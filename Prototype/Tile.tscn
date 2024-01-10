@@ -12,8 +12,10 @@ radial_segments = 6
 rings = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_82ebd"]
-radius = 0.08
-height = 0.08
+radius = 0.045
+height = 0.085
+radial_segments = 16
+rings = 16
 
 [sub_resource type="BoxMesh" id="BoxMesh_ltq8m"]
 
@@ -25,9 +27,11 @@ mesh = SubResource("CylinderMesh_wyt28")
 
 [node name="CenterMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.107185, 0)
+visible = false
 mesh = SubResource("SphereMesh_82ebd")
 
 [node name="Edges" type="Node3D" parent="."]
+visible = false
 
 [node name="Edge1" type="MeshInstance3D" parent="Edges"]
 transform = Transform3D(0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, 0.0319599, 0.42628, 0, 0.738338)
@@ -60,6 +64,16 @@ mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../..")
 
 [node name="DebugLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.00680993, 0.10476, 0.218814)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.125358, -5.47957e-09)
 pixel_size = 0.003
 text = "Tee"
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Area3D"]
+transform = Transform3D(0.866025, -0.5, 0, -2.18557e-08, -3.78552e-08, 1, -0.5, -0.866025, -4.37114e-08, 0, 0, 0)
+depth = 0.2
+polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866, 0.5, -0.866)
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

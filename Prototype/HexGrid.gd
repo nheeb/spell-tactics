@@ -37,16 +37,10 @@ func init_basic_grid(n: int):
 			if false:  # TODO dist > n
 				tiles[r][q] = null 
 				continue
-
 			# place all tiles in pointy-up fashion
 			# that mean they are higher than they are wide
 			var new_tile: Tile = TileScene.instantiate()
 			add_child(new_tile)
-			var qr_translation: Vector2 = r * tile_size * Q_BASIS + q * tile_size * R_BASIS 
-			new_tile.position = Vector3(qr_translation.x, 0.0, qr_translation.y)
+			var xz_translation: Vector2 = r * tile_size * Q_BASIS + q * tile_size * R_BASIS 
+			new_tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
 			new_tile.get_node("DebugLabel").text = "(%s, %s)" % [r, q]
-			# r is left-right
-			# q is forward-left - backward-right
-			#s = 
-			
-	
