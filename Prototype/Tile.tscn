@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgrhssy80ss18"]
+
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Prototype/TileGroundMaterial.tres" id="1_ikv8t"]
+[ext_resource type="Script" path="res://Prototype/Tile.gd" id="1_qj5vr"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wyt28"]
+material = ExtResource("1_ikv8t")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.2
+radial_segments = 6
+rings = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_82ebd"]
+radius = 0.08
+height = 0.08
+
+[sub_resource type="BoxMesh" id="BoxMesh_ltq8m"]
+
+[node name="Tile" type="Node3D"]
+script = ExtResource("1_qj5vr")
+
+[node name="Hexagon" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_wyt28")
+
+[node name="CenterMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.107185, 0)
+mesh = SubResource("SphereMesh_82ebd")
+
+[node name="Edges" type="Node3D" parent="."]
+
+[node name="Edge1" type="MeshInstance3D" parent="Edges"]
+transform = Transform3D(0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, 0.0319599, 0.42628, 0, 0.738338)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../..")
+
+[node name="Edge2" type="MeshInstance3D" parent="Edges"]
+transform = Transform3D(0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, 0.0319599, -0.429618, 0, -0.744119)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../..")
+
+[node name="Edge3" type="MeshInstance3D" parent="Edges"]
+transform = Transform3D(-5.96046e-08, 0, 0.0369041, 0, 0.235877, 0, -1, 0, -3.72529e-09, -0.86865, 0, 0.00336253)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../..")
+
+[node name="Edge4" type="MeshInstance3D" parent="Edges"]
+transform = Transform3D(-5.96046e-08, 0, 0.0369041, 0, 0.235877, 0, -1, 0, -3.72529e-09, 0.851627, 0, 0.00336235)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../..")
+
+[node name="Edge5" type="MeshInstance3D" parent="Edges"]
+transform = Transform3D(-0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, -0.0319599, 0.433373, 2.38419e-07, -0.755619)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../..")
+
+[node name="Edge6" type="MeshInstance3D" parent="Edges"]
+transform = Transform3D(-0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, -0.0319599, -0.445003, 2.38419e-07, 0.765774)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../..")
+
+[node name="DebugLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.00680993, 0.10476, 0.218814)
+pixel_size = 0.003
+text = "Tee"
