@@ -65,6 +65,9 @@ skeleton = NodePath("../..")
 
 [node name="DebugLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.125358, -5.47957e-09)
+visibility_range_end = 9.0
+visibility_range_end_margin = 0.5
+visibility_range_fade_mode = 1
 pixel_size = 0.003
 text = "Tee"
 

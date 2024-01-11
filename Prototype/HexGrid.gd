@@ -1,5 +1,5 @@
+#@tool
 class_name TileGrid extends Node3D
-
 ## Different initialization functions should be implemented.
 ## For example initializing regular n-grid.
 ## Or loading a resource defining a map.
@@ -11,7 +11,6 @@ class_name TileGrid extends Node3D
 
 ## 2D Array of tiles, indexed with (r,q)
 var tiles: Array[Array] = []
-
 
 func _ready() -> void:
 	init_basic_grid(3)
@@ -39,7 +38,8 @@ func init_basic_grid(n: int):
 			# that mean they are higher than they are wide
 			var new_tile: Tile = TileScene.instantiate()
 			add_child(new_tile)
-			var xz_translation: Vector2 = r * Q_BASIS + q * R_BASIS 
+			new_tile.owner = self
+			var xz_translation: Vector2 = (r-n) * Q_BASIS + (q-n) * R_BASIS 
 			new_tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
 			new_tile.get_node("DebugLabel").text = "(%s, %s)" % [r, q]
 			tiles[r][q] = new_tile
@@ -57,3 +57,10 @@ func tile_distance(r1: int, q1: int, r2: int, q2: int):
 	return (abs(q1 - q2) 
 			+ abs(q1 + r1 - q2 - r2)
 			+ abs(r1 - r2)) / 2
+			
+			
+## tool part:
+@export var create_catan_grid: bool = false:
+	set(value):
+		if value == true:
+			init_basic_grid(3)
