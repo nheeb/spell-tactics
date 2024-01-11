@@ -49,6 +49,7 @@ func rq_to_tile(r: int, q: int) -> Tile:
 
 ## can return null if the tile is not present
 func tile_to_rq(t: Tile) -> Vector2i:
+	# TODO !!
 	return Vector2i(0, 0)
 			
 
@@ -57,9 +58,13 @@ func tile_distance(r1: int, q1: int, r2: int, q2: int):
 	return (abs(q1 - q2) 
 			+ abs(q1 + r1 - q2 - r2)
 			+ abs(r1 - r2)) / 2
-			
-			
-## tool part:
+
+
+func get_tiles_with(tile_object: Entity):
+	pass
+
+
+# ----- tool part -----
 @export var create_catan_grid: bool = false:
 	set(value):
 		if value == true:
