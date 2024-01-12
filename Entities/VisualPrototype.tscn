@@ -1,5 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgqy5qey6ohu8"]
+[gd_scene load_steps=3 format=3 uid="uid://cgqy5qey6ohu8"]
 
 [ext_resource type="PackedScene" uid="uid://la7g0xaatryj" path="res://Entities/VisualEntity.tscn" id="1_x7re1"]
+[ext_resource type="Script" path="res://Entities/VisualPrototype.gd" id="2_r6y1o"]
 
 [node name="VisualPrototype" instance=ExtResource("1_x7re1")]
+script = ExtResource("2_r6y1o")
+
+[node name="Label" type="Label3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250447, 0.313232)
+billboard = 1
+text = "Prototype"

@@ -2,8 +2,8 @@ class_name Tile extends Node3D
 
 var entities: Array[Entity]
 
-# Should the tile know its indices? Should the tile know its neighbours?
-# leaning towards no..
+var r: int
+var q: int
 
 
 func _on_area_3d_mouse_entered() -> void:
@@ -17,3 +17,19 @@ func add_entity(entity: Entity):
 	if entity.visual_entity != null:
 		$Visuals.add_child(entity.visual_entity)
 		entity.visual_entity.owner = self
+
+
+## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
+## an obstacle.
+func is_obstacle() -> bool:
+	for ent in entities:
+		if ent.resource.is_obstacle:
+			return true
+	return false
+	
+## Coverage factor for accuracy calculation.
+func get_coverage_factor() -> int:
+	var factor := 0
+	for ent in entities:
+		factor = max(factor, ent.resource.cover_value)
+	return factor

@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://la7g0xaatryj"]
+[gd_scene load_steps=4 format=3 uid="uid://la7g0xaatryj"]
 
 [ext_resource type="Script" path="res://Entities/VisualEntity.gd" id="1_ikwqm"]
-[ext_resource type="PackedScene" uid="uid://dgrhssy80ss18" path="res://Logic/Tiles/Tile.tscn" id="2_l2oj5"]
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="2_w8f1s"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wyt28"]
+material = ExtResource("2_w8f1s")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.2
+radial_segments = 6
+rings = 1
 
 [node name="VisualEntity" type="Node3D"]
 script = ExtResource("1_ikwqm")
 
-[node name="DebugTile" parent="." instance=ExtResource("2_l2oj5")]
+[node name="DebugTile" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-script = null
+
+[node name="Hexagon" type="MeshInstance3D" parent="DebugTile"]
+mesh = SubResource("CylinderMesh_wyt28")
