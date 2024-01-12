@@ -26,7 +26,8 @@ class Index:
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
-const ROCK_TEST_ENTITY := preload("res://Entities/RockEntity.tres")
+const ROCK_TEST_ENTITY := preload("res://Entities/Types/Rock.tres")
+const WATER_TEST_ENTITY := preload("res://Entities/Types/Water.tres")
 func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).
 	# This makes it so the top-left tile will have coordinates 0,0 in the tiles 2D array
@@ -55,6 +56,7 @@ func init_basic_grid(n: int):
 	
 	# let's add a rock to the center tile
 	add_entity(3, 3, ROCK_TEST_ENTITY)
+	add_entity(3, 4, WATER_TEST_ENTITY)
 
 func add_entity(r: int, q: int, entity_type: EntityType):
 	# should entities only be part of tiles or do we want a second data structure outside?
@@ -80,8 +82,26 @@ func tile_distance(r1: int, q1: int, r2: int, q2: int):
 			+ abs(r1 - r2)) / 2
 
 
-#func get_tiles_with(tile_object: Entity):
-	#pass
+func get_tiles_with(tile_object: Entity):
+	# TODO
+	pass
+
+## returns a list of Tiles forming the straight line between tile1 and tile2.
+func get_line(tile1: Tile, tile2: Tile) -> Array[Tile]:
+	# TODO
+	return []
+
+## this can be used for enemy movement, since it respects obstacles.
+func get_shortest_path(tile1: Tile, tile2: Tile) -> Array[Tile]:
+	return []
+	
+func get_all_tiles_in_distance():
+	# TODO obstacles
+	pass
+	
+
+func move_all_entities(from: Tile, to: Tile):
+	pass
 
 
 # ----- tool part -----
