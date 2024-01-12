@@ -1,3 +1,4 @@
+extends Node
 
 func remove_y_value(pos: Vector3) -> Vector3:
 	pos.y = 0.0
@@ -35,3 +36,28 @@ func spawn_instance(packed_scene: PackedScene, position: Vector3, parent: Node =
 	new_obj.global_position = position
 	return new_obj
 
+## Returns an array with possible payment arrangement if possible or false if not
+func is_energy_cost_payable(_bank: Array[Game.Energy], _cost: Array[Game.Energy]):
+	var bank := _bank.duplicate(false)
+	var cost := _cost.duplicate()
+	var possible_payment : Array[Game.Energy] = []
+	for e in cost:
+		if e != Game.Energy.Any:
+			if e in bank:
+				possible_payment.append(e)
+				bank.erase(e)
+			else:
+				return false
+		else:
+			if not bank.is_empty():
+				possible_payment.append(bank.pop_front())
+			else:
+				return false
+	return possible_payment
+
+func pay_energy(bank: Array[Game.Energy], payment: Array[Game.Energy]):
+	for e in payment:
+		if e in bank:
+			bank.erase(e)
+		else:
+			printerr("Non existing energy was payed.")

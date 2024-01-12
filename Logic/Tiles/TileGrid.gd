@@ -1,10 +1,10 @@
 #@tool
 class_name TileGrid extends Node3D
+
 ## Different initialization functions should be implemented.
 ## For example initializing regular n-grid.
 ## Or loading a resource defining a map.
-## Ideally, this would even work in a tool script so in-editor as well
-
+## Ideally, this would even work in a tool script so in-editor as well1
 ## We're using (r,q)-axial coordinates, for a reference see
 ## https://www.redblobgames.com/grids/hexagons/#coordinates-axial
 
