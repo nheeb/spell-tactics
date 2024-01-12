@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://la7g0xaatryj"]
+[gd_scene load_steps=2 format=3 uid="uid://hj8fhsp80ehy"]
 
-[ext_resource type="Script" path="res://Entities/Entity.gd" id="1_0vkpw"]
-[ext_resource type="PackedScene" uid="uid://dgrhssy80ss18" path="res://Logic/Tiles/Tile.tscn" id="2_6jrob"]
+[ext_resource type="Script" path="res://Entities/Entity.gd" id="1_1un1r"]
 
-[node name="EntityScene" type="Node3D"]
-script = ExtResource("1_0vkpw")
-
-[node name="DebugTile" parent="." instance=ExtResource("2_6jrob")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-script = null
+[node name="Entity" type="Node"]
+script = ExtResource("1_1un1r")
