@@ -28,10 +28,11 @@ class_name EntityType extends Resource
 func to_entity() -> Entity:
 	# instance visual entity, who adds this to the scene tree?
 	# I think we should have a method add_entity() in Tile
-	# CARE, this might lead to lag, depending on the use we might want to instantiate later
+	
 	var ent: Entity = Entity.new()
 	
 	if self.visual_scene != null:
+		# CARE, this might lead to lag, depending on the use we might want to instantiate later
 		ent.visual_entity = self.visual_scene.instantiate()
 	
 	return ent

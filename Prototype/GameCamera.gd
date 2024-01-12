@@ -1,4 +1,4 @@
-extends Node3D
+class_name GameCamera extends Node3D
 
 var velocity := Vector3.ZERO
 var rotation_input := 0.0
@@ -8,7 +8,7 @@ var rotation_input := 0.0
 @export var damping := .03
 
 
-@onready var zoom_pivot = $AnglerPivot
+@onready var zoom_pivot = $AnglePivot/ZoomPivot
 var camera_zoom := 3.0
 var zoom_velocity := 0.0
 @export var zoom_factor := 5.0
