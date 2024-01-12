@@ -95,4 +95,5 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "Highlight  Movement Range"
 
+[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/EntityFindButton" to="." method="_on_entity_find_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MovementRangeButton" to="." method="_on_movement_range_button_pressed"]

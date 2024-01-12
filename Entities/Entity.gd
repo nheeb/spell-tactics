@@ -1,8 +1,7 @@
 class_name Entity
-var resource: EntityType
-## optional (can be null)
-var visual_entity: VisualEntity
 
-#class DrainableEntity extends Entity:
-	# cool
-	#pass
+## The EntityType (Resource) this Entity is an instance of
+var type: EntityType
+## The visual representation of this Entity optional (can be null).
+## This Node is only part of the scene tree if this Entity has been added to a tile.
+var visual_entity: VisualEntity

@@ -2,7 +2,7 @@ class_name Tile extends Node3D
 
 
 
-var entities: Array[Entity]
+var entities: Array[Entity] = []
 
 var r: int
 var q: int
