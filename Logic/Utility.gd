@@ -27,16 +27,6 @@ func recursive_set_light_layers(node: Node, layers: int):
 		if c is VisualInstance3D:
 			c.layers = layers
 
-func spawn_instance(packed_scene: PackedScene, position: Vector3, parent: Node = null) -> Node3D:
-	var new_obj = packed_scene.instantiate()
-	if parent == null:
-		Game.world.add_child(new_obj)
-	else:
-		parent.add_child(new_obj)
-	new_obj.global_position = position
-	return new_obj
-
-
 # ----- Hex functions -----
 func cube_add(r1, q1, s1, r2, q2, s2) -> Vector3i:
 	return Vector3i(r1 + r2, q1 + q2, s1 + s2)
