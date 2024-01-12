@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlayerEntityType" load_steps=3 format=3 uid="uid://d1wcrekyije7v"]
+
+[ext_resource type="Script" path="res://Entities/PlayerEntityType.gd" id="1_qf8ih"]
+[ext_resource type="PackedScene" uid="uid://dkl8yhcu2dmjh" path="res://Entities/Visuals/VisualPlayer.tscn" id="2_mkloq"]
+
+[resource]
+script = ExtResource("1_qf8ih")
+max_hp = 0
+internal_name = ""
+can_be_hovered = true
+pretty_name = ""
+fluff_text = ""
+visual_scene = ExtResource("2_mkloq")
+is_drainable = true
+energy = Array[int]([])
+is_obstacle = false
+cover_value = 0

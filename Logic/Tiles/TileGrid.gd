@@ -21,8 +21,9 @@ func _ready() -> void:
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
-const ROCK_TEST_ENTITY := preload("res://Entities/Types/Rock.tres")
-const WATER_TEST_ENTITY := preload("res://Entities/Types/Water.tres")
+const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
+const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
+const PLAYER_ENTITY := preload("res://Entities/PlayerResource.tres")
 func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).
 	# This makes it so the top-left tile will have coordinates 0,0 in the tiles 2D array
@@ -52,8 +53,9 @@ func init_basic_grid(n: int):
 			tiles[r][q] = new_tile
 	
 	# let's add a rock to the center tile
-	add_entity(3, 3, ROCK_TEST_ENTITY)
-	add_entity(3, 4, WATER_TEST_ENTITY)
+	add_entity(3, 3, ROCK_ENTITY)
+	add_entity(3, 4, WATER_ENTITY)
+	add_entity(0, 6, PLAYER_ENTITY)
 	
 	n_rows = 2 * n + 1
 	n_cols = 2 * n + 1

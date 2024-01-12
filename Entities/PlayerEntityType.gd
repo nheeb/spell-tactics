@@ -1,0 +1,2 @@
+class_name PlayerEntityType extends HPEntityType
+

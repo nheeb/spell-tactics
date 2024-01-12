@@ -25,7 +25,7 @@ class_name EntityType extends Resource
 @export_range(1, 3, 1) var cover_value: int = 0
 
 ## instantiate this EntityType
-const PROTOTYPE_VISUALS = preload("res://Entities/VisualPrototype.tscn")
+const PROTOTYPE_VISUALS = preload("res://Entities/Visuals/VisualPrototype.tscn")
 func to_entity() -> Entity:
 	# instance visual entity, who adds this to the scene tree?
 	# I think we should have a method add_entity() in Tile
