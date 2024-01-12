@@ -10,14 +10,23 @@ class_name TileGrid extends Node3D
 
 
 ## 2D Array of tiles, indexed with (r,q)
-var tiles: Array[Array] = []
+var tiles: Array[Array] = []  # Tile
 
 func _ready() -> void:
 	init_basic_grid(3)
 	
+class Index:
+	var r: int
+	var q: int
+	
+	func _init(r: int, q: int):
+		self.r = r
+		self.q = q
+	
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
+const ROCK_TEST_ENTITY := preload("res://Entities/RockEntity.tres")
 func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).
 	# This makes it so the top-left tile will have coordinates 0,0 in the tiles 2D array
@@ -43,9 +52,20 @@ func init_basic_grid(n: int):
 			new_tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
 			new_tile.get_node("DebugLabel").text = "(%s, %s)" % [r, q]
 			tiles[r][q] = new_tile
-			
+	
+	# let's add a rock to the center tile
+	add_entity(3, 3, ROCK_TEST_ENTITY)
+
+func add_entity(r: int, q: int, entity_type: EntityType):
+	# should entities only be part of tiles or do we want a second data structure outside?
+	# here, in TileGrid
+	if tiles[r][q] == null:
+		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
+		return
+	(tiles[r][q] as Tile).add_entity(entity_type.to_entity())
+
 func rq_to_tile(r: int, q: int) -> Tile:
-	return tiles[r][q]
+	return tiles[r][q].add_tile()
 
 ## can return null if the tile is not present
 func tile_to_rq(t: Tile) -> Vector2i:
@@ -60,8 +80,8 @@ func tile_distance(r1: int, q1: int, r2: int, q2: int):
 			+ abs(r1 - r2)) / 2
 
 
-func get_tiles_with(tile_object: Entity):
-	pass
+#func get_tiles_with(tile_object: Entity):
+	#pass
 
 
 # ----- tool part -----

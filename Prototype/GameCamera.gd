@@ -3,7 +3,7 @@ extends Node3D
 var velocity := Vector3.ZERO
 var rotation_input := 0.0
 @export var move_acceleration := 30.0
-## 45 degrees per second
+## degrees per second
 @export var rotation_velocity := 100.0
 @export var damping := .03
 

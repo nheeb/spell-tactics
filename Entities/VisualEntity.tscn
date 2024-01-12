@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://la7g0xaatryj"]
+
+[ext_resource type="Script" path="res://Entities/VisualEntity.gd" id="1_ikwqm"]
+[ext_resource type="PackedScene" uid="uid://dgrhssy80ss18" path="res://Logic/Tiles/Tile.tscn" id="2_l2oj5"]
+
+[node name="VisualEntity" type="Node3D"]
+script = ExtResource("1_ikwqm")
+
+[node name="DebugTile" parent="." instance=ExtResource("2_l2oj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+script = null

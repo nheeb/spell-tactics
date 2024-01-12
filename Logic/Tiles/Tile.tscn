@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgrhssy80ss18"]
+[gd_scene load_steps=5 format=3 uid="uid://dgrhssy80ss18"]
 
 [ext_resource type="Script" path="res://Logic/Tiles/Tile.gd" id="1_scmar"]
 [ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="2_c24a5"]
@@ -11,12 +11,6 @@ height = 0.2
 radial_segments = 6
 rings = 1
 
-[sub_resource type="SphereMesh" id="SphereMesh_82ebd"]
-radius = 0.045
-height = 0.085
-radial_segments = 16
-rings = 16
-
 [sub_resource type="BoxMesh" id="BoxMesh_ltq8m"]
 
 [node name="Tile" type="Node3D"]
@@ -24,11 +18,6 @@ script = ExtResource("1_scmar")
 
 [node name="Hexagon" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_wyt28")
-
-[node name="CenterMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.107185, 0)
-visible = false
-mesh = SubResource("SphereMesh_82ebd")
 
 [node name="Edges" type="Node3D" parent="."]
 visible = false
@@ -77,6 +66,8 @@ text = "Tee"
 transform = Transform3D(0.866025, -0.5, 0, -2.18557e-08, -3.78552e-08, 1, -0.5, -0.866025, -4.37114e-08, 0, 0, 0)
 depth = 0.2
 polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866, 0.5, -0.866)
+
+[node name="Visuals" type="Node3D" parent="."]
 
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
