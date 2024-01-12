@@ -9,4 +9,4 @@ enum Energy {  # you guys prefer all caps?
 	Any
 }
 
-var combat_state: CombatState
+var combat: Combat

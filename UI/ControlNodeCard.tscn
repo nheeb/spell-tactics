@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://binwfa5e0th2w"]
+[gd_scene load_steps=7 format=3 uid="uid://binwfa5e0th2w"]
+
+[ext_resource type="Script" path="res://UI/ControlNodeCard.gd" id="1_aqi4q"]
+[ext_resource type="FontFile" uid="uid://cgljgdhswqtmj" path="res://Assets/Fonts/Gothica-Bold.ttf" id="1_v87ep"]
+[ext_resource type="FontFile" uid="uid://6i7k7mtr5gtq" path="res://Assets/Fonts/Stark.OTF" id="2_b8pmq"]
+[ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="3_lgrkt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bjwad"]
+font = ExtResource("1_v87ep")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_1b822"]
+font = ExtResource("2_b8pmq")
+font_size = 24
 
 [node name="ControlNodeCard" type="Control"]
 layout_mode = 3
@@ -9,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_aqi4q")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -19,14 +31,36 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Name" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "<NAME>"
 label_settings = SubResource("LabelSettings_bjwad")
 
 [node name="Costs" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "<COSTS>"
+label_settings = SubResource("LabelSettings_1b822")
 
-[node name="Effekt" type="Label" parent="VBoxContainer"]
+[node name="Effect" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "<EFFECT>"
+label_settings = ExtResource("3_lgrkt")
 
 [node name="Fluff" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "<FLUFF>"
+label_settings = ExtResource("3_lgrkt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.462745)
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

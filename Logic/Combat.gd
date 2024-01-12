@@ -1,4 +1,4 @@
-class_name CombatState extends Node
+class_name Combat extends Node
 
 enum RoundPhase {
 	Start = 1,
@@ -29,5 +29,6 @@ func create_from_resource():
 func process_phase():
 	pass
 
-func process_player_input():
+func process_player_action(action):
 	pass
+	
