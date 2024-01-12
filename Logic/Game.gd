@@ -6,4 +6,7 @@ enum Energy {  # you guys prefer all caps?
 	Stone,
 	Water,
 	Flow,
+	Any
 }
+
+var combat_state: CombatState
