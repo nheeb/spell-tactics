@@ -1,5 +1,8 @@
 extends Node3D
 
+func _ready() -> void:
+	pass
+	
 
 var flip := false
 func _on_movement_range_button_pressed() -> void:
@@ -26,7 +29,8 @@ func _on_entity_find_button_pressed() -> void:
 
 
 
-@onready var mouse_ray = %MouseRaycast
+@onready var mouse_ray := %MouseRaycast
+var currently_hovering: Tile = null
 func _physics_process(delta: float) -> void:
 	var mouse_position := get_viewport().get_mouse_position()
 	var camera := get_viewport().get_camera_3d()
@@ -37,5 +41,21 @@ func _physics_process(delta: float) -> void:
 	mouse_ray.target_position = mouse_ray.to_local(end)
 	
 	if mouse_ray.is_colliding():
-		#print(mouse_ray.get_collider())
-		pass
+		var collider = mouse_ray.get_collider()
+		if collider is Area3D:
+			if collider.is_in_group("tile_area"):
+				var tile: Tile = collider.get_parent()
+				if tile != currently_hovering:
+					tile.set_highlight(Highlight.Type.Hover, true)
+					Events.tile_hovered.emit(tile)
+				
+				if currently_hovering != null and currently_hovering != tile:
+					currently_hovering.set_highlight(Highlight.Type.Hover, false)
+					Events.tile_unhovered.emit(currently_hovering)
+					currently_hovering = null
+				currently_hovering = tile
+	else:
+		if currently_hovering != null:
+			currently_hovering.set_highlight(Highlight.Type.Hover, false)
+			Events.tile_unhovered.emit(currently_hovering)
+			currently_hovering == null

@@ -30,7 +30,7 @@ visibility_range_fade_mode = 1
 pixel_size = 0.003
 text = "Tee"
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." groups=["tile_area"]]
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Area3D"]
 transform = Transform3D(0.866025, -0.5, 0, -2.18557e-08, -3.78552e-08, 1, -0.5, -0.866025, -4.37114e-08, 0, 0, 0)
@@ -74,6 +74,3 @@ skeleton = NodePath("../../..")
 transform = Transform3D(-0.877268, 0, 0.018452, 0, 0.235877, 0, -0.506491, 0, -0.0319599, -0.436516, 2.38419e-07, 0.751075)
 mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../../..")
-
-[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
-[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
