@@ -29,16 +29,17 @@ const PROTOTYPE_VISUALS = preload("res://Entities/VisualPrototype.tscn")
 func to_entity() -> Entity:
 	# instance visual entity, who adds this to the scene tree?
 	# I think we should have a method add_entity() in Tile
-	
 	var ent: Entity = Entity.new()
 	
 	if self.visual_scene != null:
 		# CARE, this might lead to lag, depending on the use we might want to instantiate later
 		ent.visual_entity = self.visual_scene.instantiate()
 		ent.visual_entity.type = self
+		ent.type = self
 	else:
 		# for debugging
 		ent.visual_entity = PROTOTYPE_VISUALS.instantiate()
 		ent.visual_entity.type = self
-	
+		ent.type = self
+
 	return ent

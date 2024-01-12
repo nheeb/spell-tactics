@@ -1,21 +1,28 @@
 class_name Tile extends Node3D
 
-var entities: Array[Entity]
+
+
+var entities: Array[Entity] = []
 
 var r: int
 var q: int
 
 
+static func create(r, q) -> Tile:
+	# TODO
+	return null
+
+
 func _on_area_3d_mouse_entered() -> void:
-	$Edges.visible = true
+	set_highlight(Highlight.Type.Hover, true)
 	
 func _on_area_3d_mouse_exited() -> void:
-	$Edges.visible = false
+	set_highlight(Highlight.Type.Hover, false)
 	
 func add_entity(entity: Entity):
 	entities.append(entity)
 	if entity.visual_entity != null:
-		$Visuals.add_child(entity.visual_entity)
+		$VisualEntities.add_child(entity.visual_entity)
 		entity.visual_entity.owner = self
 
 
@@ -33,3 +40,14 @@ func get_coverage_factor() -> int:
 	for ent in entities:
 		factor = max(factor, ent.resource.cover_value)
 	return factor
+
+
+
+func set_highlight(type: Highlight.Type, active: bool, _reset_others := false):
+	if _reset_others:
+		# TODO (if needed)
+		pass
+	if active:
+		$Highlight.enable_highlight(type)
+	else:
+		$Highlight.disable_highlight(type)
