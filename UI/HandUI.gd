@@ -5,12 +5,14 @@ extends Control
 const CNC = preload("res://UI/ControlNodeCard.tscn")
 
 var cards : Array[ControlNodeCard]
+var selected_spell: Spell
 
 func add_card(spell: Spell):
 	var card = CNC.instantiate()
 	card.set_spell(spell)
 	cards.append(card)
 	$CardContainer.add_child(card)
+	card.selected.connect(select_card)
 
 func remove_card(spell: Spell):
 	var card_to_remove = null
@@ -33,7 +35,18 @@ func _on_next_pressed():
 func _on_cast_pressed():
 	pass # Replace with function body.
 
+func _input(event):
+	if event.is_action_pressed("cancel"):
+		deselect_card()
+
 func select_card(spell):
+	deselect_card()
+	selected_spell = spell
 	var card = CNC.instantiate()
 	card.set_spell(spell)
-	$SelectedCardContainer
+	$SelectedCardContainer.add_child(card)
+
+func deselect_card():
+	selected_spell = null
+	for c in $SelectedCardContainer.get_children():
+		c.queue_free()
