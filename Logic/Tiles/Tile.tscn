@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgrhssy80ss18"]
+[gd_scene load_steps=7 format=3 uid="uid://dgrhssy80ss18"]
 
 [ext_resource type="Script" path="res://Logic/Tiles/Tile.gd" id="1_scmar"]
 [ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="2_c24a5"]
+[ext_resource type="Script" path="res://Logic/Tiles/TileHighlight.gd" id="3_ho6t1"]
+[ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/Materials/TileHighlightMaterial.tres" id="4_eqav3"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wyt28"]
 material = ExtResource("2_c24a5")
@@ -12,45 +14,13 @@ radial_segments = 6
 rings = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_ltq8m"]
+material = ExtResource("4_eqav3")
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_scmar")
 
 [node name="Hexagon" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_wyt28")
-
-[node name="Edges" type="Node3D" parent="."]
-visible = false
-
-[node name="Edge1" type="MeshInstance3D" parent="Edges"]
-transform = Transform3D(0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, 0.0319599, 0.42628, 0, 0.738338)
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../..")
-
-[node name="Edge2" type="MeshInstance3D" parent="Edges"]
-transform = Transform3D(0.8941, 0, 0.018452, 0, 0.235877, 0, -0.516209, 0, 0.0319599, -0.429618, 0, -0.744119)
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../..")
-
-[node name="Edge3" type="MeshInstance3D" parent="Edges"]
-transform = Transform3D(-5.85972e-08, 0, 0.0369041, 0, 0.235877, 0, -0.983099, 0, -3.72529e-09, -0.866, 0, 0.003)
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../..")
-
-[node name="Edge4" type="MeshInstance3D" parent="Edges"]
-transform = Transform3D(-6.11726e-08, 0, 0.0369041, 0, 0.235877, 0, -1.02631, 0, -3.72529e-09, 0.852, 0, 0)
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../..")
-
-[node name="Edge5" type="MeshInstance3D" parent="Edges"]
-transform = Transform3D(-0.857549, 0, 0.018452, 0, 0.235877, 0, -0.495107, 0, -0.0319599, 0.433373, 2.38419e-07, -0.755619)
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../..")
-
-[node name="Edge6" type="MeshInstance3D" parent="Edges"]
-transform = Transform3D(-0.877268, 0, 0.018452, 0, 0.235877, 0, -0.506491, 0, -0.0319599, -0.436516, 2.38419e-07, 0.751075)
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../..")
 
 [node name="DebugLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.125358, -5.47957e-09)
@@ -67,7 +37,43 @@ transform = Transform3D(0.866025, -0.5, 0, -2.18557e-08, -3.78552e-08, 1, -0.5, 
 depth = 0.2
 polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866, 0.5, -0.866)
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="VisualEntities" type="Node3D" parent="."]
+
+[node name="Highlight" type="Node3D" parent="."]
+script = ExtResource("3_ho6t1")
+
+[node name="Edges" type="Node3D" parent="Highlight"]
+visible = false
+
+[node name="Edge1" type="MeshInstance3D" parent="Highlight/Edges"]
+transform = Transform3D(0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, 0.0319599, 0.42628, 0, 0.738338)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../../..")
+
+[node name="Edge2" type="MeshInstance3D" parent="Highlight/Edges"]
+transform = Transform3D(0.8941, 0, 0.018452, 0, 0.235877, 0, -0.516209, 0, 0.0319599, -0.429618, 0, -0.744119)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../../..")
+
+[node name="Edge3" type="MeshInstance3D" parent="Highlight/Edges"]
+transform = Transform3D(-5.85972e-08, 0, 0.0369041, 0, 0.235877, 0, -0.983099, 0, -3.72529e-09, -0.866, 0, 0.003)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../../..")
+
+[node name="Edge4" type="MeshInstance3D" parent="Highlight/Edges"]
+transform = Transform3D(-6.11726e-08, 0, 0.0369041, 0, 0.235877, 0, -1.02631, 0, -3.72529e-09, 0.852, 0, 0)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../../..")
+
+[node name="Edge5" type="MeshInstance3D" parent="Highlight/Edges"]
+transform = Transform3D(-0.857549, 0, 0.018452, 0, 0.235877, 0, -0.495107, 0, -0.0319599, 0.433373, 2.38419e-07, -0.755619)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../../..")
+
+[node name="Edge6" type="MeshInstance3D" parent="Highlight/Edges"]
+transform = Transform3D(-0.877268, 0, 0.018452, 0, 0.235877, 0, -0.506491, 0, -0.0319599, -0.436516, 2.38419e-07, 0.751075)
+mesh = SubResource("BoxMesh_ltq8m")
+skeleton = NodePath("../../..")
 
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

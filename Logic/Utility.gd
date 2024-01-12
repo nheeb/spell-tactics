@@ -36,3 +36,11 @@ func spawn_instance(packed_scene: PackedScene, position: Vector3, parent: Node =
 	new_obj.global_position = position
 	return new_obj
 
+
+
+# ----- Hex functions -----
+func cube_add(r1, q1, s1, r2, q2, s2) -> Vector3i:
+	return Vector3i(r1 + r2, q1 + q2, s1 + s2)
+	
+func axial_add():
+	pass
