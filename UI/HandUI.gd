@@ -32,3 +32,8 @@ func _on_next_pressed():
 
 func _on_cast_pressed():
 	pass # Replace with function body.
+
+func select_card(spell):
+	var card = CNC.instantiate()
+	card.set_spell(spell)
+	$SelectedCardContainer

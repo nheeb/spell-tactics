@@ -46,5 +46,24 @@ offset_bottom = 8.0
 text = "CAST"
 metadata/_edit_use_anchors_ = true
 
+[node name="SelectedCardContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.142278
+anchor_bottom = 0.339482
+offset_right = 0.0960007
+offset_bottom = 0.0159988
+metadata/_edit_use_anchors_ = true
+
+[node name="EnergyPayment" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.348765
+anchor_right = 0.145833
+anchor_bottom = 0.424383
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]

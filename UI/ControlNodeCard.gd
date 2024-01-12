@@ -1,6 +1,6 @@
 class_name ControlNodeCard extends Control
 
-signal selected
+signal selected(spell: Spell)
 
 var spell: Spell
 
@@ -26,5 +26,5 @@ func set_content(name: String, costs: String, effect: String, fluff: String):
 	
 
 func _on_gui_input(event):
-	if event is InputEventMouseButton and event.pressed:
-		selected.emit()
+	if event.is_action("select"):
+		selected.emit(spell)
