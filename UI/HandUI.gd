@@ -1,4 +1,4 @@
-extends Control
+class_name HandUI extends Control
 
 ## This Scene and (almost) every child is meant to be replaced after Milestone-1
 
@@ -50,3 +50,6 @@ func deselect_card():
 	selected_spell = null
 	for c in $SelectedCardContainer.get_children():
 		c.queue_free()
+
+func set_status(text: String):
+	$Status.text = text
