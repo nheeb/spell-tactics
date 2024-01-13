@@ -1,5 +1,5 @@
 #@tool
-class_name TileGrid extends Node3D
+class_name Level extends Node3D
 
 ## Different initialization functions should be implemented.
 ## For example initializing regular n-grid.
@@ -15,7 +15,7 @@ var n_rows: int
 var n_cols: int
 
 func _ready() -> void:
-	init_basic_grid(3)
+	pass
 	
 
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
@@ -27,7 +27,7 @@ const PLAYER_ENTITY := preload("res://Entities/PlayerResource.tres")
 func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).
 	# This makes it so the top-left tile will have coordinates 0,0 in the tiles 2D array
-	# The origin tile will be centered at the position of the TileGrid node.
+	# The origin tile will be centered at the position of the Level node.
 	# initiate 2d Array, it will have dimensions (2n, 2n)
 	for i in range(2*n + 1):
 		tiles.append([])
@@ -59,14 +59,38 @@ func init_basic_grid(n: int):
 	
 	n_rows = 2 * n + 1
 	n_cols = 2 * n + 1
+	
+	print()
+	to_state()
+	
+## Serialize the whole tile grid and all entities.
+func to_state() -> LevelState:
+	var level_state = LevelState.new()
+	level_state.rows = n_rows
+	level_state.columns = n_cols
+	
+	var tile_data: Array[TileData] = []
+	var tile: Tile
+	for r in range(0, n_rows):
+		for q in range(0, n_cols):
+			tile = tiles[r][q]
+			if tile != null:
+				tile_data.append(tile.to_state())
+	
+	return level_state
 
-func add_entity(r: int, q: int, entity_type: EntityType):
+func add_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	# should entities only be part of tiles or do we want a second data structure outside?
-	# here, in TileGrid
+	# here, in Level
 	if tiles[r][q] == null:
 		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
 		return
-	(tiles[r][q] as Tile).add_entity(entity_type.to_entity())
+		
+	var entity := entity_type.create_entity() as Entity
+	var tile = tiles[r][q] as Tile
+
+	tile.add_entity(entity)
+	return entity
 
 ## could maybe be put in Utils singleton
 func tile_distance(r1: int, q1: int, r2: int, q2: int):
@@ -139,6 +163,7 @@ func highlight_entity_type(type: EntityType):
 	
 func unhighlight_entity_type(type: EntityType):
 	_unhighlight_tile_set(get_all_tiles_with(type), Highlight.Type.Energy)
+	
 
 
 # ----- tool part -----

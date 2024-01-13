@@ -25,10 +25,10 @@ func recursive_set_light_layers(node: Node, layers: int):
 	for c in node.get_children():
 		recursive_set_light_layers(c, layers)
 		if c is VisualInstance3D:
-			c.layers = layers
+			(c as VisualInstance3D).layers = layers
 
 # ----- Hex functions -----
-func cube_add(r1, q1, s1, r2, q2, s2) -> Vector3i:
+func cube_add(r1: int, q1: int, s1: int, r2: int, q2: int, s2: int) -> Vector3i:
 	return Vector3i(r1 + r2, q1 + q2, s1 + s2)
 	
 func axial_add():
