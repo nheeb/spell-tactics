@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dauc5wautr3f"]
+
+[node name="EnemyBehaviour" type="Node"]
+
+[node name="Movement" type="Node" parent="."]
+
+[node name="StepToPlayer" type="Node" parent="Movement"]
+
+[node name="StepToAlly" type="Node" parent="Movement"]
+
+[node name="RandomStep" type="Node" parent="Movement"]
+
+[node name="Halt" type="Node" parent="Movement"]

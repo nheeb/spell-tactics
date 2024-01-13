@@ -1,4 +1,4 @@
-class_name AnimationObject extends Node
+class_name AnimationObject extends Object
 
 signal animation_done
 
@@ -17,5 +17,5 @@ func play() -> void:
 			await reference.animation_done
 	else:
 		printerr("Animation on null reference")
-	await get_tree().process_frame
+	await Game.tree.process_frame
 	animation_done.emit()
