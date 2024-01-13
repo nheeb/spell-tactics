@@ -2,6 +2,7 @@ class_name Combat extends Node
 
 @onready var animation_utility: AnimationUtility = %AnimationUtility
 @onready var card_utility: CardUtility = %CardUtility
+@onready var energy_utility: EnergyUtility = %EnergyUtility
 
 enum RoundPhase {
 	Start = 1,

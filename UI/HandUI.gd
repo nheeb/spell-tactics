@@ -53,3 +53,6 @@ func deselect_card():
 
 func set_status(text: String):
 	$Status.text = text
+
+func set_current_energy(energy: Array[Game.Energy]):
+	$CurrentEnergy.text = Utility.energy_to_string(energy)

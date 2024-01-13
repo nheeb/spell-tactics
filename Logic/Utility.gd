@@ -54,9 +54,25 @@ func is_energy_cost_payable(_bank: Array[Game.Energy], _cost: Array[Game.Energy]
 				return false
 	return possible_payment
 
-func pay_energy(bank: Array[Game.Energy], payment: Array[Game.Energy]):
+## Reduces a new Array whith the Energy being reduced
+func pay_energy(_bank: Array[Game.Energy], payment: Array[Game.Energy]) -> Array[Game.Energy]:
+	var bank := _bank.duplicate(false)
 	for e in payment:
 		if e in bank:
 			bank.erase(e)
 		else:
 			printerr("Non existing energy was payed.")
+			return []
+	return bank
+
+var energy_to_letter := {
+	Game.Energy.Life: "L",
+	Game.Energy.Decay: "D",
+	Game.Energy.Stone: "S",
+	Game.Energy.Water: "W",
+	Game.Energy.Flow: "F",
+	Game.Energy.Any: "X",
+}
+
+func energy_to_string(energy: Array[Game.Energy]) -> String:
+	return energy.reduce(func(x, y): return x + energy_to_letter[y], "")
