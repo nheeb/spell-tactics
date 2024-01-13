@@ -26,7 +26,7 @@ class_name EntityType extends Resource
 
 ## instantiate this EntityType
 const PROTOTYPE_VISUALS = preload("res://Entities/Visuals/VisualPrototype.tscn")
-func to_entity() -> Entity:
+func create_entity() -> Entity:
 	# instance visual entity, who adds this to the scene tree?
 	# I think we should have a method add_entity() in Tile
 	var ent: Entity = Entity.new()

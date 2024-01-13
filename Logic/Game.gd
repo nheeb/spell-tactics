@@ -10,3 +10,8 @@ enum Energy {  # you guys prefer all caps?
 }
 
 var combat: Combat
+var hand_ui: HandUI
+
+var tree : SceneTree : 
+	get:
+		return get_tree()

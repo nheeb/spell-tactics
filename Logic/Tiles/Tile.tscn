@@ -39,6 +39,8 @@ polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866,
 
 [node name="VisualEntities" type="Node3D" parent="."]
 
+[node name="LogicalEntities" type="Node3D" parent="."]
+
 [node name="Highlight" type="Node3D" parent="."]
 script = ExtResource("3_ho6t1")
 

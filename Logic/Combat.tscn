@@ -1,6 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://svag2bbhgyid"]
+[gd_scene load_steps=11 format=3 uid="uid://svag2bbhgyid"]
 
 [ext_resource type="Script" path="res://Logic/Combat.gd" id="1_65o0h"]
+[ext_resource type="Script" path="res://Logic/Phases/StartPhase.gd" id="2_jgbr1"]
+[ext_resource type="Script" path="res://Logic/Phases/MovementPhase.gd" id="3_tyawg"]
+[ext_resource type="Script" path="res://Logic/Phases/SpellPhase.gd" id="4_xof1w"]
+[ext_resource type="Script" path="res://Logic/Phases/PassPhase.gd" id="5_5tk6f"]
+[ext_resource type="Script" path="res://Logic/Phases/EnemyPhase.gd" id="6_52d1n"]
+[ext_resource type="Script" path="res://Logic/Phases/EndPhase.gd" id="7_4vv4x"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/AnimationUtility.gd" id="8_2goip"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/CardUtility.gd" id="8_cksyl"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyUtility.gd" id="10_ju76k"]
 
 [node name="Combat" type="Node"]
 script = ExtResource("1_65o0h")
+
+[node name="Phases" type="Node" parent="."]
+
+[node name="StartPhase" type="Node" parent="Phases"]
+unique_name_in_owner = true
+script = ExtResource("2_jgbr1")
+
+[node name="MovementPhase" type="Node" parent="Phases"]
+unique_name_in_owner = true
+script = ExtResource("3_tyawg")
+
+[node name="SpellPhase" type="Node" parent="Phases"]
+unique_name_in_owner = true
+script = ExtResource("4_xof1w")
+
+[node name="PassPhase" type="Node" parent="Phases"]
+unique_name_in_owner = true
+script = ExtResource("5_5tk6f")
+
+[node name="EnemyPhase" type="Node" parent="Phases"]
+unique_name_in_owner = true
+script = ExtResource("6_52d1n")
+
+[node name="EndPhase" type="Node" parent="Phases"]
+unique_name_in_owner = true
+script = ExtResource("7_4vv4x")
+
+[node name="Utility" type="Node" parent="."]
+
+[node name="AnimationUtility" type="Node" parent="Utility"]
+unique_name_in_owner = true
+script = ExtResource("8_2goip")
+
+[node name="CardUtility" type="Node" parent="Utility"]
+unique_name_in_owner = true
+script = ExtResource("8_cksyl")
+
+[node name="EnergyUtility" type="Node" parent="Utility"]
+unique_name_in_owner = true
+script = ExtResource("10_ju76k")
