@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Prototype/Prototyping.gd" id="1_j078d"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="1_mf57j"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
-[ext_resource type="PackedScene" uid="uid://bshwbn0tpocns" path="res://Logic/Tiles/TileGrid.tscn" id="3_80rsa"]
+[ext_resource type="PackedScene" uid="uid://bshwbn0tpocns" path="res://Logic/Tiles/Level.tscn" id="3_80rsa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
 sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
@@ -12,12 +12,12 @@ ground_bottom_color = Color(0.227451, 0.352941, 0.592157, 1)
 ground_horizon_color = Color(0.286275, 0.521569, 0.290196, 1)
 ground_curve = 0.937017
 
-[sub_resource type="Sky" id="Sky_l7vq8"]
+[sub_resource type="Sky" id="Sky_4htsq"]
 sky_material = SubResource("ProceduralSkyMaterial_ypriw")
 
 [sub_resource type="Environment" id="Environment_0glof"]
 background_mode = 2
-sky = SubResource("Sky_l7vq8")
+sky = SubResource("Sky_4htsq")
 ambient_light_source = 3
 
 [node name="Prototyping" type="Node3D"]
@@ -51,7 +51,7 @@ transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
 
-[node name="TileGrid" parent="." instance=ExtResource("3_80rsa")]
+[node name="Level" parent="." instance=ExtResource("3_80rsa")]
 
 [node name="FeaturesUI" type="CanvasLayer" parent="."]
 

@@ -3,7 +3,6 @@ class_name Tile extends Node3D
 
 
 var entities: Array[Entity] = []
-
 var r: int
 var q: int
 
@@ -23,6 +22,7 @@ func add_entity(entity: Entity):
 	entities.append(entity)
 	if entity.visual_entity != null:
 		$VisualEntities.add_child(entity.visual_entity)
+		#entity.owner = self
 		entity.visual_entity.owner = self
 
 
@@ -51,3 +51,15 @@ func set_highlight(type: Highlight.Type, active: bool, _reset_others := false):
 		$Highlight.enable_highlight(type)
 	else:
 		$Highlight.disable_highlight(type)
+
+
+func to_state() -> TileState:
+	var tile_state := TileState.new()
+	tile_state.r = r
+	tile_state.q = q
+	var entity_states: Array[EntityState] = []
+	
+	for entity: Entity in self.entities:
+		entity_states.append(entity.to_state())
+	
+	return tile_state

@@ -13,7 +13,7 @@ enum RoundPhase {
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.Start
 
-var tile_grid: TileGrid
+var level: Level
 var deck: Array[Spell]
 var hand: Array[Spell]
 var discard_pile: Array[Spell]
