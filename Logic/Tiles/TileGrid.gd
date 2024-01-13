@@ -74,6 +74,26 @@ func tile_distance(r1: int, q1: int, r2: int, q2: int):
 			+ abs(q1 + r1 - q2 - r2)
 			+ abs(r1 - r2)) / 2
 
+func is_location_in_bounds(coord: Vector2i) -> bool:
+	var r = coord.x
+	var q = coord.y
+	if r < 0 or r >= len(tiles):
+		return false
+	if q < 0 or q >= len(tiles[0]):
+		return false
+	return tiles[r][q] != null
+	
+func is_location_obstructed(coord: Vector2i) -> bool:
+	var r = coord.x
+	var q = coord.y
+	var tile = tiles[r][q]
+	if tile == null:
+		return true
+	for entity in tile.entities:
+		if entity.type.is_obstacle:
+			return true
+	return false
+	
 
 ## returns a list of Tiles forming the straight line between tile1 and tile2.
 ## (obstacles are ignored)
@@ -140,6 +160,8 @@ func highlight_entity_type(type: EntityType):
 func unhighlight_entity_type(type: EntityType):
 	_unhighlight_tile_set(get_all_tiles_with(type), Highlight.Type.Energy)
 
+func search(from: Vector2i, to: Vector2i) -> TileGridSearch:
+	return TileGridSearch.new(self, from, to)
 
 # ----- tool part -----
 @export var create_catan_grid: bool = false:
