@@ -27,7 +27,7 @@ func _on_entity_find_button_pressed() -> void:
 		flip2 = false
 
 func _on_nav_button_pressed() -> void:
-	var search = $TileGrid.search(Vector2i(0, 6), Vector2i(6, 0))
+	var search = $Level.search(Vector2i(0, 6), Vector2i(6, 0))
 	search.execute()
 	print(search.path)
 

@@ -60,8 +60,8 @@ func init_basic_grid(n: int):
 	n_rows = 2 * n + 1
 	n_cols = 2 * n + 1
 	
-	print()
-	to_state()
+	# TODO finish implementing Entity to_state() 
+	#to_state()
 	
 ## Serialize the whole tile grid and all entities.
 func to_state() -> LevelState:
@@ -145,10 +145,6 @@ func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int):
 
 	return tiles_in_distance
 	
-
-func move_all_entities(from: Tile, to: Tile):
-	pass
-	
 	
 func _highlight_tile_set(tiles: Array[Tile], type: Highlight.Type):
 	for tile in tiles:
@@ -185,8 +181,8 @@ func unhighlight_entity_type(type: EntityType):
 	_unhighlight_tile_set(get_all_tiles_with(type), Highlight.Type.Energy)
 	
 
-func search(from: Vector2i, to: Vector2i) -> TileGridSearch:
-	return TileGridSearch.new(self, from, to)
+func search(from: Vector2i, to: Vector2i) -> LevelSearch:
+	return LevelSearch.new(self, from, to)
 
 # ----- tool part -----
 @export var create_catan_grid: bool = false:
