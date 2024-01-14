@@ -1,6 +1,8 @@
 class_name EnemyEntityType extends HPEntityType
 
-# TODO mindset???
+enum Mindset {
+	asdf,
+}
 
 @export var agility: int
 @export var actions: Array[String]

@@ -1,4 +1,4 @@
-class_name GameSingleton extends Node
+class_name GameSingletonDreck extends Node
 
 enum Energy {  # you guys prefer all caps? -> no
 	Life,

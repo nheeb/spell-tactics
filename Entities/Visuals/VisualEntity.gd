@@ -10,3 +10,6 @@ var type: EntityType
 
 func _enter_tree() -> void:
 	$DebugTile.visible = false
+
+func animation_move_to(tile: Tile) -> void:
+	pass
