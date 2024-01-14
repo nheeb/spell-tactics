@@ -176,6 +176,25 @@ func move_entity(entity: Entity, target: Tile):
 	
 	pass
 
+func get_all_tiles() -> Array[Tile]:
+	var all_tiles: Array[Tile] = []
+	var num_rows = len(tiles)
+	assert(num_rows > 0, "empty tiles.")
+	var num_cols = len(tiles[0])
+	
+	for r in range(num_rows):
+		for q in range(num_cols):
+			var tile = tiles[r][q]
+			if tile != null:
+				all_tiles.append(tile)
+	
+	return all_tiles
+
+func get_all_entities() -> Array[Entity]:
+	var all_entities: Array[Entity] = []
+	for tile in get_all_tiles():
+		all_entities.append_array(tile.entities)
+	return all_entities
 
 func find_all_tiles_with(type: EntityType) -> Array[Tile]:
 	var tiles_with: Array[Tile] = []

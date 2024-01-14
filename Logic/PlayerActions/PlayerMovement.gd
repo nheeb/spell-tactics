@@ -2,6 +2,9 @@ class_name PlayerMovement extends PlayerAction
 
 var destination : Tile
 
+func _init(_destination : Tile) -> void:
+	destination = _destination
+
 func is_valid() -> bool:
 	if Game.combat.current_phase != Combat.RoundPhase.Movement:
 		return false

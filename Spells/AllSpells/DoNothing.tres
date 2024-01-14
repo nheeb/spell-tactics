@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=2 format=3 uid="uid://bddxc6d1tivsv"]
+
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_c844k"]
+
+[resource]
+script = ExtResource("1_c844k")
+pretty_name = "Do Nothing"
+costs = Array[int]([5])
+effect_text = "Does nothing."
+fluff_text = "When nothing is done, nothing is left undone.
+
+- Lao Tsu"

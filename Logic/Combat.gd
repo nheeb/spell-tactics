@@ -3,6 +3,8 @@ class_name Combat extends Node
 @onready var animation_utility: AnimationUtility = %AnimationUtility
 @onready var card_utility: CardUtility = %CardUtility
 @onready var energy_utility: EnergyUtility = %EnergyUtility
+@onready var movement_utility: MovementUtility = %MovementUtility
+@onready var ui_utility: UiUtility = %UiUtility
 
 enum RoundPhase {
 	Start = 1,
@@ -31,7 +33,27 @@ var player_energy: Array[Game.Energy]
 var animation_queue: Array[AnimationObject]
 
 func create_from_resource():
+	# TODO Load Combat State
 	pass
+
+func create_as_prototype(_level: Level):
+	level = _level
+	deck = []
+	for i in range(20):
+		match randi_range(1,2):
+			1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres")))
+			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres")))
+	enemies = []
+	for entity in level.get_all_entities():
+		if entity is PlayerEntity:
+			player = entity
+		elif entity is EnemyEntity:
+			enemies.append(entity)
+	player_energy = []
+	animation_queue = []
+	discard_pile = []
+	hand = []
+	hand_size = 5
 
 func advance_current_phase():
 	current_phase += 1
@@ -72,6 +94,5 @@ func process_player_action(action: PlayerAction):
 	else:
 		printerr("Invalid Player Action: %s" % action.action_string)
 
-## Plays all Animations inside the animation queue
-func play_animations():
-	pass
+func _ready() -> void:
+	Events.tile_clicked.connect(func (tile): process_player_action(PlayerMovement.new(tile)))
