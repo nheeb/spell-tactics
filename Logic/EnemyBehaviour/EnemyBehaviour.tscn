@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://dauc5wautr3f"]
+[gd_scene load_steps=2 format=3 uid="uid://dauc5wautr3f"]
+
+[ext_resource type="Script" path="res://Logic/EnemyBehaviour/EnemyBehaviour.gd" id="1_j6xpk"]
 
 [node name="EnemyBehaviour" type="Node"]
+script = ExtResource("1_j6xpk")
 
 [node name="Movement" type="Node" parent="."]
 
