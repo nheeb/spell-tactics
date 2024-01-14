@@ -67,3 +67,15 @@ func _physics_process(delta: float) -> void:
 
 func _on_move_rock_button_pressed() -> void:
 	$Level.move_entity($Level.find_entity(ent_type), $Level.tiles[5][4])
+
+
+func _on_damage_player_pressed() -> void:
+	$Level.player.hp -= 1
+
+
+func _on_save_level_pressed() -> void:
+	$Level.save_to_disk("user://level.tres")
+
+
+func _on_load_level_pressed() -> void:
+	$Level.load_from_disk("user://level.tres")

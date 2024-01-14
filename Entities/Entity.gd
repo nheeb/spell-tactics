@@ -12,20 +12,36 @@ var logical_entity: LogicalEntity
 var current_tile: Tile
 
 
-func to_state() -> EntityState:
+
+## Given the name, should this property be serialized?
+const godot_internal_props = ["RefCounted", "script"]
+const entity_internal_props = ["current_tile", "visual_entity", "logical_entity", "type"]
+func serialize_this_prop(name: String) -> bool:
+	if name.ends_with(".gd"):
+		# script type, ignore this
+		return false
+	if name in godot_internal_props or name in entity_internal_props:
+		return false
+	return true
+
+func serialize() -> EntityState:
 	print("-- Serializing %s --" % type.internal_name)
 	var state: EntityState = EntityState.new()
 	
 	if logical_entity != null:
-		# TODO get all props from this
-		pass
-	
-	# need to get props from visual entity? pls no, should be initialized on load
+		for prop in logical_entity.get_property_list():
+			# TODO maybe we'll need another exclusion method for the script props
+			if not serialize_this_prop(prop.name):
+				continue
+			state.script_props[prop.name] = get(prop.name)
 	
 	for prop in get_property_list():
-		print(prop)
-	
-	return null
+		if not serialize_this_prop(prop.name):
+			continue
+		state.entity_props[prop.name] = get(prop.name)
+
+	print(state.entity_props)
+	return state
 	
 func move(target: Tile):
 	current_tile.remove_entity(self)

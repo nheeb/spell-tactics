@@ -13,3 +13,9 @@ func _enter_tree() -> void:
 
 func animation_move_to(tile: Tile) -> void:
 	pass
+	
+#func update_hp(hp: int):
+	#$HPLabel.text = "%d / %d" % [hp, type.max]
+
+
+

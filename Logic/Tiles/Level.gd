@@ -14,6 +14,8 @@ var tiles: Array[Array] = []  # Tile
 var n_rows: int
 var n_cols: int
 
+@onready var player: PlayerEntity
+
 func _ready() -> void:
 	pass
 	
@@ -50,34 +52,47 @@ func init_basic_grid(n: int):
 			new_tile.get_node("DebugLabel").text = "(%s, %s)" % [r, q]
 			new_tile.r = r
 			new_tile.q = q
+			new_tile.name = "Tile_%02d_%02d" % [r, q]
 			tiles[r][q] = new_tile
 	
 	# let's add a rock to the center tile
 	add_entity(3, 3, ROCK_ENTITY)
 	add_entity(3, 4, WATER_ENTITY)
-	add_entity(0, 6, PLAYER_ENTITY)
+	self.player = add_entity(0, 6, PLAYER_ENTITY)
 	
 	n_rows = 2 * n + 1
 	n_cols = 2 * n + 1
 	
-	# TODO finish implementing Entity to_state() 
-	#to_state()
-	
 ## Serialize the whole tile grid and all entities.
-func to_state() -> LevelState:
+func serialize() -> LevelState:
 	var level_state = LevelState.new()
 	level_state.rows = n_rows
 	level_state.columns = n_cols
 	
-	var tile_data: Array[TileData] = []
+	var tile_data: Array[TileState] = []
 	var tile: Tile
 	for r in range(0, n_rows):
 		for q in range(0, n_cols):
 			tile = tiles[r][q]
 			if tile != null:
-				tile_data.append(tile.to_state())
-	
+				tile_data.append(tile.serialize())
+	level_state.tiles = tile_data
 	return level_state
+
+static func deserialize(state: LevelState) -> Level:
+	#var level_state: LevelState = ResourceLoader.load()
+	return null
+	
+func save_to_disk(path: String = ""):
+	var state: LevelState = serialize()
+	var err = ResourceSaver.save(state, path, ResourceSaver.FLAG_BUNDLE_RESOURCES)
+	
+	if not err == OK:
+		printerr("Err when saving level state: ", err)
+	
+static func load_from_disk(path: String) -> Level:
+	var level_state: LevelState = ResourceLoader.load(path)
+	return null
 
 func add_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	# should entities only be part of tiles or do we want a second data structure outside?

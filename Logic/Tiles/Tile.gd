@@ -64,13 +64,14 @@ func set_highlight(type: Highlight.Type, active: bool, _reset_others := false):
 		$Highlight.disable_highlight(type)
 
 
-func to_state() -> TileState:
+func serialize() -> TileState:
 	var tile_state := TileState.new()
 	tile_state.r = r
 	tile_state.q = q
 	var entity_states: Array[EntityState] = []
 	
 	for entity: Entity in self.entities:
-		entity_states.append(entity.to_state())
+		entity_states.append(entity.serialize())
 	
+	tile_state.entities = entity_states
 	return tile_state

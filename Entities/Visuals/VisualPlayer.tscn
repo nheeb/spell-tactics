@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkl8yhcu2dmjh"]
+[gd_scene load_steps=4 format=3 uid="uid://dkl8yhcu2dmjh"]
 
 [ext_resource type="PackedScene" uid="uid://la7g0xaatryj" path="res://Entities/Visuals/VisualEntity.tscn" id="1_lwo7l"]
+[ext_resource type="Script" path="res://Entities/Visuals/VisualPlayer.gd" id="2_nidg8"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4tm7j"]
 
-[node name="VisualEntity" instance=ExtResource("1_lwo7l")]
+[node name="VisualPlayer" instance=ExtResource("1_lwo7l")]
+script = ExtResource("2_nidg8")
 
 [node name="Capsule" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 mesh = SubResource("CapsuleMesh_4tm7j")
+
+[node name="HPLabel" type="Label3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13708, 0)
+billboard = 1
+text = "0"
