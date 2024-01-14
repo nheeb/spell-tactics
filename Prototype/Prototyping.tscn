@@ -101,6 +101,12 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "Highlight  Movement Range"
 
+[node name="MoveRockButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Move Rock"
+
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/NavButton" to="." method="_on_nav_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/EntityFindButton" to="." method="_on_entity_find_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MovementRangeButton" to="." method="_on_movement_range_button_pressed"]
+[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MoveRockButton" to="." method="_on_move_rock_button_pressed"]

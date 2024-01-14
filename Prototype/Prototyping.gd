@@ -63,3 +63,7 @@ func _physics_process(delta: float) -> void:
 			
 	if currently_hovering and Input.is_action_just_pressed("select"):
 		Events.tile_clicked.emit(currently_hovering)
+
+
+func _on_move_rock_button_pressed() -> void:
+	$Level.move_entity($Level.find_entity(ent_type), $Level.tiles[5][4])
