@@ -26,7 +26,10 @@ func _on_entity_find_button_pressed() -> void:
 		$Level.unhighlight_entity_type(ent_type)
 		flip2 = false
 
-
+func _on_nav_button_pressed() -> void:
+	var search = $TileGrid.search(Vector2i(0, 6), Vector2i(6, 0))
+	search.execute()
+	print(search.path)
 
 @onready var mouse_ray := %MouseRaycast
 var currently_hovering: Tile = null
