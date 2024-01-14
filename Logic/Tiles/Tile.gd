@@ -22,10 +22,21 @@ func add_entity(entity: Entity):
 	entities.append(entity)
 	if entity.visual_entity != null:
 		$VisualEntities.add_child(entity.visual_entity)
+		# TODO add logical entity
 		#entity.owner = self
 		entity.visual_entity.owner = self
-
-
+		entity.current_tile = self
+		
+func remove_entity(entity: Entity):
+	var i = entities.find(entity)
+	if i == -1:
+		printerr("remove_entity(): entity not found")
+		return
+		
+	entities.remove_at(i)
+	$VisualEntities.remove_child(entity.visual_entity)
+	entity.current_tile = null
+	
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
 func is_obstacle() -> bool:

@@ -153,6 +153,13 @@ func _highlight_tile_set(tiles: Array[Tile], type: Highlight.Type):
 func _unhighlight_tile_set(tiles: Array[Tile], type: Highlight.Type):
 	for tile in tiles:
 		tile.set_highlight(type, false)
+		
+		
+func move_entity(entity: Entity, target: Tile):
+	# kind of a cursed call but this is how we do it I guess
+	entity.move(target)
+	
+	pass
 
 func get_all_tiles() -> Array[Tile]:
 	var all_tiles: Array[Tile] = []
@@ -174,7 +181,7 @@ func get_all_entities() -> Array[Entity]:
 		all_entities.append_array(tile.entities)
 	return all_entities
 
-func get_all_tiles_with(type: EntityType) -> Array[Tile]:
+func find_all_tiles_with(type: EntityType) -> Array[Tile]:
 	var tiles_with: Array[Tile] = []
 	var num_rows = len(tiles)
 	assert(num_rows > 0, "empty tiles.")
@@ -192,12 +199,23 @@ func get_all_tiles_with(type: EntityType) -> Array[Tile]:
 						break
 
 	return tiles_with
+
+## Returns the first Entity found matching the given type
+func find_entity(type: EntityType) -> Entity:
+	for r in range(len(tiles)):
+		for q in range(len(tiles[0])):
+			var tile = tiles[r][q]
+			if tile != null:
+				for ent in tile.entities:
+					if ent.type == type:
+						return ent
+	return null
 	
 func highlight_entity_type(type: EntityType):
-	_highlight_tile_set(get_all_tiles_with(type), Highlight.Type.Energy)
+	_highlight_tile_set(find_all_tiles_with(type), Highlight.Type.Energy)
 	
 func unhighlight_entity_type(type: EntityType):
-	_unhighlight_tile_set(get_all_tiles_with(type), Highlight.Type.Energy)
+	_unhighlight_tile_set(find_all_tiles_with(type), Highlight.Type.Energy)
 	
 
 func search(from: Vector2i, to: Vector2i) -> LevelSearch:

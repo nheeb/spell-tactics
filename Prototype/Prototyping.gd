@@ -29,6 +29,9 @@ func _on_entity_find_button_pressed() -> void:
 func _on_nav_button_pressed() -> void:
 	var search = $Level.search(Vector2i(0, 6), Vector2i(6, 0))
 	search.execute()
+	if search.path_found:
+		for location in search.path:
+			$Level.tiles[location.x][location.y].set_highlight(Highlight.Type.Movement, true)
 	print(search.path)
 
 @onready var mouse_ray := %MouseRaycast
@@ -63,3 +66,7 @@ func _physics_process(delta: float) -> void:
 			
 	if currently_hovering and Input.is_action_just_pressed("select"):
 		Events.tile_clicked.emit(currently_hovering)
+
+
+func _on_move_rock_button_pressed() -> void:
+	$Level.move_entity($Level.find_entity(ent_type), $Level.tiles[5][4])

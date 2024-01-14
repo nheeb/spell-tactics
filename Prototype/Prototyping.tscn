@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Prototype/Prototyping.gd" id="1_j078d"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="1_mf57j"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
-[ext_resource type="PackedScene" uid="uid://bshwbn0tpocns" path="res://Logic/Tiles/Level.tscn" id="3_80rsa"]
+[ext_resource type="PackedScene" path="res://Logic/Tiles/Level.tscn" id="3_80rsa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
 sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
@@ -101,6 +101,12 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "Highlight  Movement Range"
 
+[node name="MoveRockButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Move Rock"
+
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/NavButton" to="." method="_on_nav_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/EntityFindButton" to="." method="_on_entity_find_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MovementRangeButton" to="." method="_on_movement_range_button_pressed"]
+[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MoveRockButton" to="." method="_on_move_rock_button_pressed"]

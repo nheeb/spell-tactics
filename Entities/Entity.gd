@@ -26,3 +26,7 @@ func to_state() -> EntityState:
 		print(prop)
 	
 	return null
+	
+func move(target: Tile):
+	current_tile.remove_entity(self)
+	target.add_entity(self)
