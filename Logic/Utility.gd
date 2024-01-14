@@ -74,5 +74,22 @@ var energy_to_letter := {
 	Game.Energy.Any: "X",
 }
 
+var letter_to_energy := {
+	"L": Game.Energy.Life,
+	"D": Game.Energy.Decay,
+	"S": Game.Energy.Stone,
+	"W": Game.Energy.Water,
+	"F": Game.Energy.Flow,
+	"X": Game.Energy.Any,
+}
+
 func energy_to_string(energy: Array[Game.Energy]) -> String:
 	return energy.reduce(func(x, y): return x + energy_to_letter[y], "")
+
+func string_to_energy(string: String) -> Array[Game.Energy]:
+	string = string.to_upper()
+	var array := []
+	for c in string:
+		if c in letter_to_energy.keys():
+			array.append(letter_to_energy[c])
+	return array

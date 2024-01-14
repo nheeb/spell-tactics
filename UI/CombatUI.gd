@@ -1,4 +1,4 @@
-class_name HandUI extends Control
+class_name CombatUI extends Control
 
 ## This Scene and (almost) every child is meant to be replaced after Milestone-1
 
@@ -33,7 +33,9 @@ func _on_next_pressed():
 	Game.combat.process_player_action(PlayerPass.new())
 
 func _on_cast_pressed():
-	pass # Replace with function body.
+	var payment := Utility.string_to_energy($EnergyPayment.text)
+	if is_instance_valid(selected_spell):
+		Game.combat.process_player_action(PlayerCast.new(selected_spell, payment))
 
 func _input(event):
 	if event.is_action_pressed("cancel"):

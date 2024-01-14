@@ -1,6 +1,6 @@
-extends Node
+class_name GameSingleton extends Node
 
-enum Energy {  # you guys prefer all caps?
+enum Energy {  # you guys prefer all caps? -> no
 	Life,
 	Decay,
 	Stone,
@@ -10,7 +10,7 @@ enum Energy {  # you guys prefer all caps?
 }
 
 var combat: Combat
-var hand_ui: HandUI
+var combat_ui: CombatUI
 
 var tree : SceneTree : 
 	get:

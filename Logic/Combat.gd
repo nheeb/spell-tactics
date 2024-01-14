@@ -67,7 +67,10 @@ func advance_and_process_until_next_player_action_needed():
 			break
 
 func process_player_action(action: PlayerAction):
-	pass
+	if action.is_valid():
+		action.execute()
+	else:
+		printerr("Invalid Player Action: %s" % action.action_string)
 
 ## Plays all Animations inside the animation queue
 func play_animations():

@@ -23,6 +23,10 @@ func is_current_cast_valid() -> bool:
 func is_payment_valid(payment: Array[Game.Energy]) -> bool:
 	return Utility.is_energy_cost_payable(payment, get_costs()) is Array
 
+## Returns combination of the other valids. Is being used by PlayerCast to execute the cast
+func is_all_valid(payment: Array[Game.Energy]) -> bool:
+	return is_unlocked() and is_payment_valid(payment) and is_current_cast_valid()
+
 ## Returns a possible payment (if possible)
 func get_possible_payment():
 	return Utility.is_energy_cost_payable(Game.combat.player_energy, get_costs())
@@ -34,7 +38,7 @@ func pay_for_spell(payment: Array[Game.Energy]) -> void:
 	else:
 		printerr("Wrong payment done")
 
-## Activates the cards effect if the payment and everything else is valid. Also discards the card from hand
+## Pays for the costs. Activates the cards effect. Also discards the card from hand
 func cast(payment: Array[Game.Energy]) -> void:
 	if is_unlocked() and is_payment_valid(payment) and is_current_cast_valid():
 		pay_for_spell(payment)

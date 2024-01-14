@@ -4,4 +4,4 @@ class_name EnergyUtility extends Node
 
 func pay(payment: Array[Game.Energy]) -> void:
 	Game.combat.player_energy = Utility.pay_energy(Game.combat.player_energy, payment)
-	Game.combat.animation_queue.append(AnimationObject.new(Game.hand_ui, "set_current_energy", [Game.combat.player_energy.duplicate()]))
+	Game.combat.animation_queue.append(AnimationObject.new(Game.combat_ui, "set_current_energy", [Game.combat.player_energy.duplicate()]))

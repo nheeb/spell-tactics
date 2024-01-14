@@ -5,6 +5,7 @@ extends Node3D
 
 var ee: Array
 func _ready():
+	#print(Array("asdf"))
 	var a = []
 	var b = false
 	print(ee)
