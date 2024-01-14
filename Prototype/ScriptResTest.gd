@@ -5,10 +5,12 @@ extends Node3D
 
 var ee: Array
 func _ready():
+	var dono = SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres")
+	#dono._init()
 	#print(Array("asdf"))
-	var a = []
-	var b = false
-	print(ee)
+	#var a = []
+	#var b = false
+	#print(ee)
 	#ee = null
 	
 	#aaa()
