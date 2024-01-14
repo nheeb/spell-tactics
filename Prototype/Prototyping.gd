@@ -29,6 +29,9 @@ func _on_entity_find_button_pressed() -> void:
 func _on_nav_button_pressed() -> void:
 	var search = $Level.search(Vector2i(0, 6), Vector2i(6, 0))
 	search.execute()
+	if search.path_found:
+		for location in search.path:
+			$Level.tiles[location.x][location.y].set_highlight(Highlight.Type.Movement, true)
 	print(search.path)
 
 @onready var mouse_ray := %MouseRaycast
