@@ -80,11 +80,9 @@ class TileGridSearchEntry extends Object:
 	var g_score: float
 	var f_score: float
 	
-	func _init(parent: TileGridSearchEntry, _coord: Vector2i, _g_score: float, _f_score: float):
+	func _init(_parent: TileGridSearchEntry, _coord: Vector2i, _g_score: float, _f_score: float):
+		parent = _parent
 		coord = _coord
 		g_score = _g_score
 		f_score = _f_score
 
-class A extends Object:
-	
-	var a
