@@ -34,10 +34,6 @@ func cast(payment: Array[Game.Energy]) -> void:
 	casting_effect()
 	combat.card_utility.discard(spell)
 
-
-
-
-
 ## The current costs with all the modifiers if there are any
 func get_costs() -> Array[Game.Energy]:
 	return spell.type.costs

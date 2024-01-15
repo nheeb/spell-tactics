@@ -32,11 +32,7 @@ func _on_area_3d_mouse_exited() -> void:
 func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)
-	if entity.visual_entity != null:
-		# TODO Nils Visual movement shouldn't be done here (only when being placed at the start)
-		entity.visual_entity.position = self.position
-		# TODO add logical entity
-		
+
 		
 func remove_entity(entity: Entity):
 	var i = entities.find(entity)
