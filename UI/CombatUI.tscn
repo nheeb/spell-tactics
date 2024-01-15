@@ -47,11 +47,13 @@ offset_bottom = 8.0
 text = "CAST"
 metadata/_edit_use_anchors_ = true
 
-[node name="SelectedCardContainer" type="CenterContainer" parent="."]
+[node name="SelectedCardContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.142278
-anchor_bottom = 0.339482
+anchor_left = 0.758681
+anchor_top = 0.0617284
+anchor_right = 0.994708
+anchor_bottom = 0.432074
 offset_right = 0.0960007
 offset_bottom = 0.0159988
 metadata/_edit_use_anchors_ = true
@@ -59,9 +61,10 @@ metadata/_edit_use_anchors_ = true
 [node name="EnergyPayment" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.348765
-anchor_right = 0.145833
-anchor_bottom = 0.424383
+anchor_left = 0.763021
+anchor_top = 0.444444
+anchor_right = 0.996528
+anchor_bottom = 0.520062
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
