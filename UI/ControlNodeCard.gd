@@ -4,11 +4,16 @@ signal selected(spell: Spell)
 
 var spell: Spell
 
-func set_spell(_spell):
+func set_spell(_spell, as_hand_card := true):
 	spell = _spell
-	if is_instance_valid(spell.visual_representation):
-		printerr("Spell already has a visual representation Card")
-	spell.visual_representation = self
+	
+	if as_hand_card:
+		if is_instance_valid(spell.visual_representation):
+			printerr("Spell already has a visual representation Card")
+		spell.visual_representation = self
+	else:
+		%SelectButton.hide()
+	
 	update()
 
 func update():
@@ -20,6 +25,7 @@ func set_content(pretty_name: String, costs: String, effect: String, fluff: Stri
 	%Effect.text = effect
 	%Fluff.text = fluff
 
-func _on_gui_input(event):
-	if event.is_action("select"):
-		selected.emit(spell)
+
+func _on_button_button_down() -> void:
+	selected.emit(spell)
+	print("select")

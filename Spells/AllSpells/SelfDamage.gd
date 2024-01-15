@@ -14,5 +14,5 @@ extends SpellLogic
 
 ## Most important function for overwriting. Here should be the effect
 func casting_effect() -> void:
-	Game.combat.player.hp -= 1
+	combat.player.hp -= 1
 

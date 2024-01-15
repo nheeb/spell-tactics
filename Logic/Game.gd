@@ -9,8 +9,8 @@ enum Energy {
 	Any
 }
 
-var combat: Combat
-var combat_ui: CombatUI
+#var combat: Combat
+#var combat_ui: CombatUI
 
 var tree : SceneTree : 
 	get:

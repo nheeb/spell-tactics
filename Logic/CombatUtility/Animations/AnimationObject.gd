@@ -21,9 +21,7 @@ func play() -> void:
 			await reference.animation_done
 	else:
 		printerr("Animation on null reference")
-	print("a")
 	await Game.tree.process_frame
-	print("b")
 	animation_done.emit()
 
 func _to_string() -> String:

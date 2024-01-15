@@ -4,6 +4,7 @@ class_name CombatUI extends Control
 
 const CNC = preload("res://UI/ControlNodeCard.tscn")
 
+var combat : Combat
 var cards : Array[ControlNodeCard]
 var selected_spell: Spell
 
@@ -30,26 +31,32 @@ func remove_card(spell: Spell):
 		printerr("Failed to remove a card which spells is not in the hand")
 
 func _on_next_pressed():
-	Game.combat.process_player_action(PlayerPass.new())
+	combat.process_player_action(PlayerPass.new())
 
 func _on_cast_pressed():
-	var payment := Utility.string_to_energy($EnergyPayment.text)
+	var clean_payment_text : String = $EnergyPayment.text
+	if ":" in clean_payment_text:
+		clean_payment_text = clean_payment_text.split(":")[-1]
+	var payment := Utility.string_to_energy(clean_payment_text)
 	if is_instance_valid(selected_spell):
-		Game.combat.process_player_action(PlayerCast.new(selected_spell, payment))
+		combat.process_player_action(PlayerCast.new(selected_spell, payment))
 
 func _input(event):
 	if event.is_action_pressed("cancel"):
 		deselect_card()
 
-func select_card(spell):
+func select_card(spell: Spell):
 	deselect_card()
 	selected_spell = spell
 	var card = CNC.instantiate()
-	card.set_spell(spell)
+	card.set_spell(spell, false)
 	$SelectedCardContainer.add_child(card)
+	$EnergyPayment.visible = true
+	$EnergyPayment.text = Utility.energy_to_string(Utility.is_energy_cost_payable(combat.player_energy, spell.logic.get_costs()))
 
 func deselect_card():
 	selected_spell = null
+	$EnergyPayment.visible = false
 	for c in $SelectedCardContainer.get_children():
 		c.queue_free()
 
@@ -58,3 +65,6 @@ func set_status(text: String):
 
 func set_current_energy(energy: Array[Game.Energy]):
 	$CurrentEnergy.text = Utility.energy_to_string(energy)
+
+func _ready() -> void:
+	deselect_card()

@@ -1,6 +1,11 @@
 extends SpellLogic
 
-### The current costs with all the modifiers if there are any
+## Usable references:
+## spell - Corresponding spell
+##   (with round_persistant_properties & combat_persistant_properties)
+## combat - The current combat for which the spell was created
+
+## The current costs with all the modifiers if there are any
 #func get_costs() -> Array[Game.Energy]:
 	#return spell.type.costs
 
@@ -12,6 +17,6 @@ extends SpellLogic
 #func is_current_cast_valid() -> bool:
 	#return true
 
-## Most important function for overwriting. Here should be the effect
+## Here should be the effect
 func casting_effect() -> void:
 	pass

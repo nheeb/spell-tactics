@@ -88,7 +88,7 @@ func energy_to_string(energy: Array[Game.Energy]) -> String:
 
 func string_to_energy(string: String) -> Array[Game.Energy]:
 	string = string.to_upper()
-	var array := []
+	var array : Array[Game.Energy] = []
 	for c in string:
 		if c in letter_to_energy.keys():
 			array.append(letter_to_energy[c])

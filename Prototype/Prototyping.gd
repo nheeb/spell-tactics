@@ -7,7 +7,7 @@ const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
 const COMBAT = preload("res://Logic/Combat.tscn")
 const COMBAT_UI = preload("res://UI/CombatUI.tscn")
 
-const LOAD_PROTOTYPE_COMBAT = false
+const LOAD_PROTOTYPE_COMBAT = true
 
 func _ready() -> void:
 	$Level.init_basic_grid(3)
@@ -23,11 +23,12 @@ func _ready() -> void:
 		new_combat.create_as_prototype($Level)
 		var new_ui = COMBAT_UI.instantiate()
 		$FeaturesUI.add_child(new_ui)
-		
-		Game.combat = new_combat
-		Game.combat_ui = new_ui
+		new_combat.connect_with_ui(new_ui)
+		#Game.combat = new_combat
+		#Game.combat_ui = new_ui
 		
 		new_combat.advance_and_process_until_next_player_action_needed()
+		new_combat.animation_utility.play_animation_queue()
 
 	
 

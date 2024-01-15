@@ -21,6 +21,7 @@ var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
 
 var level: Level
+var ui: CombatUI
 
 var hand_size: int
 var deck: Array[Spell]
@@ -42,8 +43,8 @@ func create_as_prototype(_level: Level):
 	deck = []
 	for i in range(20):
 		match randi_range(1,2):
-			1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres")))
-			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres")))
+			1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
+			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
 	enemies = []
 	for entity in level.get_all_entities():
 		if entity is PlayerEntity:
@@ -55,6 +56,10 @@ func create_as_prototype(_level: Level):
 	discard_pile = []
 	hand = []
 	hand_size = 5
+
+func connect_with_ui(_ui: CombatUI) -> void:
+	ui = _ui
+	ui.combat = self
 
 func advance_current_phase():
 	# go to next phase
@@ -88,14 +93,15 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 func advance_and_process_until_next_player_action_needed():
 	while true:
 		advance_current_phase()
-		print(current_phase)
+		print("Processing phase %s ..." % current_phase)
 		if process_current_phase(): # If Player Input needed
 			break
-	animation_utility.play_animation_queue()
 
 func process_player_action(action: PlayerAction):
-	if action.is_valid():
-		action.execute()
+	if action.is_valid(self):
+		print("Doing Player Action: %s" % action.action_string)
+		action.execute(self)
+		animation_utility.play_animation_queue()
 	else:
 		printerr("Invalid Player Action: %s" % action.action_string)
 
