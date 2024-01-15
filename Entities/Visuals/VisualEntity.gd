@@ -22,4 +22,8 @@ func animation_move_to(tile: Tile) -> void:
 	#$HPLabel.text = "%d / %d" % [hp, type.max]
 
 
+# TODO discuss this
+func update_visuals(entity: Entity):
+	pass
+	
 

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://vyxoc5136bpp"]
+
+[ext_resource type="PackedScene" uid="uid://la7g0xaatryj" path="res://Entities/Visuals/VisualEntity.tscn" id="1_v8d3n"]
+[ext_resource type="PackedScene" uid="uid://bwkt7vm7l5e1h" path="res://Assets/Models/Prototype/Rock1.gltf" id="2_0q5yx"]
+
+[node name="ClickableRock" instance=ExtResource("1_v8d3n")]
+
+[node name="Rock1" parent="." index="1" instance=ExtResource("2_0q5yx")]
+transform = Transform3D(0.814839, 0, 0, 0, 0.764948, 0, 0, 0, 0.814841, 0.10245, 1.19209e-07, 0.0124449)
+
+[node name="Rock2" parent="." index="2" instance=ExtResource("2_0q5yx")]
+transform = Transform3D(0.786749, -0.199118, 0, 0.212104, 0.738578, 0, 0, 0, 0.814841, 0.10245, 0.546787, 0.0124449)
+visible = false
+
+[node name="Rock3" parent="." index="3" instance=ExtResource("2_0q5yx")]
+transform = Transform3D(-0.70781, 0.179139, 0.355745, 0.212105, 0.738578, 0, -0.343481, 0.0869312, -0.733083, -0.177381, 1.21345, -0.0714636)
+visible = false

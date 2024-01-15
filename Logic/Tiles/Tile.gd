@@ -3,6 +3,7 @@ class_name Tile extends Node3D
 
 
 var entities: Array[Entity] = []
+var hovering := false
 var r: int
 var q: int
 
@@ -83,3 +84,8 @@ func serialize() -> TileState:
 	
 	tile_state.entities = entity_states
 	return tile_state
+
+
+func _on_hover_timer_timeout() -> void:
+	hovering = true
+	print("Hovered tile %d, %d" % [r, q])

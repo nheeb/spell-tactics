@@ -75,3 +75,9 @@ skeleton = NodePath("../../..")
 transform = Transform3D(-0.877268, 0, 0.018452, 0, 0.235877, 0, -0.506491, 0, -0.0319599, -0.436516, 2.38419e-07, 0.751075)
 mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../../..")
+
+[node name="HoverTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="timeout" from="HoverTimer" to="." method="_on_hover_timer_timeout"]
