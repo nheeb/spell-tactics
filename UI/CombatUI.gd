@@ -41,9 +41,10 @@ func _on_cast_pressed():
 	if is_instance_valid(selected_spell):
 		combat.process_player_action(PlayerCast.new(selected_spell, payment))
 
-func _input(event):
-	if event.is_action_pressed("cancel"):
-		deselect_card()
+#func _input(event):
+	#if event.is_action_pressed("cancel"):
+		#deselect_card()
+
 
 func select_card(spell: Spell):
 	deselect_card()

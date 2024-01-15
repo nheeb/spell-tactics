@@ -7,7 +7,7 @@ const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
 const COMBAT = preload("res://Logic/Combat.tscn")
 const COMBAT_UI = preload("res://UI/CombatUI.tscn")
 
-const LOAD_PROTOTYPE_COMBAT = true
+const LOAD_PROTOTYPE_COMBAT = false
 
 func _ready() -> void:
 	$Level.init_basic_grid(3)
@@ -15,7 +15,6 @@ func _ready() -> void:
 	$Level.add_entity(3, 3, ROCK_ENTITY)
 	$Level.add_entity(3, 4, WATER_ENTITY)
 	$Level.player = $Level.add_entity(0, 6, PLAYER_TYPE)
-
 
 	if LOAD_PROTOTYPE_COMBAT:
 		var new_combat = COMBAT.instantiate()
