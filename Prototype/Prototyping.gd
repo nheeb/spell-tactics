@@ -1,5 +1,9 @@
 extends Node3D
 
+const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
+const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
+const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
+
 const COMBAT = preload("res://Logic/Combat.tscn")
 const COMBAT_UI = preload("res://UI/CombatUI.tscn")
 
@@ -7,6 +11,12 @@ const LOAD_PROTOTYPE_COMBAT = false
 
 func _ready() -> void:
 	$Level.init_basic_grid(3)
+	# let's add some prototyping entities to the level
+	$Level.add_entity(3, 3, ROCK_ENTITY)
+	$Level.add_entity(3, 4, WATER_ENTITY)
+	$Level.player = $Level.add_entity(0, 6, PLAYER_TYPE)
+
+
 	if LOAD_PROTOTYPE_COMBAT:
 		var new_combat = COMBAT.instantiate()
 		add_child(new_combat)
@@ -18,6 +28,8 @@ func _ready() -> void:
 		Game.combat_ui = new_ui
 		
 		new_combat.advance_and_process_until_next_player_action_needed()
+
+	
 
 var flip := false
 func _on_movement_range_button_pressed() -> void:
@@ -96,5 +108,20 @@ func _on_save_level_pressed() -> void:
 
 
 func _on_load_level_pressed() -> void:
+<<<<<<< HEAD
 	$Level.load_from_disk("user://level.tres")
 
+=======
+	var loaded_level = Level.load_from_disk("user://level.tres")
+	loaded_level.name = "Level"
+	$Level.free()
+	add_child(loaded_level)
+
+var tile_toggle := false
+func _on_toggle_tile_labels_pressed() -> void:
+	tile_toggle = not tile_toggle
+	
+	if tile_toggle:
+		# 
+		pass
+>>>>>>> 316c6fc0e5d922cb78e3e29e8a48d343e12cc9af

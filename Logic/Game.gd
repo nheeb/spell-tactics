@@ -1,6 +1,6 @@
-class_name GameSingletonDreck extends Node
+class_name GameSingleton extends Node
 
-enum Energy {  # you guys prefer all caps? -> no
+enum Energy {
 	Life,
 	Decay,
 	Stone,
@@ -15,3 +15,8 @@ var combat_ui: CombatUI
 var tree : SceneTree : 
 	get:
 		return get_tree()
+
+
+# some common EntityTypes
+#const player_type: PlayerEntityType = preload("res://Entities/PlayerResource.tres")
+

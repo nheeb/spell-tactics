@@ -99,7 +99,7 @@ text = "Highlight All Rocks
 [node name="MovementRangeButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Highlight  Movement Range"
+text = "Highlight Movement Range"
 
 [node name="MoveRockButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
@@ -111,20 +111,27 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "Damage Player"
 
+[node name="ToggleTileLabels" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Toggle Tile Labels"
+
 [node name="SaveLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Serialize Level"
+text = "Save Level"
 
 [node name="LoadLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Deserialize Level"
+text = "Load Level"
 
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/NavButton" to="." method="_on_nav_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/EntityFindButton" to="." method="_on_entity_find_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MovementRangeButton" to="." method="_on_movement_range_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MoveRockButton" to="." method="_on_move_rock_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/DamagePlayer" to="." method="_on_damage_player_pressed"]
+[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/ToggleTileLabels" to="." method="_on_toggle_tile_labels_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/SaveLevel" to="." method="_on_save_level_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/LoadLevel" to="." method="_on_load_level_pressed"]
