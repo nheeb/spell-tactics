@@ -52,7 +52,11 @@ func select_card(spell: Spell):
 	card.set_spell(spell, false)
 	$SelectedCardContainer.add_child(card)
 	$EnergyPayment.visible = true
-	$EnergyPayment.text = Utility.energy_to_string(Utility.is_energy_cost_payable(combat.player_energy, spell.logic.get_costs()))
+	var payment = Utility.is_energy_cost_payable(combat.player_energy, spell.logic.get_costs())
+	if payment is Array:
+		$EnergyPayment.text = "Payment: " + Utility.energy_to_string(payment)
+	else:
+		$EnergyPayment.text = "Not enough energy"
 
 func deselect_card():
 	selected_spell = null
