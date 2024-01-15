@@ -12,9 +12,9 @@ const LOAD_PROTOTYPE_COMBAT = true
 func _ready() -> void:
 	$Level.init_basic_grid(3)
 	# let's add some prototyping entities to the level
-	$Level.add_entity(3, 3, ROCK_ENTITY)
-	$Level.add_entity(3, 4, WATER_ENTITY)
-	$Level.player = $Level.add_entity(0, 6, PLAYER_TYPE)
+	$Level.create_entity(3, 3, ROCK_ENTITY)
+	$Level.create_entity(3, 4, WATER_ENTITY)
+	$Level.player = $Level.create_entity(0, 6, PLAYER_TYPE)
 
 	if LOAD_PROTOTYPE_COMBAT:
 		var new_combat = COMBAT.instantiate()
