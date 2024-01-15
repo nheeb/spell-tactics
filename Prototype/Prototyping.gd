@@ -1,7 +1,14 @@
 extends Node3D
 
+const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
+const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
+const PLAYER_ENTITY := preload("res://Entities/PlayerResource.tres")
 func _ready() -> void:
 	$Level.init_basic_grid(3)
+	# let's add some prototyping entities to the level
+	$Level.add_entity(3, 3, ROCK_ENTITY)
+	$Level.add_entity(3, 4, WATER_ENTITY)
+	$Level.player = $Level.add_entity(0, 6, PLAYER_ENTITY)
 	
 
 var flip := false
@@ -81,4 +88,10 @@ func _on_save_level_pressed() -> void:
 
 
 func _on_load_level_pressed() -> void:
-	$Level.load_from_disk("user://level.tres")
+	var loaded_level = Level.load_from_disk("user://level.tres")
+	loaded_level.name = "Level"
+	$Level.free()
+	add_child(loaded_level)
+	
+	print(loaded_level.global_transform)
+

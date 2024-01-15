@@ -23,18 +23,21 @@ func _ready() -> void:
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
-const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
-const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
-const PLAYER_ENTITY := preload("res://Entities/PlayerResource.tres")
+
+func init_tiles_array(n_rows, n_cols):
+	for i in range(n_rows):
+		tiles.append([])
+		for j in range(n_cols):
+			tiles[i].append(null)
+	self.n_rows = n_rows
+	self.n_cols = n_cols
+
 func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).
 	# This makes it so the top-left tile will have coordinates 0,0 in the tiles 2D array
 	# The origin tile will be centered at the position of the Level node.
 	# initiate 2d Array, it will have dimensions (2n, 2n)
-	for i in range(2*n + 1):
-		tiles.append([])
-		for j in range(2*n+1):
-			tiles[i].append(null)
+	init_tiles_array(2*n+1, 2*n+1)
 
 	for r in range(0, 2*n + 1):
 		for q in range(0, 2*n + 1):
@@ -43,25 +46,10 @@ func init_basic_grid(n: int):
 			if tile_distance(r, q, n, n) > n: 
 				continue
 
-			# TODO put this into some create_tile method 
-			var new_tile: Tile = TileScene.instantiate()
+			var new_tile = Tile.create(r, q, n, n)
 			add_child(new_tile)
 			new_tile.owner = self
-			var xz_translation: Vector2 = (r-n) * Q_BASIS + (q-n) * R_BASIS 
-			new_tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
-			new_tile.get_node("DebugLabel").text = "(%s, %s)" % [r, q]
-			new_tile.r = r
-			new_tile.q = q
-			new_tile.name = "Tile_%02d_%02d" % [r, q]
 			tiles[r][q] = new_tile
-	
-	# let's add a rock to the center tile
-	add_entity(3, 3, ROCK_ENTITY)
-	add_entity(3, 4, WATER_ENTITY)
-	self.player = add_entity(0, 6, PLAYER_ENTITY)
-	
-	n_rows = 2 * n + 1
-	n_cols = 2 * n + 1
 	
 ## Serialize the whole tile grid and all entities.
 func serialize() -> LevelState:
@@ -79,20 +67,17 @@ func serialize() -> LevelState:
 	level_state.tiles = tile_data
 	return level_state
 
-static func deserialize(state: LevelState) -> Level:
-	#var level_state: LevelState = ResourceLoader.load()
-	return null
 	
 func save_to_disk(path: String = ""):
 	var state: LevelState = serialize()
-	var err = ResourceSaver.save(state, path, ResourceSaver.FLAG_BUNDLE_RESOURCES)
+	var err = ResourceSaver.save(state, path) # , ResourceSaver.FLAG_BUNDLE_RESOURCES)
 	
 	if not err == OK:
 		printerr("Err when saving level state: ", err)
 	
 static func load_from_disk(path: String) -> Level:
 	var level_state: LevelState = ResourceLoader.load(path)
-	return null
+	return level_state.deserialize()
 
 func add_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	# should entities only be part of tiles or do we want a second data structure outside?

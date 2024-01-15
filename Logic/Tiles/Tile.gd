@@ -7,9 +7,18 @@ var r: int
 var q: int
 
 
-static func create(r, q) -> Tile:
-	# TODO
-	return null
+
+const TILE = preload("res://Logic/Tiles/Tile.tscn")
+static func create(r, q, n_rows, n_cols) -> Tile:
+	var tile = TILE.instantiate()
+	var xz_translation: Vector2 = (r-n_rows) * Level.Q_BASIS + (q-n_cols) * Level.R_BASIS 
+	tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
+
+	tile.get_node("DebugLabel").text = "(%s, %s)" % [r, q]
+	tile.r = r
+	tile.q = q
+	tile.name = "Tile_%02d_%02d" % [r, q]
+	return tile
 
 
 func _on_area_3d_mouse_entered() -> void:

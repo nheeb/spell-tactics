@@ -42,7 +42,9 @@ func pay_for_spell(payment: Array[Game.Energy]) -> void:
 func cast(payment: Array[Game.Energy]) -> void:
 	if is_unlocked() and is_payment_valid(payment) and is_current_cast_valid():
 		pay_for_spell(payment)
-		casting_effect()
+		# Style: use signal instead?
+		# What exactly is the seperation between Spell and SpellLogic?
+		# Thoguth SpellLogic would be mostly static
 		Game.combat.card_utility.discard(spell)
 	else:
 		printerr("Invalid cast of spell")

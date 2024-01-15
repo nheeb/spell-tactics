@@ -27,6 +27,7 @@ func serialize_this_prop(name: String) -> bool:
 func serialize() -> EntityState:
 	print("-- Serializing %s --" % type.internal_name)
 	var state: EntityState = EntityState.new()
+	state.type = type
 	
 	if logical_entity != null:
 		for prop in logical_entity.get_property_list():
