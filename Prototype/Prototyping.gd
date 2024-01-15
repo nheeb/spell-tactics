@@ -41,6 +41,7 @@ func _on_nav_button_pressed() -> void:
 			$Level.tiles[location.x][location.y].set_highlight(Highlight.Type.Movement, true)
 	print(search.path)
 
+
 @onready var mouse_ray := %MouseRaycast
 var currently_hovering: Tile = null
 func _physics_process(delta: float) -> void:
@@ -73,6 +74,7 @@ func _physics_process(delta: float) -> void:
 			
 	if currently_hovering and Input.is_action_just_pressed("select"):
 		Events.tile_clicked.emit(currently_hovering)
+
 
 
 func _on_move_rock_button_pressed() -> void:

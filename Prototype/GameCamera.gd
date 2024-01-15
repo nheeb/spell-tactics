@@ -4,7 +4,7 @@ var velocity := Vector3.ZERO
 var rotation_input := 0.0
 @export var move_acceleration := 30.0
 ## degrees per second
-@export var rotation_velocity := 100.0
+@export var rotation_velocity := 130.0
 @export var damping := .03
 
 
@@ -13,9 +13,16 @@ var camera_zoom := 3.0
 var zoom_velocity := 0.0
 @export var zoom_factor := 5.0
 @export var zoom_damping := 0.01
+@export var mouse_rotation_factor := .3
 
 func _ready() -> void:
 	zoom_pivot.position.y = camera_zoom
+	
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		if event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
+			rotation_input += event.relative.x * mouse_rotation_factor
 
 func _physics_process(delta: float) -> void:
 	# x-z movement
@@ -25,8 +32,9 @@ func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
 		
 	# rotation
-	rotation_input = delta * rotation_velocity * (Input.get_action_strength("rotate_camera_clockwise") - Input.get_action_strength("rotate_camera_anticlockwise"))
+	rotation_input += delta * rotation_velocity * (Input.get_action_strength("rotate_camera_clockwise") - Input.get_action_strength("rotate_camera_anticlockwise"))
 	rotate_y(deg_to_rad(rotation_input))
+	rotation_input = 0.0
 	
 	# zoom
 	if Input.is_action_just_released("zoom_camera_out"):
