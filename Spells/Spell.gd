@@ -16,3 +16,10 @@ func _init(_type: SpellType, _combat : Combat = null) -> void:
 
 func get_copy_for_combat(_combat: Combat) -> Spell:
 	return Spell.new(type, _combat)
+
+func serialize() -> SpellState:
+	var state := SpellState.new()
+	state.type = type
+	state.combat_persistant_properties = combat_persistant_properties
+	state.round_persistant_properties = round_persistant_properties
+	return state

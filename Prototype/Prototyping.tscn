@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cs6vnuiljtmct"]
+[gd_scene load_steps=11 format=3 uid="uid://cs6vnuiljtmct"]
 
 [ext_resource type="Script" path="res://Prototype/Prototyping.gd" id="1_j078d"]
 [ext_resource type="Script" path="res://Addons/smoothing/smoothing.gd" id="1_mf57j"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
-[ext_resource type="PackedScene" uid="uid://bshwbn0tpocns" path="res://Logic/Tiles/Level.tscn" id="3_80rsa"]
 [ext_resource type="Script" path="res://Prototype/MouseInput.gd" id="4_2ad06"]
 [ext_resource type="Script" path="res://UI/PopUps.gd" id="6_j6qku"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="6_rjbjq"]
@@ -55,8 +54,6 @@ transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
 script = ExtResource("4_2ad06")
-
-[node name="Level" parent="." instance=ExtResource("3_80rsa")]
 
 [node name="FeaturesUI" type="CanvasLayer" parent="."]
 
