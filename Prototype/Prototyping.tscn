@@ -99,7 +99,7 @@ text = "Highlight All Rocks
 [node name="MovementRangeButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Highlight  Movement Range"
+text = "Highlight Movement Range"
 
 [node name="MoveRockButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
@@ -114,12 +114,12 @@ text = "Damage Player"
 [node name="SaveLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Serialize Level"
+text = "Save Level"
 
 [node name="LoadLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Deserialize Level"
+text = "Load Level"
 
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/NavButton" to="." method="_on_nav_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/EntityFindButton" to="." method="_on_entity_find_button_pressed"]

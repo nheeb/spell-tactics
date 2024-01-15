@@ -7,6 +7,7 @@ class_name TileState extends Resource
 
 
 func deserialize(n_rows: int, n_cols: int) -> Tile:
+	@warning_ignore("integer_division")
 	var tile = Tile.create(r, q, n_rows/2 + n_rows % 1, n_cols/2 + n_cols % 1)
 	#var ents: Array[Entity] = []
 	var ent: Entity

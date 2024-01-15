@@ -50,14 +50,14 @@ func _process_tile() -> bool:
 	return false
 	
 func _pop_next_lowest() -> TileGridSearchEntry:
-	var min: float = INF
+	var min_score: float = INF
 	var best: TileGridSearchEntry
 	var best_position = -1
 	for pos in range(len(open_set)):
 		var entry = open_set[pos]
 		var score = entry.f_score + entry.g_score
-		if score < min:
-			min = score
+		if score < min_score:
+			min_score = score
 			best = entry
 			best_position = pos
 	if best_position != -1:

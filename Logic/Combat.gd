@@ -56,6 +56,8 @@ func create_as_prototype(_level: Level):
 	hand_size = 5
 
 func advance_current_phase():
+	# go to next phase
+	@warning_ignore("int_as_enum_without_cast")
 	current_phase += 1
 	if current_phase == RoundPhase.RoundRepeats:
 		current_phase = RoundPhase.Start

@@ -9,15 +9,16 @@ var q: int
 
 
 const TILE = preload("res://Logic/Tiles/Tile.tscn")
-static func create(r, q, n_rows, n_cols) -> Tile:
+static func create(r_tile, q_tile, r_center, q_center) -> Tile:
+	# center position is needed to properly align the tile
 	var tile = TILE.instantiate()
-	var xz_translation: Vector2 = (r-n_rows) * Level.Q_BASIS + (q-n_cols) * Level.R_BASIS 
+	var xz_translation: Vector2 = (r_tile-r_center) * Level.Q_BASIS + (q_tile-q_center) * Level.R_BASIS 
 	tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
 
-	tile.get_node("DebugLabel").text = "(%s, %s)" % [r, q]
-	tile.r = r
-	tile.q = q
-	tile.name = "Tile_%02d_%02d" % [r, q]
+	tile.get_node("DebugLabel").text = "(%s, %s)" % [r_center, q_center]
+	tile.r = r_tile
+	tile.q = q_tile
+	tile.name = "Tile_%02d_%02d" % [r_tile, q_tile]
 	return tile
 
 

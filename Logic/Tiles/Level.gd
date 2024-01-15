@@ -24,13 +24,13 @@ var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
 
-func init_tiles_array(n_rows, n_cols):
-	for i in range(n_rows):
+func init_tiles_array(rows, cols):
+	for i in range(rows):
 		tiles.append([])
-		for j in range(n_cols):
+		for j in range(cols):
 			tiles[i].append(null)
-	self.n_rows = n_rows
-	self.n_cols = n_cols
+	self.n_rows = rows
+	self.n_cols = cols
 
 func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).
@@ -146,12 +146,12 @@ func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int):
 	return tiles_in_distance
 	
 	
-func _highlight_tile_set(tiles: Array[Tile], type: Highlight.Type):
-	for tile in tiles:
+func _highlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
+	for tile in highlight_tiles:
 		tile.set_highlight(type, true)
 		
-func _unhighlight_tile_set(tiles: Array[Tile], type: Highlight.Type):
-	for tile in tiles:
+func _unhighlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
+	for tile in highlight_tiles:
 		tile.set_highlight(type, false)
 		
 		
