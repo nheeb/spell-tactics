@@ -1,8 +1,23 @@
 extends Node3D
 
+const COMBAT = preload("res://Logic/Combat.tscn")
+const COMBAT_UI = preload("res://UI/CombatUI.tscn")
+
+const LOAD_PROTOTYPE_COMBAT = false
+
 func _ready() -> void:
 	$Level.init_basic_grid(3)
-	
+	if LOAD_PROTOTYPE_COMBAT:
+		var new_combat = COMBAT.instantiate()
+		add_child(new_combat)
+		new_combat.create_as_prototype($Level)
+		var new_ui = COMBAT_UI.instantiate()
+		$FeaturesUI.add_child(new_ui)
+		
+		Game.combat = new_combat
+		Game.combat_ui = new_ui
+		
+		new_combat.advance_and_process_until_next_player_action_needed()
 
 var flip := false
 func _on_movement_range_button_pressed() -> void:
@@ -82,3 +97,4 @@ func _on_save_level_pressed() -> void:
 
 func _on_load_level_pressed() -> void:
 	$Level.load_from_disk("user://level.tres")
+
