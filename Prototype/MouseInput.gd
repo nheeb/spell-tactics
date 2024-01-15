@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
 				
 				if currently_hovering != null and currently_hovering != tile:
 					currently_hovering.set_highlight(Highlight.Type.Hover, false)
+					currently_hovering.hovering = false
 					currently_hovering.get_node("HoverTimer").stop()
 					Events.tile_unhovered.emit(currently_hovering)
 					
@@ -29,6 +30,7 @@ func _physics_process(delta: float) -> void:
 		if currently_hovering != null:
 			currently_hovering.set_highlight(Highlight.Type.Hover, false)
 			currently_hovering.get_node("HoverTimer").stop()
+			currently_hovering.hovering = false
 			Events.tile_unhovered.emit(currently_hovering)
 			currently_hovering = null
 			

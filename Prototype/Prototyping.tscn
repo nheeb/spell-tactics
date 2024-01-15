@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cs6vnuiljtmct"]
+[gd_scene load_steps=12 format=3 uid="uid://cs6vnuiljtmct"]
 
 [ext_resource type="Script" path="res://Prototype/Prototyping.gd" id="1_j078d"]
 [ext_resource type="Script" path="res://Addons/smoothing/smoothing.gd" id="1_mf57j"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
 [ext_resource type="PackedScene" uid="uid://bshwbn0tpocns" path="res://Logic/Tiles/Level.tscn" id="3_80rsa"]
 [ext_resource type="Script" path="res://Prototype/MouseInput.gd" id="4_2ad06"]
+[ext_resource type="Script" path="res://UI/PopUps.gd" id="6_j6qku"]
+[ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="6_rjbjq"]
+[ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="7_brm5d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
 sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
@@ -69,58 +72,98 @@ mouse_filter = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="FeaturesUI/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.116
-anchor_bottom = 0.533
+anchor_top = 0.0148148
+anchor_right = 0.163
+anchor_bottom = 0.415
 metadata/_edit_use_anchors_ = true
 
 [node name="LineButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Draw Line (TODO)
 "
 
 [node name="NavButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Draw Shortest Path
 "
 
 [node name="EntityFindButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Highlight All Rocks
 "
 
 [node name="MovementRangeButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Highlight Movement Range"
 
 [node name="MoveRockButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Move Rock"
 
 [node name="DamagePlayer" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Damage Player"
 
 [node name="ToggleTileLabels" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Toggle Tile Labels"
 
 [node name="SaveLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Save Level"
 
 [node name="LoadLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_rjbjq")
+theme_override_font_sizes/font_size = 30
 text = "Load Level"
+
+[node name="PopupsLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PopUps" type="Control" parent="PopupsLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_j6qku")
+
+[node name="PopUp" parent="PopupsLayer/PopUps" instance=ExtResource("7_brm5d")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.059
+anchor_bottom = 0.117
+pivot_offset = Vector2(0, 0)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/NavButton" to="." method="_on_nav_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/EntityFindButton" to="." method="_on_entity_find_button_pressed"]

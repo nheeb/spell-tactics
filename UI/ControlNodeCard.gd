@@ -23,6 +23,7 @@ func set_content(pretty_name: String, costs: String, effect: String, fluff: Stri
 	%Name.text = pretty_name
 	%Costs.text = costs
 	%Effect.text = effect
+	# could always extend the fluff to 3 lines for consistent look
 	%Fluff.text = fluff
 
 

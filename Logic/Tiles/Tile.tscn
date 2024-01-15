@@ -80,4 +80,6 @@ skeleton = NodePath("../../..")
 wait_time = 0.6
 one_shot = true
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
 [connection signal="timeout" from="HoverTimer" to="." method="_on_hover_timer_timeout"]
