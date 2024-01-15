@@ -7,18 +7,6 @@ func _init(_spell: Spell):
 	if spell.type.logic != self.get_script():
 		printerr("Weird creation of SpellLogic Object")
 
-## The current costs with all the modifiers if there are any
-func get_costs() -> Array[Game.Energy]:
-	return spell.type.costs
-
-## This is for overriding if there are general cast-conditions
-func is_unlocked() -> bool:
-	return true
-
-## This is for overriding if there are conditions for targets
-func is_current_cast_valid() -> bool:
-	return true
-
 ## Tests if payment is possible
 func is_payment_valid(payment: Array[Game.Energy]) -> bool:
 	return Utility.is_energy_cost_payable(payment, get_costs()) is Array
@@ -48,6 +36,22 @@ func cast(payment: Array[Game.Energy]) -> void:
 		Game.combat.card_utility.discard(spell)
 	else:
 		printerr("Invalid cast of spell")
+
+
+
+
+
+## The current costs with all the modifiers if there are any
+func get_costs() -> Array[Game.Energy]:
+	return spell.type.costs
+
+## This is for overriding if there are general cast-conditions
+func is_unlocked() -> bool:
+	return true
+
+## This is for overriding if there are conditions for targets
+func is_current_cast_valid() -> bool:
+	return true
 
 ## Most important function for overwriting. Here should be the effect
 func casting_effect() -> void:

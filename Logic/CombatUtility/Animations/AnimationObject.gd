@@ -14,11 +14,17 @@ func _init(_reference: Object, _command: String, _parameters := [], _flags: int 
 	flags = _flags
 
 func play() -> void:
-	if reference != null:
+	if is_instance_valid(reference):
 		reference.callv(command, parameters)
 		if reference.has_signal("animation_done"):
+			print("Waiting for %s to send a signal" % reference.name)
 			await reference.animation_done
 	else:
 		printerr("Animation on null reference")
+	print("a")
 	await Game.tree.process_frame
+	print("b")
 	animation_done.emit()
+
+func _to_string() -> String:
+	return "Anim: %s does %s with %s" % [reference.name, command, parameters]

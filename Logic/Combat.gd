@@ -7,17 +7,18 @@ class_name Combat extends Node
 @onready var ui_utility: UiUtility = %UiUtility
 
 enum RoundPhase {
+	CombatBegin = 0, # Unreachable
 	Start = 1,
 	Movement = 2, # Player Input
 	Spell = 3, # Player Input
 	Pass = 4,
 	Enemy = 5,
 	End = 6,
-	RoundRepeats = 7,
+	RoundRepeats = 7, # Unreachable
 }
 
 var current_round: int = 1
-var current_phase: RoundPhase = RoundPhase.Start
+var current_phase: RoundPhase = RoundPhase.CombatBegin
 
 var level: Level
 
@@ -59,7 +60,7 @@ func advance_current_phase():
 	# go to next phase
 	@warning_ignore("int_as_enum_without_cast")
 	current_phase += 1
-	if current_phase == RoundPhase.RoundRepeats:
+	if current_phase >= RoundPhase.RoundRepeats:
 		current_phase = RoundPhase.Start
 
 ## Processes the current phase. Returns true if Player input is needed to advace to the next phase
@@ -87,8 +88,10 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 func advance_and_process_until_next_player_action_needed():
 	while true:
 		advance_current_phase()
-		if process_current_phase():
+		print(current_phase)
+		if process_current_phase(): # If Player Input needed
 			break
+	animation_utility.play_animation_queue()
 
 func process_player_action(action: PlayerAction):
 	if action.is_valid():

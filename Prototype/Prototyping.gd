@@ -3,12 +3,32 @@ extends Node3D
 const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
 const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
 const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
+
+const COMBAT = preload("res://Logic/Combat.tscn")
+const COMBAT_UI = preload("res://UI/CombatUI.tscn")
+
+const LOAD_PROTOTYPE_COMBAT = false
+
 func _ready() -> void:
 	$Level.init_basic_grid(3)
 	# let's add some prototyping entities to the level
 	$Level.add_entity(3, 3, ROCK_ENTITY)
 	$Level.add_entity(3, 4, WATER_ENTITY)
 	$Level.player = $Level.add_entity(0, 6, PLAYER_TYPE)
+
+
+	if LOAD_PROTOTYPE_COMBAT:
+		var new_combat = COMBAT.instantiate()
+		add_child(new_combat)
+		new_combat.create_as_prototype($Level)
+		var new_ui = COMBAT_UI.instantiate()
+		$FeaturesUI.add_child(new_ui)
+		
+		Game.combat = new_combat
+		Game.combat_ui = new_ui
+		
+		new_combat.advance_and_process_until_next_player_action_needed()
+
 	
 
 var flip := false

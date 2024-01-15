@@ -11,8 +11,12 @@ var type: EntityType
 func _enter_tree() -> void:
 	$DebugTile.visible = false
 
+signal animation_done
+
 func animation_move_to(tile: Tile) -> void:
-	pass
+	var tween := get_tree().create_tween().tween_property(self, "global_position", tile.global_position, 1.0)
+	await tween.finished
+	animation_done.emit()
 	
 #func update_hp(hp: int):
 	#$HPLabel.text = "%d / %d" % [hp, type.max]

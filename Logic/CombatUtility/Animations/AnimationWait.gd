@@ -7,5 +7,8 @@ func _init(time) -> void:
 	wait_time = time
 
 func play():
-	await Game.tree.create_timer(wait_time)
+	await Game.tree.create_timer(wait_time).timeout
 	animation_done.emit()
+
+func _to_string() -> String:
+	return "Anim: Wait %s" % [wait_time]
