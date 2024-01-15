@@ -1,11 +1,5 @@
 class_name Combat extends Node
 
-@onready var animation_utility: AnimationUtility = %AnimationUtility
-@onready var card_utility: CardUtility = %CardUtility
-@onready var energy_utility: EnergyUtility = %EnergyUtility
-@onready var movement_utility: MovementUtility = %MovementUtility
-@onready var ui_utility: UiUtility = %UiUtility
-
 enum RoundPhase {
 	CombatBegin = 0, # Unreachable
 	Start = 1,
@@ -16,6 +10,12 @@ enum RoundPhase {
 	End = 6,
 	RoundRepeats = 7, # Unreachable
 }
+
+@onready var animation_utility: AnimationUtility = %AnimationUtility
+@onready var card_utility: CardUtility = %CardUtility
+@onready var energy_utility: EnergyUtility = %EnergyUtility
+@onready var movement_utility: MovementUtility = %MovementUtility
+@onready var ui_utility: UiUtility = %UiUtility
 
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
@@ -34,9 +34,16 @@ var player_energy: Array[Game.Energy]
 
 var animation_queue: Array[AnimationObject]
 
-func create_from_resource():
-	# TODO Load Combat State
-	pass
+func update_references() -> void:
+	player = null
+	enemies = []
+	for entity in level.get_all_entities():
+		if entity is PlayerEntity:
+			if player != entity and player != null:
+				printerr("Two players in a level??")
+			player = entity
+		elif entity is EnemyEntity:
+			enemies.append(entity)
 
 func create_as_prototype(_level: Level):
 	level = _level
@@ -60,6 +67,10 @@ func create_as_prototype(_level: Level):
 func connect_with_ui(_ui: CombatUI) -> void:
 	ui = _ui
 	ui.combat = self
+	
+	# Update UI
+	for spell in hand:
+		ui.add_card(spell)
 
 func advance_current_phase():
 	# go to next phase
@@ -107,3 +118,28 @@ func process_player_action(action: PlayerAction):
 
 func _ready() -> void:
 	Events.tile_clicked.connect(func (tile): process_player_action(PlayerMovement.new(tile)))
+
+func serialize() -> CombatState:
+	var state := CombatState.new()
+	state.level_state = level.serialize()
+	state.current_round = current_round
+	state.current_phase = current_phase
+	state.player_energy = player_energy
+	state.hand_size = hand_size
+	state.deck_states.append_array(deck.map(func(x: Spell): return x.serialize()))
+	state.hand_states.append_array(hand.map(func(x: Spell): return x.serialize()))
+	state.discard_pile_states.append_array(discard_pile.map(func(x: Spell): return x.serialize()))
+	return state
+
+func save_to_disk(path: String = ""):
+	var state: CombatState = serialize()
+	var err = ResourceSaver.save(state, path) # , ResourceSaver.FLAG_BUNDLE_RESOURCES)
+	
+	if not err == OK:
+		printerr("Err when saving level state: ", err)
+
+static func load_from_disk(path: String) -> Combat:
+	var state: CombatState = ResourceLoader.load(path) as CombatState
+	return state.deserialize()
+
+

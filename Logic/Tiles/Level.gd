@@ -79,10 +79,7 @@ const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
 static func load_from_disk(path: String) -> Level:
 	var level_state: LevelState = ResourceLoader.load(path) as LevelState
 	var level: Level = level_state.deserialize()
-	var player_ent: PlayerEntity = level.find_entity(PLAYER_TYPE)
-	if player_ent != null:
-		level.player = player_ent
-		
+	
 	return level
 
 func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
