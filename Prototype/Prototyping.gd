@@ -108,10 +108,6 @@ func _on_save_level_pressed() -> void:
 
 
 func _on_load_level_pressed() -> void:
-<<<<<<< HEAD
-	$Level.load_from_disk("user://level.tres")
-
-=======
 	var loaded_level = Level.load_from_disk("user://level.tres")
 	loaded_level.name = "Level"
 	$Level.free()
@@ -124,4 +120,3 @@ func _on_toggle_tile_labels_pressed() -> void:
 	if tile_toggle:
 		# 
 		pass
->>>>>>> 316c6fc0e5d922cb78e3e29e8a48d343e12cc9af
