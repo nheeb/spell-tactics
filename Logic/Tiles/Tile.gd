@@ -15,7 +15,7 @@ static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	var xz_translation: Vector2 = (r_tile-r_center) * Level.Q_BASIS + (q_tile-q_center) * Level.R_BASIS 
 	tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
 
-	tile.get_node("DebugLabel").text = "(%s, %s)" % [r_center, q_center]
+	tile.get_node("DebugLabel").text = "(%s, %s)" % [r_tile, q_tile]
 	tile.r = r_tile
 	tile.q = q_tile
 	tile.name = "Tile_%02d_%02d" % [r_tile, q_tile]
@@ -29,13 +29,12 @@ func _on_area_3d_mouse_exited() -> void:
 	set_highlight(Highlight.Type.Hover, false)
 	
 func add_entity(entity: Entity):
+	entity.current_tile = self
 	entities.append(entity)
 	if entity.visual_entity != null:
-		$VisualEntities.add_child(entity.visual_entity)
+		entity.visual_entity.position = self.position
 		# TODO add logical entity
-		#entity.owner = self
-		entity.visual_entity.owner = self
-		entity.current_tile = self
+		
 		
 func remove_entity(entity: Entity):
 	var i = entities.find(entity)
@@ -44,8 +43,9 @@ func remove_entity(entity: Entity):
 		return
 		
 	entities.remove_at(i)
-	$VisualEntities.remove_child(entity.visual_entity)
 	entity.current_tile = null
+	# should we turn it invisible then? huh
+	#entity.visual_entity.visible = false
 	
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
@@ -64,10 +64,7 @@ func get_coverage_factor() -> int:
 
 
 
-func set_highlight(type: Highlight.Type, active: bool, _reset_others := false):
-	if _reset_others:
-		# TODO (if needed)
-		pass
+func set_highlight(type: Highlight.Type, active: bool):
 	if active:
 		$Highlight.enable_highlight(type)
 	else:

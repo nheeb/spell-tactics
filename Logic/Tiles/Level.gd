@@ -74,10 +74,16 @@ func save_to_disk(path: String = ""):
 	
 	if not err == OK:
 		printerr("Err when saving level state: ", err)
-	
+
+const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
 static func load_from_disk(path: String) -> Level:
 	var level_state: LevelState = ResourceLoader.load(path)
-	return level_state.deserialize()
+	var level: Level = level_state.deserialize()
+	var player_ent: PlayerEntity = level.find_entity(PLAYER_TYPE)
+	if player_ent != null:
+		level.player = player_ent
+		
+	return level
 
 func add_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	# should entities only be part of tiles or do we want a second data structure outside?
@@ -88,9 +94,24 @@ func add_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 		
 	var entity := entity_type.create_entity() as Entity
 	var tile = tiles[r][q] as Tile
-
+	
+	entity.visual_entity.visible = true
+	$VisualEntities.add_child(entity.visual_entity)
+	entity.visual_entity.owner = self
+	
 	tile.add_entity(entity)
 	return entity
+
+## go through visual instances of this tile and assert that they are visible and
+## at the right position. Later, we can also call some kind of "update" here
+## for the UI (think healthbar, etc)
+func update_visual_entities(tile: Tile):
+	var r_tile := tile.r
+	var vis_ent: VisualEntity
+	for ent in tile.entities:
+		vis_ent = ent.visual_entity
+		if not vis_ent in $VisualEntities.get_children():
+			$VisualEntities.add_child(vis_ent)
 
 ## could maybe be put in Utils singleton
 func tile_distance(r1: int, q1: int, r2: int, q2: int):
