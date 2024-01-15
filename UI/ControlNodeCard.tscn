@@ -8,7 +8,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_bjwad"]
 font = ExtResource("1_v87ep")
-font_size = 32
+font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_1b822"]
 font = ExtResource("2_b8pmq")
@@ -16,7 +16,7 @@ font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_2udtv"]
 font = ExtResource("5_jnoks")
-font_size = 18
+font_size = 14
 font_color = Color(0.843137, 0.776471, 0, 1)
 
 [node name="ControlNodeCard" type="Control"]
@@ -28,6 +28,16 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_aqi4q")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.282353, 0.45098, 0.196078, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -65,14 +75,13 @@ text = "<FLUFF>"
 label_settings = SubResource("LabelSettings_2udtv")
 autowrap_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0.462745)
-metadata/_edit_use_anchors_ = true
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[node name="SelectButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SELECT"
+
+[connection signal="button_down" from="VBoxContainer/VBoxContainer/SelectButton" to="." method="_on_button_button_down"]

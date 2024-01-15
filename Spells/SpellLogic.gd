@@ -1,9 +1,11 @@
 class_name SpellLogic extends Object
 
 var spell: Spell
+var combat: Combat
 
 func _init(_spell: Spell):
 	spell = _spell
+	combat = spell.combat
 	if spell.type.logic != self.get_script():
 		printerr("Weird creation of SpellLogic Object")
 
@@ -17,25 +19,20 @@ func is_all_valid(payment: Array[Game.Energy]) -> bool:
 
 ## Returns a possible payment (if possible)
 func get_possible_payment():
-	return Utility.is_energy_cost_payable(Game.combat.player_energy, get_costs())
+	return Utility.is_energy_cost_payable(combat.player_energy, get_costs())
 
 ## Deducts the current cards cost from the players engergy
 func pay_for_spell(payment: Array[Game.Energy]) -> void:
 	if is_payment_valid(payment):
-		Game.combat.energy_utility.pay(payment)
+		combat.energy_utility.pay(payment)
 	else:
 		printerr("Wrong payment done")
 
 ## Pays for the costs. Activates the cards effect. Also discards the card from hand
 func cast(payment: Array[Game.Energy]) -> void:
-	if is_unlocked() and is_payment_valid(payment) and is_current_cast_valid():
-		pay_for_spell(payment)
-		# Style: use signal instead?
-		# What exactly is the seperation between Spell and SpellLogic?
-		# Thoguth SpellLogic would be mostly static
-		Game.combat.card_utility.discard(spell)
-	else:
-		printerr("Invalid cast of spell")
+	pay_for_spell(payment)
+	casting_effect()
+	combat.card_utility.discard(spell)
 
 
 

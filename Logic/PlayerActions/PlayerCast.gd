@@ -8,10 +8,10 @@ func _init(_spell: Spell, _payment: Array[Game.Energy]) -> void:
 	payment = _payment
 	action_string = "Cast Spell %s with payment %s" % [spell.type.internal_name, Utility.energy_to_string(payment)]
 
-func is_valid() -> bool:
-	if Game.combat.current_phase != Combat.RoundPhase.Spell:
+func is_valid(combat: Combat) -> bool:
+	if combat.current_phase != Combat.RoundPhase.Spell:
 		return false
 	return spell.logic.is_all_valid(payment)
 
-func execute() -> void:
+func execute(combat: Combat) -> void:
 	spell.logic.cast(payment)
