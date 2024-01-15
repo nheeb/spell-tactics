@@ -187,21 +187,21 @@ func _HasTarget() -> bool:
 func _process(_delta):
 
 	var f = Engine.get_physics_interpolation_fraction()
-	var tr: Transform3D = Transform3D()
+	var _tr: Transform3D = Transform3D()
 
 	# translate
 	if _TestFlags(SF_TRANSLATE):
 		var ptDiff = _m_trCurr.origin - _m_trPrev.origin
-		tr.origin = _m_trPrev.origin + (ptDiff * f)
+		_tr.origin = _m_trPrev.origin + (ptDiff * f)
 
 	# rotate
 	if _TestFlags(SF_BASIS):
 		if _TestFlags(SF_SLERP):
-			tr.basis = _m_trPrev.basis.slerp(_m_trCurr.basis, f)
+			_tr.basis = _m_trPrev.basis.slerp(_m_trCurr.basis, f)
 		else:
-			tr.basis = _LerpBasis(_m_trPrev.basis, _m_trCurr.basis, f)
+			_tr.basis = _LerpBasis(_m_trPrev.basis, _m_trCurr.basis, f)
 
-	transform = tr
+	transform = _tr
 
 
 func _physics_process(_delta):

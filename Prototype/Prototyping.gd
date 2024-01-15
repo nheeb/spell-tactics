@@ -7,7 +7,7 @@ const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
 const COMBAT = preload("res://Logic/Combat.tscn")
 const COMBAT_UI = preload("res://UI/CombatUI.tscn")
 
-const LOAD_PROTOTYPE_COMBAT = false
+const LOAD_PROTOTYPE_COMBAT = true
 
 func _ready() -> void:
 	$Level.init_basic_grid(3)
