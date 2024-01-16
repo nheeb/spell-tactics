@@ -1,16 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dauc5wautr3f"]
+[gd_scene load_steps=2 format=3 uid="uid://qb8wmyudb17q"]
 
-[ext_resource type="Script" path="res://Logic/EnemyBehaviour/EnemyBehaviour.gd" id="1_j6xpk"]
+[sub_resource type="GDScript" id="GDScript_1p2uf"]
+script/source = "extends Node
+
+enum Mindset {
+	asdf,
+}
+
+func get_move_from_string(move_name: String) -> EnemyMove:
+	return null
+"
 
 [node name="EnemyBehaviour" type="Node"]
-script = ExtResource("1_j6xpk")
-
-[node name="Movement" type="Node" parent="."]
-
-[node name="StepToPlayer" type="Node" parent="Movement"]
-
-[node name="StepToAlly" type="Node" parent="Movement"]
-
-[node name="RandomStep" type="Node" parent="Movement"]
-
-[node name="Halt" type="Node" parent="Movement"]
+script = SubResource("GDScript_1p2uf")

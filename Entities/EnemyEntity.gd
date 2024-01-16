@@ -17,3 +17,7 @@ func do_action() -> void:
 func do_move(moveset: Array[EnemyMove], forced_moveset: Array[EnemyMove]) -> void:
 	# TODO use move.get_score(self) to decide on a move and execute it
 	pass
+
+func on_load() -> void:
+	type = type as EnemyEntityType
+	#actions.append_array(type.actions.map(func(s): ))

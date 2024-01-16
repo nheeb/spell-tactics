@@ -10,6 +10,8 @@ var logical_entity: LogicalEntity
 
 ## Reference to the Tile this Entity is residing on
 var current_tile: Tile
+## Reference to the current combat
+var combat: Combat
 
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
@@ -45,3 +47,6 @@ func serialize() -> EntityState:
 func move(target: Tile):
 	current_tile.remove_entity(self)
 	target.add_entity(self)
+
+func on_load() -> void:
+	pass
