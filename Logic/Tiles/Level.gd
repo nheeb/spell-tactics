@@ -1,4 +1,4 @@
-#@tool
+@tool
 class_name Level extends Node3D
 
 ## Different initialization functions should be implemented.
@@ -23,6 +23,12 @@ func _ready() -> void:
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
+
+func clear():
+	for row in tiles:
+		for tile in row:
+			if tile != null:
+				tile.queue_free()
 
 func init_tiles_array(rows, cols):
 	for i in range(rows):
