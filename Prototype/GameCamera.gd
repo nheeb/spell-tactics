@@ -5,7 +5,7 @@ var rotation_input := 0.0
 @export var move_acceleration := 30.0
 ## degrees per second
 @export var rotation_velocity := 130.0
-@export var damping := .03
+@export var damping := .02
 
 
 @onready var zoom_pivot = $AnglePivot/ZoomPivot

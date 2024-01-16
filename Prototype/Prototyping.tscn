@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Addons/smoothing/smoothing.gd" id="1_mf57j"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
 [ext_resource type="Script" path="res://Prototype/MouseInput.gd" id="4_2ad06"]
-[ext_resource type="Script" path="res://UI/PopUps.gd" id="6_j6qku"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="6_rjbjq"]
+[ext_resource type="Script" path="res://UI/PopUpHandler.gd" id="6_weoy7"]
 [ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="7_brm5d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
@@ -152,7 +152,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("6_j6qku")
+script = ExtResource("6_weoy7")
 
 [node name="PopUp" parent="PopupsLayer/PopUps" instance=ExtResource("7_brm5d")]
 layout_mode = 1
