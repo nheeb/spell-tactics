@@ -5,7 +5,7 @@ const ROCK = preload("res://Entities/Environment/Rock.tres")
 
 
 func save():
-	var rock_entity: Entity = ROCK.create_entity()
+	var rock_entity: Entity = ROCK.create_entity(Combat.new())
 	# TODO test how it works with an entity with state
 	
 	# open save file

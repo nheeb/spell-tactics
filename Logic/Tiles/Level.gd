@@ -1,4 +1,4 @@
-#@tool
+@tool
 class_name Level extends Node3D
 
 ## Different initialization functions should be implemented.
@@ -14,6 +14,8 @@ var tiles: Array[Array] = []  # Tile
 var n_rows: int
 var n_cols: int
 
+var combat: Combat
+
 @onready var player: PlayerEntity
 
 func _ready() -> void:
@@ -23,6 +25,12 @@ func _ready() -> void:
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
+
+func clear():
+	for row in tiles:
+		for tile in row:
+			if tile != null:
+				tile.queue_free()
 
 func init_tiles_array(rows, cols):
 	for i in range(rows):
@@ -67,20 +75,20 @@ func serialize() -> LevelState:
 	level_state.tiles = tile_data
 	return level_state
 
-	
-func save_to_disk(path: String = ""):
-	var state: LevelState = serialize()
-	var err = ResourceSaver.save(state, path) # , ResourceSaver.FLAG_BUNDLE_RESOURCES)
-	
-	if not err == OK:
-		printerr("Err when saving level state: ", err)
-
-const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
-static func load_from_disk(path: String) -> Level:
-	var level_state: LevelState = ResourceLoader.load(path) as LevelState
-	var level: Level = level_state.deserialize()
-	
-	return level
+## Saving and loading levels from disks is depricated. Always save and load combats
+#func save_to_disk(path: String = ""):
+	#var state: LevelState = serialize()
+	#var err = ResourceSaver.save(state, path) # , ResourceSaver.FLAG_BUNDLE_RESOURCES)
+	#
+	#if not err == OK:
+		#printerr("Err when saving level state: ", err)
+#
+#const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
+#static func load_from_disk(path: String) -> Level:
+	#var level_state: LevelState = ResourceLoader.load(path) as LevelState
+	#var level: Level = level_state.deserialize(Combat.new())
+	#
+	#return level
 
 func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	# should entities only be part of tiles or do we want a second data structure outside?
@@ -89,7 +97,7 @@ func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
 		return
 		
-	var entity := entity_type.create_entity() as Entity
+	var entity := entity_type.create_entity(combat) as Entity
 	var tile = tiles[r][q] as Tile
 	
 	entity.visual_entity.visible = true
