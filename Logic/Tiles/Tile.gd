@@ -89,3 +89,7 @@ func _on_hover_timer_timeout() -> void:
 	hovering = true
 	Events.tile_hovered_long.emit(self)
 	#print("Hovered tile %d, %d" % [r, q])
+	
+	
+func _to_string() -> String:
+	return name
