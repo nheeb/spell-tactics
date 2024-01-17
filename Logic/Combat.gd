@@ -3,6 +3,7 @@ class_name Combat extends Node
 const LEVEL := preload("res://Logic/Tiles/Level.tscn")
 const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
 const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
+const GRASS_TERRAIN_ENTITY := preload("res://Entities/Environment/GrassTile.tres")
 const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
 const GOBLIN_TYPE := preload("res://Entities/Enemies/Goblin.tres")
 
@@ -59,6 +60,7 @@ func create_prototype_level():
 	level.combat = self
 	level.init_basic_grid(3)
 	# let's add some prototyping entities to the level
+	level.fill_entity(GRASS_TERRAIN_ENTITY)
 	level.create_entity(2, 2, GOBLIN_TYPE)
 	level.create_entity(3, 3, ROCK_ENTITY)
 	level.create_entity(3, 4, WATER_ENTITY)
