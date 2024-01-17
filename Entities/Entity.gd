@@ -48,5 +48,6 @@ func move(target: Tile):
 	current_tile.remove_entity(self)
 	target.add_entity(self)
 
-func on_load() -> void:
+## This will be executed after an entity has been created from a type
+func on_create() -> void:
 	pass

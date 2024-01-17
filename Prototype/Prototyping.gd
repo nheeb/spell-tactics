@@ -1,41 +1,26 @@
 extends Node3D
 
-const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
-const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
-const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
-
-const LEVEL := preload("res://Logic/Tiles/Level.tscn")
 const COMBAT := preload("res://Logic/Combat.tscn")
 const COMBAT_UI := preload("res://UI/CombatUI.tscn")
-
-const LOAD_PROTOTYPE_COMBAT = true
 
 var level : Level
 var combat : Combat
 var combat_ui : CombatUI
 
 func _ready() -> void:
-	level = LEVEL.instantiate()
-	level.name = "Level"
-	add_child(level)
-	level.init_basic_grid(3)
-	# let's add some prototyping entities to the level
-	level.create_entity(3, 3, ROCK_ENTITY)
-	level.create_entity(3, 4, WATER_ENTITY)
-	level.player = level.create_entity(0, 6, PLAYER_TYPE)
-
-	if LOAD_PROTOTYPE_COMBAT:
-		combat = COMBAT.instantiate()
-		add_child(combat)
-		combat.create_as_prototype(level)
-		combat_ui = COMBAT_UI.instantiate()
-		$FeaturesUI.add_child(combat_ui)
-		combat.connect_with_ui(combat_ui)
-		
-		combat.advance_and_process_until_next_player_action_needed()
-		combat.animation_utility.play_animation_queue()
-
+	combat = COMBAT.instantiate()
+	add_child(combat)
 	
+	combat.create_prototype_level()
+	add_child(combat.level)
+	
+	combat_ui = COMBAT_UI.instantiate()
+	$FeaturesUI.add_child(combat_ui)
+	combat.connect_with_ui(combat_ui)
+	
+	combat.advance_and_process_until_next_player_action_needed()
+	combat.animation_utility.play_animation_queue()
+
 
 var flip := false
 func _on_movement_range_button_pressed() -> void:

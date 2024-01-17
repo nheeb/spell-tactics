@@ -1,5 +1,11 @@
 class_name Combat extends Node
 
+const LEVEL := preload("res://Logic/Tiles/Level.tscn")
+const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
+const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
+const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
+const GOBLIN_TYPE := preload("res://Entities/Enemies/Goblin.tres")
+
 enum RoundPhase {
 	CombatBegin = 0, # Unreachable
 	Start = 1,
@@ -16,6 +22,8 @@ enum RoundPhase {
 @onready var energy_utility: EnergyUtility = %EnergyUtility
 @onready var movement_utility: MovementUtility = %MovementUtility
 @onready var ui_utility: UiUtility = %UiUtility
+@onready var log: LogUtility = %LogUtility
+
 
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
@@ -42,22 +50,26 @@ func update_references() -> void:
 			if player != entity and player != null:
 				printerr("Two players in a level??")
 			player = entity
-		elif entity is EnemyEntity:
+		if entity is EnemyEntity:
 			enemies.append(entity)
 
-func create_as_prototype(_level: Level):
-	level = _level
+func create_prototype_level():
+	level = LEVEL.instantiate()
+	level.name = "Level"
+	level.combat = self
+	level.init_basic_grid(3)
+	# let's add some prototyping entities to the level
+	level.create_entity(2, 2, GOBLIN_TYPE)
+	level.create_entity(3, 3, ROCK_ENTITY)
+	level.create_entity(3, 4, WATER_ENTITY)
+	level.player = level.create_entity(0, 6, PLAYER_TYPE)
+
 	deck = []
 	for i in range(20):
 		match randi_range(1,2):
 			1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
 			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
-	enemies = []
-	for entity in level.get_all_entities():
-		if entity is PlayerEntity:
-			player = entity
-		elif entity is EnemyEntity:
-			enemies.append(entity)
+	update_references()
 	player_energy = []
 	animation_queue = []
 	discard_pile = []
@@ -142,4 +154,16 @@ static func load_from_disk(path: String) -> Combat:
 	var state: CombatState = ResourceLoader.load(path) as CombatState
 	return state.deserialize()
 
-
+static func serialize_level_as_combat_state(level: Level) -> CombatState:
+	var state := CombatState.new()
+	state.level_state = level.serialize()
+	state.current_round = 1
+	state.current_phase = RoundPhase.CombatBegin
+	state.player_energy = []
+	state.hand_size = 5
+	var useless_spell_state = SpellState.new()
+	useless_spell_state.type = SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres")
+	state.deck_states.append_array(range(20).map(func(x): return useless_spell_state))
+	state.hand_states.append_array([])
+	state.discard_pile_states.append_array([])
+	return state
