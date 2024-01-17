@@ -9,7 +9,7 @@
 material = ExtResource("2_c24a5")
 top_radius = 1.0
 bottom_radius = 1.0
-height = 0.2
+height = 1.0
 radial_segments = 6
 rings = 1
 
@@ -20,6 +20,8 @@ material = ExtResource("4_eqav3")
 script = ExtResource("1_scmar")
 
 [node name="Hexagon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
 mesh = SubResource("CylinderMesh_wyt28")
 
 [node name="DebugLabel" type="Label3D" parent="."]

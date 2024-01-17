@@ -19,6 +19,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Brush" type="HFlowContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="None" type="Button" parent="VBoxContainer/Brush"]
+layout_mode = 2
+text = "None"
+
+[node name="Grass" type="Button" parent="VBoxContainer/Brush"]
+layout_mode = 2
+text = "Grass"
+
+[node name="Water" type="Button" parent="VBoxContainer/Brush"]
+layout_mode = 2
+text = "Water"
+
 [node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -45,6 +60,9 @@ text = "Lower"
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 
+[connection signal="pressed" from="VBoxContainer/Brush/None" to="." method="_on_none_pressed"]
+[connection signal="pressed" from="VBoxContainer/Brush/Grass" to="." method="_on_grass_pressed"]
+[connection signal="pressed" from="VBoxContainer/Brush/Water" to="." method="_on_water_pressed"]
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/Pencil" to="." method="_on_pencil_pressed"]
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/Raise" to="." method="_on_raise_pressed"]
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/Lower" to="." method="_on_lower_pressed"]

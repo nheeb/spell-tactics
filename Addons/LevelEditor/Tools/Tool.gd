@@ -6,8 +6,8 @@ func _selected():
 func _deselected():
 	pass
 
-func _apply(editor: Editor, tile: Tile):
+func _apply(editor: Editor, tile: Tile, placement_active: EntityType):
 	pass
 
-func _drag(editor: Editor, tile: Tile):
+func _drag(editor: Editor, tile: Tile, placement_active: EntityType):
 	pass

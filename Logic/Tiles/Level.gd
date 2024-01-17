@@ -89,6 +89,9 @@ func serialize() -> LevelState:
 	#var level: Level = level_state.deserialize(Combat.new())
 	#
 	#return level
+func fill_entity(entity_type: EntityType):
+	for tile in get_all_tiles():
+		create_entity(tile.r, tile.q, entity_type)
 
 func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	# should entities only be part of tiles or do we want a second data structure outside?
@@ -96,13 +99,14 @@ func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	if tiles[r][q] == null:
 		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
 		return
-		
+	
 	var entity := entity_type.create_entity(combat) as Entity
 	var tile = tiles[r][q] as Tile
 	
 	entity.visual_entity.visible = true
 	$VisualEntities.add_child(entity.visual_entity)
 	entity.visual_entity.owner = self
+	print(entity.visual_entity.get_path())
 	
 	tile.add_entity(entity)
 	if entity.visual_entity != null:
@@ -110,6 +114,31 @@ func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 		# TODO add logical entity
 		
 	return entity
+
+func remove_entity(r: int, q: int, entity: Entity):
+	# should entities only be part of tiles or do we want a second data structure outside?
+	# here, in Level
+	if tiles[r][q] == null:
+		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
+		return
+	
+	var tile = tiles[r][q] as Tile
+	
+	var pos = tile.entities.find(entity)
+	tile.entities.remove_at(pos)
+	if entity.visual_entity:
+		entity.visual_entity.queue_free()
+
+func get_terrain(r: int, q: int) -> Entity:
+	if tiles[r][q] == null:
+		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
+		return
+	
+	var tile = tiles[r][q] as Tile
+	for entity in tile.entities:
+		if entity.type.is_terrain:
+			return entity
+	return null
 
 ## go through visual instances of this tile and assert that they are visible and
 ## at the right position. Later, we can also call some kind of "update" here

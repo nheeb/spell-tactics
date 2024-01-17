@@ -1,3 +1,4 @@
+@tool
 class_name VisualEntity extends Node3D
 
 

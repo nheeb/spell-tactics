@@ -1,7 +1,8 @@
 extends Node3D
 
 const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
-const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
+const WATER_ENTITY := preload("res://Entities/Environment/WaterTile.tres")
+const GRASS_TILE_ENTITY := preload("res://Entities/Environment/GrassTile.tres")
 const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
 
 const LEVEL := preload("res://Logic/Tiles/Level.tscn")
@@ -19,6 +20,7 @@ func _ready() -> void:
 	level.name = "Level"
 	add_child(level)
 	level.init_basic_grid(3)
+	level.fill_entity(GRASS_TILE_ENTITY)
 	# let's add some prototyping entities to the level
 	level.create_entity(3, 3, ROCK_ENTITY)
 	level.create_entity(3, 4, WATER_ENTITY)

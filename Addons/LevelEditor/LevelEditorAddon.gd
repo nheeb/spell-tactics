@@ -54,9 +54,9 @@ func _on_editor_click(mouse_pos: Vector2i, drag: bool):
 		var tile = collider.get_parent()
 		if tile is Tile:
 			if not drag:
-				_editor_ui.tool_active._apply(_editor, tile)
+				_editor_ui.tool_active._apply(_editor, tile, _editor_ui.placement_active)
 			else:
-				_editor_ui.tool_active._drag(_editor, tile)
+				_editor_ui.tool_active._drag(_editor, tile, _editor_ui.placement_active)
 
 func _find_cameras(n : Node):
 	if n is Camera3D:

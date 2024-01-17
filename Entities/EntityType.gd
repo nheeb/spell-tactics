@@ -1,3 +1,4 @@
+@tool
 class_name EntityType extends Resource
 
 @export_category("Entity")
@@ -15,6 +16,7 @@ class_name EntityType extends Resource
 @export var entity_logic: Script
 
 @export_category("Gameplay")
+@export var is_terrain := false
 @export var is_drainable := true
 ## The energy this entity gives (if it's drainable)
 @export var energy: Array[Game.Energy]
