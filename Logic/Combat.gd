@@ -155,9 +155,9 @@ static func load_from_disk(path: String) -> Combat:
 	var state: CombatState = ResourceLoader.load(path) as CombatState
 	return state.deserialize()
 
-static func serialize_level_as_combat_state(level: Level) -> CombatState:
+static func serialize_level_as_combat_state(_level: Level) -> CombatState:
 	var state := CombatState.new()
-	state.level_state = level.serialize()
+	state.level_state = _level.serialize()
 	state.current_round = 1
 	state.current_phase = RoundPhase.CombatBegin
 	state.player_energy = []
