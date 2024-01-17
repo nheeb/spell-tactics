@@ -21,5 +21,5 @@ func draw():
 		combat.animation_queue.append(AnimationObject.new(combat.ui, "add_card", [spell]))
 
 func draw_to_hand_size():
-	while combat.hand.size() < combat.hand_size:
+	while combat.hand.size() < combat.player.traits.max_handsize:
 		draw()

@@ -16,3 +16,6 @@ func get_score() -> float:
 ## Executes the move
 func execute() -> void:
 	pass
+
+static func from_string(s: String, e: EnemyEntity) -> EnemyMove:
+	return load("res://Entities/Enemies/Moves/%s.gd" % s).new(e.combat, e)

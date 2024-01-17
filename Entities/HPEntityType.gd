@@ -24,4 +24,6 @@ func create_entity(combat: Combat) -> HPEntity:
 		
 	ent.hp = max_hp
 
+	ent.on_create()
+
 	return ent

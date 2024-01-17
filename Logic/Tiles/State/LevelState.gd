@@ -20,7 +20,7 @@ func deserialize(combat: Combat) -> Level:
 		level.update_visual_entities(tile)
 		level.tiles[tile_data.r][tile_data.q] = tile
 	
-	var player_ent: PlayerEntity = level.find_entity(PLAYER_TYPE)
+	var player_ent: PlayerEntity = level.find_entity_type(PLAYER_TYPE)
 	if player_ent != null:
 		level.player = player_ent
 	

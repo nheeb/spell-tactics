@@ -9,9 +9,11 @@ func _init(_destination : Tile) -> void:
 func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Movement:
 		return false
-	# TODO Test if destination is reachable
-	return true
+	
+	var distance = combat.level.tile_distance(combat.player.current_tile, destination)
+	return distance <= combat.player.traits.movement_range
 
 func execute(combat: Combat) -> void:
-	combat.movement_utility.move_entity(combat.player, destination)
+	print("Move Player to (%d, %d)" % [destination.r, destination.q])
+	combat.movement.move_entity(combat.player, destination)
 	combat.advance_and_process_until_next_player_action_needed()

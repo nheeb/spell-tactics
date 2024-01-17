@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cs6vnuiljtmct"]
+[gd_scene load_steps=12 format=3 uid="uid://cs6vnuiljtmct"]
 
 [ext_resource type="Script" path="res://Prototype/Prototyping.gd" id="1_j078d"]
 [ext_resource type="Script" path="res://Addons/smoothing/smoothing.gd" id="1_mf57j"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
 [ext_resource type="Script" path="res://Prototype/MouseInput.gd" id="4_2ad06"]
-[ext_resource type="Script" path="res://UI/PopUps.gd" id="6_j6qku"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="6_rjbjq"]
+[ext_resource type="Script" path="res://UI/PopUpHandler.gd" id="6_weoy7"]
 [ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="7_brm5d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
@@ -22,6 +22,9 @@ sky_material = SubResource("ProceduralSkyMaterial_ypriw")
 background_mode = 2
 sky = SubResource("Sky_4htsq")
 ambient_light_source = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_wk58v"]
+font_size = 24
 
 [node name="Prototyping" type="Node3D"]
 script = ExtResource("1_j078d")
@@ -127,6 +130,18 @@ theme_override_fonts/font = ExtResource("6_rjbjq")
 theme_override_font_sizes/font_size = 30
 text = "Toggle Tile Labels"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="FeaturesUI/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="FeaturesUI/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Save-Slot"
+label_settings = SubResource("LabelSettings_wk58v")
+
+[node name="SaveID" type="SpinBox" parent="FeaturesUI/Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="SaveLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -152,7 +167,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("6_j6qku")
+script = ExtResource("6_weoy7")
 
 [node name="PopUp" parent="PopupsLayer/PopUps" instance=ExtResource("7_brm5d")]
 layout_mode = 1

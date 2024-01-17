@@ -18,6 +18,4 @@ func deserialize(combat: Combat) -> Entity:
 		for prop_name in script_props.keys():
 			entity.logical_entity.set(prop_name, script_props[prop_name])
 
-	entity.on_load()
-
 	return entity

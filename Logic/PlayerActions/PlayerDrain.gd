@@ -16,5 +16,5 @@ func execute(combat: Combat) -> void:
 	# TODO drain the tile
 	for entity in target_tile.entities:
 		entity = entity as Entity
-		#Game.combat.energy_utility.gain(entity. ...)
+		#Game.combat.energy.gain(entity. ...)
 	pass

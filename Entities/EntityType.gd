@@ -46,4 +46,6 @@ func create_entity(combat: Combat) -> Entity:
 		ent.visual_entity.type = self
 		ent.type = self
 
+	ent.on_create()
+
 	return ent

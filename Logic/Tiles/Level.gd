@@ -18,9 +18,6 @@ var combat: Combat
 
 @onready var player: PlayerEntity
 
-func _ready() -> void:
-	pass
-	
 
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
@@ -51,7 +48,7 @@ func init_basic_grid(n: int):
 		for q in range(0, 2*n + 1):
 			# first off, check if this tile would have distance > n from origin
 			# in that case continue and put null into the array position
-			if tile_distance(r, q, n, n) > n: 
+			if rq_distance(r, q, n, n) > n: 
 				continue
 
 			var new_tile = Tile.create(r, q, n, n)
@@ -154,10 +151,18 @@ func update_visual_entities(tile: Tile):
 			vis_ent.position = tile.position
 
 ## could maybe be put in Utils singleton
-func tile_distance(r1: int, q1: int, r2: int, q2: int):
+func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
 	return (abs(q1 - q2) 
 			+ abs(q1 + r1 - q2 - r2)
 			+ abs(r1 - r2)) / 2
+			
+func tile_distance(t1: Tile, t2: Tile) -> int:
+	return rq_distance(t1.r, t1.q, t2.r, t2.q)
+	
+func entity_distance(e1: Entity, e2: Entity) -> int:
+	assert(is_instance_valid(e1.current_tile) and is_instance_valid(e2.current_tile), 
+		   "distance: entity has no tile")
+	return tile_distance(e1.current_tile, e2.current_tile)
 
 func is_location_in_bounds(coord: Vector2i) -> bool:
 	var r = coord.x
@@ -195,11 +200,13 @@ func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int):
 	assert(dist >= 0)
 	var s_center := - q_center - r_center
 	var tiles_in_distance: Array[Tile] = []
-	for q in range(-dist, dist + 1):
+	for q in range(-dist, dist+1):
 		for r in range(-dist, dist+1):
 			for s in range(-dist, dist+1):
 				if q + r + s == 0:  # valid coordinate
-					var tile_indices: Vector3i = Utility.cube_add(q_center, r_center, s_center, q, r, s)
+					var tile_indices: Vector3i = Utility.cube_add(r_center, q_center, s_center, q, r, s)
+					if not is_location_in_bounds(Vector2i(tile_indices.x, tile_indices.y)):
+						continue
 					var tile: Tile = tiles[tile_indices.x][tile_indices.y]
 					if tile != null:
 						tiles_in_distance.append(tile)
@@ -214,6 +221,13 @@ func _highlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 func _unhighlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 	for tile in highlight_tiles:
 		tile.set_highlight(type, false)
+		
+func highlight_movement_range(entity: Entity, movement_range: int) -> Array[Tile]:
+	print(entity.current_tile.r, entity.current_tile.q)
+	var highlight_tiles = get_all_tiles_in_distance(entity.current_tile.r,
+													entity.current_tile.q, movement_range)
+	_highlight_tile_set(highlight_tiles, Highlight.Type.Movement)
+	return highlight_tiles
 		
 		
 func move_entity(entity: Entity, target: Tile):
@@ -262,7 +276,7 @@ func find_all_tiles_with(type: EntityType) -> Array[Tile]:
 	return tiles_with
 
 ## Returns the first Entity found matching the given type
-func find_entity(type: EntityType) -> Entity:
+func find_entity_type(type: EntityType) -> Entity:
 	for r in range(len(tiles)):
 		for q in range(len(tiles[0])):
 			var tile = tiles[r][q]

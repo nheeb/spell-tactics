@@ -93,3 +93,21 @@ func string_to_energy(string: String) -> Array[Game.Energy]:
 		if c in letter_to_energy.keys():
 			array.append(letter_to_energy[c])
 	return array
+
+func random_index_of_scores(scores: Array[float]) -> int:
+	if scores.is_empty():
+		printerr("Random index: Empty list")
+		return -1
+	var total_size : float = scores.reduce(func(a,b): return a + b, 0.0)
+	if total_size == 0.0:
+		printerr("Random index: Only Zero entries")
+		return -1
+	var random_value := randf_range(0.0, total_size)
+	for i in range(scores.size()):
+		random_value -= scores[i]
+		if random_value < 0.0:
+			return i
+	printerr("Random index: Something went wrong")
+	return -1
+		
+	

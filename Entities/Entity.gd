@@ -15,7 +15,7 @@ var combat: Combat
 
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
-const entity_internal_props = ["current_tile", "visual_entity", "logical_entity", "type"]
+const entity_internal_props = ["current_tile", "visual_entity", "logical_entity", "type", "combat", "actions", "movements", "forced_actions", "forced_movements"]
 static func serialize_this_prop(name: String) -> bool:
 	if name.ends_with(".gd"):
 		# script type, ignore this
@@ -48,5 +48,6 @@ func move(target: Tile):
 	current_tile.remove_entity(self)
 	target.add_entity(self)
 
-func on_load() -> void:
+## This will be executed after an entity has been created from a type
+func on_create() -> void:
 	pass
