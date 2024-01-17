@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dofxa8sxjy7aw"]
+[gd_scene load_steps=4 format=3 uid="uid://dofxa8sxjy7aw"]
 
 [ext_resource type="FontFile" uid="uid://bgmbqeubb34cp" path="res://Assets/Fonts/rogue.ttf" id="1_nt321"]
-[ext_resource type="Script" path="res://Addons/smoothing/smoothing_2d.gd" id="1_ory5j"]
 [ext_resource type="Script" path="res://UI/PopUp.gd" id="1_ywwbg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0dv8f"]
@@ -29,14 +28,10 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
+[node name="TileLabel" type="Label" parent="PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "lel"
 label_settings = SubResource("LabelSettings_0dv8f")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Smoothing2D" type="Node2D" parent="PanelContainer/MarginContainer/Label"]
-script = ExtResource("1_ory5j")
-flags = 15

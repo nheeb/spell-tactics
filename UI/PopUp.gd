@@ -1,5 +1,9 @@
 extends Control
 
 
+func show_tile(tile: Tile):
+	pass
+
+
 func set_text(t: String):
-	%Label.text = t
+	%TileLabel.text = t
