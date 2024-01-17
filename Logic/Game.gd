@@ -9,14 +9,10 @@ enum Energy {
 	Any
 }
 
-#var combat: Combat
-#var combat_ui: CombatUI
+const SAVE_DIR_RES = "res://Savefiles/"
+const SAVE_DIR_USER = "user://"
 
 var tree : SceneTree : 
 	get:
 		return get_tree()
-
-
-# some common EntityTypes
-#const player_type: PlayerEntityType = preload("res://Entities/PlayerResource.tres")
 
