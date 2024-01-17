@@ -13,6 +13,7 @@ func _ready() -> void:
 	
 	combat.create_prototype_level()
 	add_child(combat.level)
+	level = combat.level
 	
 	combat_ui = COMBAT_UI.instantiate()
 	$FeaturesUI.add_child(combat_ui)
@@ -54,8 +55,8 @@ func _on_nav_button_pressed() -> void:
 
 
 func _on_move_rock_button_pressed() -> void:
-	level.move_entity(level.find_entity(ent_type), level.tiles[5][4])
-
+	combat.movement.move_entity(level.find_entity(ent_type), level.tiles[5][4])
+	combat.animation.play_animation_queue()
 
 func _on_damage_player_pressed() -> void:
 	level.player.hp -= 1
