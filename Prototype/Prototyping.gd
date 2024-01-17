@@ -19,7 +19,7 @@ func _ready() -> void:
 	combat.connect_with_ui(combat_ui)
 	
 	combat.advance_and_process_until_next_player_action_needed()
-	combat.animation_utility.play_animation_queue()
+	combat.animation.play_animation_queue()
 
 
 var flip := false
@@ -72,7 +72,8 @@ func _on_load_level_pressed() -> void:
 	#level.free()
 	#add_child(loaded_level)
 	for node in [level, combat, combat_ui]:
-		node.free()
+		if is_instance_valid(node):
+			node.free()
 	combat = Combat.load_from_disk("user://combat.tres")
 	add_child(combat)
 	level = combat.level

@@ -17,11 +17,12 @@ enum RoundPhase {
 	RoundRepeats = 7, # Unreachable
 }
 
-@onready var animation_utility: AnimationUtility = %AnimationUtility
-@onready var card_utility: CardUtility = %CardUtility
-@onready var energy_utility: EnergyUtility = %EnergyUtility
-@onready var movement_utility: MovementUtility = %MovementUtility
+@onready var animation: AnimationUtility = %AnimationUtility
+@onready var cards: CardUtility = %CardUtility
+@onready var energy: EnergyUtility = %EnergyUtility
+@onready var movement: MovementUtility = %MovementUtility
 @onready var ui_utility: UiUtility = %UiUtility
+@warning_ignore("shadowed_global_identifier")
 @onready var log: LogUtility = %LogUtility
 
 
@@ -124,7 +125,7 @@ func process_player_action(action: PlayerAction):
 	if action.is_valid(self):
 		print("Doing Player Action: %s" % action.action_string)
 		action.execute(self)
-		animation_utility.play_animation_queue()
+		animation.play_animation_queue()
 	else:
 		printerr("Invalid Player Action: %s" % action.action_string)
 

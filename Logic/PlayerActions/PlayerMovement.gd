@@ -13,5 +13,5 @@ func is_valid(combat: Combat) -> bool:
 	return true
 
 func execute(combat: Combat) -> void:
-	combat.movement_utility.move_entity(combat.player, destination)
+	combat.movement.move_entity(combat.player, destination)
 	combat.advance_and_process_until_next_player_action_needed()

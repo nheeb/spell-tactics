@@ -24,7 +24,7 @@ func get_possible_payment():
 ## Deducts the current cards cost from the players engergy
 func pay_for_spell(payment: Array[Game.Energy]) -> void:
 	if is_payment_valid(payment):
-		combat.energy_utility.pay(payment)
+		combat.energy.pay(payment)
 	else:
 		printerr("Wrong payment done")
 
@@ -32,7 +32,7 @@ func pay_for_spell(payment: Array[Game.Energy]) -> void:
 func cast(payment: Array[Game.Energy]) -> void:
 	pay_for_spell(payment)
 	casting_effect()
-	combat.card_utility.discard(spell)
+	combat.cards.discard(spell)
 
 ## The current costs with all the modifiers if there are any
 func get_costs() -> Array[Game.Energy]:

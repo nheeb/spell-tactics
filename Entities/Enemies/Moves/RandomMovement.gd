@@ -6,4 +6,4 @@ func get_score() -> float:
 
 ## Executes the move
 func execute() -> void:
-	combat.movement_utility.move_entity(enemy, combat.level.get_all_tiles().pick_random())
+	combat.movement.move_entity(enemy, combat.level.get_all_tiles().pick_random())
