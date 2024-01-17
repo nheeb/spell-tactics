@@ -10,5 +10,5 @@ func play_animation_queue():
 		print(animation_object)
 		animation_object.play()
 		await animation_object.animation_done
-	print("Animation Q finished")
+	#print("Animation Q finished")
 	animation_queue_empty.emit()

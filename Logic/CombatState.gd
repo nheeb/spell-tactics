@@ -16,8 +16,9 @@ func deserialize() -> Combat:
 	combat.level = level_state.deserialize(combat)
 	combat.current_round = current_round
 	combat.current_phase = current_phase
-	combat.player_energy = player_energy
-	combat.hand_size = hand_size
+	combat.energy.player_energy = player_energy
+	# should be deserialized in Player 
+	#combat.hand_size = hand_size
 	combat.deck.append_array(deck_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.hand.append_array(hand_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.discard_pile.append_array(discard_pile_states.map(func(x: SpellState): return x.deserialize(combat)))

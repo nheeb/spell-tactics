@@ -23,3 +23,6 @@ func serialize() -> SpellState:
 	state.combat_persistant_properties = combat_persistant_properties
 	state.round_persistant_properties = round_persistant_properties
 	return state
+	
+func _to_string() -> String:
+	return type.internal_name

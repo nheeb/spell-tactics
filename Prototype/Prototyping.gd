@@ -54,7 +54,7 @@ func _on_nav_button_pressed() -> void:
 
 
 func _on_move_rock_button_pressed() -> void:
-	level.move_entity(level.find_entity(ent_type), level.tiles[5][4])
+	level.move_entity(level.find_entity_type(ent_type), level.tiles[5][4])
 
 
 func _on_damage_player_pressed() -> void:

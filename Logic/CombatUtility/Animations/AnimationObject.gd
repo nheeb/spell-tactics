@@ -25,4 +25,7 @@ func play() -> void:
 	animation_done.emit()
 
 func _to_string() -> String:
-	return "Anim: %s does %s with %s" % [reference.name, command, parameters]
+	if len(parameters) == 1:
+		return "Anim: Calling %s.%s(%s)" % [reference.name, command, parameters[0]]
+	else:
+		return "Anim: %s calls %s(%s)" % [reference.name, command, parameters]

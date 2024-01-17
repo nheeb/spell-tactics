@@ -32,16 +32,15 @@ var current_phase: RoundPhase = RoundPhase.CombatBegin
 var level: Level
 var ui: CombatUI
 
-var hand_size: int
 var deck: Array[Spell]
 var hand: Array[Spell]
 var discard_pile: Array[Spell]
 
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
-var player_energy: Array[Game.Energy]
 
 var animation_queue: Array[AnimationObject]
+
 
 func update_references() -> void:
 	player = null
@@ -71,11 +70,10 @@ func create_prototype_level():
 			1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
 			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
 	update_references()
-	player_energy = []
+	energy.player_energy = []
 	animation_queue = []
 	discard_pile = []
 	hand = []
-	hand_size = 5
 
 func connect_with_ui(_ui: CombatUI) -> void:
 	ui = _ui
@@ -117,28 +115,34 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 func advance_and_process_until_next_player_action_needed():
 	while true:
 		advance_current_phase()
-		print("Processing phase %s ..." % current_phase)
+		print("Processing %s ..." % RoundPhase.keys()[current_phase])
 		if process_current_phase(): # If Player Input needed
 			break
 
-func process_player_action(action: PlayerAction):
+## returns whether it is valid
+func process_player_action(action: PlayerAction) -> bool:
 	if action.is_valid(self):
 		print("Doing Player Action: %s" % action.action_string)
 		action.execute(self)
 		animation.play_animation_queue()
+		return true
 	else:
+		# should we throw an error msg here or will this happen in normal play?
 		printerr("Invalid Player Action: %s" % action.action_string)
+		return false
 
 func _ready() -> void:
-	Events.tile_clicked.connect(func (tile): process_player_action(PlayerMovement.new(tile)))
+	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
+	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
 
 func serialize() -> CombatState:
 	var state := CombatState.new()
 	state.level_state = level.serialize()
 	state.current_round = current_round
 	state.current_phase = current_phase
-	state.player_energy = player_energy
-	state.hand_size = hand_size
+	state.player_energy = energy.player_energy
+	# should be serialized in Player from now on
+	#state.hand_size = hand_size
 	state.deck_states.append_array(deck.map(func(x: Spell): return x.serialize()))
 	state.hand_states.append_array(hand.map(func(x: Spell): return x.serialize()))
 	state.discard_pile_states.append_array(discard_pile.map(func(x: Spell): return x.serialize()))
