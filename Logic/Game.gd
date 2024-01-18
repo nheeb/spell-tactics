@@ -3,7 +3,7 @@ class_name GameSingleton extends Node
 enum Energy {
 	Life,
 	Decay,
-	Stone,
+	Matter,
 	Water,
 	Flow,
 	Any

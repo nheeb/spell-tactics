@@ -12,6 +12,7 @@ var logical_entity: LogicalEntity
 var current_tile: Tile
 ## Reference to the current combat
 var combat: Combat
+var energy: Array[Game.Energy]
 
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]

@@ -1,4 +1,3 @@
-@tool
 class_name EntityType extends Resource
 
 @export_category("Entity")
@@ -47,5 +46,6 @@ func create_entity(combat: Combat) -> Entity:
 		ent.type = self
 
 	ent.on_create()
+	ent.energy = ent.type.energy
 
 	return ent
