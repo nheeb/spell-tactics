@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Game="*res://Logic/Game.gd"
 Utility="*res://Logic/Utility.gd"
 Events="*res://Logic/Events.gd"
+VisualTime="*res://Logic/VisualTime.gd"
 
 [debug]
 
@@ -42,7 +43,7 @@ naming/scene_name_casing=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://Addons/LevelEditor/plugin.cfg", "res://Addons/smoothing/plugin.cfg", "res://addons/smoothing/plugin.cfg")
+enabled=PackedStringArray("res://addons/LevelEditor/plugin.cfg", "res://addons/smoothing/plugin.cfg")
 
 [input]
 

@@ -1,7 +1,7 @@
 extends AbstractPhase
 
 func process_phase() -> bool:
-	combat.ui_utility.set_debug_status("Enemies attacking...")
+	combat.animation.callback(combat.ui, "set_status", ["Enemies attacking..."])
 	
 	# Sort enemies by agility
 	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.type.agility > b.type.agility)

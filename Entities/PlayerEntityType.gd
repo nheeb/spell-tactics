@@ -19,7 +19,7 @@ func create_entity(combat: Combat) -> PlayerEntity:
 		
 	else:
 		# for debugging
-		ent.visual_entity = PROTOTYPE_VISUALS.instantiate()
+		ent.visual_entity = Game.PROTOTYPE_VISUALS.instantiate()
 		ent.visual_entity.type = self
 		ent.type = self
 

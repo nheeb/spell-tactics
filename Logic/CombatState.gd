@@ -9,7 +9,7 @@ class_name CombatState extends Resource
 @export var hand_states: Array[SpellState]
 @export var discard_pile_states: Array[SpellState]
 
-const COMBAT := preload("res://Logic/Combat.tscn")
+const COMBAT = preload("res://Logic/Combat.tscn")
 
 func deserialize() -> Combat:
 	var combat := COMBAT.instantiate()

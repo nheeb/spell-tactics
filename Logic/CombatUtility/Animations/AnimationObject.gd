@@ -1,31 +1,34 @@
 class_name AnimationObject extends Object
 
+## This is the abstract Animation Object
+
 signal animation_done
 
-var reference: Object
-var command: String
-var parameters: Array
-var flags: int
+enum Flags {
+	PlayAfterStep,
+	PlayWithStep,
+	ExtendStep
+}
 
-func _init(_reference: Object, _command: String, _parameters := [], _flags: int = 0):
-	reference = _reference
-	command = _command
-	parameters = _parameters
-	flags = _flags
+var flag: Flags = Flags.PlayAfterStep
+var delay := 0.0
+var success := false
+
+func set_flag(f: Flags) -> AnimationObject:
+	flag = f
+	return self
+
+func has_flag(f: Flags) -> bool:
+	return f == flag
+
+func set_delay(d: float) -> AnimationObject:
+	if d <= 0.0:
+		printerr("Invalid Animation delay")
+	delay = d
+	return self
 
 func play() -> void:
-	if is_instance_valid(reference):
-		reference.callv(command, parameters)
-		if reference.has_signal("animation_done"):
-			print("Waiting for %s to send a signal" % reference.name)
-			await reference.animation_done
-	else:
-		printerr("Animation on null reference")
-	await Game.tree.process_frame
-	animation_done.emit()
+	pass
 
 func _to_string() -> String:
-	if len(parameters) == 1:
-		return "Anim: Calling %s.%s(%s)" % [reference.name, command, parameters[0]]
-	else:
-		return "Anim: %s calls %s(%s)" % [reference.name, command, parameters]
+	return "Anim: Abstract Animation Object"

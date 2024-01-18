@@ -1,8 +1,7 @@
-@tool
 extends Node
-class_name Editor
+class_name LevelEditor
 
-const LEVEL := preload("res://Logic/Tiles/Level.tscn")
+const LEVEL = preload("res://Logic/Tiles/Level.tscn")
 
 var level: Level = null
 

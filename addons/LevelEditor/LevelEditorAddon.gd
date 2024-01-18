@@ -1,14 +1,13 @@
-@tool
 extends EditorPlugin
 
 var _editor_ui: EditorUI = null
 
 var _editor_cameras: Array[Camera3D] = []
-var _editor: Editor = null
+var _editor: LevelEditor = null
 
 func _enter_tree():
 	add_custom_type("Editor", "Node", preload("Editor.gd"), preload("hexagon.png"))
-	_editor_ui = preload("res://Addons/LevelEditor/UI/EditorUI.tscn").instantiate()
+	_editor_ui = preload("res://addons/LevelEditor/UI/EditorUI.tscn").instantiate()
 	EditorInterface.get_editor_main_screen().add_child(_editor_ui, true)
 	_find_cameras(EditorInterface.get_editor_main_screen())
 	_make_visible(false)
@@ -19,7 +18,7 @@ func _exit_tree():
 		_editor_ui.queue_free()
 
 func _handles(object: Object) -> bool:
-	if object is Editor:
+	if object is LevelEditor:
 		_editor = object
 		return true
 	_editor = null

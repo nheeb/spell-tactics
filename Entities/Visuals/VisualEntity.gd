@@ -1,4 +1,3 @@
-@tool
 class_name VisualEntity extends Node3D
 
 
@@ -10,12 +9,15 @@ class_name VisualEntity extends Node3D
 var type: EntityType
 
 func _enter_tree() -> void:
-	$DebugTile.visible = false
+	if has_node("DebugTile"):
+		$DebugTile.visible = false
 
 signal animation_done
 
 func animation_move_to(tile: Tile) -> void:
-	var tween := get_tree().create_tween().tween_property(self, "global_position", tile.global_position, 1.0)
+	var tween := VisualTime.new_tween()
+	tween.tween_property(self, "global_position", tile.global_position, 1.0)
+	#tween.set_speed_scale(.05)
 	await tween.finished
 	animation_done.emit()
 

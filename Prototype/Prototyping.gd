@@ -1,7 +1,7 @@
 extends Node3D
 
-const COMBAT := preload("res://Logic/Combat.tscn")
-const COMBAT_UI := preload("res://UI/CombatUI.tscn")
+const COMBAT = preload("res://Logic/Combat.tscn")
+const COMBAT_UI = preload("res://UI/CombatUI.tscn")
 
 var level : Level
 var combat : Combat
@@ -36,7 +36,7 @@ func _on_movement_range_button_pressed() -> void:
 
 
 var flip2 := false
-var ent_type := preload("res://Entities/Environment/Rock.tres")
+var ent_type = preload("res://Entities/Environment/Rock.tres")
 func _on_entity_find_button_pressed() -> void:
 	if not flip2:
 		level.highlight_entity_type(ent_type)
