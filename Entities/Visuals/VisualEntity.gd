@@ -18,10 +18,6 @@ func animation_move_to(tile: Tile) -> void:
 	var tween := get_tree().create_tween().tween_property(self, "global_position", tile.global_position, 1.0)
 	await tween.finished
 	animation_done.emit()
-	
-#func update_hp(hp: int):
-	#$HPLabel.text = "%d / %d" % [hp, type.max]
-
 
 # TODO discuss this
 func update_visuals(entity: Entity):

@@ -16,6 +16,7 @@ script = ExtResource("1_ikwqm")
 
 [node name="DebugTile" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+visible = false
 
 [node name="Hexagon" type="MeshInstance3D" parent="DebugTile"]
 mesh = SubResource("CylinderMesh_wyt28")
