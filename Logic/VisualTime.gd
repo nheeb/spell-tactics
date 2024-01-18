@@ -1,6 +1,6 @@
 extends Node
 
-var visual_time_scale := 1.0 :
+var visual_time_scale := 1.0:
 	set(factor):
 		var change_factor := factor / visual_time_scale
 		visual_time_scale = factor
@@ -28,7 +28,7 @@ class VisualTimer extends Object:
 		if time_left <= 0.0:
 			timeout.emit()
 	
-func create_timer(duration: float) -> VisualTimer:
+func new_timer(duration: float) -> VisualTimer:
 	var new_timer = VisualTimer.new(duration)
 	timers.append(new_timer)
 	new_timer.timeout.connect(destroy_timer.bind(new_timer), CONNECT_DEFERRED)
@@ -38,9 +38,9 @@ func destroy_timer(timer: VisualTimer) -> void:
 	timers.erase(timer)
 	timer.free()
 
-@warning_ignore("native_method_override")
-func create_tween() -> Tween:
+func new_tween() -> Tween:
 	var new_tween := get_tree().create_tween()
+	new_tween.set_speed_scale(visual_time_scale)
 	tweens.append(new_tween)
 	new_tween.finished.connect(destroy_tween.bind(new_tween), CONNECT_DEFERRED)
 	return new_tween
@@ -52,6 +52,7 @@ func destroy_tween(tween: Tween) -> void:
 func connect_animation_player(ap: AnimationPlayer) -> void:
 	if not ap in animation_players:
 		animation_players.append(ap)
+		ap.speed_scale += visual_time_scale
 
 func disconnect_animation_player(ap: AnimationPlayer) -> void:
 	if ap in animation_players:
@@ -62,3 +63,4 @@ func _process(delta: float) -> void:
 	visual_process.emit(fixed_delta)
 	for timer in timers:
 		timer.process(fixed_delta)
+
