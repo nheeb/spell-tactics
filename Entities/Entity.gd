@@ -1,3 +1,4 @@
+@tool
 class_name Entity
 
 ## The EntityType (Resource) this Entity is an instance of

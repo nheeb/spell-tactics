@@ -1,3 +1,4 @@
+@tool
 extends EditorPlugin
 
 var _editor_ui: EditorUI = null

@@ -1,4 +1,4 @@
-
+@tool
 class_name EditorUI extends Control
 
 var tool_pencil = Pencil.new()

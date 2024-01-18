@@ -1,3 +1,4 @@
+@tool
 class_name Raise extends Tool
 
 var _active_set: Array[Tile] = []
