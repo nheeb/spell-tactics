@@ -15,7 +15,7 @@ func _enter_tree() -> void:
 signal animation_done
 
 func animation_move_to(tile: Tile) -> void:
-	var tween := get_tree().create_tween().tween_property(self, "global_position", tile.global_position, 1.0)
+	var tween := VisualTime.create_tween().tween_property(self, "global_position", tile.global_position, 1.0)
 	await tween.finished
 	animation_done.emit()
 
