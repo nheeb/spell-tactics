@@ -157,9 +157,10 @@ theme_override_font_sizes/font_size = 30
 text = "Load Level"
 
 [node name="PopupsLayer" type="CanvasLayer" parent="."]
+editor_description = "above normal UI layer"
 layer = 2
 
-[node name="PopUps" type="Control" parent="PopupsLayer"]
+[node name="PopUpHandler" type="Control" parent="PopupsLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -169,13 +170,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("6_weoy7")
 
-[node name="PopUp" parent="PopupsLayer/PopUps" instance=ExtResource("7_brm5d")]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.059
-anchor_bottom = 0.117
-pivot_offset = Vector2(0, 0)
-metadata/_edit_use_anchors_ = true
+[node name="PopUp" parent="PopupsLayer/PopUpHandler" instance=ExtResource("7_brm5d")]
+layout_mode = 0
 
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/NavButton" to="." method="_on_nav_button_pressed"]
 [connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/EntityFindButton" to="." method="_on_entity_find_button_pressed"]
