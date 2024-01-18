@@ -1,4 +1,3 @@
-@tool
 class_name EntityType extends Resource
 
 @export_category("Entity")
@@ -19,16 +18,17 @@ class_name EntityType extends Resource
 @export var is_terrain := false
 @export var is_drainable := true
 ## The energy this entity gives (if it's drainable)
-@export var energy: Array[Game.Energy]
+@export var energy: Array[Game.Energy] = []
 
 ## Whether the player / enemies can move onto tiles containing this entity
 @export var is_obstacle: bool = false
 ## How good of a cover this is from projectiles (accuracy reduction)
-@export_range(1, 3, 1) var cover_value: int = 0
+@export var cover_value: int = 0
 
-## instantiate this EntityType
-const PROTOTYPE_VISUALS = preload("res://Entities/Visuals/VisualPrototype.tscn")
+# instantiate this EntityType
+
 func create_entity(combat: Combat) -> Entity:
+	#var PROTOTYPE_VISUALS = load("res://Entities/Visuals/VisualPrototype.tscn")
 	# instance visual entity, who adds this to the scene tree?
 	# I think we should have a method add_entity() in Tile
 	var ent: Entity = Entity.new()
@@ -42,7 +42,7 @@ func create_entity(combat: Combat) -> Entity:
 		ent.type = self
 	else:
 		# for debugging
-		ent.visual_entity = PROTOTYPE_VISUALS.instantiate()
+		ent.visual_entity = Game.PROTOTYPE_VISUALS.instantiate()
 		ent.visual_entity.type = self
 		ent.type = self
 

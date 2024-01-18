@@ -1,18 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkl8yhcu2dmjh"]
+[gd_scene load_steps=5 format=3 uid="uid://dkl8yhcu2dmjh"]
 
-[ext_resource type="PackedScene" uid="uid://la7g0xaatryj" path="res://Entities/Visuals/VisualEntity.tscn" id="1_lwo7l"]
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="1_24n3e"]
 [ext_resource type="Script" path="res://Entities/Visuals/VisualPlayer.gd" id="2_nidg8"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_4tm7j"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v522e"]
 
-[node name="VisualPlayer" instance=ExtResource("1_lwo7l")]
+[sub_resource type="CylinderMesh" id="CylinderMesh_q4f3v"]
+material = ExtResource("1_24n3e")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.2
+radial_segments = 6
+rings = 1
+
+[node name="VisualPlayer" type="Node3D"]
 script = ExtResource("2_nidg8")
 
-[node name="Capsule" type="MeshInstance3D" parent="." index="1"]
+[node name="Capsule" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
-mesh = SubResource("CapsuleMesh_4tm7j")
+mesh = SubResource("CapsuleMesh_v522e")
 
-[node name="HPLabel" type="Label3D" parent="." index="2"]
+[node name="HPLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13708, 0)
 billboard = 1
 text = "0"
+
+[node name="DebugTile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+visible = false
+
+[node name="Hexagon" type="MeshInstance3D" parent="DebugTile"]
+mesh = SubResource("CylinderMesh_q4f3v")

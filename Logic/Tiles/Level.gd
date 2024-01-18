@@ -1,4 +1,4 @@
-@tool
+
 class_name Level extends Node3D
 
 ## Different initialization functions should be implemented.
@@ -80,7 +80,7 @@ func serialize() -> LevelState:
 	#if not err == OK:
 		#printerr("Err when saving level state: ", err)
 #
-#const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
+#const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
 #static func load_from_disk(path: String) -> Level:
 	#var level_state: LevelState = ResourceLoader.load(path) as LevelState
 	#var level: Level = level_state.deserialize(Combat.new())

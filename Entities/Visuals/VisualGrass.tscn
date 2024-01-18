@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://ceosywo2l5xev"]
 
-[ext_resource type="PackedScene" uid="uid://la7g0xaatryj" path="res://Entities/Visuals/VisualEntity.tscn" id="1_8cxy8"]
+[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_6l65v"]
 [ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="2_43gr7"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_k848s"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_f16xf"]
 material = ExtResource("2_43gr7")
 top_radius = 1.0
 bottom_radius = 1.0
@@ -11,9 +11,11 @@ height = 1.0
 radial_segments = 6
 rings = 1
 
-[node name="VisualGrass" instance=ExtResource("1_8cxy8")]
+[node name="VisualGrass" type="Node3D"]
+script = ExtResource("1_6l65v")
 
-[node name="Hexagon" type="MeshInstance3D" parent="." index="1"]
+[node name="Hexagon" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("CylinderMesh_k848s")
-skeleton = NodePath("../DebugTile")
+mesh = SubResource("CylinderMesh_f16xf")
+
+[node name="Node3D" type="Node3D" parent="."]
