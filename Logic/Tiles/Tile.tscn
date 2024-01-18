@@ -44,6 +44,7 @@ polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866,
 [node name="LogicalEntities" type="Node3D" parent="."]
 
 [node name="Highlight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11396, 0)
 script = ExtResource("3_ho6t1")
 
 [node name="Edges" type="Node3D" parent="Highlight"]

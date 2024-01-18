@@ -91,8 +91,6 @@ func fill_entity(entity_type: EntityType):
 		create_entity(tile.r, tile.q, entity_type)
 
 func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
-	# should entities only be part of tiles or do we want a second data structure outside?
-	# here, in Level
 	if tiles[r][q] == null:
 		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
 		return
@@ -115,8 +113,6 @@ func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	return entity
 
 func remove_entity(r: int, q: int, entity: Entity):
-	# should entities only be part of tiles or do we want a second data structure outside?
-	# here, in Level
 	if tiles[r][q] == null:
 		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
 		return
