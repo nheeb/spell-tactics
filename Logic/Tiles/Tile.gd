@@ -64,14 +64,11 @@ func get_coverage_factor() -> int:
 		factor = max(factor, ent.resource.cover_value)
 	return factor
 
-
-
 func set_highlight(type: Highlight.Type, active: bool):
 	if active:
 		$Highlight.enable_highlight(type)
 	else:
 		$Highlight.disable_highlight(type)
-
 
 func serialize() -> TileState:
 	var tile_state := TileState.new()
@@ -89,7 +86,6 @@ func _on_hover_timer_timeout() -> void:
 	hovering = true
 	Events.tile_hovered_long.emit(self)
 	#print("Hovered tile %d, %d" % [r, q])
-	
-	
+
 func _to_string() -> String:
 	return name

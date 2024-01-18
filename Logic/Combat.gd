@@ -22,7 +22,6 @@ enum RoundPhase {
 @onready var cards: CardUtility = %CardUtility
 @onready var energy: EnergyUtility = %EnergyUtility
 @onready var movement: MovementUtility = %MovementUtility
-@onready var ui_utility: UiUtility = %UiUtility
 @warning_ignore("shadowed_global_identifier")
 @onready var log: LogUtility = %LogUtility
 
@@ -40,7 +39,7 @@ var discard_pile: Array[Spell]
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
-var animation_queue: Array[AnimationObject]
+#var animation_queue: Array[AnimationObject]
 
 
 func update_references() -> void:
@@ -73,7 +72,6 @@ func create_prototype_level():
 			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
 	update_references()
 	energy.player_energy = []
-	animation_queue = []
 	discard_pile = []
 	hand = []
 

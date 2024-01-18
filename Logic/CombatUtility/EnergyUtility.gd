@@ -7,4 +7,4 @@ var player_energy: Array[Game.Energy]
 func pay(payment: Array[Game.Energy]) -> void:
 	# style: is this utility method needed or should it be moved here?
 	player_energy = Utility.pay_energy(player_energy, payment)
-	combat.animation_queue.append(AnimationObject.new(combat.ui, "set_current_energy", [player_energy.duplicate()]))
+	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate()])

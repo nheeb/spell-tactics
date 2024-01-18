@@ -4,4 +4,4 @@ class_name MovementUtility extends Node
 
 func move_entity(entity: Entity, target: Tile):
 	entity.move(target)
-	combat.animation_queue.append(AnimationObject.new(entity.visual_entity, "animation_move_to", [target]))
+	combat.animation.callback(entity.visual_entity, "animation_move_to", [target])

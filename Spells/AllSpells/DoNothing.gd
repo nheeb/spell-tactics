@@ -14,7 +14,7 @@ extends SpellLogic
 
 ## Most important function for overwriting. Here should be the effect
 func casting_effect() -> void:
-	combat.ui_utility.set_debug_status("Doing nothing...")
-	combat.animation_queue.append(AnimationWait.new(1.2))
-	combat.ui_utility.set_debug_status("Nothing was done.")
+	combat.animation.callback(combat.ui, "set_status", ["Doing nothing..."])
+	combat.animation.wait(1.2)
+	combat.animation.callback(combat.ui, "set_status", ["Nothing was done."])
 
