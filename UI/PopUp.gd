@@ -11,8 +11,8 @@ func show_tile(tile: Tile):
 	var i = 0
 	# tile has an array of entities, show one entry for each of these
 	for ent in tile.entities:
-		if ent.type.is_terrain:
-			# skip terrain entities (for now?)
+		if not ent.type.is_drainable:
+			# skip
 			continue
 		ent_entries[i].show_entity(ent)
 		ent_entries[i].show()

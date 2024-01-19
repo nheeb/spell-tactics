@@ -6,7 +6,7 @@ var tool_raise = Raise.new()
 var tool_lower = Lower.new()
 
 const ROCK_ENTITY = preload("res://Entities/Environment/Rock.tres")
-const WATER_ENTITY = preload("res://Entities/Environment/WaterTile.tres")
+const WATER_ENTITY = preload("res://Entities/Environment/Water.tres")
 const GRASS_TILE_ENTITY = preload("res://Entities/Environment/GrassTile.tres")
 const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
 
