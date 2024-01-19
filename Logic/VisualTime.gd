@@ -29,21 +29,21 @@ class VisualTimer extends Object:
 			timeout.emit()
 	
 func new_timer(duration: float) -> VisualTimer:
-	var new_timer = VisualTimer.new(duration)
-	timers.append(new_timer)
-	new_timer.timeout.connect(destroy_timer.bind(new_timer), CONNECT_DEFERRED)
-	return new_timer
+	var new_timerx = VisualTimer.new(duration)
+	timers.append(new_timerx)
+	new_timerx.timeout.connect(destroy_timer.bind(new_timerx), CONNECT_DEFERRED)
+	return new_timerx
 
 func destroy_timer(timer: VisualTimer) -> void:
 	timers.erase(timer)
 	timer.free()
 
 func new_tween() -> Tween:
-	var new_tween := get_tree().create_tween()
-	new_tween.set_speed_scale(visual_time_scale)
-	tweens.append(new_tween)
-	new_tween.finished.connect(destroy_tween.bind(new_tween), CONNECT_DEFERRED)
-	return new_tween
+	var new_tweenx := get_tree().create_tween()
+	new_tweenx.set_speed_scale(visual_time_scale)
+	tweens.append(new_tweenx)
+	new_tweenx.finished.connect(destroy_tween.bind(new_tweenx), CONNECT_DEFERRED)
+	return new_tweenx
 
 func destroy_tween(tween: Tween) -> void:
 	tweens.erase(tween)

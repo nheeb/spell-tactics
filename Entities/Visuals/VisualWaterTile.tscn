@@ -34,9 +34,7 @@ visible = false
 
 [node name="Hexagon3" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_jwrwj")
-skeleton = NodePath("../DebugTile")
 
 [node name="Hexagon2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("CylinderMesh_x53ak")
-skeleton = NodePath("../DebugTile")

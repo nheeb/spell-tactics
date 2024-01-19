@@ -1,4 +1,3 @@
-@tool
 class_name VisualEntity extends Node3D
 
 
@@ -10,7 +9,8 @@ class_name VisualEntity extends Node3D
 var type: EntityType
 
 func _enter_tree() -> void:
-	$DebugTile.visible = false
+	if has_node("DebugTile"):
+		$DebugTile.visible = false
 
 signal animation_done
 

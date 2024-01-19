@@ -1,11 +1,12 @@
 class_name Combat extends Node
 
-const LEVEL := preload("res://Logic/Tiles/Level.tscn")
-const ROCK_ENTITY := preload("res://Entities/Environment/Rock.tres")
-const WATER_ENTITY := preload("res://Entities/Environment/Water.tres")
-const GRASS_TERRAIN_ENTITY := preload("res://Entities/Environment/GrassTile.tres")
-const PLAYER_TYPE := preload("res://Entities/PlayerResource.tres")
-const GOBLIN_TYPE := preload("res://Entities/Enemies/Goblin.tres")
+const LEVEL = preload("res://Logic/Tiles/Level.tscn")
+const ROCK_ENTITY = preload("res://Entities/Environment/Rock.tres")
+const WATER_TILE_ENTITY = preload("res://Entities/Environment/WaterTile.tres")
+const WATER_ENTITY = preload("res://Entities/Environment/Water.tres")
+const GRASS_TERRAIN_ENTITY = preload("res://Entities/Environment/GrassTile.tres")
+const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
+const GOBLIN_TYPE = preload("res://Entities/Enemies/Goblin.tres")
 
 enum RoundPhase {
 	CombatBegin = 0, # Unreachable

@@ -68,7 +68,7 @@ func pay_energy(_bank: Array[Game.Energy], payment: Array[Game.Energy]) -> Array
 var energy_to_letter := {
 	Game.Energy.Life: "L",
 	Game.Energy.Decay: "D",
-	Game.Energy.Stone: "S",
+	Game.Energy.Matter: "S",
 	Game.Energy.Water: "W",
 	Game.Energy.Flow: "F",
 	Game.Energy.Any: "X",
@@ -77,7 +77,7 @@ var energy_to_letter := {
 var letter_to_energy := {
 	"L": Game.Energy.Life,
 	"D": Game.Energy.Decay,
-	"S": Game.Energy.Stone,
+	"S": Game.Energy.Matter,
 	"W": Game.Energy.Water,
 	"F": Game.Energy.Flow,
 	"X": Game.Energy.Any,
