@@ -26,6 +26,8 @@ func _ready() -> void:
 	
 	combat.advance_and_process_until_next_player_action_needed()
 	combat.animation.play_animation_queue()
+	
+	
 
 
 var flip := false
@@ -67,12 +69,12 @@ func _on_damage_player_pressed() -> void:
 	level.player.hp -= 1
 
 
-func _on_save_level_pressed() -> void:
+func _on_save_game_pressed(id: String) -> void:
 	#level.save_to_disk("user://level.tres")
-	combat.save_to_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % %SaveID.value)
+	combat.save_to_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % id)
 
 
-func _on_load_level_pressed() -> void:
+func _on_load_game_pressed(id: String) -> void:
 	#var loaded_level = Level.load_from_disk("user://level.tres")
 	#loaded_level.name = "Level"
 	#level.free()
@@ -80,7 +82,7 @@ func _on_load_level_pressed() -> void:
 	for node in [level, combat, combat_ui]:
 		if is_instance_valid(node):
 			node.free()
-	combat = Combat.load_from_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % %SaveID.value)
+	combat = Combat.load_from_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % id)
 	add_child(combat)
 	level = combat.level
 	level.name = "Level"
@@ -105,3 +107,8 @@ func _on_show_debug_pressed() -> void:
 		debug_ui.get_node("%ShowDebug").text = "Hide Debug"
 	else:
 		debug_ui.get_node("%ShowDebug").text = "Show Debug"
+
+
+func _on_line_button_pressed() -> void:
+	# TODO implement drawing line
+	pass # Replace with function body.

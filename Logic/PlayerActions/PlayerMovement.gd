@@ -10,6 +10,9 @@ func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Movement:
 		return false
 	
+	if destination.is_obstacle():
+		return false
+	
 	var distance = combat.level.tile_distance(combat.player.current_tile, destination)
 	return distance <= combat.player.traits.movement_range
 

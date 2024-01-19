@@ -2,34 +2,45 @@ class_name PopUpHandler extends Control
 
 @export var viewport: Viewport
 
-func _ready() -> void:
-	Events.tile_hovered_long.connect(show_tile_popup)
-	Events.tile_unhovered_long.connect(hide_tile_popup)
+@onready var popup
 
+const POPUP = preload("res://UI/PopUp.tscn")
 var current_tile: Tile
 var screen_pos: Vector2 # target from unprojecting the camera
 var prev_screen_pos: Vector2
 
-#const POPUP = preload("res://UI/PopUp.tscn")
+
+func _ready() -> void:
+	Events.tile_hovered_long.connect(show_tile_popup)
+	Events.tile_unhovered_long.connect(hide_tile_popup)
+	popup = POPUP.instantiate()
+
+
 func show_tile_popup(tile: Tile):
 	#var popup = POPUP.instantiate()
-	var popup = $PopUp
-	popup.name = "PopUp"
-	#add_child(popup)
 	current_tile = tile
-	screen_pos = viewport.get_camera_3d().unproject_position(tile.global_position)
 	# can use Camera3D.is_position_behind() to check, but should not be relevant here for now	
-	#$PopUp.pivot_offset = $PopUp.size / 2.0
+	screen_pos = viewport.get_camera_3d().unproject_position(tile.global_position)
+	
+	if not popup.is_inside_tree():
+		add_child(popup)
+	else:
+		printerr("weirdness")
 	popup.position = screen_pos
-	popup.show()
 	popup.show_tile(tile)
 	#queue_redraw()
 
 
 func hide_tile_popup(tile: Tile):
+
+	if popup.is_inside_tree():
+		remove_child(popup)
+	else:
+		printerr("weird not inside tree")
 	current_tile = null
-	$PopUp.hide_popup()
-	#$PopUp.hide()
+	
+	popup.hide_popup()
+	#popup.queue_free()
 	
 #func _physics_process(delta: float) -> void:
 	#if current_tile != null:
@@ -43,7 +54,7 @@ func _process(delta: float) -> void:
 		prev_screen_pos = screen_pos
 		screen_pos = viewport.get_camera_3d().unproject_position(current_tile.global_position)
 		if prev_screen_pos.distance_to(screen_pos) > threshold:
-			$PopUp.position = screen_pos
+			popup.position = screen_pos
 	#if current_tile != null:  # lerp towards camera to beat this stutter
 		#var f = Engine.get_physics_interpolation_fraction()
 		#var target_position: Vector2 = prev_screen_pos.lerp(screen_pos, f)
