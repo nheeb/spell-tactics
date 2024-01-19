@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cs6vnuiljtmct"]
 
-[ext_resource type="Script" path="res://Prototype/Prototyping.gd" id="1_j078d"]
+[ext_resource type="Script" path="res://Prototype/World.gd" id="1_j078d"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="1_mf57j"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
 [ext_resource type="Script" path="res://Prototype/MouseInput.gd" id="4_2ad06"]
@@ -20,7 +20,7 @@ background_mode = 2
 sky = SubResource("Sky_4htsq")
 ambient_light_source = 3
 
-[node name="Prototyping" type="Node3D"]
+[node name="World" type="Node3D"]
 script = ExtResource("1_j078d")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -44,7 +44,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 script = ExtResource("1_mf57j")
 
 [node name="Camera3D" type="Camera3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, 0, 0)
 
 [node name="MouseRaycast" type="RayCast3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D"]
 unique_name_in_owner = true
