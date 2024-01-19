@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=7 format=3 uid="uid://brhegqlf0sm1x"]
 
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Prototype/World.tscn" id="1_dlhxl"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_3ykw6"]
+[ext_resource type="Script" path="res://UI/DebugUI.gd" id="2_gty54"]
 [ext_resource type="Script" path="res://UI/PopUpHandler.gd" id="3_mq6gx"]
 [ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="4_4622k"]
 
@@ -16,7 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="3DViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,14 +26,14 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="3DViewport" type="SubViewport" parent="3DViewportContainer"]
 handle_input_locally = false
 msaa_3d = 1
 physics_object_picking = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_dlhxl")]
+[node name="World" parent="3DViewportContainer/3DViewport" instance=ExtResource("1_dlhxl")]
 
 [node name="UILayer" type="CanvasLayer" parent="." groups=["ui_root"]]
 
@@ -44,6 +45,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_gty54")
 
 [node name="List" type="VBoxContainer" parent="UILayer/DebugUI"]
 unique_name_in_owner = true
@@ -100,14 +102,6 @@ theme_override_fonts/font = ExtResource("2_3ykw6")
 theme_override_font_sizes/font_size = 24
 text = "Damage Player"
 
-[node name="ToggleTileLabels" type="Button" parent="UILayer/DebugUI/List"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Toggle Tile Labels"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="UILayer/DebugUI/List"]
 layout_mode = 2
 
@@ -119,6 +113,7 @@ label_settings = SubResource("LabelSettings_pghfn")
 [node name="SaveID" type="SpinBox" parent="UILayer/DebugUI/List/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+rounded = true
 
 [node name="SaveLevel" type="Button" parent="UILayer/DebugUI/List"]
 custom_minimum_size = Vector2(32, 32)
@@ -156,7 +151,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_mq6gx")
-viewport = NodePath("../../SubViewportContainer/SubViewport")
+viewport = NodePath("../../3DViewportContainer/3DViewport")
 
 [node name="PopUp" parent="PopupsLayer/PopUpHandler" instance=ExtResource("4_4622k")]
 visible = false
@@ -166,4 +161,14 @@ offset_top = 451.0
 offset_right = 966.0
 offset_bottom = 504.0
 
-[connection signal="pressed" from="UILayer/DebugUI/ShowDebug" to="SubViewportContainer/SubViewport/World" method="_on_show_debug_pressed"]
+[connection signal="load_game_pressed" from="UILayer/DebugUI" to="3DViewportContainer/3DViewport/World" method="_on_load_game_pressed"]
+[connection signal="save_game_pressed" from="UILayer/DebugUI" to="3DViewportContainer/3DViewport/World" method="_on_save_game_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/LineButton" to="3DViewportContainer/3DViewport/World" method="_on_line_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/NavButton" to="3DViewportContainer/3DViewport/World" method="_on_nav_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/EntityFindButton" to="3DViewportContainer/3DViewport/World" method="_on_entity_find_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/MovementRangeButton" to="3DViewportContainer/3DViewport/World" method="_on_movement_range_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/MoveRockButton" to="3DViewportContainer/3DViewport/World" method="_on_move_rock_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/DamagePlayer" to="3DViewportContainer/3DViewport/World" method="_on_damage_player_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/SaveLevel" to="UILayer/DebugUI" method="_on_save_level_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/LoadLevel" to="UILayer/DebugUI" method="_on_load_level_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/ShowDebug" to="3DViewportContainer/3DViewport/World" method="_on_show_debug_pressed"]
