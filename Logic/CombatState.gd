@@ -23,5 +23,7 @@ func deserialize() -> Combat:
 	combat.deck.append_array(deck_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.hand.append_array(hand_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.discard_pile.append_array(discard_pile_states.map(func(x: SpellState): return x.deserialize(combat)))
+	if combat.deck.size() + combat.hand.size() + combat.hand.size() < 5:
+		combat.deck.append_array(Game.get_prototype_deck(combat))
 	combat.update_references()
 	return combat
