@@ -1,12 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cs6vnuiljtmct"]
+[gd_scene load_steps=8 format=3 uid="uid://cs6vnuiljtmct"]
 
 [ext_resource type="Script" path="res://Prototype/Prototyping.gd" id="1_j078d"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="1_mf57j"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
 [ext_resource type="Script" path="res://Prototype/MouseInput.gd" id="4_2ad06"]
-[ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="6_rjbjq"]
-[ext_resource type="Script" path="res://UI/PopUpHandler.gd" id="6_weoy7"]
-[ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="7_brm5d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
 sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
@@ -23,9 +20,6 @@ background_mode = 2
 sky = SubResource("Sky_4htsq")
 ambient_light_source = 3
 
-[sub_resource type="LabelSettings" id="LabelSettings_wk58v"]
-font_size = 24
-
 [node name="Prototyping" type="Node3D"]
 script = ExtResource("1_j078d")
 
@@ -35,6 +29,7 @@ environment = SubResource("Environment_0glof")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.0146024, 0.827169, -0.561763, 0.021494, 0.561953, 0.82689, 0.999662, 3.63131e-08, -0.025985, -2.62206, 4.09464, 0)
 light_energy = 1.5
+shadow_enabled = true
 
 [node name="GameCamera" type="Node3D" parent="."]
 script = ExtResource("1_wx0wr")
@@ -57,127 +52,3 @@ transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
 script = ExtResource("4_2ad06")
-
-[node name="FeaturesUI" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="FeaturesUI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="FeaturesUI/Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.0148148
-anchor_right = 0.163
-anchor_bottom = 0.415
-metadata/_edit_use_anchors_ = true
-
-[node name="LineButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Draw Line (TODO)
-"
-
-[node name="NavButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Draw Shortest Path
-"
-
-[node name="EntityFindButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Highlight All Rocks
-"
-
-[node name="MovementRangeButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Highlight Movement Range"
-
-[node name="MoveRockButton" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Move Rock"
-
-[node name="DamagePlayer" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Damage Player"
-
-[node name="ToggleTileLabels" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Toggle Tile Labels"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="FeaturesUI/Control/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="FeaturesUI/Control/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Save-Slot"
-label_settings = SubResource("LabelSettings_wk58v")
-
-[node name="SaveID" type="SpinBox" parent="FeaturesUI/Control/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="SaveLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Save Level"
-
-[node name="LoadLevel" type="Button" parent="FeaturesUI/Control/VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_rjbjq")
-theme_override_font_sizes/font_size = 30
-text = "Load Level"
-
-[node name="PopupsLayer" type="CanvasLayer" parent="."]
-editor_description = "above normal UI layer"
-layer = 2
-
-[node name="PopUpHandler" type="Control" parent="PopupsLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("6_weoy7")
-
-[node name="PopUp" parent="PopupsLayer/PopUpHandler" instance=ExtResource("7_brm5d")]
-layout_mode = 0
-
-[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/NavButton" to="." method="_on_nav_button_pressed"]
-[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/EntityFindButton" to="." method="_on_entity_find_button_pressed"]
-[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MovementRangeButton" to="." method="_on_movement_range_button_pressed"]
-[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/MoveRockButton" to="." method="_on_move_rock_button_pressed"]
-[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/DamagePlayer" to="." method="_on_damage_player_pressed"]
-[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/ToggleTileLabels" to="." method="_on_toggle_tile_labels_pressed"]
-[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/SaveLevel" to="." method="_on_save_level_pressed"]
-[connection signal="pressed" from="FeaturesUI/Control/VBoxContainer/LoadLevel" to="." method="_on_load_level_pressed"]
