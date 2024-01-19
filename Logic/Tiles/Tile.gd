@@ -6,9 +6,10 @@ class_name Tile extends Node3D
 var entities: Array[Entity] = []
 var hovering := false:
 	set(h):
-		hovering = h
-		if not hovering:
+		if not h and hovering:
 			Events.tile_unhovered_long.emit(self)
+		hovering = h
+
 var r: int
 var q: int
 
@@ -59,7 +60,7 @@ func remove_entity(entity: Entity):
 ## an obstacle.
 func is_obstacle() -> bool:
 	for ent in entities:
-		if ent.resource.is_obstacle:
+		if ent.type.is_obstacle:
 			return true
 	return false
 	
