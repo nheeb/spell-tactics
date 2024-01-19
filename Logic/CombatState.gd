@@ -27,3 +27,11 @@ func deserialize() -> Combat:
 		combat.deck.append_array(Game.get_prototype_deck(combat))
 	combat.update_references()
 	return combat
+
+func save_to_disk(path: String) -> void:
+	var err = ResourceSaver.save(self, path) # , ResourceSaver.FLAG_BUNDLE_RESOURCES)
+	if not err == OK:
+		printerr("Err when saving level state: ", err)
+
+static func load_from_disk(path: String) -> CombatState:
+	return ResourceLoader.load(path) as CombatState

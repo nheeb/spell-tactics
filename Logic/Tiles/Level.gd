@@ -300,3 +300,9 @@ func search(from: Vector2i, to: Vector2i) -> LevelSearch:
 	set(value):
 		if value == true:
 			init_basic_grid(3)
+
+func save_without_combat(path: String):
+	Combat.serialize_level_as_combat_state(self).save_to_disk(path)
+
+static func load_without_combat(path: String):
+	return Combat.deserialize_level_from_combat_state(CombatState.load_from_disk(path))
