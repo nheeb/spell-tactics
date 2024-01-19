@@ -13,6 +13,7 @@ const COMBAT = preload("res://Logic/Combat.tscn")
 
 func deserialize() -> Combat:
 	var combat := COMBAT.instantiate()
+	combat._ready()
 	combat.level = level_state.deserialize(combat)
 	combat.current_round = current_round
 	combat.current_phase = current_phase
