@@ -8,7 +8,7 @@ func _init(ref: Object, s: String) -> void:
 	reference = ref
 	signal_name = s
 
-func play():
+func play(level: Level):
 	if is_instance_valid(reference):
 		if reference.has_signal(signal_name):
 			reference.emit_signal(signal_name)
@@ -16,4 +16,4 @@ func play():
 	animation_done.emit()
 
 func _to_string() -> String:
-	return "Anim: Signal %s on Object %s" % [signal_name, reference]
+	return "Anim: Signal %s.%s.emit()" % [reference, signal_name]

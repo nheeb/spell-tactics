@@ -47,7 +47,7 @@ func new_tween() -> Tween:
 
 func destroy_tween(tween: Tween) -> void:
 	tweens.erase(tween)
-	tween.free()
+	#tween.free()
 
 func connect_animation_player(ap: AnimationPlayer) -> void:
 	if not ap in animation_players:

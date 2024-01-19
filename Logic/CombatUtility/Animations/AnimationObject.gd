@@ -27,7 +27,7 @@ func set_delay(d: float) -> AnimationObject:
 	delay = d
 	return self
 
-func play() -> void:
+func play(level: Level) -> void:
 	pass
 
 func _to_string() -> String:

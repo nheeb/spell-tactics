@@ -39,7 +39,7 @@ func play_next_step() -> void:
 		animation_queue_empty.emit()
 	else:
 		var step : AnimationStep = animation_steps.pop_front()
-		step.play()
+		step.play(combat.level)
 
 class AnimationStep extends Object:
 	signal step_done
@@ -59,8 +59,8 @@ class AnimationStep extends Object:
 				relevant_animations_to_do += 1
 				a.animation_done.connect(self.relevant_animation_done, CONNECT_ONE_SHOT)
 	
-	func play() -> void:
+	func play(level: Level) -> void:
 		for a in animations:
-			a.play()
+			a.play(level)
 		if relevant_animations_to_do == 0:
 			step_done.emit()

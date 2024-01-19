@@ -18,6 +18,7 @@ var combat: Combat
 
 @onready var player: PlayerEntity
 
+@onready var visual_effects: Node3D = $VisualEffects
 
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)

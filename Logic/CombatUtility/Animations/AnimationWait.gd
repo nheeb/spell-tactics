@@ -6,7 +6,7 @@ var wait_time : float
 func _init(time) -> void:
 	wait_time = time
 
-func play():
+func play(level: Level):
 	await VisualTime.new_timer(wait_time).timeout
 	success = true
 	animation_done.emit()
