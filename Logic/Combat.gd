@@ -128,7 +128,8 @@ func process_player_action(action: PlayerAction) -> bool:
 		return true
 	else:
 		# should we throw an error msg here or will this happen in normal play?
-		printerr("Invalid Player Action: %s" % action.action_string)
+		# printerr("Invalid Player Action: %s" % action.action_string)
+		action.on_fail(self)
 		return false
 
 func _ready() -> void:
