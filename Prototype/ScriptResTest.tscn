@@ -1,23 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmnkgdbb81cwt"]
+[gd_scene load_steps=2 format=3 uid="uid://cmnkgdbb81cwt"]
 
 [ext_resource type="Script" path="res://Prototype/ScriptResTest.gd" id="1_kartq"]
 
-[sub_resource type="GDScript" id="GDScript_3hm3v"]
-script/source = "var x = 1
-
-var tt = \"smskdfm\"
-
-func test():
-	print(x)
-	x = x + 1
-
-func mist():
-	print(5)
-
-static func kagge():
-	print(8)
-"
-
 [node name="ScriptResTest" type="Node3D"]
 script = ExtResource("1_kartq")
-scrpt = SubResource("GDScript_3hm3v")

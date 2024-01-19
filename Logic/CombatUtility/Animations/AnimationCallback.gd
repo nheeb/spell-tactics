@@ -9,7 +9,7 @@ func _init(_reference: Object, _command: String, _parameters := []):
 	command = _command
 	parameters = _parameters
 
-func play() -> void:
+func play(level: Level) -> void:
 	if is_instance_valid(reference):
 		reference.callv(command, parameters)
 		if reference.has_signal("animation_done"):

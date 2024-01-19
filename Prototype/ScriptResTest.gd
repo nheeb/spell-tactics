@@ -1,34 +1,17 @@
 extends Node3D
 
-@export var scrpt : Script
+const LEVEL = preload("res://Logic/Tiles/Level.tscn")
 
-
-var ee: Array
-func _ready():
-	var dono = SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres")
-	#dono._init()
-	#print(Array("asdf"))
-	#var a = []
-	#var b = false
-	#print(ee)
-	#ee = null
+func _ready() -> void:
+	print("start_test")
+	var level : Level = LEVEL.instantiate()
+	add_child(level)
+	level.init_basic_grid(3)
 	
-	#aaa()
-	#if ([1]):
-		#print(1 == false)
-	#var sss = scrpt.new()
-	#sss.call("test")
-	#sss.call("test")
-	#sss.call("test")
-	#
-	#for prop in sss.get_property_list():
-		#print(prop.name + " " + str(sss.get(prop.name)))
-	#
-	#
-	#var fff = scrpt.new()
-	#fff.call("test")
-	#fff.call("test")
-	#fff.call("test")
-	#
-	#scrpt.call("mist")
-	#scrpt.call("kagge")
+	level.save_without_combat("res://test.tres")
+	#Combat.serialize_level_as_combat_state(level).save_to_disk("res://test.tres")
+	var loaded_level: Level = Level.load_without_combat("res://test.tres")
+	#var loaded_level: Level = Combat.deserialize_level_from_combat_state(
+	#                                                 CombatState.load_from_disk("res://test.tres"))
+	
+	print("success")
