@@ -36,12 +36,14 @@ func hide_tile_popup(tile: Tile):
 		#prev_screen_pos = screen_pos
 		#screen_pos = get_viewport().get_camera_3d().unproject_position(current_tile.global_position)
 		##$PopUp.position = screen_pos
-		
+
+const threshold: float = .1
 func _process(delta: float) -> void:
 	if current_tile != null:
 		prev_screen_pos = screen_pos
 		screen_pos = viewport.get_camera_3d().unproject_position(current_tile.global_position)
-		$PopUp.position = $PopUp.position.lerp(screen_pos, 0.99)
+		if prev_screen_pos.distance_to(screen_pos) > threshold:
+			$PopUp.position = screen_pos
 	#if current_tile != null:  # lerp towards camera to beat this stutter
 		#var f = Engine.get_physics_interpolation_fraction()
 		#var target_position: Vector2 = prev_screen_pos.lerp(screen_pos, f)

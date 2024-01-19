@@ -1,4 +1,4 @@
-extends Node3D
+class_name World extends Node3D
 
 const COMBAT = preload("res://Logic/Combat.tscn")
 const COMBAT_UI = preload("res://UI/CombatUI.tscn")
