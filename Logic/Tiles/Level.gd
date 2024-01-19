@@ -101,7 +101,6 @@ func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	entity.visual_entity.visible = true
 	$VisualEntities.add_child(entity.visual_entity)
 	entity.visual_entity.owner = self
-
 	
 	tile.add_entity(entity)
 	if entity.visual_entity != null:

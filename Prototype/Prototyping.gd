@@ -11,9 +11,14 @@ func _ready() -> void:
 	combat = COMBAT.instantiate()
 	add_child(combat)
 	
+	var combat_state: CombatState = load('res://Levels/Area1/rivers.tres')
+	print(combat_state)
+	var level = combat_state.level_state.deserialize(combat)
+	add_child(level)
+	combat.level = level
 	combat.create_prototype_level()
-	add_child(combat.level)
-	level = combat.level
+	#add_child(combat.level)
+	#level = combat.level
 	
 	combat_ui = COMBAT_UI.instantiate()
 	$FeaturesUI.add_child(combat_ui)

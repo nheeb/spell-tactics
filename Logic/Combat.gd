@@ -1,3 +1,4 @@
+@tool
 class_name Combat extends Node
 
 const LEVEL = preload("res://Logic/Tiles/Level.tscn")
@@ -55,16 +56,16 @@ func update_references() -> void:
 			enemies.append(entity)
 
 func create_prototype_level():
-	level = LEVEL.instantiate()
-	level.name = "Level"
-	level.combat = self
-	level.init_basic_grid(3)
-	# let's add some prototyping entities to the level
-	level.fill_entity(GRASS_TERRAIN_ENTITY)
-	level.create_entity(2, 2, GOBLIN_TYPE)
-	level.create_entity(3, 3, ROCK_ENTITY)
-	level.create_entity(3, 4, WATER_ENTITY)
-	level.player = level.create_entity(0, 6, PLAYER_TYPE)
+	#level = LEVEL.instantiate()
+	#level.name = "Level"
+	#level.combat = self
+	#level.init_basic_grid(3)
+	## let's add some prototyping entities to the level
+	#level.fill_entity(GRASS_TERRAIN_ENTITY)
+	#level.create_entity(2, 2, GOBLIN_TYPE)
+	#level.create_entity(3, 3, ROCK_ENTITY)
+	#level.create_entity(3, 4, WATER_ENTITY)
+	level.player = level.create_entity(3, 3, PLAYER_TYPE)
 
 	deck = []
 	for i in range(20):

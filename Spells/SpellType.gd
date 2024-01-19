@@ -1,3 +1,4 @@
+@tool
 class_name SpellType extends Resource
 
 @export_category("Attributes")

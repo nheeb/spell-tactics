@@ -4,10 +4,10 @@ extends EditorPlugin
 var _editor_ui: EditorUI = null
 
 var _editor_cameras: Array[Camera3D] = []
-var _editor: LevelEditor = null
+var _editor: GridLevelEditor = null
 
 func _enter_tree():
-	add_custom_type("Editor", "Node", preload("Editor.gd"), preload("hexagon.png"))
+	add_custom_type("GridLevelEditor", "Node", preload("GridLevelEditor.gd"), preload("hexagon.png"))
 	_editor_ui = preload("res://addons/LevelEditor/UI/EditorUI.tscn").instantiate()
 	EditorInterface.get_editor_main_screen().add_child(_editor_ui, true)
 	_find_cameras(EditorInterface.get_editor_main_screen())
@@ -19,7 +19,7 @@ func _exit_tree():
 		_editor_ui.queue_free()
 
 func _handles(object: Object) -> bool:
-	if object is LevelEditor:
+	if object is GridLevelEditor:
 		_editor = object
 		return true
 	_editor = null
@@ -29,6 +29,10 @@ func _make_visible(visible):
 	if _editor_ui:
 		_editor_ui.visible = visible
 	pass
+
+func _apply_changes():
+	if _editor:
+		_editor.save_changes()
 	
 func _forward_3d_gui_input(camera, event):
 	if event is InputEventMouse:

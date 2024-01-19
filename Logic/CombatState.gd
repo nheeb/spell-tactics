@@ -1,3 +1,4 @@
+@tool
 class_name CombatState extends Resource
 
 @export var level_state: LevelState

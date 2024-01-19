@@ -1,10 +1,10 @@
+@tool
 class_name LevelState extends Resource
 
 @export var tiles: Array[TileState]
 # columns for initiating the 2D tile array
 @export var rows: int
 @export var columns: int
-
 
 const LEVEL = preload("res://Logic/Tiles/Level.tscn")
 const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
