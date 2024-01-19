@@ -31,7 +31,7 @@ func remove_card(spell: Spell):
 		printerr("Failed to remove a card which spells is not in the hand")
 
 func _on_next_pressed():
-	combat.process_player_action(PlayerPass.new())
+	combat.input.process_action(PlayerPass.new())
 
 func _on_cast_pressed():
 	var clean_payment_text : String = $EnergyPayment.text
@@ -39,7 +39,7 @@ func _on_cast_pressed():
 		clean_payment_text = clean_payment_text.split(":")[-1]
 	var payment := Utility.string_to_energy(clean_payment_text)
 	if is_instance_valid(selected_spell):
-		combat.process_player_action(PlayerCast.new(selected_spell, payment))
+		combat.input.process_action(PlayerCast.new(selected_spell, payment))
 
 #func _input(event):
 	#if event.is_action_pressed("cancel"):

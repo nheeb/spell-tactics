@@ -8,7 +8,7 @@ func tile_hovered(tile: Tile):
 func tile_clicked(tile: Tile):
 	# this was wrong (discuss maybe?):
 	# PlayerMovement.new(tile).execute(combat)
-	if combat.process_player_action(PlayerMovement.new(tile)):
+	if combat.input.process_action(PlayerMovement.new(tile)):
 		# valid, movement has been performed
 		combat.level._unhighlight_tile_set(highlighted_tiles, Highlight.Type.Movement)
 

@@ -25,7 +25,7 @@ func deserialize() -> Combat:
 	combat.discard_pile.append_array(discard_pile_states.map(func(x: SpellState): return x.deserialize(combat)))
 	if combat.deck.size() + combat.hand.size() + combat.hand.size() < 5:
 		combat.deck.append_array(Game.get_prototype_deck(combat))
-	combat.update_references()
+	combat.setup()
 	return combat
 
 func save_to_disk(path: String) -> void:
