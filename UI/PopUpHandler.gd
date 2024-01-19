@@ -1,5 +1,6 @@
-class_name TestPopup extends Control
+class_name PopUpHandler extends Control
 
+@export var viewport: Viewport
 
 func _ready() -> void:
 	Events.tile_hovered_long.connect(show_tile_popup)
@@ -16,7 +17,7 @@ func show_tile_popup(tile: Tile):
 	popup.name = "PopUp"
 	#add_child(popup)
 	current_tile = tile
-	screen_pos = get_viewport().get_camera_3d().unproject_position(tile.global_position)
+	screen_pos = viewport.get_camera_3d().unproject_position(tile.global_position)
 	# can use Camera3D.is_position_behind() to check, but should not be relevant here for now	
 	#$PopUp.pivot_offset = $PopUp.size / 2.0
 	popup.position = screen_pos
@@ -39,7 +40,7 @@ func hide_tile_popup(tile: Tile):
 func _process(delta: float) -> void:
 	if current_tile != null:
 		prev_screen_pos = screen_pos
-		screen_pos = get_viewport().get_camera_3d().unproject_position(current_tile.global_position)
+		screen_pos = viewport.get_camera_3d().unproject_position(current_tile.global_position)
 		$PopUp.position = $PopUp.position.lerp(screen_pos, 0.99)
 	#if current_tile != null:  # lerp towards camera to beat this stutter
 		#var f = Engine.get_physics_interpolation_fraction()
