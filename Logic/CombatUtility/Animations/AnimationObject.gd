@@ -27,6 +27,12 @@ func set_delay(d: float) -> AnimationObject:
 	delay = d
 	return self
 
+func _play(level: Level) -> void:
+	if delay > 0.0:
+		await VisualTime.new_timer(delay).timeout
+	play(level)
+
+## Override this to set what the animation does. Always emit animation_done at the end
 func play(level: Level) -> void:
 	pass
 

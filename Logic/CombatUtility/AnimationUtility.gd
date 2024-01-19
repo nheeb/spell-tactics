@@ -7,19 +7,22 @@ signal animation_queue_empty
 var animation_queue: Array[AnimationObject]
 var animation_steps: Array[AnimationStep]
 
+func add_animation_object(a: AnimationObject) -> void:
+	animation_queue.append(a)
+
 func callback(ref: Object, method: String, parameters: Array = []) -> AnimationCallback:
 	var a = AnimationCallback.new(ref, method, parameters)
-	animation_queue.append(a)
+	add_animation_object(a)
 	return a
 
 func wait(time: float) -> AnimationWait:
 	var a = AnimationWait.new(time)
-	animation_queue.append(a)
+	add_animation_object(a)
 	return a
 
 func signal_emit(ref: Object, signal_name: String) -> AnimationSignalEmit:
 	var a = AnimationSignalEmit.new(ref, signal_name)
-	animation_queue.append(a)
+	add_animation_object(a)
 	return a
 
 func play_animation_queue() -> void:
@@ -61,6 +64,6 @@ class AnimationStep extends Object:
 	
 	func play(level: Level) -> void:
 		for a in animations:
-			a.play(level)
+			a._play(level)
 		if relevant_animations_to_do == 0:
 			step_done.emit()
