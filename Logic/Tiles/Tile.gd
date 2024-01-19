@@ -26,7 +26,13 @@ static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	tile.q = q_tile
 	tile.name = "Tile_%02d_%02d" % [r_tile, q_tile]
 	return tile
-
+	
+## contains at least one drainable entity
+func is_drainable():
+	for ent in entities:
+		if ent.type.is_drainable:
+			return true
+	return false
 
 func _on_area_3d_mouse_entered() -> void:
 	set_highlight(Highlight.Type.Hover, true)

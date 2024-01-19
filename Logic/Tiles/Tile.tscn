@@ -34,7 +34,6 @@ pixel_size = 0.003
 text = "Tee"
 
 [node name="Area3D" type="Area3D" parent="." groups=["tile_area"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0020504, 0.00782931, -0.00375366)
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Area3D"]
 transform = Transform3D(0.866025, -0.5, 0, -2.18557e-08, -3.78552e-08, 1, -0.5, -0.866025, -4.37114e-08, 0, 0, 0)
@@ -44,7 +43,7 @@ polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866,
 [node name="LogicalEntities" type="Node3D" parent="."]
 
 [node name="Highlight" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11396, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.117866, 0)
 script = ExtResource("3_ho6t1")
 
 [node name="Edges" type="Node3D" parent="Highlight"]

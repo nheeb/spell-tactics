@@ -157,6 +157,7 @@ static func load_from_disk(path: String) -> Combat:
 	var state: CombatState = CombatState.load_from_disk(path)
 	return state.deserialize()
 
+@warning_ignore("shadowed_variable")  # stupid that static funcs raise a shadow warning but ok..
 static func serialize_level_as_combat_state(level: Level) -> CombatState:
 	var state := CombatState.new()
 	state.level_state = level.serialize()
