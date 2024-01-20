@@ -2,6 +2,7 @@
 extends EditorPlugin
 
 var _editor_ui: EditorUI = null
+var _selection_ui: SelectionUI = null
 
 var _editor_cameras: Array[Camera3D] = []
 var _editor: GridLevelEditor = null
@@ -10,6 +11,7 @@ func _enter_tree():
 	add_custom_type("GridLevelEditor", "Node", preload("GridLevelEditor.gd"), preload("hexagon.png"))
 	_editor_ui = preload("res://addons/LevelEditor/UI/EditorUI.tscn").instantiate()
 	EditorInterface.get_editor_main_screen().add_child(_editor_ui, true)
+	
 	_find_cameras(EditorInterface.get_editor_main_screen())
 	_make_visible(false)
 
@@ -28,7 +30,12 @@ func _handles(object: Object) -> bool:
 func _make_visible(visible):
 	if _editor_ui:
 		_editor_ui.visible = visible
-	pass
+	if visible:
+		_selection_ui = preload("res://addons/LevelEditor/UI/SelectionUI.tscn").instantiate()
+		_selection_ui.editor_ui = _editor_ui
+		add_control_to_dock(DOCK_SLOT_RIGHT_BL, _selection_ui)
+	else:
+		remove_control_from_docks(_selection_ui)
 
 func _apply_changes():
 	if _editor:
@@ -43,6 +50,7 @@ func _forward_3d_gui_input(camera, event):
 	return EditorPlugin.AFTER_GUI_INPUT_STOP
 
 func _on_editor_click(mouse_pos: Vector2i, drag: bool):
+	print('_on_editor_click')
 	var camera = _editor_cameras[0]
 	var from = camera.project_ray_origin(mouse_pos)
 	var to = from + camera.project_ray_normal(mouse_pos) * 999
@@ -58,9 +66,11 @@ func _on_editor_click(mouse_pos: Vector2i, drag: bool):
 		var tile = collider.get_parent()
 		if tile is Tile:
 			if not drag:
-				_editor_ui.tool_active._apply(_editor, tile, _editor_ui.placement_active)
+				print('click')
+				_editor_ui.tool_active._apply(_editor, tile, _editor_ui)
 			else:
-				_editor_ui.tool_active._drag(_editor, tile, _editor_ui.placement_active)
+				print('drag')
+				_editor_ui.tool_active._drag(_editor, tile, _editor_ui)
 
 func _find_cameras(n : Node):
 	if n is Camera3D:

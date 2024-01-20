@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdfhkpehk0qn0"]
+
+[ext_resource type="Script" path="res://addons/LevelEditor/UI/SelectionItem.gd" id="1_gmd8j"]
+
+[node name="SelectionItem" type="HBoxContainer"]
+offset_right = 50.0
+offset_bottom = 50.0
+script = ExtResource("1_gmd8j")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,3 +1,4 @@
+@tool
 ## Resource representing the state that should be saved for an Entity for (de-)serialization
 class_name EntityState extends Resource
 

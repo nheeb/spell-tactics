@@ -11,7 +11,6 @@ func deserialize(combat: Combat, n_rows: int, n_cols: int) -> Tile:
 	#var ents: Array[Entity] = []
 	var ent: Entity
 	for entity_data in entities:
-		print(entity_data)
 		ent = entity_data.deserialize(combat)
 		tile.add_entity(ent)
 	

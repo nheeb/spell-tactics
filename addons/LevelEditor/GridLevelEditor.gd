@@ -11,12 +11,15 @@ var level: Level = null
 func _ready():
 	if not Engine.is_editor_hint():
 		return
-	_load_level()
-	level = LEVEL.instantiate()
-	level.name = 'Level'
-	add_child(level, true)
-	level.clear()
-	level.init_basic_grid(6)
+	level = _load_level()
+	if level != null:
+		add_child(level, true)
+	else:
+		level = LEVEL.instantiate()
+		level.name = 'Level'
+		add_child(level, true)
+		level.clear()
+		level.init_basic_grid(grid_size)
 
 @export var grid_size: int = 6 : set = _set_grid_size, get = _get_grid_size
 func _set_grid_size(new_value):
@@ -38,7 +41,6 @@ func _load_level() -> Level:
 	var level_file = _get_level_file()
 	var combat_state: CombatState = ResourceLoader.load(level_file) as CombatState
 	var loaded_level_state = combat_state.level_state as LevelState
-	print(loaded_level_state)
 	return loaded_level_state.deserialize(null)
 	
 func save_changes():
@@ -47,7 +49,6 @@ func save_changes():
 	var err = ResourceSaver.save(state, level_file)
 	if not err == OK:
 		printerr("Err when saving level state: ", err)
-	pass
 
 func serialize_level_as_combat_state(_level: Level) -> CombatState:
 	var state := CombatState.new()

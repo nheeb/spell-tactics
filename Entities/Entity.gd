@@ -27,7 +27,7 @@ static func serialize_this_prop(name: String) -> bool:
 	return true
 
 func serialize() -> EntityState:
-	print("-- Serializing %s --" % type.internal_name)
+	#print("-- Serializing %s --" % type.internal_name)
 	var state: EntityState = EntityState.new()
 	state.type = type
 	
@@ -43,7 +43,7 @@ func serialize() -> EntityState:
 			continue
 		state.entity_props[prop.name] = get(prop.name)
 
-	print(state.entity_props)
+	#print(state.entity_props)
 	return state
 	
 func move(target: Tile):
