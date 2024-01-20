@@ -1,11 +1,12 @@
-extends Node3D
+class_name World extends Node3D
 
 const COMBAT = preload("res://Logic/Combat.tscn")
 const COMBAT_UI = preload("res://UI/CombatUI.tscn")
 
 var level : Level
-var combat : Combat
-var combat_ui : CombatUI
+@onready var combat : Combat
+@onready var combat_ui : CombatUI
+@onready var debug_ui: Control
 
 func _ready() -> void:
 	combat = COMBAT.instantiate()
@@ -13,19 +14,25 @@ func _ready() -> void:
 	
 	var combat_state: CombatState = load('res://Levels/Area1/rivers.tres')
 	print(combat_state)
-	var level = combat_state.level_state.deserialize(combat)
+	level = combat_state.level_state.deserialize(combat)
 	add_child(level)
 	combat.level = level
 	combat.create_prototype_level()
 	#add_child(combat.level)
 	#level = combat.level
 	
+	# construct references to ui_root which lives outside this 3d viewport
+	# ui_root/combat_ui and ui_root/debug_ui
+	var ui_root = get_tree().get_first_node_in_group("ui_root")
+	debug_ui = ui_root.get_node("DebugUI")
 	combat_ui = COMBAT_UI.instantiate()
-	$FeaturesUI.add_child(combat_ui)
+	ui_root.add_child(combat_ui)
 	combat.connect_with_ui(combat_ui)
 	
 	combat.advance_and_process_until_next_player_action_needed()
 	combat.animation.play_animation_queue()
+	
+	
 
 
 var flip := false
@@ -67,12 +74,12 @@ func _on_damage_player_pressed() -> void:
 	level.player.hp -= 1
 
 
-func _on_save_level_pressed() -> void:
+func _on_save_game_pressed(id: String) -> void:
 	#level.save_to_disk("user://level.tres")
-	combat.save_to_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % %SaveID.value)
+	combat.save_to_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % id)
 
 
-func _on_load_level_pressed() -> void:
+func _on_load_game_pressed(id: String) -> void:
 	#var loaded_level = Level.load_from_disk("user://level.tres")
 	#loaded_level.name = "Level"
 	#level.free()
@@ -80,13 +87,14 @@ func _on_load_level_pressed() -> void:
 	for node in [level, combat, combat_ui]:
 		if is_instance_valid(node):
 			node.free()
-	combat = Combat.load_from_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % %SaveID.value)
+	combat = Combat.load_from_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % id)
 	add_child(combat)
 	level = combat.level
 	level.name = "Level"
 	add_child(level)
 	combat_ui = COMBAT_UI.instantiate()
-	$FeaturesUI.add_child(combat_ui)
+	var ui_root = get_tree().get_first_node_in_group("ui_root")
+	ui_root.add_child(combat_ui)
 	combat.connect_with_ui(combat_ui)
 
 var tile_toggle := false
@@ -96,3 +104,16 @@ func _on_toggle_tile_labels_pressed() -> void:
 	if tile_toggle:
 		# 
 		pass
+
+
+func _on_show_debug_pressed() -> void:
+	debug_ui.get_node("%List").visible = not debug_ui.get_node("%List").visible
+	if debug_ui.get_node("%List").visible:
+		debug_ui.get_node("%ShowDebug").text = "Hide Debug"
+	else:
+		debug_ui.get_node("%ShowDebug").text = "Show Debug"
+
+
+func _on_line_button_pressed() -> void:
+	# TODO implement drawing line
+	pass # Replace with function body.

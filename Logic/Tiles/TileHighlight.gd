@@ -35,6 +35,9 @@ func _ready() -> void:
 
 
 func enable_highlight(type: Type):
+	if type == Type.Hover and not type in current_highlights:
+		current_highlights.append(type)
+		$HoverHexQuad.visible = true
 	# will be custom for each type. for now just change color
 	if not type in current_highlights:
 		current_material = highlight_materials[type]
@@ -44,7 +47,10 @@ func enable_highlight(type: Type):
 func disable_highlight(type: Type):
 	if type in current_highlights:
 		current_highlights.erase(type)
-		
+	
+	if type == Type.Hover:
+		$HoverHexQuad.visible = false
+	
 	if current_highlights.is_empty():
 		$Edges.visible = false
 	else:

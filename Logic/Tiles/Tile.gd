@@ -6,9 +6,10 @@ class_name Tile extends Node3D
 var entities: Array[Entity] = []
 var hovering := false:
 	set(h):
-		hovering = h
-		if not hovering:
+		if not h and hovering:
 			Events.tile_unhovered_long.emit(self)
+		hovering = h
+
 var r: int
 var q: int
 
@@ -26,7 +27,13 @@ static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	tile.q = q_tile
 	tile.name = "Tile_%02d_%02d" % [r_tile, q_tile]
 	return tile
-
+	
+## contains at least one drainable entity
+func is_drainable():
+	for ent in entities:
+		if ent.type.is_drainable:
+			return true
+	return false
 
 func _on_area_3d_mouse_entered() -> void:
 	set_highlight(Highlight.Type.Hover, true)
@@ -53,7 +60,7 @@ func remove_entity(entity: Entity):
 ## an obstacle.
 func is_obstacle() -> bool:
 	for ent in entities:
-		if ent.resource.is_obstacle:
+		if ent.type.is_obstacle:
 			return true
 	return false
 	

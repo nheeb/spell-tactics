@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=7 format=3 uid="uid://brhegqlf0sm1x"]
 
-[ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Prototype/Prototyping.tscn" id="1_dlhxl"]
+[ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Prototype/World.tscn" id="1_dlhxl"]
+[ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_3ykw6"]
+[ext_resource type="Script" path="res://UI/DebugUI.gd" id="2_gty54"]
+[ext_resource type="Script" path="res://UI/PopUpHandler.gd" id="3_mq6gx"]
+[ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="4_4622k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pghfn"]
+font_size = 24
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -10,7 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="3DViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,11 +26,149 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="3DViewport" type="SubViewport" parent="3DViewportContainer"]
 handle_input_locally = false
 msaa_3d = 1
 physics_object_picking = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="HexGridProto" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_dlhxl")]
+[node name="World" parent="3DViewportContainer/3DViewport" instance=ExtResource("1_dlhxl")]
+
+[node name="UILayer" type="CanvasLayer" parent="." groups=["ui_root"]]
+
+[node name="DebugUI" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_gty54")
+
+[node name="List" type="VBoxContainer" parent="UILayer/DebugUI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0398148
+anchor_right = 0.164583
+anchor_bottom = 0.44
+metadata/_edit_use_anchors_ = true
+
+[node name="LineButton" type="Button" parent="UILayer/DebugUI/List"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Draw Line (TODO)
+"
+
+[node name="NavButton" type="Button" parent="UILayer/DebugUI/List"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Draw Shortest Path
+"
+
+[node name="EntityFindButton" type="Button" parent="UILayer/DebugUI/List"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Highlight All Rocks
+"
+
+[node name="MovementRangeButton" type="Button" parent="UILayer/DebugUI/List"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Highlight Movement Range"
+
+[node name="MoveRockButton" type="Button" parent="UILayer/DebugUI/List"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Move Rock"
+
+[node name="DamagePlayer" type="Button" parent="UILayer/DebugUI/List"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Damage Player"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/DebugUI/List"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UILayer/DebugUI/List/HBoxContainer"]
+layout_mode = 2
+text = "Save-Slot"
+label_settings = SubResource("LabelSettings_pghfn")
+
+[node name="SaveID" type="SpinBox" parent="UILayer/DebugUI/List/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+rounded = true
+
+[node name="SaveLevel" type="Button" parent="UILayer/DebugUI/List"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Save Level"
+
+[node name="LoadLevel" type="Button" parent="UILayer/DebugUI/List"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Load Level"
+
+[node name="ShowDebug" type="Button" parent="UILayer/DebugUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("2_3ykw6")
+theme_override_font_sizes/font_size = 24
+text = "Show Debug"
+
+[node name="PopupsLayer" type="CanvasLayer" parent="."]
+editor_description = "above normal UI layer"
+layer = 2
+
+[node name="PopUpHandler" type="Control" parent="PopupsLayer" node_paths=PackedStringArray("viewport")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_mq6gx")
+viewport = NodePath("../../3DViewportContainer/3DViewport")
+
+[node name="PopUp" parent="PopupsLayer/PopUpHandler" instance=ExtResource("4_4622k")]
+visible = false
+layout_mode = 0
+offset_left = 855.0
+offset_top = 451.0
+offset_right = 966.0
+offset_bottom = 504.0
+
+[connection signal="load_game_pressed" from="UILayer/DebugUI" to="3DViewportContainer/3DViewport/World" method="_on_load_game_pressed"]
+[connection signal="save_game_pressed" from="UILayer/DebugUI" to="3DViewportContainer/3DViewport/World" method="_on_save_game_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/LineButton" to="3DViewportContainer/3DViewport/World" method="_on_line_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/NavButton" to="3DViewportContainer/3DViewport/World" method="_on_nav_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/EntityFindButton" to="3DViewportContainer/3DViewport/World" method="_on_entity_find_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/MovementRangeButton" to="3DViewportContainer/3DViewport/World" method="_on_movement_range_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/MoveRockButton" to="3DViewportContainer/3DViewport/World" method="_on_move_rock_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/DamagePlayer" to="3DViewportContainer/3DViewport/World" method="_on_damage_player_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/SaveLevel" to="UILayer/DebugUI" method="_on_save_level_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/LoadLevel" to="UILayer/DebugUI" method="_on_load_level_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/ShowDebug" to="3DViewportContainer/3DViewport/World" method="_on_show_debug_pressed"]

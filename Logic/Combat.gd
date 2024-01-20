@@ -3,7 +3,6 @@ class_name Combat extends Node
 
 const LEVEL = preload("res://Logic/Tiles/Level.tscn")
 const ROCK_ENTITY = preload("res://Entities/Environment/Rock.tres")
-const WATER_TILE_ENTITY = preload("res://Entities/Environment/WaterTile.tres")
 const WATER_ENTITY = preload("res://Entities/Environment/Water.tres")
 const GRASS_TERRAIN_ENTITY = preload("res://Entities/Environment/GrassTile.tres")
 const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
@@ -26,7 +25,7 @@ enum RoundPhase {
 @onready var movement: MovementUtility = %MovementUtility
 @warning_ignore("shadowed_global_identifier")
 @onready var log: LogUtility = %LogUtility
-
+@onready var input: InputUtility = %InputUtility
 
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
@@ -41,10 +40,13 @@ var discard_pile: Array[Spell]
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
-#var animation_queue: Array[AnimationObject]
+func _ready() -> void:
+	pass
 
-
-func update_references() -> void:
+## is called when the Combat is created to connect all the references and signals
+func setup() -> void:
+	
+	# Get player and enemy references
 	player = null
 	enemies = []
 	for entity in level.get_all_entities():
@@ -54,6 +56,10 @@ func update_references() -> void:
 			player = entity
 		if entity is EnemyEntity:
 			enemies.append(entity)
+	
+	# Connect input signals
+	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
+	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
 
 func create_prototype_level():
 
@@ -62,7 +68,7 @@ func create_prototype_level():
 		match randi_range(1,2):
 			1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
 			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
-	update_references()
+	setup()
 	energy.player_energy = []
 	discard_pile = []
 	hand = []
@@ -111,22 +117,6 @@ func advance_and_process_until_next_player_action_needed():
 		if process_current_phase(): # If Player Input needed
 			break
 
-## returns whether it is valid
-func process_player_action(action: PlayerAction) -> bool:
-	if action.is_valid(self):
-		print("Doing Player Action: %s" % action.action_string)
-		action.execute(self)
-		animation.play_animation_queue()
-		return true
-	else:
-		# should we throw an error msg here or will this happen in normal play?
-		printerr("Invalid Player Action: %s" % action.action_string)
-		return false
-
-func _ready() -> void:
-	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
-	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
-
 func serialize() -> CombatState:
 	var state := CombatState.new()
 	state.level_state = level.serialize()
@@ -148,17 +138,10 @@ static func load_from_disk(path: String) -> Combat:
 	var state: CombatState = CombatState.load_from_disk(path)
 	return state.deserialize()
 
+@warning_ignore("shadowed_variable")  # stupid that static funcs raise a shadow warning but ok..
 static func serialize_level_as_combat_state(level: Level) -> CombatState:
 	var state := CombatState.new()
 	state.level_state = level.serialize()
-	# Those values are already the starting values of the Combat State res
-	#state.current_round = 1
-	#state.current_phase = RoundPhase.CombatBegin
-	#state.player_energy = []
-	#state.hand_size = 5
-	#state.deck_states.append_array([])
-	#state.hand_states.append_array([])
-	#state.discard_pile_states.append_array([])
 	return state
 
 static func deserialize_level_from_combat_state(combat_state: CombatState) -> Level:

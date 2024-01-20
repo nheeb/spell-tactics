@@ -11,8 +11,8 @@ func show_tile(tile: Tile):
 	var i = 0
 	# tile has an array of entities, show one entry for each of these
 	for ent in tile.entities:
-		if ent.type.is_terrain:
-			# skip terrain entities (for now?)
+		if not ent.type.is_drainable:
+			# skip
 			continue
 		ent_entries[i].show_entity(ent)
 		ent_entries[i].show()
@@ -23,16 +23,25 @@ func show_tile(tile: Tile):
 	for j in range(i, len(ent_entries)):
 		ent_entries[j].hide()
 	
+	show()
+	self.size = Vector2(0.0, 0.0)
+	$MarginContainer/VBoxContainer.size = Vector2(0, 0)
+	$MarginContainer.size = Vector2(0, 0)
 	await get_tree().process_frame
 	# my best efforts to invalidate the container(s)
-	self.update_minimum_size()
-	$MarginContainer/VBoxContainer.update_minimum_size()
-	$MarginContainer/VBoxContainer.sort_children.emit()
-	$MarginContainer.update_minimum_size()
-	self.set_deferred("rect_min_size", Vector2(0, 0))
-	resized.emit()
-	$MarginContainer.resized.emit()
-	$MarginContainer/VBoxContainer.resized.emit()
+	self.size = Vector2(0.0, 0.0)
+	$MarginContainer/VBoxContainer.size = Vector2(0, 0)
+	$MarginContainer.size = Vector2(0, 0)
+	
+	
+	#$MarginContainer/VBoxContainer.sort_children.emit()
+	#self.update_minimum_size()
+	#$MarginContainer.update_minimum_size()
+	#self.set_deferred("rect_min_size", Vector2(0, 0))
+	#resized.emit()
+	#$MarginContainer.resized.emit()
+	#$MarginContainer/VBoxContainer.resized.emit()
+	
 
 func hide_popup():
 	hide()

@@ -8,3 +8,8 @@ func pay(payment: Array[Game.Energy]) -> void:
 	# style: is this utility method needed or should it be moved here?
 	player_energy = Utility.pay_energy(player_energy, payment)
 	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate()])
+
+
+func gain(energy: Array[Game.Energy]) -> void:
+	player_energy.append_array(energy)
+	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate()])

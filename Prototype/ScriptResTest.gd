@@ -4,6 +4,7 @@ const LEVEL = preload("res://Logic/Tiles/Level.tscn")
 
 func _ready() -> void:
 	print("start_test")
+	
 	var level : Level = LEVEL.instantiate()
 	add_child(level)
 	level.init_basic_grid(3)

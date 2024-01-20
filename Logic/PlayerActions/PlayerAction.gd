@@ -7,3 +7,6 @@ func is_valid(combat: Combat) -> bool:
 
 func execute(combat: Combat) -> void:
 	pass
+
+func on_fail(combat: Combat) -> void:
+	combat.log.add("Action failed: %s" % action_string)

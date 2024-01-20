@@ -49,6 +49,15 @@ func serialize() -> EntityState:
 func move(target: Tile):
 	current_tile.remove_entity(self)
 	target.add_entity(self)
+	
+func drain() -> Array[Game.Energy]:
+	assert(is_drainable(), "Tried draining entity which is not drainable.")
+	var drained_energy = Array(energy)
+	energy = []
+	return drained_energy
+	
+func is_drainable():
+	return type.is_drainable and len(energy) > 0
 
 ## This will be executed after an entity has been created from a type
 func on_create() -> void:
