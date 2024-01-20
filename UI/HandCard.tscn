@@ -14,7 +14,7 @@ shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_g7g2d")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ne87j"]
-size = Vector3(0.156494, 1.3979, 1)
+size = Vector3(0.0455627, 1.3979, 1)
 
 [node name="HandCard" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -33,5 +33,5 @@ size = Vector2i(512, 717)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0412399, 0, 1.80265e-09)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, 6.75016e-14, 0, 1, -0.0687256, 0.000282273, -3.33067e-16)
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, 6.75016e-14, 0, 1, -0.042862, 0.000282273, 1.33227e-15)
 shape = SubResource("BoxShape3D_ne87j")
