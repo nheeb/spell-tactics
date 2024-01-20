@@ -1,3 +1,4 @@
+@tool
 class_name Combat extends Node
 
 const LEVEL = preload("res://Logic/Tiles/Level.tscn")
@@ -39,6 +40,9 @@ var discard_pile: Array[Spell]
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
+func _ready() -> void:
+	pass
+
 ## is called when the Combat is created to connect all the references and signals
 func setup() -> void:
 	
@@ -58,16 +62,6 @@ func setup() -> void:
 	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
 
 func create_prototype_level():
-	level = LEVEL.instantiate()
-	level.name = "Level"
-	level.combat = self
-	level.init_basic_grid(3)
-	# let's add some prototyping entities to the level
-	level.fill_entity(GRASS_TERRAIN_ENTITY)
-	level.create_entity(2, 2, GOBLIN_TYPE)
-	level.create_entity(3, 3, ROCK_ENTITY)
-	level.create_entity(3, 4, WATER_ENTITY)
-	level.player = level.create_entity(0, 6, PLAYER_TYPE)
 
 	deck = []
 	for i in range(20):

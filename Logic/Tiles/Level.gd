@@ -1,4 +1,4 @@
-
+@tool
 class_name Level extends Node3D
 
 ## Different initialization functions should be implemented.
@@ -102,12 +102,11 @@ func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 	entity.visual_entity.visible = true
 	$VisualEntities.add_child(entity.visual_entity)
 	entity.visual_entity.owner = self
-
 	
 	tile.add_entity(entity)
 	if entity.visual_entity != null:
-		if entity.visual_entity.is_inside_tree():
-			print(entity.visual_entity.get_path())
+		#if entity.visual_entity.is_inside_tree():
+			#print(entity.visual_entity.get_path())
 		entity.visual_entity.position = tile.position
 		# TODO add logical entity
 		

@@ -1,3 +1,4 @@
+@tool
 class_name EnemyEntityType extends HPEntityType
 
 enum Behaviour {

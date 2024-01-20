@@ -1,3 +1,4 @@
+@tool
 class_name VisualPlayer extends VisualEntity
 
 func _ready() -> void:

@@ -1,3 +1,4 @@
+@tool
 class_name Lower extends Tool
 
 var _active_set: Array[Tile] = []
@@ -8,19 +9,19 @@ func _selected():
 func _deselected():
 	pass
 
-func _apply(editor: LevelEditor, tile: Tile, placement_active: EntityType):
+func _apply(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
 	_active_set = [tile]
 	_set_tile(tile)
 
-func _drag(editor: LevelEditor, tile: Tile, placement_active: EntityType):
+func _drag(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
 	if _active_set.has(tile):
 		return
 	_active_set.append(tile)
 	_set_tile(tile)
 
 func _set_tile(tile: Tile):
-	tile.global_position += Vector3.DOWN * 0.1
+	tile.global_position += Vector3.DOWN * 0.4
 	for entity in tile.entities:
 		if entity.visual_entity:
-			entity.visual_entity.global_position += Vector3.DOWN * 0.1
+			entity.visual_entity.global_position += Vector3.DOWN * 0.4
 	

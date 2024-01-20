@@ -1,3 +1,4 @@
+@tool
 class_name EnemyEntity extends HPEntity
 
 var actions: Array[EnemyMove]

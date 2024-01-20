@@ -1,3 +1,4 @@
+@tool
 extends VisualEntity
 
 func _ready() -> void:
