@@ -24,4 +24,17 @@ func deserialize(combat: Combat) -> Level:
 	if player_ent != null:
 		level.player = player_ent
 	
+	# Check of all entities have ids
+	if combat.current_phase == Combat.RoundPhase.CombatBegin:
+		# If it's a fresh combat make every id new
+		combat.log.add("Creating new ids")
+		for e in level.get_all_entities():
+			e.id = EntityID.new(e.type, level.add_type_count(e.type))
+	else:
+		for e in level.get_all_entities():
+			if e.id != null:
+				level.add_type_count(e.type)
+			else:
+				printerr("Entity without ID in savegame")
+	
 	return level

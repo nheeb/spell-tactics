@@ -4,7 +4,7 @@ var secret_msg = "serialize me"
 
 var prop := -1
 
-
+var arch_enemy : EntityReference
 
 
 # TODO test if this gets properly serialized

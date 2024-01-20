@@ -15,4 +15,7 @@ extends SpellLogic
 ## Most important function for overwriting. Here should be the effect
 func casting_effect() -> void:
 	combat.player.hp -= 1
-
+	
+	if combat.player.arch_enemy != null:
+		if combat.player.arch_enemy.is_valid(combat):
+			combat.player.arch_enemy.resolve().visual_entity.visible = false

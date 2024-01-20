@@ -20,6 +20,8 @@ var combat: Combat
 
 @onready var visual_effects: Node3D = $VisualEffects
 
+var entity_type_count := {}
+
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
@@ -87,6 +89,13 @@ func serialize() -> LevelState:
 	#var level: Level = level_state.deserialize(Combat.new())
 	#
 	#return level
+
+func add_type_count(type: EntityType) -> int:
+	if not type in entity_type_count:
+		entity_type_count[type] = 0
+	entity_type_count[type] += 1
+	return entity_type_count[type]
+
 func fill_entity(entity_type: EntityType):
 	for tile in get_all_tiles():
 		create_entity(tile.r, tile.q, entity_type)
@@ -109,10 +118,14 @@ func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 			#print(entity.visual_entity.get_path())
 		entity.visual_entity.position = tile.position
 		# TODO add logical entity
-		
+	
+	# Create id for entity
+	entity.id = EntityID.new(entity.type, add_type_count(entity.type))
+	
 	return entity
 
 func remove_entity(r: int, q: int, entity: Entity):
+	printerr("Level remove_entity: This method maybe shouldn't be executed in the running game.")
 	if tiles[r][q] == null:
 		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
 		return

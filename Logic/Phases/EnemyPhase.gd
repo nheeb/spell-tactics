@@ -10,4 +10,6 @@ func process_phase() -> bool:
 		enemy.do_movement()
 		enemy.do_action()
 	
+		combat.player.arch_enemy = enemy.get_reference()
+	
 	return false
