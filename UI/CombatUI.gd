@@ -49,9 +49,9 @@ func _on_cast_pressed():
 func select_card(spell: Spell):
 	deselect_card()
 	selected_spell = spell
-	var card = CNC.instantiate()
-	card.set_spell(spell, false)
-	$SelectedCardContainer.add_child(card)
+	var selected_card = CNC.instantiate()
+	selected_card.set_spell(spell, false)
+	$SelectedCardContainer.add_child(selected_card)
 	$EnergyPayment.visible = true
 	var payment = Utility.is_energy_cost_payable(combat.energy.player_energy, spell.logic.get_costs())
 	if payment is Array:
@@ -68,8 +68,20 @@ func deselect_card():
 func set_status(text: String):
 	$Status.text = text
 
+
+const energy_min_size := 32
+const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 func set_current_energy(energy: Array[Game.Energy]):
-	$CurrentEnergy.text = Utility.energy_to_string(energy)
+	for c in $Energy.get_children():
+		if c is EnergyIcon:
+			c.queue_free()
+	for e in energy:
+		var icon = ENERGY_ICON.instantiate()
+		$Energy.add_child(icon)
+		icon.type = e
+		icon.min_size = energy_min_size
+		
+	
 
 func _ready() -> void:
 	deselect_card()

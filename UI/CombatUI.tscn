@@ -30,10 +30,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Next" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.864583
-anchor_top = 0.842593
-anchor_right = 0.931424
-anchor_bottom = 0.933642
+anchor_left = 0.771354
+anchor_top = 0.561111
+anchor_right = 0.838195
+anchor_bottom = 0.65216
 offset_right = 8.0
 offset_bottom = 8.0
 theme_override_font_sizes/font_size = 36
@@ -44,9 +44,9 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.864583
-anchor_top = 0.716049
+anchor_top = 0.562963
 anchor_right = 0.931424
-anchor_bottom = 0.807099
+anchor_bottom = 0.654013
 offset_right = 8.0
 offset_bottom = 8.0
 theme_override_font_sizes/font_size = 36
@@ -89,20 +89,38 @@ label_settings = ExtResource("3_wybdv")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="CurrentEnergy" type="Label" parent="."]
+[node name="Energy" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.329861
-anchor_top = 0.0277778
-anchor_right = 0.614583
-anchor_bottom = 0.0833333
-grow_horizontal = 2
-grow_vertical = 2
+anchor_left = 0.3
+anchor_top = 0.612037
+anchor_right = 0.346875
+anchor_bottom = 0.615741
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="EnergyLabel" type="Label" parent="Energy"]
+layout_mode = 2
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_2hiqp")
-text = "Current Energy:"
+text = "Energy:"
 label_settings = ExtResource("3_wybdv")
 metadata/_edit_use_anchors_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.663
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+size = Vector2i(1920, 363)
 
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]

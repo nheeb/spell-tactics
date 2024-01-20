@@ -1,8 +1,12 @@
-#@tool
-extends Control
+@tool
+class_name EnergyIcon extends Control
 
 @onready var color_rect := $ColorRect
-
+@export var min_size: int = 24:
+	set(new_size):
+		min_size = new_size
+		if is_instance_valid(color_rect):
+			color_rect.custom_minimum_size = Vector2(min_size, min_size)
 @export var type: Game.Energy = Game.Energy.Any:
 	set(t):
 		type = t
