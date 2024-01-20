@@ -20,8 +20,8 @@ func _drag(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
 	_set_tile(tile)
 
 func _set_tile(tile: Tile):
-	tile.global_position += Vector3.DOWN * 0.1
+	tile.global_position += Vector3.DOWN * 0.4
 	for entity in tile.entities:
 		if entity.visual_entity:
-			entity.visual_entity.global_position += Vector3.DOWN * 0.1
+			entity.visual_entity.global_position += Vector3.DOWN * 0.4
 	
