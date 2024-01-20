@@ -12,8 +12,11 @@ func add_card(spell: Spell):
 	var card = CNC.instantiate()
 	card.set_spell(spell)
 	cards.append(card)
-	$CardContainer.add_child(card)
-	card.selected.connect(select_card)
+	%Cards3D.add_card(card)
+	var card2 = CNC.instantiate()
+	card2.set_spell(spell)
+	$CardContainer.add_child(card2)
+	#card.selected.connect(select_card)
 
 func remove_card(spell: Spell):
 	var card_to_remove = null

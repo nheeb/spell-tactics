@@ -25,7 +25,7 @@ func show_tile_popup(tile: Tile):
 	if not popup.is_inside_tree():
 		add_child(popup)
 	else:
-		printerr("weirdness")
+		printerr("trying to show 2nd popup while 1st still showing")
 	popup.position = screen_pos
 	popup.show_tile(tile)
 	#queue_redraw()

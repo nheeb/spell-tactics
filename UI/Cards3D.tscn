@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://upcefttcpy6o"]
+
+[ext_resource type="Script" path="res://UI/Cards3D.gd" id="1_s43vq"]
+[ext_resource type="PackedScene" uid="uid://j0l5hc388gmj" path="res://UI/HandCard.tscn" id="2_p4ia6"]
+
+[sub_resource type="Environment" id="Environment_621vn"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+
+[node name="Cards3D" type="Node3D"]
+script = ExtResource("1_s43vq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_621vn")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.682874, 0, 0)
+fov = 92.5
+near = 0.01
+far = 5.0
+
+[node name="CardOrigin" type="Node3D" parent="CameraPivot"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.99, -1.2, 0)
+
+[node name="HandCard4" parent="CameraPivot/CardOrigin" instance=ExtResource("2_p4ia6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2, 0, 0)
+
+[node name="HandCard3" parent="CameraPivot/CardOrigin" instance=ExtResource("2_p4ia6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.1, 0, 0)
+
+[node name="HandCard1" parent="CameraPivot/CardOrigin" instance=ExtResource("2_p4ia6")]
+
+[node name="HandCard2" parent="CameraPivot/CardOrigin" instance=ExtResource("2_p4ia6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.1, 0, 0)
+
+[node name="HandCard5" parent="CameraPivot/CardOrigin" instance=ExtResource("2_p4ia6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.2, 0, 0)
+
+[node name="MouseRayCast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.592667, 0, -4.44089e-16)
+target_position = Vector3(0, 0, -8)
+collide_with_areas = true
+debug_shape_custom_color = Color(0.780392, 0.709804, 0.772549, 1)

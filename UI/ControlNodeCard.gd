@@ -29,4 +29,3 @@ func set_content(pretty_name: String, costs: String, effect: String, fluff: Stri
 
 func _on_button_button_down() -> void:
 	selected.emit(spell)
-	print("select")
