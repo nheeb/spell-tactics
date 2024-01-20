@@ -12,7 +12,7 @@ func set_spell(_spell, as_hand_card := true):
 			printerr("Spell already has a visual representation Card")
 		spell.visual_representation = self
 	else:
-		%SelectButton.hide()
+		pass
 	
 	update()
 

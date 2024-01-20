@@ -33,9 +33,9 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.771354
-anchor_top = 0.561111
+anchor_top = 0.527778
 anchor_right = 0.838195
-anchor_bottom = 0.65216
+anchor_bottom = 0.618827
 offset_right = 8.0
 offset_bottom = 8.0
 theme_override_font_sizes/font_size = 36
@@ -46,9 +46,9 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.864583
-anchor_top = 0.562963
+anchor_top = 0.52963
 anchor_right = 0.931424
-anchor_bottom = 0.654013
+anchor_bottom = 0.62068
 offset_right = 8.0
 offset_bottom = 8.0
 theme_override_font_sizes/font_size = 36
@@ -95,9 +95,9 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3
-anchor_top = 0.612037
+anchor_top = 0.582407
 anchor_right = 0.346875
-anchor_bottom = 0.615741
+anchor_bottom = 0.586111
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
@@ -110,26 +110,33 @@ text = "Energy:"
 label_settings = ExtResource("3_wybdv")
 metadata/_edit_use_anchors_ = true
 
-[node name="CardViewportContainer" type="SubViewportContainer" parent="."]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+mouse_filter = 2
+ratio = 1.7778
+alignment_vertical = 2
+
+[node name="CardViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
 mouse_filter = 2
 stretch = true
 
-[node name="CardViewport" type="SubViewport" parent="CardViewportContainer"]
+[node name="CardViewport" type="SubViewport" parent="AspectRatioContainer/CardViewportContainer"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1920, 1080)
+size = Vector2i(1920, 1079)
 render_target_update_mode = 4
 
-[node name="Cards3D" parent="CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
+[node name="Cards3D" parent="AspectRatioContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
 unique_name_in_owner = true
 
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]
-[connection signal="card_selected" from="CardViewportContainer/CardViewport/Cards3D" to="." method="select_card"]
+[connection signal="card_selected" from="AspectRatioContainer/CardViewportContainer/CardViewport/Cards3D" to="." method="select_card"]

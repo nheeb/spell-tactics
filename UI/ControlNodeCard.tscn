@@ -1,11 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://binwfa5e0th2w"]
+[gd_scene load_steps=10 format=3 uid="uid://binwfa5e0th2w"]
 
 [ext_resource type="Script" path="res://UI/ControlNodeCard.gd" id="1_aqi4q"]
 [ext_resource type="FontFile" uid="uid://cgljgdhswqtmj" path="res://Assets/Fonts/Gothica-Bold.ttf" id="1_v87ep"]
 [ext_resource type="FontFile" uid="uid://6i7k7mtr5gtq" path="res://Assets/Fonts/Stark.OTF" id="2_b8pmq"]
 [ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="3_lgrkt"]
 [ext_resource type="FontFile" uid="uid://hxpop83lvr07" path="res://Assets/Fonts/Gothica-Book.ttf" id="5_jnoks"]
-[ext_resource type="FontFile" uid="uid://bgmbqeubb34cp" path="res://Assets/Fonts/rogue.ttf" id="6_aw5g7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2udtv"]
+font = ExtResource("5_jnoks")
+font_size = 32
+font_color = Color(0.843137, 0.776471, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bjwad"]
 font = ExtResource("1_v87ep")
@@ -18,13 +22,7 @@ font_size = 48
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7unna"]
 content_margin_left = 5.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_2udtv"]
-font = ExtResource("5_jnoks")
-font_size = 32
-font_color = Color(0.843137, 0.776471, 0, 1)
-
-[node name="ControlNodeCard" type="Control"]
-layout_mode = 3
+[node name="ControlNodeCard" type="AspectRatioContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,25 +30,34 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+ratio = 0.7143
 script = ExtResource("1_aqi4q")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 color = Color(0.282353, 0.45098, 0.196078, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="Fluff" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 8
+text = "<FLUFF>
+
+
+
+
+
+
+"
+label_settings = SubResource("LabelSettings_2udtv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="Name" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
@@ -77,28 +84,3 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_7unna")
 text = "<EFFECT>"
 label_settings = ExtResource("3_lgrkt")
 autowrap_mode = 1
-
-[node name="Fluff" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 2
-size_flags_vertical = 10
-size_flags_stretch_ratio = 3.04
-text = "<FLUFF>"
-label_settings = SubResource("LabelSettings_2udtv")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-
-[node name="SelectButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_aw5g7")
-theme_override_font_sizes/font_size = 30
-text = "SELECT"
-
-[connection signal="button_down" from="VBoxContainer/VBoxContainer/SelectButton" to="." method="_on_button_button_down"]
