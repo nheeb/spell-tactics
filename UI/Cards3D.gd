@@ -25,7 +25,6 @@ func calc_x_offset(i, n):
 	var start = -(n-1) * dist / 2.0
 	var step = i * dist
 	var offset = start + step
-	print("i=%d, n=%d, start=%f, offset=%f" % [i, n, start, offset])
 	return offset
 	
 func update_all_x_offsets():
