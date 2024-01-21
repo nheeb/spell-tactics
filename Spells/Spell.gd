@@ -3,7 +3,7 @@ class_name Spell extends Object
 var type: SpellType
 var combat: Combat
 var logic: SpellLogic
-var visual_representation: ControlNodeCard
+var visual_representation: HandCard2D
 
 var combat_persistant_properties := {}
 var round_persistant_properties := {}

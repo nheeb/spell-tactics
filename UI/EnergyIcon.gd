@@ -39,6 +39,7 @@ func _ready() -> void:
 			color_rect.color = Color.CORAL
 		Game.Energy.Decay:
 			color_rect.color = Color.MEDIUM_PURPLE
+	color_rect.custom_minimum_size = Vector2(min_size, min_size)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

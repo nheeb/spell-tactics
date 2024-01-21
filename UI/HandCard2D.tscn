@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://binwfa5e0th2w"]
+
+[ext_resource type="Script" path="res://UI/HandCard2D.gd" id="1_5w608"]
+[ext_resource type="FontFile" uid="uid://hxpop83lvr07" path="res://Assets/Fonts/Gothica-Book.ttf" id="2_3qe8h"]
+[ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/HandCard2D_panel_default.tres" id="2_4erlu"]
+[ext_resource type="FontFile" uid="uid://cgljgdhswqtmj" path="res://Assets/Fonts/Gothica-Bold.ttf" id="3_fa2ci"]
+[ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="4_tjgd0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2udtv"]
+font = ExtResource("2_3qe8h")
+font_size = 32
+font_color = Color(0.266667, 0.164706, 0.0705882, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bjwad"]
+font = ExtResource("3_fa2ci")
+font_size = 58
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7unna"]
+content_margin_left = 5.0
+
+[node name="HandCard2D" type="AspectRatioContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+ratio = 0.7143
+script = ExtResource("1_5w608")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_4erlu")
+
+[node name="Fluff" type="Label" parent="PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 8
+text = "<FLUFF>
+
+
+
+
+
+
+"
+label_settings = SubResource("LabelSettings_2udtv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<NAME>"
+label_settings = SubResource("LabelSettings_bjwad")
+horizontal_alignment = 1
+
+[node name="Gap" type="Control" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_stretch_ratio = 1.7
+
+[node name="EnergyContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+alignment = 1
+
+[node name="Gap2" type="Control" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_stretch_ratio = 1.7
+
+[node name="Effect" type="Label" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7unna")
+text = "Does Nothing"
+label_settings = ExtResource("4_tjgd0")
+autowrap_mode = 1

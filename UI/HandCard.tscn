@@ -1,22 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://j0l5hc388gmj"]
+[gd_scene load_steps=5 format=3 uid="uid://j0l5hc388gmj"]
 
 [ext_resource type="Script" path="res://UI/HandCard.gd" id="1_qf1rt"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_x50fm"]
 size = Vector2(1, 1.4)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_g7g2d"]
-viewport_path = NodePath("Quad/SubViewport")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6j1g"]
 resource_local_to_scene = true
+transparency = 1
 shading_mode = 0
-albedo_texture = SubResource("ViewportTexture_g7g2d")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ne87j"]
 size = Vector3(0.0455627, 1.3979, 1)
 
-[node name="HandCard" type="Node3D"]
+[node name="HandCard3D" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_qf1rt")
 
@@ -27,6 +24,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_y6j1g")
 
 [node name="SubViewport" type="SubViewport" parent="Quad"]
 disable_3d = true
+transparent_bg = true
 size = Vector2i(512, 717)
 
 [node name="Area3D" type="Area3D" parent="." groups=["hand_area"]]

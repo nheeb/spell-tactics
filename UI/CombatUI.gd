@@ -2,10 +2,10 @@ class_name CombatUI extends Control
 
 ## This Scene and (almost) every child is meant to be replaced after Milestone-1
 
-const CNC = preload("res://UI/ControlNodeCard.tscn")
+const CNC = preload("res://UI/HandCard2D.tscn")
 
 var combat : Combat
-var cards : Array[ControlNodeCard]
+var cards : Array[HandCard2D]
 var selected_spell: Spell
 
 func add_card(spell: Spell):
@@ -13,20 +13,20 @@ func add_card(spell: Spell):
 	card.set_spell(spell)
 	cards.append(card)
 	%Cards3D.add_card(card)
-	var card2 = CNC.instantiate()
-	card2.set_spell(spell)
-	$CardContainer.add_child(card2)
+	#var card2 = CNC.instantiate()
+	#card2.set_spell(spell)
+	#$CardContainer.add_child(card2)
 	#card.selected.connect(select_card)
 
 func remove_card(spell: Spell):
 	var card_to_remove = null
 	for c in $CardContainer.get_children():
-		if c is ControlNodeCard:
+		if c is HandCard2D:
 			if c.spell == spell:
 				if card_to_remove == null:
 					card_to_remove = c
 				else:
-					printerr("Two ControlNodeCards share the same spell")
+					printerr("Two HandCard2Ds share the same spell")
 	if card_to_remove != null:
 		$CardContainer.remove_child(card_to_remove)
 		card_to_remove.queue_free()
