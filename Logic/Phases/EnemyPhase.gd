@@ -14,6 +14,8 @@ func process_phase() -> bool:
 		enemy.do_movement()
 		enemy.do_action()
 		combat.animation.property(combat.camera, "follow_target", null)
+		
+		combat.player.arch_enemy = enemy.get_reference()
 	
 	combat.animation.property(combat.camera, "player_input_enabled", true)
 	

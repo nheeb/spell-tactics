@@ -59,7 +59,8 @@ func setup() -> void:
 				printerr("Two players in a level??")
 			player = entity
 		if entity is EnemyEntity:
-			enemies.append(entity)
+			if not entity.is_dead():
+				enemies.append(entity)
 	
 	# Connect input signals
 	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))

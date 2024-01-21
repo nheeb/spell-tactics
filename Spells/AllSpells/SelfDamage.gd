@@ -18,4 +18,4 @@ func casting_effect() -> void:
 	
 	if combat.player.arch_enemy != null:
 		if combat.player.arch_enemy.is_valid(combat):
-			combat.player.arch_enemy.resolve().visual_entity.visible = false
+			combat.player.arch_enemy.resolve().hp -= 3

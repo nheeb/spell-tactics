@@ -1,12 +1,14 @@
 class_name PlayerEntity extends HPEntity
 
-var secret_msg = "serialize me"
+#var secret_msg = "serialize me"
+#
+#var prop := -1
 
-var prop := -1
-
+## arch_enemy for testing
 var arch_enemy : EntityReference
 
-
-# TODO test if this gets properly serialized
-# it does not
 var traits := PlayerTraits.new()
+
+func on_death():
+	# TODO Game over mechanic
+	combat.log.add("GAME OVER!")

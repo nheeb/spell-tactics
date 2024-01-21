@@ -69,6 +69,7 @@ class AnimationStep extends Object:
 	
 	func play(level: Level) -> void:
 		for a in animations:
+			#print(a)
 			a._play(level)
 		if relevant_animations_to_do == 0:
 			step_done.emit()

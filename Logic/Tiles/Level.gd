@@ -14,6 +14,7 @@ var tiles: Array[Array] = []  # Tile
 var n_rows: int
 var n_cols: int
 
+var graveyard: Array[Entity]
 var combat: Combat
 
 @onready var player: PlayerEntity
@@ -73,6 +74,9 @@ func serialize() -> LevelState:
 			if tile != null:
 				tile_data.append(tile.serialize())
 	level_state.tiles = tile_data
+	
+	level_state.graveyard.append_array(graveyard.map(func (x): return x.serialize()))
+	
 	return level_state
 
 ## Saving and loading levels from disks is depricated. Always save and load combats
@@ -244,8 +248,13 @@ func highlight_movement_range(entity: Entity, movement_range: int) -> Array[Tile
 func move_entity(entity: Entity, target: Tile):
 	# kind of a cursed call but this is how we do it I guess
 	entity.move(target)
-	
-	pass
+
+func move_entity_to_graveyard(entity: Entity):
+	if entity.current_tile:
+		entity.current_tile.remove_entity(entity)
+		graveyard.append(entity)
+	else:
+		printerr("Entity has not tile (Maybe its already in the graveyard)")
 
 func get_all_tiles() -> Array[Tile]:
 	var all_tiles: Array[Tile] = []
@@ -265,6 +274,7 @@ func get_all_entities() -> Array[Entity]:
 	var all_entities: Array[Entity] = []
 	for tile in get_all_tiles():
 		all_entities.append_array(tile.entities)
+	all_entities.append_array(graveyard)
 	return all_entities
 
 func find_all_tiles_with(type: EntityType) -> Array[Tile]:

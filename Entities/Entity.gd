@@ -67,3 +67,6 @@ func on_create() -> void:
 
 func get_reference() -> EntityReference:
 	return EntityReference.new(self)
+
+func is_dead() -> bool:
+	return current_tile == null
