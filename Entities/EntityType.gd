@@ -15,6 +15,9 @@ class_name EntityType extends Resource
 ## OPTIONAL, logic script inheriting from EntityLogic for special behavior
 @export var entity_logic: Script
 
+@export_category("Prototype Graphics")
+@export var prototype_scale := Vector2.ONE
+
 @export_category("Gameplay")
 @export var is_terrain := false
 @export var is_drainable := true

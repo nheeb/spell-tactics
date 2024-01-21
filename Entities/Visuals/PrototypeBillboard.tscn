@@ -4,10 +4,12 @@
 [ext_resource type="Script" path="res://Entities/Visuals/PrototypeBillboard.gd" id="1_kqx6u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqyhl"]
+resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("1_bhg3o")
 billboard_mode = 2
+billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_qkllw"]
 size = Vector2(1.5, 2)

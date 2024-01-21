@@ -67,11 +67,13 @@ func setup() -> void:
 	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
 
 	# Check if all entities have ids
+	# Refresh entities if its CombatBegin
 	if current_phase == RoundPhase.CombatBegin:
 		# If it's a fresh combat make every id new
 		log.add("Creating new entity ids")
 		for e in level.get_all_entities():
 			e.id = EntityID.new(e.type, level.add_type_count(e.type))
+			e.energy = e.type.energy
 	else:
 		for e in level.get_all_entities():
 			if e.id != null:
