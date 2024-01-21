@@ -55,11 +55,11 @@ func serialize_level_as_combat_state(_level: Level) -> CombatState:
 	state.level_state = _level.serialize()
 	state.current_round = 1
 	state.current_phase = Combat.RoundPhase.CombatBegin
-	state.player_energy = []
-	state.hand_size = 5
-	var useless_spell_state = SpellState.new()
-	useless_spell_state.type = SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres")
-	state.deck_states.append_array(range(20).map(func(x): return useless_spell_state))
-	state.hand_states.append_array([])
-	state.discard_pile_states.append_array([])
+	#state.player_energy = []
+	#state.hand_size = 5
+	#var useless_spell_state = SpellState.new()
+	#useless_spell_state.type = SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres")
+	#state.deck_states.append_array(range(20).map(func(x): return useless_spell_state))
+	#state.hand_states.append_array([])
+	#state.discard_pile_states.append_array([])
 	return state

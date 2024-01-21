@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cno3vyggwl5f0"]
+
+[ext_resource type="Texture2D" uid="uid://c7w7f3br882sq" path="res://Assets/Sprites/PrototypeBillboard/goblin.png" id="1_bhg3o"]
+[ext_resource type="Script" path="res://Entities/Visuals/PrototypeBillboard.gd" id="1_kqx6u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqyhl"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_bhg3o")
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_qkllw"]
+size = Vector2(1.5, 2)
+
+[node name="PrototypeBillboard" type="Node3D"]
+script = ExtResource("1_kqx6u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_jqyhl")
+mesh = SubResource("QuadMesh_qkllw")

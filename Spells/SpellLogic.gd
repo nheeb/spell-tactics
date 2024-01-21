@@ -10,11 +10,11 @@ func _init(_spell: Spell):
 		printerr("Weird creation of SpellLogic Object")
 
 ## Tests if payment is possible
-func is_payment_valid(payment: Array[Game.Energy]) -> bool:
+func is_payment_valid(payment: Array[Game.Energy] = []) -> bool:
 	return Utility.is_energy_cost_payable(payment, get_costs()) is Array
 
 ## Returns combination of the other valids. Is being used by PlayerCast to execute the cast
-func is_all_valid(payment: Array[Game.Energy]) -> bool:
+func is_all_valid(payment: Array[Game.Energy] = []) -> bool:
 	return is_unlocked() and is_payment_valid(payment) and is_current_cast_valid()
 
 ## Returns a possible payment (if possible)
@@ -29,7 +29,7 @@ func pay_for_spell(payment: Array[Game.Energy]) -> void:
 		printerr("Wrong payment done")
 
 ## Pays for the costs. Activates the cards effect. Also discards the card from hand
-func cast(payment: Array[Game.Energy]) -> void:
+func cast(payment: Array[Game.Energy] = []) -> void:
 	pay_for_spell(payment)
 	casting_effect()
 	combat.cards.discard(spell)

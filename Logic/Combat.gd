@@ -26,12 +26,14 @@ enum RoundPhase {
 @warning_ignore("shadowed_global_identifier")
 @onready var log: LogUtility = %LogUtility
 @onready var input: InputUtility = %InputUtility
+@onready var event: EventUtility = %EventUtility
 
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
 
 var level: Level
 var ui: CombatUI
+var camera: GameCamera
 
 var deck: Array[Spell]
 var hand: Array[Spell]
@@ -39,6 +41,8 @@ var discard_pile: Array[Spell]
 
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
+
+var timed_effects: Array[TimedEffect]
 
 func _ready() -> void:
 	pass
@@ -55,23 +59,50 @@ func setup() -> void:
 				printerr("Two players in a level??")
 			player = entity
 		if entity is EnemyEntity:
-			enemies.append(entity)
+			if not entity.is_dead():
+				enemies.append(entity)
 	
 	# Connect input signals
 	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
 	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
 
-func create_prototype_level():
+	# Check if all entities have ids
+	# Refresh entities if its CombatBegin
+	if current_phase == RoundPhase.CombatBegin:
+		# If it's a fresh combat make every id new
+		log.add("Creating new entity ids")
+		for e in level.get_all_entities():
+			e.id = EntityID.new(e.type, level.add_type_count(e.type))
+			e.energy = e.type.energy
+	else:
+		for e in level.get_all_entities():
+			if e.id != null:
+				level.add_type_count(e.type)
+			else:
+				printerr("Entity without ID in savegame")
 
-	deck = []
-	for i in range(20):
-		match randi_range(1,2):
-			1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
-			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
-	setup()
-	energy.player_energy = []
-	discard_pile = []
-	hand = []
+	# Check if all spells have ids
+	# TODO change this when Overworld is done
+	for s in get_all_spells():
+		if s.id == null:
+			printerr("Warning: Spell without id (gets a new dangerous id)")
+			s.id = SpellID.new(Game.add_to_spell_count())
+		else:
+			Game.add_to_spell_count()
+
+	# TODO connect entity & spell references
+
+#func create_prototype_level():
+#
+	#deck = []
+	#for i in range(20):
+		#match randi_range(1,2):
+			#1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
+			#2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
+	#setup()
+	#energy.player_energy = []
+	#discard_pile = []
+	#hand = []
 
 func connect_with_ui(_ui: CombatUI) -> void:
 	ui = _ui
@@ -90,7 +121,7 @@ func advance_current_phase():
 
 ## Processes the current phase. Returns true if Player input is needed to advace to the next phase
 func process_current_phase() -> bool:
-	return get_phase_node(current_phase).process_phase()
+	return get_phase_node(current_phase)._process_phase()
 
 func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 	match current_phase:
@@ -128,6 +159,9 @@ func serialize() -> CombatState:
 	state.deck_states.append_array(deck.map(func(x: Spell): return x.serialize()))
 	state.hand_states.append_array(hand.map(func(x: Spell): return x.serialize()))
 	state.discard_pile_states.append_array(discard_pile.map(func(x: Spell): return x.serialize()))
+	state.event_states.append_array(event.events.map(func(x: Spell): return x.serialize()))
+	state.current_event = event.current_event
+	state.timed_effects = timed_effects
 	return state
 
 func save_to_disk(path: String = ""):
@@ -147,3 +181,11 @@ static func serialize_level_as_combat_state(level: Level) -> CombatState:
 static func deserialize_level_from_combat_state(combat_state: CombatState) -> Level:
 	var combat := combat_state.deserialize()
 	return combat.level
+
+func get_all_spells() -> Array[Spell]:
+	var all_spells : Array[Spell] = []
+	all_spells.append_array(hand)
+	all_spells.append_array(deck)
+	all_spells.append_array(discard_pile)
+	all_spells.append_array(event.events)
+	return all_spells

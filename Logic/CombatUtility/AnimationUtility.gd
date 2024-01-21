@@ -25,6 +25,16 @@ func signal_emit(ref: Object, signal_name: String) -> AnimationSignalEmit:
 	add_animation_object(a)
 	return a
 
+func property(ref: Object, prop: String, value) -> AnimationProperty:
+	var a = AnimationProperty.new(ref, prop, value)
+	add_animation_object(a)
+	return a
+
+func callable(callable: Callable) -> AnimationCallable:
+	var a = AnimationCallable.new(callable)
+	add_animation_object(a)
+	return a
+
 func play_animation_queue() -> void:
 	animation_steps = [AnimationStep.new()]
 	for animation in animation_queue:
@@ -64,6 +74,7 @@ class AnimationStep extends Object:
 	
 	func play(level: Level) -> void:
 		for a in animations:
+			#print(a)
 			a._play(level)
 		if relevant_animations_to_do == 0:
 			step_done.emit()

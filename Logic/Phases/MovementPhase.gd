@@ -14,6 +14,7 @@ func tile_clicked(tile: Tile):
 
 func process_phase() -> bool:
 	highlighted_tiles = combat.level.highlight_movement_range(combat.player, combat.player.traits.movement_range)
+	#combat.animation.ca
 	combat.animation.callback(combat.ui, "set_status", ["Make your movement!"])
 	
 	return true

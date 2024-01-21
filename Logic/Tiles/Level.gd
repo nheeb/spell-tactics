@@ -14,11 +14,14 @@ var tiles: Array[Array] = []  # Tile
 var n_rows: int
 var n_cols: int
 
+var graveyard: Array[Entity]
 var combat: Combat
 
 @onready var player: PlayerEntity
 
 @onready var visual_effects: Node3D = $VisualEffects
+
+var entity_type_count := {}
 
 var TileScene = preload("res://Logic/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
@@ -71,6 +74,9 @@ func serialize() -> LevelState:
 			if tile != null:
 				tile_data.append(tile.serialize())
 	level_state.tiles = tile_data
+	
+	level_state.graveyard.append_array(graveyard.map(func (x): return x.serialize()))
+	
 	return level_state
 
 ## Saving and loading levels from disks is depricated. Always save and load combats
@@ -87,6 +93,13 @@ func serialize() -> LevelState:
 	#var level: Level = level_state.deserialize(Combat.new())
 	#
 	#return level
+
+func add_type_count(type: EntityType) -> int:
+	if not type in entity_type_count:
+		entity_type_count[type] = 0
+	entity_type_count[type] += 1
+	return entity_type_count[type]
+
 func fill_entity(entity_type: EntityType):
 	for tile in get_all_tiles():
 		create_entity(tile.r, tile.q, entity_type)
@@ -109,10 +122,14 @@ func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
 			#print(entity.visual_entity.get_path())
 		entity.visual_entity.position = tile.position
 		# TODO add logical entity
-		
+	
+	# Create id for entity
+	entity.id = EntityID.new(entity.type, add_type_count(entity.type))
+	
 	return entity
 
 func remove_entity(r: int, q: int, entity: Entity):
+	printerr("Level remove_entity: This method maybe shouldn't be executed in the running game.")
 	if tiles[r][q] == null:
 		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
 		return
@@ -231,8 +248,13 @@ func highlight_movement_range(entity: Entity, movement_range: int) -> Array[Tile
 func move_entity(entity: Entity, target: Tile):
 	# kind of a cursed call but this is how we do it I guess
 	entity.move(target)
-	
-	pass
+
+func move_entity_to_graveyard(entity: Entity):
+	if entity.current_tile:
+		entity.current_tile.remove_entity(entity)
+		graveyard.append(entity)
+	else:
+		printerr("Entity has not tile (Maybe its already in the graveyard)")
 
 func get_all_tiles() -> Array[Tile]:
 	var all_tiles: Array[Tile] = []
@@ -252,6 +274,7 @@ func get_all_entities() -> Array[Entity]:
 	var all_entities: Array[Entity] = []
 	for tile in get_all_tiles():
 		all_entities.append_array(tile.entities)
+	all_entities.append_array(graveyard)
 	return all_entities
 
 func find_all_tiles_with(type: EntityType) -> Array[Tile]:

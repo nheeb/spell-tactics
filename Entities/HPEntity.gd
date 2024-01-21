@@ -10,3 +10,12 @@ signal died
 		#Game.combat.animation_queue.append(AnimationObject.new(Game.combat_ui, "set_status", ["Drawing hand cards..."]))
 		if hp <= 0:
 			died.emit()
+			on_death()
+
+func on_create():
+	super.on_create()
+
+func on_death():
+	combat.level.move_entity_to_graveyard(self)
+	# TODO change this later to call death animation
+	combat.animation.property(visual_entity, "visible", false)

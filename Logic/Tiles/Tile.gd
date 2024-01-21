@@ -1,8 +1,6 @@
 @tool
 class_name Tile extends Node3D
 
-
-
 var entities: Array[Entity] = []
 var hovering := false:
 	set(h):
@@ -12,8 +10,6 @@ var hovering := false:
 
 var r: int
 var q: int
-
-
 
 const TILE = preload("res://Logic/Tiles/Tile.tscn")
 static func create(r_tile, q_tile, r_center, q_center) -> Tile:

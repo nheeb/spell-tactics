@@ -14,6 +14,8 @@ var internal_name: String = ""
 @export_multiline var fluff_text: String
 ## Logic script
 var logic: Script
+## Spells are events when they have this flag
+@export var is_event_spell := false
 
 static func load_from_file(path: String) -> SpellType:
 	var res = load(path)
@@ -21,9 +23,13 @@ static func load_from_file(path: String) -> SpellType:
 	return res
 
 const ALL_SPELLS_FOLDER = "res://Spells/AllSpells/"
+const ALL_EVENTS_FOLDER = "res://Spells/AllEvents/"
 
 func _on_load() -> void:
 	if internal_name == "":
 		internal_name = resource_path.split("/")[-1].split(".")[0]
-		logic = load(ALL_SPELLS_FOLDER + internal_name + ".gd")
+		if is_event_spell:
+			logic = load(ALL_EVENTS_FOLDER + internal_name + ".gd")
+		else:
+			logic = load(ALL_SPELLS_FOLDER + internal_name + ".gd")
 
