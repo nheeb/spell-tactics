@@ -5,9 +5,9 @@ class_name EntityReference extends Resource
 var ent: Entity
 
 func _init(entity: Entity = null) -> void:
-	ent = entity
 	if entity == null:
 		return
+	ent = entity
 	id = entity.id
 	if id == null:
 		printerr("EntityReference was created on an entity with empty id")

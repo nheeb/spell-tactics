@@ -40,6 +40,8 @@ var discard_pile: Array[Spell]
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
+var events: Array[Spell]
+
 func _ready() -> void:
 	pass
 
@@ -60,6 +62,8 @@ func setup() -> void:
 	# Connect input signals
 	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
 	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
+
+	# TODO connect entity references
 
 func create_prototype_level():
 

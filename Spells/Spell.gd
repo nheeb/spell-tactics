@@ -15,7 +15,9 @@ func _init(_type: SpellType, _combat : Combat = null) -> void:
 		logic = type.logic.new(self)
 
 func get_copy_for_combat(_combat: Combat) -> Spell:
-	return Spell.new(type, _combat)
+	var spell := Spell.new(type, _combat)
+	spell.combat_persistant_properties = combat_persistant_properties.duplicate()
+	return spell
 
 func serialize() -> SpellState:
 	var state := SpellState.new()
