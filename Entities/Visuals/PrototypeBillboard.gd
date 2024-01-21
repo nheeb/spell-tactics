@@ -10,4 +10,4 @@ func set_texture(path: String) -> void:
 	$MeshInstance3D.material_override.set("albedo_texture", load(path))
 
 func set_texture_from_entity_name(entity_name: String) -> void:
-	set_texture(get_billboard_filepath(entity_name))
+	set_texture(PrototypeBillboard.get_billboard_filepath(entity_name))
