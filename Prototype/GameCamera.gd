@@ -15,6 +15,9 @@ var zoom_velocity := 0.0
 @export var zoom_damping := 0.01
 @export var mouse_rotation_factor := .3
 
+var player_input_enabled := true
+var follow_target: Node3D = null
+
 func _ready() -> void:
 	zoom_pivot.position.y = camera_zoom
 	
@@ -26,8 +29,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# x-z movement
-	velocity += delta * move_acceleration * (basis * Vector3.RIGHT) * (Input.get_action_strength("move_camera_right") - Input.get_action_strength("move_camera_left"))
-	velocity += delta * move_acceleration * (basis * Vector3.FORWARD) * (Input.get_action_strength("move_camera_forwards") - Input.get_action_strength("move_camera_backwards"))
+	if player_input_enabled:
+		velocity += delta * move_acceleration * (basis * Vector3.RIGHT) * (Input.get_action_strength("move_camera_right") - Input.get_action_strength("move_camera_left"))
+		velocity += delta * move_acceleration * (basis * Vector3.FORWARD) * (Input.get_action_strength("move_camera_forwards") - Input.get_action_strength("move_camera_backwards"))
+	if follow_target != null:
+		velocity += delta * move_acceleration * 1.6 * global_position.direction_to(follow_target.global_position)
 	velocity *= pow(damping, delta)
 	global_position += velocity * delta
 		

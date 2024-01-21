@@ -33,6 +33,7 @@ var current_phase: RoundPhase = RoundPhase.CombatBegin
 
 var level: Level
 var ui: CombatUI
+var camera: GameCamera
 
 var deck: Array[Spell]
 var hand: Array[Spell]
@@ -88,17 +89,17 @@ func setup() -> void:
 
 	# TODO connect entity & spell references
 
-func create_prototype_level():
-
-	deck = []
-	for i in range(20):
-		match randi_range(1,2):
-			1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
-			2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
-	setup()
-	energy.player_energy = []
-	discard_pile = []
-	hand = []
+#func create_prototype_level():
+#
+	#deck = []
+	#for i in range(20):
+		#match randi_range(1,2):
+			#1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
+			#2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
+	#setup()
+	#energy.player_energy = []
+	#discard_pile = []
+	#hand = []
 
 func connect_with_ui(_ui: CombatUI) -> void:
 	ui = _ui

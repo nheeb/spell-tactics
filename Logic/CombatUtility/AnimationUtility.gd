@@ -25,6 +25,11 @@ func signal_emit(ref: Object, signal_name: String) -> AnimationSignalEmit:
 	add_animation_object(a)
 	return a
 
+func property(ref: Object, prop: String, value) -> AnimationProperty:
+	var a = AnimationProperty.new(ref, prop, value)
+	add_animation_object(a)
+	return a
+
 func play_animation_queue() -> void:
 	animation_steps = [AnimationStep.new()]
 	for animation in animation_queue:

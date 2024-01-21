@@ -12,20 +12,9 @@ func _ready() -> void:
 	var combat_state: CombatState = load('res://Levels/Area1/rivers.tres') as CombatState
 	combat = combat_state.deserialize()
 	add_child(combat)
+	combat.camera = $GameCamera
 	level = combat.level
 	add_child(combat.level)
-	#combat = COMBAT.instantiate()
-	#add_child(combat)
-	#
-	#var combat_state: CombatState = load('res://Levels/Area1/rivers.tres')
-	#print(combat_state)
-	#level = combat_state.level_state.deserialize(combat)
-	#add_child(level)
-	#combat.level = level
-	#combat.create_prototype_level()
-	#add_child(combat.level)
-	#level = combat.level
-	
 	# construct references to ui_root which lives outside this 3d viewport
 	# ui_root/combat_ui and ui_root/debug_ui
 	var ui_root = get_tree().get_first_node_in_group("ui_root")
