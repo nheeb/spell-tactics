@@ -14,10 +14,16 @@ func tile_clicked(tile: Tile):
 
 
 
-## Processes the phase. Returns true if Player input is needed to advance to the next phase
+
+## For overriding Processes the phase. Returns true if Player input is needed to advance to the next phase
 func process_phase() -> bool:
 	printerr("Abstract Phase used")
 	return false
 
-
+func _process_phase() -> bool:
+	for timed_effect in combat.timed_effects.duplicate():
+		timed_effect = timed_effect as TimedEffect
+		if timed_effect.phase == combat.current_phase:
+			timed_effect.advance(combat)
+	return process_phase()
 

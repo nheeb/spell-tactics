@@ -117,7 +117,7 @@ func advance_current_phase():
 
 ## Processes the current phase. Returns true if Player input is needed to advace to the next phase
 func process_current_phase() -> bool:
-	return get_phase_node(current_phase).process_phase()
+	return get_phase_node(current_phase)._process_phase()
 
 func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 	match current_phase:
