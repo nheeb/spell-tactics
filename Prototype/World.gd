@@ -9,15 +9,20 @@ var level : Level
 @onready var debug_ui: Control
 
 func _ready() -> void:
-	combat = COMBAT.instantiate()
+	var combat_state: CombatState = load('res://Levels/Area1/rivers.tres') as CombatState
+	combat = combat_state.deserialize()
 	add_child(combat)
-	
-	var combat_state: CombatState = load('res://Levels/Area1/rivers.tres')
-	print(combat_state)
-	level = combat_state.level_state.deserialize(combat)
-	add_child(level)
-	combat.level = level
-	combat.create_prototype_level()
+	level = combat.level
+	add_child(combat.level)
+	#combat = COMBAT.instantiate()
+	#add_child(combat)
+	#
+	#var combat_state: CombatState = load('res://Levels/Area1/rivers.tres')
+	#print(combat_state)
+	#level = combat_state.level_state.deserialize(combat)
+	#add_child(level)
+	#combat.level = level
+	#combat.create_prototype_level()
 	#add_child(combat.level)
 	#level = combat.level
 	

@@ -1,8 +1,14 @@
 class_name Spell extends Object
 
 var type: SpellType
+var id: SpellID
 var combat: Combat
 var logic: SpellLogic
+var event_logic: EventSpellLogic:
+	get:
+		if not type.is_event_spell:
+			printerr("Trying to get an EventSpellLogic from a non event spell")
+		return logic as EventSpellLogic
 var visual_representation: ControlNodeCard
 
 var combat_persistant_properties := {}
@@ -22,9 +28,13 @@ func get_copy_for_combat(_combat: Combat) -> Spell:
 func serialize() -> SpellState:
 	var state := SpellState.new()
 	state.type = type
+	state.id = id
 	state.combat_persistant_properties = combat_persistant_properties
 	state.round_persistant_properties = round_persistant_properties
 	return state
 	
 func _to_string() -> String:
 	return type.internal_name
+
+func get_reference() -> SpellReference:
+	return SpellReference.new(self)

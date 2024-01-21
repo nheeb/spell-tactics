@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=283 format=3 uid="uid://msakyxfxijbd"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=280 format=3 uid="uid://msakyxfxijbd"]
 
-[ext_resource type="Script" path="res://Spells/SpellState.gd" id="1_8fpes"]
-[ext_resource type="Resource" uid="uid://cgx6mqqhcg5bo" path="res://Spells/AllSpells/SelfDamage.tres" id="2_db8iy"]
 [ext_resource type="Script" path="res://Logic/Tiles/State/LevelState.gd" id="3_yspqk"]
 [ext_resource type="Script" path="res://Logic/Tiles/State/TileState.gd" id="4_j17ce"]
 [ext_resource type="Resource" uid="uid://iq34rfnf6t4w" path="res://Entities/Environment/WaterTile.tres" id="5_ao3dt"]
@@ -13,12 +11,6 @@
 [ext_resource type="Resource" uid="uid://d1wcrekyije7v" path="res://Entities/PlayerResource.tres" id="9_kq25s"]
 [ext_resource type="Resource" uid="uid://qtscnlalmb8s" path="res://Entities/Environment/Water.tres" id="10_crb8e"]
 [ext_resource type="Resource" uid="uid://c6t18hbsmwiha" path="res://Entities/Environment/Rock.tres" id="11_i7ngs"]
-
-[sub_resource type="Resource" id="Resource_5onpb"]
-script = ExtResource("1_8fpes")
-type = ExtResource("2_db8iy")
-combat_persistant_properties = {}
-round_persistant_properties = {}
 
 [sub_resource type="Resource" id="Resource_p5xot"]
 script = ExtResource("5_meffh")
@@ -1918,7 +1910,8 @@ level_state = SubResource("Resource_tjboj")
 current_round = 1
 current_phase = 0
 player_energy = Array[int]([])
-hand_size = 5
-deck_states = Array[ExtResource("1_8fpes")]([SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb"), SubResource("Resource_5onpb")])
-hand_states = Array[ExtResource("1_8fpes")]([])
-discard_pile_states = Array[ExtResource("1_8fpes")]([])
+deck_states = Array[Resource("res://Spells/SpellState.gd")]([])
+hand_states = Array[Resource("res://Spells/SpellState.gd")]([])
+discard_pile_states = Array[Resource("res://Spells/SpellState.gd")]([])
+event_states = Array[Resource("res://Spells/SpellState.gd")]([])
+timed_effects = Array[Resource("res://Logic/TimedEffect.gd")]([])

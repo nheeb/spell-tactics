@@ -26,6 +26,7 @@ enum RoundPhase {
 @warning_ignore("shadowed_global_identifier")
 @onready var log: LogUtility = %LogUtility
 @onready var input: InputUtility = %InputUtility
+@onready var event: EventUtility = %EventUtility
 
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
@@ -40,7 +41,7 @@ var discard_pile: Array[Spell]
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
-var events: Array[Spell]
+var timed_effects: Array[TimedEffect]
 
 func _ready() -> void:
 	pass
@@ -63,7 +64,29 @@ func setup() -> void:
 	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
 	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
 
-	# TODO connect entity references
+	# Check if all entities have ids
+	if current_phase == RoundPhase.CombatBegin:
+		# If it's a fresh combat make every id new
+		log.add("Creating new entity ids")
+		for e in level.get_all_entities():
+			e.id = EntityID.new(e.type, level.add_type_count(e.type))
+	else:
+		for e in level.get_all_entities():
+			if e.id != null:
+				level.add_type_count(e.type)
+			else:
+				printerr("Entity without ID in savegame")
+
+	# Check if all spells have ids
+	# TODO change this when Overworld is done
+	for s in get_all_spells():
+		if s.id == null:
+			printerr("Warning: Spell without id (gets a new dangerous id)")
+			s.id = SpellID.new(Game.add_to_spell_count())
+		else:
+			Game.add_to_spell_count()
+
+	# TODO connect entity & spell references
 
 func create_prototype_level():
 
@@ -132,6 +155,9 @@ func serialize() -> CombatState:
 	state.deck_states.append_array(deck.map(func(x: Spell): return x.serialize()))
 	state.hand_states.append_array(hand.map(func(x: Spell): return x.serialize()))
 	state.discard_pile_states.append_array(discard_pile.map(func(x: Spell): return x.serialize()))
+	state.event_states.append_array(event.events.map(func(x: Spell): return x.serialize()))
+	state.current_event = event.current_event
+	state.timed_effects = timed_effects
 	return state
 
 func save_to_disk(path: String = ""):
@@ -151,3 +177,11 @@ static func serialize_level_as_combat_state(level: Level) -> CombatState:
 static func deserialize_level_from_combat_state(combat_state: CombatState) -> Level:
 	var combat := combat_state.deserialize()
 	return combat.level
+
+func get_all_spells() -> Array[Spell]:
+	var all_spells : Array[Spell] = []
+	all_spells.append_array(hand)
+	all_spells.append_array(deck)
+	all_spells.append_array(discard_pile)
+	all_spells.append_array(event.events)
+	return all_spells

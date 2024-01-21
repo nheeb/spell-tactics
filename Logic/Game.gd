@@ -18,12 +18,18 @@ var tree : SceneTree :
 	get:
 		return get_tree()
 
-
 func get_prototype_deck(combat: Combat) -> Array[Spell]:
 	var prototype_deck : Array[Spell] = []
 	for i in range(20):
 		match randi_range(1,2):
 			1: prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), combat))
 			2: prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), combat))
+	for spell in prototype_deck:
+		spell.id = SpellID.new(add_to_spell_count())
 	return prototype_deck
-	
+
+var spell_count: int = 0
+## Prototype Function for creating ids for spells. This will later be done by the Overworld
+func add_to_spell_count() -> int:
+	spell_count += 1
+	return spell_count
