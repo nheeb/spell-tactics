@@ -5,7 +5,7 @@ class_name CombatUI extends Control
 const CNC = preload("res://UI/HandCard2D.tscn")
 
 var combat : Combat
-var cards : Array[HandCard2D]
+var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
 
 func add_card(spell: Spell):
@@ -13,25 +13,21 @@ func add_card(spell: Spell):
 	card.set_spell(spell)
 	cards.append(card)
 	%Cards3D.add_card(card)
-	#var card2 = CNC.instantiate()
-	#card2.set_spell(spell)
-	#$CardContainer.add_child(card2)
-	#card.selected.connect(select_card)
 
 func remove_card(spell: Spell):
 	var card_to_remove = null
-	for c in $CardContainer.get_children():
-		if c is HandCard2D:
-			if c.spell == spell:
-				if card_to_remove == null:
-					card_to_remove = c
-				else:
-					printerr("Two HandCard2Ds share the same spell")
+	for c in cards:
+		if c.spell == spell:
+			if card_to_remove == null:
+				card_to_remove = c
+			else:
+				printerr("Two HandCard2Ds share the same spell")
 	if card_to_remove != null:
-		$CardContainer.remove_child(card_to_remove)
+		%Cards3D.remove_card(card_to_remove)
+		cards.erase(card_to_remove)
 		card_to_remove.queue_free()
 	else:
-		printerr("Failed to remove a card which spells is not in the hand")
+		printerr("Failed to remove a card whose spell is not in the hand")
 
 func _on_next_pressed():
 	combat.input.process_action(PlayerPass.new())

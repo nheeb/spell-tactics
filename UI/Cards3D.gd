@@ -3,19 +3,59 @@ extends Node3D
 signal card_selected(spell: Spell)
 
 @onready var camera := %Camera3D
+@onready var cards := %Cards
 
-func _ready() -> void:
-	pass # Replace with function body.
+@export var card_gap = 0.06
 
-
-var number_of_cards = 0  # maybe read from combat instead, idk0
 const HAND_CARD = preload("res://UI/HandCard.tscn")
-func add_card(cnc: HandCard2D):
-	number_of_cards += 1
-	var hand_card = $CameraPivot/CardOrigin.get_node("HandCard" + str(number_of_cards))
-	hand_card.set_card(cnc)
+func add_card(card_2d: HandCard2D):
+	
+	var hand_card = HAND_CARD.instantiate()
+	hand_card.set_card(card_2d)
+	cards.add_child(hand_card)
+	var n = cards.get_child_count()
+	#print("n = %d, offset = %d" % [n, calc_offset(n)])
+	#hand_card.position.x = calc_x_offset(n, n)
+	update_all_x_offsets()
+	
+
+func calc_x_offset(i, n):
+	# card width + gap
+	var dist = 1.0 + card_gap
+	var start = -(n-1) * dist / 2.0
+	var step = i * dist
+	var offset = start + step
+	print("i=%d, n=%d, start=%f, offset=%f" % [i, n, start, offset])
+	return offset
+	
+func update_all_x_offsets():
+	var i = 0
+	var n = cards.get_child_count()
+	for hand_card in cards.get_children():
+		hand_card.position.x = calc_x_offset(i, n)
+		i += 1
 
 
+func remove_card(card2d: HandCard2D):
+	var removed = false
+	var i = 0
+	
+	print("removing, ", card2d.spell)
+	print()
+	
+	for card_3d in cards.get_children():
+		if card_3d.card_2d.spell == card2d.spell:
+			print("remove at i = %d" % i)
+			cards.remove_child(card_3d)
+			removed = true
+		i += 1
+	if not removed:
+		printerr("Card ", card2d, " which should be removed not found.")
+		return
+	
+	update_all_x_offsets()
+	
+	
 
 var currently_hovering: HandCard2D = null
 func _process(delta: float) -> void:
