@@ -1,3 +1,4 @@
+@tool
 class_name PrototypeBillboard extends Node3D
 
 static func has_billboard_texture(entity_name: String) -> bool:

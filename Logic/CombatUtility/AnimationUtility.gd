@@ -30,6 +30,11 @@ func property(ref: Object, prop: String, value) -> AnimationProperty:
 	add_animation_object(a)
 	return a
 
+func callable(callable: Callable) -> AnimationCallable:
+	var a = AnimationCallable.new(callable)
+	add_animation_object(a)
+	return a
+
 func play_animation_queue() -> void:
 	animation_steps = [AnimationStep.new()]
 	for animation in animation_queue:
