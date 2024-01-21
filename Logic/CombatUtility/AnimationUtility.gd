@@ -30,8 +30,8 @@ func property(ref: Object, prop: String, value) -> AnimationProperty:
 	add_animation_object(a)
 	return a
 
-func callable(callable: Callable) -> AnimationCallable:
-	var a = AnimationCallable.new(callable)
+func callable(_callable: Callable) -> AnimationCallable:
+	var a = AnimationCallable.new(_callable)
 	add_animation_object(a)
 	return a
 
