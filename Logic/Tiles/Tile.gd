@@ -10,6 +10,7 @@ var hovering := false:
 
 var r: int
 var q: int
+var location: Vector2i
 
 const TILE = preload("res://Logic/Tiles/Tile.tscn")
 static func create(r_tile, q_tile, r_center, q_center) -> Tile:
@@ -21,6 +22,7 @@ static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	tile.get_node("DebugLabel").text = "(%s, %s)" % [r_tile, q_tile]
 	tile.r = r_tile
 	tile.q = q_tile
+	tile.location = Vector2i(r_tile, q_tile)
 	tile.name = "Tile_%02d_%02d" % [r_tile, q_tile]
 	return tile
 	
@@ -36,7 +38,10 @@ func _on_area_3d_mouse_entered() -> void:
 	
 func _on_area_3d_mouse_exited() -> void:
 	set_highlight(Highlight.Type.Hover, false)
-	
+
+func has_entity(entity_type: EntityType):
+	return entities.any(func(entity: Entity): return entity.type == entity_type)
+
 func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)

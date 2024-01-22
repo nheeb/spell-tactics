@@ -20,6 +20,7 @@ var combat: Combat
 @onready var player: PlayerEntity
 
 @onready var visual_effects: Node3D = $VisualEffects
+@onready var visual_entities: Node3D = $VisualEntities
 
 var entity_type_count := {}
 
@@ -100,57 +101,13 @@ func add_type_count(type: EntityType) -> int:
 	entity_type_count[type] += 1
 	return entity_type_count[type]
 
-func fill_entity(entity_type: EntityType):
-	for tile in get_all_tiles():
-		create_entity(tile.r, tile.q, entity_type)
-
-func create_entity(r: int, q: int, entity_type: EntityType) -> Entity:
+func get_tile(location: Vector2i) -> Tile:
+	var r = location.x
+	var q = location.y
+	
 	if tiles[r][q] == null:
-		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
-		return
-	
-	var entity := entity_type.create_entity(combat) as Entity
-	var tile = tiles[r][q] as Tile
-	
-	entity.visual_entity.visible = true
-	$VisualEntities.add_child(entity.visual_entity)
-	entity.visual_entity.owner = self
-	
-	tile.add_entity(entity)
-	if entity.visual_entity != null:
-		#if entity.visual_entity.is_inside_tree():
-			#print(entity.visual_entity.get_path())
-		entity.visual_entity.position = tile.position
-		# TODO add logical entity
-	
-	# Create id for entity
-	entity.id = EntityID.new(entity.type, add_type_count(entity.type))
-	
-	return entity
-
-func remove_entity(r: int, q: int, entity: Entity):
-	printerr("Level remove_entity: This method maybe shouldn't be executed in the running game.")
-	if tiles[r][q] == null:
-		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
-		return
-	
-	var tile = tiles[r][q] as Tile
-	
-	var pos = tile.entities.find(entity)
-	tile.entities.remove_at(pos)
-	if entity.visual_entity:
-		entity.visual_entity.queue_free()
-
-func get_terrain(r: int, q: int) -> Entity:
-	if tiles[r][q] == null:
-		printerr("Tried adding to tile %d, %d, which does not exist." % [r, q])
-		return
-	
-	var tile = tiles[r][q] as Tile
-	for entity in tile.entities:
-		if entity.type.is_terrain:
-			return entity
-	return null
+		printerr("Tried getting tile %d, %d, which does not exist." % [r, q])
+	return tiles[r][q] as Tile
 
 ## go through visual instances of this tile and assert that they are visible and
 ## at the right position. Later, we can also call some kind of "update" here
@@ -270,13 +227,6 @@ func get_all_tiles() -> Array[Tile]:
 	
 	return all_tiles
 
-func get_all_entities() -> Array[Entity]:
-	var all_entities: Array[Entity] = []
-	for tile in get_all_tiles():
-		all_entities.append_array(tile.entities)
-	all_entities.append_array(graveyard)
-	return all_entities
-
 func find_all_tiles_with(type: EntityType) -> Array[Tile]:
 	var tiles_with: Array[Tile] = []
 	var num_rows = len(tiles)
@@ -312,7 +262,9 @@ func highlight_entity_type(type: EntityType):
 	
 func unhighlight_entity_type(type: EntityType):
 	_unhighlight_tile_set(find_all_tiles_with(type), Highlight.Type.Energy)
-	
+
+func entities() -> LevelEntities:
+	return LevelEntities.new(self)
 
 func search(from: Vector2i, to: Vector2i) -> LevelSearch:
 	return LevelSearch.new(self, from, to)

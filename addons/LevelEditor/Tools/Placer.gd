@@ -14,5 +14,5 @@ func _drag(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
 	pass
 
 func _set_tile(editor: GridLevelEditor, tile: Tile, ent_active: EntityType):
-	editor.level.create_entity(tile.r, tile.q, ent_active)
+	editor.level.entities().create_entity(tile.location, ent_active)
 	

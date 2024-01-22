@@ -53,7 +53,7 @@ func setup() -> void:
 	# Get player and enemy references
 	player = null
 	enemies = []
-	for entity in level.get_all_entities():
+	for entity in level.entities().get_all_entities():
 		if entity is PlayerEntity:
 			if player != entity and player != null:
 				printerr("Two players in a level??")
@@ -71,11 +71,11 @@ func setup() -> void:
 	if current_phase == RoundPhase.CombatBegin:
 		# If it's a fresh combat make every id new
 		log.add("Creating new entity ids")
-		for e in level.get_all_entities():
+		for e in level.entities().get_all_entities():
 			e.id = EntityID.new(e.type, level.add_type_count(e.type))
 			e.energy = e.type.energy
 	else:
-		for e in level.get_all_entities():
+		for e in level.entities().get_all_entities():
 			if e.id != null:
 				level.add_type_count(e.type)
 			else:

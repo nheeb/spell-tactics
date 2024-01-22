@@ -13,7 +13,7 @@ func _init(entity: Entity = null) -> void:
 		printerr("EntityReference was created on an entity with empty id")
 
 func connect_reference(combat: Combat) -> void:
-	for e in combat.level.get_all_entities():
+	for e in combat.level.entities().get_all_entities():
 		if e.id.equals(id):
 			if ent == e:
 				printerr("EntityReference already connected to that object")

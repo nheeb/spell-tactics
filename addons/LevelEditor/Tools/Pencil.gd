@@ -20,10 +20,9 @@ func _drag(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
 	_set_tile(editor, tile, eitorUI.placement_active)
 
 func _set_tile(editor: GridLevelEditor, tile: Tile, placement_active: EntityType):
-	print(placement_active)
-	var current_terrain = editor.level.get_terrain(tile.r, tile.q)
+	var current_terrain = editor.level.entities().get_terrain(tile.location)
 	if current_terrain != null:
-		editor.level.remove_entity(tile.r, tile.q, current_terrain)
+		editor.level.entities().remove_entity(tile.location, current_terrain)
 	if placement_active != null:
-		editor.level.create_entity(tile.r, tile.q, placement_active)
+		editor.level.entities().create_entity(tile.location, placement_active)
 	

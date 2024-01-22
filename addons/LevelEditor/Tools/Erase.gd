@@ -23,5 +23,5 @@ func _set_tile(editor: GridLevelEditor, tile: Tile, placement_active: EntityType
 	var entities = editor.level.tiles[tile.r][tile.q].entities
 	for ent in entities:
 		if not ent.type.is_terrain:
-			editor.level.remove_entity(tile.r, tile.q, ent)
+			editor.level.entities().remove_entity(tile.location, ent)
 	
