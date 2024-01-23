@@ -130,7 +130,10 @@ func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
 			
 func tile_distance(t1: Tile, t2: Tile) -> int:
 	return rq_distance(t1.r, t1.q, t2.r, t2.q)
-	
+
+func tile_distance_with_pathfinding(t1: Tile, t2: Tile) -> int:
+	return get_shortest_path(t1, t2).size()
+
 func entity_distance(e1: Entity, e2: Entity) -> int:
 	assert(is_instance_valid(e1.current_tile) and is_instance_valid(e2.current_tile), 
 		   "distance: entity has no tile")
@@ -148,13 +151,10 @@ func is_location_in_bounds(coord: Vector2i) -> bool:
 func is_location_obstructed(coord: Vector2i) -> bool:
 	var r = coord.x
 	var q = coord.y
-	var tile = tiles[r][q]
+	var tile : Tile = tiles[r][q]
 	if tile == null:
 		return true
-	for entity in tile.entities:
-		if entity.type.is_obstacle:
-			return true
-	return false
+	return tile.is_obstacle()
 	
 
 func get_tile_by_location(location: Vector2i) -> Tile:

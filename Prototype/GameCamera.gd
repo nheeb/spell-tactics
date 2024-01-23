@@ -2,6 +2,7 @@ class_name GameCamera extends Node3D
 
 var velocity := Vector3.ZERO
 var rotation_input := 0.0
+var rotation_input_vertical := 0.0
 @export var move_acceleration := 30.0
 ## degrees per second
 @export var rotation_velocity := 130.0
@@ -25,7 +26,8 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
-			rotation_input += event.relative.x * mouse_rotation_factor
+			rotation_input += event.relative.x * mouse_rotation_factor * .5
+			rotation_input_vertical = - event.relative.y * mouse_rotation_factor
 
 func _physics_process(delta: float) -> void:
 	# x-z movement
@@ -41,6 +43,9 @@ func _physics_process(delta: float) -> void:
 	rotation_input += delta * rotation_velocity * (Input.get_action_strength("rotate_camera_clockwise") - Input.get_action_strength("rotate_camera_anticlockwise"))
 	rotate_y(deg_to_rad(rotation_input))
 	rotation_input = 0.0
+	
+	$AnglePivot.rotation_degrees.x = clamp($AnglePivot.rotation_degrees.x + rad_to_deg(delta * rotation_input_vertical), 5.0, 70.0)
+	rotation_input_vertical = 0.0
 	
 	# zoom
 	if Input.is_action_just_released("zoom_camera_out"):
