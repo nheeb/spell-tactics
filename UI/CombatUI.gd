@@ -36,7 +36,7 @@ func _on_cast_pressed():
 	var clean_payment_text : String = $EnergyPayment.text
 	if ":" in clean_payment_text:
 		clean_payment_text = clean_payment_text.split(":")[-1]
-	var payment := Utility.string_to_energy(clean_payment_text)
+	var payment := EnergyStack.string_to_energy(clean_payment_text)
 	if is_instance_valid(selected_spell):
 		combat.input.process_action(PlayerCast.new(selected_spell, payment))
 
@@ -52,9 +52,9 @@ func select_card(spell: Spell):
 	selected_card.set_spell(spell, false)
 	$SelectedCardContainer.add_child(selected_card)
 	$EnergyPayment.visible = true
-	var payment = Utility.is_energy_cost_payable(combat.energy.player_energy, spell.logic.get_costs())
-	if payment is Array:
-		$EnergyPayment.text = "Payment: " + Utility.energy_to_string(payment)
+	var payment = combat.energy.player_energy.get_possible_payment(spell.logic.get_costs())
+	if payment != null:
+		$EnergyPayment.text = "Payment: " + payment.to_string()
 	else:
 		$EnergyPayment.text = "Not enough energy"
 
@@ -70,11 +70,11 @@ func set_status(text: String):
 
 const energy_min_size := 32
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
-func set_current_energy(energy: Array[Game.Energy]):
+func set_current_energy(energy: EnergyStack):
 	for c in $Energy.get_children():
 		if c is EnergyIcon:
 			c.queue_free()
-	for e in energy:
+	for e in energy.stack:
 		var icon = ENERGY_ICON.instantiate()
 		$Energy.add_child(icon)
 		icon.type = e

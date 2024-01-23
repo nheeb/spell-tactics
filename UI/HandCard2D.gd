@@ -19,10 +19,10 @@ func update():
 
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 @export var icon_size := 48
-func set_content(pretty_name: String, costs: Array[Game.Energy], effect: String, fluff: String):
+func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff: String):
 	%Name.text = pretty_name
 	%Effect.text = effect
-	for cost in costs:
+	for cost in costs.stack:
 		var icon = ENERGY_ICON.instantiate()
 		icon.type = cost
 		icon.min_size = icon_size

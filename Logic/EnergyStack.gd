@@ -1,13 +1,13 @@
 class_name EnergyStack extends Resource
 
 enum EnergyType {
-	Life = 1,
-	Decay = 2,
-	Matter = 3,
-	Harmony = 4,
-	Flow = 5,
-	Spectral = 6,
-	Any = 7,
+	Life = 0,
+	Decay = 1,
+	Matter = 2,
+	Harmony = 3,
+	Flow = 4,
+	Spectral = 5,
+	Any = 6,
 }
 
 @export var stack : Array[EnergyType] = []
@@ -34,6 +34,9 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 	return EnergyStack.new(possible_payment)
 
 func sort() -> void:
+	for e in stack:
+		if e == 0:
+			printerr("WTF")
 	stack.sort()
 
 ## Applies a payment (reducing the energy by the exact energies in that payment)
@@ -83,3 +86,6 @@ static func string_to_energy(string: String) -> EnergyStack:
 func _init(_stack: Array[EnergyType] = []) -> void:
 	stack = _stack.duplicate()
 	sort()
+
+func is_empty() -> bool:
+	return stack.is_empty()

@@ -1,12 +1,12 @@
 class_name PlayerCast extends PlayerAction
 
 var spell : Spell
-var payment : Array[Game.Energy]
+var payment : EnergyStack
 
-func _init(_spell: Spell, _payment: Array[Game.Energy]) -> void:
+func _init(_spell: Spell, _payment: EnergyStack) -> void:
 	spell = _spell
 	payment = _payment
-	action_string = "Cast Spell %s with payment %s" % [spell.type.internal_name, Utility.energy_to_string(payment)]
+	action_string = "Cast Spell %s with payment %s" % [spell.type.internal_name, payment.to_string()]
 
 func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Spell:

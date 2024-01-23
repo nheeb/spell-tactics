@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="EntityType" load_steps=2 format=3 uid="uid://bhq0pkvdokid6"]
+[gd_resource type="Resource" script_class="EntityType" load_steps=4 format=3 uid="uid://bhq0pkvdokid6"]
 
 [ext_resource type="Script" path="res://Entities/EntityType.gd" id="1_m4dkt"]
+[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_w0gs2"]
+
+[sub_resource type="Resource" id="Resource_v8c80"]
+script = ExtResource("1_w0gs2")
+stack = Array[int]([2])
 
 [resource]
 script = ExtResource("1_m4dkt")
@@ -11,6 +16,6 @@ fluff_text = ""
 prototype_scale = Vector2(0.3, 0.3)
 is_terrain = false
 is_drainable = true
-energy = Array[int]([2])
+energy = SubResource("Resource_v8c80")
 is_obstacle = false
 cover_value = 0

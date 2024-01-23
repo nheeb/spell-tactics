@@ -4,7 +4,7 @@ class_name CombatState extends Resource
 @export var level_state: LevelState
 @export var current_round: int = 1
 @export var current_phase: Combat.RoundPhase = Combat.RoundPhase.CombatBegin
-@export var player_energy: Array[Game.Energy]
+@export var player_energy: EnergyStack
 #@export var hand_size: int = 5
 @export var deck_states: Array[SpellState]
 @export var hand_states: Array[SpellState]

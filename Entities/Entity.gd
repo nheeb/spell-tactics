@@ -15,7 +15,7 @@ var logical_entity: LogicalEntity
 var current_tile: Tile
 ## Reference to the current combat
 var combat: Combat
-var energy: Array[Game.Energy]
+var energy: EnergyStack
 
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
@@ -52,14 +52,14 @@ func move(target: Tile):
 	current_tile.remove_entity(self)
 	target.add_entity(self)
 	
-func drain() -> Array[Game.Energy]:
+func drain() -> EnergyStack:
 	assert(is_drainable(), "Tried draining entity which is not drainable.")
-	var drained_energy = Array(energy)
-	energy = []
+	var drained_energy = energy
+	energy = EnergyStack.new([])
 	return drained_energy
 	
 func is_drainable():
-	return type.is_drainable and len(energy) > 0
+	return type.is_drainable and energy != null and not energy.is_empty()
 
 ## This will be executed after an entity has been created from a type
 func on_create() -> void:
