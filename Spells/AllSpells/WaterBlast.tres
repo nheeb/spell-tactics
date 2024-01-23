@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=2 format=3 uid="uid://dejellym72t87"]
+
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_3exxi"]
+
+[resource]
+script = ExtResource("1_3exxi")
+pretty_name = "Water Blast"
+costs = Array[int]([4])
+effect_text = "Deal 1 Damage in Range 4"
+fluff_text = "Fun
+
+"
+is_event_spell = false
+target = 1
+target_tag = ""

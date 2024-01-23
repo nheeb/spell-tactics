@@ -189,3 +189,4 @@ func get_all_spells() -> Array[Spell]:
 	all_spells.append_array(discard_pile)
 	all_spells.append_array(event.events)
 	return all_spells
+

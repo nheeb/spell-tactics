@@ -109,5 +109,20 @@ func random_index_of_scores(scores: Array[float]) -> int:
 			return i
 	printerr("Random index: Something went wrong")
 	return -1
+	
+	
+## could maybe be put in Utils singleton
+func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
+	return (abs(q1 - q2) 
+			+ abs(q1 + r1 - q2 - r2)
+			+ abs(r1 - r2)) / 2
+			
+func tile_distance(t1: Tile, t2: Tile) -> int:
+	return rq_distance(t1.r, t1.q, t2.r, t2.q)
+	
+func entity_distance(e1: Entity, e2: Entity) -> int:
+	assert(is_instance_valid(e1.current_tile) and is_instance_valid(e2.current_tile), 
+		   "distance: entity has no tile")
+	return tile_distance(e1.current_tile, e2.current_tile)
 		
 	

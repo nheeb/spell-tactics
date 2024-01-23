@@ -53,7 +53,7 @@ func init_basic_grid(n: int):
 		for q in range(0, 2*n + 1):
 			# first off, check if this tile would have distance > n from origin
 			# in that case continue and put null into the array position
-			if rq_distance(r, q, n, n) > n: 
+			if Utility.rq_distance(r, q, n, n) > n: 
 				continue
 
 			var new_tile = Tile.create(r, q, n, n)
@@ -79,21 +79,6 @@ func serialize() -> LevelState:
 	level_state.graveyard.append_array(graveyard.map(func (x): return x.serialize()))
 	
 	return level_state
-
-## Saving and loading levels from disks is depricated. Always save and load combats
-#func save_to_disk(path: String = ""):
-	#var state: LevelState = serialize()
-	#var err = ResourceSaver.save(state, path) # , ResourceSaver.FLAG_BUNDLE_RESOURCES)
-	#
-	#if not err == OK:
-		#printerr("Err when saving level state: ", err)
-#
-#const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
-#static func load_from_disk(path: String) -> Level:
-	#var level_state: LevelState = ResourceLoader.load(path) as LevelState
-	#var level: Level = level_state.deserialize(Combat.new())
-	#
-	#return level
 
 func add_type_count(type: EntityType) -> int:
 	if not type in entity_type_count:
@@ -121,20 +106,6 @@ func update_visual_entities(tile: Tile):
 			if not vis_ent in $VisualEntities.get_children():
 				$VisualEntities.add_child(vis_ent)
 			vis_ent.position = tile.position
-
-## could maybe be put in Utils singleton
-func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
-	return (abs(q1 - q2) 
-			+ abs(q1 + r1 - q2 - r2)
-			+ abs(r1 - r2)) / 2
-			
-func tile_distance(t1: Tile, t2: Tile) -> int:
-	return rq_distance(t1.r, t1.q, t2.r, t2.q)
-	
-func entity_distance(e1: Entity, e2: Entity) -> int:
-	assert(is_instance_valid(e1.current_tile) and is_instance_valid(e2.current_tile), 
-		   "distance: entity has no tile")
-	return tile_distance(e1.current_tile, e2.current_tile)
 
 func is_location_in_bounds(coord: Vector2i) -> bool:
 	var r = coord.x
@@ -195,7 +166,6 @@ func _unhighlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 		tile.set_highlight(type, false)
 		
 func highlight_movement_range(entity: Entity, movement_range: int) -> Array[Tile]:
-	print(entity.current_tile.r, entity.current_tile.q)
 	var highlight_tiles = get_all_tiles_in_distance(entity.current_tile.r,
 													entity.current_tile.q, movement_range)
 	_highlight_tile_set(highlight_tiles, Highlight.Type.Movement)
@@ -203,7 +173,6 @@ func highlight_movement_range(entity: Entity, movement_range: int) -> Array[Tile
 		
 		
 func move_entity(entity: Entity, target: Tile):
-	# kind of a cursed call but this is how we do it I guess
 	entity.move(target)
 
 func move_entity_to_graveyard(entity: Entity):

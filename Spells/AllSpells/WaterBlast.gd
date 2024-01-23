@@ -20,4 +20,11 @@ extends SpellLogic
 
 ## Here should be the effect
 func casting_effect() -> void:
-	pass
+	assert(target is Tile, "WaterBlast expecting Tile as target")
+	target = target as Tile
+	var enemies = target.get_enemies()
+	assert(len(enemies) >= 1, "WaterBlast expects min 1 enemy on tile")
+	
+	for enemy in enemies:
+		enemy.hp -= 10
+

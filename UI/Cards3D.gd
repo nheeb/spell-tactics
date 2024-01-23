@@ -44,7 +44,7 @@ func remove_card(card2d: HandCard2D):
 	
 	for card_3d in cards.get_children():
 		if card_3d.card_2d.spell == card2d.spell:
-			print("remove at i = %d" % i)
+			#print("remove at i = %d" % i)
 			cards.remove_child(card_3d)
 			removed = true
 		i += 1

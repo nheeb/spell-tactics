@@ -21,7 +21,7 @@ func play(level: Level):
 	for prop in setup_properties:
 		effect.set(prop, setup_properties[prop])
 	if effect.has_signal("effect_done"):
-		await effect.await_done
+		await effect.effect_done
 	success = true
 	animation_done.emit()
 

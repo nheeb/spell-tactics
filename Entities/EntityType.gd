@@ -29,6 +29,9 @@ class_name EntityType extends Resource
 ## How good of a cover this is from projectiles (accuracy reduction)
 @export var cover_value: int = 0
 
+## Which tags (categories) this entity belongs to, for example Mushroom
+@export var tags: Array[String] = []
+
 # instantiate this EntityType
 
 func create_entity(combat: Combat) -> Entity:

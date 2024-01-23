@@ -57,6 +57,14 @@ func remove_entity(entity: Entity):
 	# should we turn it invisible then? huh
 	#entity.visual_entity.visible = false
 	
+## Returns all enemy entities on this tile.
+func get_enemies() -> Array[EnemyEntity]:
+	var enemies: Array[EnemyEntity] = []
+	for ent in entities:
+		if ent is EnemyEntity:
+			enemies.append(ent)
+	return enemies
+	
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
 func is_obstacle() -> bool:

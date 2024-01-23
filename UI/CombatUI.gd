@@ -57,6 +57,8 @@ func select_card(spell: Spell):
 		$EnergyPayment.text = "Payment: " + Utility.energy_to_string(payment)
 	else:
 		$EnergyPayment.text = "Not enough energy"
+		
+	combat.input.process_action(SelectSpell.new(selected_spell))
 
 func deselect_card():
 	selected_spell = null
@@ -79,6 +81,10 @@ func set_current_energy(energy: Array[Game.Energy]):
 		$Energy.add_child(icon)
 		icon.type = e
 		icon.min_size = energy_min_size
+		
+		
+func update_payable_cards():
+	pass
 		
 	
 

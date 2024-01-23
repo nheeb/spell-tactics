@@ -2,6 +2,7 @@ class_name SpellLogic extends Object
 
 var spell: Spell
 var combat: Combat
+var target  # Entity or Tile or maybe Array[Tile]
 
 func _init(_spell: Spell):
 	spell = _spell
