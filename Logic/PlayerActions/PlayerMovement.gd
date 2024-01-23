@@ -18,5 +18,8 @@ func is_valid(combat: Combat) -> bool:
 
 func execute(combat: Combat) -> void:
 	print("Move Player to (%d, %d)" % [destination.r, destination.q])
-	combat.movement.move_entity(combat.player, destination)
+	var path := combat.level.get_shortest_path(combat.player.current_tile, destination)
+	for tile in path:
+		combat.movement.move_entity(combat.player, tile)
+		combat.animation.wait(.1)
 	combat.advance_and_process_until_next_player_action_needed()

@@ -22,6 +22,7 @@ func execute(max_iterations = 1000):
 		iterations += 1
 		if iterations > max_iterations:
 			return
+	var hurensohn = len(open_set)
 
 func _observe_tile(coord: Vector2i, current_path_distance: float, parent: TileGridSearchEntry):
 	if not level.is_location_in_bounds(coord):

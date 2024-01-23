@@ -10,11 +10,10 @@ func tile_clicked(tile: Tile):
 	# PlayerMovement.new(tile).execute(combat)
 	if combat.input.process_action(PlayerMovement.new(tile)):
 		# valid, movement has been performed
-		combat.level._unhighlight_tile_set(highlighted_tiles, Highlight.Type.Movement)
+		combat.level._unhighlight_tile_set(combat.level.get_all_tiles(), Highlight.Type.Movement)
 
 func process_phase() -> bool:
-	highlighted_tiles = combat.level.highlight_movement_range(combat.player, combat.player.traits.movement_range)
-	#combat.animation.ca
+	combat.animation.callback(combat.level, "highlight_movement_range", [combat.player, combat.player.traits.movement_range])
 	combat.animation.callback(combat.ui, "set_status", ["Make your movement!"])
 	
 	return true

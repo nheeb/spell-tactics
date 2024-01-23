@@ -71,7 +71,7 @@ static func energy_to_string(energy_stack: EnergyStack) -> String:
 	return energy_stack.stack.reduce(func(x, y): return x + ENERGY_TO_LETTER[y], "")
 
 func _to_string() -> String:
-	return energy_to_string(self)
+	return EnergyStack.energy_to_string(self)
 
 static func string_to_energy(string: String) -> EnergyStack:
 	string = string.to_upper()
