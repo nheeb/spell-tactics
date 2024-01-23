@@ -22,7 +22,7 @@ class_name EntityType extends Resource
 @export var is_terrain := false
 @export var is_drainable := true
 ## The energy this entity gives (if it's drainable)
-@export var energy: Array[Game.Energy] = []
+@export var energy: EnergyStack = null
 
 ## Whether the player / enemies can move onto tiles containing this entity
 @export var is_obstacle: bool = false

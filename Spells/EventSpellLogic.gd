@@ -1,11 +1,11 @@
 class_name EventSpellLogic extends SpellLogic
 
 ### Tests if payment is possible
-#func is_payment_valid(payment: Array[Game.Energy] = []) -> bool:
+#func is_payment_valid(payment: EnergyStack = null) -> bool:
 	#return true
 #
 ### Returns combination of the other valids. Is being used by PlayerCast to execute the cast
-#func is_all_valid(payment: Array[Game.Energy] = []) -> bool:
+#func is_all_valid(payment: EnergyStack = null) -> bool:
 	#return true
 #
 ### Returns a possible payment (if possible)
@@ -13,11 +13,11 @@ class_name EventSpellLogic extends SpellLogic
 	#return []
 #
 ### Pays for the costs. Activates the cards effect. Also discards the card from hand
-#func cast(payment: Array[Game.Energy] = []) -> void:
+#func cast(payment: EnergyStack = null) -> void:
 	#casting_effect()
 #
 ### The current costs with all the modifiers if there are any
-#func get_costs() -> Array[Game.Energy]:
+#func get_costs() -> EnergyStack:
 	#return []
 #
 ### This is for overriding if there are general cast-conditions

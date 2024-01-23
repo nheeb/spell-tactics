@@ -128,6 +128,9 @@ func is_location_obstructed(coord: Vector2i) -> bool:
 	return false
 	
 
+func get_tile_by_location(location: Vector2i) -> Tile:
+	return tiles[location.x][location.y]
+
 ## returns a list of Tiles forming the straight line between tile1 and tile2.
 ## (obstacles are ignored)
 func get_line(tile1: Tile, tile2: Tile) -> Array[Tile]:
@@ -136,10 +139,18 @@ func get_line(tile1: Tile, tile2: Tile) -> Array[Tile]:
 
 ## this can be used for enemy movement, since it respects obstacles.
 func get_shortest_path(tile1: Tile, tile2: Tile) -> Array[Tile]:
-	return []
+	var search_object := search(tile1.location, tile2.location)
+	search_object.execute()
+	var location_path := search_object.path
+	var path: Array[Tile] = []
+	path.append_array(location_path.map(func(location): return get_tile_by_location(location)))
+	return path
+
+func get_all_tiles_in_distance_of_tile(tile: Tile, dist: int) -> Array[Tile]:
+	return get_all_tiles_in_distance(tile.r, tile.q, dist)
 
 ## Returns the list of tiles within `dist` distance of the tile (r_center, q_center)
-func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int):
+func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int) -> Array[Tile]:
 	assert(dist >= 0)
 	var s_center := - q_center - r_center
 	var tiles_in_distance: Array[Tile] = []

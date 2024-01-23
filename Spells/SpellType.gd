@@ -7,7 +7,7 @@ var internal_name: String = ""
 ## Name that will be shown ingame
 @export var pretty_name: String
 ## Energy costs of the card
-@export var costs: Array[Game.Energy]
+@export var costs: EnergyStack
 ## Effect text shown on the card
 @export_multiline var effect_text: String
 ## Fluff text shown on the card
@@ -49,4 +49,5 @@ func _on_load() -> void:
 			logic = load(ALL_EVENTS_FOLDER + internal_name + ".gd")
 		else:
 			logic = load(ALL_SPELLS_FOLDER + internal_name + ".gd")
-
+	if costs == null:
+		costs = EnergyStack.new([])

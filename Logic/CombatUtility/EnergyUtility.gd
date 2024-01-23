@@ -2,14 +2,14 @@ class_name EnergyUtility extends Node
 
 @onready var combat : Combat = get_parent().get_parent()
 
-var player_energy: Array[Game.Energy]
+@onready var player_energy: EnergyStack = EnergyStack.new([])
 
-func pay(payment: Array[Game.Energy]) -> void:
+func pay(payment: EnergyStack) -> void:
 	# style: is this utility method needed or should it be moved here?
-	player_energy = Utility.pay_energy(player_energy, payment)
-	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate()])
+	player_energy.apply_payment(payment)
+	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate(true)])
 
 
-func gain(energy: Array[Game.Energy]) -> void:
+func gain(energy: EnergyStack) -> void:
 	player_energy.append_array(energy)
-	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate()])
+	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate(true)])

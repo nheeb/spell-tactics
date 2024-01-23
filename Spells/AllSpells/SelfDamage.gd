@@ -1,7 +1,7 @@
 extends SpellLogic
 
 ### The current costs with all the modifiers if there are any
-#func get_costs() -> Array[Game.Energy]:
+#func get_costs() -> EnergyStack:
 	#return spell.type.costs
 
 ## This is for overriding if there are general cast-conditions

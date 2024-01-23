@@ -1,13 +1,13 @@
 class_name GameSingleton extends Node
 
-enum Energy {
-	Life,
-	Decay,
-	Matter,
-	Water,
-	Flow,
-	Any
-}
+#enum Energy {
+	#Life,
+	#Decay,
+	#Matter,
+	#Water,
+	#Flow,
+	#Any
+#}
 
 const PROTOTYPE_VISUALS = preload("res://Entities/Visuals/VisualPrototype.tscn")
 

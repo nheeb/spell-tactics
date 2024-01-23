@@ -4,11 +4,14 @@ extends MarginContainer
 
 func show_entity(ent: Entity):
 	%EntityName.text = ent.type.pretty_name
-	var n_energies = len(ent.energy)
+	var n_energies := 0
+	if ent.energy != null:
+		n_energies = len(ent.energy.stack)
 	
 	icons.map(func (i): i.hide())
 	
 	for i in range(n_energies):
 		var icon = icons[i]
 		icon.show()
-		icon.type = ent.energy[i]
+		icon.type = ent.energy.stack[i]
+		

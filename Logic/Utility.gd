@@ -34,66 +34,6 @@ func cube_add(r1: int, q1: int, s1: int, r2: int, q2: int, s2: int) -> Vector3i:
 func axial_add():
 	pass
 
-
-## Returns an array with possible payment arrangement if possible or false if not
-func is_energy_cost_payable(_bank: Array[Game.Energy], _cost: Array[Game.Energy]):
-	var bank := _bank.duplicate(false)
-	var cost := _cost.duplicate()
-	var possible_payment : Array[Game.Energy] = []
-	for e in cost:
-		if e != Game.Energy.Any:
-			if e in bank:
-				possible_payment.append(e)
-				bank.erase(e)
-			else:
-				return false
-		else:
-			if not bank.is_empty():
-				possible_payment.append(bank.pop_front())
-			else:
-				return false
-	return possible_payment
-
-## Reduces a new Array whith the Energy being reduced
-func pay_energy(_bank: Array[Game.Energy], payment: Array[Game.Energy]) -> Array[Game.Energy]:
-	var bank := _bank.duplicate(false)
-	for e in payment:
-		if e in bank:
-			bank.erase(e)
-		else:
-			printerr("Non existing energy was payed.")
-			return []
-	return bank
-
-var energy_to_letter := {
-	Game.Energy.Life: "L",
-	Game.Energy.Decay: "D",
-	Game.Energy.Matter: "S",
-	Game.Energy.Water: "W",
-	Game.Energy.Flow: "F",
-	Game.Energy.Any: "X",
-}
-
-var letter_to_energy := {
-	"L": Game.Energy.Life,
-	"D": Game.Energy.Decay,
-	"S": Game.Energy.Matter,
-	"W": Game.Energy.Water,
-	"F": Game.Energy.Flow,
-	"X": Game.Energy.Any,
-}
-
-func energy_to_string(energy: Array[Game.Energy]) -> String:
-	return energy.reduce(func(x, y): return x + energy_to_letter[y], "")
-
-func string_to_energy(string: String) -> Array[Game.Energy]:
-	string = string.to_upper()
-	var array : Array[Game.Energy] = []
-	for c in string:
-		if c in letter_to_energy.keys():
-			array.append(letter_to_energy[c])
-	return array
-
 func random_index_of_scores(scores: Array[float]) -> int:
 	if scores.is_empty():
 		printerr("Random index: Empty list")
