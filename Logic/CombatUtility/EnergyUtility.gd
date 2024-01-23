@@ -11,5 +11,5 @@ func pay(payment: EnergyStack) -> void:
 
 
 func gain(energy: EnergyStack) -> void:
-	player_energy.append_array(energy)
+	player_energy.stack.append_array(energy.stack)
 	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate(true)])

@@ -2,7 +2,7 @@ class_name PlayerCastTargeted extends PlayerCast
 
 var target
 
-func _init(_spell: Spell, _payment: Array[Game.Energy], _target) -> void:
+func _init(_spell: Spell, _payment: EnergyStack, _target) -> void:
 	super(_spell, _payment)
 	self.target = _target
 	action_string = "Cast targeted %s on %s" % [_spell, _target]

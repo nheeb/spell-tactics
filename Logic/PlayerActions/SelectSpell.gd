@@ -8,7 +8,7 @@ func _init(selected: Spell) -> void:
 	
 func is_valid(combat: Combat) -> bool:
 	# is payable (validation, but unpayable spell should not be able to be selected in UI)
-	return Utility.is_energy_cost_payable(combat.energy.player_energy,
+	return Utility.get_possible_payment(combat.energy.player_energy,
 										  selected_spell.logic.get_costs()) is Array
 
 func execute(combat: Combat) -> void:
