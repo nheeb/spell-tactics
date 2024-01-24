@@ -1,12 +1,12 @@
 class_name CombatUI extends Control
 
-## This Scene and (almost) every child is meant to be replaced after Milestone-1
-
 const CNC = preload("res://UI/HandCard2D.tscn")
 
 var combat : Combat
 var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
+
+@onready var cards3d = %Cards3D
 
 func add_card(spell: Spell):
 	var card = CNC.instantiate()
@@ -57,6 +57,8 @@ func select_card(spell: Spell):
 		$EnergyPayment.text = "Payment: " + payment.to_string()
 	else:
 		$EnergyPayment.text = "Not enough energy"
+		
+	combat.input.process_action(SelectSpell.new(selected_spell))
 
 func deselect_card():
 	selected_spell = null
@@ -79,6 +81,10 @@ func set_current_energy(energy: EnergyStack):
 		$Energy.add_child(icon)
 		icon.type = e
 		icon.min_size = energy_min_size
+		
+		
+func update_payable_cards():
+	pass
 		
 	
 

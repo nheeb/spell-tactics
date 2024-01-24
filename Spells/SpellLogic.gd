@@ -2,6 +2,7 @@ class_name SpellLogic extends Object
 
 var spell: Spell
 var combat: Combat
+var target  # Entity or Tile or maybe Array[Tile]
 
 func _init(_spell: Spell):
 	spell = _spell
@@ -11,7 +12,7 @@ func _init(_spell: Spell):
 
 ## Tests if payment is possible
 func is_payment_valid(payment: EnergyStack = null) -> bool:
-	return get_costs().get_possible_payment(payment) != null
+	return payment.get_possible_payment(get_costs()) != null
 
 ## Returns combination of the other valids. Is being used by PlayerCast to execute the cast
 func is_all_valid(payment: EnergyStack = null) -> bool:

@@ -10,7 +10,7 @@ func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Spell:
 		return false
 	# Check distance, only adjacent tiles can be drained
-	if combat.level.tile_distance(combat.player.current_tile, target_tile) <= 1:
+	if Utility.tile_distance(combat.player.current_tile, target_tile) <= 1:
 		if target_tile.is_drainable():
 			return true
 	return false

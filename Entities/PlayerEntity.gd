@@ -1,9 +1,5 @@
 class_name PlayerEntity extends HPEntity
 
-#var secret_msg = "serialize me"
-#
-#var prop := -1
-
 ## arch_enemy for testing
 var arch_enemy : EntityReference
 

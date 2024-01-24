@@ -23,10 +23,14 @@ func _ready() -> void:
 	ui_root.add_child(combat_ui)
 	combat.connect_with_ui(combat_ui)
 	
+
+	
 	combat.advance_and_process_until_next_player_action_needed()
 	combat.animation.play_animation_queue()
 	
-	
+	await get_tree().process_frame
+	# FIXME looser coupling World - Cards3D would be preferable
+	%MouseRaycast.cards3d = combat_ui.cards3d
 
 
 var flip := false

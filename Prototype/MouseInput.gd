@@ -1,5 +1,10 @@
 extends RayCast3D
 
+
+# A reference to cards3d is needed here to see if the hover/click input is meant for this RayCast
+# or the one in Cards3D (cards3d has priority, since it is "on top" visually)
+var cards3d: Cards3D = null
+
 var currently_hovering: Tile = null
 func _physics_process(delta: float) -> void:
 	var mouse_position := get_viewport().get_mouse_position()
@@ -8,8 +13,10 @@ func _physics_process(delta: float) -> void:
 	var ray_direction := camera.project_ray_normal(mouse_position)
 	var end := ray_origin + ray_direction * camera.far
 	self.target_position = to_local(end)
+		
 	
-	if is_colliding():
+	# if something has been hit and hasn't been hit in Cards3D as well
+	if is_colliding() and (cards3d == null or not cards3d.raycast_hit):
 		var collider = get_collider()
 		if collider is Area3D:
 			if collider.is_in_group("tile_area"):

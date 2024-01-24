@@ -17,6 +17,23 @@ var logic: Script
 ## Spells are events when they have this flag
 @export var is_event_spell := false
 
+enum Target {
+	None,
+	Enemy,
+	Tile,
+	Tag,
+	Condition, # custom bool func in SpellLogic
+}
+
+## Which, if any, targets this spell requires
+@export var target := Target.None
+
+## Max tile range of the target, -1 for unlimited range
+@export var target_range := -1
+
+## when target is Tag, which Tag to target
+@export var target_tag := ""
+
 static func load_from_file(path: String) -> SpellType:
 	var res = load(path)
 	res._on_load()
