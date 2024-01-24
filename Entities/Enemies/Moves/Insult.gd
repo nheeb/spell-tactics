@@ -6,6 +6,6 @@ func get_score() -> float:
 
 ## Executes the move
 func execute() -> void:
-	var insult_text = "The %s insults your %s." % [enemy.type.pretty_name, ["mother", "honor", "dog", "cats", "existance", "pathetic spells"].pick_random()]
+	var insult_text = "The %s insults your %s." % [enemy.type.pretty_name, ["mother", "honor", "dog", "cats", "existance", "pathetic spells", "previous jam-entries", "favorite food", "poor social skills", "time management"].pick_random()]
 	combat.log.add(insult_text)
 	combat.animation.say(enemy.current_tile, insult_text)

@@ -7,7 +7,7 @@ func _init(_callable: Callable):
 
 func play(level: Level) -> void:
 	callable.call()
-	animation_done.emit()
+	animation_done_internally.emit()
 
 func _to_string() -> String:
 	return "Anim: Do a callable"

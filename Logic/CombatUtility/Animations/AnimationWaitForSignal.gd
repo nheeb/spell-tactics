@@ -13,7 +13,7 @@ func play(level: Level):
 		await obj.get(signal_name)
 	else:
 		printerr("Anim: WaitforSignal Signal does not exist")
-	animation_done.emit()
+	animation_done_internally.emit()
 
 func _to_string() -> String:
 	return "Anim: Wait for %s.%s" % [obj, signal_name]
