@@ -9,8 +9,9 @@ signal animation_queue_empty
 var animation_queue: Array[AnimationObject]
 var animation_steps: Array[AnimationStep]
 
-func add_animation_object(a: AnimationObject) -> void:
-	animation_queue.append(a)
+########################################
+## Wrapper Functions (only use those) ##
+########################################
 
 func callback(ref: Object, method: String, parameters: Array = []) -> AnimationCallback:
 	var a = AnimationCallback.new(ref, method, parameters)
@@ -42,8 +43,36 @@ func effect(_effect_scene: PackedScene, target: Node3D,_setup_properties := {}) 
 	add_animation_object(a)
 	return a
 
+func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSignal:
+	var a = AnimationWaitForSignal.new(_obj, _signal_name)
+	add_animation_object(a)
+	return a
+
 func say(target: Node3D, text: String, duration := 1.7) -> AnimationEffect:
 	return effect(SAY_EFFECT, target, {"text": text, "duration": duration})
+
+func camera_set_player_input(enabled: bool) -> AnimationProperty:
+	return property(combat.camera, "player_input_enabled", enabled)
+
+func camera_follow(target: Node3D) -> AnimationProperty:
+	return property(combat.camera, "follow_target", target)
+
+func camera_unfollow() -> AnimationProperty:
+	return property(combat.camera, "follow_target", null)
+
+func camera_reach(target: Node3D) -> Array[AnimationObject]:
+	var animations : Array[AnimationObject] = []
+	animations.append(property(combat.camera, "follow_target", target))
+	animations.append(property(combat.camera, "just_reach_target", true).set_flag(AnimationObject.Flags.PlayWithStep))
+	animations.append(wait_for_signal(combat.camera, "target_reached").set_flag(AnimationObject.Flags.ExtendStep))
+	return animations
+
+#######################################
+## Logic Functions (don't use those) ##
+#######################################
+
+func add_animation_object(a: AnimationObject) -> void:
+	animation_queue.append(a)
 
 func play_animation_queue() -> void:
 	animation_steps = [AnimationStep.new()]
