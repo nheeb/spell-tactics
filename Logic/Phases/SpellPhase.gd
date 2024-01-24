@@ -25,7 +25,6 @@ func tile_clicked(tile: Tile):
 		# for now read the cost out of the spell (hack)
 		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, selected_spell.type.costs, tile))
 		if valid:
-			print("Valid cast performed.")
 			state = CastingState.Selecting
 			combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
 			combat.animation.play_animation_queue()

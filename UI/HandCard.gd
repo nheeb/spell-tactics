@@ -7,7 +7,6 @@ func _enter_tree() -> void:
 
 func get_spell() -> Spell:
 	var spell =  $Quad/SubViewport/HandCard2D.spell
-	print(spell)
 	return spell
 
 func set_card(card: HandCard2D):
