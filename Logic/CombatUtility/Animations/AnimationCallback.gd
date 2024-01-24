@@ -18,7 +18,7 @@ func play(level: Level) -> void:
 		success = true
 	else:
 		printerr("Animation on null reference")
-	animation_done.emit()
+	animation_done_internally.emit()
 
 func _to_string() -> String:
 	if len(parameters) == 1:

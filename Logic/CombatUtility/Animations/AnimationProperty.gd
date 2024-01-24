@@ -13,7 +13,7 @@ func play(level: Level) -> void:
 	if is_instance_valid(reference):
 		reference.set(property, value)
 		success = true
-	animation_done.emit()
+	animation_done_internally.emit()
 
 func _to_string() -> String:
 	return "Anim: Setting %s.%s = %s" % [reference, property, value]

@@ -13,7 +13,7 @@ func play(level: Level):
 		if reference.has_signal(signal_name):
 			reference.emit_signal(signal_name)
 			success = true
-	animation_done.emit()
+	animation_done_internally.emit()
 
 func _to_string() -> String:
 	return "Anim: Signal %s.%s.emit()" % [reference, signal_name]

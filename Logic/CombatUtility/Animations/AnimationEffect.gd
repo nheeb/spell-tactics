@@ -26,7 +26,7 @@ func play(level: Level):
 	if effect.has_signal("effect_done"):
 		await effect.effect_done
 	success = true
-	animation_done.emit()
+	animation_done_internally.emit()
 
 func _to_string() -> String:
 	if is_instance_valid(target):
