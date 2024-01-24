@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c41y46dsxcico"]
+
+[ext_resource type="Script" path="res://Effects/SayEffect.gd" id="1_dhexd"]
+
+[node name="SayEffect" type="Node3D"]
+script = ExtResource("1_dhexd")
+
+[node name="Label3D" type="Label3D" parent="."]
+pixel_size = 0.01
+billboard = 1
+text = "Making this and that"
+outline_size = 0

@@ -1,4 +1,4 @@
-extends Node3D
+class_name Cards3D extends Node3D
 
 signal card_selected(spell: Spell)
 
@@ -54,9 +54,9 @@ func remove_card(card2d: HandCard2D):
 	
 	update_all_x_offsets()
 	
-	
 
 var currently_hovering: HandCard2D = null
+var raycast_hit: bool = false
 func _process(delta: float) -> void:
 	var mouse_position := get_viewport().get_mouse_position()
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_position)
@@ -66,6 +66,10 @@ func _process(delta: float) -> void:
 	%MouseRayCast.target_position = to_local(end)
 	
 	if %MouseRayCast.is_colliding():
+		# this bool might need replacing with colision check on a wider area later on.
+		# as it stands, the player can accidentally click on a tile through the gap between cards.
+		raycast_hit = true
+		
 		var collider = %MouseRayCast.get_collider()
 		if collider is Area3D and collider.is_in_group("hand_area"):
 			var hand_card = collider.get_parent()
@@ -74,9 +78,12 @@ func _process(delta: float) -> void:
 			hand_card.card_2d.set_hover(true)
 			currently_hovering = hand_card.card_2d
 			if Input.is_action_just_pressed("select"):
-			
+				get_viewport().set_input_as_handled()
 				card_selected.emit(hand_card.get_spell())
 	else:
 		if currently_hovering != null:
 			currently_hovering.set_hover(false)
 			currently_hovering = null
+			
+		raycast_hit = false
+

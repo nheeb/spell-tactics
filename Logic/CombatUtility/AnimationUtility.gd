@@ -1,5 +1,7 @@
 class_name AnimationUtility extends Node
 
+const SAY_EFFECT = preload("res://Effects/SayEffect.tscn")
+
 @onready var combat : Combat = get_parent().get_parent()
 
 signal animation_queue_empty
@@ -34,6 +36,14 @@ func callable(_callable: Callable) -> AnimationCallable:
 	var a = AnimationCallable.new(_callable)
 	add_animation_object(a)
 	return a
+
+func effect(_effect_scene: PackedScene, target: Node3D,_setup_properties := {}) -> AnimationEffect:
+	var a = AnimationEffect.new(_effect_scene, target, _setup_properties)
+	add_animation_object(a)
+	return a
+
+func say(target: Node3D, text: String, duration := 1.7) -> AnimationEffect:
+	return effect(SAY_EFFECT, target, {"text": text, "duration": duration})
 
 func play_animation_queue() -> void:
 	animation_steps = [AnimationStep.new()]

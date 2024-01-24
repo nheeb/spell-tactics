@@ -23,12 +23,17 @@ func tile_clicked(tile: Tile):
 		# try casting the spell onto the selected tile
 		# TODO support targetted spells with X/Any type Energy
 		# for now read the cost out of the spell (hack)
-		combat.input.process_action(PlayerCastTargeted.new(selected_spell, selected_spell.type.costs, tile))
+		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, selected_spell.type.costs, tile))
+		if valid:
+			print("Valid cast performed.")
+			state = CastingState.Selecting
+			combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
+			combat.animation.play_animation_queue()
 		# should something happen here if it doesn't work?
 
 func process_phase() -> bool:
 	state = CastingState.Selecting  # reset state
-	combat.animation.callback(combat.ui, "set_status", ["Cast your spells!"])
+	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
 	return true
 	
 	

@@ -1,12 +1,12 @@
 class_name CombatUI extends Control
 
-## This Scene and (almost) every child is meant to be replaced after Milestone-1
-
 const CNC = preload("res://UI/HandCard2D.tscn")
 
 var combat : Combat
 var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
+
+@onready var cards3d = %Cards3D
 
 func add_card(spell: Spell):
 	var card = CNC.instantiate()

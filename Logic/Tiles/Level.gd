@@ -119,13 +119,10 @@ func is_location_in_bounds(coord: Vector2i) -> bool:
 func is_location_obstructed(coord: Vector2i) -> bool:
 	var r = coord.x
 	var q = coord.y
-	var tile = tiles[r][q]
+	var tile : Tile = tiles[r][q]
 	if tile == null:
 		return true
-	for entity in tile.entities:
-		if entity.type.is_obstacle:
-			return true
-	return false
+	return tile.is_obstacle()
 	
 
 func get_tile_by_location(location: Vector2i) -> Tile:
