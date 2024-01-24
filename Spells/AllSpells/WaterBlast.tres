@@ -11,11 +11,11 @@ stack = Array[int]([4])
 script = ExtResource("1_3exxi")
 pretty_name = "Water Blast"
 costs = SubResource("Resource_gkkbv")
-effect_text = "Deal 1 Damage in Range 4"
+effect_text = "Deal 10 Damage to an Enemy within Range 4."
 fluff_text = "Fun
 
 "
 is_event_spell = false
 target = 1
-target_range = -1
+target_range = 4
 target_tag = ""
