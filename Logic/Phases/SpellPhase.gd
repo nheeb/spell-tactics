@@ -1,4 +1,4 @@
-extends AbstractPhase
+class_name SpellPhase extends AbstractPhase
 
 enum CastingState {
 	Selecting,
