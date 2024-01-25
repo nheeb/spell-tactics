@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfam461t2amia"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0q0y7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_aar25"]
+height = 0.4
+radial_segments = 6
+rings = 1
+
+[node name="EventNodeVisual" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+material_override = SubResource("StandardMaterial3D_0q0y7")
+mesh = SubResource("CylinderMesh_aar25")
