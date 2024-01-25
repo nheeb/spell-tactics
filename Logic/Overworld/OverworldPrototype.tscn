@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://flsmyabg31yq"]
+
+[ext_resource type="Script" path="res://Logic/Overworld/LevelNodes.gd" id="1_vno3f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8f7t"]
+albedo_color = Color(0.2, 1, 0.301961, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qvbou"]
+size = Vector2(20, 10)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j1gb7"]
+
+[sub_resource type="Sky" id="Sky_npntb"]
+sky_material = SubResource("ProceduralSkyMaterial_j1gb7")
+
+[sub_resource type="Environment" id="Environment_8xeb3"]
+background_mode = 2
+sky = SubResource("Sky_npntb")
+
+[node name="OverworldPrototype" type="Node3D"]
+
+[node name="ground" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_c8f7t")
+mesh = SubResource("PlaneMesh_qvbou")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8xeb3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.794584, 0.607154, 0, -0.607154, 0.794584, 0, 2.10779, 0)
+light_energy = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.552615, 4.31357, 3.11031)
+projection = 1
+size = 10.0
+
+[node name="LevelNodes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62176, 0, 0)
+script = ExtResource("1_vno3f")
