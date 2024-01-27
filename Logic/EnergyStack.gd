@@ -18,6 +18,8 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 	cost_stack.sort()
 	var bank := stack.duplicate()
 	var cost := cost_stack.stack.duplicate()
+	if EnergyType.Any in bank:
+		printerr("Any Type Energy should not be in a bank Stack")
 	var possible_payment : Array[EnergyType] = []
 	for e in cost:
 		if e != EnergyType.Any:
@@ -31,12 +33,14 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 				possible_payment.append(bank.pop_front())
 			else:
 				return null
+	if cost.size() != possible_payment.size():
+		printerr("Something went wrong in the Payment calculation")
 	return EnergyStack.new(possible_payment)
 
 func sort() -> void:
 	for e in stack:
 		if e == 0:
-			printerr("WTF")
+			printerr("WTF invalid Energy Type")
 	stack.sort()
 
 ## Applies a payment (reducing the energy by the exact energies in that payment)

@@ -12,6 +12,8 @@ var r: int
 var q: int
 var location: Vector2i
 
+@onready var level: Level = get_parent()
+
 const TILE = preload("res://Logic/Tiles/Tile.tscn")
 static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	# center position is needed to properly align the tile
@@ -72,7 +74,10 @@ func is_obstacle() -> bool:
 		if ent.type.is_obstacle:
 			return true
 	return false
-	
+
+func is_blocked() -> bool:
+	return is_obstacle() or entities.any(func(e): return e.type.is_blocker)
+
 ## Coverage factor for accuracy calculation.
 func get_coverage_factor() -> int:
 	var factor := 0
@@ -105,3 +110,9 @@ func _on_hover_timer_timeout() -> void:
 
 func _to_string() -> String:
 	return name
+
+func distance_to(other_tile: Tile) -> int:
+	return Utility.tile_distance(self, other_tile)
+
+func get_surrounding_tiles(range := 1) -> Array[Tile]:
+	return level.get_all_tiles_in_distance_of_tile(self, range)

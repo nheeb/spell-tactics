@@ -25,5 +25,7 @@ func animation_move_to(tile: Tile) -> void:
 # TODO discuss this
 func update_visuals(entity: Entity):
 	pass
-	
 
+## For overriding and making the drain effect
+func visual_drain(drained := true):
+	pass

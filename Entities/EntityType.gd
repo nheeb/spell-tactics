@@ -24,8 +24,10 @@ class_name EntityType extends Resource
 ## The energy this entity gives (if it's drainable)
 @export var energy: EnergyStack = null
 
-## Whether the player / enemies can move onto tiles containing this entity
+## Whether the player / enemies can move ONTO or OVER tiles containing this entity
 @export var is_obstacle: bool = false
+## Whether the player / enemies can move (just) ONTO tiles containing this entity
+@export var is_blocker: bool = false
 ## How good of a cover this is from projectiles (accuracy reduction)
 @export var cover_value: int = 0
 

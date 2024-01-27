@@ -6,7 +6,7 @@ func process_phase() -> bool:
 	combat.animation.property(combat.camera, "player_input_enabled", false)
 	
 	# Sort enemies by agility
-	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.type.agility > b.type.agility)
+	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.agility > b.agility)
 	
 	for enemy in combat.enemies:
 		combat.animation.camera_reach(enemy.visual_entity)

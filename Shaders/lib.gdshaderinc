@@ -48,6 +48,10 @@ float clamp_and_map_and_pow(float value, float istart, float istop, float ostart
     return ostart + (ostop - ostart) * middle_value;
 }
 
+float invert(float value) {
+	return 1.0 - value;
+}
+
 float positive_direction_of_vec2(vec2 v) {
 	return PI/2.0 + atan(v.y / v.x) + PI * float(v.x < 0.0);
 }

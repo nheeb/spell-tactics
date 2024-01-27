@@ -14,8 +14,14 @@ signal died
 
 func on_create():
 	super.on_create()
+	combat.animation.update_hp(self)
 
 func on_death():
 	combat.level.move_entity_to_graveyard(self)
 	# TODO change this later to call death animation
 	combat.animation.property(visual_entity, "visible", false)
+
+func inflict_damage(damage: int):
+	if damage == 0:
+		return
+	hp = hp - damage
