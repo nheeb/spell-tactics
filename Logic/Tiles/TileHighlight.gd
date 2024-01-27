@@ -16,6 +16,7 @@ const type_to_color := {
 	Type.Hover: Color.LIGHT_BLUE,
 	Type.HoverTarget: Color.LIGHT_CORAL,
 	Type.Energy: Color.LIME,
+	Type.Combat: Color.LIGHT_CORAL,
 }
 
 var highlight_materials = {}
@@ -54,6 +55,8 @@ func enable_highlight(type: Type):
 func disable_highlight(type: Type):
 	if type in current_highlights:
 		current_highlights.erase(type)
+	else:  # wasn't even active, so no need to update the materials
+		return
 	
 	if type == Type.Hover:
 		$HoverHexQuad.visible = false

@@ -66,6 +66,16 @@ func get_enemies() -> Array[EnemyEntity]:
 		if ent is EnemyEntity:
 			enemies.append(ent)
 	return enemies
+
+## Whether it contains at least one EnemyEntity
+func has_enemy() -> bool:
+	if r == 4 and q == 8:
+		print("break")
+	for ent in entities:
+		if ent is EnemyEntity:
+			return true
+	return false
+	
 	
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
