@@ -5,7 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_vir08"]
 script = ExtResource("1_40caj")
-stack = Array[int]([0, 2])
+stack = Array[int]([0, 0, 2])
 
 [resource]
 script = ExtResource("1_lkvqb")
@@ -13,9 +13,11 @@ internal_name = "tree"
 can_be_hovered = true
 pretty_name = "Tree"
 fluff_text = "A beautiful source of wood"
-prototype_scale = Vector2(1, 1.5)
+prototype_scale = Vector2(1.3, 1.5)
 is_terrain = false
 is_drainable = true
 energy = SubResource("Resource_vir08")
 is_obstacle = true
+is_blocker = false
 cover_value = 3
+tags = Array[String]([])

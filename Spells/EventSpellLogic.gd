@@ -42,7 +42,13 @@ func initialize_event() -> void:
 ## Processes the next round of the event. Returns true if the event is done
 func advance_event() -> bool:
 	spell.round_persistant_properties["event_current_round"] += 1
-	event_effect(spell.round_persistant_properties["event_current_round"])
+	
+	var round_number : int = spell.round_persistant_properties["event_current_round"]
+	var event_name := spell.type.pretty_name
+	var effect_text := spell.type.effect_text
+	combat.animation.callback(combat.ui, "set_status", ["Event %s (Round %s)\n%s" % [event_name, round_number, effect_text] ])
+	
+	event_effect(round_number)
 	if spell.round_persistant_properties["event_current_round"] >= get_event_length():
 		finalize_event()
 		return true

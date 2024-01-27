@@ -74,6 +74,12 @@ func update_hp(ent: HPEntity) -> AnimationProperty:
 	else:
 		return null
 
+func show(node: Node3D) -> AnimationProperty:
+	return property(node, "visible", true)
+
+func hide(node: Node3D) -> AnimationProperty:
+	return property(node, "visible", false)
+
 #######################################
 ## Logic Functions (don't use those) ##
 #######################################

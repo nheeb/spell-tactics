@@ -21,6 +21,15 @@ func get_prototype_deck(combat: Combat) -> Array[Spell]:
 		spell.id = SpellID.new(add_to_spell_count())
 	return prototype_deck
 
+func get_prototype_events(combat: Combat) -> Array[Spell]:
+	var prototype_events : Array[Spell] = []
+	
+	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/LeafDrop.tres"), combat))
+	
+	for spell in prototype_events:
+		spell.id = SpellID.new(add_to_spell_count())
+	return prototype_events
+
 var spell_count: int = 0
 ## Prototype Function for creating ids for spells. This will later be done by the Overworld
 func add_to_spell_count() -> int:

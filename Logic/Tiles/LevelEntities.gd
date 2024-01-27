@@ -6,14 +6,14 @@ var _level: Level
 func _init(level: Level):
 	_level = level
 	
-func create_entity(location: Vector2i, entity_type: EntityType) -> Entity:
+func create_entity(location: Vector2i, entity_type: EntityType, create_with_active_visuals := true) -> Entity:
 	var tile = _level.get_tile(location)
 	if tile.has_entity(entity_type):
 		return
 
 	var entity := entity_type.create_entity(_level.combat) as Entity
 	
-	entity.visual_entity.visible = true
+	entity.visual_entity.visible = create_with_active_visuals
 	_level.visual_entities.add_child(entity.visual_entity)
 	entity.visual_entity.owner = _level
 	
@@ -54,4 +54,11 @@ func get_all_entities() -> Array[Entity]:
 	for tile in _level.get_all_tiles():
 		all_entities.append_array(tile.entities)
 	all_entities.append_array(_level.graveyard)
+	return all_entities
+
+## Does not include entities in the graveyard
+func get_all_active_entities() -> Array[Entity]:
+	var all_entities: Array[Entity] = []
+	for tile in _level.get_all_tiles():
+		all_entities.append_array(tile.entities)
 	return all_entities
