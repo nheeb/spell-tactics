@@ -1,12 +1,23 @@
-extends Node3D
+class_name Overworld extends Node3D
 
+var seed: int = 0
+var map: OverworldMap
 var player_position: Vector2i = Vector2i(0, 0)
+var stage: int = 0
 
 @onready var nodes: LevelNodes = $LevelNodes
 @onready var player_marker: Node3D = $Player
 @onready var camera: Camera3D = $Camera3D
 
 func _ready():
+	SaveFile.delete()
+	if SaveFile.exists():
+		load_save()
+	else:
+		map = OverworldMap.new()
+		map.generate_prototype_layout()
+	nodes.initialise(map)
+	nodes.highlight_active_layer(player_position.x+1)
 	player_marker.global_position = nodes.node_instance_sets[player_position.x][player_position.y].global_position
 
 func _input(event):
@@ -29,10 +40,29 @@ func _click(position: Vector2):
 		var collider = raycast_result['collider']
 		var node = collider
 		if node is LevelNode:
-			_click_node (node)
+			node.click(self)
 
-func _click_node(node: LevelNode):
-	var location = node.location
-	if not location.x == player_position.x + 1:
-		return
-	get_tree().change_scene_to_file("res://Logic/Main.tscn")
+func move_to(position: Vector2i):
+	player_position = position
+	player_marker.global_position = nodes.node_instance_sets[player_position.x][player_position.y].global_position
+	
+func load_save():
+	var save_state = SaveFile.load_from_disk()
+	deserialize(save_state)
+
+func deserialize(state: OverworldState):
+	seed = state.seed
+	stage = state.stage
+	player_position = state.player_position
+	map = state.map
+
+func save():
+	SaveFile.save_to_disk(serialize())
+
+func serialize() -> OverworldState:
+	var state = OverworldState.new()
+	state.seed = seed
+	state.stage = stage
+	state.player_position = player_position
+	state.map = map
+	return state

@@ -4,37 +4,37 @@ class_name OverworldMap extends Resource
 
 func generate_prototype_layout():
 	node_sets.append([
-		NodeData.new(LevelNode.NodeType.Empty)
+		LevelNodeData.create(LevelNode.NodeType.Empty)
 	])
 	for i in range(1):
 		node_sets.append([
-			NodeData.new(LevelNode.NodeType.Battle),
-			NodeData.new(LevelNode.NodeType.Battle),
-			NodeData.new(LevelNode.NodeType.Battle),
+			LevelNodeData.create(LevelNode.NodeType.Battle),
+			LevelNodeData.create(LevelNode.NodeType.Battle),
+			LevelNodeData.create(LevelNode.NodeType.Battle),
 		])
 	node_sets.append([
-		NodeData.new(LevelNode.NodeType.Event),
-		NodeData.new(LevelNode.NodeType.Event),
+		LevelNodeData.create(LevelNode.NodeType.Event),
+		LevelNodeData.create(LevelNode.NodeType.Event),
 	])
 	node_sets.append([
-		NodeData.new(LevelNode.NodeType.Battle),
-		NodeData.new(LevelNode.NodeType.Battle),
-		NodeData.new(LevelNode.NodeType.Battle),
-		NodeData.new(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
 	])
 	node_sets.append([
-		NodeData.new(LevelNode.NodeType.Battle),
-		NodeData.new(LevelNode.NodeType.Battle),
-		NodeData.new(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
 	])
 	node_sets.append([
-		NodeData.new(LevelNode.NodeType.Event),
-		NodeData.new(LevelNode.NodeType.Event),
+		LevelNodeData.create(LevelNode.NodeType.Event),
+		LevelNodeData.create(LevelNode.NodeType.Event),
 	])
 	node_sets.append([
-		NodeData.new(LevelNode.NodeType.Battle),
-		NodeData.new(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
+		LevelNodeData.create(LevelNode.NodeType.Battle),
 	])
 	node_sets.append([
-		NodeData.new(LevelNode.NodeType.Boss)
+		LevelNodeData.create(LevelNode.NodeType.Boss)
 	])

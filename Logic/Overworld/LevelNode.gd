@@ -7,7 +7,7 @@ enum NodeType {
 	Boss
 }
 
-@export var data: NodeData
+@export var data: LevelNodeData
 @export var location: Vector2i
 
 var _visual: Node3D
@@ -32,10 +32,9 @@ func highlight_selectable(flag: bool):
 		else:
 			child.material_override = null
 
-
-func _on_input_event(camera, event, pos, normal, shape_idx):
-	print(event)
-
-
-func _on_mouse_entered():
-	print('mouse entered') # Replace with function body.
+func click(overworld: Overworld):
+	if not location.x == overworld.player_position.x + 1:
+		return
+	overworld.move_to(location)
+	overworld.save()
+	get_tree().change_scene_to_file("res://Logic/Main.tscn")
