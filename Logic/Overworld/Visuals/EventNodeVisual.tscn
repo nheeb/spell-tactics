@@ -4,6 +4,7 @@
 albedo_color = Color(1, 0.933333, 0.458824, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_aar25"]
+material = SubResource("StandardMaterial3D_0c84k")
 height = 0.4
 radial_segments = 6
 rings = 1
@@ -12,5 +13,4 @@ rings = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-material_override = SubResource("StandardMaterial3D_0c84k")
 mesh = SubResource("CylinderMesh_aar25")
