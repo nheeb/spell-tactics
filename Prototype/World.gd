@@ -12,7 +12,7 @@ func _ready() -> void:
 	var combat_state: CombatState = load('res://Levels/Area1/rivers.tres') as CombatState
 	combat = combat_state.deserialize()
 	add_child(combat)
-	combat.camera = $GameCamera
+	#combat.camera = $GameCamera
 	level = combat.level
 	add_child(combat.level)
 	# construct references to ui_root which lives outside this 3d viewport
@@ -21,7 +21,7 @@ func _ready() -> void:
 	debug_ui = ui_root.get_node("DebugUI")
 	combat_ui = COMBAT_UI.instantiate()
 	ui_root.add_child(combat_ui)
-	combat.connect_with_ui(combat_ui)
+	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 	
 
 	
@@ -94,7 +94,8 @@ func _on_load_game_pressed(id: String) -> void:
 	combat_ui = COMBAT_UI.instantiate()
 	var ui_root = get_tree().get_first_node_in_group("ui_root")
 	ui_root.add_child(combat_ui)
-	combat.connect_with_ui(combat_ui)
+	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
+	combat.animation.play_animation_queue()
 
 var tile_toggle := false
 func _on_toggle_tile_labels_pressed() -> void:

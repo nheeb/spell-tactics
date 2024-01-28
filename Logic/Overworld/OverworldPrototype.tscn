@@ -1,12 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://flsmyabg31yq"]
+[gd_scene load_steps=19 format=3 uid="uid://flsmyabg31yq"]
 
+[ext_resource type="Texture2D" uid="uid://c1fri6h5fndvk" path="res://Assets/Sprites/PrototypeBillboard/tree.png" id="1_4uek2"]
+[ext_resource type="Script" path="res://Logic/Overworld/Overworld.gd" id="1_b23bk"]
 [ext_resource type="Script" path="res://Logic/Overworld/LevelNodes.gd" id="1_vno3f"]
+[ext_resource type="PackedScene" uid="uid://d4el0sk15132i" path="res://Assets/Models/Prototype/overworld-prototype.blend" id="3_of01p"]
+[ext_resource type="PackedScene" uid="uid://ctxh4xx08dxss" path="res://Assets/Models/Prototype/overworld terrain.blend" id="4_b5ah0"]
+[ext_resource type="FontFile" uid="uid://cgljgdhswqtmj" path="res://Assets/Fonts/Gothica-Bold.ttf" id="5_yydue"]
+[ext_resource type="PackedScene" uid="uid://02tehbwfpaun" path="res://Logic/Overworld/OverworldPlayerMarker.tscn" id="6_caugn"]
+[ext_resource type="Texture2D" uid="uid://dydt6whqkjeba" path="res://Assets/Sprites/Icons/stack.png" id="6_qnmd3"]
+[ext_resource type="Texture2D" uid="uid://cxsh8c3020etw" path="res://Assets/Sprites/Icons/hearts.png" id="7_vqqih"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5onu"]
+transparency = 1
+albedo_texture = ExtResource("1_4uek2")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_yxp28"]
+material = SubResource("StandardMaterial3D_x5onu")
+center_offset = Vector3(0, 1.5, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8f7t"]
 albedo_color = Color(0.2, 1, 0.301961, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_qvbou"]
-size = Vector2(20, 10)
+[sub_resource type="CylinderMesh" id="CylinderMesh_b478i"]
+top_radius = 4.0
+bottom_radius = 0.0
+height = 0.1
+radial_segments = 6
+rings = 1
+
+[sub_resource type="MultiMesh" id="MultiMesh_7hiy2"]
+transform_format = 1
+instance_count = 38
+mesh = SubResource("QuadMesh_yxp28")
+buffer = PackedFloat32Array(-1.001, 0, 0, -5.31057, 0, 1.001, 0, 0.05, 0, 0, -1.001, -11.2938, 0.500292, 0.0144422, 0.866892, -4.20817, 0.0288844, -1.00058, 0, 0.048991, 0.86653, 0.0250146, -0.5005, -6.07487, 1.001, 0, 0, -7.26572, 0, 1.001, 0, 0.05, 0, 0, 1.001, -6.62253, -0.500281, -0.0144418, -0.866898, -6.47591, 0.0288841, -1.00058, 0, -0.0358492, -0.866537, -0.0250146, 0.500489, -9.29127, 0.5005, 0, -0.866892, -8.16632, 0, 1.001, 0, 0.05, 0.866892, 0, 0.5005, -8.90988, 0.5005, 0, 0.866892, -5.59281, 0, 1.001, 0, 0.05, -0.866892, 0, 0.5005, -8.64241, -0.5005, 0, -0.866892, -6.06612, 0, 1.001, 0, 0.05, 0.866892, 0, -0.5005, -10.0886, -0.5005, 0, 0.866892, -4.12887, 0, 1.001, 0, 0.05, -0.866892, 0, -0.5005, -8.89609, 0.500772, 0.0144422, -0.866614, -3.19335, -0.014438, -1.00058, -0.0250177, 0.0336892, -0.866614, 0.0250153, -0.500355, -7.27284, -0.5005, 0, 0.866892, -3.58311, 0, 1.001, 0, 0.05, -0.866892, 0, -0.5005, -7.9369, -0.500292, -0.0144422, -0.866892, -8.30973, 0.0288843, -1.00058, 0, 0.0454278, -0.86653, -0.0250146, 0.5005, -11.4836, 0.5005, 0, 0.866892, -4.50536, 0, 1.001, 0, 0.05, -0.866892, 0, 0.5005, -6.69176, -1.00058, -0.0288852, 0, -8.9764, 0.0288852, -1.00058, 0, 0.035921, 0, 0, 1.001, -8.68807, 0.500292, 0.0144424, -0.866892, -4.56008, 0.0288848, -1.00058, 0, 0.0129472, -0.86653, -0.0250149, -0.5005, -10.6866, -0.500292, -0.0144422, -0.866892, -7.28534, 0.0288843, -1.00058, 0, 0.0329553, -0.86653, -0.0250146, 0.5005, -11.5761, 0.5005, 0, 0.866892, -5.29006, 0, 1.001, 0, 0.05, -0.866892, 0, 0.5005, -7.24552, -0.5005, 0, -0.866892, -7.88262, 0, 1.001, 0, 0.05, 0.866892, 0, -0.5005, -10.3405, 0.500292, 0.0144424, -0.866892, -4.22943, 0.0288848, -1.00058, 0, 0.0309899, -0.86653, -0.0250149, -0.5005, -11.2174, 0.500772, 0.0144422, -0.866614, -5.20201, -0.014438, -1.00058, -0.0250177, 0.00659878, -0.866614, 0.0250153, -0.500355, -7.19676, -0.5005, 0, 0.866892, -5.52073, 0, 1.001, 0, 0.05, -0.866892, 0, -0.5005, -8.82555, -0.5005, 0, 0.866892, -3.65157, 0, 1.001, 0, 0.05, -0.866892, 0, -0.5005, -8.78291, 1.0009, -0.0144418, 0, -6.29082, -0.0144373, -1.00058, -0.0250172, 0.0128932, 0.000360931, 0.0250146, -1.00069, -6.65217, -1.001, 0, 0, -5.18372, 0, 1.001, 0, 0.05, 0, 0, -1.001, -10.1443, -0.500292, -0.0144424, 0.866891, -8.65352, 0.0288848, -1.00058, 0, 0.0376212, 0.86653, 0.0250149, 0.5005, -7.02715, 1.00058, 0.0288852, 0, -3.37881, 0.0288852, -1.00058, 0, 0.0256665, 0, 0, -1.001, -8.53537, 1.0009, -0.0144418, 0, -6.45514, -0.0144373, -1.00058, -0.0250172, 0.0167183, 0.000360931, 0.0250146, -1.00069, -6.59403, -1.001, 0, 0, -4.86998, 0, 1.001, 0, 0.05, 0, 0, -1.001, -12.1517, -1.00058, -0.0288852, 0, -8.99189, 0.0288852, -1.00058, 0, 0.0363682, 0, 0, 1.001, -8.75415, 1.001, 0, 0, -6.39746, 0, 1.001, 0, 0.05, 0, 0, 1.001, -8.00675, -0.500292, -0.0144424, 0.866892, -6.38221, 0.0288848, -1.00058, 0, 0.0499368, 0.86653, 0.0250149, 0.5005, -5.2232, -0.5005, 0, -0.866892, -7.25977, 0, 1.001, 0, 0.05, 0.866892, 0, -0.5005, -11.2218, -1.00058, -0.0288852, 0, -8.76142, 0.0288852, -1.00058, 0, 0.0297147, 0, 0, 1.001, -9.81108, -0.500772, -0.0144422, 0.866614, -7.77771, -0.014438, -1.00058, -0.0250177, 0.0212868, 0.866614, -0.0250153, 0.500355, -10.8251, -0.500281, -0.0144418, 0.866898, -6.30618, 0.0288841, -1.00058, 0, -0.0350941, 0.866537, 0.0250146, 0.500489, -8.58053, 1.00058, 0.0288852, 0, -2.70265, 0.0288852, -1.00058, 0, 0.0451863, 0, 0, -1.001, -8.21406, 0.5005, 0, 0.866891, -4.65191, 0, 1.001, 0, 0.05, -0.866891, 0, 0.5005, -6.9482, 1.0009, -0.0144418, 0, -6.06952, -0.0144373, -1.00058, -0.0250172, 0.00106691, 0.000360931, 0.0250146, -1.00069, -6.99746, -0.5005, 0, 0.866892, -5.69052, 0, 1.001, 0, 0.05, -0.866892, 0, -0.5005, -8.84036)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j1gb7"]
 
@@ -16,12 +44,52 @@ sky_material = SubResource("ProceduralSkyMaterial_j1gb7")
 [sub_resource type="Environment" id="Environment_8xeb3"]
 background_mode = 2
 sky = SubResource("Sky_npntb")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_tgtdm"]
+density = 0.4
+albedo = Color(0, 0, 0, 1)
 
 [node name="OverworldPrototype" type="Node3D"]
+script = ExtResource("1_b23bk")
 
-[node name="ground" type="MeshInstance3D" parent="."]
+[node name="overworld-prototype" parent="." instance=ExtResource("3_of01p")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -4)
+visible = false
+
+[node name="tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50551, -0.5, -2)
+visible = false
+mesh = SubResource("QuadMesh_yxp28")
+skeleton = NodePath("../forest")
+
+[node name="forest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50551, -0.5, -7)
 material_override = SubResource("StandardMaterial3D_c8f7t")
-mesh = SubResource("PlaneMesh_qvbou")
+mesh = SubResource("CylinderMesh_b478i")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="forest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
+multimesh = SubResource("MultiMesh_7hiy2")
+
+[node name="forest2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.49449, -0.5, -7)
+material_override = SubResource("StandardMaterial3D_c8f7t")
+mesh = SubResource("CylinderMesh_b478i")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="forest2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
+multimesh = SubResource("MultiMesh_7hiy2")
+
+[node name="forest3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50551, -0.2, 6.3)
+material_override = SubResource("StandardMaterial3D_c8f7t")
+mesh = SubResource("CylinderMesh_b478i")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="forest3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
+multimesh = SubResource("MultiMesh_7hiy2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8xeb3")
@@ -31,10 +99,91 @@ transform = Transform3D(1, 0, 0, 0, 0.794584, 0.607154, 0, -0.607154, 0.794584, 
 light_energy = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.552615, 4.31357, 3.11031)
+transform = Transform3D(1, 0, 0, 0, 0.597443, 0.801911, 0, -0.801911, 0.597443, -1.62821, 6.14216, 1.68686)
 projection = 1
-size = 10.0
+size = 9.96124
+
+[node name="FogVolume" type="FogVolume" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.597443, -0.801911, 0, 0.801911, 0.597443, -1, -5.50191, -2.13604)
+size = Vector3(100, 3, 3)
+material = SubResource("FogMaterial_tgtdm")
+
+[node name="FogVolume2" type="FogVolume" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.597443, -0.801911, 0, 0.801911, 0.597443, -1, 5.58615, -2.91478)
+size = Vector3(100, 3, 3)
+material = SubResource("FogMaterial_tgtdm")
 
 [node name="LevelNodes" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62176, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62176, 0, -1.72141)
 script = ExtResource("1_vno3f")
+
+[node name="overworld terrain" parent="." instance=ExtResource("4_b5ah0")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -4.88826)
+
+[node name="Player" parent="." instance=ExtResource("6_caugn")]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -59.0
+offset_right = 295.0
+offset_bottom = -36.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_yydue")
+theme_override_font_sizes/font_size = 60
+text = "1 - The enchanted forest"
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -162.0
+offset_top = 50.0
+offset_right = -40.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_qnmd3")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="UI/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yydue")
+theme_override_font_sizes/font_size = 30
+text = "100"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI"]
+layout_direction = 2
+layout_mode = 1
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 293.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("7_vqqih")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="UI/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yydue")
+theme_override_font_sizes/font_size = 30
+text = "5"

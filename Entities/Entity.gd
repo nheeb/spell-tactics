@@ -17,6 +17,8 @@ var current_tile: Tile
 var combat: Combat
 var energy: EnergyStack
 
+var custom_props := {}
+
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
 const entity_internal_props = ["current_tile", "visual_entity", "logical_entity", "type", "combat", "actions", "movements", "forced_actions", "forced_movements"]
@@ -63,7 +65,7 @@ func is_drainable():
 
 ## This will be executed after an entity has been created from a type
 func on_create() -> void:
-	pass
+	visual_entity.visible = false
 
 func get_reference() -> EntityReference:
 	return EntityReference.new(self)

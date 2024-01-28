@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=2 format=3 uid="uid://dhkq4klm4snnk"]
+
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_hui2k"]
+
+[resource]
+script = ExtResource("1_hui2k")
+pretty_name = "Autumn Breeze"
+effect_text = "A tree looses his leafs."
+fluff_text = ""
+is_event_spell = true
+target = 0
+target_range = -1
+target_tag = ""

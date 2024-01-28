@@ -48,8 +48,9 @@ func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSign
 	add_animation_object(a)
 	return a
 
-func say(target: Node3D, text: String, duration := 1.7) -> AnimationEffect:
-	return effect(SAY_EFFECT, target, {"text": text, "duration": duration})
+func say(target: Node3D, text: String, params := {}) -> AnimationEffect:
+	params["text"] = text
+	return effect(SAY_EFFECT, target, params)
 
 func camera_set_player_input(enabled: bool) -> AnimationProperty:
 	return property(combat.camera, "player_input_enabled", enabled)
@@ -66,6 +67,18 @@ func camera_reach(target: Node3D) -> Array[AnimationObject]:
 	animations.append(property(combat.camera, "just_reach_target", true).set_flag(AnimationObject.Flags.PlayWithStep))
 	animations.append(wait_for_signal(combat.camera, "target_reached").set_flag(AnimationObject.Flags.ExtendStep))
 	return animations
+
+func update_hp(ent: HPEntity) -> AnimationProperty:
+	if ent.visual_entity.has_node("HPLabel"):
+		return property(ent.visual_entity.get_node("HPLabel"), "text", "%s / %s" % [ent.hp, ent.type.max_hp])
+	else:
+		return null
+
+func show(node: Node3D) -> AnimationProperty:
+	return property(node, "visible", true)
+
+func hide(node: Node3D) -> AnimationProperty:
+	return property(node, "visible", false)
 
 #######################################
 ## Logic Functions (don't use those) ##

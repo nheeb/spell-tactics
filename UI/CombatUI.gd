@@ -33,9 +33,12 @@ func _on_next_pressed():
 	combat.input.process_action(PlayerPass.new())
 
 func _on_cast_pressed():
-	var clean_payment_text : String = $EnergyPayment.text
+	var payment_text : String = $EnergyPayment.text
+	var clean_payment_text : String = payment_text
 	if ":" in clean_payment_text:
 		clean_payment_text = clean_payment_text.split(":")[-1]
+	else:
+		clean_payment_text = ""
 	var payment := EnergyStack.string_to_energy(clean_payment_text)
 	if is_instance_valid(selected_spell):
 		combat.input.process_action(PlayerCast.new(selected_spell, payment))

@@ -8,7 +8,10 @@ enum Behaviour {
 }
 
 @export var behaviour: Behaviour
-@export var agility: int
+@export var agility: int = 0
+@export var strength: int = 1
+@export var accuracy: int = 0
+@export var resistance: int = 0
 @export var actions: Array[String]
 @export var movements: Array[String]
 @export var passives: Array[String]
@@ -33,6 +36,10 @@ func create_entity(combat: Combat) -> EnemyEntity:
 		ent.type = self
 		
 	ent.hp = max_hp
+	ent.agility = agility
+	ent.strength = strength
+	ent.accuracy = accuracy
+	ent.resistance = resistance
 
 	ent.on_create()
 

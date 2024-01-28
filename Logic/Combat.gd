@@ -104,10 +104,10 @@ func setup() -> void:
 	#discard_pile = []
 	#hand = []
 
-func connect_with_ui(_ui: CombatUI) -> void:
+func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
 	ui.combat = self
-	
+	camera = cam
 	# Update UI
 	for spell in hand:
 		ui.add_card(spell)
@@ -190,3 +190,8 @@ func get_all_spells() -> Array[Spell]:
 	all_spells.append_array(event.events)
 	return all_spells
 
+func resolve_reference(ref) -> Object:
+	if ref == null:
+		return null
+	assert(ref is EntityReference or ref is SpellReference)
+	return ref.resolve(self)

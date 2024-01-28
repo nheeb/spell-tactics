@@ -52,6 +52,11 @@ func set_max_duration(d: float) -> AnimationObject:
 	max_duration = d
 	return self
 
+func set_duration(d: float) -> AnimationObject:
+	set_min_duration(d)
+	set_max_duration(d)
+	return self
+
 func _play(level: Level) -> void:
 	animation_done_internally.connect(internal_animation_done)
 	await VisualTime.visual_process

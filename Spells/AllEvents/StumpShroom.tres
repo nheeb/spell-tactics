@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=2 format=3 uid="uid://bb3o0li0gq8ju"]
+
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_csax5"]
+
+[resource]
+script = ExtResource("1_csax5")
+pretty_name = "Autumn Breeze"
+effect_text = "Shrooms are growing on a stump."
+fluff_text = ""
+is_event_spell = true
+target = 0
+target_range = -1
+target_tag = ""
