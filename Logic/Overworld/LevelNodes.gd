@@ -1,18 +1,13 @@
 class_name LevelNodes extends Node3D
 
-@export var map: OverworldMap
-
 const spacing_x = 2
 const spacing_z = 2.5
 
 var node_instance_sets = []
 
-func _ready():
-	map = OverworldMap.new()
-	map.generate_prototype_layout()
-	generate_nodes()
-	generate_roads()
-	highlight_active_layer(1)
+func initialise(map: OverworldMap):
+	generate_nodes(map)
+	generate_roads(map)
 	
 func highlight_active_layer(index: int):
 	for i in range(len(node_instance_sets)):
@@ -27,7 +22,7 @@ func get_terrain_height(pos: Vector3) -> Vector3:
 		return result["position"] as Vector3
 	return pos
 
-func generate_nodes():
+func generate_nodes(map: OverworldMap):
 	var pos_x = 0.0
 	var i = 0
 	for node_set in map.node_sets:
@@ -48,17 +43,17 @@ func generate_nodes():
 		i += 1
 	pass
 	
-func generate_roads():
+func generate_roads(map: OverworldMap):
 	var i = 0
 	for node_set in map.node_sets:
 		if i != 0:
 			var j = 0
 			for node_data in node_set:
-					generate_road(i, j)
+					generate_road(map, i, j)
 					j += 1
 		i += 1
 		
-func generate_road(i: int, j: int):
+func generate_road(map: OverworldMap, i: int, j: int):
 	var to_instance : LevelNode = node_instance_sets[i][j]
 	var k = 0
 	for node_data in map.node_sets[i-1]:
