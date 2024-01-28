@@ -131,8 +131,14 @@ func get_tile_by_location(location: Vector2i) -> Tile:
 ## returns a list of Tiles forming the straight line between tile1 and tile2.
 ## (obstacles are ignored)
 func get_line(tile1: Tile, tile2: Tile) -> Array[Tile]:
-	# TODO
-	return []
+	var line : Array[Tile] = []
+	var dist := tile1.distance_to(tile2)
+	var pos1 = Vector2(tile1.location)
+	var pos2 = Vector2(tile2.location)
+	for i in range(dist+1):
+		line.append(get_tile_by_location(Vector2i(round(lerp(pos1, pos2, float(i)/dist)))))
+	
+	return line
 
 ## this can be used for enemy movement, since it respects obstacles.
 func get_shortest_path(tile1: Tile, tile2: Tile) -> Array[Tile]:

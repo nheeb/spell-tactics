@@ -13,3 +13,4 @@ func effect_start() -> void:
 	tween.tween_property($OmniLight3D, "light_energy", 0.0, duration)
 	await tween.finished
 	effect_done.emit()
+	queue_free()

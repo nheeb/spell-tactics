@@ -15,7 +15,9 @@ func get_score() -> float:
 		return 0.0
 	match enemy.type.behaviour:
 		EnemyEntityType.Behaviour.Fighter:
-			return 2.1
+			return 2.0
+		EnemyEntityType.Behaviour.Archer:
+			return .5
 	return 0.0
 
 ## Executes the move
