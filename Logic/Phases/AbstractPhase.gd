@@ -12,9 +12,6 @@ func tile_hovered(tile: Tile):
 func tile_clicked(tile: Tile):
 	pass
 
-
-
-
 ## For overriding Processes the phase. Returns true if Player input is needed to advance to the next phase
 func process_phase() -> bool:
 	printerr("Abstract Phase used")

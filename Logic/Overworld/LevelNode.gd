@@ -8,14 +8,34 @@ enum NodeType {
 }
 
 @export var data: NodeData
+@export var location: Vector2i
+
+var _visual: Node3D
 
 func _ready():
+	var visual: Node3D
 	if data.type == NodeType.Event:
-		add_child(preload("res://Logic/Overworld/Visuals/EventNodeVisual.tscn").instantiate())
+		visual = preload("res://Logic/Overworld/Visuals/EventNodeVisual.tscn").instantiate()
 	elif data.type == NodeType.Boss:
-		add_child(preload("res://Logic/Overworld/Visuals/BossNodeVisual.tscn").instantiate())
+		visual = preload("res://Logic/Overworld/Visuals/BossNodeVisual.tscn").instantiate()
 	else:
-		add_child(preload("res://Logic/Overworld/Visuals/GenericNodeVisual.tscn").instantiate())
+		visual = preload("res://Logic/Overworld/Visuals/GenericNodeVisual.tscn").instantiate()
+	_visual = visual
+	add_child(visual)
 
-func _process(delta):
-	pass
+func highlight_selectable(flag: bool):
+	for child in _visual.get_children():
+		if not child is MeshInstance3D:
+			return
+		if flag:
+			child.material_override = preload("res://Logic/Overworld/selectable.tres")
+		else:
+			child.material_override = null
+
+
+func _on_input_event(camera, event, pos, normal, shape_idx):
+	print(event)
+
+
+func _on_mouse_entered():
+	print('mouse entered') # Replace with function body.
