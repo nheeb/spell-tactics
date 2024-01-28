@@ -14,7 +14,8 @@ signal died
 
 func on_create():
 	super.on_create()
-	combat.animation.update_hp(self)
+	if not Engine.is_editor_hint():
+		combat.animation.update_hp(self)
 
 func on_death():
 	combat.level.move_entity_to_graveyard(self)

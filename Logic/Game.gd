@@ -25,6 +25,7 @@ func get_prototype_events(combat: Combat) -> Array[Spell]:
 	var prototype_events : Array[Spell] = []
 	
 	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/LeafDrop.tres"), combat))
+	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/StumpShroom.tres"), combat))
 	
 	for spell in prototype_events:
 		spell.id = SpellID.new(add_to_spell_count())

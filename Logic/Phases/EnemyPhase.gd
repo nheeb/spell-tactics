@@ -18,7 +18,6 @@ func process_phase() -> bool:
 		
 		combat.player.arch_enemy = enemy.get_reference()
 	
-	combat.animation.camera_reach(combat.player.visual_entity)
-	combat.animation.property(combat.camera, "player_input_enabled", true)
+	# Player camera input will be reenabled in the end phase
 	
 	return false
