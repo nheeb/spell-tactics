@@ -21,8 +21,8 @@ enum Target {
 	None,
 	Enemy,
 	Tile,
-	Tag,
-	Condition, # custom bool func in SpellLogic
+	Tag, # TODO
+	Condition, # TODO, custom bool func in SpellLogic
 }
 
 ## Which, if any, targets this spell requires

@@ -58,37 +58,44 @@ visible = false
 
 [node name="Edge1" type="MeshInstance3D" parent="Highlight/Edges"]
 transform = Transform3D(0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, 0.0319599, 0.42628, 0, 0.738338)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../../..")
 
 [node name="Edge2" type="MeshInstance3D" parent="Highlight/Edges"]
 transform = Transform3D(0.8941, 0, 0.018452, 0, 0.235877, 0, -0.516209, 0, 0.0319599, -0.429618, 0, -0.744119)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../../..")
 
 [node name="Edge3" type="MeshInstance3D" parent="Highlight/Edges"]
 transform = Transform3D(-5.85972e-08, 0, 0.0369041, 0, 0.235877, 0, -0.983099, 0, -3.72529e-09, -0.866, 0, 0.003)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../../..")
 
 [node name="Edge4" type="MeshInstance3D" parent="Highlight/Edges"]
 transform = Transform3D(-6.11726e-08, 0, 0.0369041, 0, 0.235877, 0, -1.02631, 0, -3.72529e-09, 0.852, 0, 0)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../../..")
 
 [node name="Edge5" type="MeshInstance3D" parent="Highlight/Edges"]
 transform = Transform3D(-0.857549, 0, 0.018452, 0, 0.235877, 0, -0.495107, 0, -0.0319599, 0.433373, 2.38419e-07, -0.755619)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../../..")
 
 [node name="Edge6" type="MeshInstance3D" parent="Highlight/Edges"]
 transform = Transform3D(-0.877268, 0, 0.018452, 0, 0.235877, 0, -0.506491, 0, -0.0319599, -0.436516, 2.38419e-07, 0.751075)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_ltq8m")
 skeleton = NodePath("../../..")
 
 [node name="HoverHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
 visible = false
+cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("5_ihgi2")
@@ -96,6 +103,7 @@ surface_material_override/0 = ExtResource("5_ihgi2")
 [node name="HoverTargetHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
 visible = false
+cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("6_bryv2")
@@ -103,6 +111,7 @@ surface_material_override/0 = ExtResource("6_bryv2")
 [node name="CombatHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
 visible = false
+cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("7_p4ipm")

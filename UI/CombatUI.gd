@@ -73,12 +73,12 @@ func set_status(text: String):
 const energy_min_size := 32
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 func set_current_energy(energy: EnergyStack):
-	for c in $Energy.get_children():
+	for c in $EnergyArea/EnergyList.get_children():
 		if c is EnergyIcon:
 			c.queue_free()
 	for e in energy.stack:
 		var icon = ENERGY_ICON.instantiate()
-		$Energy.add_child(icon)
+		$EnergyArea/EnergyList.add_child(icon)
 		icon.type = e
 		icon.min_size = energy_min_size
 		
