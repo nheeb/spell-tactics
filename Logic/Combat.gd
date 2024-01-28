@@ -39,6 +39,9 @@ var deck: Array[Spell]
 var hand: Array[Spell]
 var discard_pile: Array[Spell]
 
+## combat, items, etc.
+var actives: Array[Spell]
+
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
@@ -91,6 +94,8 @@ func setup() -> void:
 			Game.add_to_spell_count()
 
 	# TODO connect entity & spell references
+	
+	actives = [Spell.new(SpellType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self)]
 
 #func create_prototype_level():
 #
@@ -111,6 +116,8 @@ func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	# Update UI
 	for spell in hand:
 		ui.add_card(spell)
+		
+	ui.actives = actives
 
 func advance_current_phase():
 	# go to next phase

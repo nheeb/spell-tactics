@@ -69,8 +69,6 @@ func get_enemies() -> Array[EnemyEntity]:
 
 ## Whether it contains at least one EnemyEntity
 func has_enemy() -> bool:
-	if r == 4 and q == 8:
-		print("break")
 	for ent in entities:
 		if ent is EnemyEntity:
 			return true

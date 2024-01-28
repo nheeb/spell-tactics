@@ -45,9 +45,10 @@ const ALL_EVENTS_FOLDER = "res://Spells/AllEvents/"
 func _on_load() -> void:
 	if internal_name == "":
 		internal_name = resource_path.split("/")[-1].split(".")[0]
-		if is_event_spell:
-			logic = load(ALL_EVENTS_FOLDER + internal_name + ".gd")
-		else:
-			logic = load(ALL_SPELLS_FOLDER + internal_name + ".gd")
+		var directory = "/".join(resource_path.split("/").slice(0, -1))
+		#if is_event_spell:  # TODO remove is_event property
+		logic = load(directory + "/" + internal_name + ".gd")
+		#else:
+			#logic = load(directory + internal_name + ".gd")
 	if costs == null:
 		costs = EnergyStack.new([])

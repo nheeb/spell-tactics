@@ -5,6 +5,7 @@ const CNC = preload("res://UI/HandCard2D.tscn")
 var combat : Combat
 var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
+var actives: Array[Spell]
 
 @onready var cards3d = %Cards3D
 
@@ -93,3 +94,7 @@ func update_payable_cards():
 
 func _ready() -> void:
 	deselect_card()
+
+
+func _on_melee_button_pressed() -> void:
+	combat.input.process_action(SelectActive.new(actives[0]))
