@@ -32,8 +32,12 @@ func do_move(moveset: Array[EnemyMove], forced_moveset: Array[EnemyMove] = []) -
 	if forced_moveset.is_empty():
 		var scores : Array[float] = []
 		scores.append_array(moveset.map(func(x): return x.get_score()))
-		var selected_move : EnemyMove = moveset[Utility.random_index_of_scores(scores)]
-		selected_move.execute()
+		var index := Utility.random_index_of_scores(scores)
+		if index == -1:
+			printerr("%s has no move to choose." % type.pretty_name)
+		else:
+			var selected_move : EnemyMove = moveset[index]
+			selected_move.execute()
 	else:
 		for forced_move in forced_moveset:
 			forced_move.execute()

@@ -5,7 +5,7 @@ const FOLIAGE = preload("res://Entities/Environment/Foliage.tres")
 
 ## Usable references:
 ## spell - Corresponding event
-##   (with round_persistant_properties & combat_persistant_properties)
+##   (with round_persistant_properties)
 ## combat - The current combat for which the spell was created
 
 
@@ -16,10 +16,16 @@ func get_event_length() -> int:
 ## Most important function for overwriting. Here should be the event effect
 func event_effect(round_number: int) -> void:
 	if round_number <= 1:
-		return
-	var all_trees : Array[Entity] = combat.level.entities().get_all_active_entities().filter(func(e): return e.type.internal_name == "tree")
-	if all_trees:
-		var tree : Entity = all_trees.pick_random() as Entity
+		var all_trees : Array[Entity] = combat.level.entities().get_all_active_entities().filter(func(e): return e.type.internal_name == "tree")
+		if all_trees:
+			var tree : Entity = all_trees.pick_random() as Entity
+			spell.round_persistant_properties["target"] = tree.get_reference()
+			combat.animation.camera_reach(tree.visual_entity)
+			combat.animation.say(tree.visual_entity, "The leaves tremble in the wind.", {"color": Color.YELLOW, "font": "italic"})
+	else:
+		var tree : Entity = combat.resolve_reference(spell.round_persistant_properties.get("target")) as Entity
+		if tree == null:
+			return
 		var tile := tree.current_tile
 		combat.animation.camera_reach(tree.visual_entity)
 		
