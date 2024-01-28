@@ -1,4 +1,4 @@
-extends AbstractPhase
+class_name SpellPhase extends AbstractPhase
 
 enum CastingState {
 	Selecting,
@@ -9,6 +9,7 @@ enum CastingState {
 
 var state: CastingState = CastingState.Selecting
 var selected_spell: Spell
+var highlighted_targets: Array[Tile]
 
 func _ready() -> void:
 	pass
@@ -26,6 +27,7 @@ func tile_clicked(tile: Tile):
 		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, selected_spell.type.costs, tile))
 		if valid:
 			state = CastingState.Selecting
+			combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 			combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
 			combat.animation.play_animation_queue()
 		# should something happen here if it doesn't work?
@@ -35,19 +37,34 @@ func process_phase() -> bool:
 	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
 	return true
 	
-	
+
 func select_spell(spell: Spell):
 	selected_spell = spell
 	if spell.type.target != SpellType.Target.None:
 		# wait for player to target
 		state = CastingState.Targeting
 		combat.animation.callback(combat.ui, "set_status", ["Choose the target!"])
+		#combat.animation.callback()
+		highlighted_targets = get_spell_targets(selected_spell)
+		combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 		
 	# else proceed to energy / casting
+		
 
-func show_spell_targets(spell: Spell):
-	#set_status("Select Target")
-	pass  # TODO but maybe not here in UI, this is
+
+func get_spell_targets(spell: Spell) -> Array[Tile]:
+	var target_range = spell.type.target_range  
+	var tiles: Array[Tile]
+	if target_range != -1:
+		tiles = combat.level.get_all_tiles_in_distance_of_tile(combat.player.current_tile, 
+															   target_range)
+	else:
+		tiles = combat.level.get_all_tiles()
+	
+	# for now just Spells targeted on Enemy, 
+	# later we have to check the target type in SpellType
+	tiles = tiles.filter(func(t): return t.has_enemy())
+	return tiles 
 
 
 #func _on_input_utility_performed_action(action: PlayerAction) -> void:

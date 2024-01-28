@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://cno3vyggwl5f0"]
+[gd_scene load_steps=6 format=3 uid="uid://cno3vyggwl5f0"]
 
 [ext_resource type="Texture2D" uid="uid://c7w7f3br882sq" path="res://Assets/Sprites/PrototypeBillboard/goblin.png" id="1_bhg3o"]
 [ext_resource type="Script" path="res://Entities/Visuals/PrototypeBillboard.gd" id="1_kqx6u"]
+[ext_resource type="Shader" path="res://Shaders/PrototypeBillboard.gdshader" id="2_jmlwr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqyhl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6fqy"]
 resource_local_to_scene = true
-transparency = 1
-shading_mode = 0
-albedo_texture = ExtResource("1_bhg3o")
-billboard_mode = 2
-billboard_keep_scale = true
+render_priority = 0
+shader = ExtResource("2_jmlwr")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/drain_progress = 0.0
+shader_parameter/texture_albedo = ExtResource("1_bhg3o")
 
 [sub_resource type="QuadMesh" id="QuadMesh_qkllw"]
 size = Vector2(1.5, 2)
@@ -19,5 +25,5 @@ script = ExtResource("1_kqx6u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_jqyhl")
+material_override = SubResource("ShaderMaterial_e6fqy")
 mesh = SubResource("QuadMesh_qkllw")

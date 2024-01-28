@@ -29,8 +29,9 @@ func _ready() -> void:
 	combat.animation.play_animation_queue()
 	
 	await get_tree().process_frame
-	# FIXME looser coupling World - Cards3D would be preferable
+	# FIXME looser coupling World with Cards3D and Combat would be preferable
 	%MouseRaycast.cards3d = combat_ui.cards3d
+	%MouseRaycast.combat = combat
 
 
 var flip := false

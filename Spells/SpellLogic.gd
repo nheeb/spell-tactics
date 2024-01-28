@@ -12,6 +12,8 @@ func _init(_spell: Spell):
 
 ## Tests if payment is possible
 func is_payment_valid(payment: EnergyStack = null) -> bool:
+	if payment == null:
+		payment = EnergyStack.new()
 	return payment.get_possible_payment(get_costs()) != null
 
 ## Returns combination of the other valids. Is being used by PlayerCast to execute the cast

@@ -4,6 +4,32 @@ extends RayCast3D
 # A reference to cards3d is needed here to see if the hover/click input is meant for this RayCast
 # or the one in Cards3D (cards3d has priority, since it is "on top" visually)
 var cards3d: Cards3D = null
+# for checking current GamePhase
+var combat: Combat
+
+var targeting: bool = false
+func enable_highlight(tile: Tile):
+	if combat != null:  # check if targeting with a spell
+		if combat.current_phase == Combat.RoundPhase.Spell:
+			var spell_phase = combat.get_phase_node(combat.current_phase)
+			if spell_phase.state == SpellPhase.CastingState.Targeting:
+				targeting = true
+			else:
+				targeting = false
+		else:
+			targeting = false
+		
+	tile.set_highlight(Highlight.Type.HoverTarget if targeting else Highlight.Type.Hover, true)
+	Events.tile_hovered.emit(tile)
+	tile.get_node("HoverTimer").start()
+	
+func disable_highlight(tile: Tile):
+	tile.set_highlight(Highlight.Type.Hover, false)
+	tile.set_highlight(Highlight.Type.HoverTarget, false)
+	tile.hovering = false
+	tile.get_node("HoverTimer").stop()
+	Events.tile_unhovered.emit(tile)
+
 
 var currently_hovering: Tile = null
 func _physics_process(delta: float) -> void:
@@ -22,23 +48,15 @@ func _physics_process(delta: float) -> void:
 			if collider.is_in_group("tile_area"):
 				var tile: Tile = collider.get_parent()
 				if tile != currently_hovering:
-					tile.set_highlight(Highlight.Type.Hover, true)
-					Events.tile_hovered.emit(tile)
-					tile.get_node("HoverTimer").start()
+					enable_highlight(tile)
 				
 				if currently_hovering != null and currently_hovering != tile:
-					currently_hovering.set_highlight(Highlight.Type.Hover, false)
-					currently_hovering.hovering = false
-					currently_hovering.get_node("HoverTimer").stop()
-					Events.tile_unhovered.emit(currently_hovering)
-					
+					disable_highlight(currently_hovering)
+
 				currently_hovering = tile
 	else:
 		if currently_hovering != null:
-			currently_hovering.set_highlight(Highlight.Type.Hover, false)
-			currently_hovering.get_node("HoverTimer").stop()
-			currently_hovering.hovering = false
-			Events.tile_unhovered.emit(currently_hovering)
+			disable_highlight(currently_hovering)
 			currently_hovering = null
 			
 	if currently_hovering and Input.is_action_just_pressed("select"):

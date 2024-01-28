@@ -31,6 +31,8 @@ func deserialize() -> Combat:
 		combat.deck.append_array(Game.get_prototype_deck(combat))
 	combat.event.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.event.current_event = current_event
+	if combat.event.events.is_empty():
+		combat.event.events.append_array(Game.get_prototype_events(combat))
 	combat.timed_effects = timed_effects
 	combat.setup()
 	combat.log.add("Combat was deserialized.")

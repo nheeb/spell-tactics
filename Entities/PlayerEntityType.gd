@@ -14,7 +14,7 @@ func create_entity(combat: Combat) -> PlayerEntity:
 		# CARE, this might lead to lag, depending on the use we might want to instantiate later
 		ent.visual_entity = self.visual_scene.instantiate()
 		assert(ent.visual_entity is VisualPlayer)
-		ent.hp_changed.connect(ent.visual_entity.update_hp)
+		#ent.hp_changed.connect(ent.visual_entity.update_hp)
 		ent.visual_entity.type = self
 		ent.type = self
 		
@@ -25,5 +25,7 @@ func create_entity(combat: Combat) -> PlayerEntity:
 		ent.type = self
 
 	ent.hp = max_hp
+
+	ent.on_create()
 
 	return ent

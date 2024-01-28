@@ -6,14 +6,26 @@ var movements: Array[EnemyMove]
 #var passives: Array[Node]
 
 ## To implement things like stuns / combo attacks / ...
-var forced_movements: Array[EnemyMove]
-var forced_actions: Array[EnemyMove]
+#var forced_movements: Array[EnemyMove]
+#var forced_actions: Array[EnemyMove]
+
+enum Teams {
+	Evil,
+	Good,
+}
+
+var team := Teams.Evil
+
+var agility: int = 0
+var strength: int = 1
+var accuracy: int = 0
+var resistance: int = 0
 
 func do_movement() -> void:
-	do_move(movements, forced_movements)
+	do_move(movements)
 
 func do_action() -> void:
-	do_move(actions, forced_actions)
+	do_move(actions)
 
 func do_move(moveset: Array[EnemyMove], forced_moveset: Array[EnemyMove] = []) -> void:
 	# TODO use move.get_score(self) to decide on a move and execute it

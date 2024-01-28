@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=2 format=3 uid="uid://kq07x16lyno7"]
+
+[ext_resource type="Script" path="res://Entities/EnemyEntityType.gd" id="1_uc3fh"]
+
+[resource]
+script = ExtResource("1_uc3fh")
+behaviour = 1
+agility = -1
+strength = 1
+accuracy = 3
+resistance = 0
+actions = Array[String](["Insult", "RandomAgression", "ArrowShot"])
+movements = Array[String](["RandomMovement"])
+passives = Array[String]([])
+max_hp = 5
+internal_name = "goblin_archer"
+can_be_hovered = true
+pretty_name = "Goblin Archer"
+fluff_text = ""
+prototype_scale = Vector2(1, 1)
+is_terrain = false
+is_drainable = false
+is_obstacle = false
+is_blocker = true
+cover_value = 0
+tags = Array[String]([])

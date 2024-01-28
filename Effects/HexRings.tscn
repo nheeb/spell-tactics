@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmmddf27jd70g"]
+
+[ext_resource type="Script" path="res://Effects/HexRings.gd" id="1_2yjwv"]
+[ext_resource type="Shader" path="res://Shaders/HexRings.gdshader" id="2_bih6v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8dyr7"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_bih6v")
+shader_parameter/albedo = Color(0.682353, 0.752941, 0, 1)
+shader_parameter/progress = 0.0
+shader_parameter/p_start = -0.405
+shader_parameter/p_end = 1.03
+shader_parameter/rings = 3
+shader_parameter/ring_dist = 0.18
+shader_parameter/thickness = 2.69
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_u5aid"]
+top_radius = 1.0
+bottom_radius = 1.0
+radial_segments = 6
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[node name="HexRings" type="Node3D"]
+script = ExtResource("1_2yjwv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("ShaderMaterial_8dyr7")
+mesh = SubResource("CylinderMesh_u5aid")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+omni_range = 2.56865

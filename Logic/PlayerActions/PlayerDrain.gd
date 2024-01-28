@@ -24,5 +24,6 @@ func execute(combat: Combat) -> void:
 			continue
 		# entity.drain() removes the energy from that entity as a side-effect
 		combat.energy.gain(entity.drain())
+		combat.animation.callback(entity.visual_entity, "visual_drain").set_max_duration(.5)
 		
 	# TODO animation_queue send entity got drained signal to the visual instance
