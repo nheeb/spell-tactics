@@ -10,7 +10,7 @@ func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Movement:
 		return false
 	
-	if destination.is_obstacle():
+	if destination.is_obstacle(Constants.INT64_MAX):
 		return false
 	
 	var distance = Utility.tile_distance(combat.player.current_tile, destination)

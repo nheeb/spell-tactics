@@ -66,3 +66,6 @@ func serialize() -> OverworldState:
 	state.player_position = player_position
 	state.map = map
 	return state
+
+func set_active() -> void:
+	camera.make_current()

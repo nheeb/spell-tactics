@@ -6,6 +6,8 @@ const SAVE_DIR_RES = "res://Prototype/Savefiles/"
 const SAVE_DIR_USER = "user://"
 const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
+var view_orchestrator: ViewOrchestrator = null
+
 var tree : SceneTree : 
 	get:
 		return get_tree()

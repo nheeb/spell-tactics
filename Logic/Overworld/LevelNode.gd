@@ -37,4 +37,4 @@ func click(overworld: Overworld):
 		return
 	overworld.move_to(location)
 	overworld.save()
-	get_tree().change_scene_to_file("res://Logic/Main.tscn")
+	Game.view_orchestrator.transition_to_combat(data.level_path)

@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=9 format=3 uid="uid://brhegqlf0sm1x"]
 
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Prototype/World.tscn" id="1_dlhxl"]
+[ext_resource type="Script" path="res://Logic/ViewOrchestrator.gd" id="1_hv6af"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_3ykw6"]
+[ext_resource type="PackedScene" uid="uid://flsmyabg31yq" path="res://Logic/Overworld/Overworld.tscn" id="2_688l4"]
 [ext_resource type="Script" path="res://UI/DebugUI.gd" id="2_gty54"]
 [ext_resource type="Script" path="res://UI/PopUpHandler.gd" id="3_mq6gx"]
 [ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="4_4622k"]
@@ -17,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="3DViewportContainer" type="SubViewportContainer" parent="."]
+[node name="CombatViewport" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +28,8 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="3DViewport" type="SubViewport" parent="3DViewportContainer"]
+[node name="3DViewport" type="SubViewport" parent="CombatViewport"]
+own_world_3d = true
 handle_input_locally = false
 msaa_3d = 1
 use_debanding = true
@@ -34,7 +37,27 @@ physics_object_picking = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="World" parent="3DViewportContainer/3DViewport" instance=ExtResource("1_dlhxl")]
+[node name="World" parent="CombatViewport/3DViewport" instance=ExtResource("1_dlhxl")]
+
+[node name="OverworldViewport" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="3DViewport" type="SubViewport" parent="OverworldViewport"]
+own_world_3d = true
+handle_input_locally = false
+msaa_3d = 1
+use_debanding = true
+physics_object_picking = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="OverworldPrototype" parent="OverworldViewport/3DViewport" instance=ExtResource("2_688l4")]
 
 [node name="UILayer" type="CanvasLayer" parent="." groups=["ui_root"]]
 
@@ -152,24 +175,31 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_mq6gx")
-viewport = NodePath("../../3DViewportContainer/3DViewport")
+viewport = NodePath("../../CombatViewport/3DViewport")
 
 [node name="PopUp" parent="PopupsLayer/PopUpHandler" instance=ExtResource("4_4622k")]
-visible = false
 layout_mode = 0
 offset_left = 855.0
 offset_top = 451.0
 offset_right = 966.0
 offset_bottom = 504.0
 
-[connection signal="load_game_pressed" from="UILayer/DebugUI" to="3DViewportContainer/3DViewport/World" method="_on_load_game_pressed"]
-[connection signal="save_game_pressed" from="UILayer/DebugUI" to="3DViewportContainer/3DViewport/World" method="_on_save_game_pressed"]
-[connection signal="pressed" from="UILayer/DebugUI/List/LineButton" to="3DViewportContainer/3DViewport/World" method="_on_line_button_pressed"]
-[connection signal="pressed" from="UILayer/DebugUI/List/NavButton" to="3DViewportContainer/3DViewport/World" method="_on_nav_button_pressed"]
-[connection signal="pressed" from="UILayer/DebugUI/List/EntityFindButton" to="3DViewportContainer/3DViewport/World" method="_on_entity_find_button_pressed"]
-[connection signal="pressed" from="UILayer/DebugUI/List/MovementRangeButton" to="3DViewportContainer/3DViewport/World" method="_on_movement_range_button_pressed"]
-[connection signal="pressed" from="UILayer/DebugUI/List/MoveRockButton" to="3DViewportContainer/3DViewport/World" method="_on_move_rock_button_pressed"]
-[connection signal="pressed" from="UILayer/DebugUI/List/DamagePlayer" to="3DViewportContainer/3DViewport/World" method="_on_damage_player_pressed"]
+[node name="ViewOrchestrator" type="Node" parent="." node_paths=PackedStringArray("combat_viewport", "world", "overworld_viewport", "overworld", "combat_ui")]
+script = ExtResource("1_hv6af")
+combat_viewport = NodePath("../CombatViewport")
+world = NodePath("../CombatViewport/3DViewport/World")
+overworld_viewport = NodePath("../OverworldViewport")
+overworld = NodePath("../OverworldViewport/3DViewport/OverworldPrototype")
+combat_ui = NodePath("../UILayer")
+
+[connection signal="load_game_pressed" from="UILayer/DebugUI" to="CombatViewport/3DViewport/World" method="_on_load_game_pressed"]
+[connection signal="save_game_pressed" from="UILayer/DebugUI" to="CombatViewport/3DViewport/World" method="_on_save_game_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/LineButton" to="CombatViewport/3DViewport/World" method="_on_line_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/NavButton" to="CombatViewport/3DViewport/World" method="_on_nav_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/EntityFindButton" to="CombatViewport/3DViewport/World" method="_on_entity_find_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/MovementRangeButton" to="CombatViewport/3DViewport/World" method="_on_movement_range_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/MoveRockButton" to="CombatViewport/3DViewport/World" method="_on_move_rock_button_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/List/DamagePlayer" to="CombatViewport/3DViewport/World" method="_on_damage_player_pressed"]
 [connection signal="pressed" from="UILayer/DebugUI/List/SaveLevel" to="UILayer/DebugUI" method="_on_save_level_pressed"]
 [connection signal="pressed" from="UILayer/DebugUI/List/LoadLevel" to="UILayer/DebugUI" method="_on_load_level_pressed"]
-[connection signal="pressed" from="UILayer/DebugUI/ShowDebug" to="3DViewportContainer/3DViewport/World" method="_on_show_debug_pressed"]
+[connection signal="pressed" from="UILayer/DebugUI/ShowDebug" to="CombatViewport/3DViewport/World" method="_on_show_debug_pressed"]
