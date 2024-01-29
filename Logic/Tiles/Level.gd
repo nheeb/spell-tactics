@@ -249,7 +249,7 @@ func unhighlight_entity_type(type: EntityType):
 func entities() -> LevelEntities:
 	return LevelEntities.new(self)
 
-func search(from: Vector2i, to: Vector2i, mask: int) -> LevelSearch:
+func search(from: Vector2i, to: Vector2i, mask: int = Constants.INT64_MAX) -> LevelSearch:
 	return LevelSearch.new(self, from, to, mask)
 
 # ----- tool part -----
