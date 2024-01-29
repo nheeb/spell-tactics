@@ -5,6 +5,7 @@ const CNC = preload("res://UI/HandCard2D.tscn")
 var combat : Combat
 var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
+var actives: Array[Spell]
 
 @onready var cards3d = %Cards3D
 
@@ -76,12 +77,12 @@ func set_status(text: String):
 const energy_min_size := 32
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 func set_current_energy(energy: EnergyStack):
-	for c in $Energy.get_children():
+	for c in $EnergyArea/EnergyList.get_children():
 		if c is EnergyIcon:
 			c.queue_free()
 	for e in energy.stack:
 		var icon = ENERGY_ICON.instantiate()
-		$Energy.add_child(icon)
+		$EnergyArea/EnergyList.add_child(icon)
 		icon.type = e
 		icon.min_size = energy_min_size
 		
@@ -93,3 +94,7 @@ func update_payable_cards():
 
 func _ready() -> void:
 	deselect_card()
+
+
+func _on_melee_button_pressed() -> void:
+	combat.input.process_action(SelectActive.new(actives[0]))

@@ -9,10 +9,10 @@ signal card_selected(spell: Spell)
 
 const HAND_CARD = preload("res://UI/HandCard.tscn")
 func add_card(card_2d: HandCard2D):
-	
 	var hand_card = HAND_CARD.instantiate()
 	hand_card.set_card(card_2d)
 	cards.add_child(hand_card)
+	hand_card.owner = self
 	var n = cards.get_child_count()
 	#print("n = %d, offset = %d" % [n, calc_offset(n)])
 	#hand_card.position.x = calc_x_offset(n, n)

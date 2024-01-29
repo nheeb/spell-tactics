@@ -11,7 +11,6 @@ func _init(_spell: Spell, _payment: EnergyStack, _target) -> void:
 func is_valid(combat: Combat) -> bool:
 	var super_valid: bool = super(combat)
 	# TODO valid target
-	# TODO valid range
 	
 	var range_valid = true
 	if spell.type.target_range != -1:  # -1 means infinite range
