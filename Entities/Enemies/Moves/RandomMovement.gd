@@ -7,7 +7,7 @@ func get_score() -> float:
 ## Executes the move
 func execute() -> void:
 	var tiles_in_range := combat.level.get_all_tiles_in_distance_of_tile(enemy.current_tile, 2)
-	tiles_in_range = tiles_in_range.filter(func(tile): return not tile.is_obstacle())
+	tiles_in_range = tiles_in_range.filter(func(tile): return not tile.is_obstacle(Constants.INT64_MAX))
 	if not tiles_in_range.is_empty():
 		var target: Tile = tiles_in_range.pick_random() as Tile
 		var path := combat.level.get_shortest_path(enemy.current_tile, target)

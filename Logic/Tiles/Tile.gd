@@ -79,14 +79,14 @@ func has_enemy() -> bool:
 	
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
-func is_obstacle() -> bool:
+func is_obstacle(mask: int = Constants.INT64_MAX) -> bool:
+	var mask_aggregate: int = 0
 	for ent in entities:
-		if ent.type.is_obstacle:
-			return true
-	return false
+		mask_aggregate = mask_aggregate | ent.type.obstacle_layer
+	return (mask & mask_aggregate) > 0
 
 func is_blocked() -> bool:
-	return is_obstacle() or entities.any(func(e): return e.type.is_blocker)
+	return is_obstacle(Constants.INT64_MAX) or entities.any(func(e): return e.type.is_blocker)
 
 ## Coverage factor for accuracy calculation.
 func get_coverage_factor() -> int:

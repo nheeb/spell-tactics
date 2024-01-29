@@ -116,13 +116,13 @@ func is_location_in_bounds(coord: Vector2i) -> bool:
 		return false
 	return tiles[r][q] != null
 	
-func is_location_obstructed(coord: Vector2i) -> bool:
+func is_location_obstructed(coord: Vector2i, mask: int) -> bool:
 	var r = coord.x
 	var q = coord.y
 	var tile : Tile = tiles[r][q]
 	if tile == null:
 		return true
-	return tile.is_obstacle()
+	return tile.is_obstacle(mask)
 	
 
 func get_tile_by_location(location: Vector2i) -> Tile:
@@ -141,8 +141,8 @@ func get_line(tile1: Tile, tile2: Tile) -> Array[Tile]:
 	return line
 
 ## this can be used for enemy movement, since it respects obstacles.
-func get_shortest_path(tile1: Tile, tile2: Tile) -> Array[Tile]:
-	var search_object := search(tile1.location, tile2.location)
+func get_shortest_path(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX) -> Array[Tile]:
+	var search_object := search(tile1.location, tile2.location, mask)
 	search_object.execute()
 	var location_path := search_object.path
 	var path: Array[Tile] = []
@@ -249,8 +249,8 @@ func unhighlight_entity_type(type: EntityType):
 func entities() -> LevelEntities:
 	return LevelEntities.new(self)
 
-func search(from: Vector2i, to: Vector2i) -> LevelSearch:
-	return LevelSearch.new(self, from, to)
+func search(from: Vector2i, to: Vector2i, mask: int) -> LevelSearch:
+	return LevelSearch.new(self, from, to, mask)
 
 # ----- tool part -----
 @export var create_catan_grid: bool = false:
