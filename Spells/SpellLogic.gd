@@ -41,6 +41,7 @@ func cast(payment: EnergyStack = null) -> void:
 			spell.unlocked = false
 	else:  # else the spell comes from the hand, discard it
 		combat.cards.discard(spell)
+		combat.get_phase_node(Combat.RoundPhase.Spell).state = SpellPhase.CastingState.Selecting
 	
 	
 

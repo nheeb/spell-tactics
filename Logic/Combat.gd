@@ -28,6 +28,8 @@ enum RoundPhase {
 @onready var input: InputUtility = %InputUtility
 @onready var event: EventUtility = %EventUtility
 
+signal next_round
+
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
 
@@ -111,13 +113,8 @@ func setup() -> void:
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
-	ui.combat = self
+	ui.setup(self)
 	camera = cam
-	# Update UI
-	for spell in hand:
-		ui.add_card(spell)
-		
-	ui.initialize_active_buttons(actives)
 
 func advance_current_phase():
 	# go to next phase
@@ -131,7 +128,7 @@ func process_current_phase() -> bool:
 	return get_phase_node(current_phase)._process_phase()
 
 func get_phase_node(phase: RoundPhase) -> AbstractPhase:
-	match current_phase:
+	match phase:
 		RoundPhase.Start:
 			return %StartPhase
 		RoundPhase.Movement:

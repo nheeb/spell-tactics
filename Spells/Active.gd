@@ -11,3 +11,4 @@ var unlocked: bool = true:
 		else:
 			got_unlocked.emit()
 		unlocked = u
+		round_persistant_properties["unlocked"] = u

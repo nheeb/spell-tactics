@@ -9,6 +9,9 @@ var camera : Camera3D
 @onready var combat_ui : CombatUI
 @onready var debug_ui: Control
 
+func _ready() -> void:
+	Game.world = self
+
 func start_combat(level_path: String) -> void:
 	if combat != null:
 		_reset_combat()
@@ -34,6 +37,7 @@ func start_combat(level_path: String) -> void:
 	# FIXME looser coupling World with Cards3D and Combat would be preferable
 	%MouseRaycast.cards3d = combat_ui.cards3d
 	%MouseRaycast.combat = combat
+	%MouseRaycast.enabled = true
 
 func _reset_combat():
 	if combat == null:

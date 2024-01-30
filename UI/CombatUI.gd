@@ -1,6 +1,6 @@
 class_name CombatUI extends Control
 
-const CNC = preload("res://UI/HandCard2D.tscn")
+
 
 var combat : Combat
 var cards : Array[HandCard2D]  # is this needed?
@@ -9,11 +9,41 @@ var actives: Array[Active]
 
 @onready var cards3d = %Cards3D
 
+func setup(_combat: Combat):
+	self.combat = _combat
+	# Update UI
+	for spell in self.combat.hand:
+		add_card(spell)
+
+	# set actives
+	actives = _combat.actives
+	_combat.next_round.connect(next_round)
+	initialize_active_buttons(actives)
+	update_payable_cards()
+	
+	# connect to spell phase
+	combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)
+
+func _on_changed_casting_state(s: SpellPhase.CastingState):
+	if s == SpellPhase.CastingState.SettingEnergy:
+		$Cast.disabled = false
+	else:
+		$Cast.disabled = true
+
+func next_round(current_round: int):
+	pass
+
+const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 func add_card(spell: Spell):
-	var card = CNC.instantiate()
+	var card = HAND_CARD_2D.instantiate()
 	card.set_spell(spell)
 	cards.append(card)
 	%Cards3D.add_card(card)
+	if combat.energy.is_payable(spell.type.costs):
+		# spell is available
+		card.set_enabled(true)
+	else:
+		card.set_enabled(false)
 
 func remove_card(spell: Spell):
 	var card_to_remove = null
@@ -52,7 +82,7 @@ func _on_cast_pressed():
 func select_card(spell: Spell):
 	deselect_card()
 	selected_spell = spell
-	var selected_card = CNC.instantiate()
+	var selected_card = HAND_CARD_2D.instantiate()
 	selected_card.set_spell(spell, false)
 	$SelectedCardContainer.add_child(selected_card)
 	$EnergyPayment.visible = true
@@ -101,9 +131,18 @@ func set_current_energy(energy: EnergyStack):
 		icon.type = e
 		icon.min_size = energy_min_size
 		
+	update_payable_cards()
+		
 		
 func update_payable_cards():
-	pass
+	for hand_card2d in cards:
+		var spell: Spell = hand_card2d.spell
+		if combat.energy.is_payable(spell.type.costs):
+			# spell is available
+			hand_card2d.set_enabled(true)
+		else:
+			hand_card2d.set_enabled(false)
+			# can't cast spell
 	
 
 func _ready() -> void:
@@ -121,3 +160,10 @@ func _on_active_unlocked(i: int) -> void:
 func _on_active_locked(i: int) -> void:
 	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
 	button.disabled = true
+
+
+func _on_button_entered() -> void:
+	Game.world.get_node("%MouseRaycast").disabled = true
+
+func _on_button_exited() -> void:
+	Game.world.get_node("%MouseRaycast").disabled = false

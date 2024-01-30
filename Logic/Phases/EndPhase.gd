@@ -7,4 +7,7 @@ func process_phase() -> bool:
 	combat.animation.camera_reach(combat.player.visual_entity)
 	combat.animation.property(combat.camera, "player_input_enabled", true)
 	
+	combat.current_round += 1
+	combat.next_round.emit(combat.current_round)
+	
 	return false

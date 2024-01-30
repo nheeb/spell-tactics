@@ -8,7 +8,7 @@ func _init(selected: Active) -> void:
 	
 func is_valid(combat: Combat) -> bool:
 	# is payable (validation, but unpayable spell should not be able to be selected in UI)
-	return true
+	return selected_active.unlocked
 
 func execute(combat: Combat) -> void:
 	combat.get_phase_node(combat.current_phase).select_spell(selected_active)

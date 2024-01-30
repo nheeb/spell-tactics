@@ -55,6 +55,7 @@ anchor_bottom = 0.600309
 offset_right = 8.0
 offset_bottom = 8.0
 theme_override_font_sizes/font_size = 36
+disabled = true
 text = "CAST"
 metadata/_edit_use_anchors_ = true
 
@@ -169,6 +170,10 @@ text = "Energy:"
 label_settings = ExtResource("3_wybdv")
 metadata/_edit_use_anchors_ = true
 
+[connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
+[connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="mouse_entered" from="Cast" to="." method="_on_button_entered"]
+[connection signal="mouse_exited" from="Cast" to="." method="_on_button_exited"]
 [connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]
 [connection signal="card_selected" from="AspectRatioContainer/CardViewportContainer/CardViewport/Cards3D" to="." method="select_card"]

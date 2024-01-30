@@ -7,6 +7,8 @@ var cards3d: Cards3D = null
 # for checking current GamePhase
 var combat: Combat
 
+var disabled := false
+
 var targeting: bool = false
 func enable_highlight(tile: Tile):
 	if combat != null:  # check if targeting with a spell
@@ -42,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		
 	
 	# if something has been hit and hasn't been hit in Cards3D as well
-	if is_colliding() and (cards3d == null or not cards3d.raycast_hit):
+	if is_colliding() and (cards3d == null or not cards3d.raycast_hit) and not disabled:
 		var collider = get_collider()
 		if collider is Area3D:
 			if collider.is_in_group("tile_area"):

@@ -8,6 +8,8 @@ const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var view_orchestrator: ViewOrchestrator = null
 
+var world: World = null
+
 var tree : SceneTree : 
 	get:
 		return get_tree()

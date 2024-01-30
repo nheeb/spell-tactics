@@ -78,8 +78,9 @@ func _process(delta: float) -> void:
 			hand_card.card_2d.set_hover(true)
 			currently_hovering = hand_card.card_2d
 			if Input.is_action_just_pressed("select"):
-				get_viewport().set_input_as_handled()
-				card_selected.emit(hand_card.get_spell())
+				if hand_card.card_2d.enabled:
+					get_viewport().set_input_as_handled()
+					card_selected.emit(hand_card.get_spell())
 	else:
 		if currently_hovering != null:
 			currently_hovering.set_hover(false)

@@ -20,5 +20,6 @@ func process_phase() -> bool:
 	for active in combat.actives:
 		if active.type.unlocked_once_per_round:
 			active.unlocked = true
+		# check active unlocked conditions
 	
 	return true
