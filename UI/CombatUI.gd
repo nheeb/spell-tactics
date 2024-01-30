@@ -5,7 +5,7 @@ const CNC = preload("res://UI/HandCard2D.tscn")
 var combat : Combat
 var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
-var actives: Array[Spell]
+var actives: Array[Active]
 
 @onready var cards3d = %Cards3D
 
@@ -72,6 +72,21 @@ func deselect_card():
 
 func set_status(text: String):
 	$Status.text = text
+	
+
+const ACTIVE_BUTTON = preload("res://UI/CombatUI/ActiveButton.tscn")
+func initialize_active_buttons(new_actives: Array[Active]):
+	actives = new_actives
+	var i = 0
+	for active in actives:
+		var button = ACTIVE_BUTTON.instantiate()
+		button.name = "ActiveButton%d" % i
+		button.pressed.connect(_on_active_button_pressed.bind(i))
+		active.got_locked.connect(_on_active_locked.bind(i))
+		active.got_unlocked.connect(_on_active_unlocked.bind(i))
+		i += 1
+		$Actives/VBoxContainer.add_child(button)
+		button.owner = self
 
 
 const energy_min_size := 32
@@ -89,12 +104,20 @@ func set_current_energy(energy: EnergyStack):
 		
 func update_payable_cards():
 	pass
-		
 	
 
 func _ready() -> void:
 	deselect_card()
 
 
-func _on_melee_button_pressed() -> void:
-	combat.input.process_action(SelectActive.new(actives[0]))
+func _on_active_button_pressed(i: int) -> void:
+	print("pressed ", i)
+	combat.input.process_action(SelectActive.new(actives[i]))
+	
+func _on_active_unlocked(i: int) -> void:
+	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	button.disabled = false
+	
+func _on_active_locked(i: int) -> void:
+	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	button.disabled = true

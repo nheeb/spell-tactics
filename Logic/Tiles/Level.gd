@@ -46,7 +46,7 @@ func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).
 	# This makes it so the top-left tile will have coordinates 0,0 in the tiles 2D array
 	# The origin tile will be centered at the position of the Level node.
-	# initiate 2d Array, it will have dimensions (2n, 2n)
+	# initiate 2d Array, it will have dimensions (2n+1, 2n+1)
 	init_tiles_array(2*n+1, 2*n+1)
 
 	for r in range(0, 2*n + 1):
@@ -169,8 +169,17 @@ func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int) -> Array
 						tiles_in_distance.append(tile)
 
 	return tiles_in_distance
+
+
+func get_center_tile() -> Tile:
+	@warning_ignore("integer_division")
+	var r_center: int = n_rows / 2
+	@warning_ignore("integer_division")
+	var q_center: int = n_cols / 2
 	
-	
+	return tiles[r_center][q_center]
+
+
 func _highlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 	for tile in highlight_tiles:
 		tile.set_highlight(type, true)

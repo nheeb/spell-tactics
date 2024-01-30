@@ -1,7 +1,7 @@
 @tool
 class_name SpellType extends Resource
 
-@export_category("Attributes")
+@export_category("Spell Attributes")
 ## Lowercase unique entity identifier
 var internal_name: String = ""
 ## Name that will be shown ingame

@@ -35,7 +35,14 @@ func pay_for_spell(payment: EnergyStack) -> void:
 func cast(payment: EnergyStack = null) -> void:
 	pay_for_spell(payment)
 	casting_effect()
-	combat.cards.discard(spell)
+	if spell is Active:
+		var type = spell.type as ActiveType
+		if type.unlocked_once_per_round:  # if this is a once-per-round active, lock it
+			spell.unlocked = false
+	else:  # else the spell comes from the hand, discard it
+		combat.cards.discard(spell)
+	
+	
 
 ## The current costs with all the modifiers if there are any
 func get_costs() -> EnergyStack:

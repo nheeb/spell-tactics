@@ -1,18 +1,19 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://dysn0gn8hgs5c"]
+[gd_resource type="Resource" script_class="ActiveType" load_steps=4 format=3 uid="uid://duhyg28aqh66q"]
 
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_06vfc"]
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="2_ux2r3"]
+[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_3w50l"]
+[ext_resource type="Script" path="res://Spells/ActiveType.gd" id="1_y6tb2"]
 
-[sub_resource type="Resource" id="Resource_ufdj6"]
-script = ExtResource("1_06vfc")
+[sub_resource type="Resource" id="Resource_x3rms"]
+script = ExtResource("1_3w50l")
 stack = Array[int]([])
 
 [resource]
-script = ExtResource("2_ux2r3")
+script = ExtResource("1_y6tb2")
+unlocked_once_per_round = true
 pretty_name = "SimpleMelee"
-costs = SubResource("Resource_ufdj6")
-effect_text = "Simple Melee (1 DMG)"
-fluff_text = "Simple"
+costs = SubResource("Resource_x3rms")
+effect_text = "Deal 1 damage in Range 1"
+fluff_text = ""
 is_event_spell = false
 target = 1
 target_range = 1

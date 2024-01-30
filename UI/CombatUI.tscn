@@ -132,21 +132,13 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
 metadata/_edit_use_anchors_ = true
 
-[node name="MeleeButton" type="Button" parent="Actives"]
-custom_minimum_size = Vector2(150, 150)
+[node name="VBoxContainer" type="VBoxContainer" parent="Actives"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -61.0
 grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("2_2hiqp")
-theme_override_font_sizes/font_size = 43
-text = "Melee"
+grow_vertical = 2
 
 [node name="EnergyArea" type="Panel" parent="."]
 layout_mode = 1
@@ -180,4 +172,3 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]
 [connection signal="card_selected" from="AspectRatioContainer/CardViewportContainer/CardViewport/Cards3D" to="." method="select_card"]
-[connection signal="pressed" from="Actives/MeleeButton" to="." method="_on_melee_button_pressed"]

@@ -1,8 +1,8 @@
 class_name SelectActive extends PlayerAction
 
-var selected_active: Spell
+var selected_active: Active
 
-func _init(selected: Spell) -> void:
+func _init(selected: Active) -> void:
 	selected_active = selected
 	action_string = "Select spell %s" % selected
 	

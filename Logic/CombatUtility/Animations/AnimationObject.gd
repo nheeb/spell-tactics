@@ -58,6 +58,9 @@ func set_duration(d: float) -> AnimationObject:
 	return self
 
 func _play(level: Level) -> void:
+	#if animation_done_internally.is_connected(internal_animation_done):
+		#print("ERROR")
+	
 	animation_done_internally.connect(internal_animation_done)
 	await VisualTime.visual_process
 	if delay > 0.0:
