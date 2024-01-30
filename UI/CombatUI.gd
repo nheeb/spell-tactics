@@ -20,6 +20,7 @@ func setup(_combat: Combat):
 	_combat.next_round.connect(next_round)
 	initialize_active_buttons(actives)
 	update_payable_cards()
+	cards3d.combat = _combat
 	
 	# connect to spell phase
 	combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)

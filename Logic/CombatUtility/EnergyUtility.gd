@@ -11,7 +11,7 @@ func pay(payment: EnergyStack) -> void:
 	
 func is_payable(payment: EnergyStack) -> bool:
 	var possible: EnergyStack = player_energy.get_possible_payment(payment)
-	return possible != null and not possible.stack.is_empty()
+	return possible != null
 	
 
 

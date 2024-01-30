@@ -44,6 +44,7 @@ func process_phase() -> bool:
 	
 
 func select_spell(spell: Spell):
+	assert(combat.current_phase == combat.RoundPhase.Spell, "selected a spell outside of spell phase")
 	selected_spell = spell
 	if spell.type.target != SpellType.Target.None:
 		# wait for player to target

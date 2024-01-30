@@ -7,6 +7,8 @@ signal card_selected(spell: Spell)
 
 @export var card_gap = 0.06
 
+var combat: Combat
+
 const HAND_CARD = preload("res://UI/HandCard.tscn")
 func add_card(card_2d: HandCard2D):
 	var hand_card = HAND_CARD.instantiate()
@@ -78,7 +80,11 @@ func _process(delta: float) -> void:
 			hand_card.card_2d.set_hover(true)
 			currently_hovering = hand_card.card_2d
 			if Input.is_action_just_pressed("select"):
-				if hand_card.card_2d.enabled:
+				var combat_agrees = true
+				if combat != null:
+					if combat.current_phase != Combat.RoundPhase.Spell:
+						combat_agrees = false
+				if hand_card.card_2d.enabled and combat_agrees:
 					get_viewport().set_input_as_handled()
 					card_selected.emit(hand_card.get_spell())
 	else:
