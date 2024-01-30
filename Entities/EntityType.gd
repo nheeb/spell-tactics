@@ -24,8 +24,10 @@ class_name EntityType extends Resource
 ## The energy this entity gives (if it's drainable)
 @export var energy: EnergyStack = null
 
-## Whether the player / enemies can move ONTO or OVER tiles containing this entity
-@export var is_obstacle: bool = false
+## The obstacle layer for collisions.
+@export_flags_2d_physics var obstacle_layer: int = 0
+## The default obstacle layer mask for grid search.
+@export_flags_2d_physics var obstacle_mask: int = 0
 ## Whether the player / enemies can move (just) ONTO tiles containing this entity
 @export var is_blocker: bool = false
 ## How good of a cover this is from projectiles (accuracy reduction)
