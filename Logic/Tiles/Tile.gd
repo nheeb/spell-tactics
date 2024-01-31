@@ -116,6 +116,15 @@ func _on_hover_timer_timeout() -> void:
 	Events.tile_hovered_long.emit(self)
 	#print("Hovered tile %d, %d" % [r, q])
 
+
+## Returns the combined obstacle layers of this tile's entities
+func get_obstacle_layers() -> int:
+	var layers: int = 0
+	for ent in entities:
+		layers |= ent.type.obstacle_layer
+	return layers
+	
+
 func _to_string() -> String:
 	return name
 

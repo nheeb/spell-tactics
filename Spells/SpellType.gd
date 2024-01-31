@@ -19,8 +19,9 @@ var logic: Script
 
 enum Target {
 	None,
-	Enemy,
-	Tile,
+	Enemy, # any tile with an enemy
+	Tile,  # any tile
+	TileWithoutObstacles, # tile without nav obstacles (layer 1)
 	Tag, # TODO
 	Condition, # TODO, custom bool func in SpellLogic
 }

@@ -10,6 +10,8 @@ var view_orchestrator: ViewOrchestrator = null
 
 var world: World = null
 
+const DEBUG_SKIP_OVERWORLD = true
+
 var tree : SceneTree : 
 	get:
 		return get_tree()
@@ -21,7 +23,8 @@ func get_prototype_deck(combat: Combat) -> Array[Spell]:
 			1: prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), combat))
 			#2: prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), combat))
 			2: prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SpellMemory.tres"), combat))
-			3: prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/WaterBlast.tres"), combat))
+			#3: prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/WaterBlast.tres"), combat))
+			3: prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/Cyclone.tres"), combat))
 	for spell in prototype_deck:
 		spell.id = SpellID.new(add_to_spell_count())
 	return prototype_deck

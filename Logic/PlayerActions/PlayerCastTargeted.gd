@@ -10,8 +10,8 @@ func _init(_spell: Spell, _payment: EnergyStack, _target) -> void:
 
 func is_valid(combat: Combat) -> bool:
 	var super_valid: bool = super(combat)
-	# TODO valid target
 	
+	# Target Range Validation
 	var range_valid = true
 	if spell.type.target_range != -1:  # -1 means infinite range
 		var dist: int
@@ -24,7 +24,33 @@ func is_valid(combat: Combat) -> bool:
 	
 		range_valid = dist <= spell.type.target_range
 		
-	return super_valid and range_valid
+	if not (range_valid and super_valid):
+		return false  # early stopping :)
+	
+	# Target Type validation
+	var target_valid = true
+	if spell.type.target != SpellType.Target.None:
+		match spell.type.target:
+			SpellType.Target.Tile:
+				pass  # any tile is valid
+			SpellType.Target.Enemy:
+				if target is Tile:
+					target_valid = target.has_enemy()
+				elif target is Entity:
+					target_valid = target is EnemyEntity
+			SpellType.Target.TileWithoutObstacles:
+				if target is Tile:
+					target_valid = bool(target.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER)
+				else:
+					target_valid = false
+			SpellType.Target.Tag:
+				printerr("Tag Target not implemented yet.")
+				target_valid = false
+			SpellType.Target.Condition:
+				printerr("Target custom condition not implemented yet.")
+				target_valid = false
+
+	return super_valid and range_valid and target_valid
 
 
 func execute(combat: Combat) -> void:
