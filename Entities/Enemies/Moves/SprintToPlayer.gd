@@ -2,6 +2,8 @@ extends EnemyMove
 
 ## Returns a score for the attractiveness to do the move.
 func get_score() -> float:
+	if enemy.get_status_effect("snare"):
+		return 0.0
 	if enemy.current_tile.distance_to(combat.player.current_tile) > 1:
 		match enemy.type.behaviour:
 			EnemyEntityType.Behaviour.Fighter:

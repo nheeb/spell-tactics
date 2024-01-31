@@ -263,3 +263,4 @@ func save_without_combat(path: String):
 
 static func load_without_combat(path: String):
 	return Combat.deserialize_level_from_combat_state(CombatState.load_from_disk(path))
+

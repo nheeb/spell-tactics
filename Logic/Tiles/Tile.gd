@@ -124,5 +124,5 @@ func _to_string() -> String:
 func distance_to(other_tile: Tile) -> int:
 	return Utility.tile_distance(self, other_tile)
 
-func get_surrounding_tiles(range := 1) -> Array[Tile]:
-	return level.get_all_tiles_in_distance_of_tile(self, range)
+func get_surrounding_tiles(_range := 1) -> Array[Tile]:
+	return level.get_all_tiles_in_distance_of_tile(self, _range)

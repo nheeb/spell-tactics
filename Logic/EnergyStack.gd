@@ -38,9 +38,6 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 	return EnergyStack.new(possible_payment)
 
 func sort() -> void:
-	for e in stack:
-		if e == 0:
-			printerr("WTF invalid Energy Type")
 	stack.sort()
 
 ## Applies a payment (reducing the energy by the exact energies in that payment)

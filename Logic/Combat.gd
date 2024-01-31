@@ -92,18 +92,6 @@ func setup() -> void:
 
 	# TODO connect entity & spell references
 
-#func create_prototype_level():
-#
-	#deck = []
-	#for i in range(20):
-		#match randi_range(1,2):
-			#1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
-			#2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
-	#setup()
-	#energy.player_energy = []
-	#discard_pile = []
-	#hand = []
-
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
 	ui.combat = self
@@ -124,7 +112,7 @@ func process_current_phase() -> bool:
 	return get_phase_node(current_phase)._process_phase()
 
 func get_phase_node(phase: RoundPhase) -> AbstractPhase:
-	match current_phase:
+	match phase:
 		RoundPhase.Start:
 			return %StartPhase
 		RoundPhase.Movement:

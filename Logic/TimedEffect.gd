@@ -43,4 +43,3 @@ func advance(combat: Combat) -> void:
 	if delay <= 0:
 		get_reference().resolve(combat).callv(method, params)
 		combat.timed_effects.erase(self)
-		free()
