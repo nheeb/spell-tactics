@@ -73,6 +73,8 @@ func get_spell_targets(spell: Spell) -> Array[Tile]:
 		tiles = tiles.filter(func(t): return t.has_enemy())
 	elif spell.type.target == SpellType.Target.TileWithoutObstacles:
 		tiles = tiles.filter(func(t): return not(t.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER))
+	elif spell.type.target == SpellType.Target.Tag:
+		tiles = tiles.filter(func(t): return spell.type.target_tag in t.get_tags())
 	return tiles 
 
 

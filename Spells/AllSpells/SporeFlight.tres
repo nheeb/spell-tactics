@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://cca31estceejt"]
+
+[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_c2j37"]
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_hms4h"]
+
+[sub_resource type="Resource" id="Resource_fjmuh"]
+script = ExtResource("1_c2j37")
+stack = Array[int]([1, 4, 6])
+
+[resource]
+script = ExtResource("1_hms4h")
+pretty_name = "Spore Flight"
+costs = SubResource("Resource_fjmuh")
+effect_text = "Poison all enemies next to target shroom."
+fluff_text = ""
+is_event_spell = false
+target = 4
+target_range = -1
+target_tag = "shroom"

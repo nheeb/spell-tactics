@@ -45,8 +45,8 @@ func is_valid(combat: Combat) -> bool:
 				else:
 					target_valid = false
 			SpellType.Target.Tag:
-				printerr("Tag Target not implemented yet.")
-				target_valid = false
+				assert(target is Tile)
+				target_valid = spell.type.target_tag in target.get_tags()
 			SpellType.Target.Condition:
 				printerr("Target custom condition not implemented yet.")
 				target_valid = false

@@ -20,11 +20,15 @@ func play(level: Level):
 		effect.set("position", target.position)
 	for prop in setup_properties:
 		effect.set(prop, setup_properties[prop])
-	if effect.has_method("effect_start"):
-		effect.effect_start()
+
 	if effect.has_signal("effect_done"):
-		await effect.effect_done
-	animation_done_internally.emit()
+		effect.effect_done.connect(func(): animation_done_internally.emit(),CONNECT_ONE_SHOT)
+		if effect.has_method("effect_start"):
+			effect.effect_start()
+	else:
+		if effect.has_method("effect_start"):
+			effect.effect_start()
+		animation_done_internally.emit()
 
 func _to_string() -> String:
 	if is_instance_valid(target):
