@@ -21,6 +21,7 @@ func start_combat(level_path: String) -> void:
 	add_child(combat)
 	#combat.camera = $GameCamera
 	level = combat.level
+	#level.combat = combat
 	add_child(combat.level)
 	# construct references to ui_root which lives outside this 3d viewport
 	# ui_root/combat_ui and ui_root/debug_ui

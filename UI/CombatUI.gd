@@ -17,7 +17,7 @@ func setup(_combat: Combat):
 
 	# set actives
 	actives = _combat.actives
-	_combat.next_round.connect(next_round)
+	_combat.round_ended.connect(next_round)
 	initialize_active_buttons(actives)
 	update_payable_cards()
 	cards3d.combat = _combat
@@ -64,7 +64,8 @@ func remove_card(spell: Spell):
 func _on_next_pressed():
 	combat.input.process_action(PlayerPass.new())
 
-func _on_cast_pressed():
+
+func extract_payment() -> EnergyStack:
 	var payment_text : String = $EnergyPayment.text
 	var clean_payment_text : String = payment_text
 	if ":" in clean_payment_text:
@@ -72,6 +73,10 @@ func _on_cast_pressed():
 	else:
 		clean_payment_text = ""
 	var payment := EnergyStack.string_to_energy(clean_payment_text)
+	return payment
+
+func _on_cast_pressed():
+	var payment := extract_payment()
 	if is_instance_valid(selected_spell):
 		combat.input.process_action(PlayerCast.new(selected_spell, payment))
 

@@ -40,7 +40,8 @@ func is_valid(combat: Combat) -> bool:
 					target_valid = target is EnemyEntity
 			SpellType.Target.TileWithoutObstacles:
 				if target is Tile:
-					target_valid = bool(target.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER)
+					# valid if the target tile does NOT have any entities with Nav obstacle layer
+					target_valid = not bool(target.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER)
 				else:
 					target_valid = false
 			SpellType.Target.Tag:

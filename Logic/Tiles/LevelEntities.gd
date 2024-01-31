@@ -20,7 +20,6 @@ func create_entity(location: Vector2i, entity_type: EntityType, create_with_acti
 	tile.add_entity(entity)
 	if entity.visual_entity != null:
 		entity.visual_entity.position = tile.position
-		# TODO add logical entity
 	
 	# Create id for entity
 	entity.id = EntityID.new(entity.type, _level.add_type_count(entity.type))

@@ -9,7 +9,7 @@ var id: EntityID
 ## This Node is only part of the scene tree if this Entity has been added to a tile.
 var visual_entity: VisualEntity
 ## optional:
-var logical_entity: LogicalEntity
+var logic: EntityLogic
 
 ## Reference to the Tile this Entity is residing on
 var current_tile: Tile
@@ -36,8 +36,8 @@ func serialize() -> EntityState:
 	var state: EntityState = EntityState.new()
 	state.type = type
 	
-	if logical_entity != null:
-		for prop in logical_entity.get_property_list():
+	if logic != null:
+		for prop in logic.get_property_list():
 			# TODO maybe we'll need another exclusion method for the script props
 			if not Entity.serialize_this_prop(prop.name):
 				continue
@@ -103,3 +103,12 @@ func call_on_status_effect(status_name: String, method: String, params := []) ->
 			effect.callv(method, params)
 		else:
 			printerr("Status effect %s has no method %s" % [status_effects, method])
+			
+func call_logic(method: String, params := []):
+	if logic == null:
+		printerr("%s does not have logic." % self)
+		return
+	if not logic.has_method(method):
+		printerr("%s logic does not have method '%s'." % [self, method])
+		return
+	logic.callv(method, params)

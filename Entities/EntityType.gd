@@ -56,6 +56,12 @@ func create_entity(combat: Combat, call_on_create := true) -> Entity:
 		ent.visual_entity = Game.PROTOTYPE_VISUALS.instantiate()
 		ent.visual_entity.type = self
 		ent.type = self
+		
+	if self.entity_logic != null:
+		ent.logic = self.entity_logic.new()
+		ent.logic.combat = combat
+		ent.logic.entity = ent
+		ent.logic.on_create()
 
 	
 	ent.energy = ent.type.energy

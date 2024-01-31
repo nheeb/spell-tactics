@@ -29,7 +29,8 @@ func tile_clicked(tile: Tile):
 		# try casting the spell onto the selected tile
 		# TODO support targetted spells with X/Any type Energy
 		# for now read the cost out of the spell (hack)
-		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, selected_spell.type.costs, tile))
+		var payment = combat.ui.extract_payment()  # for now: reading payment from text input
+		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, payment, tile))
 		if valid:
 			state = CastingState.Selecting
 			combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
@@ -68,7 +69,10 @@ func get_spell_targets(spell: Spell) -> Array[Tile]:
 	
 	# for now just Spells targeted on Enemy, 
 	# later we have to check the target type in SpellType
-	tiles = tiles.filter(func(t): return t.has_enemy())
+	if spell.type.target == SpellType.Target.Enemy:
+		tiles = tiles.filter(func(t): return t.has_enemy())
+	elif spell.type.target == SpellType.Target.TileWithoutObstacles:
+		tiles = tiles.filter(func(t): return not(t.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER))
 	return tiles 
 
 

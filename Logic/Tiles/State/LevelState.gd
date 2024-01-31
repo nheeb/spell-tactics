@@ -12,6 +12,7 @@ const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
 #const player_type = preload("res://Entities/PlayerResource.tres")
 func deserialize(combat: Combat) -> Level:
 	var level := LEVEL.instantiate()
+	level.combat = combat
 	level.init_tiles_array(rows, columns)
 	
 	var tile: Tile
