@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://cwd6hlopbacw7"]
+
+[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_ra3ys"]
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="2_xyors"]
+
+[sub_resource type="Resource" id="Resource_gkkbv"]
+script = ExtResource("1_ra3ys")
+stack = Array[int]([])
+
+[resource]
+script = ExtResource("2_xyors")
+pretty_name = "Air Missile"
+costs = SubResource("Resource_gkkbv")
+effect_text = "A short range burst of air deals 2 damage to a nearby target."
+fluff_text = "Fun
+
+"
+is_event_spell = false
+target = 1
+target_range = 2
+target_tag = ""
