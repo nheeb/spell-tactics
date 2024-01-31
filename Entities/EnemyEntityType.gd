@@ -17,7 +17,7 @@ enum Behaviour {
 @export var passives: Array[String]
 
 ## Overriding base entity method to return more specific type
-func create_entity(combat: Combat) -> EnemyEntity:
+func create_entity(combat: Combat, call_on_create := true) -> EnemyEntity:
 	# instance visual entity, who adds this to the scene tree?
 	# I think we should have a method add_entity() in Tile
 	var ent: EnemyEntity = EnemyEntity.new()
@@ -41,6 +41,7 @@ func create_entity(combat: Combat) -> EnemyEntity:
 	ent.accuracy = accuracy
 	ent.resistance = resistance
 
-	ent.on_create()
+	if call_on_create:
+		ent.on_create()
 
 	return ent

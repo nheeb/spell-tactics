@@ -13,7 +13,6 @@ enum Flags {
 
 var flag: Flags = Flags.PlayAfterStep
 var delay := 0.0
-var success := false
 var min_duration := 0.0
 var max_duration := 0.0
 var global_start_time : float
@@ -61,6 +60,8 @@ func _play(level: Level) -> void:
 	#if animation_done_internally.is_connected(internal_animation_done):
 		#print("ERROR")
 	
+	DebugInfo.current_animations.append(self)
+	
 	animation_done_internally.connect(internal_animation_done)
 	await VisualTime.visual_process
 	if delay > 0.0:
@@ -78,11 +79,10 @@ func play(level: Level) -> void:
 
 func internal_animation_done() -> void:
 	var ellapsed_time : float = abs(VisualTime.visual_global_time - global_start_time)
-	if ellapsed_time >= min_duration:
-		animation_done.emit()
-	else:
+	if ellapsed_time < min_duration:
 		await VisualTime.new_timer(min_duration - ellapsed_time).timeout
-		animation_done.emit()
+	DebugInfo.current_animations.erase(self)
+	animation_done.emit()
 
 func _to_string() -> String:
 	return "Anim: Abstract Animation Object"

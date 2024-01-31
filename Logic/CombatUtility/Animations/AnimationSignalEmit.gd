@@ -12,7 +12,6 @@ func play(level: Level):
 	if is_instance_valid(reference):
 		if reference.has_signal(signal_name):
 			reference.emit_signal(signal_name)
-			success = true
 	animation_done_internally.emit()
 
 func _to_string() -> String:

@@ -25,6 +25,6 @@ func deserialize(combat: Combat) -> Level:
 	if player_ent != null:
 		level.player = player_ent
 	
-	level.graveyard.append_array(graveyard.map(func (x): return x.deserialize()))
+	level.graveyard.append_array(graveyard.map(func (x): return x.deserialize(combat)))
 	
 	return level

@@ -10,8 +10,8 @@ class_name EntityState extends Resource
 
 
 ## the current tile will be set from outside, as the Tile deserialize will call this.
-func deserialize(combat: Combat) -> Entity:
-	var entity = type.create_entity(combat)
+func deserialize(combat: Combat = null) -> Entity:
+	var entity = type.create_entity(combat, false)
 	
 	for prop_name in entity_props.keys():
 		entity.set(prop_name, entity_props[prop_name])
@@ -19,6 +19,10 @@ func deserialize(combat: Combat) -> Entity:
 	if entity.logical_entity != null:
 		for prop_name in script_props.keys():
 			entity.logical_entity.set(prop_name, script_props[prop_name])
+	
+	
+	
+	entity.on_create()
 	
 	entity.visual_entity.visible = true
 	
