@@ -16,9 +16,9 @@ func deserialize(combat: Combat) -> Entity:
 	for prop_name in entity_props.keys():
 		entity.set(prop_name, entity_props[prop_name])
 	
-	if entity.logical_entity != null:
+	if entity.logic != null:
 		for prop_name in script_props.keys():
-			entity.logical_entity.set(prop_name, script_props[prop_name])
+			entity.logic.set(prop_name, script_props[prop_name])
 	
 	entity.visual_entity.visible = true
 	

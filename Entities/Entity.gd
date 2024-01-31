@@ -9,7 +9,7 @@ var id: EntityID
 ## This Node is only part of the scene tree if this Entity has been added to a tile.
 var visual_entity: VisualEntity
 ## optional:
-var logical_entity: LogicalEntity
+var logic: EntityLogic
 
 ## Reference to the Tile this Entity is residing on
 var current_tile: Tile
@@ -35,8 +35,8 @@ func serialize() -> EntityState:
 	var state: EntityState = EntityState.new()
 	state.type = type
 	
-	if logical_entity != null:
-		for prop in logical_entity.get_property_list():
+	if logic != null:
+		for prop in logic.get_property_list():
 			# TODO maybe we'll need another exclusion method for the script props
 			if not Entity.serialize_this_prop(prop.name):
 				continue

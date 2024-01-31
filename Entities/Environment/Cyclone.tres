@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="EntityType" load_steps=4 format=3 uid="uid://cw3o15tcdsldr"]
+[gd_resource type="Resource" script_class="EntityType" load_steps=5 format=3 uid="uid://cw3o15tcdsldr"]
 
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_cr1ai"]
 [ext_resource type="Script" path="res://Entities/EntityType.gd" id="2_j8ofm"]
+[ext_resource type="Script" path="res://Entities/Environment/Cyclone.gd" id="2_rkyx6"]
 
 [sub_resource type="Resource" id="Resource_tdi1b"]
 script = ExtResource("1_cr1ai")
@@ -13,6 +14,7 @@ internal_name = "cyclone"
 can_be_hovered = true
 pretty_name = "Cyclone"
 fluff_text = "Deals 3 damage at the start of each turn."
+entity_logic = ExtResource("2_rkyx6")
 prototype_scale = Vector2(1, 1)
 is_terrain = false
 is_drainable = false
@@ -20,5 +22,5 @@ energy = SubResource("Resource_tdi1b")
 obstacle_layer = 0
 obstacle_mask = 0
 is_blocker = false
-cover_value = 1
+cover_value = 0
 tags = Array[String]([])
