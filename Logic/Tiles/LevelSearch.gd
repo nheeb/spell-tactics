@@ -3,6 +3,7 @@ class_name LevelSearch extends Object
 var level: Level
 var start: Vector2i
 var target: Vector2i
+var mask: int
 
 var open_set: Array[TileGridSearchEntry]
 var closed_set: Dictionary = {}
@@ -10,13 +11,14 @@ var closed_set: Dictionary = {}
 var path_found: bool = false
 var path: Array[Vector2i]
 
-func _init(_level: Level, _start: Vector2i, _target: Vector2i):
+func _init(_level: Level, _start: Vector2i, _target: Vector2i, _mask: int):
 	level = _level
 	start = _start
 	target = _target
+	mask = _mask
 	
 func execute(max_iterations = 1000):
-	_observe_tile(start, -1.0, null)
+	_append_observed_tile(start, -1.0, null)
 	var iterations = 0
 	while len(open_set) > 0 and not _process_tile():
 		iterations += 1
@@ -28,9 +30,11 @@ func _observe_tile(coord: Vector2i, current_path_distance: float, parent: TileGr
 		return
 	if closed_set.has(coord):
 		return
-	if level.is_location_obstructed(coord):
+	if level.is_location_obstructed(coord, mask):
 		return
-		
+	_append_observed_tile(coord, current_path_distance, parent)
+
+func _append_observed_tile(coord: Vector2i, current_path_distance: float, parent: TileGridSearchEntry):
 	var distance_to_target = (coord - target).length()
 	var new_distance_from_start = current_path_distance + 1.0
 	open_set.append(TileGridSearchEntry.new(parent, coord, new_distance_from_start, distance_to_target))

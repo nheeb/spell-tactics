@@ -7,7 +7,12 @@ enum CastingState {
 	Casting
 }
 
-var state: CastingState = CastingState.Selecting
+signal changed_casting_state(s: CastingState)
+var state: CastingState = CastingState.Selecting:
+	set(s):
+		if state != s:
+			state = s
+			changed_casting_state.emit(s)
 var selected_spell: Spell
 var highlighted_targets: Array[Tile]
 
@@ -39,6 +44,7 @@ func process_phase() -> bool:
 	
 
 func select_spell(spell: Spell):
+	assert(combat.current_phase == combat.RoundPhase.Spell, "selected a spell outside of spell phase")
 	selected_spell = spell
 	if spell.type.target != SpellType.Target.None:
 		# wait for player to target
@@ -47,10 +53,9 @@ func select_spell(spell: Spell):
 		#combat.animation.callback()
 		highlighted_targets = get_spell_targets(selected_spell)
 		combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
-		
-	# else proceed to energy / casting
-		
-
+	else:
+		# else proceed to energy / casting
+		state = CastingState.SettingEnergy
 
 func get_spell_targets(spell: Spell) -> Array[Tile]:
 	var target_range = spell.type.target_range  

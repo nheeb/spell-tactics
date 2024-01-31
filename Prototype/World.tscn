@@ -49,6 +49,7 @@ transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, 0, 
 [node name="MouseRaycast" type="RayCast3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 0)
+enabled = false
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
 script = ExtResource("4_2ad06")

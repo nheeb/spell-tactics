@@ -6,8 +6,8 @@ func tile_hovered(tile: Tile):
 	pass
 	
 func tile_clicked(tile: Tile):
-	# this was wrong (discuss maybe?):
-	# PlayerMovement.new(tile).execute(combat)
+	print("click")
+
 	if combat.input.process_action(PlayerMovement.new(tile)):
 		# valid, movement has been performed
 		combat.level._unhighlight_tile_set(combat.level.get_all_tiles(), Highlight.Type.Movement)
@@ -15,5 +15,11 @@ func tile_clicked(tile: Tile):
 func process_phase() -> bool:
 	combat.animation.callback(combat.level, "highlight_movement_range", [combat.player, combat.player.traits.movement_range])
 	combat.animation.callback(combat.ui, "set_status", ["Make your movement!"])
+	
+	# unlock all actives that are available once per round
+	for active in combat.actives:
+		if active.type.unlocked_once_per_round:
+			active.unlocked = true
+		# check active unlocked conditions
 	
 	return true

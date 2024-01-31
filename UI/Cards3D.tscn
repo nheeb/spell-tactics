@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://upcefttcpy6o"]
+[gd_scene load_steps=5 format=3 uid="uid://upcefttcpy6o"]
 
 [ext_resource type="Script" path="res://UI/Cards3D.gd" id="1_s43vq"]
+[ext_resource type="Script" path="res://UI/CardEditorPreview.gd" id="2_dbt0i"]
 
 [sub_resource type="Environment" id="Environment_621vn"]
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ic45"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
 
 [node name="Cards3D" type="Node3D"]
 script = ExtResource("1_s43vq")
@@ -28,7 +36,21 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.99, 
 
 [node name="MouseRayCast" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.846283, 0, -4.44089e-16)
-target_position = Vector3(0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.856, 0, 0)
+target_position = Vector3(10, 0, 0)
 collide_with_areas = true
 debug_shape_custom_color = Color(0.780392, 0.709804, 0.772549, 1)
+
+[node name="DebugBorder" type="Panel" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2ic45")
+
+[node name="CardEditorPreview" type="Node3D" parent="." node_paths=PackedStringArray("cards3d")]
+script = ExtResource("2_dbt0i")
+create_preview_cards = true
+cards3d = NodePath("..")

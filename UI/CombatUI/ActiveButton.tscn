@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://1421ngumthvb"]
+
+[ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="1_7euso"]
+[ext_resource type="Script" path="res://UI/CombatUI/ActiveButton.gd" id="2_o25rt"]
+
+[node name="ActiveButton" type="Button"]
+custom_minimum_size = Vector2(150, 150)
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_7euso")
+theme_override_font_sizes/font_size = 43
+text = "Melee"
+script = ExtResource("2_o25rt")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

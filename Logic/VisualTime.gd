@@ -68,7 +68,7 @@ func disconnect_animation_player(ap: AnimationPlayer) -> void:
 func _process(delta: float) -> void:
 	visual_time_scale = 1.0
 	if Input.is_action_pressed("speed_up"):
-		visual_time_scale = 2.0
+		visual_time_scale = 100.0
 		if Input.is_action_pressed("ultra_speed_up"):
 			visual_time_scale = 4.0
 	var fixed_delta := delta * visual_time_scale

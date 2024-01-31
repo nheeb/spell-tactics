@@ -8,6 +8,11 @@ func pay(payment: EnergyStack) -> void:
 	# style: is this utility method needed or should it be moved here?
 	player_energy.apply_payment(payment)
 	combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate(true)])
+	
+func is_payable(payment: EnergyStack) -> bool:
+	var possible: EnergyStack = player_energy.get_possible_payment(payment)
+	return possible != null
+	
 
 
 func gain(energy: EnergyStack) -> void:

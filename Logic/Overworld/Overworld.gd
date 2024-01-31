@@ -1,6 +1,6 @@
 class_name Overworld extends Node3D
 
-var seed: int = 0
+var random_seed: int = 0
 var map: OverworldMap
 var player_position: Vector2i = Vector2i(0, 0)
 var stage: int = 0
@@ -26,9 +26,9 @@ func _input(event):
 			if event.pressed:
 				_click(event.position)
 
-func _click(position: Vector2):
-	var from = camera.project_ray_origin(position)
-	var to = from + camera.project_ray_normal(position) * 999
+func _click(_position: Vector2):
+	var from = camera.project_ray_origin(_position)
+	var to = from + camera.project_ray_normal(_position) * 999
 	var space = camera.get_world_3d().direct_space_state
 	var ray_query = PhysicsRayQueryParameters3D.new()
 	ray_query.from = from
@@ -42,8 +42,8 @@ func _click(position: Vector2):
 		if node is LevelNode:
 			node.click(self)
 
-func move_to(position: Vector2i):
-	player_position = position
+func move_to(_position: Vector2i):
+	player_position = _position
 	player_marker.global_position = nodes.node_instance_sets[player_position.x][player_position.y].global_position
 	
 func load_save():
@@ -51,7 +51,7 @@ func load_save():
 	deserialize(save_state)
 
 func deserialize(state: OverworldState):
-	seed = state.seed
+	random_seed = state.random_seed
 	stage = state.stage
 	player_position = state.player_position
 	map = state.map
@@ -61,8 +61,11 @@ func save():
 
 func serialize() -> OverworldState:
 	var state = OverworldState.new()
-	state.seed = seed
+	state.random_seed = random_seed
 	state.stage = stage
 	state.player_position = player_position
 	state.map = map
 	return state
+
+func set_active() -> void:
+	camera.make_current()

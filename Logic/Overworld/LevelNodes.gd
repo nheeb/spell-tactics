@@ -33,6 +33,7 @@ func generate_nodes(map: OverworldMap):
 			var node = preload("res://Logic/Overworld/LevelNode.tscn").instantiate()
 			node.data = node_data
 			node.location = Vector2i(i, j)
+			node.name = "LevelNode_%d_%d" % [i, j]  # add human-readable name
 			add_child(node)
 			node.global_position = get_terrain_height(position + Vector3(pos_x, 0, pos_z))
 			node_instance_set.append(node)

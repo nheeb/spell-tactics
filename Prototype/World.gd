@@ -4,12 +4,19 @@ const COMBAT = preload("res://Logic/Combat.tscn")
 const COMBAT_UI = preload("res://UI/CombatUI.tscn")
 
 var level : Level
+var camera : Camera3D
 @onready var combat : Combat
 @onready var combat_ui : CombatUI
 @onready var debug_ui: Control
 
 func _ready() -> void:
-	var combat_state: CombatState = load('res://Levels/Area1/rivers.tres') as CombatState
+	Game.world = self
+
+func start_combat(level_path: String) -> void:
+	if combat != null:
+		_reset_combat()
+	
+	var combat_state: CombatState = load(level_path) as CombatState
 	combat = combat_state.deserialize()
 	add_child(combat)
 	#combat.camera = $GameCamera
@@ -22,9 +29,7 @@ func _ready() -> void:
 	combat_ui = COMBAT_UI.instantiate()
 	ui_root.add_child(combat_ui)
 	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
-	
-
-	
+	camera = get_node("GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D")
 	combat.advance_and_process_until_next_player_action_needed()
 	combat.animation.play_animation_queue()
 	
@@ -32,7 +37,15 @@ func _ready() -> void:
 	# FIXME looser coupling World with Cards3D and Combat would be preferable
 	%MouseRaycast.cards3d = combat_ui.cards3d
 	%MouseRaycast.combat = combat
+	%MouseRaycast.enabled = true
 
+func _reset_combat():
+	if combat == null:
+		return
+	remove_child(combat)
+	remove_child(combat.level)
+	var ui_root = get_tree().get_first_node_in_group("ui_root")
+	ui_root.remove_child(combat_ui)
 
 var flip := false
 func _on_movement_range_button_pressed() -> void:
@@ -57,7 +70,7 @@ func _on_entity_find_button_pressed() -> void:
 		flip2 = false
 
 func _on_nav_button_pressed() -> void:
-	var search = level.search(Vector2i(0, 6), Vector2i(6, 0))
+	var search = level.search(Vector2i(0, 6), Vector2i(6, 0), Constants.INT64_MAX)
 	search.execute()
 	if search.path_found:
 		for location in search.path:
@@ -117,3 +130,6 @@ func _on_show_debug_pressed() -> void:
 func _on_line_button_pressed() -> void:
 	# TODO implement drawing line
 	pass # Replace with function body.
+
+func set_active() -> void:
+	camera.make_current()

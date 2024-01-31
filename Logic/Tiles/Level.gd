@@ -46,7 +46,7 @@ func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).
 	# This makes it so the top-left tile will have coordinates 0,0 in the tiles 2D array
 	# The origin tile will be centered at the position of the Level node.
-	# initiate 2d Array, it will have dimensions (2n, 2n)
+	# initiate 2d Array, it will have dimensions (2n+1, 2n+1)
 	init_tiles_array(2*n+1, 2*n+1)
 
 	for r in range(0, 2*n + 1):
@@ -116,13 +116,13 @@ func is_location_in_bounds(coord: Vector2i) -> bool:
 		return false
 	return tiles[r][q] != null
 	
-func is_location_obstructed(coord: Vector2i) -> bool:
+func is_location_obstructed(coord: Vector2i, mask: int) -> bool:
 	var r = coord.x
 	var q = coord.y
 	var tile : Tile = tiles[r][q]
 	if tile == null:
 		return true
-	return tile.is_obstacle()
+	return tile.is_obstacle(mask)
 	
 
 func get_tile_by_location(location: Vector2i) -> Tile:
@@ -141,8 +141,8 @@ func get_line(tile1: Tile, tile2: Tile) -> Array[Tile]:
 	return line
 
 ## this can be used for enemy movement, since it respects obstacles.
-func get_shortest_path(tile1: Tile, tile2: Tile) -> Array[Tile]:
-	var search_object := search(tile1.location, tile2.location)
+func get_shortest_path(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX) -> Array[Tile]:
+	var search_object := search(tile1.location, tile2.location, mask)
 	search_object.execute()
 	var location_path := search_object.path
 	var path: Array[Tile] = []
@@ -169,8 +169,17 @@ func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int) -> Array
 						tiles_in_distance.append(tile)
 
 	return tiles_in_distance
+
+
+func get_center_tile() -> Tile:
+	@warning_ignore("integer_division")
+	var r_center: int = n_rows / 2
+	@warning_ignore("integer_division")
+	var q_center: int = n_cols / 2
 	
-	
+	return tiles[r_center][q_center]
+
+
 func _highlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 	for tile in highlight_tiles:
 		tile.set_highlight(type, true)
@@ -249,8 +258,8 @@ func unhighlight_entity_type(type: EntityType):
 func entities() -> LevelEntities:
 	return LevelEntities.new(self)
 
-func search(from: Vector2i, to: Vector2i) -> LevelSearch:
-	return LevelSearch.new(self, from, to)
+func search(from: Vector2i, to: Vector2i, mask: int = Constants.INT64_MAX) -> LevelSearch:
+	return LevelSearch.new(self, from, to, mask)
 
 # ----- tool part -----
 @export var create_catan_grid: bool = false:

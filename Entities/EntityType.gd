@@ -24,8 +24,14 @@ class_name EntityType extends Resource
 ## The energy this entity gives (if it's drainable)
 @export var energy: EnergyStack = null
 
-## Whether the player / enemies can move ONTO or OVER tiles containing this entity
-@export var is_obstacle: bool = false
+
+const NAV_OBSTACLE_LAYER = 1
+const ENEMY_LAYER = 2
+
+## The obstacle layer for collisions.
+@export_flags_2d_physics var obstacle_layer: int = 0
+## The default obstacle layer mask for grid search.
+@export_flags_2d_physics var obstacle_mask: int = 0
 ## Whether the player / enemies can move (just) ONTO tiles containing this entity
 @export var is_blocker: bool = false
 ## How good of a cover this is from projectiles (accuracy reduction)
@@ -35,13 +41,8 @@ class_name EntityType extends Resource
 @export var tags: Array[String] = []
 
 # instantiate this EntityType
-
 func create_entity(combat: Combat) -> Entity:
-	#var PROTOTYPE_VISUALS = load("res://Entities/Visuals/VisualPrototype.tscn")
-	# instance visual entity, who adds this to the scene tree?
-	# I think we should have a method add_entity() in Tile
 	var ent: Entity = Entity.new()
-	
 	ent.combat = combat
 	
 	if self.visual_scene != null:

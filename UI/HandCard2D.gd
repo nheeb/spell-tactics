@@ -34,11 +34,26 @@ func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff:
 
 const PANEL_DEFAULT = preload("res://UI/Theme/HandCard2D_panel_default.tres")
 const PANEL_HOVER = preload("res://UI/Theme/HandCard2D_panel_hover.tres")
+const PANEL_DISABLED = preload("res://UI/Theme/HandCard2D_panel_disabled.tres")
+
+var hovered: bool
+var enabled: bool
+
 func set_hover(hover: bool):
-	if hover:
-		$PanelContainer.set("theme_override_styles/panel", PANEL_HOVER)
-	else:
+	if enabled:
+		if hover:
+			$PanelContainer.set("theme_override_styles/panel", PANEL_HOVER)
+		else:
+			$PanelContainer.set("theme_override_styles/panel", PANEL_DEFAULT)
+		
+		
+func set_enabled(e: bool):
+	enabled = e
+	if e:
 		$PanelContainer.set("theme_override_styles/panel", PANEL_DEFAULT)
+	else:
+		$PanelContainer.set("theme_override_styles/panel", PANEL_DISABLED)
+		
 
 
 func _on_button_button_down() -> void:

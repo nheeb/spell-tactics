@@ -1,18 +1,18 @@
 [gd_scene load_steps=19 format=3 uid="uid://flsmyabg31yq"]
 
-[ext_resource type="Texture2D" uid="uid://c1fri6h5fndvk" path="res://Assets/Sprites/PrototypeBillboard/tree.png" id="1_4uek2"]
-[ext_resource type="Script" path="res://Logic/Overworld/Overworld.gd" id="1_b23bk"]
-[ext_resource type="Script" path="res://Logic/Overworld/LevelNodes.gd" id="1_vno3f"]
-[ext_resource type="PackedScene" uid="uid://cr4yxfjt1ng02" path="res://Assets/Models/Prototype/overworld-prototype.blend" id="3_of01p"]
-[ext_resource type="PackedScene" uid="uid://xmln0krrlgq3" path="res://Assets/Models/Prototype/overworld terrain.blend" id="4_b5ah0"]
-[ext_resource type="FontFile" uid="uid://cgljgdhswqtmj" path="res://Assets/Fonts/Gothica-Bold.ttf" id="5_yydue"]
-[ext_resource type="PackedScene" uid="uid://02tehbwfpaun" path="res://Logic/Overworld/OverworldPlayerMarker.tscn" id="6_caugn"]
-[ext_resource type="Texture2D" uid="uid://dydt6whqkjeba" path="res://Assets/Sprites/Icons/stack.png" id="6_qnmd3"]
-[ext_resource type="Texture2D" uid="uid://cxsh8c3020etw" path="res://Assets/Sprites/Icons/hearts.png" id="7_vqqih"]
+[ext_resource type="Script" path="res://Logic/Overworld/Overworld.gd" id="1_l7bfy"]
+[ext_resource type="PackedScene" uid="uid://cr4yxfjt1ng02" path="res://Assets/Models/Prototype/overworld-prototype.blend" id="2_xdaey"]
+[ext_resource type="Texture2D" uid="uid://c1fri6h5fndvk" path="res://Assets/Sprites/PrototypeBillboard/tree.png" id="3_lsxfa"]
+[ext_resource type="Script" path="res://Logic/Overworld/LevelNodes.gd" id="4_m28fd"]
+[ext_resource type="PackedScene" uid="uid://xmln0krrlgq3" path="res://Assets/Models/Prototype/overworld terrain.blend" id="5_638ua"]
+[ext_resource type="PackedScene" uid="uid://02tehbwfpaun" path="res://Logic/Overworld/OverworldPlayerMarker.tscn" id="6_dohr6"]
+[ext_resource type="FontFile" uid="uid://cgljgdhswqtmj" path="res://Assets/Fonts/Gothica-Bold.ttf" id="7_0scg0"]
+[ext_resource type="Texture2D" uid="uid://dydt6whqkjeba" path="res://Assets/Sprites/Icons/stack.png" id="8_dbchn"]
+[ext_resource type="Texture2D" uid="uid://cxsh8c3020etw" path="res://Assets/Sprites/Icons/hearts.png" id="9_1rh35"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5onu"]
 transparency = 1
-albedo_texture = ExtResource("1_4uek2")
+albedo_texture = ExtResource("3_lsxfa")
 billboard_mode = 1
 billboard_keep_scale = true
 
@@ -52,9 +52,9 @@ density = 0.4
 albedo = Color(0, 0, 0, 1)
 
 [node name="OverworldPrototype" type="Node3D"]
-script = ExtResource("1_b23bk")
+script = ExtResource("1_l7bfy")
 
-[node name="overworld-prototype" parent="." instance=ExtResource("3_of01p")]
+[node name="overworld-prototype" parent="." instance=ExtResource("2_xdaey")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -4)
 visible = false
 
@@ -115,12 +115,12 @@ material = SubResource("FogMaterial_tgtdm")
 
 [node name="LevelNodes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62176, 0, -1.72141)
-script = ExtResource("1_vno3f")
+script = ExtResource("4_m28fd")
 
-[node name="overworld terrain" parent="." instance=ExtResource("4_b5ah0")]
+[node name="overworld terrain" parent="." instance=ExtResource("5_638ua")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -4.88826)
 
-[node name="Player" parent="." instance=ExtResource("6_caugn")]
+[node name="Player" parent="." instance=ExtResource("6_dohr6")]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -141,7 +141,7 @@ offset_top = -59.0
 offset_right = 295.0
 offset_bottom = -36.0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_yydue")
+theme_override_fonts/font = ExtResource("7_0scg0")
 theme_override_font_sizes/font_size = 60
 text = "1 - The enchanted forest"
 vertical_alignment = 2
@@ -160,12 +160,12 @@ grow_horizontal = 0
 
 [node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_qnmd3")
+texture = ExtResource("8_dbchn")
 expand_mode = 3
 
 [node name="Label" type="Label" parent="UI/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_yydue")
+theme_override_fonts/font = ExtResource("7_0scg0")
 theme_override_font_sizes/font_size = 30
 text = "100"
 
@@ -179,11 +179,11 @@ offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer2"]
 layout_mode = 2
-texture = ExtResource("7_vqqih")
+texture = ExtResource("9_1rh35")
 expand_mode = 3
 
 [node name="Label" type="Label" parent="UI/HBoxContainer2"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_yydue")
+theme_override_fonts/font = ExtResource("7_0scg0")
 theme_override_font_sizes/font_size = 30
 text = "5"

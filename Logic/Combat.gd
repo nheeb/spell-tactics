@@ -28,6 +28,8 @@ enum RoundPhase {
 @onready var input: InputUtility = %InputUtility
 @onready var event: EventUtility = %EventUtility
 
+signal next_round
+
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
 
@@ -38,6 +40,9 @@ var camera: GameCamera
 var deck: Array[Spell]
 var hand: Array[Spell]
 var discard_pile: Array[Spell]
+
+## combat, items, etc.
+var actives: Array[Active]
 
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
@@ -91,14 +96,13 @@ func setup() -> void:
 			Game.add_to_spell_count()
 
 	# TODO connect entity & spell references
+	
+	actives = [Active.new(SpellType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self)]
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
-	ui.combat = self
+	ui.setup(self)
 	camera = cam
-	# Update UI
-	for spell in hand:
-		ui.add_card(spell)
 
 func advance_current_phase():
 	# go to next phase

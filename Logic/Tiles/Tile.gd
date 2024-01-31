@@ -69,8 +69,6 @@ func get_enemies() -> Array[EnemyEntity]:
 
 ## Whether it contains at least one EnemyEntity
 func has_enemy() -> bool:
-	if r == 4 and q == 8:
-		print("break")
 	for ent in entities:
 		if ent is EnemyEntity:
 			return true
@@ -79,14 +77,14 @@ func has_enemy() -> bool:
 	
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
-func is_obstacle() -> bool:
+func is_obstacle(mask: int = Constants.INT64_MAX) -> bool:
+	var mask_aggregate: int = 0
 	for ent in entities:
-		if ent.type.is_obstacle:
-			return true
-	return false
+		mask_aggregate = mask_aggregate | ent.type.obstacle_layer
+	return (mask & mask_aggregate) > 0
 
 func is_blocked() -> bool:
-	return is_obstacle() or entities.any(func(e): return e.type.is_blocker)
+	return is_obstacle(Constants.INT64_MAX) or entities.any(func(e): return e.type.is_blocker)
 
 ## Coverage factor for accuracy calculation.
 func get_coverage_factor() -> int:
@@ -117,6 +115,15 @@ func _on_hover_timer_timeout() -> void:
 	hovering = true
 	Events.tile_hovered_long.emit(self)
 	#print("Hovered tile %d, %d" % [r, q])
+
+
+## Returns the combined obstacle layers of this tile's entities
+func get_obstacle_layers() -> int:
+	var layers: int = 0
+	for ent in entities:
+		layers |= ent.type.obstacle_layer
+	return layers
+	
 
 func _to_string() -> String:
 	return name
