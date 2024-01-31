@@ -18,9 +18,11 @@ func process_phase() -> bool:
 	return false
 
 func _process_phase() -> bool:
-	for timed_effect in combat.timed_effects.duplicate():
+	var timed_effects := combat.timed_effects.duplicate()
+	for timed_effect in timed_effects:
 		timed_effect = timed_effect as TimedEffect
 		if timed_effect.phase == combat.current_phase:
 			timed_effect.advance(combat)
+		# combat.timed_effects.erase(timed_effect) this will be done by the TimedEffect base class
 	return process_phase()
 

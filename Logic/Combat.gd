@@ -99,18 +99,6 @@ func setup() -> void:
 	
 	actives = [Active.new(SpellType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self)]
 
-#func create_prototype_level():
-#
-	#deck = []
-	#for i in range(20):
-		#match randi_range(1,2):
-			#1: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), self))
-			#2: deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), self))
-	#setup()
-	#energy.player_energy = []
-	#discard_pile = []
-	#hand = []
-
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
 	ui.setup(self)

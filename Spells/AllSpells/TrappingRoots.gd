@@ -20,4 +20,6 @@ extends SpellLogic
 
 ## Here should be the effect
 func casting_effect() -> void:
-	pass
+	target = target as Tile
+	for enemy in target.get_enemies():
+		enemy.apply_status_effect(SnareEffect.new(2))

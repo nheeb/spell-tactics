@@ -43,6 +43,14 @@ func effect(_effect_scene: PackedScene, target: Node3D,_setup_properties := {}) 
 	add_animation_object(a)
 	return a
 
+func add_staying_effect(_effect_scene: PackedScene, target: VisualEntity, id: String,_setup_properties := {}) -> AnimationStayingEffect:
+	var a = AnimationStayingEffect.new(_effect_scene, target, id, _setup_properties)
+	add_animation_object(a)
+	return a
+
+func remove_staying_effect(target: VisualEntity, id: String) -> AnimationCallback:
+	return callback(target, "remove_visual_effect", [id])
+
 func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSignal:
 	var a = AnimationWaitForSignal.new(_obj, _signal_name)
 	add_animation_object(a)

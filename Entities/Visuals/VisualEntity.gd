@@ -29,3 +29,24 @@ func update_visuals(entity: Entity):
 ## For overriding and making the drain effect
 func visual_drain(drained := true):
 	pass
+
+var visual_effects := {}
+
+func add_visual_effect(id: String, effect: StayingVisualEffect) -> void:
+	if id in visual_effects:
+		printerr("VisualEntity already has effect %s" % id)
+	visual_effects[id] = effect
+	add_child(effect)
+
+func remove_visual_effect(id: String) -> void:
+	if id in visual_effects.keys():
+		var effect := (visual_effects[id] as StayingVisualEffect)
+		effect.effect_died.connect(emit_animation_done_signal, CONNECT_ONE_SHOT)
+		effect.on_effect_end()
+		visual_effects.erase(id)
+	else:
+		printerr("VisualEntity has no effect %s" % id)
+		animation_done.emit()
+
+func emit_animation_done_signal():
+	animation_done.emit()
