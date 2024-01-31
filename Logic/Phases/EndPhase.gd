@@ -1,6 +1,7 @@
 extends AbstractPhase
 
 func process_phase() -> bool:
+	combat.round_ended.emit(combat.current_round)
 	combat.event.process_event()
 	combat.animation.callback(combat.ui, "set_status", ["Round ending ..."])
 	
@@ -8,6 +9,6 @@ func process_phase() -> bool:
 	combat.animation.property(combat.camera, "player_input_enabled", true)
 	
 	combat.current_round += 1
-	combat.next_round.emit(combat.current_round)
+	
 	
 	return false

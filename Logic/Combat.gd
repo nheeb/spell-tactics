@@ -28,7 +28,7 @@ enum RoundPhase {
 @onready var input: InputUtility = %InputUtility
 @onready var event: EventUtility = %EventUtility
 
-signal next_round
+signal round_ended
 
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin

@@ -27,6 +27,7 @@ func get_prototype_deck(combat: Combat) -> Array[Spell]:
 		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/Cyclone.tres"), combat))
 	for spell in prototype_deck:
 		spell.id = SpellID.new(add_to_spell_count())
+	prototype_deck.shuffle()
 	return prototype_deck
 
 func get_prototype_events(combat: Combat) -> Array[Spell]:

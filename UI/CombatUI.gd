@@ -17,7 +17,7 @@ func setup(_combat: Combat):
 
 	# set actives
 	actives = _combat.actives
-	_combat.next_round.connect(next_round)
+	_combat.round_ended.connect(next_round)
 	initialize_active_buttons(actives)
 	update_payable_cards()
 	cards3d.combat = _combat
