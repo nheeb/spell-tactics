@@ -19,10 +19,10 @@ var tree : SceneTree :
 func get_prototype_deck(combat: Combat) -> Array[Spell]:
 	var prototype_deck : Array[Spell] = []
 	for i in range(5):
-		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), combat))
-		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), combat))
-		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/WaterBlast.tres"), combat))
-		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/TrappingRoots.tres"), combat))
+		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), combat))
+		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), combat))
+		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/WaterBlast.tres"), combat))
+		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/TrappingRoots.tres"), combat))
 		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SpellMemory.tres"), combat))
 		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/Cyclone.tres"), combat))
 	for spell in prototype_deck:

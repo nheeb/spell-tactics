@@ -58,9 +58,7 @@ func create_entity(combat: Combat, call_on_create := true) -> Entity:
 		ent.type = self
 		
 	if self.entity_logic != null:
-		ent.logic = self.entity_logic.new()
-		ent.logic.combat = combat
-		ent.logic.entity = ent
+		ent.logic = self.entity_logic.new(ent, combat)
 		ent.logic.on_create()
 
 	

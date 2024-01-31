@@ -42,7 +42,6 @@ func _append_observed_tile(coord: Vector2i, current_path_distance: float, parent
 
 func _process_tile() -> bool:
 	var next = _pop_next_lowest()
-	print(str(next.coord))
 	if next.coord == target:
 		_backtrack_path(next)
 		return true

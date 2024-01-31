@@ -20,6 +20,8 @@ var energy: EnergyStack
 var custom_props := {}
 var status_effects : Array[StatusEffect] = []
 
+signal entered_graveyard
+
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
 const entity_internal_props = ["current_tile", "visual_entity", "logical_entity", "type", "combat", "actions", "movements"]

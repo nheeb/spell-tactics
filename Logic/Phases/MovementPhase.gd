@@ -6,8 +6,6 @@ func tile_hovered(tile: Tile):
 	pass
 	
 func tile_clicked(tile: Tile):
-	print("click")
-
 	if combat.input.process_action(PlayerMovement.new(tile)):
 		# valid, movement has been performed
 		combat.level._unhighlight_tile_set(combat.level.get_all_tiles(), Highlight.Type.Movement)

@@ -53,8 +53,9 @@ func remove_entity(entity: Entity):
 	if i == -1:
 		printerr("remove_entity(): entity not found")
 		return
-		
+	
 	entities.remove_at(i)
+
 	entity.current_tile = null
 	# should we turn it invisible then? huh
 	#entity.visual_entity.visible = false
