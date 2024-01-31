@@ -8,7 +8,6 @@ func _init(time) -> void:
 
 func play(level: Level):
 	await VisualTime.new_timer(wait_time).timeout
-	success = true
 	animation_done_internally.emit()
 
 func _to_string() -> String:

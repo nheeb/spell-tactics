@@ -41,7 +41,8 @@ const ENEMY_LAYER = 2
 @export var tags: Array[String] = []
 
 # instantiate this EntityType
-func create_entity(combat: Combat) -> Entity:
+# usually calls on create, the flag is only for deserialize to call that function after the properties have been set
+func create_entity(combat: Combat, call_on_create := true) -> Entity:
 	var ent: Entity = Entity.new()
 	ent.combat = combat
 	
@@ -61,6 +62,11 @@ func create_entity(combat: Combat) -> Entity:
 		ent.logic.combat = combat
 		ent.logic.entity = ent
 		ent.logic.on_create()
+
+	
 	ent.energy = ent.type.energy
+
+	if call_on_create:
+		ent.on_create()
 
 	return ent

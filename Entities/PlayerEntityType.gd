@@ -3,7 +3,7 @@ class_name PlayerEntityType extends HPEntityType
 
 
 ## Overriding base entity method to return more specific type
-func create_entity(combat: Combat) -> PlayerEntity:
+func create_entity(combat: Combat, call_on_create := true) -> PlayerEntity:
 	# instance visual entity, who adds this to the scene tree?
 	# I think we should have a method add_entity() in Tile
 	var ent: PlayerEntity = PlayerEntity.new()
@@ -26,6 +26,7 @@ func create_entity(combat: Combat) -> PlayerEntity:
 
 	ent.hp = max_hp
 
-	ent.on_create()
+	if call_on_create:
+		ent.on_create()
 
 	return ent
