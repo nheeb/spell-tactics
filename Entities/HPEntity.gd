@@ -27,7 +27,11 @@ func inflict_damage(damage: int):
 		return
 	hp = hp - damage
 
-
-func inflict_damage_with_visuals(damage: int):
+func inflict_damage_with_visuals(damage: int) -> AnimationObject:
 	inflict_damage(damage)
-	combat.animation.update_hp(self)
+	return combat.animation.update_hp(self)
+
+func inflict_heal_with_visuals(heal: int) -> AnimationObject:
+	type = type as HPEntityType
+	hp = min(type.max_hp, hp + heal)
+	return combat.animation.update_hp(self)

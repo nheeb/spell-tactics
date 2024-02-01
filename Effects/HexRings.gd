@@ -1,5 +1,7 @@
 extends Node3D
 
+# Quick Paste: combat.animation.effect(VFX.HEX_RINGS, target, {"color": Color.})
+
 signal effect_done
 
 var color: Color = Color.HOT_PINK
