@@ -2,7 +2,11 @@ extends AbstractPhase
 
 func process_phase() -> bool:
 	combat.round_ended.emit(combat.current_round)
+	
 	combat.event.process_event()
+	
+	combat.energy.pay(combat.energy.player_energy)
+	
 	combat.animation.callback(combat.ui, "set_status", ["Round ending ..."])
 	
 	combat.animation.camera_reach(combat.player.visual_entity)
