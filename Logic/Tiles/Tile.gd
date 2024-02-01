@@ -125,6 +125,13 @@ func get_obstacle_layers() -> int:
 		layers |= ent.type.obstacle_layer
 	return layers
 	
+func get_tags() -> Array[String]:
+	var tags : Array[String] = []
+	for e in entities:
+		for t in e.type.tags:
+			if not t in tags:
+				tags.append(t)
+	return tags
 
 func _to_string() -> String:
 	return name
