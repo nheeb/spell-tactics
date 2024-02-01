@@ -42,7 +42,7 @@ func sort() -> void:
 
 ## Applies a payment (reducing the energy by the exact energies in that payment)
 func apply_payment(payment: EnergyStack) -> void:
-	for e in payment.stack:
+	for e in payment.stack.duplicate():
 		if e in stack:
 			stack.erase(e)
 		else:
