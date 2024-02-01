@@ -8,7 +8,8 @@ var visual_representation: HandCard2D
 var event_logic: EventSpellLogic:
 	get:
 		if not type.is_event_spell:
-			printerr("Trying to get an EventSpellLogic from a non event spell")
+			pass
+			#printerr("Trying to get an EventSpellLogic from a non event spell")
 		return logic as EventSpellLogic
 
 var combat_persistant_properties := {}

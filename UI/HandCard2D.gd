@@ -6,7 +6,6 @@ var spell: Spell
 
 func set_spell(_spell, as_hand_card := true):
 	spell = _spell
-	
 	if as_hand_card:
 		if is_instance_valid(spell.visual_representation):
 			printerr("Spell already has a visual representation Card")
