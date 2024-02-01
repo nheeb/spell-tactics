@@ -26,3 +26,8 @@ func inflict_damage(damage: int):
 	if damage == 0:
 		return
 	hp = hp - damage
+
+
+func inflict_damage_with_visuals(damage: int):
+	inflict_damage(damage)
+	combat.animation.update_hp(self)

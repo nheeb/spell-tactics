@@ -17,5 +17,5 @@ func create() -> void:
 		#print(cards3d.has_method("add_card"))
 		#cards3d.call("add_card", card2d.instantiate())
 		#cards3d.add_card(card2d.instantiate())
-	print("??")
+	pass
 
