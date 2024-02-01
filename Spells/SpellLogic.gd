@@ -37,8 +37,10 @@ func cast(payment: EnergyStack = null) -> void:
 	casting_effect()
 	if spell is Active:
 		var type = spell.type as ActiveType
-		if type.unlocked_once_per_round:  # if this is a once-per-round active, lock it
-			spell.unlocked = false
+		if type.limitation == ActiveType.Limitation.X_PER_ROUND:  # if this is a once-per-round active, lock it
+			spell.uses_left -= 1
+			if spell.uses_left == 0:
+				spell.unlocked = false
 	else:  # else the spell comes from the hand, discard it
 		combat.cards.discard(spell)
 		combat.get_phase_node(Combat.RoundPhase.Spell).state = SpellPhase.CastingState.Selecting
