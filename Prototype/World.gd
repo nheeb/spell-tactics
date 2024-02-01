@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func start_combat(level_path: String) -> void:
 	if combat != null:
-		_reset_combat()
+		_reset_combat() 
 	
 	var combat_state: CombatState = load(level_path) as CombatState
 	combat = combat_state.deserialize()

@@ -191,8 +191,18 @@ func _unhighlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 func highlight_movement_range(entity: Entity, movement_range: int) -> Array[Tile]:
 	var highlight_tiles = get_all_tiles_in_distance(entity.current_tile.r,
 													entity.current_tile.q, movement_range)
-	_highlight_tile_set(highlight_tiles, Highlight.Type.Movement)
-	return highlight_tiles
+	var distance_filtered: Array[Tile] = []
+	for tile in highlight_tiles:
+		var path = get_shortest_path(entity.current_tile, tile)
+		var distance = len(path)
+		if distance <= movement_range:
+			distance_filtered.append(tile)
+			
+	# filter obstacles
+	distance_filtered = distance_filtered.filter(func(t): return not t.is_obstacle())
+	
+	_highlight_tile_set(distance_filtered, Highlight.Type.Movement)
+	return distance_filtered
 		
 		
 func move_entity(entity: Entity, target: Tile):
