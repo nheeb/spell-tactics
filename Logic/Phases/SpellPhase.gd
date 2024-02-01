@@ -45,6 +45,9 @@ func process_phase() -> bool:
 	
 
 func select_spell(spell: Spell):
+	if state == CastingState.Targeting:
+		# already targeting another spell, need to unhighlight here
+		combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 	assert(combat.current_phase == combat.RoundPhase.Spell, "selected a spell outside of spell phase")
 	selected_spell = spell
 	if spell.type.target != SpellType.Target.None:
