@@ -13,7 +13,7 @@ func is_valid(combat: Combat) -> bool:
 	if destination.is_obstacle(Constants.INT64_MAX):
 		return false
 	
-	var distance = Utility.tile_distance(combat.player.current_tile, destination)
+	var distance = combat.level.get_shortest_distance(combat.player.current_tile, destination)
 	return distance <= combat.player.traits.movement_range
 
 func execute(combat: Combat) -> void:

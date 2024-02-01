@@ -148,6 +148,11 @@ func get_shortest_path(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX
 	var path: Array[Tile] = []
 	path.append_array(location_path.map(func(location): return get_tile_by_location(location)))
 	return path
+	
+func get_shortest_distance(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX):
+	var path = get_shortest_path(tile1, tile2, mask)
+	assert(path != null, "path == null in get_shortest_distance")
+	return len(path)
 
 func get_all_tiles_in_distance_of_tile(tile: Tile, dist: int) -> Array[Tile]:
 	return get_all_tiles_in_distance(tile.r, tile.q, dist)
