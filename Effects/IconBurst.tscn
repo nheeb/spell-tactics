@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmq4bxkagw4d4"]
+
+[ext_resource type="Script" path="res://Effects/IconBurst.gd" id="1_wgbu1"]
+
+[sub_resource type="Curve" id="Curve_kw4qo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.503448, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vd3h8"]
+curve = SubResource("Curve_kw4qo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_df1ui"]
+emission_shape = 2
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 20.0
+initial_velocity_min = 1.5
+initial_velocity_max = 2.5
+angular_velocity_min = 50.0
+angular_velocity_max = 100.0
+gravity = Vector3(0, -2, 0)
+damping_min = 0.5
+damping_max = 0.5
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_vd3h8")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u57xf"]
+load_path = "res://.godot/imported/thorns.png-b0d83af0c6011f6c0e5df70e1b5f79cb.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jd48s"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = SubResource("CompressedTexture2D_u57xf")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_3lsv7"]
+material = SubResource("StandardMaterial3D_jd48s")
+
+[node name="IconBurst" type="Node3D"]
+script = ExtResource("1_wgbu1")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.73
+visibility_aabb = AABB(-2.82495, -5.00577, -1.92247, 4.91071, 7.43508, 4.13011)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_df1ui")
+draw_pass_1 = SubResource("QuadMesh_3lsv7")
