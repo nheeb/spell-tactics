@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsnfqrgkfmq0n"]
+
+[ext_resource type="ArrayMesh" uid="uid://cya81563vig2v" path="res://Assets/Models/HUD_Card/Card_Crystal_Crystal.res" id="1_dbna4"]
+
+[node name="HudCardCrystal" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_dbna4")
