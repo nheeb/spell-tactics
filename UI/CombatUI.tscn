@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=7 format=3 uid="uid://bysejqqiloy1u"]
 
 [ext_resource type="Script" path="res://UI/CombatUI.gd" id="1_uhqdp"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_2hiqp"]
@@ -7,6 +7,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc21w"]
 bg_color = Color(0.113725, 0.117647, 0.113725, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0d1w0"]
+font = ExtResource("2_2hiqp")
+font_size = 72
 
 [node name="CombatUI" type="Control"]
 layout_mode = 3
@@ -117,7 +121,7 @@ stretch = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1920, 1079)
 render_target_update_mode = 4
 
 [node name="Cards3D" parent="AspectRatioContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
@@ -168,6 +172,33 @@ mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_2hiqp")
 text = "Energy:"
 label_settings = ExtResource("3_wybdv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Drains" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.6
+anchor_right = 0.121521
+anchor_bottom = 0.653407
+offset_right = -0.320004
+offset_bottom = 0.319998
+text = "Drains left: X"
+label_settings = ExtResource("3_wybdv")
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOverText" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.244792
+anchor_top = 0.338889
+anchor_right = 0.751729
+anchor_bottom = 0.580259
+offset_right = -0.320004
+offset_bottom = 0.319998
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_0d1w0")
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]

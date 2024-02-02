@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://qbeyupkesosh"]
+[gd_scene load_steps=8 format=3 uid="uid://cs2w87t01erw7"]
 
 [ext_resource type="Script" path="res://Effects/IconVisuals.gd" id="1_bybv3"]
 [ext_resource type="Texture2D" uid="uid://dh0vrvv6jiuue" path="res://Assets/Sprites/Icons/thorns.png" id="1_n42k5"]
@@ -43,6 +43,7 @@ script = ExtResource("1_bybv3")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
 lifetime = 10.0
 visibility_aabb = AABB(-1.97427, -1.97611, -1.88484, 3.92776, 3.97568, 3.85607)
 local_coords = true

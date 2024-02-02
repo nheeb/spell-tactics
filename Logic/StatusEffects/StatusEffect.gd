@@ -28,6 +28,9 @@ func setup_visually() -> void:
 func get_status_name() -> String:
 	return "invalid_status"
 
+func get_icon_name() -> String:
+	return "no icon"
+
 ## For overwriting: How does the effect change, when the entity would get another instance of the same effect
 func extend(other_status: StatusEffect) -> void:
 	pass

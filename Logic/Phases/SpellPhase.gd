@@ -41,6 +41,14 @@ func tile_clicked(tile: Tile):
 func process_phase() -> bool:
 	state = CastingState.Selecting  # reset state
 	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
+	
+	# unlock all actives that are available once per round
+	for active in combat.actives:
+		if active.type.limitation == ActiveType.Limitation.X_PER_ROUND:
+			active.unlocked = true
+			active.uses_left = max(active.uses_left, active.type.max_uses_per_round)
+		# check active unlocked conditions
+	
 	return true
 	
 

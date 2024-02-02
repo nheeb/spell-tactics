@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://q1qlekj71eya"]
+
+[ext_resource type="Script" path="res://UI/PopUp/DrainablePopUp.gd" id="1_b8wrf"]
+[ext_resource type="FontFile" uid="uid://bgmbqeubb34cp" path="res://Assets/Fonts/rogue.ttf" id="2_y78ql"]
+[ext_resource type="PackedScene" uid="uid://c0331kddmygfg" path="res://UI/PopUp/PopUpEntityEntry.tscn" id="3_sf2mk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0dv8f"]
+line_spacing = 0.0
+font = ExtResource("2_y78ql")
+font_size = 26
+
+[node name="PopUp" type="PanelContainer"]
+offset_right = 45.0
+offset_bottom = 53.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_b8wrf")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="TileLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tile (0, 0)"
+label_settings = SubResource("LabelSettings_0dv8f")
+horizontal_alignment = 1
+
+[node name="EntityEntry1" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_sf2mk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="EntityEntry2" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_sf2mk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="EntityEntry3" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_sf2mk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
