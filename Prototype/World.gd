@@ -92,7 +92,7 @@ func _on_damage_player_pressed() -> void:
 
 func _on_save_game_pressed(id: String) -> void:
 	#level.save_to_disk("user://level.tres")
-	combat.save_to_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % id)
+	combat.save_to_disk(Game.SAVE_DIR + "combat-%s.tres" % id)
 
 
 func _on_load_game_pressed(id: String) -> void:
@@ -103,7 +103,7 @@ func _on_load_game_pressed(id: String) -> void:
 	for node in [level, combat, combat_ui]:
 		if is_instance_valid(node):
 			node.free()
-	combat = Combat.load_from_disk(Game.SAVE_DIR_RES + "combat-%s.tres" % id)
+	combat = Combat.load_from_disk(Game.SAVE_DIR + "combat-%s.tres" % id)
 	add_child(combat)
 	level = combat.level
 	level.name = "Level"

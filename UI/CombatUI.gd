@@ -120,6 +120,7 @@ func initialize_active_buttons(new_actives: Array[Active]):
 		button.pressed.connect(_on_active_button_pressed.bind(i))
 		active.got_locked.connect(_on_active_locked.bind(i))
 		active.got_unlocked.connect(_on_active_unlocked.bind(i))
+		button.disabled = not active.unlocked
 		i += 1
 		$Actives/VBoxContainer.add_child(button)
 		button.owner = self
