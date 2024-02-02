@@ -9,7 +9,8 @@ stack = Array[int]([])
 
 [resource]
 script = ExtResource("1_y6tb2")
-unlocked_once_per_round = true
+limitation = 0
+max_uses_per_round = 1
 pretty_name = "SimpleMelee"
 costs = SubResource("Resource_x3rms")
 effect_text = "Deal 1 damage in Range 1"

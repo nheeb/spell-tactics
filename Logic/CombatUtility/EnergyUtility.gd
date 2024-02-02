@@ -4,6 +4,8 @@ class_name EnergyUtility extends Node
 
 @onready var player_energy: EnergyStack = EnergyStack.new([])
 
+var drains_done_this_turn := 0
+
 func pay(payment: EnergyStack) -> void:
 	# style: is this utility method needed or should it be moved here?
 	player_energy.apply_payment(payment)

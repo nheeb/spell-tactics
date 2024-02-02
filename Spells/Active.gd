@@ -3,6 +3,8 @@ class_name Active extends Spell
 signal got_locked
 signal got_unlocked
 
+var uses_left := 0
+
 # FIXME should this go into Spell round specific properties?
 var unlocked: bool = false:
 	set(u):

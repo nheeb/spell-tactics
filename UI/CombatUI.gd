@@ -14,6 +14,7 @@ func setup(_combat: Combat):
 	# Update UI
 	for spell in self.combat.hand:
 		add_card(spell)
+	$GameOverText.visible = false
 
 	# set actives
 	actives = _combat.actives
@@ -24,6 +25,7 @@ func setup(_combat: Combat):
 	
 	# connect to spell phase
 	combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)
+
 
 func _on_changed_casting_state(s: SpellPhase.CastingState):
 	if s == SpellPhase.CastingState.SettingEnergy:
@@ -108,7 +110,9 @@ func deselect_card():
 
 func set_status(text: String):
 	$Status.text = text
-	
+
+func set_drains_left(x: int) -> void:
+	$Drains.text = "Drains left: %s" % x
 
 const ACTIVE_BUTTON = preload("res://UI/CombatUI/ActiveButton.tscn")
 func initialize_active_buttons(new_actives: Array[Active]):
@@ -174,3 +178,7 @@ func _on_button_entered() -> void:
 
 func _on_button_exited() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = false
+
+func show_game_over(text: String) -> void:
+	$GameOverText.text = "GAME OVER\n" + text
+	$GameOverText.show()
