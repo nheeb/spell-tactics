@@ -8,10 +8,11 @@ var stage: int = 0
 @onready var nodes: LevelNodes = $LevelNodes
 @onready var player_marker: Node3D = $Player
 @onready var camera: Camera3D = $Camera3D
+@onready var path: String = Game.SAVE_DIR + "save.tres"
 
 func _ready():
-	SaveFile.delete()
-	if SaveFile.exists():
+	SaveFile.delete(path)
+	if SaveFile.exists(path):
 		load_save()
 	else:
 		map = OverworldMap.new()
@@ -47,7 +48,7 @@ func move_to(_position: Vector2i):
 	player_marker.global_position = nodes.node_instance_sets[player_position.x][player_position.y].global_position
 	
 func load_save():
-	var save_state = SaveFile.load_from_disk()
+	var save_state = SaveFile.load_from_disk(path)
 	deserialize(save_state)
 
 func deserialize(state: OverworldState):
@@ -57,7 +58,7 @@ func deserialize(state: OverworldState):
 	map = state.map
 
 func save():
-	SaveFile.save_to_disk(serialize())
+	SaveFile.save_to_disk(serialize(), path)
 
 func serialize() -> OverworldState:
 	var state = OverworldState.new()
@@ -69,3 +70,8 @@ func serialize() -> OverworldState:
 
 func set_active() -> void:
 	camera.make_current()
+	set_process_input(true)
+	
+func to_combat() -> void:
+	await get_tree().process_frame
+	set_process_input(false)

@@ -13,6 +13,7 @@ func _ready():
 
 func transition_to_combat(level_path: String):
 	world.start_combat(level_path)
+	overworld.to_combat()
 	overworld_viewport.hide()
 	combat_viewport.show()
 	combat_ui.show()

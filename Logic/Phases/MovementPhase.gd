@@ -14,10 +14,4 @@ func process_phase() -> bool:
 	combat.animation.callback(combat.level, "highlight_movement_range", [combat.player, combat.player.traits.movement_range])
 	combat.animation.callback(combat.ui, "set_status", ["Make your movement!"])
 	
-	# unlock all actives that are available once per round
-	for active in combat.actives:
-		if active.type.unlocked_once_per_round:
-			active.unlocked = true
-		# check active unlocked conditions
-	
 	return true
