@@ -3,9 +3,12 @@ extends AbstractPhase
 func process_phase() -> bool:
 	combat.round_ended.emit(combat.current_round)
 	
+	# Events
 	combat.event.process_event()
 	
+	# All stat resets here
 	combat.energy.pay(combat.energy.player_energy)
+	
 	
 	combat.animation.callback(combat.ui, "set_status", ["Round ending ..."])
 	

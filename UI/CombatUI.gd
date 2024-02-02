@@ -108,7 +108,9 @@ func deselect_card():
 
 func set_status(text: String):
 	$Status.text = text
-	
+
+func set_drains_left(x: int) -> void:
+	$Drains.text = "Drains left: %s" % x
 
 const ACTIVE_BUTTON = preload("res://UI/CombatUI/ActiveButton.tscn")
 func initialize_active_buttons(new_actives: Array[Active]):
