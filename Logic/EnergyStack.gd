@@ -39,6 +39,10 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 
 func sort() -> void:
 	stack.sort()
+	
+func add(e: EnergyStack) -> EnergyStack:
+	stack.append_array(e.stack)
+	return self
 
 ## Applies a payment (reducing the energy by the exact energies in that payment)
 func apply_payment(payment: EnergyStack) -> void:

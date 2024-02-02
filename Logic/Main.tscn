@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=9 format=3 uid="uid://brhegqlf0sm1x"]
 
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Prototype/World.tscn" id="1_dlhxl"]
 [ext_resource type="Script" path="res://Logic/ViewOrchestrator.gd" id="1_hv6af"]
@@ -6,8 +6,7 @@
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_3ykw6"]
 [ext_resource type="PackedScene" uid="uid://flsmyabg31yq" path="res://Logic/Overworld/Overworld.tscn" id="2_688l4"]
 [ext_resource type="Script" path="res://UI/DebugUI.gd" id="2_gty54"]
-[ext_resource type="Script" path="res://UI/PopUpHandler.gd" id="3_mq6gx"]
-[ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="4_4622k"]
+[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="6_hemcp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pghfn"]
 font_size = 24
@@ -40,6 +39,7 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="World" parent="CombatViewport/3DViewport" instance=ExtResource("1_dlhxl")]
+unique_name_in_owner = true
 
 [node name="OverworldViewport" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -164,28 +164,12 @@ theme_override_fonts/font = ExtResource("2_3ykw6")
 theme_override_font_sizes/font_size = 24
 text = "Show Debug"
 
-[node name="PopupsLayer" type="CanvasLayer" parent="."]
+[node name="PopupLayer" type="CanvasLayer" parent="."]
 editor_description = "above normal UI layer"
-layer = 2
+layer = 0
 
-[node name="PopUpHandler" type="Control" parent="PopupsLayer" node_paths=PackedStringArray("viewport")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("3_mq6gx")
+[node name="PopUpHandler" parent="PopupLayer" node_paths=PackedStringArray("viewport") instance=ExtResource("6_hemcp")]
 viewport = NodePath("../../CombatViewport/3DViewport")
-
-[node name="PopUp" parent="PopupsLayer/PopUpHandler" instance=ExtResource("4_4622k")]
-visible = false
-layout_mode = 0
-offset_left = 855.0
-offset_top = 451.0
-offset_right = 966.0
-offset_bottom = 504.0
 
 [node name="ViewOrchestrator" type="Node" parent="." node_paths=PackedStringArray("combat_viewport", "world", "overworld_viewport", "overworld", "combat_ui")]
 script = ExtResource("1_hv6af")

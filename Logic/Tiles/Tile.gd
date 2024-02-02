@@ -29,11 +29,24 @@ static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	return tile
 	
 ## contains at least one drainable entity
-func is_drainable():
+func is_drainable() -> bool:
 	for ent in entities:
 		if ent.type.is_drainable:
 			return true
 	return false
+	
+func get_drainable_entities() -> Array[Entity]:
+	var ents: Array[Entity] = []
+	for ent in entities:
+		if ent.type.is_drainable:
+			ents.append(ent)
+	return ents
+	
+func get_drainable_energy() -> EnergyStack:
+	var drainable_e: EnergyStack = EnergyStack.new()
+	for ent in get_drainable_entities():
+		drainable_e.add(ent.energy)
+	return drainable_e
 
 func _on_area_3d_mouse_entered() -> void:
 	set_highlight(Highlight.Type.Hover, true)

@@ -69,3 +69,8 @@ func serialize() -> OverworldState:
 
 func set_active() -> void:
 	camera.make_current()
+	set_process_input(true)
+	
+func to_combat() -> void:
+	await get_tree().process_frame
+	set_process_input(false)

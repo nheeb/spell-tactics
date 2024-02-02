@@ -11,6 +11,8 @@ var camera : Camera3D
 
 func _ready() -> void:
 	Game.world = self
+	
+	
 
 func start_combat(level_path: String) -> void:
 	if combat != null:
@@ -21,6 +23,7 @@ func start_combat(level_path: String) -> void:
 	add_child(combat)
 	#combat.camera = $GameCamera
 	level = combat.level
+	self.combat = combat
 	#level.combat = combat
 	add_child(combat.level)
 	# construct references to ui_root which lives outside this 3d viewport

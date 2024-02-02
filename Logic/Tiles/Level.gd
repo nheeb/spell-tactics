@@ -183,6 +183,13 @@ func get_center_tile() -> Tile:
 	var q_center: int = n_cols / 2
 	
 	return tiles[r_center][q_center]
+	
+func get_drainable_entities() -> Dictionary: # Tile -> Array[Entity]
+	var tile_to_ents: Dictionary = {}
+	for tile in get_all_tiles():
+		if tile.is_drainable():
+			tile_to_ents[tile] = tile.get_drainable_entities()
+	return tile_to_ents
 
 
 func _highlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):

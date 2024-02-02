@@ -114,3 +114,6 @@ func call_logic(method: String, params := []):
 		printerr("%s logic does not have method '%s'." % [self, method])
 		return
 	logic.callv(method, params)
+	
+func _to_string() -> String:
+	return type.internal_name + '_' + str(id.id)
