@@ -28,6 +28,12 @@ func _set_grid_size(new_value):
 		if level != null:
 			level.clear()
 			level.init_basic_grid(grid_size)
+		else:
+			level = LEVEL.instantiate()
+			level.name = 'Level'
+			add_child(level, true)
+			level.clear()
+			level.init_basic_grid(grid_size)
 
 func _get_grid_size():
 	return grid_size
