@@ -9,6 +9,10 @@ func process_phase() -> bool:
 	# All stat resets here
 	combat.energy.pay(combat.energy.player_energy)
 	
+	if combat.enemies.is_empty():
+		# TODO Game won
+		combat.log.add("Game Won!")
+		combat.animation.callback(combat.ui, "show_game_over", ["You won!"])
 	
 	combat.animation.callback(combat.ui, "set_status", ["Round ending ..."])
 	
