@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 func remove_y_value(pos: Vector3) -> Vector3:
