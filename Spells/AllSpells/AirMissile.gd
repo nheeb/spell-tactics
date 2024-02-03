@@ -26,5 +26,5 @@ func casting_effect() -> void:
 	assert(len(enemies) >= 1, "AirMissile expects min 1 enemy on tile")
 	
 	for enemy in enemies:
-		enemy.hp -= 2
+		enemy.inflict_damage(2)
 
