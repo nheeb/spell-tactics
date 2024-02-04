@@ -14,8 +14,5 @@ extends SpellLogic
 
 ## Most important function for overwriting. Here should be the effect
 func casting_effect() -> void:
-	combat.player.inflict_damage(10)
-	
-	if combat.player.arch_enemy != null:
-		if combat.player.arch_enemy.is_valid(combat):
-			combat.player.arch_enemy.resolve().hp -= 3
+	for enemy in combat.enemies:
+		enemy.inflict_damage(1000)
