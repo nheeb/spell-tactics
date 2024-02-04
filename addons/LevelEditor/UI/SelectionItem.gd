@@ -8,6 +8,13 @@ extends Control
 
 func _ready():
 	$Button.text = display_name
+	if res:
+		var texture := load("res://Assets/Sprites/PrototypeBillboard/" + res.internal_name + ".png")
+		if texture:
+			$Button/TextureRect.texture = texture
+			$Button/TextureRect.visible = true
+		else:
+			$Button/TextureRect.visible = false
 
 func _on_button_pressed():
 	if mode == SelectionUI.Mode.Terrain:

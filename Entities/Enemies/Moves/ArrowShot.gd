@@ -26,6 +26,7 @@ func execute() -> void:
 	var dmg := enemy.strength
 	combat.animation.say(enemy.visual_entity, "Shooting! (%.0f%% hit chance)" % chance)
 	combat.animation.effect(VFX.HEX_RINGS, combat.player.current_tile, {"color": Color.RED}).set_flag_with()
+	combat.animation.effect(VFX.BILLBOARD_PROJECTILE, enemy.visual_entity, {"texture_name": "arrow", "target": combat.player.visual_entity}).set_flag_extend()
 	
 	var hit := Utility.random_hit(chance)
 	if hit:

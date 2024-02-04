@@ -78,7 +78,10 @@ func camera_reach(target: Node3D) -> Array[AnimationObject]:
 
 func update_hp(ent: HPEntity) -> AnimationProperty:
 	if ent.visual_entity.has_node("HPLabel"):
-		return property(ent.visual_entity.get_node("HPLabel"), "text", "%s / %s" % [ent.hp, ent.type.max_hp])
+		if ent.armor:
+			return property(ent.visual_entity.get_node("HPLabel"), "text", "%s [+%s] / %s" % [ent.hp, ent.armor, ent.type.max_hp])
+		else:
+			return property(ent.visual_entity.get_node("HPLabel"), "text", "%s / %s" % [ent.hp, ent.type.max_hp])
 	else:
 		return null
 

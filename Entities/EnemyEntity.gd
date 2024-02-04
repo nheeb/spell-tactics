@@ -38,7 +38,7 @@ func do_action() -> void:
 		_move.execute()
 		_move.free()
 		forced_action_name = ""
-
+	
 func do_random_move(moveset: Array[EnemyMove]) -> void:
 	var scores : Array[float] = []
 	scores.append_array(moveset.map(func(x): return x.get_score()))
