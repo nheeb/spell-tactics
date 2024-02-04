@@ -70,13 +70,18 @@ func select_spell(spell: Spell):
 		state = CastingState.SettingEnergy
 
 func get_spell_targets(spell: Spell) -> Array[Tile]:
-	var target_range = spell.type.target_range  
+	var target_range = spell.type.target_range
+	var target_min_range = spell.type.target_min_range
 	var tiles: Array[Tile]
 	if target_range != -1:
 		tiles = combat.level.get_all_tiles_in_distance_of_tile(combat.player.current_tile, 
 															   target_range)
 	else:
 		tiles = combat.level.get_all_tiles()
+	
+	if target_min_range != -1:
+		var min_range_tiles = combat.level.get_all_tiles_with_min_distance_of_tile(combat.player.current_tile, target_min_range)
+		tiles = tiles.filter(func (t): return t in min_range_tiles)
 	
 	# for now just Spells targeted on Enemy, 
 	# later we have to check the target type in SpellType

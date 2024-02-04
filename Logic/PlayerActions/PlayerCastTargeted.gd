@@ -13,7 +13,7 @@ func is_valid(combat: Combat) -> bool:
 	
 	# Target Range Validation
 	var range_valid = true
-	if spell.type.target_range != -1:  # -1 means infinite range
+	if spell.type.target_range != -1 or spell.type.target_min_range != -1:  # -1 means infinite range
 		var dist: int
 		if target is Tile:
 			dist = Utility.tile_distance(target, combat.player.current_tile)
@@ -22,7 +22,10 @@ func is_valid(combat: Combat) -> bool:
 		else:
 			printerr("Currently expecting Tile or Entity target for ranged spells.")
 	
-		range_valid = dist <= spell.type.target_range
+		if spell.type.target_range != -1:
+			range_valid = dist <= spell.type.target_range
+		if spell.type.target_min_range != -1:
+			range_valid = range_valid and (dist >= spell.type.target_min_range)
 		
 	if not (range_valid and super_valid):
 		return false  # early stopping :)
