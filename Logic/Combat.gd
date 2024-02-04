@@ -187,3 +187,6 @@ func resolve_reference(ref) -> Object:
 		return null
 	assert(ref is EntityReference or ref is SpellReference)
 	return ref.resolve(self)
+
+func get_all_enemies() -> Array[EnemyEntity]:
+	return enemies.duplicate()
