@@ -12,7 +12,6 @@ var prev_screen_pos: Vector2
 
 var combat: Combat
 
-
 func _ready() -> void:
 	Events.tile_hovered_long.connect(show_tile_popup)
 	Events.tile_unhovered_long.connect(hide_tile_popup)
@@ -104,8 +103,7 @@ func update_active_entries(entries: Array[DrainableEntry]):
 			entry.show()
 		else:
 			entry.reset()
-		
-	
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("show_drain_overlay"):
 		show_drainable_overlay()
@@ -131,3 +129,6 @@ func _process(delta: float) -> void:
 		#var f = Engine.get_physics_interpolation_fraction()
 		#var target_position: Vector2 = prev_screen_pos.lerp(screen_pos, f)
 		#$PopUp.position = target_position
+
+func _on_world_combat_changed(combat: Combat):
+	self.combat = combat

@@ -68,10 +68,7 @@ func serialize() -> OverworldState:
 	state.map = map
 	return state
 
-func set_active() -> void:
-	camera.make_current()
-	set_process_input(true)
-	
-func to_combat() -> void:
+func set_active(active: bool) -> void:
 	await get_tree().process_frame
-	set_process_input(false)
+	set_process_input(active)
+	nodes.highlight_active_layer(player_position.x+1)

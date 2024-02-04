@@ -8,8 +8,7 @@ static func create(_type: LevelNode.NodeType) -> LevelNodeData:
 	var data : LevelNodeData = LevelNodeData.new()
 	data.type = _type
 	data.from = [0, 1, 2, 3] # test
-	if _type == LevelNode.NodeType.Battle:
-		data.level_path = "res://Levels/Area1/rivers.tres"
+	data.level_path = "res://Levels/Area1/rivers.tres"
 	return data
 
 static func create_battle(_level_path: String) -> LevelNodeData:

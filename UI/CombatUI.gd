@@ -179,6 +179,8 @@ func _on_button_entered() -> void:
 func _on_button_exited() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = false
 
+func show_victory(text: String) -> void:
+	Game.view_orchestrator.transition_to_post_battle()
+	
 func show_game_over(text: String) -> void:
-	$GameOverText.text = "GAME OVER\n" + text
-	$GameOverText.show()
+	Game.view_orchestrator.transition_to_game_over()

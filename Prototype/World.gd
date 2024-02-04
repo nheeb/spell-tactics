@@ -7,29 +7,29 @@ var level : Level
 var camera : Camera3D
 @onready var combat : Combat
 @onready var combat_ui : CombatUI
-@onready var debug_ui: Control
+@export var debug_ui: Control
+
+signal combat_changed (combat : Combat)
 
 func _ready() -> void:
 	Game.world = self
-	
-	
 
 func start_combat(level_path: String) -> void:
 	if combat != null:
 		_reset_combat() 
 	
 	var combat_state: CombatState = load(level_path) as CombatState
-	combat = combat_state.deserialize()
+	combat = combat_state.deserialize()	
 	add_child(combat)
 	#combat.camera = $GameCamera
 	level = combat.level
 	self.combat = combat
 	#level.combat = combat
 	add_child(combat.level)
+	combat_changed.emit(combat)
 	# construct references to ui_root which lives outside this 3d viewport
 	# ui_root/combat_ui and ui_root/debug_ui
 	var ui_root = get_tree().get_first_node_in_group("ui_root")
-	debug_ui = ui_root.get_node("DebugUI")
 	combat_ui = COMBAT_UI.instantiate()
 	ui_root.add_child(combat_ui)
 	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)

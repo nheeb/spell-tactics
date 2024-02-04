@@ -12,7 +12,7 @@ func process_phase() -> bool:
 	if combat.enemies.is_empty():
 		# TODO Game won
 		combat.log.add("Game Won!")
-		combat.animation.callback(combat.ui, "show_game_over", ["You won!"])
+		combat.animation.callback(combat.ui, "show_victory", ["You won!"])
 	
 	combat.animation.callback(combat.ui, "set_status", ["Round ending ..."])
 	

@@ -30,5 +30,5 @@ func casting_effect() -> void:
 		combat.cards.discard(card)
 	
 	for enemy in enemies:
-		enemy.hp -= hand_size
+		enemy.inflict_damage(hand_size)
 
