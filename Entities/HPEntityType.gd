@@ -9,23 +9,7 @@ func create_entity(combat: Combat, call_on_create := true) -> HPEntity:
 	# instance visual entity, who adds this to the scene tree?
 	# I think we should have a method add_entity() in Tile
 	var ent: HPEntity = HPEntity.new()
-	
-	ent.combat = combat
-	
-	if self.visual_scene != null:
-		# CARE, this might lead to lag, depending on the use we might want to instantiate later
-		ent.visual_entity = self.visual_scene.instantiate()
-		ent.visual_entity.type = self
-		ent.type = self
-	else:
-		# for debugging
-		ent.visual_entity = Game.PROTOTYPE_VISUALS.instantiate()
-		ent.visual_entity.type = self
-		ent.type = self
-		
+	setup_visuals_and_logic(ent, combat)
 	ent.hp = max_hp
-
-	if call_on_create:
-		ent.on_create()
-
+	entity_on_create(ent, call_on_create)
 	return ent

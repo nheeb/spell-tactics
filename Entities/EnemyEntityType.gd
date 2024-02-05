@@ -22,26 +22,14 @@ func create_entity(combat: Combat, call_on_create := true) -> EnemyEntity:
 	# I think we should have a method add_entity() in Tile
 	var ent: EnemyEntity = EnemyEntity.new()
 	
-	ent.combat = combat
+	setup_visuals_and_logic(ent, combat)
 	
-	if self.visual_scene != null:
-		# CARE, this might lead to lag, depending on the use we might want to instantiate later
-		ent.visual_entity = self.visual_scene.instantiate()
-		ent.visual_entity.type = self
-		ent.type = self
-	else:
-		# for debugging
-		ent.visual_entity = Game.PROTOTYPE_VISUALS.instantiate()
-		ent.visual_entity.type = self
-		ent.type = self
-		
 	ent.hp = max_hp
 	ent.agility = agility
 	ent.strength = strength
 	ent.accuracy = accuracy
 	ent.resistance = resistance
 
-	if call_on_create:
-		ent.on_create()
+	entity_on_create(ent, call_on_create)
 
 	return ent

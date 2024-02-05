@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=2 format=3 uid="uid://kq07x16lyno7"]
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=3 format=3 uid="uid://kq07x16lyno7"]
 
 [ext_resource type="Script" path="res://Entities/EnemyEntityType.gd" id="1_uc3fh"]
+[ext_resource type="Script" path="res://Entities/Enemies/CorpseLogic.gd" id="1_v3v1y"]
 
 [resource]
 script = ExtResource("1_uc3fh")
@@ -17,6 +18,7 @@ internal_name = "goblin_archer"
 can_be_hovered = true
 pretty_name = "Goblin Archer"
 fluff_text = ""
+entity_logic = ExtResource("1_v3v1y")
 prototype_scale = Vector2(1, 1)
 is_terrain = false
 is_drainable = false

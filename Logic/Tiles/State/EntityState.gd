@@ -14,13 +14,12 @@ func deserialize(combat: Combat = null) -> Entity:
 	var entity = type.create_entity(combat, false)
 	
 	for prop_name in entity_props.keys():
-		entity.set(prop_name, entity_props[prop_name])
+		if Entity.serialize_this_prop(prop_name):
+			entity.set(prop_name, entity_props[prop_name])
 	
 	if entity.logic != null:
 		for prop_name in script_props.keys():
 			entity.logic.set(prop_name, script_props[prop_name])
-	
-	
 	
 	entity.on_create()
 	

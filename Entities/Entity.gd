@@ -24,7 +24,7 @@ signal entered_graveyard
 
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
-const entity_internal_props = ["current_tile", "visual_entity", "logical_entity", "type", "combat", "actions", "movements"]
+const entity_internal_props = ["current_tile", "visual_entity", "logic", "type", "combat", "actions", "movements"]
 static func serialize_this_prop(name: String) -> bool:
 	if name.ends_with(".gd"):
 		# script type, ignore this

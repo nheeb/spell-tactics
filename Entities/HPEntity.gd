@@ -21,9 +21,13 @@ func on_create():
 		died.connect(on_death)  
 
 func on_death():
-	combat.level.move_entity_to_graveyard(self)
 	# TODO change this later to call death animation
 	combat.animation.property(visual_entity, "visible", false)
+	if logic:
+		if logic.has_method("on_death"):
+			logic.on_death()
+	combat.level.move_entity_to_graveyard(self)
+	
 
 func inflict_damage(damage: int):
 	if damage <= 0:
