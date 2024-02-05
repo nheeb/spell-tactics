@@ -30,7 +30,7 @@ overworld_viewport = NodePath("../ScreenOverworld/OverworldViewport")
 overworld = NodePath("../ScreenOverworld/OverworldViewport/3DViewport/OverworldPrototype")
 
 [node name="ScreenCombat" type="CanvasLayer" parent="." groups=["ui_root"]]
-layer = 4
+layer = 2
 
 [node name="CombatViewport" type="SubViewportContainer" parent="ScreenCombat"]
 visible = false
@@ -157,7 +157,7 @@ text = "Show Debug"
 
 [node name="PopupLayer" type="CanvasLayer" parent="ScreenCombat"]
 editor_description = "above normal UI layer"
-layer = 0
+layer = 3
 
 [node name="PopUpHandler" parent="ScreenCombat/PopupLayer" node_paths=PackedStringArray("viewport") instance=ExtResource("6_hemcp")]
 viewport = NodePath("../../CombatViewport/3DViewport")
