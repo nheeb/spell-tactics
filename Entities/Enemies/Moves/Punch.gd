@@ -5,7 +5,7 @@ func get_score() -> float:
 	match enemy.type.behaviour:
 		EnemyEntityType.Behaviour.Fighter:
 			var dist_to_player = Utility.tile_distance(combat.player.current_tile, enemy.current_tile)
-			return 4.0 if dist_to_player <= 1 else 0.0
+			return 5.0 if dist_to_player <= 1 else 0.0
 	return 0.0
 
 ## Executes the move

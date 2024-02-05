@@ -157,6 +157,12 @@ func get_shortest_distance(tile1: Tile, tile2: Tile, mask: int = Constants.INT64
 func get_all_tiles_in_distance_of_tile(tile: Tile, dist: int) -> Array[Tile]:
 	return get_all_tiles_in_distance(tile.r, tile.q, dist)
 
+func get_all_tiles_with_min_distance_of_tile(tile: Tile, dist: int) -> Array[Tile]:
+	if dist <= 0:
+		return get_all_tiles()
+	var exclude := get_all_tiles_in_distance_of_tile(tile, dist - 1)
+	return get_all_tiles().filter(func (t): return t not in exclude)
+
 ## Returns the list of tiles within `dist` distance of the tile (r_center, q_center)
 func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int) -> Array[Tile]:
 	assert(dist >= 0)
@@ -174,7 +180,6 @@ func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int) -> Array
 						tiles_in_distance.append(tile)
 
 	return tiles_in_distance
-
 
 func get_center_tile() -> Tile:
 	@warning_ignore("integer_division")

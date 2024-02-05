@@ -80,6 +80,7 @@ func is_dead() -> bool:
 
 func apply_status_effect(effect: StatusEffect) -> void:
 	var existing_effect := get_status_effect(effect.get_status_name())
+	combat.animation.say(visual_entity, effect.get_status_name()).set_duration(0.0)
 	if existing_effect:
 		existing_effect.extend(effect)
 	else:

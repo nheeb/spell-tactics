@@ -31,6 +31,7 @@ enum Target {
 
 ## Max tile range of the target, -1 for unlimited range
 @export var target_range := -1
+@export var target_min_range := -1
 
 ## when target is Tag, which Tag to target
 @export var target_tag := ""

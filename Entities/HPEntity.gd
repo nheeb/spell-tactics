@@ -9,6 +9,8 @@ signal died
 		if hp <= 0:
 			died.emit()
 
+var armor := 0
+
 func on_create():
 	super.on_create()
 	if not Engine.is_editor_hint():
@@ -24,7 +26,12 @@ func on_death():
 	combat.animation.property(visual_entity, "visible", false)
 
 func inflict_damage(damage: int):
-	if damage == 0:
+	if damage <= 0:
+		return
+	var new_armor = max(0, armor - damage)
+	damage -= armor
+	armor = new_armor
+	if damage <= 0:
 		return
 	hp = hp - damage
 

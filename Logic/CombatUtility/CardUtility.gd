@@ -14,12 +14,18 @@ func discard(spell: Spell):
 	else:
 		printerr("Tried to discard spell which is not in hand")
 
-func draw():
-	if not combat.deck.is_empty():
-		var spell : Spell = combat.deck.pop_front()
-		combat.hand.append(spell)
-		combat.animation.callback(combat.ui, "add_card", [spell])
+func draw() -> AnimationObject:
+	if combat.deck.is_empty():
+		reshuffle()
+	var spell : Spell = combat.deck.pop_front()
+	combat.hand.append(spell)
+	return combat.animation.callback(combat.ui, "add_card", [spell])
 
 func draw_to_hand_size():
 	while combat.hand.size() < combat.player.traits.max_handsize:
 		draw()
+
+func reshuffle():
+	combat.deck.append_array(combat.discard_pile)
+	combat.discard_pile.clear()
+	shuffle_deck()
