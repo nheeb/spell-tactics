@@ -27,6 +27,7 @@ func transition_to_combat(level_path: String):
 	combat_viewport.show()
 	
 	_reset()
+	print("Show screen_combat.")
 	screen_combat.show()
 	
 func transition_to_game_over():

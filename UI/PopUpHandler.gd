@@ -130,5 +130,5 @@ func _process(delta: float) -> void:
 		#var target_position: Vector2 = prev_screen_pos.lerp(screen_pos, f)
 		#$PopUp.position = target_position
 
-func _on_world_combat_changed(combat: Combat):
-	self.combat = combat
+func _on_world_combat_changed(_combat: Combat):
+	self.combat = _combat
