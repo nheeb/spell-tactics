@@ -2,9 +2,13 @@ extends Node3D
 
 const LEVEL = preload("res://Logic/Tiles/Level.tscn")
 
+var test = ["ast", "mast", "past"]
+
 func _ready() -> void:
-	OS.shell_open(ProjectSettings.globalize_path("user://"))
-	OS.shell_open(Game.GOOGLE_DRIVE_REVIEWS_LINK)
+	set("test:0", "uuu")
+	print(test)
+	#OS.shell_open(ProjectSettings.globalize_path("user://"))
+	#OS.shell_open(Game.GOOGLE_DRIVE_REVIEWS_LINK)
 	#print("start_test")
 	#
 	#var level : Level = LEVEL.instantiate()
