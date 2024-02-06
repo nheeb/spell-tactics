@@ -11,11 +11,11 @@ static func create(_type: LevelNode.NodeType) -> LevelNodeData:
 	data.level_path = "res://Levels/Area1/rivers.tres"
 	return data
 
-static func create_battle(level_path: String) -> LevelNodeData:
+static func create_battle(_level_path: String) -> LevelNodeData:
 	var data : LevelNodeData = LevelNodeData.new()
 	data.type = LevelNode.NodeType.Battle
 	data.from = [0, 1, 2, 3] # test
-	data.level_path = level_path
+	data.level_path = _level_path
 	return data
 
 func add_from(previous_position: int):

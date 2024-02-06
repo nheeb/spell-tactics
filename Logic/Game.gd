@@ -1,5 +1,10 @@
 class_name GameSingleton extends Node
 
+var game_version_string : String = "1.0 - First Prototype"
+var review_questions : Array[String] = []
+const _SAVE_DIR_USER_REVIEWS = "user://reviews/"
+const GOOGLE_DRIVE_REVIEWS_LINK = "https://drive.google.com/drive/folders/1o0zJrVl51mmWTfiNKrZq-RvV7wg2pnY2?usp=sharing"
+
 const PROTOTYPE_VISUALS = preload("res://Entities/Visuals/VisualPrototype.tscn")
 
 const _SAVE_DIR_RES = "res://Prototype/Savefiles/"

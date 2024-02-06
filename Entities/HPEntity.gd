@@ -6,11 +6,8 @@ signal died
 	set(h):
 		hp = h
 		hp_changed.emit(hp)
-		# TODO
-		#Game.combat.animation_queue.append(AnimationObject.new(Game.combat_ui, "set_status", ["Drawing hand cards..."]))
 		if hp <= 0:
 			died.emit()
-			on_death()
 
 var armor := 0
 
@@ -18,11 +15,19 @@ func on_create():
 	super.on_create()
 	if not Engine.is_editor_hint():
 		combat.animation.update_hp(self)
+		# only connect once everything is set up
+		# previously the deserialization ran into errors in on_death() since
+		# combat.level was still null
+		died.connect(on_death)  
 
 func on_death():
-	combat.level.move_entity_to_graveyard(self)
 	# TODO change this later to call death animation
 	combat.animation.property(visual_entity, "visible", false)
+	if logic:
+		if logic.has_method("on_death"):
+			logic.on_death()
+	combat.level.move_entity_to_graveyard(self)
+	
 
 func inflict_damage(damage: int):
 	if damage <= 0:

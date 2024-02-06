@@ -19,6 +19,13 @@ enum RoundPhase {
 	RoundRepeats = 7, # Unreachable
 }
 
+enum RESULT {
+	Unfinished,
+	Victory,
+	Loss,
+	Draw
+}
+
 @onready var animation: AnimationUtility = %AnimationUtility
 @onready var cards: CardUtility = %CardUtility
 @onready var energy: EnergyUtility = %EnergyUtility
@@ -30,6 +37,7 @@ enum RoundPhase {
 
 signal round_ended
 
+var result: RESULT = RESULT.Unfinished
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
 

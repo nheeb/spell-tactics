@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_3ykw6"]
 [ext_resource type="PackedScene" uid="uid://flsmyabg31yq" path="res://Logic/Overworld/Overworld.tscn" id="2_688l4"]
 [ext_resource type="Script" path="res://UI/DebugUI.gd" id="2_gty54"]
-[ext_resource type="PackedScene" path="res://UI/PopUp/PopUpHandler.tscn" id="6_hemcp"]
+[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="6_hemcp"]
 [ext_resource type="PackedScene" uid="uid://dl4v7jtsyvm05" path="res://UI/GameOver.tscn" id="7_jijdq"]
 [ext_resource type="PackedScene" uid="uid://uat6g64vbik4" path="res://UI/PostBattle.tscn" id="9_57ffr"]
 
@@ -30,7 +30,29 @@ overworld_viewport = NodePath("../ScreenOverworld/OverworldViewport")
 overworld = NodePath("../ScreenOverworld/OverworldViewport/3DViewport/OverworldPrototype")
 
 [node name="ScreenCombat" type="CanvasLayer" parent="." groups=["ui_root"]]
+layer = 2
+
+[node name="CombatViewport" type="SubViewportContainer" parent="ScreenCombat"]
 visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="3DViewport" type="SubViewport" parent="ScreenCombat/CombatViewport"]
+own_world_3d = true
+handle_input_locally = false
+msaa_3d = 1
+use_debanding = true
+physics_object_picking = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 0
+
+[node name="World" parent="ScreenCombat/CombatViewport/3DViewport" node_paths=PackedStringArray("debug_ui") instance=ExtResource("1_dlhxl")]
+unique_name_in_owner = true
+debug_ui = NodePath("../../../DebugUI")
 
 [node name="DebugUI" type="Control" parent="ScreenCombat"]
 layout_mode = 3
@@ -133,31 +155,9 @@ theme_override_fonts/font = ExtResource("2_3ykw6")
 theme_override_font_sizes/font_size = 24
 text = "Show Debug"
 
-[node name="CombatViewport" type="SubViewportContainer" parent="ScreenCombat"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="3DViewport" type="SubViewport" parent="ScreenCombat/CombatViewport"]
-own_world_3d = true
-handle_input_locally = false
-msaa_3d = 1
-use_debanding = true
-physics_object_picking = true
-size = Vector2i(1920, 1080)
-render_target_update_mode = 0
-
-[node name="World" parent="ScreenCombat/CombatViewport/3DViewport" node_paths=PackedStringArray("debug_ui") instance=ExtResource("1_dlhxl")]
-unique_name_in_owner = true
-debug_ui = NodePath("../../../DebugUI")
-
 [node name="PopupLayer" type="CanvasLayer" parent="ScreenCombat"]
 editor_description = "above normal UI layer"
-layer = 0
+layer = 3
 
 [node name="PopUpHandler" parent="ScreenCombat/PopupLayer" node_paths=PackedStringArray("viewport") instance=ExtResource("6_hemcp")]
 viewport = NodePath("../../CombatViewport/3DViewport")
@@ -195,6 +195,7 @@ visible = false
 
 [node name="PostBattle" parent="ScreenPostBattle" instance=ExtResource("9_57ffr")]
 
+[connection signal="combat_changed" from="ScreenCombat/CombatViewport/3DViewport/World" to="ScreenCombat/PopupLayer/PopUpHandler" method="_on_world_combat_changed"]
 [connection signal="load_game_pressed" from="ScreenCombat/DebugUI" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_load_game_pressed"]
 [connection signal="save_game_pressed" from="ScreenCombat/DebugUI" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_save_game_pressed"]
 [connection signal="pressed" from="ScreenCombat/DebugUI/List/LineButton" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_line_button_pressed"]
@@ -206,4 +207,3 @@ visible = false
 [connection signal="pressed" from="ScreenCombat/DebugUI/List/SaveLevel" to="ScreenCombat/DebugUI" method="_on_save_level_pressed"]
 [connection signal="pressed" from="ScreenCombat/DebugUI/List/LoadLevel" to="ScreenCombat/DebugUI" method="_on_load_level_pressed"]
 [connection signal="pressed" from="ScreenCombat/DebugUI/ShowDebug" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_show_debug_pressed"]
-[connection signal="combat_changed" from="ScreenCombat/CombatViewport/3DViewport/World" to="ScreenCombat/PopupLayer/PopUpHandler" method="_on_world_combat_changed"]

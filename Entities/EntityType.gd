@@ -44,6 +44,11 @@ const ENEMY_LAYER = 2
 # usually calls on create, the flag is only for deserialize to call that function after the properties have been set
 func create_entity(combat: Combat, call_on_create := true) -> Entity:
 	var ent: Entity = Entity.new()
+	setup_visuals_and_logic(ent, combat)
+	entity_on_create(ent, call_on_create)
+	return ent
+
+func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	ent.combat = combat
 	
 	if self.visual_scene != null:
@@ -59,12 +64,12 @@ func create_entity(combat: Combat, call_on_create := true) -> Entity:
 		
 	if self.entity_logic != null:
 		ent.logic = self.entity_logic.new(ent, combat)
-		ent.logic.on_create()
+		#ent.logic.on_create()
 
-	
 	ent.energy = ent.type.energy
 
+func entity_on_create(ent: Entity, call_on_create: bool) -> void:
 	if call_on_create:
 		ent.on_create()
-
-	return ent
+	if ent.logic:
+		ent.logic.on_create()
