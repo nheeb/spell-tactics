@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://c4yj8j5clqch8"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://dtg6te2oqm1my"]
 
 [ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_1y3km"]
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_f5gre"]
@@ -16,4 +16,5 @@ fluff_text = ""
 is_event_spell = false
 target = 0
 target_range = -1
+target_min_range = -1
 target_tag = ""
