@@ -5,7 +5,7 @@ extends Control
 @onready var grid: Control = $"PickBoosterPopup/VBoxContainer/GridContainer"
 
 func _on_continue_pressed():
-	Game.view_orchestrator.transition_to_overworld()
+	ActivityManager.pop()
 
 func _ready():
 	var items = booster_packs.duplicate()
@@ -24,3 +24,7 @@ func _ready():
 
 	var choose_coin = preload("res://UI/PostBattle/CoinsPickOption.tscn").instantiate()
 	grid.add_child(choose_coin)
+
+
+func _on_skip_pressed():
+	ActivityManager.pop()

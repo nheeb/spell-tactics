@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://0kc7i3ala7l"]
+
+[ext_resource type="Texture2D" uid="uid://bxo67tdfibt81" path="res://Assets/Sprites/Icons/coins.png" id="1_ol6qg"]
+[ext_resource type="Texture2D" uid="uid://3ktu4vwrplxj" path="res://Assets/Sprites/Icons/receive-money.png" id="2_lfbti"]
+
+[node name="BoosterPickOption" type="Button"]
+anchors_preset = -1
+anchor_right = 0.371
+anchor_bottom = 1.0
+offset_right = -286.32
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Take the coins"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Container"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+texture = ExtResource("1_ol6qg")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="Container"]
+layout_mode = 2
+text = "Blast your enemies with the power of thunder and lightning..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="Container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PickupIcon" type="TextureRect" parent="Container"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+texture = ExtResource("2_lfbti")
+expand_mode = 2
+stretch_mode = 5

@@ -98,8 +98,9 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 4
 
-[node name="Button" type="Button" parent="PickBoosterPopup/VBoxContainer"]
+[node name="Skip" type="Button" parent="PickBoosterPopup/VBoxContainer"]
 layout_mode = 2
 text = "Skip"
 
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PickBoosterPopup/VBoxContainer/Skip" to="." method="_on_skip_pressed"]

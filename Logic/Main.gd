@@ -2,5 +2,7 @@ extends Control
 
 
 func _ready() -> void:
+	ActivityManager.push(RootActivity.new())
 	if Game.DEBUG_SKIP_OVERWORLD:
-		Game.view_orchestrator.transition_to_combat("res://Levels/Area1/rivers.tres")
+		ActivityManager.push(OverworldActivity.new())
+		ActivityManager.push(CombatActivity.new("res://Levels/Area1/rivers.tres"))

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://brewkay16y5my"]
+
+[ext_resource type="PackedScene" uid="uid://uat6g64vbik4" path="res://UI/PostBattle.tscn" id="1_0hyh5"]
+
+[node name="ScreenPostCombat" type="CanvasLayer"]
+visible = false
+
+[node name="PostBattle" parent="." instance=ExtResource("1_0hyh5")]
