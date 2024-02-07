@@ -1,21 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://binwfa5e0th2w"]
+[gd_scene load_steps=8 format=3 uid="uid://binwfa5e0th2w"]
 
 [ext_resource type="Script" path="res://UI/HandCard2D.gd" id="1_5w608"]
 [ext_resource type="FontFile" uid="uid://hxpop83lvr07" path="res://Assets/Fonts/Gothica-Book.ttf" id="2_3qe8h"]
 [ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/HandCard2D_panel_default.tres" id="2_4erlu"]
-[ext_resource type="FontFile" uid="uid://cgljgdhswqtmj" path="res://Assets/Fonts/Gothica-Bold.ttf" id="3_fa2ci"]
+[ext_resource type="LabelSettings" uid="uid://bvmsibwfudvvs" path="res://Assets/Fonts/LabelSettings/HandCard2D_Title_LabelSettings.tres" id="4_gidae"]
 [ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="4_tjgd0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2udtv"]
 font = ExtResource("2_3qe8h")
 font_size = 32
 font_color = Color(0.266667, 0.164706, 0.0705882, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_bjwad"]
-font = ExtResource("3_fa2ci")
-font_size = 58
-outline_size = 7
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7unna"]
 content_margin_left = 5.0
@@ -60,7 +54,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "<NAME>"
-label_settings = SubResource("LabelSettings_bjwad")
+label_settings = ExtResource("4_gidae")
 horizontal_alignment = 1
 
 [node name="Gap" type="Control" parent="PanelContainer/VBoxContainer"]

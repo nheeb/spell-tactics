@@ -17,8 +17,11 @@ func update():
 	set_content(spell.type.pretty_name, spell.logic.get_costs(), spell.type.effect_text, spell.type.fluff_text)
 
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
+const SHRINKED_TITLE = preload("res://Assets/Fonts/LabelSettings/HandCard2D_Title_LabelSettings_shrinked.tres")
 @export var icon_size := 48
 func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff: String):
+	if len(pretty_name) > 15:
+		%Name.label_settings = SHRINKED_TITLE
 	%Name.text = pretty_name
 	%Effect.text = effect
 	for cost in costs.stack:

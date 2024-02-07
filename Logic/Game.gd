@@ -4,7 +4,7 @@ const PROTOTYPE_VISUALS = preload("res://Entities/Visuals/VisualPrototype.tscn")
 
 const _SAVE_DIR_RES = "res://Prototype/Savefiles/"
 const _SAVE_DIR_USER = "user://"
-var SAVE_DIR = _SAVE_DIR_USER if OS.has_feature("standalone") else _SAVE_DIR_RES
+var SAVE_DIR = _SAVE_DIR_USER  if OS.has_feature("template") else _SAVE_DIR_RES
 const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var view_orchestrator: ViewOrchestrator = null
