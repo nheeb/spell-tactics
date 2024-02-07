@@ -9,6 +9,7 @@ class_name ViewOrchestrator extends Node
 @onready var screen_overworld: CanvasLayer = $"../ScreenOverworld"
 @onready var screen_game_over: CanvasLayer = $"../ScreenGameOver"
 @onready var screen_post_battle: CanvasLayer = $"../ScreenPostBattle"
+@onready var screen_combat_review: CanvasLayer = $"../ScreenCombatReview"
 
 func _ready():
 	Game.view_orchestrator = self
@@ -19,6 +20,7 @@ func _reset():
 	screen_overworld.hide()
 	screen_game_over.hide()
 	screen_post_battle.hide()
+	screen_combat_review.hide()
 
 func transition_to_combat(level_path: String):
 	world.start_combat(level_path)
@@ -45,3 +47,8 @@ func transition_to_overworld():
 	
 	_reset()
 	screen_overworld.show()
+
+func transition_to_combat_review():
+	_reset()
+	screen_combat_review.get_node("CombatReviewMaker").setup()
+	screen_combat_review.show()

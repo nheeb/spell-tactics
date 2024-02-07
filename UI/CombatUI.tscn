@@ -187,7 +187,6 @@ label_settings = ExtResource("3_wybdv")
 metadata/_edit_use_anchors_ = true
 
 [node name="GameOverText" type="Label" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.244792
@@ -201,6 +200,18 @@ label_settings = SubResource("LabelSettings_0d1w0")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Button" type="Button" parent="GameOverText"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.391572
+anchor_top = 0.91571
+anchor_right = 0.612679
+anchor_bottom = 1.3679
+offset_right = -0.136948
+offset_bottom = -0.0209427
+text = "Write a review"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
@@ -208,3 +219,4 @@ metadata/_edit_use_anchors_ = true
 [connection signal="mouse_exited" from="Cast" to="." method="_on_button_exited"]
 [connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]
 [connection signal="card_selected" from="AspectRatioContainer/CardViewportContainer/CardViewport/Cards3D" to="." method="select_card"]
+[connection signal="pressed" from="GameOverText/Button" to="." method="_on_button_pressed"]

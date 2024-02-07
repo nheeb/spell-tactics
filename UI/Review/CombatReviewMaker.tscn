@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmpxern03wg1w"]
+[gd_scene load_steps=3 format=3 uid="uid://cmpxern03wg1w"]
 
 [ext_resource type="Script" path="res://UI/Review/CombatReviewMaker.gd" id="1_dev1k"]
 [ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/DefaultLabelSettings.tres" id="1_w8cw1"]
-[ext_resource type="PackedScene" uid="uid://c4yepuo1ynkja" path="res://UI/Review/ReviewQuestion.tscn" id="2_l6ab2"]
 
 [node name="CombatReviewMaker" type="Control"]
 layout_mode = 3
@@ -24,6 +23,7 @@ grow_vertical = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+vertical_scroll_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -41,9 +41,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ReviewQuestion" parent="VBoxContainer/ScrollContainer/VBoxContainer/Questions" instance=ExtResource("2_l6ab2")]
-layout_mode = 2
-
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -54,6 +51,7 @@ size_flags_horizontal = 3
 text = "Save Review"
 
 [node name="ButtonUpload" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
@@ -64,3 +62,7 @@ text = "Upload Review
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonSave" to="." method="_on_button_save_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonUpload" to="." method="_on_button_upload_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]

@@ -69,5 +69,10 @@ func entity_distance(e1: Entity, e2: Entity) -> int:
 	assert(is_instance_valid(e1.current_tile) and is_instance_valid(e2.current_tile), 
 		   "distance: entity has no tile")
 	return tile_distance(e1.current_tile, e2.current_tile)
-		
-	
+
+func array_unique(array: Array) -> Array:
+	var unique: Array = []
+	for item in array:
+		if not unique.has(item):
+			unique.append(item)
+	return unique

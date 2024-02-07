@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=12 format=3 uid="uid://brhegqlf0sm1x"]
 
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Prototype/World.tscn" id="1_dlhxl"]
 [ext_resource type="Script" path="res://Logic/ViewOrchestrator.gd" id="1_hv6af"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="6_hemcp"]
 [ext_resource type="PackedScene" uid="uid://dl4v7jtsyvm05" path="res://UI/GameOver.tscn" id="7_jijdq"]
 [ext_resource type="PackedScene" uid="uid://uat6g64vbik4" path="res://UI/PostBattle.tscn" id="9_57ffr"]
+[ext_resource type="PackedScene" uid="uid://cmpxern03wg1w" path="res://UI/Review/CombatReviewMaker.tscn" id="10_26ymb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pghfn"]
 font_size = 24
@@ -194,6 +195,11 @@ visible = false
 visible = false
 
 [node name="PostBattle" parent="ScreenPostBattle" instance=ExtResource("9_57ffr")]
+
+[node name="ScreenCombatReview" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="CombatReviewMaker" parent="ScreenCombatReview" instance=ExtResource("10_26ymb")]
 
 [connection signal="combat_changed" from="ScreenCombat/CombatViewport/3DViewport/World" to="ScreenCombat/PopupLayer/PopUpHandler" method="_on_world_combat_changed"]
 [connection signal="load_game_pressed" from="ScreenCombat/DebugUI" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_load_game_pressed"]

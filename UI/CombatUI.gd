@@ -172,7 +172,6 @@ func _on_active_locked(i: int) -> void:
 	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
 	button.disabled = true
 
-
 func _on_button_entered() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = true
 
@@ -180,7 +179,14 @@ func _on_button_exited() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = false
 
 func show_victory(text: String) -> void:
+	Game.combat_to_review = combat
 	Game.view_orchestrator.transition_to_post_battle()
 	
 func show_game_over(text: String) -> void:
+	Game.combat_to_review = combat
 	Game.view_orchestrator.transition_to_game_over()
+
+const REVIEW_MAKER = preload("res://UI/Review/CombatReviewMaker.tscn")
+func _on_button_pressed() -> void:
+	Game.combat_to_review = combat
+	get_tree().change_scene_to_packed(REVIEW_MAKER)

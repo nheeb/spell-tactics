@@ -1,7 +1,7 @@
 @tool
 class_name EditorUI extends Control
 
-@export var selection_ui: SelectionUI = null
+@export var selection_ui:  = null
 
 var tool_pencil = Pencil.new()
 var tool_raise = Raise.new()
