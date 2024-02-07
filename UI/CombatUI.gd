@@ -128,6 +128,10 @@ func initialize_active_buttons(new_actives: Array[Active]):
 		i += 1
 		$Actives/VBoxContainer.add_child(button)
 		button.owner = self
+		
+func disable_actions():
+	# TODO disable card selection / others?
+	pass
 
 
 const energy_min_size := 32
