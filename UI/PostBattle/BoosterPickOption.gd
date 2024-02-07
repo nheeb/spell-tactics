@@ -1,9 +1,12 @@
 extends Button
 
-@export var booster_pack: BoosterPack
+var booster_pickup_option: BoosterPickupOption
 
 @onready var title_label: Label = $"Container/Label"
 
 func _ready():
-	title_label.text = booster_pack.name
+	title_label.text = booster_pickup_option.booster_pack.name
 
+func _on_pressed():
+	booster_pickup_option.apply()
+	ActivityManager.pop()

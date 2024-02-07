@@ -1,13 +1,16 @@
-class_name Adventure
+class_name AdventureSingleton extends Node
 
 @export var health: int = 0
 @export var coins: int = 0
 @export var deck_states: Array[SpellState]
 
-var adventure_prompts: Array[Activity] = []
-
-func push_activity():
-	pass
+func reset():
+	health = 10
+	coins = 0
+	deck_states = []
+	
+func sync_health(amount: int):
+	health = amount
 
 func heal(amount: int):
 	health += amount
@@ -31,3 +34,8 @@ func serialise():
 	adventure_state.coins = coins
 	adventure_state.deck_states = deck_states
 	return adventure_state
+
+func deserialise(adventure_state: AdventureState):
+	self.health = adventure_state.health
+	self.coins = adventure_state.coins
+	self.deck_states = adventure_state.deck_states

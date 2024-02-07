@@ -1,9 +1,19 @@
 class_name BoosterPickupOption extends Object
 
-@export var booster_pack: BoosterPack
+var booster_pack: BoosterPack
 
 func _init(booster_pack: BoosterPack):
 	self.booster_pack = booster_pack
 
-func apply(adventure: Adventure):
-	pass
+func apply() -> bool:
+	var selected_cards = booster_pack.select_cards(3)
+	var spell_states: Array[SpellState] = []
+	for card in selected_cards:
+		var spell_id = SpellID.new()
+		spell_id.id = randi() # TODO - incremental?
+		var spell_state = SpellState.new()
+		spell_state.id = spell_id
+		spell_state.type = card
+		spell_states.append(SpellState.new())
+	Adventure.add_cards(spell_states)
+	return true

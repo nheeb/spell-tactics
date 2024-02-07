@@ -16,6 +16,7 @@ const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 var world: World = null
 
 const DEBUG_SKIP_OVERWORLD = false
+const DEBUG_SKIP_POST_COMBAT = true
 
 var tree : SceneTree : 
 	get:

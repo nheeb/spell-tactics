@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://uat6g64vbik4"]
+[gd_scene load_steps=3 format=3 uid="uid://uat6g64vbik4"]
 
 [ext_resource type="Script" path="res://UI/PostBattle.gd" id="1_bqpxm"]
-[ext_resource type="Resource" uid="uid://blf8jx3hqraqt" path="res://Spells/AllBoosterPacks/BookOfAir.tres" id="2_pcoeo"]
-[ext_resource type="Resource" uid="uid://bc1mtvf2xx3t6" path="res://Spells/AllBoosterPacks/BookOfFury.tres" id="3_yw43h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58lbm"]
 
@@ -14,7 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bqpxm")
-booster_packs = Array[Resource("res://Spells/BoosterPack.gd")]([ExtResource("2_pcoeo"), ExtResource("3_yw43h"), ExtResource("2_pcoeo")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
