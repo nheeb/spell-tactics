@@ -154,11 +154,9 @@ func update_payable_cards():
 		else:
 			hand_card2d.set_enabled(false)
 			# can't cast spell
-	
 
 func _ready() -> void:
 	deselect_card()
-
 
 func _on_active_button_pressed(i: int) -> void:
 	print("pressed ", i)
@@ -172,7 +170,6 @@ func _on_active_locked(i: int) -> void:
 	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
 	button.disabled = true
 
-
 func _on_button_entered() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = true
 
@@ -180,7 +177,7 @@ func _on_button_exited() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = false
 
 func show_victory(text: String) -> void:
-	Game.view_orchestrator.transition_to_post_battle()
+	ActivityManager.substitute(PostCombatActivity.new())
 	
 func show_game_over(text: String) -> void:
-	Game.view_orchestrator.transition_to_game_over()
+	ActivityManager.substitute(DeathActivity.new())

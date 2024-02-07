@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://uat6g64vbik4"]
+[gd_scene load_steps=3 format=3 uid="uid://uat6g64vbik4"]
 
 [ext_resource type="Script" path="res://UI/PostBattle.gd" id="1_bqpxm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58lbm"]
 
 [node name="PostBattle" type="Control"]
 layout_mode = 3
@@ -30,6 +32,17 @@ layout_mode = 2
 text = "You live to fight another day..."
 horizontal_alignment = 1
 
+[node name="RewardOptions" type="HFlowContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Booster" type="Button" parent="VBoxContainer/RewardOptions"]
+layout_mode = 2
+text = "Claim booster"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -38,4 +51,53 @@ alignment = 1
 layout_mode = 2
 text = "Continue"
 
+[node name="PickBoosterPopup" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 181.0
+offset_top = 140.0
+offset_right = -157.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_58lbm")
+
+[node name="Label" type="Label" parent="PickBoosterPopup"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -789.0
+offset_top = 14.0
+offset_right = 790.0
+offset_bottom = 44.0
+grow_horizontal = 2
+text = "Claim your booster pack"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PickBoosterPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 53.0
+offset_right = -2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PickBoosterPopup/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
+[node name="Skip" type="Button" parent="PickBoosterPopup/VBoxContainer"]
+layout_mode = 2
+text = "Skip"
+
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PickBoosterPopup/VBoxContainer/Skip" to="." method="_on_skip_pressed"]

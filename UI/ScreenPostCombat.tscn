@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://brewkay16y5my"]
+
+[ext_resource type="PackedScene" uid="uid://uat6g64vbik4" path="res://UI/PostBattle.tscn" id="1_0hyh5"]
+[ext_resource type="Script" path="res://UI/ScreenPostCombat.gd" id="1_1lcfl"]
+
+[node name="ScreenPostCombat" type="CanvasLayer"]
+script = ExtResource("1_1lcfl")
+
+[node name="PostBattle" parent="." instance=ExtResource("1_0hyh5")]

@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4yepuo1ynkja"]
+
+[ext_resource type="Script" path="res://UI/Review/ReviewQuestion.gd" id="1_qp4pk"]
+[ext_resource type="PackedScene" uid="uid://binwfa5e0th2w" path="res://UI/HandCard2D.tscn" id="2_4bh34"]
+
+[node name="ReviewQuestion" type="Container"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_qp4pk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HandCard2D" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_4bh34")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="QuestionBody" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuestionLabel" type="Label" parent="VBoxContainer/HBoxContainer/QuestionBody"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "How was it?"
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer/QuestionBody"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "..."
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer/QuestionBody"]
+visible = false
+layout_mode = 2
+text = "Mist"

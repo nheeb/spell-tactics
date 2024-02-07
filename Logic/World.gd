@@ -5,6 +5,7 @@ const COMBAT_UI = preload("res://UI/CombatUI.tscn")
 
 var level : Level
 var camera : Camera3D
+var ui_root : Node
 @onready var combat : Combat
 @onready var combat_ui : CombatUI
 @export var debug_ui: Control
@@ -29,7 +30,7 @@ func start_combat(level_path: String) -> void:
 	combat_changed.emit(combat)
 	# construct references to ui_root which lives outside this 3d viewport
 	# ui_root/combat_ui and ui_root/debug_ui
-	var ui_root = get_tree().get_first_node_in_group("ui_root")
+	ui_root = get_tree().get_first_node_in_group("ui_root")
 	combat_ui = COMBAT_UI.instantiate()
 	ui_root.add_child(combat_ui)
 	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
@@ -48,8 +49,10 @@ func _reset_combat():
 		return
 	remove_child(combat)
 	remove_child(combat.level)
-	var ui_root = get_tree().get_first_node_in_group("ui_root")
 	ui_root.remove_child(combat_ui)
+	
+func _exit_tree():
+	call_deferred("_reset_combat")
 
 var flip := false
 func _on_movement_range_button_pressed() -> void:
@@ -109,8 +112,8 @@ func _on_load_game_pressed(id: String) -> void:
 	level.name = "Level"
 	add_child(level)
 	combat_ui = COMBAT_UI.instantiate()
-	var ui_root = get_tree().get_first_node_in_group("ui_root")
-	ui_root.add_child(combat_ui)
+	var _ui_root = get_tree().get_first_node_in_group("ui_root")
+	_ui_root.add_child(combat_ui)
 	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 	combat.animation.play_animation_queue()
 

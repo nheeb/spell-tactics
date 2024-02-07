@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Logic/World.gd" id="1_i0b03"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="2_1cart"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_mpog2"]
-[ext_resource type="Script" path="res://Logic/MouseInput.gd" id="4_box88"]
+[ext_resource type="Script" path="res://Logic/Tiles/MouseInput.gd" id="4_xdvdf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
 sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
@@ -52,4 +52,4 @@ transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 
 enabled = false
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
-script = ExtResource("4_box88")
+script = ExtResource("4_xdvdf")
