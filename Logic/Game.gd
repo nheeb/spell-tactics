@@ -13,11 +13,10 @@ const _SAVE_DIR_USER = "user://"
 var SAVE_DIR = _SAVE_DIR_USER if OS.has_feature("standalone") else _SAVE_DIR_RES
 const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
-var view_orchestrator: ViewOrchestrator = null
-
 var world: World = null
 
 const DEBUG_SKIP_OVERWORLD = false
+const DEBUG_SKIP_POST_COMBAT = true
 
 var tree : SceneTree : 
 	get:
@@ -36,7 +35,7 @@ func get_prototype_deck(combat: Combat) -> Array[Spell]:
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/Cyclone.tres"), combat))
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfHeal.tres"), combat))
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/Berserker.tres"), combat))
-		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/GrowingMycel.tres"), combat))
+		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/GrowingMycel.tres"), combat))
 	for spell in prototype_deck:
 		spell.id = SpellID.new(add_to_spell_count())
 	prototype_deck.shuffle()

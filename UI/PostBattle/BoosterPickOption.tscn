@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://df8jaj15aepiu"]
+
+[ext_resource type="Texture2D" uid="uid://bk6gubcidtwpg" path="res://Assets/Sprites/Icons/book-cover.png" id="1_5htjg"]
+[ext_resource type="Script" path="res://UI/PostBattle/BoosterPickOption.gd" id="1_woxkd"]
+[ext_resource type="Texture2D" uid="uid://cg517gbeyqckx" path="res://Assets/Sprites/Icons/card-pickup.png" id="2_w0txr"]
+
+[node name="BoosterPickOption" type="Button"]
+anchors_preset = -1
+anchor_right = 0.371
+anchor_bottom = 1.0
+offset_right = -286.32
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_woxkd")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Book of the storm"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Container"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+texture = ExtResource("1_5htjg")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="Container"]
+layout_mode = 2
+text = "Blast your enemies with the power of thunder and lightning..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="Container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PickupIcon" type="TextureRect" parent="Container"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+texture = ExtResource("2_w0txr")
+expand_mode = 3
+stretch_mode = 5
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

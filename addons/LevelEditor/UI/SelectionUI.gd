@@ -13,7 +13,8 @@ var container: Container
 var _mode: Mode
 
 func _ready():
-	editor_ui.selection_ui = self
+	if editor_ui:
+		editor_ui.selection_ui = self
 	container = get_node("ScrollContainer/Container")
 	call_deferred("set_mode", Mode.Terrain)
 

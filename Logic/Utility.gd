@@ -76,3 +76,10 @@ func array_unique(array: Array) -> Array:
 		if not unique.has(item):
 			unique.append(item)
 	return unique
+
+func random_hash(length:int, chars := "abcdefghijklmnopqrstuvwxyz") -> String:
+	var word: String
+	var n_char = len(chars)
+	for i in range(length):
+		word += chars[randi()% n_char]
+	return word

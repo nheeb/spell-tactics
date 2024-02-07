@@ -37,4 +37,4 @@ func click(overworld: Overworld):
 		return
 	overworld.move_to(location)
 	overworld.save()
-	Game.view_orchestrator.transition_to_combat(data.level_path)
+	ActivityManager.push(CombatActivity.new(data.level_path))

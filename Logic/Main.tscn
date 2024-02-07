@@ -1,18 +1,44 @@
-[gd_scene load_steps=12 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=16 format=3 uid="uid://brhegqlf0sm1x"]
 
-[ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Prototype/World.tscn" id="1_dlhxl"]
-[ext_resource type="Script" path="res://Logic/ViewOrchestrator.gd" id="1_hv6af"]
 [ext_resource type="Script" path="res://Logic/Main.gd" id="1_u1dq5"]
-[ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_3ykw6"]
-[ext_resource type="PackedScene" uid="uid://flsmyabg31yq" path="res://Logic/Overworld/Overworld.tscn" id="2_688l4"]
-[ext_resource type="Script" path="res://UI/DebugUI.gd" id="2_gty54"]
-[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="6_hemcp"]
-[ext_resource type="PackedScene" uid="uid://dl4v7jtsyvm05" path="res://UI/GameOver.tscn" id="7_jijdq"]
-[ext_resource type="PackedScene" uid="uid://uat6g64vbik4" path="res://UI/PostBattle.tscn" id="9_57ffr"]
-[ext_resource type="PackedScene" uid="uid://cmpxern03wg1w" path="res://UI/Review/CombatReviewMaker.tscn" id="10_26ymb"]
+[ext_resource type="PackedScene" uid="uid://brewkay16y5my" path="res://UI/ScreenPostCombat.tscn" id="4_7jo8o"]
+[ext_resource type="PackedScene" uid="uid://c068mk54cnfau" path="res://UI/ScreenOverworld.tscn" id="7_nsqe3"]
+[ext_resource type="PackedScene" uid="uid://c8rre4qcpsefg" path="res://UI/ScreenGameOver.tscn" id="8_a2s8e"]
+[ext_resource type="PackedScene" uid="uid://b8ckb65eob6x2" path="res://UI/ScreenCombat.tscn" id="9_cgcr1"]
+[ext_resource type="PackedScene" uid="uid://ciegwnpuuhd71" path="res://UI/Review/ScreenCombatReview.tscn" id="9_cwj8i"]
+[ext_resource type="PackedScene" uid="uid://ds2ivp3x5ferm" path="res://UI/ActivityRouter.tscn" id="10_1e1ax"]
+[ext_resource type="PackedScene" uid="uid://bydj3trmw77hb" path="res://UI/MainMenu.tscn" id="11_5hlvu"]
+[ext_resource type="Script" path="res://UI/ActivityRouterEntry.gd" id="11_qsh2o"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_pghfn"]
-font_size = 24
+[sub_resource type="Resource" id="Resource_mqai8"]
+script = ExtResource("11_qsh2o")
+activity_script_path = "res://Logic/Activities/RootActivity.gd"
+packed_scene = ExtResource("11_5hlvu")
+
+[sub_resource type="Resource" id="Resource_ep884"]
+script = ExtResource("11_qsh2o")
+activity_script_path = "res://Logic/Activities/OverworldActivity.gd"
+packed_scene = ExtResource("7_nsqe3")
+
+[sub_resource type="Resource" id="Resource_8nmyv"]
+script = ExtResource("11_qsh2o")
+activity_script_path = "res://Logic/Activities/CombatActivity.gd"
+packed_scene = ExtResource("9_cgcr1")
+
+[sub_resource type="Resource" id="Resource_y80su"]
+script = ExtResource("11_qsh2o")
+activity_script_path = "res://Logic/Activities/PostCombatActivity.gd"
+packed_scene = ExtResource("4_7jo8o")
+
+[sub_resource type="Resource" id="Resource_7534x"]
+script = ExtResource("11_qsh2o")
+activity_script_path = "res://Logic/Activities/DeathActivity.gd"
+packed_scene = ExtResource("8_a2s8e")
+
+[sub_resource type="Resource" id="Resource_ti6f6"]
+script = ExtResource("11_qsh2o")
+activity_script_path = "res://Logic/Activities/ReviewActivity.gd"
+packed_scene = ExtResource("9_cwj8i")
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -23,193 +49,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u1dq5")
 
-[node name="ViewOrchestrator" type="Node" parent="." node_paths=PackedStringArray("combat_viewport", "world", "overworld_viewport", "overworld")]
-script = ExtResource("1_hv6af")
-combat_viewport = NodePath("../ScreenCombat/CombatViewport")
-world = NodePath("../ScreenCombat/CombatViewport/3DViewport/World")
-overworld_viewport = NodePath("../ScreenOverworld/OverworldViewport")
-overworld = NodePath("../ScreenOverworld/OverworldViewport/3DViewport/OverworldPrototype")
-
-[node name="ScreenCombat" type="CanvasLayer" parent="." groups=["ui_root"]]
-layer = 2
-
-[node name="CombatViewport" type="SubViewportContainer" parent="ScreenCombat"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="3DViewport" type="SubViewport" parent="ScreenCombat/CombatViewport"]
-own_world_3d = true
-handle_input_locally = false
-msaa_3d = 1
-use_debanding = true
-physics_object_picking = true
-size = Vector2i(1920, 1080)
-render_target_update_mode = 0
-
-[node name="World" parent="ScreenCombat/CombatViewport/3DViewport" node_paths=PackedStringArray("debug_ui") instance=ExtResource("1_dlhxl")]
-unique_name_in_owner = true
-debug_ui = NodePath("../../../DebugUI")
-
-[node name="DebugUI" type="Control" parent="ScreenCombat"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("2_gty54")
-
-[node name="List" type="VBoxContainer" parent="ScreenCombat/DebugUI"]
-unique_name_in_owner = true
-visible = false
+[node name="ActivityRouter" parent="." instance=ExtResource("10_1e1ax")]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.0398148
-anchor_right = 0.164583
-anchor_bottom = 0.44
-metadata/_edit_use_anchors_ = true
-
-[node name="LineButton" type="Button" parent="ScreenCombat/DebugUI/List"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Draw Line (TODO)
-"
-
-[node name="NavButton" type="Button" parent="ScreenCombat/DebugUI/List"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Draw Shortest Path
-"
-
-[node name="EntityFindButton" type="Button" parent="ScreenCombat/DebugUI/List"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Highlight All Rocks
-"
-
-[node name="MovementRangeButton" type="Button" parent="ScreenCombat/DebugUI/List"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Highlight Movement Range"
-
-[node name="MoveRockButton" type="Button" parent="ScreenCombat/DebugUI/List"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Move Rock"
-
-[node name="DamagePlayer" type="Button" parent="ScreenCombat/DebugUI/List"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Damage Player"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScreenCombat/DebugUI/List"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="ScreenCombat/DebugUI/List/HBoxContainer"]
-layout_mode = 2
-text = "Save-Slot"
-label_settings = SubResource("LabelSettings_pghfn")
-
-[node name="SaveID" type="SpinBox" parent="ScreenCombat/DebugUI/List/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-rounded = true
-
-[node name="SaveLevel" type="Button" parent="ScreenCombat/DebugUI/List"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Save Level"
-
-[node name="LoadLevel" type="Button" parent="ScreenCombat/DebugUI/List"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Load Level"
-
-[node name="ShowDebug" type="Button" parent="ScreenCombat/DebugUI"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-theme_override_fonts/font = ExtResource("2_3ykw6")
-theme_override_font_sizes/font_size = 24
-text = "Show Debug"
-
-[node name="PopupLayer" type="CanvasLayer" parent="ScreenCombat"]
-editor_description = "above normal UI layer"
-layer = 3
-
-[node name="PopUpHandler" parent="ScreenCombat/PopupLayer" node_paths=PackedStringArray("viewport") instance=ExtResource("6_hemcp")]
-viewport = NodePath("../../CombatViewport/3DViewport")
-
-[node name="ScreenOverworld" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="OverworldViewport" type="SubViewportContainer" parent="ScreenOverworld"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch = true
-
-[node name="3DViewport" type="SubViewport" parent="ScreenOverworld/OverworldViewport"]
-own_world_3d = true
-handle_input_locally = false
-msaa_3d = 1
-use_debanding = true
-physics_object_picking = true
-size = Vector2i(1920, 1080)
-render_target_update_mode = 0
-
-[node name="OverworldPrototype" parent="ScreenOverworld/OverworldViewport/3DViewport" instance=ExtResource("2_688l4")]
-
-[node name="ScreenGameOver" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="GameOver" parent="ScreenGameOver" instance=ExtResource("7_jijdq")]
-
-[node name="ScreenPostBattle" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="PostBattle" parent="ScreenPostBattle" instance=ExtResource("9_57ffr")]
-
-[node name="ScreenCombatReview" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="CombatReviewMaker" parent="ScreenCombatReview" instance=ExtResource("10_26ymb")]
-
-[connection signal="combat_changed" from="ScreenCombat/CombatViewport/3DViewport/World" to="ScreenCombat/PopupLayer/PopUpHandler" method="_on_world_combat_changed"]
-[connection signal="load_game_pressed" from="ScreenCombat/DebugUI" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_load_game_pressed"]
-[connection signal="save_game_pressed" from="ScreenCombat/DebugUI" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_save_game_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/List/LineButton" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_line_button_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/List/NavButton" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_nav_button_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/List/EntityFindButton" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_entity_find_button_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/List/MovementRangeButton" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_movement_range_button_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/List/MoveRockButton" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_move_rock_button_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/List/DamagePlayer" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_damage_player_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/List/SaveLevel" to="ScreenCombat/DebugUI" method="_on_save_level_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/List/LoadLevel" to="ScreenCombat/DebugUI" method="_on_load_level_pressed"]
-[connection signal="pressed" from="ScreenCombat/DebugUI/ShowDebug" to="ScreenCombat/CombatViewport/3DViewport/World" method="_on_show_debug_pressed"]
+activity_to_view_map = Array[ExtResource("11_qsh2o")]([SubResource("Resource_mqai8"), SubResource("Resource_ep884"), SubResource("Resource_8nmyv"), SubResource("Resource_y80su"), SubResource("Resource_7534x"), SubResource("Resource_ti6f6")])

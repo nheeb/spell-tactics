@@ -17,6 +17,10 @@ func _ready() -> void:
 	Events.tile_unhovered_long.connect(hide_tile_popup)
 	popup = POPUP.instantiate()
 
+func _exit_tree():
+	Events.tile_hovered_long.disconnect(show_tile_popup)
+	Events.tile_unhovered_long.disconnect(hide_tile_popup)
+
 func show_tile_popup(tile: Tile):
 	current_tile = tile
 	# can use Camera3D.is_position_behind() to check, but should not be relevant here for now	

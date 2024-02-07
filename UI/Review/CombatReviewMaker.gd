@@ -5,7 +5,7 @@ const REVIEW_QUESTION = preload("res://UI/Review/ReviewQuestion.tscn")
 var review: CombatReview
 var questions: Array[ReviewQuestion]
 
-func setup() -> void:
+func _ready() -> void:
 	if Game.combat_to_review:
 		review = CombatReview.from_combat(Game.combat_to_review)
 		create_questions()
@@ -58,7 +58,8 @@ func update_review() -> void:
 func save_review() -> void:
 	if not DirAccess.dir_exists_absolute(Game._SAVE_DIR_USER_REVIEWS):
 		DirAccess.make_dir_absolute(Game._SAVE_DIR_USER_REVIEWS)
-	ResourceSaver.save(review, Game._SAVE_DIR_USER_REVIEWS + "test.tres")
+	var filename := review.date + Utility.random_hash(6) + ".tres"
+	ResourceSaver.save(review, Game._SAVE_DIR_USER_REVIEWS + filename)
 
 func _on_button_save_pressed() -> void:
 	update_review()
