@@ -70,6 +70,37 @@ func entity_distance(e1: Entity, e2: Entity) -> int:
 		   "distance: entity has no tile")
 	return tile_distance(e1.current_tile, e2.current_tile)
 
+
+class DeckUtils:
+	static func load_spell(name: String, combat: Combat) -> Spell:
+		return Spell.new(SpellType.load_from_file("res://Spells/AllSpells/%s.tres" % name), combat)
+	
+	static func load_spell_n_times(name: String, n: int, combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		for i in range(n):
+			spells.append(load_spell(name, combat))
+		return spells
+
+	static func create_test_deck(combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		spells.append_array(load_spell_n_times("MudArmor", 3, combat))
+		spells.append_array(load_spell_n_times("AirMissile", 5, combat))
+		spells.append_array(load_spell_n_times("Berserker", 4, combat))
+		spells.append_array(load_spell_n_times("TrappingRoots", 3, combat))
+		spells.append_array(load_spell_n_times("SummonBush", 2, combat))
+		spells.append_array(load_spell_n_times("SporeFlight", 4, combat))
+		spells.append_array(load_spell_n_times("Cyclone", 2, combat))
+		
+		for spell in spells:
+			spell.id = SpellID.new(Game.add_to_spell_count())
+		
+		spells.shuffle()
+		
+		return spells
+		
+	static func create_spell_list():
+		# TODO
+		pass
 func array_unique(array: Array) -> Array:
 	var unique: Array = []
 	for item in array:
@@ -78,7 +109,7 @@ func array_unique(array: Array) -> Array:
 	return unique
 
 func random_hash(length:int, chars := "abcdefghijklmnopqrstuvwxyz") -> String:
-	var word: String
+	var word: String = ""
 	var n_char = len(chars)
 	for i in range(length):
 		word += chars[randi()% n_char]

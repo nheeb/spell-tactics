@@ -5,6 +5,10 @@ func process_phase() -> bool:
 	
 	combat.animation.property(combat.camera, "player_input_enabled", false)
 	
+	combat.ui.disable_actions()
+	for active in combat.actives:
+		active.unlocked = false
+	
 	# Sort enemies by agility
 	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.agility > b.agility)
 	

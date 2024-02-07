@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cs6vnuiljtmct"]
 
-[ext_resource type="Script" path="res://Prototype/World.gd" id="1_j078d"]
-[ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="1_mf57j"]
-[ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="1_wx0wr"]
-[ext_resource type="Script" path="res://Prototype/MouseInput.gd" id="4_2ad06"]
+[ext_resource type="Script" path="res://Logic/World.gd" id="1_i0b03"]
+[ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="2_1cart"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_mpog2"]
+[ext_resource type="Script" path="res://Logic/Tiles/MouseInput.gd" id="4_xdvdf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
 sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
@@ -21,7 +21,7 @@ sky = SubResource("Sky_4htsq")
 ambient_light_source = 3
 
 [node name="World" type="Node3D"]
-script = ExtResource("1_j078d")
+script = ExtResource("1_i0b03")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0glof")
@@ -32,7 +32,7 @@ light_energy = 1.5
 shadow_enabled = true
 
 [node name="GameCamera" type="Node3D" parent="."]
-script = ExtResource("1_wx0wr")
+script = ExtResource("2_1cart")
 
 [node name="AnglePivot" type="Node3D" parent="GameCamera"]
 transform = Transform3D(1, 0, 0, 0, 0.866026, -0.5, 0, 0.5, 0.866026, 0, 0, 0)
@@ -41,7 +41,7 @@ transform = Transform3D(1, 0, 0, 0, 0.866026, -0.5, 0, 0.5, 0.866026, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="Smoothing" type="Node3D" parent="GameCamera/AnglePivot/ZoomPivot"]
-script = ExtResource("1_mf57j")
+script = ExtResource("3_mpog2")
 
 [node name="Camera3D" type="Camera3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing"]
 transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, 0, 0)
@@ -52,4 +52,4 @@ transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 
 enabled = false
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
-script = ExtResource("4_2ad06")
+script = ExtResource("4_xdvdf")

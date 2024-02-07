@@ -10,7 +10,7 @@ const PROTOTYPE_VISUALS = preload("res://Entities/Visuals/VisualPrototype.tscn")
 
 const _SAVE_DIR_RES = "res://Prototype/Savefiles/"
 const _SAVE_DIR_USER = "user://"
-var SAVE_DIR = _SAVE_DIR_USER if OS.has_feature("standalone") else _SAVE_DIR_RES
+var SAVE_DIR = _SAVE_DIR_USER  if OS.has_feature("template") else _SAVE_DIR_RES
 const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var world: World = null
@@ -22,14 +22,15 @@ var tree : SceneTree :
 	get:
 		return get_tree()
 
+
 func get_prototype_deck(combat: Combat) -> Array[Spell]:
 	var prototype_deck : Array[Spell] = []
 	for i in range(5):
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), combat))
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), combat))
-		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/MudArmor.tres"), combat))
-		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/OmniDamage.tres"), combat))
-		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/WaterBlast.tres"), combat))
+		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/MudArmor.tres"), combat))
+		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/OmniDamage.tres"), combat))
+		prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/WaterBlast.tres"), combat))
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/TrappingRoots.tres"), combat))
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SpellMemory.tres"), combat))
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/Cyclone.tres"), combat))

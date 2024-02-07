@@ -112,8 +112,8 @@ func _on_load_game_pressed(id: String) -> void:
 	level.name = "Level"
 	add_child(level)
 	combat_ui = COMBAT_UI.instantiate()
-	var ui_root = get_tree().get_first_node_in_group("ui_root")
-	ui_root.add_child(combat_ui)
+	var _ui_root = get_tree().get_first_node_in_group("ui_root")
+	_ui_root.add_child(combat_ui)
 	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 	combat.animation.play_animation_queue()
 
