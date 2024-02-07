@@ -1,7 +1,5 @@
 class_name CombatUI extends Control
 
-
-
 var combat : Combat
 var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
@@ -181,7 +179,9 @@ func _on_button_exited() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = false
 
 func show_victory(text: String) -> void:
+	Game.combat_to_review = combat
 	ActivityManager.substitute(PostCombatActivity.new())
-	
+
 func show_game_over(text: String) -> void:
+	Game.combat_to_review = combat
 	ActivityManager.substitute(DeathActivity.new())

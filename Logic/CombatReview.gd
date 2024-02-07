@@ -6,11 +6,12 @@ class_name CombatReview extends Resource
 
 @export var combat_log: Array[String]
 @export var deck: Array[SpellType]
-@export var entities: Array[EnemyEntityType]
+@export var entities: Array[EntityType]
 
 @export var game_version: String
 @export var level_name: String
 
+@export var bugs: String
 @export var remarks: String
 @export var rating: String
 @export var card_remarks: Dictionary
@@ -26,9 +27,9 @@ func initialize_with_combat(combat: Combat) -> void:
 	date = Time.get_date_string_from_system()
 	combat_log = combat.log.log_lines.duplicate(true)
 	deck = []
-	deck.append_array(combat.get_all_spells().map(func(s): return s.type))
+	deck.append_array(Utility.array_unique(combat.get_all_spells().map(func(s): return s.type)))
 	entities = []
-	entities.append_array(combat.level.entities().get_all_entities().map(func(e): return e.type))
+	entities.append_array(Utility.array_unique(combat.level.entities().get_all_entities().map(func(e): return e.type)))
 	game_version = Game.game_version_string
 	# TODO Level name
 	if Game.review_questions:
@@ -41,3 +42,12 @@ static func from_combat(combat: Combat) -> CombatReview:
 	var review = CombatReview.new()
 	review.initialize_with_combat(combat)
 	return review
+
+func array_unique(array: Array) -> Array:
+	var unique: Array = []
+
+	for item in array:
+		if not unique.has(item):
+			unique.append(item)
+
+	return unique

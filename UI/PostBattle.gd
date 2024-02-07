@@ -17,3 +17,10 @@ func start(activity: PostCombatActivity):
 
 func _on_skip_pressed():
 	ActivityManager.pop()
+
+func _on_review_pressed() -> void:
+	ActivityManager.substitute(ReviewActivity.new())
+
+
+func _on_booster_pressed() -> void:
+	$PickBoosterPopup.visible = not $PickBoosterPopup.visible

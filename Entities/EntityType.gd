@@ -73,3 +73,7 @@ func entity_on_create(ent: Entity, call_on_create: bool) -> void:
 		ent.on_create()
 	if ent.logic:
 		ent.logic.on_create()
+
+func get_prototype_texture():
+	var texture_path := "res://Assets/Sprites/PrototypeBillboard/" + internal_name + ".png"
+	return load(texture_path)

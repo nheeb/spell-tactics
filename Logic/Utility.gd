@@ -101,3 +101,16 @@ class DeckUtils:
 	static func create_spell_list():
 		# TODO
 		pass
+func array_unique(array: Array) -> Array:
+	var unique: Array = []
+	for item in array:
+		if not unique.has(item):
+			unique.append(item)
+	return unique
+
+func random_hash(length:int, chars := "abcdefghijklmnopqrstuvwxyz") -> String:
+	var word: String = ""
+	var n_char = len(chars)
+	for i in range(length):
+		word += chars[randi()% n_char]
+	return word

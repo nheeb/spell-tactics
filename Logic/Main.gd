@@ -10,3 +10,4 @@ func _ready() -> void:
 		ActivityManager.push(OverworldActivity.new())
 		ActivityManager.push(CombatActivity.new("res://Levels/Area1/rivers.tres"))
 		ActivityManager.substitute(PostCombatActivity.new())
+#

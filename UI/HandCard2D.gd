@@ -16,6 +16,9 @@ func set_spell(_spell, as_hand_card := true):
 func set_spell_type(_spell_type):
 	spell_type = _spell_type
 	spell = null
+	%Name.label_settings.font_size = 24
+	%Fluff.label_settings.font_size = 16
+	%Effect.label_settings.font_size = 16
 	update()
 
 func update():
