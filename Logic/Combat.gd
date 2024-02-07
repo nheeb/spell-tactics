@@ -36,6 +36,7 @@ enum RESULT {
 @onready var event: EventUtility = %EventUtility
 
 signal round_ended
+signal spell_casted_successfully(spell: SpellReference)
 
 var result: RESULT = RESULT.Unfinished
 var current_round: int = 1

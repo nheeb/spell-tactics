@@ -15,3 +15,4 @@ func is_valid(combat: Combat) -> bool:
 
 func execute(combat: Combat) -> void:
 	spell.logic.cast(payment)
+	combat.spell_casted_successfully.emit(spell.get_reference())

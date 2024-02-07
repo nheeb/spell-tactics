@@ -59,7 +59,7 @@ func is_valid(combat: Combat) -> bool:
 
 func execute(combat: Combat) -> void:
 	spell.logic.target = target
-	spell.logic.cast(payment)
+	super.execute(combat)
 	#if spell is Active:
 		#if spell.type.unlocked_once_per_round:
 			#spell.unlocked = false
