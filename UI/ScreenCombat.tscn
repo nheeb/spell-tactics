@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ckb65eob6x2"]
+[gd_scene load_steps=7 format=3 uid="uid://c3t7dsskwul4j"]
 
-[ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Prototype/World.tscn" id="1_p18xo"]
+[ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="1_p18xo"]
 [ext_resource type="Script" path="res://UI/ScreenCombat.gd" id="1_wrhl6"]
 [ext_resource type="Script" path="res://UI/DebugUI.gd" id="2_g43go"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="3_gu2gq"]
-[ext_resource type="PackedScene" path="res://UI/PopUp/PopUpHandler.tscn" id="4_rxvfx"]
+[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="4_rxvfx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pghfn"]
 font_size = 24
@@ -30,8 +30,10 @@ physics_object_picking = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="World" parent="CombatViewport/3DViewport" instance=ExtResource("1_p18xo")]
+[node name="World" parent="CombatViewport/3DViewport" node_paths=PackedStringArray("debug_ui", "popup_handler") instance=ExtResource("1_p18xo")]
 unique_name_in_owner = true
+debug_ui = NodePath("../../../DebugUI")
+popup_handler = NodePath("../../../PopUpHandler")
 
 [node name="DebugUI" type="Control" parent="."]
 layout_mode = 3
