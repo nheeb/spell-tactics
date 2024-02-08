@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://bhbal4070u1qk"]
+
+[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_cq3mu"]
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_xaj57"]
+
+[sub_resource type="Resource" id="Resource_6ekvi"]
+script = ExtResource("1_cq3mu")
+stack = Array[int]([2, 2, 6, 6])
+
+[resource]
+script = ExtResource("1_xaj57")
+pretty_name = "Witch Totem"
+costs = SubResource("Resource_6ekvi")
+effect_text = "The witch totem gives 1 Decay Energy whenever you cast a spell next to it."
+fluff_text = ""
+is_event_spell = false
+target = 3
+target_range = -1
+target_min_range = -1
+target_tag = ""

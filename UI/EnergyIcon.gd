@@ -43,10 +43,3 @@ func type_to_color(type) -> Color:
 func _ready() -> void:
 	color_rect.color = type_to_color(type)
 	color_rect.custom_minimum_size = Vector2(min_size, min_size)
-
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
