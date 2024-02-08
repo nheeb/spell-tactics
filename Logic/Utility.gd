@@ -83,13 +83,17 @@ class DeckUtils:
 
 	static func create_test_deck(combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []
-		spells.append_array(load_spell_n_times("MudArmor", 3, combat))
-		spells.append_array(load_spell_n_times("AirMissile", 5, combat))
-		spells.append_array(load_spell_n_times("Berserker", 4, combat))
-		spells.append_array(load_spell_n_times("TrappingRoots", 3, combat))
-		spells.append_array(load_spell_n_times("SummonBush", 2, combat))
-		spells.append_array(load_spell_n_times("SporeFlight", 4, combat))
-		spells.append_array(load_spell_n_times("Cyclone", 2, combat))
+		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
+		spells.append_array(load_spell_n_times("AirMissile", 3, combat))
+		spells.append_array(load_spell_n_times("Berserker", 2, combat))
+		spells.append_array(load_spell_n_times("TrappingRoots", 2, combat))
+		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
+		spells.append_array(load_spell_n_times("SporeFlight", 2, combat))
+		spells.append_array(load_spell_n_times("Cyclone", 1, combat))
+		spells.append_array(load_spell_n_times("SelfHeal", 3, combat))
+		spells.append_array(load_spell_n_times("GrowingMycel", 2, combat))
+		spells.append_array(load_spell_n_times("DeadlyDart", 2, combat))
+		
 		
 		for spell in spells:
 			spell.id = SpellID.new(Game.add_to_spell_count())
