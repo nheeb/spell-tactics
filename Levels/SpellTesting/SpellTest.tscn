@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1eod0pbyip4b"]
+
+[ext_resource type="Script" path="res://Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
+[ext_resource type="Script" path="res://addons/LevelEditor/GridLevelEditor.gd" id="1_wcyqb"]
+
+[node name="SpellTest" type="Node3D"]
+script = ExtResource("1_58ka4")
+
+[node name="Editor" type="Node" parent="."]
+script = ExtResource("1_wcyqb")
+level_name = "spell_test"
+grid_size = 4

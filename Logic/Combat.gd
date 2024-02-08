@@ -59,7 +59,11 @@ var enemies: Array[EnemyEntity]
 var timed_effects: Array[TimedEffect]
 
 func _ready() -> void:
-	pass
+	if self not in Game.combats:
+		for c in Game.combats:
+			c.queue_free()
+		Game.combats.clear()
+		Game.combats.append(self)
 
 ## is called when the Combat is created to connect all the references and signals
 func setup() -> void:

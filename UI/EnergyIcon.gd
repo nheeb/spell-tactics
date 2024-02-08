@@ -46,8 +46,3 @@ func _ready() -> void:
 		EnergyStack.EnergyType.Spectral:
 			color_rect.color = Color.HOT_PINK
 	color_rect.custom_minimum_size = Vector2(min_size, min_size)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
