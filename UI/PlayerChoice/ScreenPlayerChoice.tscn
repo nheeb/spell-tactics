@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dweskebgaykh3"]
+[gd_scene load_steps=6 format=3 uid="uid://dweskebgaykh3"]
 
 [ext_resource type="Script" path="res://UI/PlayerChoice/ScreenPlayerChoice.gd" id="1_7twcq"]
 [ext_resource type="FontFile" uid="uid://giavsib4gnp0" path="res://Assets/Fonts/Teachers/Teachers-Italic.ttf" id="1_a8day"]
-[ext_resource type="PackedScene" uid="uid://qyfdsghabwag" path="res://UI/PlayerChoice/PlayerChoiceButton.tscn" id="2_hthnw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_soyim"]
-bg_color = Color(0.6, 0.6, 0.6, 0.247059)
+bg_color = Color(0.6, 0.6, 0.6, 0.662745)
 border_width_left = 20
 border_width_top = 20
 border_width_right = 20
@@ -35,6 +34,7 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [node name="ScreenPlayerChoice" type="CanvasLayer"]
+layer = 5
 script = ExtResource("1_7twcq")
 
 [node name="Control" type="Control" parent="."]
@@ -47,29 +47,17 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="HideButton" type="Button" parent="Control"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.964753
-anchor_top = 0.0545171
-anchor_right = 0.964753
-anchor_bottom = 0.0545171
-offset_left = -74.92
-offset_bottom = 43.456
-grow_horizontal = 0
-text = "HIDE"
-metadata/_edit_use_anchors_ = true
-
 [node name="Panel" type="PanelContainer" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = -0.152648
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.771027
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_soyim")
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Panel"]
 layout_mode = 2
@@ -105,7 +93,19 @@ theme_override_constants/h_separation = -40
 theme_override_constants/v_separation = 0
 columns = 4
 
-[node name="PlayerChoiceButton" parent="Control/Panel/MarginContainer/VBoxContainer/PanelContainer/GridContainer" instance=ExtResource("2_hthnw")]
-layout_mode = 2
+[node name="HideButton" type="Button" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.961901
+anchor_top = -0.0950147
+anchor_right = 0.961901
+anchor_bottom = -0.0950147
+offset_left = -74.92
+offset_right = -6.10352e-05
+offset_bottom = 43.456
+grow_horizontal = 0
+text = "HIDE"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Control/HideButton" to="." method="_on_hide_button_pressed"]

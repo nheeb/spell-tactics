@@ -1,6 +1,8 @@
 class_name EntityLogic
 
-var entity: Entity
+var entity: Entity:
+	set(x):
+		entity = x
 var combat: Combat
 
 

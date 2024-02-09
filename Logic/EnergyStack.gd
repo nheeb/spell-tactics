@@ -88,9 +88,20 @@ static func string_to_energy(string: String) -> EnergyStack:
 	energy_stack.sort()
 	return energy_stack
 
+static func single_energy_from_type(type: EnergyType) -> EnergyStack:
+	var e = EnergyStack.new()
+	e.stack.append(type)
+	return e
+
 func _init(_stack: Array[EnergyType] = []) -> void:
 	stack = _stack.duplicate()
 	sort()
 
 func is_empty() -> bool:
 	return stack.is_empty()
+
+func size() -> int:
+	return stack.size()
+
+func count(type: EnergyType) -> int:
+	return stack.count(type)

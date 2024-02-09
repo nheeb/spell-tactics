@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var activity: Activity
+var activity
 
 func set_activity(_activity: Activity) -> void:
 	self.activity = _activity

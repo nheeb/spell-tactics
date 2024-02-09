@@ -19,7 +19,8 @@ func deserialize(combat: Combat = null) -> Entity:
 	
 	if entity.logic != null:
 		for prop_name in script_props.keys():
-			entity.logic.set(prop_name, script_props[prop_name])
+			if Entity.serialize_this_prop(prop_name):
+				entity.logic.set(prop_name, script_props[prop_name])
 	
 	entity.on_create()
 	

@@ -20,6 +20,7 @@ const DEBUG_SKIP_POST_COMBAT = true
 var DEBUG_SPELL_TESTING := false # Not meant to be changed.
 # Play the scene SpellTest.tscn to start spell testing
 var testing_deck: Array[SpellType]
+var testing_energy: EnergyStack
 
 var tree : SceneTree : 
 	get:

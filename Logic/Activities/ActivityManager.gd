@@ -13,7 +13,7 @@ func substitute(activity: Activity):
 	pop()
 	push(activity)
 
-func pop() -> Active:
+func pop() -> Activity:
 	var activity = activity_stack.pop_back()
 	activity_popped.emit(activity)
 	return activity

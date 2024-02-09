@@ -5,13 +5,15 @@ const MAX_COLUMS = 4
 
 var activity: PlayerChoiceActivity
 
+@export var dont_hide_other_views := true
+
 func set_activity(_activity: PlayerChoiceActivity):
 	self.activity = _activity
 	setup()
 
 func resolve(result: Variant):
-	ActivityManager.pop()
-	activity.resolved.emit(result)
+	#ActivityManager.pop() will be done by the AnimationPlayerChoice
+	activity.resolve(result)
 
 func on_view_removed() -> void:
 	queue_free()

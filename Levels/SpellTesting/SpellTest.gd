@@ -2,6 +2,8 @@ extends Node3D
 
 const NOTHING = preload("res://Spells/AllSpells/DoNothing.tres")
 
+@export var start_every_round_with : EnergyStack
+
 @export var test_spell_1: SpellType = NOTHING
 @export var test_spell_2: SpellType = NOTHING
 @export var test_spell_3: SpellType = NOTHING
@@ -18,6 +20,8 @@ func _ready() -> void:
 		var test_deck = range(1,6).map(func(i): return get("test_spell_%s" % i) if get("test_spell_%s" % i) else NOTHING)
 		test_deck.append_array(range(10).map(func(i): return NOTHING))
 		Game.testing_deck.append_array(test_deck)
+		
+		Game.testing_energy = start_every_round_with
 		
 		await get_tree().process_frame
 		

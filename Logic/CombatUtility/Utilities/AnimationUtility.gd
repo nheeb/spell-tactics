@@ -59,6 +59,7 @@ func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSign
 func say(target: Node3D, text: String, params := {}) -> AnimationEffect:
 	params["text"] = text
 	return effect(SAY_EFFECT, target, params)
+	## Quick Paste: combat.animation.say(target, "", {"color": Color., "font_size": 64})
 
 func camera_set_player_input(enabled: bool) -> AnimationProperty:
 	return property(combat.camera, "player_input_enabled", enabled)
@@ -90,6 +91,12 @@ func show(node: Node3D) -> AnimationProperty:
 
 func hide(node: Node3D) -> AnimationProperty:
 	return property(node, "visible", false)
+
+func player_choice(activity: PlayerChoiceActivity) -> AnimationPlayerChoice:
+	var a = AnimationPlayerChoice.new(activity)
+	add_animation_object(a)
+	return a
+	
 
 #######################################
 ## Logic Functions (don't use those) ##
