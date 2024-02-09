@@ -7,6 +7,7 @@ const SAY_EFFECT = preload("res://Effects/SayEffect.tscn")
 signal animation_queue_empty
 
 var animation_queue: Array[AnimationObject]
+var currently_playing_queues: Array[AnimationQueue]
 
 ########################################
 ## Wrapper Functions (only use those) ##
@@ -98,9 +99,12 @@ func add_animation_object(a: AnimationObject) -> void:
 	animation_queue.append(a)
 
 func play_animation_queue() -> void:
-	while not animation_queue.is_empty():
-		var aq := AnimationQueue.new(animation_queue.duplicate())
-		animation_queue.clear()
-		aq.play(combat)
-		await aq.queue_finished
-	animation_queue_empty.emit()
+	if currently_playing_queues.is_empty():
+		while not animation_queue.is_empty():
+			var aq := AnimationQueue.new(animation_queue.duplicate())
+			currently_playing_queues.append(aq)
+			animation_queue.clear()
+			aq.play(combat)
+			await aq.queue_finished
+			currently_playing_queues.erase(aq)
+		animation_queue_empty.emit()

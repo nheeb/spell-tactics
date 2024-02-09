@@ -154,3 +154,6 @@ func distance_to(other_tile: Tile) -> int:
 
 func get_surrounding_tiles(_range := 1) -> Array[Tile]:
 	return level.get_all_tiles_in_distance_of_tile(self, _range)
+
+func get_reference() -> TileReference:
+	return TileReference.new(location)

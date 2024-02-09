@@ -1,4 +1,4 @@
-class_name SpellReference extends Resource
+class_name SpellReference extends UniversalReference
 
 @export var id: SpellID
 
@@ -12,6 +12,7 @@ func _init(_spell: Spell = null) -> void:
 	if id == null:
 		printerr("SpellReference was created on an spell with empty id")
 
+## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
 	for s in combat.get_all_spells():
 		if s.id.equals(id):
@@ -24,16 +25,9 @@ func connect_reference(combat: Combat) -> void:
 	if spell == null:
 		printerr("SpellReference did not get connected")
 
-func resolve(combat: Combat = null) -> Spell:
-	if spell != null:
-		return spell
-	else:
-		if combat != null:
-			connect_reference(combat)
-			return spell
-		else:
-			printerr("SpellReference was not connected yet. Either connect it first or call resolve(combat)")
-			return null
+## Is being called by resolve and should never be called from outside.
+func _resolve() -> Variant:
+	return spell
 
-func is_valid(combat: Combat = null) -> bool:
-	return resolve(combat) != null
+func get_reference_type() -> String:
+	return "SpellReference"
