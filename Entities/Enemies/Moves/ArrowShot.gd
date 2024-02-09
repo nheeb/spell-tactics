@@ -13,7 +13,8 @@ func execute() -> void:
 	combat.animation.camera_follow(combat.player.visual_entity)
 	combat.animation.wait(1.0)
 	var line := combat.level.get_line(enemy.current_tile, combat.player.current_tile)
-	combat.animation.wait(2.0)
+	combat.animation.wait(1.0)
+	combat.animation.effect(VFX.LINE, enemy.current_tile, {"start_node": enemy.current_tile, "end_node": combat.player.current_tile, "duration": 2.0}).set_max_duration(.1)
 	var total_cover := 0
 	for tile in line:
 		combat.animation.effect(VFX.HEX_COLOR, tile).set_flag_with()
