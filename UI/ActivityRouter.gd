@@ -14,6 +14,8 @@ func _on_activity_popped(activity: Activity):
 	var view = views[pos]
 	views.remove_at(pos)
 	remove_child(view)
+	if view.has_method("on_view_removed"):
+		view.call("on_view_removed")
 	_show_top()
 
 func _on_activity_pushed(activity: Activity):

@@ -7,7 +7,6 @@ const SAY_EFFECT = preload("res://Effects/SayEffect.tscn")
 signal animation_queue_empty
 
 var animation_queue: Array[AnimationObject]
-var animation_steps: Array[AnimationStep]
 
 ########################################
 ## Wrapper Functions (only use those) ##
@@ -99,45 +98,9 @@ func add_animation_object(a: AnimationObject) -> void:
 	animation_queue.append(a)
 
 func play_animation_queue() -> void:
-	animation_steps = [AnimationStep.new()]
-	for animation in animation_queue:
-		if animation.has_flag(AnimationObject.Flags.PlayAfterStep):
-			animation_steps.append(AnimationStep.new())
-		animation_steps[-1].animations.append(animation)
-	for step in animation_steps:
-		step.compile()
-		step.step_done.connect(play_next_step, CONNECT_ONE_SHOT)
-	play_next_step()
-
-func play_next_step() -> void:
-	if animation_steps.is_empty():
+	while not animation_queue.is_empty():
+		var aq := AnimationQueue.new(animation_queue.duplicate())
 		animation_queue.clear()
-		animation_queue_empty.emit()
-	else:
-		var step : AnimationStep = animation_steps.pop_front()
-		step.play(combat.level)
-
-class AnimationStep extends Object:
-	signal step_done
-	
-	var animations : Array[AnimationObject] = []
-	
-	var relevant_animations_to_do := 0
-	
-	func relevant_animation_done() -> void:
-		relevant_animations_to_do -= 1
-		if relevant_animations_to_do <= 0:
-			step_done.emit()
-	
-	func compile() -> void:
-		for a in animations:
-			if a.has_flag(AnimationObject.Flags.PlayAfterStep) or a.has_flag(AnimationObject.Flags.ExtendStep):
-				relevant_animations_to_do += 1
-				a.animation_done.connect(self.relevant_animation_done, CONNECT_ONE_SHOT)
-	
-	func play(level: Level) -> void:
-		for a in animations:
-			#print(a)
-			a._play(level)
-		if relevant_animations_to_do == 0:
-			step_done.emit()
+		aq.play(combat)
+		await aq.queue_finished
+	animation_queue_empty.emit()
