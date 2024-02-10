@@ -118,3 +118,6 @@ func call_logic(method: String, params := []):
 	
 func _to_string() -> String:
 	return type.internal_name + '_' + str(id.id)
+
+func get_tags() -> Array[String]:
+	return type.tags

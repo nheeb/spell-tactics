@@ -1,6 +1,6 @@
 class_name ReviewQuestion extends VBoxContainer
 
-enum TYPE {
+enum Type {
 	Text,
 	MultipleChoice,
 	NumberSlider
@@ -9,16 +9,16 @@ enum TYPE {
 var target_property: String
 var target_index # When the property is Array or dict
 var question_text: String
-var question_type: TYPE
+var question_type: Type
 
 var choices: Array[String]
 var checkboxes: Array[CheckBox]
 
 func get_answer() -> String:
 	match question_type:
-		TYPE.Text:
+		Type.Text:
 			return %TextEdit.text
-		TYPE.MultipleChoice:
+		Type.MultipleChoice:
 			var answers := []
 			for cb in checkboxes:
 				if cb.button_pressed:
@@ -27,7 +27,7 @@ func get_answer() -> String:
 			if %CustomCB.button_pressed:
 				answer = answer + ";%s" % %CustomOptionText.text
 			return answer
-		TYPE.NumberSlider:
+		Type.NumberSlider:
 			return str(%HSlider.value)
 	return "Error: No question type"
 
@@ -44,14 +44,14 @@ func set_target_index(_target_index) -> ReviewQuestion:
 	return self
 
 func setup_text(_target_property: String, _question_text: String) -> ReviewQuestion:
-	question_type = TYPE.Text
+	question_type = Type.Text
 	target_property = _target_property
 	question_text = _question_text
 	_setup()
 	return self
 
 func setup_multiple_choice(_target_property: String, _question_text: String, _choices: Array[String]) -> ReviewQuestion:
-	question_type = TYPE.MultipleChoice
+	question_type = Type.MultipleChoice
 	target_property = _target_property
 	question_text = _question_text
 	choices = _choices
@@ -59,7 +59,7 @@ func setup_multiple_choice(_target_property: String, _question_text: String, _ch
 	return self
 
 func setup_number_slider(_target_property: String, _question_text: String) -> ReviewQuestion:
-	question_type = TYPE.NumberSlider
+	question_type = Type.NumberSlider
 	target_property = _target_property
 	question_text = _question_text
 	_setup()
@@ -73,9 +73,9 @@ func _setup() -> void:
 	%QuestionLabel.text = question_text
 	%CustomOption.visible = false
 	match question_type:
-		TYPE.Text:
+		Type.Text:
 			%TextEdit.visible = true
-		TYPE.MultipleChoice:
+		Type.MultipleChoice:
 			checkboxes.clear()
 			for c in choices:
 				var cb = CheckBox.new()
@@ -84,7 +84,7 @@ func _setup() -> void:
 				cb.text = c
 			%CustomOption.visible = true
 			%QuestionBody.move_child(%CustomOption, -1)
-		TYPE.NumberSlider:
+		Type.NumberSlider:
 			%SliderContainer.visible = true
 
 func _on_custom_cb_toggled(toggled_on: bool) -> void:

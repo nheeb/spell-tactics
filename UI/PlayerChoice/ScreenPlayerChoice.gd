@@ -13,7 +13,7 @@ func set_activity(_activity: PlayerChoiceActivity):
 
 func resolve(result: Variant):
 	#ActivityManager.pop() will be done by the AnimationPlayerChoice
-	activity.resolve(result)
+	activity._resolve(result)
 
 func on_view_removed() -> void:
 	queue_free()

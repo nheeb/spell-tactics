@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1eod0pbyip4b"]
+[gd_scene load_steps=10 format=3 uid="uid://b1eod0pbyip4b"]
 
 [ext_resource type="Script" path="res://Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://addons/LevelEditor/GridLevelEditor.gd" id="1_wcyqb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://c2gimhhja8fi6" path="res://Spells/AllSpells/Breath.tres" id="2_d070n"]
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="2_rjkex"]
 [ext_resource type="Resource" uid="uid://dcbq3ohb123xy" path="res://Spells/AllSpells/TotalDecay.tres" id="3_hlajr"]
+[ext_resource type="Resource" uid="uid://d2k4vhkqurk7r" path="res://Spells/AllSpells/Haunting.tres" id="6_issit"]
 [ext_resource type="Resource" uid="uid://djuhody4na5qo" path="res://Spells/AllSpells/OmniDamage.tres" id="6_juxbu"]
 
 [sub_resource type="Resource" id="Resource_vfkqf"]
@@ -18,6 +19,7 @@ start_every_round_with = SubResource("Resource_vfkqf")
 test_spell_1 = ExtResource("2_7xwg7")
 test_spell_2 = ExtResource("3_hlajr")
 test_spell_3 = ExtResource("2_d070n")
+test_spell_4 = ExtResource("6_issit")
 test_spell_5 = ExtResource("6_juxbu")
 
 [node name="Editor" type="Node" parent="."]

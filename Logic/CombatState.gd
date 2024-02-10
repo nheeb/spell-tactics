@@ -12,6 +12,7 @@ class_name CombatState extends Resource
 @export var event_states: Array[SpellState]
 @export var current_event: SpellReference
 @export var timed_effects: Array[TimedEffect]
+@export var combat_log: Array[LogEntry]
 
 const COMBAT = preload("res://Logic/Combat.tscn")
 
@@ -38,6 +39,7 @@ func deserialize() -> Combat:
 	if combat.event.events.is_empty():
 		combat.event.events.append_array(Game.get_prototype_events(combat))
 	combat.timed_effects = timed_effects
+	combat.log.log_entries = combat_log
 	combat.setup()
 	combat.log.add("Combat was deserialized.")
 	return combat

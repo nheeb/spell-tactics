@@ -18,16 +18,21 @@ extends SpellLogic
 #func is_current_cast_valid() -> bool:
 	#return true
 
-const SHROOMS = preload("res://Entities/Environment/Shrooms.tres")
-const FUNNEL = preload("res://Entities/Environment/FunnelShrooms.tres")
+var acc_loss := 3
+var damage := 3
 
 ## Here should be the effect
 func casting_effect() -> void:
 	target = target as Tile
-	var type = [SHROOMS, FUNNEL].pick_random()
-	var shroom : Entity = combat.level.entities().create_entity(target.location, type, false)
-	combat.animation.effect(VFX.HEX_RINGS, target, {"color": Color.DARK_VIOLET})
-	combat.animation.show(shroom.visual_entity).set_flag_with()
-	for i in range(2):
-		combat.cards.draw()
+	for enemy in target.get_enemies():
+		enemy = enemy as EnemyEntity
+		enemy.apply_status_effect(BlindEffect.new(acc_loss))
+		combat.animation.say(enemy.visual_entity,\
+		 "-%s Acc" % acc_loss).set_flag_extend().set_duration(0.5).set_delay(1.0)
+		var corpse_drain := combat.log.get_last_incident("drained_tag_corpse")
+		if corpse_drain:
+			if corpse_drain.round_number == combat.current_round:
+				enemy.inflict_damage_with_visuals(damage)
+				combat.animation.say(enemy.visual_entity, "%s Damage" % acc_loss, \
+					 {"color": Color.RED}).set_flag_extend().set_duration(1.0)
 

@@ -2,7 +2,7 @@ class_name CombatReview extends Resource
 
 @export var player: String
 @export var date: String
-@export var result: Combat.RESULT
+@export var result: Combat.Result
 
 @export var combat_log: Array[String]
 @export var deck: Array[SpellType]
@@ -25,7 +25,7 @@ class_name CombatReview extends Resource
 func initialize_with_combat(combat: Combat) -> void:
 	result = combat.result
 	date = Time.get_date_string_from_system()
-	combat_log = combat.log.log_lines.duplicate(true)
+	combat_log = combat.log.log_entries.duplicate(true)
 	deck = []
 	deck.append_array(Utility.array_unique(combat.get_all_spells().map(func(s): return s.type)))
 	entities = []

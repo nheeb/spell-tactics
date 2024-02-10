@@ -141,7 +141,7 @@ func get_obstacle_layers() -> int:
 func get_tags() -> Array[String]:
 	var tags : Array[String] = []
 	for e in entities:
-		for t in e.type.tags:
+		for t in e.get_tags():
 			if not t in tags:
 				tags.append(t)
 	return tags

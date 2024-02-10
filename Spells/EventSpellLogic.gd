@@ -17,7 +17,7 @@ class_name EventSpellLogic extends SpellLogic
 	#casting_effect()
 #
 ### The current costs with all the modifiers if there are any
-#func get_costs() -> EnergyStack:
+#func _get_costs() -> EnergyStack:
 	#return []
 #
 ### This is for overriding if there are general cast-conditions

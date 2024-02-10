@@ -16,7 +16,7 @@ func _init(_question: String, _choices: Array, _choices_strings: Array = []) -> 
 	if choices_strings:
 		assert(choices.size() == choices_strings.size())
 
-func resolve(_result: Variant) -> void:
+func _resolve(_result: Variant) -> void:
 	result = _result
 	resolved.emit(result)
 

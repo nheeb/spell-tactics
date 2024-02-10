@@ -19,7 +19,7 @@ enum RoundPhase {
 	RoundRepeats = 7, # Unreachable
 }
 
-enum RESULT {
+enum Result {
 	Unfinished,
 	Victory,
 	Loss,
@@ -38,7 +38,7 @@ enum RESULT {
 signal round_ended
 signal spell_casted_successfully(spell: SpellReference)
 
-var result: RESULT = RESULT.Unfinished
+var result: Result = Result.Unfinished
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
 
@@ -168,6 +168,7 @@ func serialize() -> CombatState:
 	state.event_states.append_array(event.events.map(func(x: Spell): return x.serialize()))
 	state.current_event = event.current_event
 	state.timed_effects = timed_effects
+	state.combat_log = self.log.log_entries
 	return state
 
 func save_to_disk(path: String = ""):
