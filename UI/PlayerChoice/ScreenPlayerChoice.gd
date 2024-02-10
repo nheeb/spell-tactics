@@ -35,3 +35,11 @@ func _on_hide_button_pressed() -> void:
 	var vis: bool = not %Panel.visible
 	%Panel.visible = vis
 	%HideButton.text = "Hide" if vis else "Show"
+
+
+func _on_panel_mouse_entered() -> void:
+	Game.world.get_node("%MouseRaycast").disabled = true
+
+
+func _on_panel_mouse_exited() -> void:
+	Game.world.get_node("%MouseRaycast").disabled = false

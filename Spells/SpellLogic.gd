@@ -34,7 +34,7 @@ func pay_for_spell(payment: EnergyStack) -> void:
 ## Pays for the costs. Activates the cards effect. Also discards the card from hand
 func cast(payment: EnergyStack = null) -> void:
 	pay_for_spell(payment)
-	for keyword in get_keywords():
+	for keyword in spell.get_keywords():
 		keyword.logic.before_spell(spell)
 	casting_effect()
 	if spell is Active:
@@ -46,14 +46,14 @@ func cast(payment: EnergyStack = null) -> void:
 	else:  # else the spell comes from the hand, discard it
 		combat.cards.discard(spell)
 		combat.get_phase_node(Combat.RoundPhase.Spell).state = SpellPhase.CastingState.Selecting
-	for keyword in get_keywords():
+	for keyword in spell.get_keywords():
 		keyword.logic.after_spell(spell)
 	
 
 ## The current costs with all the modifiers if there are any
 func get_costs() -> EnergyStack:
 	var costs := _get_costs()
-	for keyword in get_keywords():
+	for keyword in spell.get_keywords():
 		var logic = keyword.logic as KeywordLogic
 		costs = logic.get_updated_energy_price(costs, spell)
 	return costs
@@ -73,5 +73,4 @@ func is_current_cast_valid() -> bool:
 func casting_effect() -> void:
 	pass
 
-func get_keywords() -> Array[Keyword]:
-	return spell.type.keywords
+

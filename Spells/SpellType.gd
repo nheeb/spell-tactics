@@ -56,3 +56,10 @@ func _on_load() -> void:
 	for keyword in keywords:
 		keyword.on_load()
 
+func get_effect_text(used_keywords: Array[Keyword] = []) -> String:
+	if not used_keywords:
+		used_keywords = keywords
+	var keyword_text = ""
+	for k in used_keywords:
+		keyword_text = keyword_text + " [%s] " % k.pretty_name
+	return keyword_text + "\n" + effect_text

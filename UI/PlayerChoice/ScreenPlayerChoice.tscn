@@ -21,7 +21,7 @@ font = ExtResource("1_a8day")
 font_size = 36
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0f3qw"]
-bg_color = Color(0.737255, 0.737255, 0.737255, 0.0196078)
+bg_color = Color(0, 0, 0, 0.278431)
 border_width_left = 10
 border_width_top = 10
 border_width_right = 10
@@ -43,6 +43,10 @@ anchor_left = 0.235938
 anchor_top = 0.181481
 anchor_right = 0.783854
 anchor_bottom = 0.775926
+offset_left = 5.99905
+offset_top = -75.9995
+offset_right = 5.99902
+offset_bottom = -75.9995
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
@@ -50,14 +54,12 @@ metadata/_edit_use_anchors_ = true
 [node name="Panel" type="PanelContainer" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.152648
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.771027
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_soyim")
-metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Panel"]
 layout_mode = 2
@@ -83,6 +85,7 @@ autowrap_mode = 2
 [node name="PanelContainer" type="PanelContainer" parent="Control/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0f3qw")
 
 [node name="GridContainer" type="GridContainer" parent="Control/Panel/MarginContainer/VBoxContainer/PanelContainer"]
@@ -108,4 +111,6 @@ grow_horizontal = 0
 text = "HIDE"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="mouse_entered" from="Control/Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Panel" to="." method="_on_panel_mouse_exited"]
 [connection signal="pressed" from="Control/HideButton" to="." method="_on_hide_button_pressed"]

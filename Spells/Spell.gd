@@ -39,3 +39,9 @@ func _to_string() -> String:
 
 func get_reference() -> SpellReference:
 	return SpellReference.new(self)
+
+func get_keywords() -> Array[Keyword]:
+	return type.keywords
+
+func get_effect_text() -> String:
+	return type.get_effect_text(get_keywords())

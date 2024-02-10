@@ -23,9 +23,9 @@ func set_spell_type(_spell_type):
 
 func update():
 	if spell != null:
-		set_content(spell.type.pretty_name, spell.logic.get_costs(), spell.type.effect_text, spell.type.fluff_text)
+		set_content(spell.type.pretty_name, spell.logic.get_costs(), spell.get_effect_text(), spell.type.fluff_text)
 	elif spell_type:
-		set_content(spell_type.pretty_name, spell_type.costs, spell_type.effect_text, spell_type.fluff_text)
+		set_content(spell_type.pretty_name, spell_type.costs, spell_type.get_effect_text(), spell_type.fluff_text)
 
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 const SHRINKED_TITLE = preload("res://Assets/Fonts/LabelSettings/HandCard2D_Title_LabelSettings_shrinked.tres")
