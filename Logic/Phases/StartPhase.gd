@@ -10,4 +10,7 @@ func process_phase() -> bool:
 	var drains_left : int = combat.player.traits.max_drains - combat.energy.drains_done_this_turn
 	combat.animation.callback(combat.ui, "set_drains_left", [drains_left])
 	
+	if Game.DEBUG_SPELL_TESTING:
+		combat.energy.gain(EnergyStack.string_to_energy("LLLDDDMMMHHHFFFSSS"))
+	
 	return false

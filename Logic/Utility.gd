@@ -72,6 +72,9 @@ func entity_distance(e1: Entity, e2: Entity) -> int:
 
 
 class DeckUtils:
+	static func create_spell(spell_type: SpellType, combat: Combat) -> Spell:
+		return Spell.new(spell_type, combat)
+	
 	static func load_spell(name: String, combat: Combat) -> Spell:
 		return Spell.new(SpellType.load_from_file("res://Spells/AllSpells/%s.tres" % name), combat)
 	
@@ -89,13 +92,16 @@ class DeckUtils:
 
 	static func create_test_deck(combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []
-		#spells.append_array(load_spell_n_times("MudArmor", 3, combat))
-		#spells.append_array(load_spell_n_times("AirMissile", 5, combat))
-		#spells.append_array(load_spell_n_times("Berserker", 4, combat))
-		#spells.append_array(load_spell_n_times("TrappingRoots", 3, combat))
-		#spells.append_array(load_spell_n_times("SummonBush", 2, combat))
-		#spells.append_array(load_spell_n_times("SporeFlight", 4, combat))
+		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
+		spells.append_array(load_spell_n_times("AirMissile", 3, combat))
+		spells.append_array(load_spell_n_times("Berserker", 2, combat))
+		spells.append_array(load_spell_n_times("TrappingRoots", 2, combat))
+		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
+		spells.append_array(load_spell_n_times("SporeFlight", 2, combat))
 		spells.append_array(load_spell_n_times("Cyclone", 1, combat))
+		spells.append_array(load_spell_n_times("SelfHeal", 3, combat))
+		spells.append_array(load_spell_n_times("GrowingMycel", 2, combat))
+		spells.append_array(load_spell_n_times("DeadlyDart", 2, combat))
 		
 		for spell in spells:
 			spell.id = SpellID.new(Game.add_to_spell_count())
@@ -107,6 +113,16 @@ class DeckUtils:
 	static func create_spell_list():
 		# TODO
 		pass
+	
+	static func deck_for_spell_testing(combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		for spell_type in Game.testing_deck:
+			spell_type._on_load()
+			spells.append(create_spell(spell_type, combat))
+		for spell in spells:
+			spell.id = SpellID.new(Game.add_to_spell_count())
+		return spells
+
 func array_unique(array: Array) -> Array:
 	var unique: Array = []
 	for item in array:

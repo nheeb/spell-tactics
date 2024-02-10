@@ -20,6 +20,7 @@ func _ready() -> void:
 func _exit_tree():
 	Events.tile_hovered_long.disconnect(show_tile_popup)
 	Events.tile_unhovered_long.disconnect(hide_tile_popup)
+	reset()
 
 func show_tile_popup(tile: Tile):
 	current_tile = tile
@@ -45,9 +46,12 @@ func hide_tile_popup(tile: Tile):
 ## TODO call this on_level_changed !
 func reset():
 	active_entries = []
-	# TODO update all current_tile references!
+	set_process(false)
 	pass
 
+
+func start():
+	set_process(true)
 
 
 ## Reference to the list of control popup entries. 

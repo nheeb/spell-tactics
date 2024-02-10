@@ -79,6 +79,7 @@ func _on_cast_pressed():
 	var payment := extract_payment()
 	if is_instance_valid(selected_spell):
 		combat.input.process_action(PlayerCast.new(selected_spell, payment))
+		
 
 #func _input(event):
 	#if event.is_action_pressed("cancel"):

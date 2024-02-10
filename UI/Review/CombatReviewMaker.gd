@@ -58,7 +58,7 @@ func update_review() -> void:
 func save_review() -> void:
 	if not DirAccess.dir_exists_absolute(Game._SAVE_DIR_USER_REVIEWS):
 		DirAccess.make_dir_absolute(Game._SAVE_DIR_USER_REVIEWS)
-	var filename := review.date + Utility.random_hash(6) + ".tres"
+	var filename := review.date + "-" + review.player + "-" + Utility.random_hash(6) + ".tres"
 	ResourceSaver.save(review, Game._SAVE_DIR_USER_REVIEWS + filename)
 
 func _on_button_save_pressed() -> void:

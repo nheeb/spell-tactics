@@ -58,13 +58,13 @@ label_settings = ExtResource("4_gidae")
 horizontal_alignment = 1
 
 [node name="Gap" type="Control" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 15)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_stretch_ratio = 1.7
 
 [node name="EnergyContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 alignment = 1
 

@@ -5,6 +5,10 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nu6bn"]
 shader = ExtResource("1_ft63v")
+shader_parameter/base_color = Color(0.890196, 0.890196, 0.890196, 1)
+shader_parameter/border_color = null
+shader_parameter/border_thickness = 0.07
+shader_parameter/alpha_feathering = 0.029
 
 [node name="EnergyIcon" type="AspectRatioContainer"]
 anchors_preset = 15
@@ -13,9 +17,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y44af")
+min_size = 24
+any_color = Color(0.886275, 0.886275, 0.886275, 1)
+matter_color = Color(0.678431, 0.427451, 0.372549, 1)
+life_color = Color(0.45098, 0.741176, 0.317647, 1)
+harmony_color = Color(0.321569, 0.796078, 0.890196, 1)
+flow_color = Color(0.968627, 0.596078, 0.117647, 1)
+decay_color = Color(0.423529, 0.231373, 0.541176, 1)
+spectral_color = Color(0.960784, 0, 0.788235, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_nu6bn")
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-color = Color(0.960784, 0.960784, 0.960784, 1)
+color = Color(0.886275, 0.886275, 0.886275, 1)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://s65v550m6da3"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://coxs5uvjtigok"]
 
 [ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_3xw06"]
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_45yov"]
@@ -11,7 +11,7 @@ stack = Array[int]([1, 5])
 script = ExtResource("1_3xw06")
 pretty_name = "Deadly Dart"
 costs = SubResource("Resource_kfprs")
-effect_text = "Poisones an enemy. Kills the enemy if he was already poisoned."
+effect_text = "Poisons an enemy. Kills the enemy if it was already poisoned."
 fluff_text = ""
 is_event_spell = false
 target = 1

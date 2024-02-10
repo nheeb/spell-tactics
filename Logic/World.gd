@@ -9,6 +9,7 @@ var ui_root : Node
 @onready var combat : Combat
 @onready var combat_ui : CombatUI
 @export var debug_ui: Control
+@export var popup_handler: Control
 
 signal combat_changed (combat : Combat)
 
@@ -44,6 +45,8 @@ func start_combat(level_path: String) -> void:
 	%MouseRaycast.cards3d = combat_ui.cards3d
 	%MouseRaycast.combat = combat
 	%MouseRaycast.enabled = true
+	
+	popup_handler.start()
 
 func _reset_combat():
 	if combat == null:
@@ -51,6 +54,9 @@ func _reset_combat():
 	remove_child(combat)
 	remove_child(combat.level)
 	ui_root.remove_child(combat_ui)
+	popup_handler.reset()
+	
+	# FIXME free combat?
 	
 func _exit_tree():
 	call_deferred("_reset_combat")
@@ -100,10 +106,7 @@ func _on_save_game_pressed(id: String) -> void:
 
 
 func _on_load_game_pressed(id: String) -> void:
-	#var loaded_level = Level.load_from_disk("user://level.tres")
-	#loaded_level.name = "Level"
-	#level.free()
-	#add_child(loaded_level)
+	_reset_combat()
 	for node in [level, combat, combat_ui]:
 		if is_instance_valid(node):
 			node.free()
@@ -117,6 +120,7 @@ func _on_load_game_pressed(id: String) -> void:
 	_ui_root.add_child(combat_ui)
 	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 	combat.animation.play_animation_queue()
+	combat_changed.emit(combat)
 
 var tile_toggle := false
 func _on_toggle_tile_labels_pressed() -> void:
@@ -128,11 +132,11 @@ func _on_toggle_tile_labels_pressed() -> void:
 
 
 func _on_show_debug_pressed() -> void:
-	debug_ui.get_node("%List").visible = not debug_ui.get_node("%List").visible
-	if debug_ui.get_node("%List").visible:
-		debug_ui.get_node("%ShowDebug").text = "Hide Debug"
+	debug_ui.get_node("List").visible = not debug_ui.get_node("List").visible
+	if debug_ui.get_node("List").visible:
+		debug_ui.get_node("ShowDebug").text = "Hide Debug"
 	else:
-		debug_ui.get_node("%ShowDebug").text = "Show Debug"
+		debug_ui.get_node("ShowDebug").text = "Show Debug"
 
 
 func _on_line_button_pressed() -> void:

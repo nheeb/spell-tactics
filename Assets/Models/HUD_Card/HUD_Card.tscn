@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bebi3ksbrhy28"]
+[gd_scene load_steps=8 format=3 uid="uid://bebi3ksbrhy28"]
 
-[ext_resource type="ArrayMesh" uid="uid://c3qycu5xf07mh" path="res://Assets/Models/HUD_Card/Card_Basic_Card_Basic.res" id="1_i75ug"]
-[ext_resource type="Material" uid="uid://by73nllyjciwo" path="res://Assets/Models/HUD_Card/card_basic_material.tres" id="2_sqyiu"]
-[ext_resource type="ArrayMesh" uid="uid://cya81563vig2v" path="res://Assets/Models/HUD_Card/Card_Crystal_Crystal.res" id="3_o26sa"]
+[ext_resource type="ArrayMesh" uid="uid://glhyeep87p3j" path="res://Assets/Models/HUD_Card/Card_Basic_Card_Basic.res" id="1_i75ug"]
+[ext_resource type="Material" uid="uid://b0wjmmu5rjjis" path="res://Assets/Materials/Palette/palette.tres" id="2_ipxen"]
+[ext_resource type="PackedScene" uid="uid://dsnfqrgkfmq0n" path="res://Assets/Models/HUD_Card/HUD_Card_Crystal.tscn" id="3_51f3h"]
 [ext_resource type="Texture2D" uid="uid://bwk0am3wfxqwi" path="res://Assets/Models/HUD_Card/test_icon.png" id="4_kgwq5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3omr7"]
@@ -20,20 +20,6 @@ glow_enabled = true
 glow_intensity = 0.51
 glow_blend_mode = 1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0enqc"]
-albedo_color = Color(0.54902, 0.745098, 0.25098, 1)
-emission = Color(0.54902, 0.745098, 0.25098, 1)
-emission_energy_multiplier = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1aa7"]
-albedo_color = Color(0.427451, 0.223529, 0.54902, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6x7g"]
-albedo_color = Color(0.427451, 0.223529, 0.54902, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gy8b"]
-albedo_color = Color(0.478431, 0.337255, 0.286275, 1)
-
 [node name="HudCard" type="Node3D"]
 
 [node name="TestEnv" type="Node3D" parent="."]
@@ -50,44 +36,26 @@ light_energy = 0.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
 mesh = ExtResource("1_i75ug")
-surface_material_override/0 = ExtResource("2_sqyiu")
+surface_material_override/0 = ExtResource("2_ipxen")
 
 [node name="Sockets" type="Node3D" parent="."]
 
 [node name="Card_Basic_CrystalPosition01" type="Node3D" parent="Sockets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.385, 0.002, 0.05)
 
-[node name="TestCrystalMesh" type="MeshInstance3D" parent="Sockets/Card_Basic_CrystalPosition01"]
-mesh = ExtResource("3_o26sa")
-surface_material_override/0 = SubResource("StandardMaterial3D_0enqc")
+[node name="HudCardCrystal" parent="Sockets/Card_Basic_CrystalPosition01" instance=ExtResource("3_51f3h")]
 
 [node name="Card_Basic_CrystalPosition02" type="Node3D" parent="Sockets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39718, 0.24158, 0.0503276)
 
-[node name="TestCrystalMesh" type="MeshInstance3D" parent="Sockets/Card_Basic_CrystalPosition02"]
-mesh = ExtResource("3_o26sa")
-surface_material_override/0 = SubResource("StandardMaterial3D_s1aa7")
-
 [node name="Card_Basic_CrystalPosition03" type="Node3D" parent="Sockets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.224037, 0.414186, 0.0503276)
-
-[node name="TestCrystalMesh" type="MeshInstance3D" parent="Sockets/Card_Basic_CrystalPosition03"]
-mesh = ExtResource("3_o26sa")
-surface_material_override/0 = SubResource("StandardMaterial3D_a6x7g")
 
 [node name="Card_Basic_CrystalPosition04" type="Node3D" parent="Sockets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.08258e-06, 0.478599, 0.0503276)
 
-[node name="TestCrystalMesh" type="MeshInstance3D" parent="Sockets/Card_Basic_CrystalPosition04"]
-mesh = ExtResource("3_o26sa")
-surface_material_override/0 = SubResource("StandardMaterial3D_2gy8b")
-
 [node name="Card_Basic_CrystalPosition05" type="Node3D" parent="Sockets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.234994, 0.407142, 0.0503276)
-
-[node name="TestCrystalMesh" type="MeshInstance3D" parent="Sockets/Card_Basic_CrystalPosition05"]
-mesh = ExtResource("3_o26sa")
-surface_material_override/0 = SubResource("StandardMaterial3D_2gy8b")
 
 [node name="Card_Basic_CrystalPosition06" type="Node3D" parent="Sockets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.398446, 0.233175, 0.0503276)
