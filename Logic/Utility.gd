@@ -83,6 +83,12 @@ class DeckUtils:
 		for i in range(n):
 			spells.append(load_spell(name, combat))
 		return spells
+		
+	static func create_test_deck_serialized() -> Array[SpellState]:
+		var spell_states: Array[SpellState] = []
+		for i in create_test_deck(null):
+			spell_states.append(i.serialize())
+		return spell_states
 
 	static func create_test_deck(combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []

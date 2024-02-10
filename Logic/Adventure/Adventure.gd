@@ -4,10 +4,13 @@ class_name AdventureSingleton extends Node
 @export var coins: int = 0
 @export var deck_states: Array[SpellState]
 
+func _init():
+	reset()
+
 func reset():
 	health = 10
 	coins = 0
-	deck_states = []
+	deck_states = Utility.DeckUtils.create_test_deck_serialized()
 	
 func sync_health(amount: int):
 	health = amount

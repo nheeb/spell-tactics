@@ -14,6 +14,6 @@ func apply() -> bool:
 		var spell_state = SpellState.new()
 		spell_state.id = spell_id
 		spell_state.type = card
-		spell_states.append(SpellState.new())
+		spell_states.append(spell_state)
 	Adventure.add_cards(spell_states)
 	return true

@@ -30,8 +30,11 @@ func draw() -> AnimationObject:
 	return combat.animation.callback(combat.ui, "add_card", [spell])
 
 func draw_to_hand_size():
-	while combat.hand.size() < combat.player.traits.max_handsize:
+	while combat.hand.size() < combat.player.traits.max_handsize and can_draw():
 		draw()
+
+func can_draw():
+	return len(combat.deck) > 0 or len(combat.discard_pile) > 0
 
 func reshuffle():
 	combat.deck.append_array(combat.discard_pile)
