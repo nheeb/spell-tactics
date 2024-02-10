@@ -20,6 +20,7 @@ func start_combat(level_path: String) -> void:
 		_reset_combat() 
 	
 	var combat_state: CombatState = load(level_path) as CombatState
+	combat_state.deck_states = Adventure.deck_states
 	combat = combat_state.deserialize()	
 	add_child(combat)
 	#combat.camera = $GameCamera

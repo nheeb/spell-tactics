@@ -3,6 +3,10 @@ class_name BoosterPack extends Resource
 @export var name: String = ""
 @export var entries: Array[BoosterPackEntry] = []
 
+func initialise():
+	for entry in entries:
+		entry.spell_type._on_load()
+
 func select_cards(count: int) -> Array[SpellType]:
 	var cards : Array[SpellType] = []
 	for i in range(count):

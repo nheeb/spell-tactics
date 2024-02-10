@@ -26,7 +26,7 @@ func deserialize() -> Combat:
 	combat.deck.append_array(deck_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.hand.append_array(hand_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.discard_pile.append_array(discard_pile_states.map(func(x: SpellState): return x.deserialize(combat)))
-	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 5:
+	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 1:
 		combat.log.add("CombatState has no deck -> PrototypeDeck will be loaded")
 		combat.deck.append_array(Utility.DeckUtils.create_test_deck(combat))
 	combat.event.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
