@@ -38,7 +38,7 @@ func deserialize() -> Combat:
 	combat.event.current_event = current_event
 	if combat.event.events.is_empty():
 		combat.event.events.append_array(Game.get_prototype_events(combat))
-	combat.timed_effects = timed_effects
+	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
 	combat.setup()
 	combat.log.add("Combat was deserialized.")

@@ -4,9 +4,11 @@ const LEVEL = preload("res://Logic/Tiles/Level.tscn")
 
 var test = ["ast", "mast", "past"]
 
+func mist():
+	pass
+
 func _ready() -> void:
-	set("test:0", "uuu")
-	print(test)
+	print(get("mist"))
 	#OS.shell_open(ProjectSettings.globalize_path("user://"))
 	#OS.shell_open(Game.GOOGLE_DRIVE_REVIEWS_LINK)
 	#print("start_test")

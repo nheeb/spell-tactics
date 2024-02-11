@@ -136,3 +136,12 @@ func random_hash(length:int, chars := "abcdefghijklmnopqrstuvwxyz") -> String:
 	for i in range(length):
 		word += chars[randi()% n_char]
 	return word
+
+func has_int_flag(flags: int, target_flag: int) -> bool:
+	return (flags & target_flag) == target_flag
+
+func add_int_flag(flags: int, target_flag: int) -> int:
+	return flags | target_flag
+
+func remove_int_flag(flags: int, target_flag: int) -> int:
+	return flags & (~target_flag)

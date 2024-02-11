@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://svag2bbhgyid"]
+[gd_scene load_steps=16 format=3 uid="uid://svag2bbhgyid"]
 
 [ext_resource type="Script" path="res://Logic/Combat.gd" id="1_65o0h"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Phases/StartPhase.gd" id="2_jgbr1"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/LogUtility.gd" id="12_4hu3i"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/InputUtility.gd" id="13_djmeo"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/EventUtility.gd" id="14_q5i8d"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/TimedEffectsUtility.gd" id="15_t7ygn"]
 
 [node name="Combat" type="Node"]
 script = ExtResource("1_65o0h")
@@ -73,3 +74,7 @@ script = ExtResource("13_djmeo")
 [node name="EventUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
 script = ExtResource("14_q5i8d")
+
+[node name="TimedEffectsUtility" type="Node" parent="Utility"]
+unique_name_in_owner = true
+script = ExtResource("15_t7ygn")

@@ -1,7 +1,7 @@
 extends EntityLogic
 
 func on_create(): # Happens when the entity is created (deserialized or summoned)
-	combat.spell_casted_successfully.connect(give_energy)
+	TimedEffect.new_from_signal_and_callable(combat.spell_casted_successfully, give_energy).register(combat)
 
 var first_time_lock := true
 
@@ -15,9 +15,8 @@ func give_energy(spell_ref = null) -> void:
 		combat.energy.gain(EnergyStack.string_to_energy("D")).set_flag_with()
 		combat.animation.say(entity.visual_entity, "+1 Decay").set_flag_with()
 
-func on_delete(): # Happens when the entity enters the graveyard
-	if combat.spell_casted_successfully.is_connected(give_energy):
-		combat.spell_casted_successfully.disconnect(give_energy)
+func on_graveyard(): # Happens when the entity enters the graveyard
+	pass
 
 func on_death(): # Happens when hp entity dies (before its being moved to the graveyard)
 	pass

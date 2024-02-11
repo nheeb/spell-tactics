@@ -42,17 +42,5 @@ func on_remove() -> void:
 func self_remove() -> void:
 	entity.remove_status_effect(get_status_name())
 
-#func make_timed_effect_self_removal() -> TimedEffect:
-	#return make_timed_effect_entity_call("remove_status_effect", [get_status_name()])
-
-func make_timed_effect_self_call(method: String, params := []) -> TimedEffect:
-	return make_timed_effect_entity_call("call_on_status_effect", [get_status_name(), method, params])
-
-func make_timed_effect_entity_call(method: String, params := []) -> TimedEffect:
-	var timed_effect := TimedEffect.new()
-	timed_effect.phase = Combat.RoundPhase.End
-	timed_effect.entity_reference = entity.get_reference()
-	timed_effect.method = method
-	timed_effect.params = params
-	combat.timed_effects.append(timed_effect)
-	return timed_effect
+func get_reference() -> StatusEffectReference:
+	return StatusEffectReference.new(entity.get_reference(), get_status_name())

@@ -19,9 +19,8 @@ func get_status_name() -> String:
 ## For overwriting: Logic when status effect enters the game
 ## This will only be called when the status effect is applied, not when it is loaded
 func setup_logic() -> void:
-	make_timed_effect_self_call("advance")
-	entity = entity as EnemyEntity
 	entity.forced_movement_name = "SnareMove"
+	TimedEffect.new_end_phase_trigger_from_callable(self_remove).set_oneshot().register(combat)
 
 ## For overwriting: Visual changes when status effect enters the game
 func setup_visually() -> void:
@@ -35,11 +34,3 @@ func extend(other_status: StatusEffect) -> void:
 func on_remove() -> void:
 	combat.animation.remove_staying_effect(entity.visual_entity, "snare_icons")
 
-func advance() -> void:
-	length -= 1
-	if length == 0:
-		self_remove()
-	else:
-		make_timed_effect_self_call("advance")
-		entity = entity as EnemyEntity
-		entity.forced_movement_name = "SnareMove"

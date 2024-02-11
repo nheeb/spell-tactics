@@ -26,7 +26,7 @@ func connect_reference(combat: Combat) -> void:
 		printerr("SpellReference did not get connected")
 
 ## Is being called by resolve and should never be called from outside.
-func _resolve() -> Variant:
+func _resolve() -> Object:
 	return spell
 
 func get_reference_type() -> String:

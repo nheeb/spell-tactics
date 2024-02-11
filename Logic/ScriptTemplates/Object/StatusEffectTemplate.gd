@@ -2,10 +2,8 @@ extends StatusEffect
 
 ## Make persistant vars export so they get serialized automatically since StatusEffect is a Resource
 
-## make_timed_effect_self_call(method: String, params := []) -> TimedEffect:
-## make_timed_effect_entity_call(method: String, params := []) -> TimedEffect:
-## You can use those wrapper functions to create timed effects
-## (they get added into the combat automatically and are set on EndPhase by default)
+## get_reference() returns a StatusEffectReference
+## Because of that you can use callables to create TimedEffects
 ## self_remove() is a shortcut for entity.remove_status_effect(get_status_name())
 
 ## Name of the status effect

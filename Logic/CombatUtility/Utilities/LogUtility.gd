@@ -1,6 +1,4 @@
-class_name LogUtility extends Node
-
-@onready var combat : Combat = get_parent().get_parent()
+class_name LogUtility extends CombatUtility
 
 var log_entries: Array[LogEntry] = []
 

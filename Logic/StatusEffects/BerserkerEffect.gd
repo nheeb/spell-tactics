@@ -4,12 +4,6 @@ class_name BerserkerEffect extends StatusEffect
 
 @export var length := 2
 
-## make_timed_effect_self_call(method: String, params := []) -> TimedEffect:
-## make_timed_effect_entity_call(method: String, params := []) -> TimedEffect:
-## You can use those wrapper functions to create timed effects
-## (they get added into the combat automatically and are set on EndPhase by default)
-## self_remove() is a shortcut for entity.remove_status_effect(get_status_name())
-
 ## Name of the status effect
 func get_status_name() -> String:
 	return "berserker"
@@ -24,15 +18,18 @@ func _init(_length := 2) -> void:
 ## This will only be called when the status effect is applied, not when it is loaded
 func setup_logic() -> void:
 	make_meele_two_uses()
-	make_timed_effect_self_call("advance")
+	TimedEffect.new_end_phase_trigger_from_callable(make_meele_two_uses).set_trigger_count(length) \
+			.replace_last_callable(self_remove).register(combat)
 
 ## For overwriting: Visual changes when status effect enters the game
 func setup_visually() -> void:
-	combat.animation.add_staying_effect(VFX.ICON_VISUALS, entity.visual_entity, "berserker_icons", {"icon_name": get_icon_name(), "color": Color.ORANGE})
+	combat.animation.add_staying_effect(VFX.ICON_VISUALS, entity.visual_entity, "berserker_icons", \
+					{"icon_name": get_icon_name(), "color": Color.ORANGE})
 
 ## For overwriting: How does the effect change, when the entity would get another instance of the same effect
 func extend(other_status: StatusEffect) -> void:
-	pass
+	for timed_effect in combat.t_effects.get_effects(self):
+		timed_effect.triggers_left += other_status.length
 
 ## For overwriting: Effects on being removed
 func on_remove() -> void:
@@ -40,14 +37,6 @@ func on_remove() -> void:
 	for melee in melee_attacks:
 		melee.uses_left = 0
 	combat.animation.remove_staying_effect(entity.visual_entity, "berserker_icons")
-
-func advance() -> void:
-	length -= 1
-	if length == 0:
-		self_remove()
-	else:
-		make_meele_two_uses()
-		make_timed_effect_self_call("advance")
 
 func make_meele_two_uses():
 	var melee_attacks = combat.actives.filter(func(x): return "Melee" in x.type.pretty_name)

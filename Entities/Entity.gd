@@ -20,7 +20,8 @@ var energy: EnergyStack
 var custom_props := {}
 var status_effects : Array[StatusEffect] = []
 
-signal entered_graveyard
+signal entering_graveyard # Before the graveyard
+signal entered_graveyard # After the graveyard
 
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
@@ -77,6 +78,12 @@ func get_reference() -> EntityReference:
 
 func is_dead() -> bool:
 	return current_tile == null
+
+func die() -> void:
+	combat.level.move_entity_to_graveyard(self)
+
+func go_to_graveyard() -> void:
+	die()
 
 func apply_status_effect(effect: StatusEffect) -> void:
 	var existing_effect := get_status_effect(effect.get_status_name())

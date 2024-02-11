@@ -20,7 +20,8 @@ func _init(_length := 3) -> void:
 ## For overwriting: Logic when status effect enters the game
 ## This will only be called when the status effect is applied, not when it is loaded
 func setup_logic() -> void:
-	make_timed_effect_self_call("advance")
+	TimedEffect.new_end_phase_trigger_from_callable(advance).set_trigger_count(length)\
+	.extra_last_callable(self_remove).register(combat)
 
 ## For overwriting: Visual changes when status effect enters the game
 func setup_visually() -> void:
@@ -28,19 +29,15 @@ func setup_visually() -> void:
 
 ## For overwriting: How does the effect change, when the entity would get another instance of the same effect
 func extend(other_status: StatusEffect) -> void:
-	pass
+	for te in combat.t_effects.get_effects(self):
+		te.triggers_left += other_status.get("length")
 
 ## For overwriting: Effects on being removed
 func on_remove() -> void:
 	combat.animation.remove_staying_effect(entity.visual_entity, "poison_icons")
 
 func advance() -> void:
-	length -= 1
 	entity = entity as EnemyEntity
 	entity.inflict_damage(1)
 	combat.animation.update_hp(entity)
 	combat.animation.say(entity.visual_entity, "Poisoned!", {"color": Color.BROWN})
-	if length == 0:
-		self_remove()
-	else:
-		make_timed_effect_self_call("advance")

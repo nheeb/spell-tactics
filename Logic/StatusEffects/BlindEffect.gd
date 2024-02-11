@@ -1,8 +1,6 @@
 class_name BlindEffect extends StatusEffect
 
 ## Make persistant vars export so they get serialized automatically since StatusEffect is a Resource
-
-@export var length := 1
 @export var value: int
 
 ## make_timed_effect_self_call(method: String, params := []) -> TimedEffect:
@@ -25,7 +23,7 @@ func _init(_value := 3) -> void:
 ## This will only be called when the status effect is applied, not when it is loaded
 func setup_logic() -> void:
 	reduce_acc(value)
-	make_timed_effect_self_call("advance")
+	TimedEffect.new_end_phase_trigger_from_callable(self_remove).set_oneshot().register(combat)
 
 ## For overwriting: Visual changes when status effect enters the game
 func setup_visually() -> void:
@@ -39,7 +37,7 @@ func extend(other_status: StatusEffect) -> void:
 ## For overwriting: Effects on being removed
 func on_remove() -> void:
 	recover_acc()
-	combat.animation.remove_staying_effect(entity.visual_entity, "berserker_icons")
+	combat.animation.remove_staying_effect(entity.visual_entity, "blind_icons")
 
 func reduce_acc(x: int):
 	entity = entity as EnemyEntity
@@ -48,10 +46,3 @@ func reduce_acc(x: int):
 func recover_acc():
 	entity = entity as EnemyEntity
 	entity.accuracy += value
-
-func advance() -> void:
-	length -= 1
-	if length == 0:
-		self_remove()
-	else:
-		make_timed_effect_self_call("advance")

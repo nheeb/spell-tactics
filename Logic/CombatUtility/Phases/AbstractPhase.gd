@@ -1,10 +1,12 @@
 class_name AbstractPhase extends Node
 
+signal process_start
+signal process_end
+
 @onready var combat : Combat = get_parent().get_parent()
 # TODO doesn't work since they're not initialized yet -- any way to fix this?
 #@onready var level: Level = combat.level
 #@onready var player: PlayerEntity = combat.player
-
 
 func tile_hovered(tile: Tile):
 	pass
@@ -18,11 +20,10 @@ func process_phase() -> bool:
 	return false
 
 func _process_phase() -> bool:
-	var timed_effects := combat.timed_effects.duplicate()
-	for timed_effect in timed_effects:
-		timed_effect = timed_effect as TimedEffect
-		if timed_effect.phase == combat.current_phase:
-			timed_effect.advance(combat)
-		# combat.timed_effects.erase(timed_effect) this will be done by the TimedEffect base class
-	return process_phase()
+	process_start.emit()
+	var user_input = process_phase()
+	process_end.emit()
+	return user_input
 
+func get_reference() -> CombatNodeReference:
+	return CombatNodeReference.new(combat.get_path_to(self))

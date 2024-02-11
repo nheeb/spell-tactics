@@ -1,6 +1,4 @@
-class_name EventUtility extends Node
-
-@onready var combat : Combat = get_parent().get_parent()
+class_name EventUtility extends CombatUtility
 
 var events: Array[Spell]
 var current_event: SpellReference

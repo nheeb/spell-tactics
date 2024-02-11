@@ -1,8 +1,6 @@
-class_name AnimationUtility extends Node
+class_name AnimationUtility extends CombatUtility
 
 const SAY_EFFECT = preload("res://Effects/SayEffect.tscn")
-
-@onready var combat : Combat = get_parent().get_parent()
 
 signal animation_queue_empty
 

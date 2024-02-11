@@ -1,6 +1,4 @@
-class_name CardUtility extends Node
-
-@onready var combat : Combat = get_parent().get_parent()
+class_name CardUtility extends CombatUtility
 
 func shuffle_deck():
 	combat.deck.shuffle()

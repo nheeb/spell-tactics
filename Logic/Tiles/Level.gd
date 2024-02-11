@@ -227,6 +227,7 @@ func move_entity(entity: Entity, target: Tile):
 
 func move_entity_to_graveyard(entity: Entity):
 	if entity.current_tile:
+		entity.entering_graveyard.emit()
 		entity.current_tile.remove_entity(entity)
 		entity.entered_graveyard.emit()
 		graveyard.append(entity)
