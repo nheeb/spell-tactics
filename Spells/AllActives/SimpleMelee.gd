@@ -16,7 +16,7 @@ func casting_effect() -> void:
 	target = target as Tile
 	var enemies = target.get_enemies()
 	assert(len(enemies) >= 1, "Melee expects min 1 enemy on tile")
-	enemies[0].inflict_damage(1 if not Game.DEBUG_SPELL_TESTING else 5)
+	enemies[0].inflict_damage(1)
 	combat.animation.update_hp(enemies[0])
 	combat.animation.say(combat.player.current_tile, "ATTACK!", {"color": Color.CORAL, "font": "bold"})
 

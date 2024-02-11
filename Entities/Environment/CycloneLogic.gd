@@ -14,8 +14,14 @@ func on_graveyard():
 func make_damage():
 	var tile: Tile = entity.current_tile
 	assert(tile)
+	var anims = []
 	var enemies = tile.get_enemies()
 	for enemy in enemies:
-		enemy.inflict_damage_with_visuals(damage)
+		anims.append(enemy.inflict_damage_with_visuals(damage))
 	if combat.player.current_tile == tile:
-		combat.player.inflict_damage_with_visuals(damage)
+		anims.append(combat.player.inflict_damage_with_visuals(damage))
+	if anims:
+		anims.push_front(combat.animation.say(tile, "Cyclone Damage").set_delay(.5))
+		anims.push_front(combat.animation.camera_reach(tile))
+		combat.animation.reappend_as_array(anims)
+		

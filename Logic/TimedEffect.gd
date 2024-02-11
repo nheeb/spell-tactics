@@ -36,7 +36,7 @@ enum Flags {
 @export var triggers_left := 0
 @export var delay := 0
 
-@export var trigger_count := 0
+@export var trigger_counter := 0
 @export var dead := false
 
 func _init(_signal_ref: UniversalReference = null, _signal_name: String = "", \
@@ -97,16 +97,16 @@ func set_death_callback(replace: bool, ref: UniversalReference, method: String, 
 func extra_last_callable(callable: Callable, params := []) -> TimedEffect:
 	assert(callable.is_valid() and callable.is_standard())
 	assert(callable.get_object().has_method("get_reference"))
-	call_ref = callable.get_object().get_reference()
-	call_method = callable.get_method()
-	return set_death_callback(false, call_ref, call_method, params)
+	var _ref = callable.get_object().get_reference()
+	var _method = callable.get_method()
+	return set_death_callback(false, _ref, _method, params)
 
 func replace_last_callable(callable: Callable, params := []) -> TimedEffect:
 	assert(callable.is_valid() and callable.is_standard())
 	assert(callable.get_object().has_method("get_reference"))
-	call_ref = callable.get_object().get_reference()
-	call_method = callable.get_method()
-	return set_death_callback(true, call_ref, call_method, params)
+	var _ref = callable.get_object().get_reference()
+	var _method = callable.get_method()
+	return set_death_callback(true, _ref, _method, params)
 
 func set_trigger_count(trigger_count: int) -> TimedEffect:
 	triggers_left = trigger_count
@@ -155,7 +155,7 @@ func _trigger(signal_params := []):
 	if delay > 0:
 		delay -= 1
 		return
-	trigger_count += 1
+	trigger_counter += 1
 	if Utility.has_int_flag(flags, Flags.LimitedTriggers):
 		triggers_left -= 1
 		if triggers_left <= 0:
@@ -179,12 +179,12 @@ func _set_signal(sig: Signal) -> TimedEffect:
 	signal_name = sig.get_name()
 	return self
 
-func _set_callable(call: Callable) -> TimedEffect:
+func _set_callable(callable: Callable) -> TimedEffect:
 	assert(not effect_connected)
-	assert(call.is_valid() and call.is_standard())
-	assert(call.get_object().has_method("get_reference"))
-	call_ref = call.get_object().get_reference()
-	call_method = call.get_method()
+	assert(callable.is_valid() and callable.is_standard())
+	assert(callable.get_object().has_method("get_reference"))
+	call_ref = callable.get_object().get_reference()
+	call_method = callable.get_method()
 	return self
 
 func set_owner(ref: UniversalReference) -> TimedEffect:
@@ -211,5 +211,5 @@ static func new_end_phase_trigger_from_callable(callable: Callable) -> TimedEffe
 
 # TODO Test this
 ## Only works of the owners of the signal and callable have "get_reference()"
-static func new_from_signal_and_callable(sig: Signal, call: Callable) -> TimedEffect:
-	return TimedEffect.new()._set_signal(sig)._set_callable(call)
+static func new_from_signal_and_callable(sig: Signal, callable: Callable) -> TimedEffect:
+	return TimedEffect.new()._set_signal(sig)._set_callable(callable)

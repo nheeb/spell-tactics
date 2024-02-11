@@ -94,6 +94,37 @@ func player_choice(activity: PlayerChoiceActivity) -> AnimationPlayerChoice:
 	var a = AnimationPlayerChoice.new(activity)
 	add_animation_object(a)
 	return a
+
+func reappend_as_subqueue(_anims: Array) -> AnimationSubQueue:
+	var anims: Array[AnimationObject] = get_flat_animation_array(_anims)
+	anims.append_array(_anims)
+	for anim in anims:
+		animation_queue.erase(anim)
+	var a = AnimationSubQueue.new(anims)
+	add_animation_object(a)
+	return a
+
+func reappend_as_array(_anims: Array) -> Array[AnimationObject]:
+	var anims: Array[AnimationObject] = get_flat_animation_array(_anims)
+	for anim in anims:
+		animation_queue.erase(anim)
+	for anim in anims:
+		add_animation_object(anim)
+	return anims
+
+func get_flat_animation_array(anims) -> Array[AnimationObject]:
+	var anim_array: Array[AnimationObject] = []
+	if anims is AnimationObject:
+		anim_array.append(anims)
+	elif anims is Array:
+		for a in anims:
+			if a is AnimationObject:
+				anim_array.append(a)
+			elif a is Array:
+				anim_array.append_array(get_flat_animation_array(a))
+	else:
+		printerr("No array or animobj given to flatten")
+	return anim_array
 	
 
 #######################################

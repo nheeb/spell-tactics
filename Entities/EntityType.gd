@@ -71,8 +71,8 @@ func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 func entity_on_create(ent: Entity, call_on_create: bool) -> void:
 	if call_on_create:
 		ent.on_create()
-	if ent.logic:
-		ent.logic.on_create()
+		if ent.logic:
+			ent.logic.on_create()
 
 func get_prototype_texture():
 	var texture_path := "res://Assets/Sprites/PrototypeBillboard/" + internal_name + ".png"

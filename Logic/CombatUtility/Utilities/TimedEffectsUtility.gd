@@ -37,15 +37,21 @@ func add_effect(te: TimedEffect) -> void:
 	connect_effect(te)
 
 ## Since cringe Godot doen't allow vararg we do it that way ...
-func signal_triggered(sig: Signal, sig_param1 = null, sig_param2 = null, \
+func signal_triggered(sig_param0 = null, sig_param1 = null, sig_param2 = null, \
 					 sig_param3 = null, sig_param4 = null, sig_param5 = null):
+	var sig: Signal
+	var sig_params := []
+	for param in [sig_param0, sig_param1, sig_param2, sig_param3, sig_param4, sig_param5]:
+		if param != null:
+			if param is Signal:
+				if not sig.is_null():
+					printerr("Timed effect signal has a signal in its parameters")
+				sig = param
+			else:
+				sig_params.append(param)
+
 	if sig not in connected_effects.keys():
 		return
-
-	var sig_params := []
-	for param in [sig_param1, sig_param2, sig_param3, sig_param4, sig_param5]:
-		if param != null:
-			sig_params.append(param)
 
 	var signal_effects : Array = connected_effects[sig]
 	for te in signal_effects.duplicate():

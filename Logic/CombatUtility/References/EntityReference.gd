@@ -9,6 +9,7 @@ func _init(entity: Entity = null) -> void:
 		return
 	ent = entity
 	id = entity.id
+	assert(id)
 	if id == null:
 		printerr("EntityReference was created on an entity with empty id")
 
