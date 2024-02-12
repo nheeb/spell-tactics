@@ -4,6 +4,8 @@ class_name AdventureSingleton extends Node
 @export var coins: int = 0
 @export var deck_states: Array[SpellState]
 
+signal state_changed
+
 func _init():
 	reset()
 
@@ -14,22 +16,31 @@ func reset():
 	
 func sync_health(amount: int):
 	health = amount
+	state_changed.emit()
 
 func heal(amount: int):
 	health += amount
+	state_changed.emit()
 
 func damage(amount: int):
 	health -= amount
 	# TODO: Death check?
+	state_changed.emit()
 
 func add_cards(cards: Array[SpellState]):
 	deck_states.append_array(cards)
+	state_changed.emit()
 	
 func remove_cards(cards: Array[SpellState]):
 	for card in cards:
 		var index = deck_states.find(card)
 		if index != -1:
 			deck_states.remove_at(index)
+	state_changed.emit()
+
+func add_coins(coins: int):
+	self.coins += coins
+	state_changed.emit()
 
 func serialise():
 	var adventure_state = AdventureState.new()

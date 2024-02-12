@@ -15,7 +15,7 @@ const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var world: World = null
 
-const DEBUG_SKIP_OVERWORLD = true
+const DEBUG_SKIP_OVERWORLD = false
 const DEBUG_SKIP_POST_COMBAT = true
 var DEBUG_SPELL_TESTING := false # Not meant to be changed.
 # Play the scene SpellTest.tscn to start spell testing
