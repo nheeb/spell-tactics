@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://ciug3sucml2b5"]
+[gd_scene load_steps=6 format=3 uid="uid://ciug3sucml2b5"]
 
 [ext_resource type="Shader" path="res://UI/EnergyIcon.gdshader" id="1_ft63v"]
 [ext_resource type="Script" path="res://UI/EnergyIcon.gd" id="1_y44af"]
+[ext_resource type="Texture2D" uid="uid://ckh1exvhdroly" path="res://Assets/Sprites/EnergyIconMasks/matter.png" id="2_74tm8"]
+[ext_resource type="Texture2D" uid="uid://c4cqmwxrkmmrp" path="res://Assets/Sprites/EnergyIconMasks/flow.png" id="4_6a8h7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nu6bn"]
 shader = ExtResource("1_ft63v")
-shader_parameter/base_color = Color(0.890196, 0.890196, 0.890196, 1)
 shader_parameter/border_color = null
 shader_parameter/border_thickness = 0.07
 shader_parameter/alpha_feathering = 0.029
+shader_parameter/icon_color = Color(1, 1, 0.984314, 1)
+shader_parameter/icon_mask = ExtResource("4_6a8h7")
 
 [node name="EnergyIcon" type="AspectRatioContainer"]
 anchors_preset = 15
@@ -25,6 +28,7 @@ harmony_color = Color(0.321569, 0.796078, 0.890196, 1)
 flow_color = Color(0.968627, 0.596078, 0.117647, 1)
 decay_color = Color(0.423529, 0.231373, 0.541176, 1)
 spectral_color = Color(0.960784, 0, 0.788235, 1)
+icons = Array[Texture]([ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_nu6bn")
