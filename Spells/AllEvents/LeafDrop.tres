@@ -5,9 +5,11 @@
 [resource]
 script = ExtResource("1_hui2k")
 pretty_name = "Autumn Breeze"
-effect_text = "A tree looses his leafs."
+keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+effect_text = "Round 1 : A tree is chosen.;
+Round 2 : It looses all it leaves."
 fluff_text = ""
-is_event_spell = true
 target = 0
 target_range = -1
+target_min_range = -1
 target_tag = ""

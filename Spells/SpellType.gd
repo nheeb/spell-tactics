@@ -18,6 +18,7 @@ var internal_name: String = ""
 var logic: Script
 ## Spells are events when they have this flag
 var is_event_spell := false
+var is_enemy_event_spell := false
 
 enum Target {
 	None,
@@ -48,6 +49,7 @@ func _on_load() -> void:
 		internal_name = resource_path.split("/")[-1].split(".")[0]
 		var directory = "/".join(resource_path.split("/").slice(0, -1))
 		is_event_spell = "Event" in directory
+		is_enemy_event_spell = "EnemyEvent" in directory
 		logic = load(directory + "/" + internal_name + ".gd")
 
 	if costs == null:

@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqqfa3o8fq1a3"]
+
+[ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/HandCard2D_panel_default.tres" id="1_bgjqg"]
+[ext_resource type="Script" path="res://UI/EventCardEffectEntry.gd" id="1_ce61u"]
+[ext_resource type="LabelSettings" uid="uid://bfwxbyblem36k" path="res://UI/Theme/EventCardTextLableSettings.tres" id="2_ag6ls"]
+[ext_resource type="Script" path="res://UI/LabelFix.gd" id="3_ha6o0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_388ra"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ku17e"]
+
+[node name="EventEffectEntry" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_388ra")
+script = ExtResource("1_ce61u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_bgjqg")
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ROUND 1"
+label_settings = ExtResource("2_ag6ls")
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ku17e")
+
+[node name="EffectLabel" type="Label" parent="VBoxContainer/PanelContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 74)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Text asdfasdf Text asdfasdfText asdsdfas asdf asasdfasdfasdfText asdfasdsdfsdf sdf sdf sdfsadfasefawef asdfasdfasef fText asdfasdfText asdfasdf Text as"
+label_settings = ExtResource("2_ag6ls")
+vertical_alignment = 1
+autowrap_mode = 1
+text_overrun_behavior = 1
+script = ExtResource("3_ha6o0")

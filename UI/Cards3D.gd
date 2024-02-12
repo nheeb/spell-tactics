@@ -19,7 +19,25 @@ func add_card(card_2d: HandCard2D):
 	#print("n = %d, offset = %d" % [n, calc_offset(n)])
 	#hand_card.position.x = calc_x_offset(n, n)
 	update_all_x_offsets()
-	
+
+const EVENT_CARD = preload("res://UI/EventCard3D.tscn")
+const EVENT_HEIGHT = .4
+var current_shown_event_card: EventCard3D
+func show_event(event: SpellType, round_highlight := -1) -> void:
+	var event_card = EVENT_CARD.instantiate()
+	event_card.setup(event, round_highlight)
+	%EventCards.add_child(event_card)
+	event_card.position.y = EVENT_HEIGHT
+	event_card.rotation_degrees.y = 180.0
+	var tween := VisualTime.new_tween()
+	tween.tween_property(event_card, "position:y", 0.0, .6).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(event_card, "rotation_degrees:y", 0.0, .7).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
+	current_shown_event_card = event_card
+
+func hide_event() -> void:
+	if current_shown_event_card:
+		current_shown_event_card.queue_free()
+		current_shown_event_card = null
 
 func calc_x_offset(i, n):
 	# card width + gap
