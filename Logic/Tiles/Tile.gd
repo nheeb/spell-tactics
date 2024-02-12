@@ -141,7 +141,7 @@ func get_obstacle_layers() -> int:
 func get_tags() -> Array[String]:
 	var tags : Array[String] = []
 	for e in entities:
-		for t in e.type.tags:
+		for t in e.get_tags():
 			if not t in tags:
 				tags.append(t)
 	return tags
@@ -154,3 +154,6 @@ func distance_to(other_tile: Tile) -> int:
 
 func get_surrounding_tiles(_range := 1) -> Array[Tile]:
 	return level.get_all_tiles_in_distance_of_tile(self, _range)
+
+func get_reference() -> TileReference:
+	return TileReference.new(location)

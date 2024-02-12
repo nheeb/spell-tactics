@@ -11,7 +11,12 @@ func create_entity(location: Vector2i, entity_type: EntityType, create_with_acti
 	if tile.has_entity(entity_type):
 		return
 
-	var entity := entity_type.create_entity(_level.combat) as Entity
+	var entity := entity_type.create_entity(_level.combat, false) as Entity
+	
+	# Create id for entity
+	entity.id = EntityID.new(entity.type, _level.add_type_count(entity.type))
+	
+	entity_type.entity_on_create(entity, true)
 	
 	entity.visual_entity.visible = create_with_active_visuals
 	_level.visual_entities.add_child(entity.visual_entity)
@@ -20,10 +25,7 @@ func create_entity(location: Vector2i, entity_type: EntityType, create_with_acti
 	tile.add_entity(entity)
 	if entity.visual_entity != null:
 		entity.visual_entity.position = tile.position
-	
-	# Create id for entity
-	entity.id = EntityID.new(entity.type, _level.add_type_count(entity.type))
-	
+
 	return entity
 
 func fill_entity(entity_type: EntityType):

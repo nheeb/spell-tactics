@@ -1,19 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://svag2bbhgyid"]
+[gd_scene load_steps=16 format=3 uid="uid://svag2bbhgyid"]
 
 [ext_resource type="Script" path="res://Logic/Combat.gd" id="1_65o0h"]
-[ext_resource type="Script" path="res://Logic/Phases/StartPhase.gd" id="2_jgbr1"]
-[ext_resource type="Script" path="res://Logic/Phases/MovementPhase.gd" id="3_tyawg"]
-[ext_resource type="Script" path="res://Logic/Phases/SpellPhase.gd" id="4_xof1w"]
-[ext_resource type="Script" path="res://Logic/Phases/PassPhase.gd" id="5_5tk6f"]
-[ext_resource type="Script" path="res://Logic/Phases/EnemyPhase.gd" id="6_52d1n"]
-[ext_resource type="Script" path="res://Logic/Phases/EndPhase.gd" id="7_4vv4x"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/AnimationUtility.gd" id="8_2goip"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/CardUtility.gd" id="8_cksyl"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyUtility.gd" id="10_ju76k"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/MovementUtility.gd" id="11_ja5ni"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/LogUtility.gd" id="13_4hcuj"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/InputUtility.gd" id="13_22c6t"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/EventUtility.gd" id="14_krpvg"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Phases/StartPhase.gd" id="2_jgbr1"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Phases/MovementPhase.gd" id="3_tyawg"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Phases/SpellPhase.gd" id="4_xof1w"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Phases/PassPhase.gd" id="5_5tk6f"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Phases/EnemyPhase.gd" id="6_52d1n"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Phases/EndPhase.gd" id="7_4vv4x"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/AnimationUtility.gd" id="8_7ilnj"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/CardUtility.gd" id="9_tmams"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/EnergyUtility.gd" id="10_4ygde"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/MovementUtility.gd" id="11_0wukx"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/LogUtility.gd" id="12_4hu3i"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/InputUtility.gd" id="13_djmeo"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/EventUtility.gd" id="14_q5i8d"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/TimedEffectsUtility.gd" id="15_t7ygn"]
 
 [node name="Combat" type="Node"]
 script = ExtResource("1_65o0h")
@@ -48,28 +49,32 @@ script = ExtResource("7_4vv4x")
 
 [node name="AnimationUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
-script = ExtResource("8_2goip")
+script = ExtResource("8_7ilnj")
 
 [node name="CardUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
-script = ExtResource("8_cksyl")
+script = ExtResource("9_tmams")
 
 [node name="EnergyUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
-script = ExtResource("10_ju76k")
+script = ExtResource("10_4ygde")
 
 [node name="MovementUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
-script = ExtResource("11_ja5ni")
+script = ExtResource("11_0wukx")
 
 [node name="LogUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
-script = ExtResource("13_4hcuj")
+script = ExtResource("12_4hu3i")
 
 [node name="InputUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
-script = ExtResource("13_22c6t")
+script = ExtResource("13_djmeo")
 
 [node name="EventUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
-script = ExtResource("14_krpvg")
+script = ExtResource("14_q5i8d")
+
+[node name="TimedEffectsUtility" type="Node" parent="Utility"]
+unique_name_in_owner = true
+script = ExtResource("15_t7ygn")

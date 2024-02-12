@@ -19,7 +19,7 @@ enum RoundPhase {
 	RoundRepeats = 7, # Unreachable
 }
 
-enum RESULT {
+enum Result {
 	Unfinished,
 	Victory,
 	Loss,
@@ -34,11 +34,12 @@ enum RESULT {
 @onready var log: LogUtility = %LogUtility
 @onready var input: InputUtility = %InputUtility
 @onready var event: EventUtility = %EventUtility
+@onready var t_effects: TimedEffectsUtility = %TimedEffectsUtility
 
 signal round_ended
 signal spell_casted_successfully(spell: SpellReference)
 
-var result: RESULT = RESULT.Unfinished
+var result: Result = Result.Unfinished
 var current_round: int = 1
 var current_phase: RoundPhase = RoundPhase.CombatBegin
 
@@ -55,8 +56,6 @@ var actives: Array[Active]
 
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
-
-var timed_effects: Array[TimedEffect]
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
@@ -113,6 +112,8 @@ func setup() -> void:
 	
 	actives = [Active.new(SpellType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self)]
 
+	t_effects.connect_all_effects()
+
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
 	ui.setup(self)
@@ -167,7 +168,8 @@ func serialize() -> CombatState:
 	state.discard_pile_states.append_array(discard_pile.map(func(x: Spell): return x.serialize()))
 	state.event_states.append_array(event.events.map(func(x: Spell): return x.serialize()))
 	state.current_event = event.current_event
-	state.timed_effects = timed_effects
+	state.timed_effects = t_effects.effects
+	state.combat_log = self.log.log_entries
 	return state
 
 func save_to_disk(path: String = ""):
@@ -204,3 +206,6 @@ func resolve_reference(ref) -> Object:
 
 func get_all_enemies() -> Array[EnemyEntity]:
 	return enemies.duplicate()
+
+func get_reference() -> CombatReference:
+	return CombatReference.new()

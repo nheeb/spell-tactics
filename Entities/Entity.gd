@@ -20,11 +20,12 @@ var energy: EnergyStack
 var custom_props := {}
 var status_effects : Array[StatusEffect] = []
 
-signal entered_graveyard
+signal entering_graveyard # Before the graveyard
+signal entered_graveyard # After the graveyard
 
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
-const entity_internal_props = ["current_tile", "visual_entity", "logic", "type", "combat", "actions", "movements"]
+const entity_internal_props = ["current_tile", "visual_entity", "logic", "type", "combat", "actions", "movements", "entity"]
 static func serialize_this_prop(name: String) -> bool:
 	if name.ends_with(".gd"):
 		# script type, ignore this
@@ -78,6 +79,12 @@ func get_reference() -> EntityReference:
 func is_dead() -> bool:
 	return current_tile == null
 
+func die() -> void:
+	combat.level.move_entity_to_graveyard(self)
+
+func go_to_graveyard() -> void:
+	die()
+
 func apply_status_effect(effect: StatusEffect) -> void:
 	var existing_effect := get_status_effect(effect.get_status_name())
 	combat.animation.say(visual_entity, effect.get_status_name()).set_duration(0.0)
@@ -118,3 +125,6 @@ func call_logic(method: String, params := []):
 	
 func _to_string() -> String:
 	return type.internal_name + '_' + str(id.id)
+
+func get_tags() -> Array[String]:
+	return type.tags

@@ -9,6 +9,8 @@ const possible_booster_packs: Array[BoosterPack] = [
 var booster_pickup_options: Array[BoosterPickupOption] = []
 
 func _init():
+	for booster_pack in possible_booster_packs:
+		booster_pack.initialise()
 	var items = possible_booster_packs.duplicate()
 	for i in range(3):
 		var booster = items.pick_random()

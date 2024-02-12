@@ -40,14 +40,16 @@ func set_delay(d: float) -> AnimationObject:
 	return self
 
 func set_min_duration(d: float) -> AnimationObject:
-	if d <= 0.0:
+	if d < 0.0:
 		printerr("Invalid Min Duration")
 	min_duration = d
 	return self
 
 func set_max_duration(d: float) -> AnimationObject:
-	if d <= 0.0:
+	if d < 0.0:
 		printerr("Invalid Max Duration")
+	if d == 0.0:
+		d = 0.01
 	max_duration = d
 	return self
 

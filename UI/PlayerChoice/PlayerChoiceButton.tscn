@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://qyfdsghabwag"]
+
+[ext_resource type="FontFile" uid="uid://d2paqurb1iqxc" path="res://Assets/Fonts/Teachers/Teachers-Regular.ttf" id="1_ev8db"]
+[ext_resource type="Script" path="res://UI/PlayerChoice/PlayerChoiceButton.gd" id="1_qo6fm"]
+
+[node name="PlayerChoiceButton" type="CenterContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_qo6fm")
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_ev8db")
+theme_override_font_sizes/font_size = 32
+text = "Test"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

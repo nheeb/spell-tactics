@@ -1,6 +1,4 @@
-class_name CardUtility extends Node
-
-@onready var combat : Combat = get_parent().get_parent()
+class_name CardUtility extends CombatUtility
 
 func shuffle_deck():
 	combat.deck.shuffle()
@@ -14,6 +12,14 @@ func discard(spell: Spell):
 	else:
 		printerr("Tried to discard spell which is not in hand")
 
+func fetch_from_discard(spell: Spell):
+	if combat.discard_pile.has(spell):
+		combat.discard_pile.erase(spell)
+		combat.hand.append(spell)
+		combat.animation.callback(combat.ui, "add_card", [spell])
+	else:
+		printerr("Tried to fetch a spell from discard_pile which is not there")
+
 func draw() -> AnimationObject:
 	if combat.deck.is_empty():
 		reshuffle()
@@ -22,8 +28,11 @@ func draw() -> AnimationObject:
 	return combat.animation.callback(combat.ui, "add_card", [spell])
 
 func draw_to_hand_size():
-	while combat.hand.size() < combat.player.traits.max_handsize:
+	while combat.hand.size() < combat.player.traits.max_handsize and can_draw():
 		draw()
+
+func can_draw():
+	return len(combat.deck) > 0 or len(combat.discard_pile) > 0
 
 func reshuffle():
 	combat.deck.append_array(combat.discard_pile)

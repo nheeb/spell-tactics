@@ -5,7 +5,7 @@ func on_create():
 
 const BONES = preload("res://Entities/Environment/Bones.tres")
 
-func on_delete():
+func on_graveyard():
 	pass
 
 func on_death(): # Happens when HP Entity dies

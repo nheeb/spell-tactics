@@ -11,6 +11,6 @@ func process_phase() -> bool:
 	combat.animation.callback(combat.ui, "set_drains_left", [drains_left])
 	
 	if Game.DEBUG_SPELL_TESTING:
-		combat.energy.gain(EnergyStack.string_to_energy("LLLDDDMMMHHHFFFSSS"))
+		combat.energy.gain(Game.testing_energy)
 	
 	return false

@@ -1,16 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1eod0pbyip4b"]
+[gd_scene load_steps=10 format=3 uid="uid://b1eod0pbyip4b"]
 
 [ext_resource type="Script" path="res://Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://addons/LevelEditor/GridLevelEditor.gd" id="1_wcyqb"]
 [ext_resource type="Resource" uid="uid://bhbal4070u1qk" path="res://Spells/AllSpells/SummonWitchTotem.tres" id="2_7xwg7"]
-[ext_resource type="Resource" uid="uid://c2gimhhja8fi6" path="res://Spells/AllSpells/Breath.tres" id="2_d070n"]
-[ext_resource type="Resource" uid="uid://djuhody4na5qo" path="res://Spells/AllSpells/OmniDamage.tres" id="4_jea2x"]
+[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="2_rjkex"]
+[ext_resource type="Resource" uid="uid://cd42nwwenro" path="res://Spells/AllSpells/Cyclone.tres" id="4_krc3l"]
+[ext_resource type="Resource" uid="uid://qhnw7yi6brvf" path="res://Spells/AllSpells/TrappingRoots.tres" id="5_jwn41"]
+[ext_resource type="Resource" uid="uid://d2k4vhkqurk7r" path="res://Spells/AllSpells/Haunting.tres" id="6_issit"]
+[ext_resource type="Resource" uid="uid://c4yj8j5clqch8" path="res://Spells/AllSpells/Berserker.tres" id="7_njx18"]
+
+[sub_resource type="Resource" id="Resource_vfkqf"]
+script = ExtResource("2_rjkex")
+stack = Array[int]([0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5])
 
 [node name="SpellTest" type="Node3D"]
 script = ExtResource("1_58ka4")
+start_every_round_with = SubResource("Resource_vfkqf")
 test_spell_1 = ExtResource("2_7xwg7")
-test_spell_3 = ExtResource("2_d070n")
-test_spell_4 = ExtResource("4_jea2x")
+test_spell_2 = ExtResource("4_krc3l")
+test_spell_3 = ExtResource("5_jwn41")
+test_spell_4 = ExtResource("6_issit")
+test_spell_5 = ExtResource("7_njx18")
 
 [node name="Editor" type="Node" parent="."]
 script = ExtResource("1_wcyqb")

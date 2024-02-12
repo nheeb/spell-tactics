@@ -11,11 +11,11 @@ stack = Array[int]([])
 script = ExtResource("2_txoh5")
 pretty_name = "Omni Death"
 costs = SubResource("Resource_61ndi")
+keywords = Array[Resource("res://Spells/Keyword.gd")]([])
 effect_text = "Kills everything."
 fluff_text = "Happy times.
 
 "
-is_event_spell = false
 target = 0
 target_range = -1
 target_min_range = -1

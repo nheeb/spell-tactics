@@ -1,4 +1,4 @@
-class_name EntityReference extends Resource
+class_name EntityReference extends UniversalReference
 
 @export var id: EntityID
 
@@ -9,9 +9,11 @@ func _init(entity: Entity = null) -> void:
 		return
 	ent = entity
 	id = entity.id
+	assert(id)
 	if id == null:
 		printerr("EntityReference was created on an entity with empty id")
 
+## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
 	for e in combat.level.entities().get_all_entities():
 		if e.id.equals(id):
@@ -24,16 +26,9 @@ func connect_reference(combat: Combat) -> void:
 	if ent == null:
 		printerr("EntityReference did not get connected")
 
-func resolve(combat: Combat = null) -> Entity:
-	if ent != null:
-		return ent
-	else:
-		if combat != null:
-			connect_reference(combat)
-			return ent
-		else:
-			printerr("EntityReference was not connected yet. Either connect it first or call resolve(combat)")
-			return null
+## Is being called by resolve and should never be called from outside.
+func _resolve() -> Object:
+	return ent
 
-func is_valid(combat: Combat = null) -> bool:
-	return resolve(combat) != null
+func get_reference_type() -> String:
+	return "SpellReference"

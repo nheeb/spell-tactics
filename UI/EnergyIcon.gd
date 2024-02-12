@@ -21,8 +21,8 @@ class_name EnergyIcon extends Control
 @export var flow_color: Color
 @export var decay_color: Color
 @export var spectral_color: Color
-func type_to_color(type) -> Color:
-	match type:
+func type_to_color(_type) -> Color:
+	match _type:
 		EnergyStack.EnergyType.Any:
 			return any_color
 		EnergyStack.EnergyType.Matter:

@@ -11,11 +11,11 @@ stack = Array[int]([6])
 script = ExtResource("1_c844k")
 pretty_name = "Do Nothing"
 costs = SubResource("Resource_ufdj6")
+keywords = Array[Resource("res://Spells/Keyword.gd")]([])
 effect_text = "Does nothing."
 fluff_text = "When nothing is done,
 nothing is left undone.
 - Lao Tsu"
-is_event_spell = false
 target = 0
 target_range = -1
 target_min_range = -1

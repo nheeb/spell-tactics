@@ -32,5 +32,7 @@ func execute(combat: Combat) -> void:
 		
 		combat.energy.gain(entity.drain())
 		combat.animation.callback(entity.visual_entity, "visual_drain").set_max_duration(.5)
+		for tag in entity.get_tags():
+			combat.log.register_incident("drained_tag_%s" % tag)
 	
 	# TODO animation_queue send entity got drained signal to the visual instance

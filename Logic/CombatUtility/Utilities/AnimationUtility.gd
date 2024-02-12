@@ -1,13 +1,11 @@
-class_name AnimationUtility extends Node
+class_name AnimationUtility extends CombatUtility
 
 const SAY_EFFECT = preload("res://Effects/SayEffect.tscn")
-
-@onready var combat : Combat = get_parent().get_parent()
 
 signal animation_queue_empty
 
 var animation_queue: Array[AnimationObject]
-var animation_steps: Array[AnimationStep]
+var currently_playing_queues: Array[AnimationQueue]
 
 ########################################
 ## Wrapper Functions (only use those) ##
@@ -59,6 +57,7 @@ func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSign
 func say(target: Node3D, text: String, params := {}) -> AnimationEffect:
 	params["text"] = text
 	return effect(SAY_EFFECT, target, params)
+	## Quick Paste: combat.animation.say(target, "", {"color": Color., "font_size": 64})
 
 func camera_set_player_input(enabled: bool) -> AnimationProperty:
 	return property(combat.camera, "player_input_enabled", enabled)
@@ -91,6 +90,43 @@ func show(node: Node3D) -> AnimationProperty:
 func hide(node: Node3D) -> AnimationProperty:
 	return property(node, "visible", false)
 
+func player_choice(activity: PlayerChoiceActivity) -> AnimationPlayerChoice:
+	var a = AnimationPlayerChoice.new(activity)
+	add_animation_object(a)
+	return a
+
+func reappend_as_subqueue(_anims: Array) -> AnimationSubQueue:
+	var anims: Array[AnimationObject] = get_flat_animation_array(_anims)
+	anims.append_array(_anims)
+	for anim in anims:
+		animation_queue.erase(anim)
+	var a = AnimationSubQueue.new(anims)
+	add_animation_object(a)
+	return a
+
+func reappend_as_array(_anims: Array) -> Array[AnimationObject]:
+	var anims: Array[AnimationObject] = get_flat_animation_array(_anims)
+	for anim in anims:
+		animation_queue.erase(anim)
+	for anim in anims:
+		add_animation_object(anim)
+	return anims
+
+func get_flat_animation_array(anims) -> Array[AnimationObject]:
+	var anim_array: Array[AnimationObject] = []
+	if anims is AnimationObject:
+		anim_array.append(anims)
+	elif anims is Array:
+		for a in anims:
+			if a is AnimationObject:
+				anim_array.append(a)
+			elif a is Array:
+				anim_array.append_array(get_flat_animation_array(a))
+	else:
+		printerr("No array or animobj given to flatten")
+	return anim_array
+	
+
 #######################################
 ## Logic Functions (don't use those) ##
 #######################################
@@ -99,45 +135,12 @@ func add_animation_object(a: AnimationObject) -> void:
 	animation_queue.append(a)
 
 func play_animation_queue() -> void:
-	animation_steps = [AnimationStep.new()]
-	for animation in animation_queue:
-		if animation.has_flag(AnimationObject.Flags.PlayAfterStep):
-			animation_steps.append(AnimationStep.new())
-		animation_steps[-1].animations.append(animation)
-	for step in animation_steps:
-		step.compile()
-		step.step_done.connect(play_next_step, CONNECT_ONE_SHOT)
-	play_next_step()
-
-func play_next_step() -> void:
-	if animation_steps.is_empty():
-		animation_queue.clear()
+	if currently_playing_queues.is_empty():
+		while not animation_queue.is_empty():
+			var aq := AnimationQueue.new(animation_queue.duplicate())
+			currently_playing_queues.append(aq)
+			animation_queue.clear()
+			aq.play(combat)
+			await aq.queue_finished
+			currently_playing_queues.erase(aq)
 		animation_queue_empty.emit()
-	else:
-		var step : AnimationStep = animation_steps.pop_front()
-		step.play(combat.level)
-
-class AnimationStep extends Object:
-	signal step_done
-	
-	var animations : Array[AnimationObject] = []
-	
-	var relevant_animations_to_do := 0
-	
-	func relevant_animation_done() -> void:
-		relevant_animations_to_do -= 1
-		if relevant_animations_to_do <= 0:
-			step_done.emit()
-	
-	func compile() -> void:
-		for a in animations:
-			if a.has_flag(AnimationObject.Flags.PlayAfterStep) or a.has_flag(AnimationObject.Flags.ExtendStep):
-				relevant_animations_to_do += 1
-				a.animation_done.connect(self.relevant_animation_done, CONNECT_ONE_SHOT)
-	
-	func play(level: Level) -> void:
-		for a in animations:
-			#print(a)
-			a._play(level)
-		if relevant_animations_to_do == 0:
-			step_done.emit()

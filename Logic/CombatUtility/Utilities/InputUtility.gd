@@ -1,6 +1,4 @@
-class_name InputUtility extends Node
-
-@onready var combat : Combat = get_parent().get_parent()
+class_name InputUtility extends CombatUtility
 
 signal performed_action(action: PlayerAction)
 

@@ -1,6 +1,4 @@
-class_name EnergyUtility extends Node
-
-@onready var combat : Combat = get_parent().get_parent()
+class_name EnergyUtility extends CombatUtility
 
 @onready var player_energy: EnergyStack = EnergyStack.new([])
 
