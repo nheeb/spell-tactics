@@ -34,9 +34,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_vertical = 1
-text = "Event -  "
+text = "Event - "
 label_settings = ExtResource("3_cboju")
 vertical_alignment = 1
+text_overrun_behavior = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="AspectRatioContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
