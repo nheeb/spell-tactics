@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cqqfa3o8fq1a3"]
 
-[ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/HandCard2D_panel_default.tres" id="1_bgjqg"]
 [ext_resource type="Script" path="res://UI/EventCardEffectEntry.gd" id="1_ce61u"]
 [ext_resource type="LabelSettings" uid="uid://bfwxbyblem36k" path="res://UI/Theme/EventCardTextLableSettings.tres" id="2_ag6ls"]
+[ext_resource type="StyleBox" uid="uid://mu0weav5yf6m" path="res://UI/Theme/EventCardPanelEntryDefault.tres" id="2_eeqfe"]
 [ext_resource type="Script" path="res://UI/LabelFix.gd" id="3_ha6o0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_388ra"]
@@ -21,12 +21,13 @@ script = ExtResource("1_ce61u")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="TitlePanel" type="PanelContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/panel = ExtResource("1_bgjqg")
+theme_override_styles/panel = ExtResource("2_eeqfe")
 
-[node name="TitleLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+[node name="TitleLabel" type="Label" parent="VBoxContainer/TitlePanel"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "ROUND 1"

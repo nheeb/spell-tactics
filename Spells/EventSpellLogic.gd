@@ -46,9 +46,12 @@ func advance_event() -> bool:
 	var round_number : int = spell.round_persistant_properties["event_current_round"]
 	var event_name := spell.type.pretty_name
 	var effect_text := spell.type.effect_text
-	combat.animation.callback(combat.ui, "set_status", ["Event %s (Round %s)\n%s" % [event_name, round_number, effect_text] ])
+	combat.animation.callback(combat.ui, "set_status", ["Event %s (Round %s)\n%s" % [event_name, round_number, ""] ])
+	combat.animation.callback(combat.ui.cards3d, "show_event", [spell.type, round_number]).set_min_duration(4.5)
 	
 	event_effect(round_number)
+	
+	combat.animation.callback(combat.ui.cards3d, "hide_event").set_delay(1.5)
 	if spell.round_persistant_properties["event_current_round"] >= get_event_length():
 		finalize_event()
 		return true
