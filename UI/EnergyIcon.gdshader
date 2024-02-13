@@ -19,8 +19,9 @@ void fragment() {
     float t2 = 1.0 - smoothstep(radius, radius + border_thickness, d); // Interpolation for alpha channel
 
 	float mask_val =  texture(icon_mask, UV).r;
-    vec4 final_color = mix(COLOR, border_color, t1) * (1.0-mask_val) + mask_val * icon_color; // Mix colors for interior and border
-    final_color.a = float(d<radius) + smoothstep(t2, -alpha_feathering, +alpha_feathering);  // Set alpha channel for outline
+    //vec4 final_color = mix(COLOR, border_color, t1) * (1.0-mask_val) + mask_val * icon_color; // Mix colors for interior and border
+	vec4 final_color = mix(mix(COLOR, border_color, t1), icon_color, mask_val); // Mix colors for interior and border
+    final_color.a = clamp(float(d<radius) + smoothstep(t2, -alpha_feathering, +alpha_feathering), 0.0, 1.0);  // Set alpha channel for outline
 
-    COLOR = final_color;// + icon_color * texture(icon_mask, UV);
+    COLOR = final_color;
 }
