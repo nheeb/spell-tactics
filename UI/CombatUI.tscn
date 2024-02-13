@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=10 format=3 uid="uid://bysejqqiloy1u"]
 
 [ext_resource type="Script" path="res://UI/CombatUI.gd" id="1_uhqdp"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_2hiqp"]
 [ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/DefaultLabelSettings.tres" id="3_wybdv"]
 [ext_resource type="PackedScene" uid="uid://upcefttcpy6o" path="res://UI/Cards3D.tscn" id="4_a38j0"]
+[ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="5_jttea"]
+[ext_resource type="Texture2D" uid="uid://ditt5pum2lahc" path="res://Assets/Sprites/Icons/plain-arrow.png" id="5_myaa6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc21w"]
 bg_color = Color(0.113725, 0.117647, 0.113725, 0)
@@ -11,6 +13,8 @@ bg_color = Color(0.113725, 0.117647, 0.113725, 0)
 [sub_resource type="LabelSettings" id="LabelSettings_0d1w0"]
 font = ExtResource("2_2hiqp")
 font_size = 72
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_so122"]
 
 [node name="CombatUI" type="Control"]
 layout_mode = 3
@@ -204,6 +208,45 @@ offset_bottom = 0.319998
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_0d1w0")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyArea" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421354
+anchor_top = 0.00555556
+anchor_right = 0.617479
+anchor_bottom = 0.122815
+offset_right = 0.439972
+offset_bottom = 0.359985
+theme_override_styles/panel = SubResource("StyleBoxEmpty_so122")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyMeterLabel" type="Label" parent="EnemyArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enemy Meter: 0 / 5"
+label_settings = ExtResource("5_jttea")
+
+[node name="EnemyArrow" type="TextureRect" parent="EnemyArea"]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.543767
+anchor_top = 0.362205
+anchor_right = 0.891347
+anchor_bottom = 1.19665
+offset_right = -0.0379944
+offset_bottom = 0.0249939
+texture = ExtResource("5_myaa6")
+expand_mode = 1
+flip_v = true
 metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
