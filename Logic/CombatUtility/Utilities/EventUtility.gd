@@ -4,7 +4,7 @@ var events: Array[Spell]
 var current_event: SpellReference
 
 # TODO serialize me
-var enemy_meter := 3
+var enemy_meter := 0
 const ENEMY_METER_MAX = 5
 
 func get_regular_events() -> Array[Spell]:

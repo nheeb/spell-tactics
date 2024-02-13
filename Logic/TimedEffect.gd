@@ -72,8 +72,8 @@ func _connect_with_combat(combat: Combat) -> void:
 	if Utility.has_int_flag(flags, Flags.ExtraCallOnDeath) or Utility.has_int_flag(flags, Flags.ReplaceCallOnDeath):
 		if death_ref:
 			death_obj = death_ref.resolve(combat)
-			if death_obj.has_method(call_method):
-				connected_death_method = death_obj.get(call_method)
+			if death_obj.has_method(death_method):
+				connected_death_method = death_obj.get(death_method)
 
 func set_flag(flag: int, value := true) -> TimedEffect:
 	if value:

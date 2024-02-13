@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=9 format=3 uid="uid://bysejqqiloy1u"]
 
 [ext_resource type="Script" path="res://UI/CombatUI.gd" id="1_uhqdp"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_2hiqp"]
@@ -9,10 +9,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc21w"]
 bg_color = Color(0.113725, 0.117647, 0.113725, 0)
-
-[sub_resource type="LabelSettings" id="LabelSettings_0d1w0"]
-font = ExtResource("2_2hiqp")
-font_size = 72
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_so122"]
 
@@ -95,11 +91,13 @@ anchors_preset = -1
 anchor_left = 0.686632
 anchor_right = 1.0
 anchor_bottom = 0.24537
+offset_top = 10.0
+offset_right = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 text = "<DebugStatus>"
-label_settings = ExtResource("3_wybdv")
+label_settings = ExtResource("5_jttea")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
@@ -114,6 +112,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 ratio = 1.7778
 alignment_vertical = 2
+metadata/_edit_group_ = true
 
 [node name="CardViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer"]
 layout_mode = 2
@@ -206,7 +205,7 @@ anchor_bottom = 0.580259
 offset_right = -0.320004
 offset_bottom = 0.319998
 text = "GAME OVER"
-label_settings = SubResource("LabelSettings_0d1w0")
+label_settings = ExtResource("5_jttea")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 

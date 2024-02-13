@@ -33,7 +33,8 @@ func pay_for_spell(payment: EnergyStack) -> void:
 
 ## Pays for the costs. Activates the cards effect. Also discards the card from hand
 func cast(payment: EnergyStack = null) -> void:
-	pay_for_spell(payment)
+	if not spell is Active:
+		pay_for_spell(payment)
 	for keyword in spell.get_keywords():
 		keyword.logic.before_spell(spell)
 	casting_effect()

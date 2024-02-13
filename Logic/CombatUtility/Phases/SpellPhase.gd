@@ -23,6 +23,7 @@ func _ready() -> void:
 func tile_clicked(tile: Tile):
 	# for now try draining anytime a tile is clicked. later we'll need state,
 	# whether we're targeting a spell or draining
+	print("spellphase tile clicked")
 	if state == CastingState.Selecting:
 		combat.input.process_action(PlayerDrain.new(tile))
 	elif state == CastingState.Targeting:

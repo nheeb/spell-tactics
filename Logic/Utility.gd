@@ -99,9 +99,9 @@ class DeckUtils:
 		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
 		spells.append_array(load_spell_n_times("SporeFlight", 2, combat))
 		spells.append_array(load_spell_n_times("Cyclone", 1, combat))
-		spells.append_array(load_spell_n_times("SelfHeal", 3, combat))
+		spells.append_array(load_spell_n_times("SelfHeal", 2, combat))
 		spells.append_array(load_spell_n_times("GrowingMycel", 2, combat))
-		spells.append_array(load_spell_n_times("DeadlyDart", 2, combat))
+		spells.append_array(load_spell_n_times("DeadlyDart", 1, combat))
 		
 		for spell in spells:
 			spell.id = SpellID.new(Game.add_to_spell_count())

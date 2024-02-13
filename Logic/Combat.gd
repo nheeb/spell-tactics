@@ -81,8 +81,9 @@ func setup() -> void:
 				enemies.append(entity)
 	
 	# Connect input signals
+	#Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
 	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
-	Events.tile_hovered.connect(func(tile): get_phase_node(current_phase).tile_hovered(tile))
+	Events.tile_hovered.connect(func (tile): get_phase_node(current_phase).tile_hovered(tile))
 
 	# Check if all entities have ids
 	# Refresh entities if its CombatBegin
@@ -91,7 +92,13 @@ func setup() -> void:
 		log.add("Creating new entity ids")
 		for e in level.entities().get_all_entities():
 			e.id = EntityID.new(e.type, level.add_type_count(e.type))
+			# set energy to the EntityType's energy in case it changed from level creation
 			e.energy = e.type.energy
+			# same for hp
+			if e is HPEntity:
+				e.hp = e.type.max_hp
+				animation.update_hp(e)
+				print(e.type.internal_name, " ", e.hp)
 	else:
 		for e in level.entities().get_all_entities():
 			if e.id != null:
@@ -131,6 +138,8 @@ func process_current_phase() -> bool:
 	return get_phase_node(current_phase)._process_phase()
 
 func get_phase_node(phase: RoundPhase) -> AbstractPhase:
+	if Input.is_action_just_pressed("select"):
+		print("break")
 	match phase:
 		RoundPhase.Start:
 			return %StartPhase

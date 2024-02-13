@@ -124,7 +124,10 @@ func call_logic(method: String, params := []):
 	logic.callv(method, params)
 	
 func _to_string() -> String:
-	return type.internal_name + '_' + str(id.id)
+	if id != null:
+		return type.internal_name + '_' + str(id.id)
+	else:
+		return type.internal_name + '_null'
 
 func get_tags() -> Array[String]:
 	return type.tags

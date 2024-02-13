@@ -62,4 +62,5 @@ func _physics_process(delta: float) -> void:
 			currently_hovering = null
 			
 	if currently_hovering and Input.is_action_just_pressed("select"):
+		var connections = Events.tile_clicked.get_connections()
 		Events.tile_clicked.emit(currently_hovering)
