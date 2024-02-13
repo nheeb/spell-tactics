@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=2 format=3 uid="uid://b2sxob1h1nrak"]
+
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_sr1vg"]
+
+[resource]
+script = ExtResource("1_sr1vg")
+pretty_name = "Goblin Reinforcement"
+keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+effect_text = "Effect: Spawn a new goblin fighter"
+fluff_text = ""
+target = 0
+target_range = -1
+target_min_range = -1
+target_tag = ""

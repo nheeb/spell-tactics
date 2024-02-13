@@ -15,7 +15,7 @@ const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var world: World = null
 
-const DEBUG_SKIP_OVERWORLD = true
+const DEBUG_SKIP_OVERWORLD = false
 const DEBUG_SKIP_POST_COMBAT = true
 var DEBUG_SPELL_TESTING := false # Not meant to be changed.
 # Play the scene SpellTest.tscn to start spell testing
@@ -52,6 +52,7 @@ func get_prototype_events(combat: Combat) -> Array[Spell]:
 	
 	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/LeafDrop.tres"), combat))
 	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/StumpShroom.tres"), combat))
+	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEnemyEvents/SpawnGoblinFighter.tres"), combat))
 	
 	for spell in prototype_events:
 		spell.id = SpellID.new(add_to_spell_count())

@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://0kc7i3ala7l"]
+[gd_scene load_steps=4 format=3 uid="uid://0kc7i3ala7l"]
 
+[ext_resource type="Script" path="res://UI/PostBattle/CoinsPickOption.gd" id="1_0iy36"]
 [ext_resource type="Texture2D" uid="uid://bxo67tdfibt81" path="res://Assets/Sprites/Icons/coins.png" id="1_ol6qg"]
 [ext_resource type="Texture2D" uid="uid://3ktu4vwrplxj" path="res://Assets/Sprites/Icons/receive-money.png" id="2_lfbti"]
 
@@ -12,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_0iy36")
 
 [node name="Container" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -39,7 +41,7 @@ stretch_mode = 3
 
 [node name="Label2" type="Label" parent="Container"]
 layout_mode = 2
-text = "Blast your enemies with the power of thunder and lightning..."
+text = "Search the area for treasure, and make your pockets a little heavier."
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -53,3 +55,5 @@ layout_mode = 2
 texture = ExtResource("2_lfbti")
 expand_mode = 2
 stretch_mode = 5
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

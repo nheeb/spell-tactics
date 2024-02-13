@@ -4,10 +4,12 @@
 
 [resource]
 script = ExtResource("1_csax5")
-pretty_name = "Autumn Breeze"
-effect_text = "Shrooms are growing on a stump."
+pretty_name = "Digesting wood"
+keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+effect_text = "Round 1 : A stump is chosen.;
+Round 2 : It grows some shrooms."
 fluff_text = ""
-is_event_spell = true
 target = 0
 target_range = -1
+target_min_range = -1
 target_tag = ""

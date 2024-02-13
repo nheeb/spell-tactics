@@ -8,6 +8,7 @@ vertex_color_use_as_albedo = true
 point_size = 10.0
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_phlyc"]
+resource_local_to_scene = true
 
 [node name="LineEffect" type="Node3D"]
 script = ExtResource("1_8wdue")

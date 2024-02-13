@@ -12,6 +12,7 @@ func start(activity: PostCombatActivity):
 		grid.add_child(option_ui)
 
 	var choose_coin = preload("res://UI/PostBattle/CoinsPickOption.tscn").instantiate()
+	choose_coin.coin_pickup_option = activity.coin_pickup_option
 	grid.add_child(choose_coin)
 
 

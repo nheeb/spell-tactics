@@ -8,5 +8,5 @@ func _ready():
 	title_label.text = booster_pickup_option.booster_pack.name
 
 func _on_pressed():
-	booster_pickup_option.apply()
-	ActivityManager.pop()
+	if booster_pickup_option.apply():
+		ActivityManager.pop()

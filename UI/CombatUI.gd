@@ -160,6 +160,7 @@ func update_payable_cards():
 
 func _ready() -> void:
 	deselect_card()
+	%EnemyArrow.visible = false
 
 func _on_active_button_pressed(i: int) -> void:
 	print("pressed ", i)
@@ -186,3 +187,13 @@ func show_victory(text: String) -> void:
 func show_game_over(text: String) -> void:
 	Game.combat_to_review = combat
 	ActivityManager.substitute(DeathActivity.new())
+
+func set_enemy_meter(value: int) -> void:
+	var tween := VisualTime.new_tween()
+	for i in range(3):
+		tween.tween_callback(%EnemyArrow.show)
+		tween.tween_interval(.4)
+		tween.tween_callback(%EnemyArrow.hide)
+		tween.tween_interval(.4)
+	tween.tween_callback(func(): %EnemyMeterLabel.text = "Enemy Meter: %s / %s" %\
+			 [value, EventUtility.ENEMY_METER_MAX])

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmsgwgqtcvgsv"]
+
+[ext_resource type="Script" path="res://UI/EventCard3D.gd" id="1_65qon"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ndhcp"]
+size = Vector2(1, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_su7ht"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lm4c5"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+
+[node name="EventCard3D" type="Node3D"]
+script = ExtResource("1_65qon")
+
+[node name="Quad" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_ndhcp")
+surface_material_override/0 = SubResource("StandardMaterial3D_su7ht")
+
+[node name="SubViewport" type="SubViewport" parent="Quad"]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(512, 717)
+
+[node name="Quad2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("QuadMesh_ndhcp")
+surface_material_override/0 = SubResource("StandardMaterial3D_lm4c5")
