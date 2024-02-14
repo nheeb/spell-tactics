@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3t7dsskwul4j"]
+[gd_scene load_steps=8 format=3 uid="uid://c3t7dsskwul4j"]
 
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="1_p18xo"]
 [ext_resource type="Script" path="res://UI/ScreenCombat.gd" id="1_wrhl6"]
 [ext_resource type="Script" path="res://UI/DebugUI.gd" id="2_g43go"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="3_gu2gq"]
 [ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="4_rxvfx"]
+[ext_resource type="PackedScene" uid="uid://mdk6ql82hwrt" path="res://UI/SaveLoadMenu.tscn" id="5_0bish"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pghfn"]
 font_size = 24
@@ -127,6 +128,10 @@ theme_override_fonts/font = ExtResource("3_gu2gq")
 theme_override_font_sizes/font_size = 24
 text = "Load Level"
 
+[node name="SaveLoadGame" type="Button" parent="DebugUI/List"]
+layout_mode = 2
+text = "Save / Load"
+
 [node name="ShowDebug" type="Button" parent="DebugUI"]
 unique_name_in_owner = true
 layout_mode = 0
@@ -135,6 +140,17 @@ offset_bottom = 8.0
 theme_override_fonts/font = ExtResource("3_gu2gq")
 theme_override_font_sizes/font_size = 24
 text = "Show Debug"
+
+[node name="SaveLoadMenu" parent="DebugUI" instance=ExtResource("5_0bish")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21875
+anchor_top = 0.0916667
+anchor_right = 0.832292
+anchor_bottom = 0.841667
+metadata/_edit_use_anchors_ = true
 
 [node name="PopUpHandler" parent="." node_paths=PackedStringArray("viewport") instance=ExtResource("4_rxvfx")]
 viewport = NodePath("../CombatViewport/3DViewport")
@@ -150,4 +166,5 @@ viewport = NodePath("../CombatViewport/3DViewport")
 [connection signal="pressed" from="DebugUI/List/DamagePlayer" to="CombatViewport/3DViewport/World" method="_on_damage_player_pressed"]
 [connection signal="pressed" from="DebugUI/List/SaveLevel" to="DebugUI" method="_on_save_level_pressed"]
 [connection signal="pressed" from="DebugUI/List/LoadLevel" to="DebugUI" method="_on_load_level_pressed"]
+[connection signal="pressed" from="DebugUI/List/SaveLoadGame" to="DebugUI" method="_on_save_load_game_pressed"]
 [connection signal="pressed" from="DebugUI/ShowDebug" to="CombatViewport/3DViewport/World" method="_on_show_debug_pressed"]

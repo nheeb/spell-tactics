@@ -9,3 +9,8 @@ func _on_save_level_pressed() -> void:
 
 func _on_load_level_pressed() -> void:
 	load_game_pressed.emit(str(int(%SaveID.value)))
+
+@onready var save_load_menu := %SaveLoadMenu
+
+func _on_save_load_game_pressed() -> void:
+	%SaveLoadMenu.setup()

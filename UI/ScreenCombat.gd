@@ -7,3 +7,5 @@ func set_activity(_activity: CombatActivity):
 
 func _ready():
 	%World.start_combat(activity.level_path)
+	await VisualTime.visual_process
+	activity.combat = %World.get_node("Combat")

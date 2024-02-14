@@ -38,11 +38,11 @@ func remove_cards(cards: Array[SpellState]):
 			deck_states.remove_at(index)
 	state_changed.emit()
 
-func add_coins(coins: int):
-	self.coins += coins
+func add_coins(_coins: int):
+	self.coins += _coins
 	state_changed.emit()
 
-func serialise():
+func serialize() -> AdventureState:
 	var adventure_state = AdventureState.new()
 	adventure_state.health = health
 	adventure_state.coins = coins

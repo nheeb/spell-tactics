@@ -60,12 +60,14 @@ func deserialize(state: OverworldState):
 func save():
 	SaveFile.save_to_disk(serialize(), path)
 
-func serialize() -> OverworldState:
+func serialize(combat_state: CombatState = null) -> OverworldState:
 	var state = OverworldState.new()
 	state.random_seed = random_seed
 	state.stage = stage
 	state.player_position = player_position
 	state.map = map
+	state.adventure_state = Adventure.serialize()
+	state.combat_state = combat_state
 	return state
 
 func set_active(active: bool) -> void:
