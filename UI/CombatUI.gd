@@ -187,6 +187,10 @@ func show_victory(text: String) -> void:
 func show_game_over(text: String) -> void:
 	Game.combat_to_review = combat
 	ActivityManager.substitute(DeathActivity.new())
+	
+func show_no_targets_popup():
+	# TODO
+	pass
 
 func set_enemy_meter(value: int) -> void:
 	var tween := VisualTime.new_tween()

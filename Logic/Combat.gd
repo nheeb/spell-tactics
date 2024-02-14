@@ -138,8 +138,6 @@ func process_current_phase() -> bool:
 	return get_phase_node(current_phase)._process_phase()
 
 func get_phase_node(phase: RoundPhase) -> AbstractPhase:
-	if Input.is_action_just_pressed("select"):
-		print("break")
 	match phase:
 		RoundPhase.Start:
 			return %StartPhase

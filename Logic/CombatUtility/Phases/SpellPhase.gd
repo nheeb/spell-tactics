@@ -65,13 +65,14 @@ func select_spell(spell: Spell):
 	assert(combat.current_phase == combat.RoundPhase.Spell, "selected a spell outside of spell phase")
 	selected_spell = spell
 	if spell.type.target != SpellType.Target.None:
-		# wait for player to target
-		state = CastingState.Targeting
-		combat.animation.callback(combat.ui, "set_status", ["Choose the target!\n(Right-click to deselect)"])
-		#combat.animation.callback()
 		highlighted_targets = get_spell_targets(selected_spell)
+		if len(highlighted_targets) == 0:
+			combat.animation.callback(combat.ui, "show_no_targets_popup")
+			return
+		combat.animation.callback(combat.ui, "set_status", ["Choose the target!\n(Right-click to deselect)"])
 		combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 		set_process(true)
+		state = CastingState.Targeting
 	else:
 		# else proceed to energy / casting
 		state = CastingState.SettingEnergy
@@ -107,12 +108,4 @@ func get_spell_targets(spell: Spell) -> Array[Tile]:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("deselect"):
-		print("deselect")
 		combat.input.process_action(DeselectSpell.new())
-
-#func _on_input_utility_performed_action(action: PlayerAction) -> void:
-	#if action is SelectSpell:
-		#if state == CastingState.Selecting:
-			## TODO if spell is targetable
-			#selected_spell = action.selected_spell
-			#pass
