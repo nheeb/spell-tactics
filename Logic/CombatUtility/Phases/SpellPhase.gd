@@ -20,6 +20,15 @@ func _ready() -> void:
 	pass
 
 
+func return_to_spell_selection():
+	state = CastingState.Selecting
+	combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
+	combat.animation.play_animation_queue()
+	selected_spell = null
+	set_process(false)
+	combat.ui.deselect_card()
+
 func tile_clicked(tile: Tile):
 	# for now try draining anytime a tile is clicked. later we'll need state,
 	# whether we're targeting a spell or draining
@@ -33,11 +42,7 @@ func tile_clicked(tile: Tile):
 		var payment = combat.ui.extract_payment()  # for now: reading payment from text input
 		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, payment, tile))
 		if valid:
-			state = CastingState.Selecting
-			combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
-			combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
-			combat.animation.play_animation_queue()
-		# should something happen here if it doesn't work?
+			return_to_spell_selection()
 
 func process_phase() -> bool:
 	state = CastingState.Selecting  # reset state
@@ -62,13 +67,18 @@ func select_spell(spell: Spell):
 	if spell.type.target != SpellType.Target.None:
 		# wait for player to target
 		state = CastingState.Targeting
-		combat.animation.callback(combat.ui, "set_status", ["Choose the target!"])
+		combat.animation.callback(combat.ui, "set_status", ["Choose the target!\n(Right-click to deselect)"])
 		#combat.animation.callback()
 		highlighted_targets = get_spell_targets(selected_spell)
 		combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+		set_process(true)
 	else:
 		# else proceed to energy / casting
 		state = CastingState.SettingEnergy
+
+func deselect_spell():
+	assert(is_instance_valid(selected_spell))
+	return_to_spell_selection()
 
 func get_spell_targets(spell: Spell) -> Array[Tile]:
 	var target_range = spell.type.target_range
@@ -94,6 +104,11 @@ func get_spell_targets(spell: Spell) -> Array[Tile]:
 		tiles = tiles.filter(func(t): return spell.type.target_tag in t.get_tags())
 	return tiles 
 
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("deselect"):
+		print("deselect")
+		combat.input.process_action(DeselectSpell.new())
 
 #func _on_input_utility_performed_action(action: PlayerAction) -> void:
 	#if action is SelectSpell:

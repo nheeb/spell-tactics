@@ -41,8 +41,8 @@ func type_to_color(_type) -> Color:
 	return Color.RED
 
 @export var icons: Array[Texture]
-func type_to_icon(type) -> Texture:
-	match type:
+func type_to_icon(_type) -> Texture:
+	match _type:
 		EnergyStack.EnergyType.Any:
 			return icons[0]
 		EnergyStack.EnergyType.Matter:
