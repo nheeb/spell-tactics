@@ -20,3 +20,7 @@ func pop() -> Activity:
 
 func peek() -> Activity:
 	return activity_stack[len(activity_stack) - 1]
+
+func clear() -> void:
+	for i in range(len(activity_stack)):
+		pop()

@@ -59,7 +59,9 @@ func _on_savename_edit_text_changed() -> void:
 	%ButtonSave.disabled = len(%SavenameEdit.text) < 4
 
 func _on_button_load_pressed() -> void:
-	pass # Replace with function body.
+	ActivityManager.clear()
+	ActivityManager.push(OverworldActivity.new())
+	ActivityManager.push(CombatActivity.new("res://Levels/SpellTesting/spell_test.tres"))
 
 func _on_button_save_pressed() -> void:
 	var overworld: Overworld = null # Where do I get it??
