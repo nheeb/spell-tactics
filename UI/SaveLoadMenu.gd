@@ -21,6 +21,7 @@ func load_all_savefiles() -> void:
 					if loaded_file:
 						states.append(loaded_file)
 			file_name = dir.get_next()
+		states.reverse()
 	else:
 		print("An error occurred when trying to access the path.")
 
@@ -44,6 +45,12 @@ func select_entry(_selected_entry: SavefileMenuEntry) -> void:
 func setup(take_screenshot := true):
 	if take_screenshot:
 		last_screenshot = ImageTexture.create_from_image(Game.get_viewport().get_texture().get_image())
+	var t = Thread.new()
+	t.start(_setup, Thread.PRIORITY_LOW)
+	t.wait_to_finish()
+
+func _setup():
+	await VisualTime.new_timer(1.0).timeout
 	%ButtonLoad.disabled = true
 	%ButtonSave.disabled = true
 	%SavenameEdit.text = ""
@@ -60,12 +67,11 @@ func _on_savename_edit_text_changed() -> void:
 
 func _on_button_load_pressed() -> void:
 	ActivityManager.clear()
-	ActivityManager.push(OverworldActivity.new())
-	ActivityManager.push(CombatActivity.new("res://Levels/SpellTesting/spell_test.tres"))
+	ActivityManager.push(OverworldActivity.new(selected_entry.overworld_state))
 
 func _on_button_save_pressed() -> void:
-	var overworld: Overworld = null # Where do I get it??
-	var combat: Combat = null # TODO where???
+	var overworld: Overworld = null
+	var combat: Combat = null
 	
 	for activity in ActivityManager.activity_stack:
 		if activity is CombatActivity:

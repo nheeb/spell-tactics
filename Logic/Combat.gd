@@ -120,6 +120,10 @@ func setup() -> void:
 	actives = [Active.new(SpellType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self)]
 
 	t_effects.connect_all_effects()
+	
+	# Initial Animations
+	energy.show_drains_in_ui()
+	energy.show_energy_in_ui()
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
@@ -164,14 +168,27 @@ func advance_and_process_until_next_player_action_needed():
 		if process_current_phase(): # If Player Input needed
 			break
 
+func process_initial_phase() -> void:
+	match current_phase:
+		RoundPhase.CombatBegin:
+			advance_and_process_until_next_player_action_needed()
+		RoundPhase.Start:
+			advance_current_phase()
+			process_current_phase()
+		RoundPhase.Movement:
+			process_current_phase()
+		RoundPhase.Spell:
+			process_current_phase()
+		_:
+			printerr("Savefiles should not be in phase %s" % current_phase)
+			advance_and_process_until_next_player_action_needed()
+
 func serialize() -> CombatState:
 	var state := CombatState.new()
 	state.level_state = level.serialize()
 	state.current_round = current_round
 	state.current_phase = current_phase
 	state.player_energy = energy.player_energy
-	# should be serialized in Player from now on
-	#state.hand_size = hand_size
 	state.deck_states.append_array(deck.map(func(x: Spell): return x.serialize()))
 	state.hand_states.append_array(hand.map(func(x: Spell): return x.serialize()))
 	state.discard_pile_states.append_array(discard_pile.map(func(x: Spell): return x.serialize()))
@@ -179,6 +196,7 @@ func serialize() -> CombatState:
 	state.current_event = event.current_event
 	state.timed_effects = t_effects.effects
 	state.combat_log = self.log.log_entries
+	state.drains_done = energy.drains_done_this_turn
 	return state
 
 func save_to_disk(path: String = ""):
@@ -205,16 +223,17 @@ func get_all_spells() -> Array[Spell]:
 	all_spells.append_array(deck)
 	all_spells.append_array(discard_pile)
 	all_spells.append_array(event.events)
+	all_spells.append_array(actives)
 	return all_spells
-
-func resolve_reference(ref) -> Object:
-	if ref == null:
-		return null
-	assert(ref is EntityReference or ref is SpellReference)
-	return ref.resolve(self)
 
 func get_all_enemies() -> Array[EnemyEntity]:
 	return enemies.duplicate()
 
 func get_reference() -> CombatReference:
 	return CombatReference.new()
+
+func resolve_reference(ref) -> Object:
+	if ref == null:
+		return null
+	assert(ref is UniversalReference)
+	return ref.resolve(self)

@@ -39,4 +39,5 @@ func _hide_all_but_top():
 		views[i].hide()
 	
 func _show_top():
-	views[len(views)-1].show()
+	if not views.is_empty():
+		views[len(views)-1].show()

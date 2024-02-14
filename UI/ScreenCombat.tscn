@@ -57,6 +57,7 @@ anchor_bottom = 0.44
 metadata/_edit_use_anchors_ = true
 
 [node name="LineButton" type="Button" parent="DebugUI/List"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gu2gq")
@@ -65,6 +66,7 @@ text = "Draw Line (TODO)
 "
 
 [node name="NavButton" type="Button" parent="DebugUI/List"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gu2gq")
@@ -73,6 +75,7 @@ text = "Draw Shortest Path
 "
 
 [node name="EntityFindButton" type="Button" parent="DebugUI/List"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gu2gq")
@@ -81,6 +84,7 @@ text = "Highlight All Rocks
 "
 
 [node name="MovementRangeButton" type="Button" parent="DebugUI/List"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gu2gq")
@@ -88,6 +92,7 @@ theme_override_font_sizes/font_size = 24
 text = "Highlight Movement Range"
 
 [node name="MoveRockButton" type="Button" parent="DebugUI/List"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gu2gq")
@@ -95,6 +100,7 @@ theme_override_font_sizes/font_size = 24
 text = "Move Rock"
 
 [node name="DamagePlayer" type="Button" parent="DebugUI/List"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gu2gq")
@@ -102,6 +108,7 @@ theme_override_font_sizes/font_size = 24
 text = "Damage Player"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DebugUI/List"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="DebugUI/List/HBoxContainer"]
@@ -115,6 +122,7 @@ layout_mode = 2
 rounded = true
 
 [node name="SaveLevel" type="Button" parent="DebugUI/List"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gu2gq")
@@ -122,6 +130,7 @@ theme_override_font_sizes/font_size = 24
 text = "Save Level"
 
 [node name="LoadLevel" type="Button" parent="DebugUI/List"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gu2gq")

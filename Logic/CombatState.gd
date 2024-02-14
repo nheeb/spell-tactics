@@ -5,7 +5,6 @@ class_name CombatState extends Resource
 @export var current_round: int = 1
 @export var current_phase: Combat.RoundPhase = Combat.RoundPhase.CombatBegin
 @export var player_energy: EnergyStack
-#@export var hand_size: int = 5
 @export var deck_states: Array[SpellState]
 @export var hand_states: Array[SpellState]
 @export var discard_pile_states: Array[SpellState]
@@ -13,6 +12,7 @@ class_name CombatState extends Resource
 @export var current_event: SpellReference
 @export var timed_effects: Array[TimedEffect]
 @export var combat_log: Array[LogEntry]
+@export var drains_done: int
 
 const COMBAT = preload("res://Logic/Combat.tscn")
 
@@ -40,7 +40,7 @@ func deserialize() -> Combat:
 		combat.event.events.append_array(Game.get_prototype_events(combat))
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
-	combat.setup()
+	combat.energy.drains_done_this_turn = drains_done
 	combat.log.add("Combat was deserialized.")
 	return combat
 

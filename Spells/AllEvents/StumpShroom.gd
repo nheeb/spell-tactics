@@ -21,14 +21,17 @@ func event_effect(round_number: int) -> void:
 			combat.animation.camera_reach(stump.visual_entity)
 			combat.animation.say(stump.visual_entity, "Something grows inside.", {"color": Color.YELLOW, "font": "italic"})
 	else:
-		var stump : Entity = combat.resolve_reference(spell.round_persistant_properties.get("target")) as Entity
+		var stump_ref = spell.round_persistant_properties.get("target")
+		if not stump_ref:
+			return
+		var stump : Entity = stump_ref.resolve(combat) as Entity
 		if stump == null:
 			return
 		var tile := stump.current_tile
 		combat.animation.camera_reach(stump.visual_entity)
 		
 		combat.level.move_entity_to_graveyard(stump)
-		var leafless := combat.level.entities().create_entity(tile.location, SHROOM_STUMP, false)
+		var shroom_stump := combat.level.entities().create_entity(tile.location, SHROOM_STUMP, false)
 		combat.animation.effect(VFX.HEX_RINGS, tile, {"color": Color.YELLOW}).set_duration(1.5)
 		combat.animation.hide(stump.visual_entity).set_flag_with()
-		combat.animation.show(leafless.visual_entity).set_flag_with()
+		combat.animation.show(shroom_stump.visual_entity).set_flag_with()

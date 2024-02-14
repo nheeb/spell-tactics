@@ -12,6 +12,8 @@ func _init(queue) -> void:
 	animation_objects = queue
 
 func play(combat: Combat) -> void:
+	if not combat:
+		printerr("Animation Queue played without combat?")
 	currently_playing = true
 	
 	await VisualTime.visual_process

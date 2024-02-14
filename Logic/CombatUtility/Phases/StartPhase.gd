@@ -6,11 +6,33 @@ func process_phase() -> bool:
 	combat.animation.wait(.5)
 	combat.cards.draw_to_hand_size()
 	
-	combat.energy.drains_done_this_turn = 0
-	var drains_left : int = combat.player.traits.max_drains - combat.energy.drains_done_this_turn
-	combat.animation.callback(combat.ui, "set_drains_left", [drains_left])
+	combat.energy.reset_drains()
 	
 	if Game.DEBUG_SPELL_TESTING:
 		combat.energy.gain(Game.testing_energy)
 	
+	auto_save()
+	
 	return false
+
+func auto_save():
+	if combat.current_round == 1:
+		return
+	var overworld: Overworld = null
+	
+	for activity in ActivityManager.activity_stack:
+		if activity is OverworldActivity:
+			overworld = activity.overworld
+	
+	if not overworld:
+		printerr("No Overworld found for auto-saving")
+		return
+	
+	var state = overworld.serialize(combat.serialize())
+	var thread = Thread.new()
+	thread.start(func():
+		await VisualTime.new_timer(1).timeout
+		state.generate_meta("Auto Save - Round %s" % combat.current_round)
+		SaveFile.save_to_disk(state, Game.SAVE_DIR + state.meta.filename + ".tres")
+		)
+	

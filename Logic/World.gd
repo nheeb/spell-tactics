@@ -16,31 +16,49 @@ signal combat_changed (combat : Combat)
 func _ready() -> void:
 	Game.world = self
 
-func start_combat(level_path: String) -> void:
-	if combat != null:
-		_reset_combat() 
-	
+func load_combat_from_path(level_path: String) -> void:
 	var combat_state: CombatState = load(level_path) as CombatState
+	load_combat_from_state(combat_state)
+
+func load_combat_from_state(combat_state: CombatState) -> void:
+	# If we always create a new ScreenCombat for every Combat (which I think
+	# we should) then some of the following lines could be cut & simplified
+	
+	# Take the deck from the current adventure
 	combat_state.deck_states = Adventure.deck_states
-	combat = combat_state.deserialize()	
+	
+	# Create combat
+	combat = combat_state.deserialize()
+	self.combat = combat # What?
 	add_child(combat)
-	#combat.camera = $GameCamera
+	
+	# Add level to tree
 	level = combat.level
-	self.combat = combat
-	#level.combat = combat
 	add_child(combat.level)
+	
+	# Apparently that's only for notifying the PopUpHandler
 	combat_changed.emit(combat)
+	
 	# construct references to ui_root which lives outside this 3d viewport
 	# ui_root/combat_ui and ui_root/debug_ui
-	ui_root = get_tree().get_first_node_in_group("ui_root")
+	ui_root = get_tree().get_first_node_in_group("ui_root") # This seems kinda weird to me
 	combat_ui = COMBAT_UI.instantiate()
 	ui_root.add_child(combat_ui)
+	
+	# Connect combat to UI & Cam
 	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 	camera = get_node("GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D")
-	combat.advance_and_process_until_next_player_action_needed()
+	
+	# Do initial phase process (if any)
+	await get_tree().process_frame
+	combat.setup()
+	combat.process_initial_phase()
+	
+	# Play initial animations
 	combat.animation.play_animation_queue()
 	
-	await get_tree().process_frame
+	# Connect the raycast & start pop up handler
+	# await get_tree().process_frame
 	# FIXME looser coupling World with Cards3D and Combat would be preferable
 	%MouseRaycast.cards3d = combat_ui.cards3d
 	%MouseRaycast.combat = combat
@@ -48,88 +66,16 @@ func start_combat(level_path: String) -> void:
 	
 	popup_handler.start()
 
-func _reset_combat():
-	if combat == null:
-		return
-	remove_child(combat)
-	remove_child(combat.level)
-	ui_root.remove_child(combat_ui)
-	popup_handler.reset()
-	
-	# FIXME free combat?
-	
-func _exit_tree():
-	call_deferred("_reset_combat")
-
-var flip := false
-func _on_movement_range_button_pressed() -> void:
-	if not flip:
-		var movement_tiles = level.get_all_tiles_in_distance(3, 3, 2)
-		level._highlight_tile_set(movement_tiles, Highlight.Type.Movement)
-		flip = true
-	else:
-		var movement_tiles = level.get_all_tiles_in_distance(3, 3, 2)
-		level._unhighlight_tile_set(movement_tiles, Highlight.Type.Movement)
-		flip = false
-
-
-var flip2 := false
-var ent_type = preload("res://Entities/Environment/Rock.tres")
-func _on_entity_find_button_pressed() -> void:
-	if not flip2:
-		level.highlight_entity_type(ent_type)
-		flip2 = true
-	else:
-		level.unhighlight_entity_type(ent_type)
-		flip2 = false
-
-func _on_nav_button_pressed() -> void:
-	var search = level.search(Vector2i(0, 6), Vector2i(6, 0), Constants.INT64_MAX)
-	search.execute()
-	if search.path_found:
-		for location in search.path:
-			level.tiles[location.x][location.y].set_highlight(Highlight.Type.Movement, true)
-	print(search.path)
-
-
-func _on_move_rock_button_pressed() -> void:
-	combat.movement.move_entity(level.find_entity_type(ent_type), level.tiles[5][4])
-	combat.animation.play_animation_queue()
-
-func _on_damage_player_pressed() -> void:
-	level.player.hp -= 1
-
-
-func _on_save_game_pressed(id: String) -> void:
-	#level.save_to_disk("user://level.tres")
-	combat.save_to_disk(Game.SAVE_DIR + "combat-%s.tres" % id)
-
-
-func _on_load_game_pressed(id: String) -> void:
-	_reset_combat()
-	for node in [level, combat, combat_ui]:
-		if is_instance_valid(node):
-			node.free()
-	combat = Combat.load_from_disk(Game.SAVE_DIR + "combat-%s.tres" % id)
-	add_child(combat)
-	level = combat.level
-	level.name = "Level"
-	add_child(level)
-	combat_ui = COMBAT_UI.instantiate()
-	var _ui_root = get_tree().get_first_node_in_group("ui_root")
-	_ui_root.add_child(combat_ui)
-	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
-	combat.animation.play_animation_queue()
-	combat_changed.emit(combat)
-
-var tile_toggle := false
-func _on_toggle_tile_labels_pressed() -> void:
-	tile_toggle = not tile_toggle
-	
-	if tile_toggle:
-		# 
-		pass
-
+#func _reset_combat():
+	#if combat == null:
+		#return
+	#remove_child(combat)
+	#remove_child(combat.level)
+	#ui_root.remove_child(combat_ui)
+	#popup_handler.reset()
+#
+#func _exit_tree():
+	#call_deferred("_reset_combat")
 
 func _on_show_debug_pressed() -> void:
 	debug_ui.get_node("List").visible = not debug_ui.get_node("List").visible
@@ -137,11 +83,6 @@ func _on_show_debug_pressed() -> void:
 		debug_ui.get_node("ShowDebug").text = "Hide Debug"
 	else:
 		debug_ui.get_node("ShowDebug").text = "Show Debug"
-
-
-func _on_line_button_pressed() -> void:
-	# TODO implement drawing line
-	pass # Replace with function body.
 
 func set_active() -> void:
 	camera.make_current()

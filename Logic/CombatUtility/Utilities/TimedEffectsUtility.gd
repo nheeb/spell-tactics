@@ -8,7 +8,7 @@ var connected_effects : Dictionary
 
 func connect_all_effects() -> void:
 	for te in effects:
-		if not te.effect_connected:
+		if (not te.effect_connected) and (not te.dead):
 			connect_effect(te)
 
 func connect_effect(te: TimedEffect) -> void:

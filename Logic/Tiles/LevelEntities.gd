@@ -26,6 +26,9 @@ func create_entity(location: Vector2i, entity_type: EntityType, create_with_acti
 	if entity.visual_entity != null:
 		entity.visual_entity.position = tile.position
 
+	if entity.logic:
+		entity.logic.on_summon()
+
 	return entity
 
 func fill_entity(entity_type: EntityType):

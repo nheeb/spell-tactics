@@ -1,6 +1,6 @@
 extends EntityLogic
 
-func on_create(): # Happens when the entity is created (deserialized or summoned)
+func on_summon():
 	TimedEffect.new_from_signal_and_callable(combat.spell_casted_successfully, give_energy).register(combat)
 
 var first_time_lock := true

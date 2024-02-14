@@ -1,6 +1,6 @@
 class_name StatusEffectReference extends CallbackReference
 
-func _init(entity_ref: EntityReference, status_name: String) -> void:
+func _init(entity_ref: EntityReference = null, status_name: String = "") -> void:
 	origin_reference = entity_ref
 	method_name = "get_status_effect"
 	params = [status_name]

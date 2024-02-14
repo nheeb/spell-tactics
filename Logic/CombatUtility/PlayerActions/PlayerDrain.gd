@@ -20,9 +20,7 @@ func is_valid(combat: Combat) -> bool:
 func execute(combat: Combat) -> void:
 	#var drainable_ents = target_tile.entities.filter(func(e): e.is_drainable())
 	
-	combat.energy.drains_done_this_turn += 1
-	var drains_left : int = combat.player.traits.max_drains - combat.energy.drains_done_this_turn
-	combat.animation.callback(combat.ui, "set_drains_left", [drains_left])
+	combat.energy.add_a_drain()
 	
 	for entity in target_tile.entities:
 		entity = entity as Entity
