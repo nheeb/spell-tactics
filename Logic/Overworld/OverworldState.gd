@@ -17,6 +17,6 @@ func generate_meta(save_name: String = "Unnamed Savefile", screenshot : ImageTex
 	if screenshot:
 		meta.screenshot = screenshot
 	else:
-		meta.screenshot = ImageTexture.create_from_image(Game.get_viewport().get_texture().get_image())
+		meta.screenshot = Utility.take_screenshot(3)
 	meta.filename = "Savefile-" + meta.timestamp.replace(":", "-").replace("T", "-")\
 			 + "-" + meta.title.replace(" ", "")

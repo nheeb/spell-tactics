@@ -145,3 +145,11 @@ func add_int_flag(flags: int, target_flag: int) -> int:
 
 func remove_int_flag(flags: int, target_flag: int) -> int:
 	return flags & (~target_flag)
+
+func take_screenshot(shrink_count := 0) -> ImageTexture:
+	var image := Game.get_viewport().get_texture().get_image()
+	for i in range(shrink_count):
+		image.shrink_x2()
+	image.compress(Image.COMPRESS_ASTC)
+	var texture := ImageTexture.create_from_image(image)
+	return texture
