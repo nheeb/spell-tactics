@@ -31,7 +31,7 @@ static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 ## contains at least one drainable entity
 func is_drainable() -> bool:
 	for ent in entities:
-		if ent.type.is_drainable:
+		if ent.type.is_drainable and not ent.energy.is_empty():
 			return true
 	return false
 	
