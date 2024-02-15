@@ -35,3 +35,4 @@ func event_effect(round_number: int) -> void:
 		combat.animation.effect(VFX.HEX_RINGS, tile, {"color": Color.YELLOW}).set_duration(1.5)
 		combat.animation.hide(stump.visual_entity).set_flag_with()
 		combat.animation.show(shroom_stump.visual_entity).set_flag_with()
+		spell.round_persistant_properties["target"] = null

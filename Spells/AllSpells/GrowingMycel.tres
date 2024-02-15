@@ -12,7 +12,9 @@ script = ExtResource("1_dgvjx")
 pretty_name = "Growing Mycelium"
 costs = SubResource("Resource_jf1pl")
 keywords = Array[Resource("res://Spells/Keyword.gd")]([])
-effect_text = "Spawn a shroom. Draw 2 spells."
+effect_text = "Spawn a shroom. Draw 2 spells.
+(Min range: 3)
+"
 fluff_text = ""
 target = 3
 target_range = -1
