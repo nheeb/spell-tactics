@@ -116,6 +116,7 @@ class DeckUtils:
 		spells.append_array(load_spell_n_times("SpellMemory", 1, combat))
 		spells.append_array(load_spell_n_times("WaterBlast", 1, combat))
 		spells.append_array(load_spell_n_times("Unload", 1, combat))
+		spells.append_array(load_spell_n_times("LightningStrike", 1, combat))
 		
 		for spell in spells:
 			spell.id = SpellID.new(Game.add_to_spell_count())
