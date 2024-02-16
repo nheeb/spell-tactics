@@ -152,6 +152,17 @@ func _to_string() -> String:
 func distance_to(other_tile: Tile) -> int:
 	return Utility.tile_distance(self, other_tile)
 
+func direction_to(other_tile: Tile) -> Vector2i:
+	var step := level.get_line(self, other_tile)[0]
+	return step.location - self.location
+
+const DIRECTION_ORDER = [Vector2i(0, 1),Vector2i(-1, 1),Vector2i(-1, 0),Vector2i(0, -1),Vector2i(1, -1),Vector2i(1, 0)]
+static func rotate_direction_clockwise(direction: Vector2i, x := 1) -> Vector2i:
+	return DIRECTION_ORDER[ ( x+DIRECTION_ORDER.find(direction) ) % len(DIRECTION_ORDER)]
+
+func step_in_direction(direction: Vector2i) -> Tile:
+	return level.get_tile_by_location(location + direction)
+
 func get_surrounding_tiles(_range := 1) -> Array[Tile]:
 	return level.get_all_tiles_in_distance_of_tile(self, _range)
 

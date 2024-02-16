@@ -27,6 +27,7 @@ enum Target {
 	TileWithoutObstacles, # tile without nav obstacles (layer 1)
 	Tag, # TODO
 	Condition, # TODO, custom bool func in SpellLogic
+	Cone
 }
 
 ## Which, if any, targets this spell requires

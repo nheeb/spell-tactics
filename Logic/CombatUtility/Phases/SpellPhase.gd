@@ -44,6 +44,11 @@ func tile_clicked(tile: Tile):
 		if valid:
 			return_to_spell_selection()
 
+func tile_hovered(tile: Tile):
+	if state == CastingState.Targeting:
+		if selected_spell.type.target == SpellType.Target.Cone:
+			combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+
 func process_phase() -> bool:
 	state = CastingState.Selecting  # reset state
 	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
@@ -103,6 +108,9 @@ func get_spell_targets(spell: Spell) -> Array[Tile]:
 		tiles = tiles.filter(func(t): return not(t.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER))
 	elif spell.type.target == SpellType.Target.Tag:
 		tiles = tiles.filter(func(t): return spell.type.target_tag in t.get_tags())
+	elif spell.type.target == SpellType.Target.Cone:
+		var none : Array[Tile] = []
+		return none
 	return tiles 
 
 

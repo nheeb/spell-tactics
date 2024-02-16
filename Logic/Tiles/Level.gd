@@ -129,13 +129,14 @@ func get_tile_by_location(location: Vector2i) -> Tile:
 	return tiles[location.x][location.y]
 
 ## returns a list of Tiles forming the straight line between tile1 and tile2.
+## Only tile2 is included
 ## (obstacles are ignored)
 func get_line(tile1: Tile, tile2: Tile) -> Array[Tile]:
 	var line : Array[Tile] = []
 	var dist := tile1.distance_to(tile2)
 	var pos1 = Vector2(tile1.location)
 	var pos2 = Vector2(tile2.location)
-	for i in range(dist+1):
+	for i in range(1,dist+1):
 		line.append(get_tile_by_location(Vector2i(round(lerp(pos1, pos2, float(i)/dist)))))
 	
 	return line
@@ -188,7 +189,26 @@ func get_center_tile() -> Tile:
 	var q_center: int = n_cols / 2
 	
 	return tiles[r_center][q_center]
-	
+
+func get_cone_tiles(origin: Tile, destination: Tile, range_start : int, range_end : int,distance : int) -> Array[Tile]:
+	var tiles: Array[Tile] = []
+	var direction : Vector2i = origin.direction_to(destination)
+	var cone_origin : Tile = origin.step_in_direction(direction * distance)
+	if cone_origin:
+		tiles.append(cone_origin)
+		var direction_left : Vector2i = Tile.rotate_direction_clockwise(direction,-1)
+		var direction_right : Vector2i = Tile.rotate_direction_clockwise(direction,1)
+		for i in range(range_start, range_end+1):
+			if i == 0:
+				continue
+			var left_edge := cone_origin.step_in_direction(direction_left * i)
+			var middle_edge := cone_origin.step_in_direction(direction * i)
+			var right_edge := cone_origin.step_in_direction(direction_right * i)
+			tiles.append(left_edge)
+			tiles.append_array(get_line(left_edge, middle_edge))
+			tiles.append_array(get_line(middle_edge, right_edge))
+	return tiles
+
 func get_drainable_entities() -> Dictionary: # Tile -> Array[Entity]
 	var tile_to_ents: Dictionary = {}
 	for tile in get_all_tiles():
