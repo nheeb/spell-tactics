@@ -150,9 +150,12 @@ func get_tiles_from_float_vec(vec: Vector2, just_one := false) -> Array[Tile]:
 	if just_one:
 		_tiles.append(get_tile_by_location(Vector2i(round(vec))))
 		return _tiles
-	if abs(vec.x - int(vec.x) - .5) < EDGE_DELTA:
-		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(.5, 0.0))) 
-		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(-.5, 0.0)))
+	if abs(vec.x - int(vec.x) - .5) < EDGE_DELTA and abs(vec.y - int(vec.y) - .5) < EDGE_DELTA:
+		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(.5, -.5), true))
+		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(-.5, .5), true))
+	elif abs(vec.x - int(vec.x) - .5) < EDGE_DELTA:
+		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(.5, 0.0), true)) 
+		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(-.5, 0.0), true))
 	elif abs(vec.y - int(vec.y) - .5) < EDGE_DELTA:
 		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(0.0, .5), true)) 
 		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(0.0, -.5), true))
