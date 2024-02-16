@@ -9,6 +9,7 @@ func process_action(action: PlayerAction) -> bool:
 		action.execute(combat)
 		performed_action.emit(action)
 		combat.animation.play_animation_queue()
+		combat.ui.update_payable_cards()
 		return true
 	else:
 		# should we throw an error msg here or will this happen in normal play?

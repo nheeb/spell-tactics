@@ -131,15 +131,34 @@ func get_tile_by_location(location: Vector2i) -> Tile:
 ## returns a list of Tiles forming the straight line between tile1 and tile2.
 ## Only tile2 is included
 ## (obstacles are ignored)
-func get_line(tile1: Tile, tile2: Tile) -> Array[Tile]:
+const EDGE_DELTA = .01
+func get_line(tile1: Tile, tile2: Tile, include_edge_tiles := true) -> Array[Tile]:
 	var line : Array[Tile] = []
+	if not (tile1 and tile2):
+		return line
 	var dist := tile1.distance_to(tile2)
 	var pos1 = Vector2(tile1.location)
 	var pos2 = Vector2(tile2.location)
 	for i in range(1,dist+1):
-		line.append(get_tile_by_location(Vector2i(round(lerp(pos1, pos2, float(i)/dist)))))
+		var lerp_pos = lerp(pos1, pos2, float(i)/dist)
+		line.append_array(get_tiles_from_float_vec(lerp_pos, not include_edge_tiles))
 	
 	return line
+
+func get_tiles_from_float_vec(vec: Vector2, just_one := false) -> Array[Tile]:
+	var _tiles : Array[Tile] = []
+	if just_one:
+		_tiles.append(get_tile_by_location(Vector2i(round(vec))))
+		return _tiles
+	if abs(vec.x - int(vec.x) - .5) < EDGE_DELTA:
+		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(.5, 0.0))) 
+		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(-.5, 0.0)))
+	elif abs(vec.y - int(vec.y) - .5) < EDGE_DELTA:
+		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(0.0, .5), true)) 
+		_tiles.append_array(get_tiles_from_float_vec(vec + Vector2(0.0, -.5), true))
+	else:
+		_tiles.append(get_tile_by_location(Vector2i(round(vec))))
+	return _tiles
 
 ## this can be used for enemy movement, since it respects obstacles.
 func get_shortest_path(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX) -> Array[Tile]:
@@ -190,24 +209,29 @@ func get_center_tile() -> Tile:
 	
 	return tiles[r_center][q_center]
 
-func get_cone_tiles(origin: Tile, destination: Tile, range_start : int, range_end : int,distance : int) -> Array[Tile]:
-	var tiles: Array[Tile] = []
+func get_cone_tiles(origin: Tile, destination: Tile, range_start : int, range_end : int, \
+				distance : int, exclude_origin := false) -> Array[Tile]:
+	var _tiles: Array[Tile] = []
+	if origin == destination:
+		return _tiles
 	var direction : Vector2i = origin.direction_to(destination)
 	var cone_origin : Tile = origin.step_in_direction(direction * distance)
 	if cone_origin:
-		tiles.append(cone_origin)
+		_tiles.append(cone_origin)
 		var direction_left : Vector2i = Tile.rotate_direction_clockwise(direction,-1)
 		var direction_right : Vector2i = Tile.rotate_direction_clockwise(direction,1)
-		for i in range(range_start, range_end+1):
+		for i in range(range_start, range_end):
 			if i == 0:
 				continue
 			var left_edge := cone_origin.step_in_direction(direction_left * i)
 			var middle_edge := cone_origin.step_in_direction(direction * i)
 			var right_edge := cone_origin.step_in_direction(direction_right * i)
-			tiles.append(left_edge)
-			tiles.append_array(get_line(left_edge, middle_edge))
-			tiles.append_array(get_line(middle_edge, right_edge))
-	return tiles
+			_tiles.append(left_edge)
+			_tiles.append_array(get_line(left_edge, middle_edge))
+			_tiles.append_array(get_line(middle_edge, right_edge))
+	if exclude_origin:
+		_tiles.erase(origin)
+	return _tiles
 
 func get_drainable_entities() -> Dictionary: # Tile -> Array[Entity]
 	var tile_to_ents: Dictionary = {}
@@ -219,7 +243,8 @@ func get_drainable_entities() -> Dictionary: # Tile -> Array[Entity]
 
 func _highlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 	for tile in highlight_tiles:
-		tile.set_highlight(type, true)
+		if tile:
+			tile.set_highlight(type, true)
 		
 func _unhighlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 	for tile in highlight_tiles:

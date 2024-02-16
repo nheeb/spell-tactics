@@ -39,8 +39,13 @@ func tile_clicked(tile: Tile):
 		# try casting the spell onto the selected tile
 		# TODO support targetted spells with X/Any type Energy
 		# for now read the cost out of the spell (hack)
+		var target = tile
+		match selected_spell.type.target:
+			SpellType.Target.Cone:
+				target = highlighted_targets
+		
 		var payment = combat.ui.extract_payment()  # for now: reading payment from text input
-		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, payment, tile))
+		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, payment, target))
 		if valid:
 			return_to_spell_selection()
 
@@ -48,6 +53,10 @@ func tile_hovered(tile: Tile):
 	if state == CastingState.Targeting:
 		if selected_spell.type.target == SpellType.Target.Cone:
 			combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+			highlighted_targets = combat.level.get_cone_tiles(\
+					combat.player.current_tile, tile, selected_spell.type.target_min_range,\
+							selected_spell.type.target_range, 1)
+			combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 
 func process_phase() -> bool:
 	state = CastingState.Selecting  # reset state
@@ -71,7 +80,7 @@ func select_spell(spell: Spell):
 	selected_spell = spell
 	if spell.type.target != SpellType.Target.None:
 		highlighted_targets = get_spell_targets(selected_spell)
-		if len(highlighted_targets) == 0:
+		if len(highlighted_targets) == 0 and spell.type.target != SpellType.Target.Cone:
 			combat.animation.callback(combat.ui, "show_no_targets_popup")
 			return
 		combat.animation.callback(combat.ui, "set_status", ["Choose the target!\n(Right-click to deselect)"])

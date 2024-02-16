@@ -63,7 +63,9 @@ func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
 			+ abs(r1 - r2)) / 2
 			
 func tile_distance(t1: Tile, t2: Tile) -> int:
-	return rq_distance(t1.r, t1.q, t2.r, t2.q)
+	if t1 and t2:
+		return rq_distance(t1.r, t1.q, t2.r, t2.q)
+	return 0
 	
 func entity_distance(e1: Entity, e2: Entity) -> int:
 	assert(is_instance_valid(e1.current_tile) and is_instance_valid(e2.current_tile), 
@@ -93,15 +95,22 @@ class DeckUtils:
 	static func create_test_deck(combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []
 		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
-		spells.append_array(load_spell_n_times("AirMissile", 3, combat))
-		spells.append_array(load_spell_n_times("Berserker", 2, combat))
-		spells.append_array(load_spell_n_times("TrappingRoots", 2, combat))
+		spells.append_array(load_spell_n_times("AirMissile", 1, combat))
+		spells.append_array(load_spell_n_times("Berserker", 1, combat))
+		spells.append_array(load_spell_n_times("TrappingRoots", 1, combat))
 		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
-		spells.append_array(load_spell_n_times("SporeFlight", 2, combat))
+		spells.append_array(load_spell_n_times("SporeFlight", 1, combat))
 		spells.append_array(load_spell_n_times("Cyclone", 1, combat))
-		spells.append_array(load_spell_n_times("SelfHeal", 2, combat))
+		spells.append_array(load_spell_n_times("SelfHeal", 1, combat))
 		spells.append_array(load_spell_n_times("GrowingMycel", 2, combat))
 		spells.append_array(load_spell_n_times("DeadlyDart", 1, combat))
+		spells.append_array(load_spell_n_times("Haunting", 1, combat))
+		spells.append_array(load_spell_n_times("HotSteam", 1, combat))
+		spells.append_array(load_spell_n_times("RockBlast", 1, combat))
+		spells.append_array(load_spell_n_times("SummonWitchTotem", 1, combat))
+		spells.append_array(load_spell_n_times("TotalDecay", 1, combat))
+		spells.append_array(load_spell_n_times("Breath", 1, combat))
+		spells.append_array(load_spell_n_times("WaterBlast", 1, combat))
 		
 		for spell in spells:
 			spell.id = SpellID.new(Game.add_to_spell_count())
@@ -150,6 +159,6 @@ func take_screenshot(shrink_count := 0) -> ImageTexture:
 	var image := Game.get_viewport().get_texture().get_image()
 	for i in range(shrink_count):
 		image.shrink_x2()
-	image.compress(Image.COMPRESS_ASTC)
+	#image.compress(Image.COMPRESS_ASTC)
 	var texture := ImageTexture.create_from_image(image)
 	return texture

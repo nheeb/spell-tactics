@@ -35,4 +35,5 @@ func auto_save():
 		state.generate_meta("Auto Save - Round %s" % combat.current_round)
 		SaveFile.save_to_disk(state, Game.SAVE_DIR + state.meta.filename + ".tres")
 		)
+	thread.wait_to_finish()
 	

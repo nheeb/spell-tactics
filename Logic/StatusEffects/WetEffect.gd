@@ -1,4 +1,4 @@
-extends StatusEffect
+class_name WetEffect extends StatusEffect
 
 ## Make persistant vars export so they get serialized automatically since StatusEffect is a Resource
 

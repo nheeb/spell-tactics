@@ -13,5 +13,7 @@ func _after_spell(combat: Combat, spell: Spell):
 	#return price
 
 ## Uncomment this method if you want to add a locking condition
-#func _is_unlocked(combat: Combat, spell: Spell) -> bool:
-	#return true
+func _is_unlocked(combat: Combat, spell: Spell) -> bool:
+	var unlock = not combat.player.current_tile.get_surrounding_tiles().any(\
+			func(t): return len(t.get_enemies()) > 0)
+	return unlock

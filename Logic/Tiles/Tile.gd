@@ -153,7 +153,10 @@ func distance_to(other_tile: Tile) -> int:
 	return Utility.tile_distance(self, other_tile)
 
 func direction_to(other_tile: Tile) -> Vector2i:
-	var step := level.get_line(self, other_tile)[0]
+	var line := level.get_line(self, other_tile)
+	if len(line) == 0:
+		return Vector2i.ZERO
+	var step := line[0]
 	return step.location - self.location
 
 const DIRECTION_ORDER = [Vector2i(0, 1),Vector2i(-1, 1),Vector2i(-1, 0),Vector2i(0, -1),Vector2i(1, -1),Vector2i(1, 0)]

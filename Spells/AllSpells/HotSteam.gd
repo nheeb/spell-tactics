@@ -11,7 +11,7 @@ extends SpellLogic
 	#return spell.type.costs
 
 ## This is for overriding if there are general cast-conditions
-#func is_unlocked() -> bool:
+#func _is_unlocked() -> bool:
 	#return true
 
 ## This is for overriding if there are conditions for targets
@@ -20,5 +20,17 @@ extends SpellLogic
 
 ## Here should be the effect
 func casting_effect() -> void:
-	pass
+	assert(target is Array)
+	combat.animation.wait(.8)
+	for tile in target:
+		tile = tile as Tile
+		var dist = tile.distance_to(combat.player.current_tile)
+		combat.animation.effect(VFX.BILLBOARD_EFFECT, tile, {"grow_size": 1.5, \
+			 "texture_name": "steam", "duration": 1.2}).set_delay(.2 * dist).set_flag_with()
+	
+	for tile in target:
+		for enemy in tile.get_enemies():
+			enemy = enemy as EnemyEntity
+			enemy.inflict_damage_with_visuals(1)
+			enemy.apply_status_effect(WetEffect.new())
 
