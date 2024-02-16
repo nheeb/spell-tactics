@@ -67,6 +67,8 @@ func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 		#ent.logic.on_create()
 
 	ent.energy = ent.type.energy
+	if ent.energy == null:  # give empty stack if it was left blank
+		ent.energy = EnergyStack.new()
 
 func entity_on_create(ent: Entity, call_on_create: bool) -> void:
 	if call_on_create:
