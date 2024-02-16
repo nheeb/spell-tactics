@@ -99,18 +99,23 @@ class DeckUtils:
 		spells.append_array(load_spell_n_times("Berserker", 1, combat))
 		spells.append_array(load_spell_n_times("TrappingRoots", 1, combat))
 		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
+		
 		spells.append_array(load_spell_n_times("SporeFlight", 1, combat))
 		spells.append_array(load_spell_n_times("Cyclone", 1, combat))
 		spells.append_array(load_spell_n_times("SelfHeal", 1, combat))
-		spells.append_array(load_spell_n_times("GrowingMycel", 2, combat))
+		spells.append_array(load_spell_n_times("GrowingMycel", 1, combat))
 		spells.append_array(load_spell_n_times("DeadlyDart", 1, combat))
+		
 		spells.append_array(load_spell_n_times("Haunting", 1, combat))
 		spells.append_array(load_spell_n_times("HotSteam", 1, combat))
 		spells.append_array(load_spell_n_times("RockBlast", 1, combat))
 		spells.append_array(load_spell_n_times("SummonWitchTotem", 1, combat))
 		spells.append_array(load_spell_n_times("TotalDecay", 1, combat))
+		
 		spells.append_array(load_spell_n_times("Breath", 1, combat))
+		spells.append_array(load_spell_n_times("SpellMemory", 1, combat))
 		spells.append_array(load_spell_n_times("WaterBlast", 1, combat))
+		spells.append_array(load_spell_n_times("Unload", 1, combat))
 		
 		for spell in spells:
 			spell.id = SpellID.new(Game.add_to_spell_count())
