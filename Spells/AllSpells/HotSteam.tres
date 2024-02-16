@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://bp2a8k0nxmpba"]
+
+[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_ubwst"]
+[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_xq4sg"]
+
+[sub_resource type="Resource" id="Resource_kflfu"]
+script = ExtResource("1_ubwst")
+stack = Array[int]([3])
+
+[resource]
+script = ExtResource("1_xq4sg")
+pretty_name = "Hot Steam"
+costs = SubResource("Resource_kflfu")
+keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+effect_text = "In a cone (range 2) all enemies get 1 damage and become wet."
+fluff_text = ""
+target = 6
+target_range = 2
+target_min_range = 1
+target_tag = ""

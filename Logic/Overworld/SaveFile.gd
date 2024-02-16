@@ -14,3 +14,12 @@ static func save_to_disk(overworld_state: OverworldState, path: String) -> void:
 static func load_from_disk(path: String) -> OverworldState:
 	var overworld_state = ResourceLoader.load(path) as OverworldState
 	return overworld_state
+
+static func load_thread_request(path : String) -> void:
+	ResourceLoader.load_threaded_request(path)
+
+static func load_thread_get(path : String) -> OverworldState:
+	return ResourceLoader.load_threaded_get(path) as OverworldState
+
+static func load_thread_status(path: String) -> ResourceLoader.ThreadLoadStatus:
+	return ResourceLoader.load_threaded_get_status(path)

@@ -62,8 +62,12 @@ func get_costs() -> EnergyStack:
 func _get_costs() -> EnergyStack:
 	return spell.type.costs
 
-## This is for overriding if there are general cast-conditions
 func is_unlocked() -> bool:
+	var keywords_unlocked = spell.get_keywords().all(func(k): return k.logic.is_unlocked(spell))
+	return _is_unlocked() and keywords_unlocked
+
+## This is for overriding if there are general cast-conditions
+func _is_unlocked() -> bool:
 	return true
 
 ## This is for overriding if there are conditions for targets

@@ -8,6 +8,8 @@ var states : Array[OverworldState] = []
 
 var last_screenshot : ImageTexture
 
+signal save_files_loaded
+
 func load_all_savefiles() -> void:
 	states.clear()
 	var dir = DirAccess.open(Game.SAVE_DIR)
@@ -17,13 +19,18 @@ func load_all_savefiles() -> void:
 		while file_name != "":
 			if not dir.current_is_dir():
 				if file_name.ends_with(".tres"):
-					var loaded_file := SaveFile.load_from_disk(Game.SAVE_DIR + file_name)
+					SaveFile.load_thread_request(Game.SAVE_DIR + file_name)
+					while SaveFile.load_thread_status(Game.SAVE_DIR + file_name) == 1:
+						await VisualTime.visual_process
+					var loaded_file := SaveFile.load_thread_get(Game.SAVE_DIR + file_name)
 					if loaded_file:
 						states.append(loaded_file)
 			file_name = dir.get_next()
 		states.reverse()
 	else:
 		print("An error occurred when trying to access the path.")
+	await VisualTime.visual_process
+	save_files_loaded.emit()
 
 func setup_entries() -> void:
 	entries.clear()
@@ -44,19 +51,18 @@ func select_entry(_selected_entry: SavefileMenuEntry) -> void:
 
 func setup(take_screenshot := true):
 	if take_screenshot:
-		last_screenshot = ImageTexture.create_from_image(Game.get_viewport().get_texture().get_image())
-	var t = Thread.new()
-	t.start(_setup, Thread.PRIORITY_LOW)
-	t.wait_to_finish()
+		last_screenshot = Utility.take_screenshot(3)
+	_setup()
 
 func _setup():
-	await VisualTime.new_timer(1.0).timeout
 	%ButtonLoad.disabled = true
 	%ButtonSave.disabled = true
 	%SavenameEdit.text = ""
 	load_all_savefiles()
+	await save_files_loaded
 	setup_entries()
 	show()
+	get_tree().paused = true
 
 func _ready() -> void:
 	%ButtonLoad.disabled = true
@@ -87,7 +93,8 @@ func _on_button_save_pressed() -> void:
 	var state = overworld.serialize(combat.serialize())
 	state.generate_meta(title, last_screenshot)
 	SaveFile.save_to_disk(state, Game.SAVE_DIR + state.meta.filename + ".tres")
-	setup(false)
+	_setup()
 
 func _on_button_close_pressed() -> void:
 	hide()
+	get_tree().paused = false

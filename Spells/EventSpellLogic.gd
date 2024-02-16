@@ -21,7 +21,7 @@ class_name EventSpellLogic extends SpellLogic
 	#return []
 #
 ### This is for overriding if there are general cast-conditions
-#func is_unlocked() -> bool:
+#func _is_unlocked() -> bool:
 	#return true
 #
 ### This is for overriding if there are conditions for targets

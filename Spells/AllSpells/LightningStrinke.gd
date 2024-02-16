@@ -4,10 +4,10 @@ extends SpellLogic
 ## spell - Corresponding spell
 ##   (with round_persistant_properties & combat_persistant_properties)
 ## combat - The current combat for which the spell was created
-## target - The target Entity/Tile (if Spell is targetable)
+## target - The target Tile (if Spell is targetable)
 
 ## The current costs with all the modifiers if there are any
-#func _get_costs() -> Array[Game.Energy]:
+#func _get_costs() -> EnergyStack:
 	#return spell.type.costs
 
 ## This is for overriding if there are general cast-conditions
@@ -20,11 +20,13 @@ extends SpellLogic
 
 ## Here should be the effect
 func casting_effect() -> void:
-	assert(target is Tile, "AirMissile expecting Tile as target")
+	var base_damage := 3
 	target = target as Tile
-	var enemies = target.get_enemies()
-	assert(len(enemies) >= 1, "AirMissile expects min 1 enemy on tile")
-	
-	for enemy in enemies:
-		enemy.inflict_damage_with_visuals(2)
+	for enemy in target.get_enemies():
+		enemy = enemy as EnemyEntity
+		if enemy.get_status_effect("wet"):
+			enemy.inflict_damage_with_visuals(2*base_damage)
+		else:
+			enemy.inflict_damage_with_visuals(1*base_damage)
+		
 

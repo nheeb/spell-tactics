@@ -11,10 +11,10 @@ stack = Array[int]([6, 6])
 script = ExtResource("2_x2nta")
 pretty_name = "Spell Memory"
 costs = SubResource("Resource_gkkbv")
+keywords = Array[Resource("res://Spells/Keyword.gd")]([])
 effect_text = "Draw 3 Spells."
 fluff_text = "The spell at the tip of one's tongue..
 "
-is_event_spell = false
 target = 0
 target_range = -1
 target_min_range = -1

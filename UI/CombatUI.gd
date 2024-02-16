@@ -151,7 +151,7 @@ func set_current_energy(energy: EnergyStack):
 func update_payable_cards():
 	for hand_card2d in cards:
 		var spell: Spell = hand_card2d.spell
-		if combat.energy.is_payable(spell.type.costs):
+		if combat.energy.is_payable(spell.type.costs) and spell.logic.is_unlocked():
 			# spell is available
 			hand_card2d.set_enabled(true)
 		else:
