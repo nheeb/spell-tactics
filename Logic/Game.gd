@@ -15,6 +15,8 @@ const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var world: World = null
 
+var start_debugging = false
+
 const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
 var DEBUG_SPELL_TESTING := false # Not meant to be changed.

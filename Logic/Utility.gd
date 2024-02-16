@@ -94,7 +94,7 @@ class DeckUtils:
 		var spells: Array[Spell] = []
 		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
 		spells.append_array(load_spell_n_times("AirMissile", 3, combat))
-		spells.append_array(load_spell_n_times("Berserker", 2, combat))
+		spells.append_array(load_spell_n_times("Berserker", 200, combat))
 		spells.append_array(load_spell_n_times("TrappingRoots", 2, combat))
 		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
 		spells.append_array(load_spell_n_times("SporeFlight", 2, combat))

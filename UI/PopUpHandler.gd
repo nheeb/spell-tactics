@@ -71,7 +71,10 @@ func show_drainable_overlay():
 
 	
 func hide_drainable_overlay():
-	$Drainables.hide()
+	Game.start_debugging = true
+	#$Drainables.hide()
+	for drainable in $Drainables.get_children():
+		drainable.visible = false
 	#for entry in active_entries:
 		#entry.hide()
 	
@@ -95,6 +98,7 @@ func setup_active_entries() -> Array[DrainableEntry]:
 		entry.connected_tile = tile
 		entry.name = "DrainableEntry_%d_%d" % [tile.r, tile.q]
 		$Drainables.add_child(entry)
+		entry.owner = self
 		entry.show_energy(energy)
 		var _screen_pos = viewport.get_camera_3d().unproject_position(entry.connected_tile.global_position)
 		entry.position = _screen_pos - entry.size/2
@@ -111,6 +115,14 @@ func update_active_entries(entries: Array[DrainableEntry]):
 			entry.show()
 		else:
 			entry.reset()
+			
+func show_surrounding_drainable_entries():
+	var position: Tile = combat.player.current_tile
+	var neighbours: Array[Tile] = combat.level.get_all_tiles_in_distance_of_tile(position, 1)
+	
+	for neighbour in neighbours:
+		if neighbour in active_entries:
+			active_entries[neighbour].show()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("show_drain_overlay"):
@@ -128,7 +140,8 @@ func _process(delta: float) -> void:
 	if not active_entries.is_empty():
 		for entry in active_entries:
 			var cam = viewport.get_camera_3d()
-			entry.visible = not cam.is_position_behind(entry.connected_tile.global_position)
+			if entry.visible:
+				entry.visible = not cam.is_position_behind(entry.connected_tile.global_position)
 			var _screen_pos = viewport.get_camera_3d().unproject_position(entry.connected_tile.global_position)
 			entry.position = _screen_pos - entry.size/2  # unfortunately necessary..
 			
@@ -140,3 +153,4 @@ func _process(delta: float) -> void:
 
 func _on_world_combat_changed(_combat: Combat):
 	self.combat = _combat
+	combat.get_phase_node(Combat.RoundPhase.Spell).process_start.connect(show_surrounding_drainable_entries)

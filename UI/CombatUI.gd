@@ -157,13 +157,18 @@ func update_payable_cards():
 		else:
 			hand_card2d.set_enabled(false)
 			# can't cast spell
+			
+#func update_actives():
+	#for i in range(len(actives)):
+		#var active = actives[i]
+		#if active.uses_left > 0:
+			#_on_active_unlocked(i)
 
 func _ready() -> void:
 	deselect_card()
 	%EnemyArrow.visible = false
 
 func _on_active_button_pressed(i: int) -> void:
-	print("pressed ", i)
 	combat.input.process_action(SelectActive.new(actives[i]))
 	
 func _on_active_unlocked(i: int) -> void:
@@ -188,9 +193,9 @@ func show_game_over(text: String) -> void:
 	Game.combat_to_review = combat
 	ActivityManager.substitute(DeathActivity.new())
 	
-func show_no_targets_popup():
-	# TODO
-	pass
+#func show_no_targets_popup():
+	## TODO
+	#pass
 
 func set_enemy_meter(value: int) -> void:
 	var tween := VisualTime.new_tween()

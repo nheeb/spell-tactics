@@ -45,13 +45,13 @@ func load_combat_from_state(combat_state: CombatState) -> void:
 	combat_ui = COMBAT_UI.instantiate()
 	ui_root.add_child(combat_ui)
 	
-	# Connect combat to UI & Cam
-	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 	camera = get_node("GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D")
 	
 	# Do initial phase process (if any)
 	await get_tree().process_frame
 	combat.setup()
+	# Connect combat to UI & Cam
+	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 	combat.process_initial_phase()
 	
 	# Play initial animations

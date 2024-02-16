@@ -32,7 +32,6 @@ func return_to_spell_selection():
 func tile_clicked(tile: Tile):
 	# for now try draining anytime a tile is clicked. later we'll need state,
 	# whether we're targeting a spell or draining
-	print("spellphase tile clicked")
 	if state == CastingState.Selecting:
 		combat.input.process_action(PlayerDrain.new(tile))
 	elif state == CastingState.Targeting:
@@ -67,7 +66,9 @@ func select_spell(spell: Spell):
 	if spell.type.target != SpellType.Target.None:
 		highlighted_targets = get_spell_targets(selected_spell)
 		if len(highlighted_targets) == 0:
-			combat.animation.callback(combat.ui, "show_no_targets_popup")
+			combat.animation.callback(combat.ui, "set_status", ["No targets available."])
+			combat.animation.wait(1.0)
+			combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
 			return
 		combat.animation.callback(combat.ui, "set_status", ["Choose the target!\n(Right-click to deselect)"])
 		combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)

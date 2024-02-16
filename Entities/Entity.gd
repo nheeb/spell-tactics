@@ -81,6 +81,7 @@ func is_dead() -> bool:
 
 func die() -> void:
 	combat.level.move_entity_to_graveyard(self)
+	combat.animation.hide(visual_entity)
 
 func go_to_graveyard() -> void:
 	die()

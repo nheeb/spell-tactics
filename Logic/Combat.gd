@@ -65,9 +65,15 @@ func _ready() -> void:
 			Game.combats.clear()
 			Game.combats.append(self)
 
+# instead of lambdas, as we noticed weird behavior with those..
+func route_tile_clicked(tile):
+	get_phase_node(current_phase).tile_clicked(tile)
+	
+func route_tile_hovered(tile):
+	get_phase_node(current_phase).tile_hovered(tile)
+
 ## is called when the Combat is created to connect all the references and signals
 func setup() -> void:
-	
 	# Get player and enemy references
 	player = null
 	enemies = []
@@ -79,11 +85,10 @@ func setup() -> void:
 		if entity is EnemyEntity:
 			if not entity.is_dead():
 				enemies.append(entity)
-	
+
 	# Connect input signals
-	#Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
-	Events.tile_clicked.connect(func (tile): get_phase_node(current_phase).tile_clicked(tile))
-	Events.tile_hovered.connect(func (tile): get_phase_node(current_phase).tile_hovered(tile))
+	Events.tile_clicked.connect(route_tile_clicked)
+	Events.tile_hovered.connect(route_tile_hovered)
 
 	# Check if all entities have ids
 	# Refresh entities if its CombatBegin

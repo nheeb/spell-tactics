@@ -3,6 +3,7 @@ class_name DrainableEntry extends PanelContainer
 @export var icon_size := 38
 var connected_tile: Tile = null
 
+
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 func show_energy(energy: EnergyStack):
 	#if connected_tile.r == 6 and connected_tile.q == 6:
