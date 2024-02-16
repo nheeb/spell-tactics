@@ -5,14 +5,14 @@
 
 [sub_resource type="Resource" id="Resource_a4kwb"]
 script = ExtResource("1_8p5mh")
-stack = Array[int]([1, 2, 3, 6])
+stack = Array[int]([1, 3, 4, 4])
 
 [resource]
 script = ExtResource("1_ve8pr")
 pretty_name = "Lightning Strike"
 costs = SubResource("Resource_a4kwb")
 keywords = Array[Resource("res://Spells/Keyword.gd")]([])
-effect_text = ""
+effect_text = "Deals 3 damage. (Double damage to wet enemies)"
 fluff_text = ""
 target = 1
 target_range = -1
