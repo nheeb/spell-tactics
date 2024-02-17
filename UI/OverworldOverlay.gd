@@ -16,4 +16,6 @@ func _update_coins():
 
 func _update_health():
 	health_label.text = str(Adventure.health)
-	
+
+func _on_view_deck_pressed():
+	ActivityManager.push(BrowseDeckActivity.new())
