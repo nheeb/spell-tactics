@@ -16,29 +16,38 @@ func set_spell(_spell, as_hand_card := true):
 func set_spell_type(_spell_type):
 	spell_type = _spell_type
 	spell = null
-	%Name.label_settings.font_size = 24
+	%Name.label_settings.font_size = 28
 	%Fluff.label_settings.font_size = 16
-	%Effect.label_settings.font_size = 16
+	%Effect.label_settings.font_size = 24
+	%EnergyContainer.custom_minimum_size = Vector2(0, 8)
+	%EnergyContainer.minimum_size_changed.emit()
+	for icon in %EnergyContainer.get_children():
+		icon.min_size = 12
+		icon.minimum_size_changed.emit()
 	update()
 
 func update():
 	if spell != null:
 		set_content(spell.type.pretty_name, spell.logic.get_costs(), spell.get_effect_text(), spell.type.fluff_text)
 	elif spell_type:
-		set_content(spell_type.pretty_name, spell_type.costs, spell_type.get_effect_text(), spell_type.fluff_text)
+		set_content(spell_type.pretty_name, spell_type.costs, spell_type.get_effect_text(), spell_type.fluff_text, true)
 
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 const SHRINKED_TITLE = preload("res://Assets/Fonts/LabelSettings/HandCard2D_Title_LabelSettings_shrinked.tres")
 @export var icon_size := 56
-func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff: String):
-	if len(pretty_name) > 15:
+@export var icon_size_spelltype := 32
+func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff: String, spell_type: bool = false):
+	if len(pretty_name) > 15 and not spell_type:
 		%Name.label_settings = SHRINKED_TITLE
 	%Name.text = pretty_name
 	%Effect.text = effect
 	for cost in costs.stack:
 		var icon = ENERGY_ICON.instantiate()
 		icon.type = cost
-		icon.min_size = icon_size
+		if spell_type:
+			icon.min_size = icon_size_spelltype
+		else:
+			icon.min_size = icon_size
 		%EnergyContainer.add_child(icon)
 
 	# could always extend the fluff to 3 lines for consistent look
