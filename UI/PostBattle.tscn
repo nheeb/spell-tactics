@@ -1,6 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://uat6g64vbik4"]
+[gd_scene load_steps=9 format=3 uid="uid://uat6g64vbik4"]
 
 [ext_resource type="Script" path="res://UI/PostBattle.gd" id="1_bqpxm"]
+[ext_resource type="PackedScene" uid="uid://du2afy7boqngx" path="res://UI/PostBattle/CampfireButton.tscn" id="2_mrgwu"]
+[ext_resource type="Texture2D" uid="uid://cg517gbeyqckx" path="res://Assets/Sprites/Icons/card-pickup.png" id="3_6da7v"]
+[ext_resource type="Texture2D" uid="uid://ch5vh7v651v0d" path="res://Assets/Sprites/Icons/evil-love.png" id="4_u5uty"]
+[ext_resource type="Texture2D" uid="uid://bb68man3kr4o6" path="res://Assets/Sprites/Icons/pillow.png" id="5_ksw52"]
+[ext_resource type="Texture2D" uid="uid://bo8531ow2v0lr" path="res://Assets/Sprites/Icons/run.png" id="5_t0kms"]
+[ext_resource type="Texture2D" uid="uid://dtsm01nltudbh" path="res://Assets/Sprites/Icons/bone-knife.png" id="6_krpvi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58lbm"]
 
@@ -12,6 +18,85 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bqpxm")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.0
+offset_top = 140.0
+offset_right = 145.0
+offset_bottom = 163.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "You live to fight another day..."
+horizontal_alignment = 1
+
+[node name="RewardOptions" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -808.0
+offset_top = -319.0
+offset_right = 809.0
+offset_bottom = -218.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Booster" parent="RewardOptions" instance=ExtResource("2_mrgwu")]
+layout_mode = 2
+texture = ExtResource("3_6da7v")
+text = "Scavange for treasure"
+
+[node name="Review" parent="RewardOptions" instance=ExtResource("2_mrgwu")]
+layout_mode = 2
+texture = ExtResource("4_u5uty")
+text = "Review combat experience"
+
+[node name="ActionSection" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -502.0
+offset_top = 269.0
+offset_right = 494.0
+offset_bottom = 393.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ActionSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Choose an action:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionOptions" type="HFlowContainer" parent="ActionSection"]
+layout_mode = 2
+alignment = 1
+
+[node name="Rest" parent="ActionSection/ActionOptions" instance=ExtResource("2_mrgwu")]
+layout_mode = 2
+texture = ExtResource("5_ksw52")
+text = "Rest and replenish"
+
+[node name="Purge" parent="ActionSection/ActionOptions" instance=ExtResource("2_mrgwu")]
+layout_mode = 2
+texture = ExtResource("6_krpvi")
+text = "Purge a spell"
+
+[node name="MarchOn" parent="ActionSection/ActionOptions" instance=ExtResource("2_mrgwu")]
+layout_mode = 2
+texture = ExtResource("5_t0kms")
+text = "March on"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -26,34 +111,6 @@ offset_right = 145.0
 offset_bottom = 154.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "You live to fight another day..."
-horizontal_alignment = 1
-
-[node name="RewardOptions" type="HFlowContainer" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Booster" type="Button" parent="VBoxContainer/RewardOptions"]
-layout_mode = 2
-text = "Claim booster"
-
-[node name="Label2" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Continue" type="Button" parent="VBoxContainer/HFlowContainer"]
-layout_mode = 2
-text = "Continue"
-
-[node name="Review" type="Button" parent="VBoxContainer/HFlowContainer"]
-layout_mode = 2
-text = "Write a review"
 
 [node name="PickBoosterPopup" type="Panel" parent="."]
 visible = false
@@ -104,7 +161,9 @@ columns = 4
 layout_mode = 2
 text = "Skip"
 
-[connection signal="pressed" from="VBoxContainer/RewardOptions/Booster" to="." method="_on_booster_pressed"]
-[connection signal="pressed" from="VBoxContainer/HFlowContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="VBoxContainer/HFlowContainer/Review" to="." method="_on_review_pressed"]
+[connection signal="pressed" from="RewardOptions/Booster" to="." method="_on_booster_pressed"]
+[connection signal="pressed" from="RewardOptions/Review" to="." method="_on_review_pressed"]
+[connection signal="pressed" from="ActionSection/ActionOptions/Rest" to="." method="_on_rest_pressed"]
+[connection signal="pressed" from="ActionSection/ActionOptions/Purge" to="." method="_on_purge_pressed"]
+[connection signal="pressed" from="ActionSection/ActionOptions/MarchOn" to="." method="_on_march_on_pressed"]
 [connection signal="pressed" from="PickBoosterPopup/VBoxContainer/Skip" to="." method="_on_skip_pressed"]

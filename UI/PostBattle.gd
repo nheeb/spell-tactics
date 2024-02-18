@@ -2,8 +2,6 @@ extends Control
 
 @onready var grid: Control = $"PickBoosterPopup/VBoxContainer/GridContainer"
 
-func _on_continue_pressed():
-	ActivityManager.pop()
 
 func start(activity: PostCombatActivity):
 	for option in activity.booster_pickup_options:
@@ -20,8 +18,19 @@ func _on_skip_pressed():
 	ActivityManager.pop()
 
 func _on_review_pressed() -> void:
-	ActivityManager.substitute(ReviewActivity.new())
+	ActivityManager.push(ReviewActivity.new())
 
 
 func _on_booster_pressed() -> void:
 	$PickBoosterPopup.visible = not $PickBoosterPopup.visible
+
+func _on_rest_pressed():
+	Adventure.heal(10)
+	ActivityManager.pop()
+
+func _on_purge_pressed():
+	# TODO
+	ActivityManager.pop()
+
+func _on_march_on_pressed():
+	ActivityManager.pop()
