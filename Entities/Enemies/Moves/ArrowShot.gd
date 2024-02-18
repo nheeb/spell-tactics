@@ -23,7 +23,7 @@ func execute() -> void:
 			if cover != 0:
 				total_cover += cover
 				combat.animation.say(tile, "[%s]" % cover).set_flag_with().set_delay(.9)
-	var chance := enemy.accuracy * 10.0 + 40.0 - total_cover * 10.0
+	var chance := float(clamp(enemy.accuracy * 10.0 + 40.0 - total_cover * 10.0, 0, 100))
 	var dmg := enemy.strength
 	combat.animation.say(enemy.visual_entity, "Shooting! (%.0f%% hit chance)" % chance)
 	combat.animation.effect(VFX.HEX_RINGS, combat.player.current_tile, {"color": Color.RED}).set_flag_with()
