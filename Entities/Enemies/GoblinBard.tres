@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=3 format=3 uid="uid://shswrcu1hkq5"]
+
+[ext_resource type="Script" path="res://Entities/Enemies/CorpseLogic.gd" id="1_a441d"]
+[ext_resource type="Script" path="res://Entities/EnemyEntityType.gd" id="1_c53sr"]
+
+[resource]
+script = ExtResource("1_c53sr")
+behaviour = 2
+agility = 2
+strength = 1
+accuracy = 6
+resistance = 0
+actions = Array[String](["Insult", "IceTune", "FireTune", "EarthTune", "DrainTune", "CallHelp"])
+movements = Array[String](["RandomMovement", "MoveAwayFromPlayer"])
+passives = Array[String]([])
+max_hp = 3
+internal_name = "goblin_bard"
+can_be_hovered = true
+pretty_name = "Goblin Bard"
+fluff_text = ""
+entity_logic = ExtResource("1_a441d")
+prototype_scale = Vector2(0.9, 1)
+is_terrain = false
+is_drainable = false
+obstacle_layer = 2
+obstacle_mask = 3
+is_blocker = true
+cover_value = 0
+tags = Array[String]([])

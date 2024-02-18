@@ -126,7 +126,11 @@ func is_location_obstructed(coord: Vector2i, mask: int) -> bool:
 	
 
 func get_tile_by_location(location: Vector2i) -> Tile:
-	return tiles[location.x][location.y]
+	if location.x >= 0 and location.y >= 0:
+		if location.x < len(tiles):
+			if location.y < len(tiles[location.x]):
+				return tiles[location.x][location.y]
+	return null
 
 ## returns a list of Tiles forming the straight line between tile1 and tile2.
 ## Only tile2 is included

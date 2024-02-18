@@ -47,3 +47,8 @@ func inflict_heal_with_visuals(heal: int) -> AnimationObject:
 	type = type as HPEntityType
 	hp = min(type.max_hp, hp + heal)
 	return combat.animation.update_hp(self)
+
+func sync_with_type() -> void:
+	super()
+	hp = type.max_hp
+	combat.animation.update_hp(self)

@@ -2,7 +2,7 @@ extends EnemyMove
 
 ## Returns a score for the attractiveness to do the move.
 func get_score() -> float:
-	return 0.8
+	return 0.7
 
 ## Executes the move
 func execute() -> void:
