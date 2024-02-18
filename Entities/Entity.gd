@@ -132,3 +132,7 @@ func _to_string() -> String:
 
 func get_tags() -> Array[String]:
 	return type.tags
+
+## This takes all relevant information from the type in CombatBegin Phase
+func sync_with_type() -> void:
+	energy = type.energy

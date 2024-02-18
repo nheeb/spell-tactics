@@ -1,5 +1,7 @@
 extends OneshotVisualEffect
 
+## Quick paste: combat.animation.effect(VFX.BILLBOARD_EFFECT, target, {"grow_size": 1.5, "texture_name": ""})
+
 var texture_name := ""
 var duration := 2.0
 var alpha_blend_time := .4
