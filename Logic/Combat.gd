@@ -35,6 +35,7 @@ enum Result {
 @onready var input: InputUtility = %InputUtility
 @onready var event: EventUtility = %EventUtility
 @onready var t_effects: TimedEffectsUtility = %TimedEffectsUtility
+@onready var attack: AttackUtility = %AttackUtility
 
 signal round_ended
 signal spell_casted_successfully(spell: SpellReference)
@@ -98,12 +99,13 @@ func setup() -> void:
 		for e in level.entities().get_all_entities():
 			e.id = EntityID.new(e.type, level.add_type_count(e.type))
 			# set energy to the EntityType's energy in case it changed from level creation
-			e.energy = e.type.energy
-			# same for hp
-			if e is HPEntity:
-				e.hp = e.type.max_hp
-				animation.update_hp(e)
-				print(e.type.internal_name, " ", e.hp)
+			e.sync_with_type()
+			#e.energy = e.type.energy
+			## same for hp
+			#if e is HPEntity:
+				#e.hp = e.type.max_hp
+				#animation.update_hp(e)
+				#print(e.type.internal_name, " ", e.hp)
 	else:
 		for e in level.entities().get_all_entities():
 			if e.id != null:

@@ -3,18 +3,20 @@ extends EnemyMove
 ## Returns a score for the attractiveness to do the move.
 func get_score() -> float:
 	match enemy.type.behaviour:
-		EnemyEntityType.Behaviour.Fighter:
-			var dist_to_player = Utility.tile_distance(combat.player.current_tile, enemy.current_tile)
-			return 6.0 if dist_to_player <= 1 else 0.0
+		EnemyEntityType.Behaviour.Support:
+			return 2.0
 	return 0.0
 
 ## Executes the move
 func execute() -> void:
-	var dmg : int = enemy.strength
+	combat.animation.say(enemy.visual_entity, "\"This tune will slow him.\"")
 
-	var hit := combat.attack.enemy_punch(enemy, 0)
+	var hit := combat.attack.enemy_shoot_projectile(enemy, 0, "notes")
+	var dmg := 1
 	if hit:
 		combat.player.inflict_damage_with_visuals(dmg)
 		combat.animation.say(combat.player.visual_entity, "%s DAMAGE" % dmg, {"font_size": 42, "color": Color.RED})
+		combat.player.apply_status_effect(SlowEffect.new())
 	else:
-		combat.animation.say(enemy.visual_entity, "Punch missed.")
+		combat.animation.say(enemy.visual_entity, "Shot missed.")
+

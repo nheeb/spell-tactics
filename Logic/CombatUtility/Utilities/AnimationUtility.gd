@@ -68,12 +68,12 @@ func camera_follow(target: Node3D) -> AnimationProperty:
 func camera_unfollow() -> AnimationProperty:
 	return property(combat.camera, "follow_target", null)
 
-func camera_reach(target: Node3D) -> Array[AnimationObject]:
+func camera_reach(target: Node3D) -> AnimationObject:
 	var animations : Array[AnimationObject] = []
 	animations.append(property(combat.camera, "follow_target", target))
 	animations.append(property(combat.camera, "just_reach_target", true).set_flag(AnimationObject.Flags.PlayWithStep))
 	animations.append(wait_for_signal(combat.camera, "target_reached").set_flag(AnimationObject.Flags.ExtendStep))
-	return animations
+	return reappend_as_subqueue(animations)
 
 func update_hp(ent: HPEntity) -> AnimationProperty:
 	print(ent, ent.hp)
@@ -98,7 +98,6 @@ func player_choice(activity: PlayerChoiceActivity) -> AnimationPlayerChoice:
 
 func reappend_as_subqueue(_anims: Array) -> AnimationSubQueue:
 	var anims: Array[AnimationObject] = get_flat_animation_array(_anims)
-	anims.append_array(_anims)
 	for anim in anims:
 		animation_queue.erase(anim)
 	var a = AnimationSubQueue.new(anims)
