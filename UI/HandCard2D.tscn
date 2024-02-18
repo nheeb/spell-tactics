@@ -7,6 +7,7 @@
 [ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="4_tjgd0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2udtv"]
+resource_local_to_scene = true
 font = ExtResource("2_3qe8h")
 font_size = 32
 font_color = Color(0.266667, 0.164706, 0.0705882, 1)
@@ -15,13 +16,16 @@ font_color = Color(0.266667, 0.164706, 0.0705882, 1)
 content_margin_left = 5.0
 
 [node name="HandCard2D" type="AspectRatioContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 400)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
 ratio = 0.7143
 script = ExtResource("1_5w608")
 
@@ -48,7 +52,9 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+clip_contents = true
 layout_mode = 2
+size_flags_stretch_ratio = 0.0
 
 [node name="Name" type="Label" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -56,20 +62,23 @@ layout_mode = 2
 text = "<NAME>"
 label_settings = ExtResource("4_gidae")
 horizontal_alignment = 1
+clip_text = true
 
 [node name="Gap" type="Control" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 size_flags_stretch_ratio = 1.7
 
 [node name="EnergyContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 alignment = 1
 
 [node name="Gap2" type="Control" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_stretch_ratio = 1.7
 

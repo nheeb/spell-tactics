@@ -1,14 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=20 format=3 uid="uid://brhegqlf0sm1x"]
 
 [ext_resource type="Script" path="res://Logic/Main.gd" id="1_u1dq5"]
 [ext_resource type="PackedScene" uid="uid://brewkay16y5my" path="res://UI/ScreenPostCombat.tscn" id="4_7jo8o"]
 [ext_resource type="PackedScene" uid="uid://c068mk54cnfau" path="res://UI/ScreenOverworld.tscn" id="7_nsqe3"]
-[ext_resource type="PackedScene" path="res://UI/ScreenGameOver.tscn" id="8_a2s8e"]
+[ext_resource type="PackedScene" uid="uid://c8rre4qcpsefg" path="res://UI/ScreenGameOver.tscn" id="8_a2s8e"]
 [ext_resource type="PackedScene" uid="uid://c3t7dsskwul4j" path="res://UI/ScreenCombat.tscn" id="9_cgcr1"]
 [ext_resource type="PackedScene" uid="uid://ciegwnpuuhd71" path="res://UI/Review/ScreenCombatReview.tscn" id="9_cwj8i"]
-[ext_resource type="PackedScene" path="res://UI/ActivityRouter.tscn" id="10_1e1ax"]
+[ext_resource type="PackedScene" uid="uid://ds2ivp3x5ferm" path="res://UI/ActivityRouter.tscn" id="10_1e1ax"]
 [ext_resource type="PackedScene" uid="uid://dweskebgaykh3" path="res://UI/PlayerChoice/ScreenPlayerChoice.tscn" id="10_cfyof"]
-[ext_resource type="PackedScene" path="res://UI/MainMenu.tscn" id="11_5hlvu"]
+[ext_resource type="PackedScene" uid="uid://bydj3trmw77hb" path="res://UI/MainMenu.tscn" id="11_5hlvu"]
+[ext_resource type="PackedScene" uid="uid://bxjvfou3tmu28" path="res://UI/ScreenDeckExplorer.tscn" id="11_ou0h7"]
 [ext_resource type="Script" path="res://UI/ActivityRouterEntry.gd" id="11_qsh2o"]
 
 [sub_resource type="Resource" id="Resource_mqai8"]
@@ -46,6 +47,11 @@ script = ExtResource("11_qsh2o")
 activity_script_path = "res://Logic/Activities/PlayerChoiceActivity.gd"
 packed_scene = ExtResource("10_cfyof")
 
+[sub_resource type="Resource" id="Resource_4345y"]
+script = ExtResource("11_qsh2o")
+activity_script_path = "res://Logic/Activities/BrowseDeckActivity.gd"
+packed_scene = ExtResource("11_ou0h7")
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -64,4 +70,4 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-activity_to_view_map = Array[ExtResource("11_qsh2o")]([SubResource("Resource_mqai8"), SubResource("Resource_ep884"), SubResource("Resource_8nmyv"), SubResource("Resource_y80su"), SubResource("Resource_7534x"), SubResource("Resource_ti6f6"), SubResource("Resource_nyjlp")])
+activity_to_view_map = Array[ExtResource("11_qsh2o")]([SubResource("Resource_mqai8"), SubResource("Resource_ep884"), SubResource("Resource_8nmyv"), SubResource("Resource_y80su"), SubResource("Resource_7534x"), SubResource("Resource_ti6f6"), SubResource("Resource_nyjlp"), SubResource("Resource_4345y")])

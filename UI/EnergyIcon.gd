@@ -7,6 +7,7 @@ class_name EnergyIcon extends Control
 		min_size = new_size
 		if is_instance_valid(color_rect):
 			color_rect.custom_minimum_size = Vector2(min_size, min_size)
+			color_rect.minimum_size_changed.emit()
 @export var type: EnergyStack.EnergyType = EnergyStack.EnergyType.Any:
 	set(t):
 		type = t

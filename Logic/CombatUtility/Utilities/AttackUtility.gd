@@ -17,7 +17,7 @@ func enemy_shoot_projectile(enemy: EnemyEntity, projectile_bonus := 0, texture_n
 				if DebugInfo.SHOW_ENEMY_PROJECTILE_INFO:
 					combat.animation.say(tile, "[%s]" % cover).set_flag_with().set_delay(.9)
 	
-	var chance := enemy.accuracy * 10.0 + projectile_bonus * 10.0 - total_cover * 10.0
+	var chance : float = max(0.0, enemy.accuracy * 10.0 + projectile_bonus * 10.0 - total_cover * 10.0)
 
 	combat.animation.say(enemy.visual_entity, "Shooting! (%.0f%% hit chance)" % chance)
 	combat.animation.effect(VFX.HEX_RINGS, combat.player.current_tile, \
@@ -30,7 +30,7 @@ func enemy_shoot_projectile(enemy: EnemyEntity, projectile_bonus := 0, texture_n
 	return hit
 
 func enemy_punch(enemy: EnemyEntity, attack_bonus := 0) -> bool:
-	var chance : float = attack_bonus * 10.0 + enemy.accuracy * 10.0
+	var chance : float = max(0.0, attack_bonus * 10.0 + enemy.accuracy * 10.0)
 
 	combat.animation.say(enemy.visual_entity, "Punching! (%.0f%% hit chance)" % chance)
 	combat.animation.effect(VFX.HEX_RINGS, combat.player.current_tile, {"color": Color.RED}).set_flag_with()

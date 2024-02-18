@@ -19,8 +19,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment_vertical = 0
 script = ExtResource("1_y44af")
-min_size = 24
+min_size = 56
 any_color = Color(0.886275, 0.886275, 0.886275, 1)
 matter_color = Color(0.678431, 0.427451, 0.372549, 1)
 life_color = Color(0.45098, 0.741176, 0.317647, 1)
@@ -32,6 +35,6 @@ icons = Array[Texture]([ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResou
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_nu6bn")
-custom_minimum_size = Vector2(24, 24)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 color = Color(0.886275, 0.886275, 0.886275, 1)
