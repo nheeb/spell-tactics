@@ -13,6 +13,8 @@ class_name EnergyIcon extends Control
 		type = t
 		if is_instance_valid(color_rect):
 			color_rect.color = type_to_color(type)
+			# TODO
+			#color_rect.material.set_shader_param()
 
 
 @export var any_color: Color
