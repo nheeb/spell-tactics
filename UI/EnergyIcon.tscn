@@ -1,17 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciug3sucml2b5"]
+[gd_scene load_steps=10 format=3 uid="uid://ciug3sucml2b5"]
 
 [ext_resource type="Shader" path="res://UI/EnergyIcon.gdshader" id="1_ft63v"]
 [ext_resource type="Script" path="res://UI/EnergyIcon.gd" id="1_y44af"]
 [ext_resource type="Texture2D" uid="uid://ckh1exvhdroly" path="res://Assets/Sprites/EnergyIconMasks/matter.png" id="2_74tm8"]
+[ext_resource type="Texture2D" uid="uid://dqqryr4jr7d4" path="res://Assets/Sprites/EnergyIconMasks/any.png" id="2_tec3x"]
+[ext_resource type="Texture2D" uid="uid://d1q47nuj8o2vd" path="res://Assets/Sprites/EnergyIconMasks/decay.png" id="4_2sbhq"]
 [ext_resource type="Texture2D" uid="uid://c4cqmwxrkmmrp" path="res://Assets/Sprites/EnergyIconMasks/flow.png" id="4_6a8h7"]
+[ext_resource type="Texture2D" uid="uid://n2qxg0htgbyk" path="res://Assets/Sprites/EnergyIconMasks/life.png" id="4_mgdgq"]
+[ext_resource type="Texture2D" uid="uid://cm7jubekt0axa" path="res://Assets/Sprites/EnergyIconMasks/harmony.png" id="6_w0rpi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nu6bn"]
+resource_local_to_scene = true
 shader = ExtResource("1_ft63v")
 shader_parameter/border_color = null
 shader_parameter/border_thickness = 0.07
 shader_parameter/alpha_feathering = 0.029
-shader_parameter/icon_color = Color(1, 1, 0.984314, 1)
-shader_parameter/icon_mask = ExtResource("4_6a8h7")
+shader_parameter/icon_color = Color(1, 1, 1, 1)
+shader_parameter/icon_mask = ExtResource("2_tec3x")
 
 [node name="EnergyIcon" type="AspectRatioContainer"]
 anchors_preset = 15
@@ -22,18 +27,19 @@ grow_vertical = 2
 size_flags_horizontal = 4
 alignment_vertical = 0
 script = ExtResource("1_y44af")
-min_size = 56
-any_color = Color(0.886275, 0.886275, 0.886275, 1)
+min_size = 40
+any_color = Color(0.968627, 0.968627, 0.968627, 1)
 matter_color = Color(0.678431, 0.427451, 0.372549, 1)
 life_color = Color(0.45098, 0.741176, 0.317647, 1)
 harmony_color = Color(0.321569, 0.796078, 0.890196, 1)
 flow_color = Color(0.968627, 0.596078, 0.117647, 1)
 decay_color = Color(0.423529, 0.231373, 0.541176, 1)
 spectral_color = Color(0.960784, 0, 0.788235, 1)
-icons = Array[Texture]([ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8"), ExtResource("2_74tm8")])
+icons = Array[Texture]([ExtResource("2_tec3x"), ExtResource("2_74tm8"), ExtResource("4_mgdgq"), ExtResource("6_w0rpi"), ExtResource("4_6a8h7"), ExtResource("4_2sbhq"), ExtResource("2_tec3x")])
+icon_colors = Array[Color]([Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.878431, 0.768627, 0.439216, 1), Color(0.980392, 0.701961, 0.458824, 1)])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_nu6bn")
-custom_minimum_size = Vector2(56, 56)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-color = Color(0.886275, 0.886275, 0.886275, 1)
+color = Color(0.968627, 0.968627, 0.968627, 1)
