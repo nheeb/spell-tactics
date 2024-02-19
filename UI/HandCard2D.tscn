@@ -31,6 +31,7 @@ script = ExtResource("1_5w608")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_4erlu")
 
 [node name="Fluff" type="Label" parent="PanelContainer"]

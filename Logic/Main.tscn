@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=22 format=3 uid="uid://brhegqlf0sm1x"]
 
 [ext_resource type="Script" path="res://Logic/Main.gd" id="1_u1dq5"]
 [ext_resource type="PackedScene" uid="uid://brewkay16y5my" path="res://UI/ScreenPostCombat.tscn" id="4_7jo8o"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bydj3trmw77hb" path="res://UI/MainMenu.tscn" id="11_5hlvu"]
 [ext_resource type="PackedScene" uid="uid://bxjvfou3tmu28" path="res://UI/ScreenDeckExplorer.tscn" id="11_ou0h7"]
 [ext_resource type="Script" path="res://UI/ActivityRouterEntry.gd" id="11_qsh2o"]
+[ext_resource type="PackedScene" uid="uid://b7k0q7ricx1kt" path="res://UI/ScreenDeckPurge.tscn" id="12_trg3p"]
 
 [sub_resource type="Resource" id="Resource_mqai8"]
 script = ExtResource("11_qsh2o")
@@ -52,6 +53,11 @@ script = ExtResource("11_qsh2o")
 activity_script_path = "res://Logic/Activities/BrowseDeckActivity.gd"
 packed_scene = ExtResource("11_ou0h7")
 
+[sub_resource type="Resource" id="Resource_pvi0c"]
+script = ExtResource("11_qsh2o")
+activity_script_path = "res://Logic/Activities/PurgeDeckActivity.gd"
+packed_scene = ExtResource("12_trg3p")
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -70,4 +76,4 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-activity_to_view_map = Array[ExtResource("11_qsh2o")]([SubResource("Resource_mqai8"), SubResource("Resource_ep884"), SubResource("Resource_8nmyv"), SubResource("Resource_y80su"), SubResource("Resource_7534x"), SubResource("Resource_ti6f6"), SubResource("Resource_nyjlp"), SubResource("Resource_4345y")])
+activity_to_view_map = Array[ExtResource("11_qsh2o")]([SubResource("Resource_mqai8"), SubResource("Resource_ep884"), SubResource("Resource_8nmyv"), SubResource("Resource_y80su"), SubResource("Resource_7534x"), SubResource("Resource_ti6f6"), SubResource("Resource_nyjlp"), SubResource("Resource_4345y"), SubResource("Resource_pvi0c")])

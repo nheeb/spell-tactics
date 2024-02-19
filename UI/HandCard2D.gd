@@ -1,9 +1,11 @@
 class_name HandCard2D extends Control
 
 signal selected(spell: Spell)
+signal pressed(card: HandCard2D)
 
 var spell: Spell
 var spell_type: SpellType
+var spell_state: SpellState
 
 func set_spell(_spell, as_hand_card := true):
 	spell = _spell
@@ -25,6 +27,10 @@ func set_spell_type(_spell_type):
 		icon.min_size = 12
 		icon.minimum_size_changed.emit()
 	update()
+
+# Used by out of combat UI.
+func set_spell_state(_spell_state):
+	spell_state = _spell_state
 
 func update():
 	if spell != null:
@@ -76,7 +82,12 @@ func set_enabled(e: bool):
 	else:
 		$PanelContainer.set("theme_override_styles/panel", PANEL_DISABLED)
 		
+var _last_pressed_state: bool = false
 
+func _gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			pressed.emit(self)
 
 func _on_button_button_down() -> void:
 	selected.emit(spell)

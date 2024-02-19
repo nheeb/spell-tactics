@@ -16,3 +16,6 @@ func _ready() -> void:
 	elif Game.DEBUG_DECK_VIEW:
 		ActivityManager.push(OverworldActivity.new())
 		ActivityManager.push(BrowseDeckActivity.new())
+	elif Game.DEBUG_DECK_PURGE:
+		ActivityManager.push(OverworldActivity.new())
+		ActivityManager.push(PurgeDeckActivity.new(20, false))
