@@ -41,6 +41,10 @@ func _ready():
 		hand_card.pressed.connect(toggle_card)
 		hand_card.set_enabled(false)
 		all_cards.append(hand_card)
+		for child in hand_card.get_children():
+			if child is Control:
+				var child_control: Control = child
+				child_control.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	update_label()
 	update_selected()
 
