@@ -9,6 +9,13 @@ signal card_selected(spell: Spell)
 
 var combat: Combat
 
+const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
+func _ready() -> void:
+	if get_tree().current_scene.name == "Cards3D":
+		# add dummy cards if debugging this scene alone
+		for i in range(5):
+			add_card(HAND_CARD_2D.instantiate())
+
 const HAND_CARD = preload("res://UI/HandCard.tscn")
 func add_card(card_2d: HandCard2D):
 	var hand_card = HAND_CARD.instantiate()
@@ -58,10 +65,7 @@ func update_all_x_offsets():
 func remove_card(card2d: HandCard2D):
 	var removed = false
 	var i = 0
-	
-	print("removing, ", card2d.spell)
-	print()
-	
+
 	for card_3d in cards.get_children():
 		if card_3d.card_2d.spell == card2d.spell:
 			#print("remove at i = %d" % i)
@@ -80,10 +84,11 @@ var raycast_hit: bool = false
 func _process(delta: float) -> void:
 	var mouse_position := get_viewport().get_mouse_position()
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_position)
-	var ray_direction: Vector3 = camera.project_ray_normal(mouse_position)
-	var end: Vector3 = ray_origin + ray_direction * 100
+	#var ray_direction: Vector3 = camera.project_ray_normal(mouse_position)
+	var end: Vector3 = ray_origin + Vector3.FORWARD * 50.0
 	
-	%MouseRayCast.target_position = to_local(end)
+	%MouseRayCast.global_position = ray_origin
+	%MouseRayCast.target_position = %MouseRayCast.to_local(end)
 	
 	if %MouseRayCast.is_colliding():
 		# this bool might need replacing with colision check on a wider area later on.
@@ -93,6 +98,9 @@ func _process(delta: float) -> void:
 		var collider = %MouseRayCast.get_collider()
 		if collider is Area3D and collider.is_in_group("hand_area"):
 			var hand_card = collider.get_parent()
+			var i = 0  # remove me
+			for card in cards.get_children():
+				i += 1
 			if currently_hovering != null:
 				currently_hovering.set_hover(false)
 			hand_card.card_2d.set_hover(true)
