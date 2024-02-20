@@ -2,7 +2,6 @@ extends Control
 
 @onready var grid: Control = $"PickBoosterPopup/VBoxContainer/GridContainer"
 
-
 func start(activity: PostCombatActivity):
 	for option in activity.booster_pickup_options:
 		var option_ui = preload("res://UI/PostBattle/BoosterPickOption.tscn").instantiate()
@@ -29,8 +28,7 @@ func _on_rest_pressed():
 	ActivityManager.pop()
 
 func _on_purge_pressed():
-	# TODO
-	ActivityManager.pop()
+	ActivityManager.substitute(PurgeDeckActivity.new(1, true))
 
 func _on_march_on_pressed():
 	ActivityManager.pop()
