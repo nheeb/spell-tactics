@@ -128,13 +128,14 @@ func setup() -> void:
 
 	t_effects.connect_all_effects()
 	
+	ui.setup(self)
+	
 	# Initial Animations
 	energy.show_drains_in_ui()
 	energy.show_energy_in_ui()
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
-	ui.setup(self)
 	camera = cam
 
 func advance_current_phase():

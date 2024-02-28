@@ -49,10 +49,12 @@ func load_combat_from_state(combat_state: CombatState) -> void:
 	
 	# Connect combat to UI & Cam
 	await get_tree().process_frame
-	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
+
 	
 	# Do initial phase process (if any)
+	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 	combat.setup()
+
 	combat.process_initial_phase()
 	
 	# Play initial animations

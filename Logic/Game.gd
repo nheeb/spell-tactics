@@ -17,7 +17,7 @@ var world: World = null
 
 var start_debugging = false
 
-const DEBUG_SKIP_OVERWORLD = false
+const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false
 const DEBUG_DECK_PURGE = false
