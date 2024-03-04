@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://j0l5hc388gmj"]
+[gd_scene load_steps=6 format=3 uid="uid://j0l5hc388gmj"]
 
 [ext_resource type="Script" path="res://UI/HandCard.gd" id="1_qf1rt"]
+[ext_resource type="PackedScene" uid="uid://cr5uo2crw6yep" path="res://Logic/GeneralUtility/SmoothMovement.tscn" id="2_r8jtd"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_x50fm"]
 size = Vector2(1, 1.4)
@@ -33,3 +34,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0412399, 0, 1.80265e-09)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, 6.75016e-14, 0, 1, -0.042862, 0.000282273, 1.33227e-15)
 shape = SubResource("BoxShape3D_ne87j")
+
+[node name="SmoothMovement" parent="." instance=ExtResource("2_r8jtd")]

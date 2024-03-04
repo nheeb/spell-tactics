@@ -168,3 +168,10 @@ func take_screenshot(shrink_count := 0) -> ImageTexture:
 	#image.compress(Image.COMPRESS_ASTC)
 	var texture := ImageTexture.create_from_image(image)
 	return texture
+
+func get_mouse_pos_absolute() -> Vector2:
+	return get_viewport().get_mouse_position()
+
+func get_mouse_pos_normalized() -> Vector2:
+	var absolute := get_mouse_pos_absolute()
+	return Vector2(absolute.x / get_viewport().size.x, absolute.y / get_viewport().size.y)

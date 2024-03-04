@@ -1,5 +1,7 @@
 class_name HandCard3D extends Node3D
 
+@onready var smooth_movement: SmoothMovement = $SmoothMovement
+
 var card_2d: HandCard2D
 
 func _enter_tree() -> void:

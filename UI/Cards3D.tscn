@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://upcefttcpy6o"]
+[gd_scene load_steps=6 format=3 uid="uid://upcefttcpy6o"]
 
 [ext_resource type="Script" path="res://UI/Cards3D.gd" id="1_s43vq"]
 [ext_resource type="Script" path="res://UI/CardEditorPreview.gd" id="2_dbt0i"]
+[ext_resource type="PackedScene" uid="uid://j0l5hc388gmj" path="res://UI/HandCard.tscn" id="2_takhi"]
 
 [sub_resource type="Environment" id="Environment_621vn"]
 ambient_light_source = 2
@@ -34,6 +35,8 @@ far = 10.0
 [node name="Cards" type="Node3D" parent="CameraPivot"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19977, -1.31324)
+
+[node name="HandCard3D" parent="CameraPivot/Cards" instance=ExtResource("2_takhi")]
 
 [node name="EventCards" type="Node3D" parent="CameraPivot"]
 unique_name_in_owner = true
