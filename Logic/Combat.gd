@@ -133,6 +133,7 @@ func setup() -> void:
 	# Initial Animations
 	energy.show_drains_in_ui()
 	energy.show_energy_in_ui()
+	animation.camera_reach(player.current_tile)
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui

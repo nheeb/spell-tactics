@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnhhb7u1lgml1"]
+
+[ext_resource type="Script" path="res://Effects/ImmediateArrows.gd" id="1_utnbb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oesjh"]
+cull_mode = 2
+shading_mode = 0
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_lwrje"]
+
+[node name="ImmediateArrows" type="Node3D"]
+script = ExtResource("1_utnbb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_oesjh")
+mesh = SubResource("ImmediateMesh_lwrje")

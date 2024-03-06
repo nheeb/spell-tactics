@@ -143,3 +143,6 @@ func play_animation_queue() -> void:
 			await aq.queue_finished
 			currently_playing_queues.erase(aq)
 		animation_queue_empty.emit()
+
+func is_playing() -> bool:
+	return not currently_playing_queues.is_empty()

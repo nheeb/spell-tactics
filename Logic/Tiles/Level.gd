@@ -354,3 +354,9 @@ func save_without_combat(path: String):
 static func load_without_combat(path: String):
 	return Combat.deserialize_level_from_combat_state(CombatState.load_from_disk(path))
 
+var _im_arr: ImmediateArrows
+func immediate_arrows() -> ImmediateArrows:
+	if not _im_arr:
+		_im_arr = VFX.IMMEDIATE_ARROWS.instantiate()
+		add_child(_im_arr)
+	return _im_arr
