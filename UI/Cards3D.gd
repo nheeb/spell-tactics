@@ -1,14 +1,57 @@
 class_name Cards3D extends Node3D
 
-const CAM_MODE_PERSPECTIVE = false
+const CAM_MODE_PERSPECTIVE = true
 const CAM_MODE_ORTHOGONAL = not CAM_MODE_PERSPECTIVE
+const CAM_PERSPECTIVE_DISTANCE = 16.0
 
 signal card_selected(spell: Spell)
 
+enum HandState {
+	Closed,
+	Open,
+	Hover,
+	Drag
+}
+
+const OPEN_Y = -1.3 # Height of open hand cards
+const CLOSED_Y = -2.15 # Height of closed hand cards
+const OPEN_AT_NORM_MOUSE_POS = .3 # Open hand when mouse at normalized y pos
+const CLOSE_AT_NORM_MOUSE_POS = .6 # Close hand when mouse at normalized y pos
+const BASE_ROTATION = Vector3(0.0, - PI / 2, 0.0)
+const RADIAL_TURN = 1.0 # Rotate cards like in a real hand
+const RADIAL_ORIGIN_Y = -5.0 # 
+const PADDING = .9 # Distance between the cards
+const CLOSED_PADDING_EXTRA = -.39 # Distance change when hand closed
+const HOVER_SCALE = 1.3 # Scale of hovered card
+const HOVER_PUSH = .2 # Push Distance of adjacent cards
+const HOVER_LIFT = 0.0 # Y lift of hovered card
+const DRAG_SCALE = 1.15
+const DRAG_PUSH = .3 # Gap size when rearranging cards
+const DRAG_ARRANGE_NORM_MOUSE_POS = .45
+const Z_BASE = -2.0
+#const Z_UNIT = .1
+const BOW_HEIGHT = .15 # Bow shape of card hand
+const PINNED_SCALE = 1.5
+const PINNED_ROTATION = BASE_ROTATION + Vector3(PI / 12, - PI / 8, 0.0)
+const HOVER_BALANCE_RAD = PI / 12
+const HOVER_BALANCE_RANGE = .5
+const HOVER_BALANCE_Y_BONUS = 1.5
+
+var hand_state: HandState = HandState.Closed
+var all_cards : Array[HandCard3D] = []
+var hand_cards : Array[HandCard3D] = []
+var hovered_card : HandCard3D = null
+var dragged_card : HandCard3D = null
+var dragged_on_hand := false
+var dragged_before : HandCard3D = null
+var drag_target_pos : Vector3
+var pinned_card : HandCard3D = null
+var mouse_pos_on_card_layer : Vector3
+
+var test_mode := false # This is true when the scene runs solo
+
 @onready var camera := %Camera3D
 @onready var cards := %Cards
-
-@export var card_gap = 0.06
 
 var combat: Combat
 
@@ -17,22 +60,33 @@ func _ready() -> void:
 	# Set cam mode
 	camera.projection = Camera3D.PROJECTION_PERSPECTIVE if CAM_MODE_PERSPECTIVE \
 			 else Camera3D.PROJECTION_ORTHOGONAL
+	if CAM_MODE_PERSPECTIVE:
+		camera.position.z = CAM_PERSPECTIVE_DISTANCE + Z_BASE
+		camera.fov = 2 * rad_to_deg(atan(-Z_BASE/CAM_PERSPECTIVE_DISTANCE))
+		#print(camera.fov)
+		#print(camera.position.z)
+		
+	
+	# Move cards z
+	cards.global_position.z = Z_BASE
 	
 	# add dummy cards if debugging this scene alone
 	if get_tree().current_scene.name == "Cards3D":
+		test_mode = true
 		for i in range(5):
 			add_card(HAND_CARD_2D.instantiate())
+			await get_tree().create_timer(.5).timeout
 
 const HAND_CARD = preload("res://UI/HandCard.tscn")
 func add_card(card_2d: HandCard2D):
 	var hand_card = HAND_CARD.instantiate()
 	hand_card.set_card(card_2d)
 	cards.add_child(hand_card)
-	hand_card.owner = self
-	var n = cards.get_child_count()
-	#print("n = %d, offset = %d" % [n, calc_offset(n)])
-	#hand_card.position.x = calc_x_offset(n, n)
-	update_all_x_offsets()
+	#hand_card.owner = self
+	all_cards.append(hand_card)
+	hand_cards.push_front(hand_card)
+	hand_card.global_position = %CardSpawn.global_position
+	hand_card.global_position.z = Z_BASE
 
 const EVENT_CARD = preload("res://UI/EventCard3D.tscn")
 const EVENT_HEIGHT = 2.0
@@ -53,123 +107,30 @@ func hide_event() -> void:
 		current_shown_event_card.queue_free()
 		current_shown_event_card = null
 
-func calc_x_offset(i, n):
-	# card width + gap
-	var dist = 1.0 + card_gap
-	var start = -(n-1) * dist / 2.0
-	var step = i * dist
-	var offset = start + step
-	return offset
-	
-func update_all_x_offsets():
-	var i = 0
-	var n = cards.get_child_count()
-	for hand_card in cards.get_children():
-		hand_card.position.x = calc_x_offset(i, n)
-		i += 1
-
-
 func remove_card(card2d: HandCard2D):
-	var removed = false
-	var i = 0
+	var to_be_removed : HandCard3D = null
 
-	for card_3d in cards.get_children():
+	for card_3d in all_cards:
 		if card_3d.card_2d.spell == card2d.spell:
-			#print("remove at i = %d" % i)
 			cards.remove_child(card_3d)
-			removed = true
-		i += 1
-	if not removed:
+			to_be_removed = card_3d
+
+	if not to_be_removed:
 		printerr("Card ", card2d, " which should be removed not found.")
 		return
 	
-	update_all_x_offsets()
-	
+	all_cards.erase(to_be_removed)
+	hand_cards.erase(to_be_removed)
+	hovered_card = null if hovered_card == to_be_removed else hovered_card
+	dragged_card = null if dragged_card == to_be_removed else dragged_card
+	pinned_card = null if pinned_card == to_be_removed else pinned_card
 
-var currently_hovering: HandCard2D = null
-var raycast_hit: bool = false
 func _process(delta: float) -> void:
-	var mouse_position := get_viewport().get_mouse_position()
-	var ray_origin: Vector3 = camera.project_ray_origin(mouse_position)
-	var ray_direction: Vector3
-	if CAM_MODE_ORTHOGONAL:
-		ray_direction = Vector3.FORWARD
-	else:
-		ray_direction = camera.project_ray_normal(mouse_position)
-	var ray_end: Vector3 = ray_origin + ray_direction * 50.0
-	
-	%MouseRayCast.global_position = ray_origin
-	%MouseRayCast.target_position = %MouseRayCast.to_local(ray_end)
-	
-	# 3D Mouse pos on cards layer
-	var ray_layer_intersection : Vector3 = Plane(cards.global_position, Vector3.FORWARD)\
-								.intersects_ray(ray_origin, ray_direction)
-	
-	if %MouseRayCast.is_colliding():
-		# this bool might need replacing with colision check on a wider area later on.
-		# as it stands, the player can accidentally click on a tile through the gap between cards.
-		raycast_hit = true
-		
-		var collider = %MouseRayCast.get_collider()
-		if collider is Area3D and collider.is_in_group("hand_area"):
-			var hand_card = collider.get_parent()
-			var i = 0  # remove me
-			for card in cards.get_children():
-				i += 1
-			if currently_hovering != null:
-				currently_hovering.set_hover(false)
-			hand_card.card_2d.set_hover(true)
-			currently_hovering = hand_card.card_2d
-			if Input.is_action_just_pressed("select"):
-				var combat_agrees = true
-				if combat != null:
-					if combat.current_phase != Combat.RoundPhase.Spell:
-						combat_agrees = false
-				if hand_card.card_2d.enabled and combat_agrees:
-					get_viewport().set_input_as_handled()
-					card_selected.emit(hand_card.get_spell())
-	else:
-		if currently_hovering != null:
-			currently_hovering.set_hover(false)
-			currently_hovering = null
-			
-		raycast_hit = false
+	check_hand_state()
+	calc_positions()
+	visual_process(VisualTime.visual_time_scale * delta)
 
-
-
-enum HandState {
-	Closed,
-	Open,
-	Hover,
-	Drag
-}
-var hand_state: HandState = HandState.Closed
-
-var all_cards : Array[HandCard3D] = []
-var hand_cards : Array[HandCard3D] = []
-var hovered_card : HandCard3D = null
-var dragged_card : HandCard3D = null
-var dragged_on_hand := false
-var dragged_before : HandCard3D = null
-var drag_target_pos : Vector3
-
-const OPEN_Y = 0.0 # Height of open hand cards
-const CLOSED_Y = -0.7 # Height of closed hand cards
-const OPEN_AT_NORM_MOUSE_POS = .2 # Open hand when mouse at normalized y pos
-const CLOSE_AT_NORM_MOUSE_POS = .6 # Close hand when mouse at normalized y pos
-const RADIAL_TURN = true # Rotate cards like in a real hand
-const RADIAL_ORIGIN_Y = .1 # 
-const PADDING = 1.0 # Distance between the cards
-const CLOSED_PADDING_EXTRA = -.3 # Distance change when hand closed
-const HOVER_SCALE = 1.4 # Scale of hovered card
-const HOVER_PUSH = .5 # Push Distance of adjacent cards
-const HOVER_LIFT = .4 # Y lift of hovered card
-const DRAG_PUSH = .4 # Gap size when rearranging cards
-const DRAG_ARRANGE_NORM_MOUSE_POS = .35
-#const Z_UNIT = .1 
-const BOW_HEIGHT = .2 # Bow shape of card hand
-
-
+var raycast_hit := false
 func check_hand_state():
 	var mouse_pos_2d := Utility.get_mouse_pos_absolute()
 	var mouse_pos_2d_normalized := Utility.get_mouse_pos_normalized()
@@ -186,15 +147,21 @@ func check_hand_state():
 	%MouseRayCast.force_raycast_update()
 	
 	# 3D Mouse pos on cards layer
-	var ray_layer_intersection : Vector3 = Plane(cards.global_position, Vector3.FORWARD)\
-								.intersects_ray(ray_origin, ray_direction)
-	var mouse_pos_3d : Vector3 = ray_layer_intersection
+	var cards_plane := Plane(Vector3.BACK,cards.global_position)
 	
+	var ray_layer_intersection = cards_plane.intersects_ray(ray_origin, ray_direction)
+	var mouse_pos_3d : Vector3 = Vector3(0.0, 0.0, Z_BASE)
+	if ray_layer_intersection:
+		mouse_pos_3d = ray_layer_intersection
+		mouse_pos_on_card_layer = mouse_pos_3d
+	
+	raycast_hit = false
 	var card_on_cursor: HandCard3D = null
 	if %MouseRayCast.is_colliding():
 		var collider = %MouseRayCast.get_collider()
 		if collider is Area3D and collider.is_in_group("hand_area"):
 			card_on_cursor = collider.get_parent()
+			raycast_hit = true
 	
 	match hand_state:
 		HandState.Closed:
@@ -204,18 +171,25 @@ func check_hand_state():
 			if mouse_pos_2d_normalized.y > CLOSE_AT_NORM_MOUSE_POS:
 				hand_state = HandState.Closed
 			elif card_on_cursor:
-				hovered_card = card_on_cursor
-				hand_state = HandState.Hover
+				if card_on_cursor in hand_cards:
+					hovered_card = card_on_cursor
+					hand_state = HandState.Hover
 		HandState.Hover:
 			if not card_on_cursor:
 				hand_state = HandState.Open
+				hovered_card.card_2d.set_hover(false)
+				hovered_card = null
 			else:
-				hovered_card = card_on_cursor
+				if hovered_card != card_on_cursor:
+					hovered_card.card_2d.set_hover(false)
+					card_on_cursor.card_2d.set_hover(false)
+					hovered_card = card_on_cursor
 				if Input.is_action_just_pressed("select"):
 					hand_state = HandState.Drag
 					dragged_on_hand = true
 					drag_target_pos = mouse_pos_3d
 					dragged_card = card_on_cursor
+					hovered_card = null
 					var drag_card_index := hand_cards.find(dragged_card)
 					assert(drag_card_index != -1)
 					if drag_card_index != hand_cards.size() - 1:
@@ -228,14 +202,44 @@ func check_hand_state():
 			dragged_on_hand = mouse_pos_2d_normalized.y < DRAG_ARRANGE_NORM_MOUSE_POS
 			if dragged_on_hand:
 				dragged_before = hand_cards\
-					.filter(func(c): return c.global_position.x > dragged_card.global_position.x)\
+					.filter(func(c): return c.global_position.x > mouse_pos_3d.x)\
 					.reduce(func(a, b): return a if a.global_position.x < b.global_position.x else b)
 			if not Input.is_action_pressed("select"):
 				hand_state = HandState.Open
-				if dragged_before:
-					hand_cards.insert(hand_cards.find(dragged_before), dragged_card)
-				else:
-					hand_cards.append(dragged_card)
+				
+				var card_got_played := false
+				
+				if not dragged_on_hand:
+					# Player tried to play the card
+					var combat_agrees = true
+					if combat != null:
+						if combat.current_phase != Combat.RoundPhase.Spell:
+							combat_agrees = false
+					if test_mode or (dragged_card.card_2d.enabled and combat_agrees):
+						card_got_played = true
+						get_viewport().set_input_as_handled()
+						card_selected.emit(dragged_card.get_spell())
+						if pinned_card:
+							pinned_card.card_2d.set_hover(false)
+							if dragged_before:
+								hand_cards.insert(hand_cards.find(dragged_before), pinned_card)
+							else:
+								hand_cards.append(pinned_card)
+						pinned_card = dragged_card
+						dragged_card = null
+				if not card_got_played:
+					# Card got rearranged
+					dragged_card.card_2d.set_hover(false)
+					if dragged_before:
+						hand_cards.insert(hand_cards.find(dragged_before), dragged_card)
+					else:
+						hand_cards.append(dragged_card)
+					dragged_card = null
+
+	if pinned_card and Input.is_action_just_pressed("deselect"):
+		pinned_card.card_2d.set_hover(false)
+		hand_cards.push_back(pinned_card)
+		pinned_card = null
 
 func calc_positions():
 	# Create blank 2D positions, scales (float) & rotations
@@ -245,9 +249,9 @@ func calc_positions():
 	for card in all_cards:
 		positions[card] = Vector2.ZERO
 		scales[card] = 1.0
-		rotations[card] = 0.0
+		rotations[card] = BASE_ROTATION
 	var hand_size := hand_cards.size()
-	var middle_index := (hand_size - 1.0) / 2.0
+	var middle_index : float = (hand_size - 1.0) / 2.0
 	match hand_state:
 		HandState.Closed:
 			for i in range(hand_size):
@@ -255,6 +259,11 @@ func calc_positions():
 				var pos_index := i - middle_index
 				positions[card] = Vector2(pos_index * \
 					(PADDING + CLOSED_PADDING_EXTRA), CLOSED_Y)
+				rotations[card].z += atan(positions[card].x / RADIAL_ORIGIN_Y) * RADIAL_TURN
+				var pos_index_norm := pos_index / middle_index
+				var bow_height := BOW_HEIGHT * Utility.clamp_map_pow(\
+					abs(pos_index_norm), 0.0, 1.0, 1.0, 0.0, 2.0)
+				positions[card].y += bow_height
 		HandState.Open:
 			for i in range(hand_size):
 				var card := hand_cards[i]
@@ -272,6 +281,11 @@ func calc_positions():
 				else:
 					positions[card] = Vector2(pos_index * \
 					PADDING + hover_push, OPEN_Y)
+			var balance_pos := mouse_pos_on_card_layer - hovered_card.global_position
+			rotations[hovered_card] += Vector3(\
+				clamp(-balance_pos.y / HOVER_BALANCE_RANGE,-1,1) * HOVER_BALANCE_RAD,\
+				clamp(balance_pos.x / HOVER_BALANCE_RANGE,-1,1) * HOVER_BALANCE_RAD * HOVER_BALANCE_Y_BONUS ,\
+				0.0 )
 		HandState.Drag:
 			if dragged_on_hand:
 				var drag_push := -DRAG_PUSH
@@ -286,12 +300,36 @@ func calc_positions():
 					var card := hand_cards[i]
 					var pos_index := i - middle_index
 					positions[card] = Vector2(pos_index * PADDING, OPEN_Y)
-			positions[dragged_card] = drag_target_pos
+			positions[dragged_card] = Utility.vec3_discard_z(drag_target_pos)
+			scales[dragged_card] = DRAG_SCALE
 
+	if pinned_card:
+		positions[pinned_card] = Utility.vec3_discard_z(%PinnedCard.global_position) 
+		scales[pinned_card] = PINNED_SCALE
+		rotations[pinned_card] = PINNED_ROTATION
+
+	# Submit all transformations to the
 	for card in all_cards:
-		card.smooth_movement.target_pos = positions[card]
-		card.smooth_movement.target_scale = scales[card]
+		#card.smooth_movement.target_pos = Utility.vec_xy_to_vec3(positions[card],\
+				#Z_BASE + (hand_cards.find(card) * Z_UNIT if card != hovered_card else 0.0))
+		card.smooth_movement.target_pos = Utility.vec_xy_to_vec3(positions[card], Z_BASE)
+		card.smooth_movement.target_scale = scales[card] * Vector3.ONE
+		card.smooth_movement.target_rotation = rotations[card]
+		
+		# Set render prio
+		card.set_render_prio(hand_cards.find(card) \
+			+ 20 * int(card == hovered_card) \
+			+ 30 * int(card == pinned_card) \
+			+ 40 * int(card == dragged_card) )
+		
+		# Hover card bigger collision
+		card.set_collision_scale(1.2 if card == hovered_card else 1.0)
 
 func visual_process(delta: float) -> void:
 	for card in all_cards:
-		card.smooth_movement.movement_process(delta)
+		if card == dragged_card:
+			card.smooth_movement.movement_process(delta, 10.0)
+		elif card == pinned_card:
+			card.smooth_movement.movement_process(delta, 4.0)
+		else:
+			card.smooth_movement.movement_process(delta, 2.0)

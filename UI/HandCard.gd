@@ -15,3 +15,8 @@ func set_card(card: HandCard2D):
 	card_2d = card
 	$Quad/SubViewport.add_child(card)
 	
+func set_render_prio(p: int) -> void:
+	$Quad.get_surface_override_material(0).set("render_priority", p)
+
+func set_collision_scale(s: float) -> void:
+	$Area3D/CollisionShape3D.scale = Vector3.ONE * s

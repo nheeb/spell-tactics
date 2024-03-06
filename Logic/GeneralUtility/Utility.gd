@@ -15,6 +15,10 @@ func clamp_map(value: float, istart: float, istop: float, ostart: float, ostop: 
 	value = clamp(value, istart, istop)
 	return ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
 
+func clamp_map_pow(value: float, istart: float, istop: float, ostart: float, ostop: float, e: float) -> float:
+	var middle = pow(clamp_map(value, istart, istop, 0.0, 1.0), e)
+	return lerp(ostart, ostop, middle)
+
 func align_node(node: Node3D, local_direction: Vector3, target_global_direction: Vector3):
 	var current_global_direction := node.global_position.direction_to(node.to_global(local_direction))
 	var cross_direction := current_global_direction.cross(target_global_direction).normalized()
@@ -172,6 +176,15 @@ func take_screenshot(shrink_count := 0) -> ImageTexture:
 func get_mouse_pos_absolute() -> Vector2:
 	return get_viewport().get_mouse_position()
 
-func get_mouse_pos_normalized() -> Vector2:
+func get_mouse_pos_normalized(invert_y_axis := true) -> Vector2:
 	var absolute := get_mouse_pos_absolute()
-	return Vector2(absolute.x / get_viewport().size.x, absolute.y / get_viewport().size.y)
+	if invert_y_axis:
+		return Vector2(absolute.x / get_viewport().get_visible_rect().size.x, 1.0 - (absolute.y / get_viewport().get_visible_rect().size.y))
+	else:
+		return Vector2(absolute.x / get_viewport().get_visible_rect().size.x, absolute.y / get_viewport().get_visible_rect().size.y)
+
+func vec_xy_to_vec3(v: Vector2, z := 0.0) -> Vector3:
+	return Vector3(v.x, v.y, z)
+
+func vec3_discard_z(v: Vector3) -> Vector2:
+	return Vector2(v.x, v.y)

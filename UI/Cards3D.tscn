@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://upcefttcpy6o"]
+[gd_scene load_steps=5 format=3 uid="uid://upcefttcpy6o"]
 
 [ext_resource type="Script" path="res://UI/Cards3D.gd" id="1_s43vq"]
 [ext_resource type="Script" path="res://UI/CardEditorPreview.gd" id="2_dbt0i"]
-[ext_resource type="PackedScene" uid="uid://j0l5hc388gmj" path="res://UI/HandCard.tscn" id="2_takhi"]
 
 [sub_resource type="Environment" id="Environment_621vn"]
 ambient_light_source = 2
@@ -26,21 +25,22 @@ environment = SubResource("Environment_621vn")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 unique_name_in_owner = true
-projection = 1
-fov = 92.5
+fov = 90.0
 size = 3.8
 near = 0.01
-far = 10.0
+far = 100.0
 
 [node name="Cards" type="Node3D" parent="CameraPivot"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19977, -1.31324)
-
-[node name="HandCard3D" parent="CameraPivot/Cards" instance=ExtResource("2_takhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, -1.5)
 
 [node name="EventCards" type="Node3D" parent="CameraPivot"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00032, 0.4318, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72866, 0.638435, -2)
+
+[node name="PinnedCard" type="Node3D" parent="CameraPivot"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.48754, 0.388316, -1.153)
 
 [node name="MouseRayCast" type="RayCast3D" parent="CameraPivot"]
 unique_name_in_owner = true
@@ -48,6 +48,10 @@ target_position = Vector3(0, 0, -20)
 collide_with_areas = true
 debug_shape_custom_color = Color(0.756863, 0.25098, 0.780392, 1)
 debug_shape_thickness = 4
+
+[node name="CardSpawn" type="Node3D" parent="CameraPivot"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05677, -2.58383, -1.33061)
 
 [node name="DebugBorder" type="Panel" parent="."]
 visible = false
