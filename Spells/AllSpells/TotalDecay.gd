@@ -26,7 +26,7 @@ func casting_effect() -> void:
 	if decay_energy >= 1:
 		var choice = PlayerChoiceActivity.new("Do you want to pay extra Decay Energy?", \
 		range(decay_energy+1), range(decay_energy+1).map(func (i): return "Pay %s extra" % i))
-		combat.animation.player_choice(choice)
+		combat.animation.combat_choice(choice)
 		await choice.resolved
 		additional_payment = choice.get_result()
 	for i in range(additional_payment):

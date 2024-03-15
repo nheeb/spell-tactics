@@ -90,8 +90,8 @@ func show(node: Node3D) -> AnimationProperty:
 func hide(node: Node3D) -> AnimationProperty:
 	return property(node, "visible", false)
 
-func player_choice(activity: PlayerChoiceActivity) -> AnimationPlayerChoice:
-	var a = AnimationPlayerChoice.new(activity)
+func combat_choice(activity: CombatChoiceActivity) -> AnimationCombatChoice:
+	var a = AnimationCombatChoice.new(activity)
 	add_animation_object(a)
 	return a
 

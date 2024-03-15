@@ -1,11 +1,8 @@
-class_name PlayerChoiceActivity extends Activity
+class_name PlayerChoiceActivity extends CombatChoiceActivity
 
 var question: String
 var choices: Array
 var choices_strings: Array
-
-var result: Variant
-signal resolved(result)
 
 ## Creates the activity
 func _init(_question: String, _choices: Array, _choices_strings: Array = []) -> void:
@@ -15,10 +12,3 @@ func _init(_question: String, _choices: Array, _choices_strings: Array = []) -> 
 	assert(choices)
 	if choices_strings:
 		assert(choices.size() == choices_strings.size())
-
-func _resolve(_result: Variant) -> void:
-	result = _result
-	resolved.emit(result)
-
-func get_result() -> Variant:
-	return result

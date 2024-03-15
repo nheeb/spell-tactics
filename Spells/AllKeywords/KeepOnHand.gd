@@ -9,7 +9,7 @@ func _after_spell(combat: Combat, spell: Spell):
 	var choice = PlayerChoiceActivity.new("Do you want to keep \"%s\"" % spell.type.pretty_name, \
 					[true, false], ["Yes", "No"])
 	combat.animation.wait(.5)
-	combat.animation.player_choice(choice)
+	combat.animation.combat_choice(choice)
 	await choice.resolved
 	if choice.get_result():
 		combat.cards.fetch_from_discard(spell)

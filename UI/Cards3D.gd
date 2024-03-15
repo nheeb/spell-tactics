@@ -36,6 +36,7 @@ const PINNED_ROTATION = BASE_ROTATION + Vector3(PI / 12, - PI / 8, 0.0)
 const HOVER_BALANCE_RAD = PI / 12
 const HOVER_BALANCE_RANGE = .5
 const HOVER_BALANCE_Y_BONUS = 1.5
+const CHOSEN_LIFT = .5
 
 var hand_state: HandState = HandState.Closed
 var all_cards : Array[HandCard3D] = []
@@ -54,6 +55,8 @@ var test_mode := false # This is true when the scene runs solo
 @onready var cards := %Cards
 
 var combat: Combat
+
+
 
 const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 func _ready() -> void:
@@ -185,18 +188,21 @@ func check_hand_state():
 					card_on_cursor.card_2d.set_hover(false)
 					hovered_card = card_on_cursor
 				if Input.is_action_just_pressed("select"):
-					hand_state = HandState.Drag
-					dragged_on_hand = true
-					drag_target_pos = mouse_pos_3d
-					dragged_card = card_on_cursor
-					hovered_card = null
-					var drag_card_index := hand_cards.find(dragged_card)
-					assert(drag_card_index != -1)
-					if drag_card_index != hand_cards.size() - 1:
-						dragged_before = hand_cards[drag_card_index + 1]
+					if choice_running:
+						choose_card(hovered_card)
 					else:
-						dragged_before = null
-					hand_cards.erase(dragged_card)
+						hand_state = HandState.Drag
+						dragged_on_hand = true
+						drag_target_pos = mouse_pos_3d
+						dragged_card = card_on_cursor
+						hovered_card = null
+						var drag_card_index := hand_cards.find(dragged_card)
+						assert(drag_card_index != -1)
+						if drag_card_index != hand_cards.size() - 1:
+							dragged_before = hand_cards[drag_card_index + 1]
+						else:
+							dragged_before = null
+						hand_cards.erase(dragged_card)
 		HandState.Drag:
 			drag_target_pos = mouse_pos_3d
 			dragged_on_hand = mouse_pos_2d_normalized.y < DRAG_ARRANGE_NORM_MOUSE_POS
@@ -235,6 +241,10 @@ func check_hand_state():
 					else:
 						hand_cards.append(dragged_card)
 					dragged_card = null
+
+	if choice_running:
+		if Input.is_action_just_pressed("deselect"):
+			clear_chosen_cards()
 
 	if pinned_card and Input.is_action_just_pressed("deselect"):
 		pinned_card.card_2d.set_hover(false)
@@ -302,6 +312,9 @@ func calc_positions():
 					positions[card] = Vector2(pos_index * PADDING, OPEN_Y)
 			positions[dragged_card] = Utility.vec3_discard_z(drag_target_pos)
 			scales[dragged_card] = DRAG_SCALE
+	if choice_running:
+		for card in chosen_cards:
+			positions[card] -= Vector2.UP * CHOSEN_LIFT
 
 	if pinned_card:
 		positions[pinned_card] = Utility.vec3_discard_z(%PinnedCard.global_position) 
@@ -333,3 +346,51 @@ func visual_process(delta: float) -> void:
 			card.smooth_movement.movement_process(delta, 4.0)
 		else:
 			card.smooth_movement.movement_process(delta, 2.0)
+
+
+#################
+## Card Choice ##
+#################
+
+var choice_running := false
+var choice_count_min : int
+var choice_count_max : int
+var chosen_cards: Array
+
+signal card_chosen(chosen_card_count: int)
+
+func start_choice(_min: int, _max: int) -> void:
+	choice_count_min = _min
+	choice_count_max = _max
+	chosen_cards = []
+	choice_running = true
+
+func end_choice_and_get_result() -> Array:
+	var _chosen_spells = []
+	for c in chosen_cards:
+		c = c as HandCard3D
+		_chosen_spells.append(c.card_2d.spell)
+	chosen_cards = []
+	choice_running = false
+	return _chosen_spells
+
+func unchoose_card(card: HandCard3D) -> void:
+	if card in chosen_cards:
+		chosen_cards.erase(card)
+		card_chosen.emit(chosen_cards.size())
+	card.card_2d.set_chosen(false)
+
+func choose_card(card) -> void:
+	if not card in chosen_cards:
+		chosen_cards.append(card)
+	
+		if chosen_cards.size() > choice_count_max:
+			unchoose_card(chosen_cards.pop_front())
+	
+		card_chosen.emit(chosen_cards.size())
+		
+		card.card_2d.set_chosen(true)
+
+func clear_chosen_cards():
+	for card in chosen_cards:
+		unchoose_card(card)

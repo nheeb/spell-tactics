@@ -42,15 +42,15 @@ const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 const SHRINKED_TITLE = preload("res://Assets/Fonts/LabelSettings/HandCard2D_Title_LabelSettings_shrinked.tres")
 @export var icon_size := 56
 @export var icon_size_spelltype := 32
-func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff: String, spell_type: bool = false):
-	if len(pretty_name) > 15 and not spell_type:
+func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff: String, _spell_type: bool = false):
+	if len(pretty_name) > 15 and not _spell_type:
 		%Name.label_settings = SHRINKED_TITLE
 	%Name.text = pretty_name
 	%Effect.text = effect
 	for cost in costs.stack:
 		var icon = ENERGY_ICON.instantiate()
 		icon.type = cost
-		if spell_type:
+		if _spell_type:
 			icon.min_size = icon_size_spelltype
 		else:
 			icon.min_size = icon_size
@@ -63,25 +63,31 @@ func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff:
 const PANEL_DEFAULT = preload("res://UI/Theme/HandCard2D_panel_default.tres")
 const PANEL_HOVER = preload("res://UI/Theme/HandCard2D_panel_hover.tres")
 const PANEL_DISABLED = preload("res://UI/Theme/HandCard2D_panel_disabled.tres")
+const PANEL_CHOSEN = preload("res://UI/Theme/HandCard2D_panel_chosen.tres")
+const PANEL_PRIORITY_ORDER = [PANEL_CHOSEN, PANEL_DISABLED, PANEL_HOVER, PANEL_DEFAULT]
 
-var hovered: bool
-var enabled: bool
+var panel_stack = [PANEL_DEFAULT]
+
+func set_panel(panel, b: bool = not (panel in panel_stack)):
+	if b != (panel in panel_stack):
+		if b:
+			panel_stack.append(panel)
+		else:
+			panel_stack.erase(panel)
+		
+		panel_stack.sort_custom(func(x, y): return PANEL_PRIORITY_ORDER.find(x) < PANEL_PRIORITY_ORDER.find(y))
+
+		$PanelContainer.set("theme_override_styles/panel", panel_stack[0])
+
+func set_chosen(c: bool):
+	set_panel(PANEL_CHOSEN, c)
 
 func set_hover(hover: bool):
-	if enabled:
-		if hover:
-			$PanelContainer.set("theme_override_styles/panel", PANEL_HOVER)
-		else:
-			$PanelContainer.set("theme_override_styles/panel", PANEL_DEFAULT)
-		
-		
+	set_panel(PANEL_HOVER, hover)
+
 func set_enabled(e: bool):
-	enabled = e
-	if e:
-		$PanelContainer.set("theme_override_styles/panel", PANEL_DEFAULT)
-	else:
-		$PanelContainer.set("theme_override_styles/panel", PANEL_DISABLED)
-		
+	set_panel(PANEL_DISABLED, not e)
+
 var _last_pressed_state: bool = false
 
 func _gui_input(event):

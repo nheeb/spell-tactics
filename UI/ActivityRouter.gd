@@ -27,7 +27,7 @@ func _on_activity_pushed(activity: Activity):
 				view.set_activity(activity)
 			views.append(view)
 			add_child(view)
-			if not view.get("dont_hide_other_views"):
+			if not activity.get("dont_hide_other_views"):
 				_hide_all_but_top()
 			_show_top()
 			return

@@ -120,6 +120,7 @@ func initialize_active_buttons(new_actives: Array[Active]):
 	for active in actives:
 		var button = ACTIVE_BUTTON.instantiate()
 		button.name = "ActiveButton%d" % i
+		button.text = active.type.pretty_name
 		button.pressed.connect(_on_active_button_pressed.bind(i))
 		active.got_locked.connect(_on_active_locked.bind(i))
 		active.got_unlocked.connect(_on_active_unlocked.bind(i))

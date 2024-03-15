@@ -5,14 +5,12 @@ const MAX_COLUMS = 4
 
 var activity: PlayerChoiceActivity
 
-@export var dont_hide_other_views := true
-
 func set_activity(_activity: PlayerChoiceActivity):
 	self.activity = _activity
 	setup()
 
 func resolve(result: Variant):
-	#ActivityManager.pop() will be done by the AnimationPlayerChoice
+	#ActivityManager.pop() will be done by the AnimationCombatChoice
 	activity._resolve(result)
 
 func on_view_removed() -> void:

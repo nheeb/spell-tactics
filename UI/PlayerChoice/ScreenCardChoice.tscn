@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxkg4yr5fq1ry"]
+
+[ext_resource type="Script" path="res://UI/PlayerChoice/ScreenCardChoice.gd" id="1_7rieh"]
+[ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/DefaultLabelSettings.tres" id="1_65sao"]
+
+[node name="ScreenCardChoice" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_7rieh")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_top = -0.121296
+anchor_right = 1.0
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Prompt" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.390501
+anchor_top = 0.406
+anchor_right = 0.607835
+anchor_bottom = 0.46369
+offset_left = 0.237305
+offset_top = 0.519989
+offset_right = -0.0427246
+offset_bottom = 0.215149
+grow_horizontal = 2
+grow_vertical = 2
+text = "Select X Cards"
+label_settings = ExtResource("1_65sao")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.512901
+anchor_top = 0.462577
+anchor_right = 0.604901
+anchor_bottom = 0.531577
+offset_left = 0.22937
+offset_top = 0.416626
+offset_right = 0.275879
+offset_bottom = 0.230347
+grow_horizontal = 2
+grow_vertical = 2
+text = "SUBMIT"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.384583
+anchor_top = 0.471519
+anchor_right = 0.505167
+anchor_bottom = 0.521556
+offset_left = 0.599976
+offset_top = -0.240051
+offset_right = -0.920044
+offset_bottom = -0.280029
+grow_horizontal = 2
+grow_vertical = 2
+text = "(0 selected)"
+label_settings = ExtResource("1_65sao")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

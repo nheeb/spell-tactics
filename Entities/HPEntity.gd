@@ -39,9 +39,16 @@ func inflict_damage(damage: int):
 		return
 	hp = hp - damage
 
-func inflict_damage_with_visuals(damage: int) -> AnimationObject:
+func inflict_damage_with_visuals(damage: int, with_text := false) -> AnimationObject:
 	inflict_damage(damage)
-	return combat.animation.update_hp(self)
+	if not with_text:
+		return combat.animation.update_hp(self)
+	else:
+		return combat.animation.reappend_as_subqueue([
+			combat.animation.update_hp(self),
+			combat.animation.say(self.visual_entity, "%s Damage" % damage,\
+		 		{"color": Color.RED, "font_size": 64}).set_duration(.5).set_flag_with()
+		])
 
 func inflict_heal_with_visuals(heal: int) -> AnimationObject:
 	type = type as HPEntityType

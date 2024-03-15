@@ -113,6 +113,12 @@ func setup() -> void:
 			else:
 				printerr("Entity without ID in savegame")
 
+	
+	actives = [ \
+		Active.new(SpellType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self),\
+		Active.new(SpellType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self)]
+
+
 	# Check if all spells have ids
 	# TODO change this when Overworld is done
 	for s in get_all_spells():
@@ -123,8 +129,6 @@ func setup() -> void:
 			Game.add_to_spell_count()
 
 	# TODO connect entity & spell references
-	
-	actives = [Active.new(SpellType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self)]
 
 	t_effects.connect_all_effects()
 	
