@@ -138,31 +138,11 @@ stretch = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1920, 1079)
 render_target_update_mode = 4
 
 [node name="Cards3D" parent="AspectRatioContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
 unique_name_in_owner = true
-
-[node name="Actives" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0239583
-anchor_top = 0.65
-anchor_right = 0.147396
-anchor_bottom = 0.980556
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Actives"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -3.05176e-05
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="EnergyArea" type="Panel" parent="."]
 layout_mode = 1
@@ -244,6 +224,26 @@ text = "GAME OVER"
 label_settings = ExtResource("5_jttea")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Actives" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0177083
+anchor_top = 0.65
+anchor_right = 0.130208
+anchor_bottom = 0.980556
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Actives"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="EnemyArea" type="Panel" parent="."]
 layout_mode = 1
