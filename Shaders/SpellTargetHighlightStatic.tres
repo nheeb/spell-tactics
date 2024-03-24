@@ -11,6 +11,8 @@ uniform float range = 0.04;
 uniform float smooth_edge = 0.1;
 uniform float width = 0.1;
 
+uniform float alpha = 1.0;
+
 float sdHexagon( in vec2 p, in float r )
 {
     const vec3 k = vec3(-0.866025404,0.5,0.577350269);
@@ -26,7 +28,7 @@ void fragment() {
 	//float time_offset = range * sin(TIME * time_scale);
 	float outer_edge = 1.0 - smoothstep(smooth_edge, smooth_edge, d);
 	float inner_edge = smoothstep(width - smooth_edge, width + smooth_edge, d);
-	ALPHA = outer_edge * inner_edge;
+	ALPHA = outer_edge * inner_edge * alpha;
 }
 "
 
@@ -37,4 +39,5 @@ shader_parameter/albedo = Color(1, 0.407843, 0.419608, 1)
 shader_parameter/time_scale = 4.0
 shader_parameter/range = 0.04
 shader_parameter/smooth_edge = 0.13
-shader_parameter/width = 0.08
+shader_parameter/width = -0.13
+shader_parameter/alpha = 1.0

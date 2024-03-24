@@ -56,8 +56,6 @@ var test_mode := false # This is true when the scene runs solo
 
 var combat: Combat
 
-
-
 const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 func _ready() -> void:
 	# Set cam mode
@@ -79,6 +77,9 @@ func _ready() -> void:
 		for i in range(5):
 			add_card(HAND_CARD_2D.instantiate())
 			await get_tree().create_timer(.5).timeout
+
+func setup(_combat : Combat):
+	combat = _combat
 
 const HAND_CARD = preload("res://UI/HandCard.tscn")
 func add_card(card_2d: HandCard2D):
@@ -175,18 +176,15 @@ func check_hand_state():
 				hand_state = HandState.Closed
 			elif card_on_cursor:
 				if card_on_cursor in hand_cards:
-					hovered_card = card_on_cursor
+					_set_hovered_card(card_on_cursor)
 					hand_state = HandState.Hover
 		HandState.Hover:
 			if not card_on_cursor:
 				hand_state = HandState.Open
-				hovered_card.card_2d.set_hover(false)
-				hovered_card = null
+				_set_hovered_card(null)
 			else:
 				if hovered_card != card_on_cursor:
-					hovered_card.card_2d.set_hover(false)
-					card_on_cursor.card_2d.set_hover(false)
-					hovered_card = card_on_cursor
+					_set_hovered_card(card_on_cursor)
 				if Input.is_action_just_pressed("select"):
 					if choice_running:
 						choose_card(hovered_card)
@@ -250,6 +248,14 @@ func check_hand_state():
 		pinned_card.card_2d.set_hover(false)
 		hand_cards.push_back(pinned_card)
 		pinned_card = null
+
+func _set_hovered_card(card):
+	if hovered_card != null:
+		hovered_card.card_2d.set_hover(false)
+	hovered_card = card
+	if hovered_card != null:
+		hovered_card.card_2d.set_hover(true)
+	Events.card_hovered.emit(card)
 
 func calc_positions():
 	# Create blank 2D positions, scales (float) & rotations

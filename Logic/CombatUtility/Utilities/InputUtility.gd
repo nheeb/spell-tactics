@@ -16,3 +16,17 @@ func process_action(action: PlayerAction) -> bool:
 		# printerr("Invalid Player Action: %s" % action.action_string)
 		action.on_fail(combat)
 		return false
+
+func tile_hovered(tile: Tile) -> void:
+	combat.get_current_phase_node().tile_hovered(tile)
+
+func tile_clicked(tile: Tile) -> void:
+	combat.get_current_phase_node().tile_clicked(tile)
+
+func card_hovered(card: HandCard3D) -> void:
+	combat.get_current_phase_node().card_hovered(card)
+
+func connect_with_event_signals() -> void:
+	Events.tile_clicked.connect(tile_clicked)
+	Events.tile_hovered.connect(tile_hovered)
+	Events.card_hovered.connect(card_hovered)

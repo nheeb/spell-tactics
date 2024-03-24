@@ -45,3 +45,6 @@ func get_keywords() -> Array[Keyword]:
 
 func get_effect_text() -> String:
 	return type.get_effect_text(get_keywords())
+
+func get_costs() -> EnergyStack:
+	return logic.get_costs()

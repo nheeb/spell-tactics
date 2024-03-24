@@ -64,7 +64,9 @@ const PANEL_DEFAULT = preload("res://UI/Theme/HandCard2D_panel_default.tres")
 const PANEL_HOVER = preload("res://UI/Theme/HandCard2D_panel_hover.tres")
 const PANEL_DISABLED = preload("res://UI/Theme/HandCard2D_panel_disabled.tres")
 const PANEL_CHOSEN = preload("res://UI/Theme/HandCard2D_panel_chosen.tres")
-const PANEL_PRIORITY_ORDER = [PANEL_CHOSEN, PANEL_DISABLED, PANEL_HOVER, PANEL_DEFAULT]
+const PANEL_PAYABLE_HINT = preload("res://UI/Theme/HandCard2D_panel_payable_hint.tres")
+const PANEL_PRIORITY_ORDER = [PANEL_PAYABLE_HINT, PANEL_CHOSEN, PANEL_DISABLED, \
+							  PANEL_HOVER, PANEL_DEFAULT]
 
 var panel_stack = [PANEL_DEFAULT]
 
@@ -85,7 +87,12 @@ func set_chosen(c: bool):
 func set_hover(hover: bool):
 	set_panel(PANEL_HOVER, hover)
 
+func set_payable_hint(h: bool):
+	set_panel(PANEL_PAYABLE_HINT, h)
+
+var enabled := false
 func set_enabled(e: bool):
+	enabled = e
 	set_panel(PANEL_DISABLED, not e)
 
 var _last_pressed_state: bool = false

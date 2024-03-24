@@ -32,7 +32,7 @@ enum Result {
 @onready var movement: MovementUtility = %MovementUtility
 @warning_ignore("shadowed_global_identifier")
 @onready var log: LogUtility = %LogUtility
-@onready var input: InputUtility = %InputUtility
+@onready var input: InputUtility = %InputUtility as InputUtility
 @onready var event: EventUtility = %EventUtility
 @onready var t_effects: TimedEffectsUtility = %TimedEffectsUtility
 @onready var attack: AttackUtility = %AttackUtility
@@ -66,13 +66,6 @@ func _ready() -> void:
 			Game.combats.clear()
 			Game.combats.append(self)
 
-# instead of lambdas, as we noticed weird behavior with those..
-func route_tile_clicked(tile):
-	get_phase_node(current_phase).tile_clicked(tile)
-	
-func route_tile_hovered(tile):
-	get_phase_node(current_phase).tile_hovered(tile)
-
 ## is called when the Combat is created to connect all the references and signals
 func setup() -> void:
 	# Get player and enemy references
@@ -88,8 +81,7 @@ func setup() -> void:
 				enemies.append(entity)
 
 	# Connect input signals
-	Events.tile_clicked.connect(route_tile_clicked)
-	Events.tile_hovered.connect(route_tile_hovered)
+	input.connect_with_event_signals()
 
 	# Check if all entities have ids
 	# Refresh entities if its CombatBegin
@@ -132,6 +124,7 @@ func setup() -> void:
 
 	t_effects.connect_all_effects()
 	
+	# Connect with ui
 	ui.setup(self)
 	
 	# Initial Animations
@@ -150,9 +143,12 @@ func advance_current_phase():
 	if current_phase >= RoundPhase.RoundRepeats:
 		current_phase = RoundPhase.Start
 
+func get_current_phase_node() -> AbstractPhase:
+	return get_phase_node(current_phase)
+
 ## Processes the current phase. Returns true if Player input is needed to advace to the next phase
 func process_current_phase() -> bool:
-	return get_phase_node(current_phase)._process_phase()
+	return get_current_phase_node()._process_phase()
 
 func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 	match phase:

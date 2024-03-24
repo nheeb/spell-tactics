@@ -5,7 +5,9 @@ enum Type {
 	HoverTarget,
 	Movement,
 	Combat,
-	Energy
+	Energy,
+	LowSpellEnergy,
+	HighSpellEnergy,
 }
 
 var current_highlights: Array[Type] = []
@@ -17,6 +19,8 @@ const type_to_color := {
 	Type.HoverTarget: Color.LIGHT_CORAL,
 	Type.Energy: Color.LIME,
 	Type.Combat: Color.LIGHT_CORAL,
+	Type.LowSpellEnergy: Color.YELLOW,
+	Type.HighSpellEnergy: Color.DARK_ORANGE
 }
 
 var highlight_materials = {}
@@ -37,20 +41,23 @@ func _ready() -> void:
 
 
 func enable_highlight(type: Type):
-	if type == Type.Hover and not type in current_highlights:
-		current_highlights.append(type)
-		$HoverHexQuad.visible = true
-	if type == Type.HoverTarget and not type in current_highlights:
-		current_highlights.append(type)
-		$HoverTargetHexQuad.visible = true
-	if type == Type.Combat and not type in current_highlights:
-		current_highlights.append(type)
-		$CombatHexQuad.visible = true
 	# will be custom for each type. for now just change color
 	if not type in current_highlights:
-		current_material = highlight_materials[type]
 		current_highlights.append(type)
-		$Edges.visible = true
+		
+		if type == Type.Hover:
+			$HoverHexQuad.visible = true
+		elif type == Type.HoverTarget:
+			$HoverTargetHexQuad.visible = true
+		elif type == Type.Combat:
+			$CombatHexQuad.visible = true
+		elif type == Type.LowSpellEnergy:
+			$LowSpellEnergyHexQuad.visible = true
+		elif type == Type.HighSpellEnergy:
+			$HighSpellEnergyHexQuad.visible = true
+		else:
+			current_material = highlight_materials[type]
+			$Edges.visible = true
 	
 func disable_highlight(type: Type):
 	if type in current_highlights:
@@ -66,6 +73,12 @@ func disable_highlight(type: Type):
 		
 	if type == Type.Combat:
 		$CombatHexQuad.visible = false
+	
+	if type == Type.LowSpellEnergy:
+		$LowSpellEnergyHexQuad.visible = false
+	
+	if type == Type.HighSpellEnergy:
+		$HighSpellEnergyHexQuad.visible = false
 	
 	if current_highlights.is_empty():
 		$Edges.visible = false

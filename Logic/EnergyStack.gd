@@ -37,6 +37,16 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 		printerr("Something went wrong in the Payment calculation")
 	return EnergyStack.new(possible_payment)
 
+func can_pay_costs(costs: EnergyStack) -> bool:
+	return get_possible_payment(costs) != null
+
+func shares_type_with(other: EnergyStack) -> bool:
+	for e in stack:
+		if e != EnergyType.Any:
+			if e in other.stack:
+				return true
+	return false
+
 func sort() -> void:
 	stack.sort()
 	

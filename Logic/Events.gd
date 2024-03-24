@@ -9,3 +9,5 @@ signal tile_hovered(tile)
 signal tile_unhovered(tile)
 
 signal tile_clicked(tile)
+
+signal card_hovered(card)
