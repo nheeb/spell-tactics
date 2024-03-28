@@ -21,8 +21,7 @@ func on_create():
 		died.connect(on_death)  
 
 func on_death():
-	# TODO change this later to call death animation
-	combat.animation.property(visual_entity, "visible", false)
+	combat.animation.callback(visual_entity, "on_death_visuals")
 	if logic:
 		if logic.has_method("on_death"):
 			logic.on_death()
@@ -41,14 +40,15 @@ func inflict_damage(damage: int):
 
 func inflict_damage_with_visuals(damage: int, with_text := false) -> AnimationObject:
 	inflict_damage(damage)
-	if not with_text:
-		return combat.animation.update_hp(self)
-	else:
-		return combat.animation.reappend_as_subqueue([
-			combat.animation.update_hp(self),
-			combat.animation.say(self.visual_entity, "%s Damage" % damage,\
-		 		{"color": Color.RED, "font_size": 64}).set_duration(.5).set_flag_with()
-		])
+	
+	var animations = []	
+	animations.append(combat.animation.update_hp(self))
+	animations.append(combat.animation.callback(visual_entity, "on_hurt_visuals"))
+	if with_text:
+		animations.append(combat.animation.say(self.visual_entity, "%s Damage" % damage,\
+		 		{"color": Color.RED, "font_size": 64}).set_duration(.5).set_flag_with())
+	
+	return combat.animation.reappend_as_subqueue(animations)
 
 func inflict_heal_with_visuals(heal: int) -> AnimationObject:
 	type = type as HPEntityType

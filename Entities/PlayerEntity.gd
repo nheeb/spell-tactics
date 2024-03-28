@@ -6,7 +6,7 @@ var arch_enemy : EntityReference
 var traits := PlayerTraits.new()
 
 func on_death():
-	# TODO Game over mechanic
+	combat.animation.callback(visual_entity, "on_death_visuals")
 	combat.log.add("GAME OVER!")
 	combat.animation.callback(combat.ui, "show_game_over", ["You lost!"])
 

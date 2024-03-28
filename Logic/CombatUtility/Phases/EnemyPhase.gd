@@ -16,11 +16,14 @@ func process_phase() -> bool:
 		combat.animation.camera_reach(enemy.visual_entity)
 		combat.animation.camera_follow(enemy.visual_entity)
 		enemy.do_movement()
-		combat.animation.wait(.7)
+		combat.animation.wait(.3)
 		enemy.do_action()
 		combat.animation.camera_unfollow()
 		
 		combat.player.arch_enemy = enemy.get_reference()
+		
+		if combat.player.is_dead():
+			break
 	
 	# Player camera input will be reenabled in the end phase
 	

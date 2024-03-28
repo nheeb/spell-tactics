@@ -12,12 +12,8 @@ func tile_hovered(tile: Tile):
 		highlight_payable_spells(tile)
 	
 func tile_clicked(tile: Tile):
-	if combat.input.process_action(PlayerMovement.new(tile)):
-		# valid, movement has been performed
-		combat.level._unhighlight_tile_set(combat.level.get_all_tiles(), Highlight.Type.Movement)
-		combat.level.immediate_arrows().clear()
-		highlight_payable_spells(null)
-		highlight_for_spell_energy(null)
+	# state gets reset in process_phase() in SpellPhase
+	combat.input.process_action(PlayerMovement.new(tile))
 
 func process_phase() -> bool:
 	combat.animation.callback(combat.level, "highlight_movement_range", [combat.player, combat.player.traits.movement_range])

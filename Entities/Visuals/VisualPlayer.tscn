@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkl8yhcu2dmjh"]
+[gd_scene load_steps=6 format=3 uid="uid://dkl8yhcu2dmjh"]
 
 [ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="1_24n3e"]
 [ext_resource type="Script" path="res://Entities/Visuals/VisualPlayer.gd" id="2_nidg8"]
+[ext_resource type="PackedScene" uid="uid://667ohrdomp4u" path="res://Assets/Models/Character/MagicRaccoon_Model.tscn" id="3_p2lke"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v522e"]
 
@@ -18,10 +19,11 @@ script = ExtResource("2_nidg8")
 
 [node name="Capsule" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_v522e")
 
 [node name="HPLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13708, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50099, 0)
 billboard = 1
 text = "0"
 
@@ -31,3 +33,49 @@ visible = false
 
 [node name="Hexagon" type="MeshInstance3D" parent="DebugTile"]
 mesh = SubResource("CylinderMesh_q4f3v")
+
+[node name="MagicRaccoon_Model" parent="." instance=ExtResource("3_p2lke")]
+transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 0, 0, 0)
+
+[node name="Skeleton3D" parent="MagicRaccoon_Model/MagicRaccoon/rig_deform" index="0"]
+bones/0/position = Vector3(-0.00314386, 0.369355, -0.0234006)
+bones/2/rotation = Quaternion(0.0534866, 0.0723926, 0.0125936, 0.995861)
+bones/3/rotation = Quaternion(0.107424, 0.0228149, 0.00938725, 0.993907)
+bones/4/rotation = Quaternion(0.122453, -0.00186315, -0.0118324, 0.992402)
+bones/6/rotation = Quaternion(0.0420937, -0.00529647, -0.0154678, 0.99898)
+bones/13/rotation = Quaternion(-0.0602807, 0.631201, -0.555458, 0.537977)
+bones/14/rotation = Quaternion(8.27481e-08, 0.0148591, -2.77709e-07, 0.99989)
+bones/15/rotation = Quaternion(0.530548, 0.0148338, -0.00928632, 0.847474)
+bones/16/rotation = Quaternion(-1.34716e-08, -0.54897, 1.59607e-08, 0.835842)
+bones/17/rotation = Quaternion(0.0884126, -0.549005, -0.0319985, 0.830514)
+bones/39/rotation = Quaternion(0.174819, -0.645244, 0.387515, 0.634768)
+bones/40/rotation = Quaternion(-3.84242e-07, 0.0317142, 4.28965e-07, 0.999497)
+bones/41/rotation = Quaternion(0.528421, 0.0319516, -0.0199072, 0.848148)
+bones/42/rotation = Quaternion(-3.50418e-08, 0.273685, 1.84526e-08, 0.961819)
+bones/43/rotation = Quaternion(0.0411086, 0.273655, -0.00102542, 0.960949)
+bones/64/rotation = Quaternion(0.989527, -0.0228627, 0.00470935, -0.14245)
+bones/65/rotation = Quaternion(-0.170914, -0.000132131, -0.00060254, 0.985286)
+bones/66/rotation = Quaternion(-0.0130545, -3.52419e-05, -0.000615884, 0.999915)
+bones/67/rotation = Quaternion(0.0114105, -2.01648e-05, -0.000616569, 0.999935)
+bones/68/rotation = Quaternion(0.909853, -0.0757856, -0.113351, -0.391887)
+bones/69/rotation = Quaternion(0.0496525, -0.00153581, 0.0496916, 0.997528)
+bones/70/rotation = Quaternion(0.0643889, -0.00226993, 0.0496635, 0.996686)
+bones/71/rotation = Quaternion(0.0963489, -0.00386305, 0.0495651, 0.994105)
+bones/72/rotation = Quaternion(0.00849999, 0.000513392, 0.0497126, 0.998727)
+bones/75/rotation = Quaternion(0.985477, 0.135691, 0.00129397, 0.102088)
+bones/77/rotation = Quaternion(0.251717, -0.0644273, 0.0167968, 0.965508)
+bones/78/rotation = Quaternion(-7.34919e-09, -0.0543932, -1.56181e-08, 0.99852)
+bones/79/rotation = Quaternion(-0.663109, -0.0541891, 0.0788068, 0.742388)
+bones/81/rotation = Quaternion(0.98549, -0.128166, -0.001222, -0.111271)
+bones/82/rotation = Quaternion(2.19062e-08, 0.0360878, -8.99806e-09, 0.999349)
+bones/83/rotation = Quaternion(0.102173, 0.0352933, -0.00362731, 0.994134)
+bones/84/rotation = Quaternion(-4.74801e-08, 0.0278369, 1.26208e-08, 0.999612)
+bones/85/rotation = Quaternion(-0.718654, 0.0280024, -0.149946, 0.678432)
+
+[node name="RightHand" parent="MagicRaccoon_Model" index="2"]
+transform = Transform3D(0.999482, -0.0211173, -0.0242796, 0.0209611, 0.999758, -0.00667503, 0.0244146, 0.00616237, 0.999683, -0.21449, 0.67252, 0.192956)
+
+[node name="LeftHand" parent="MagicRaccoon_Model" index="3"]
+transform = Transform3D(0.998036, 0.0048124, 0.0624555, -0.00239484, 0.999247, -0.0387273, -0.0625949, 0.0385015, 0.997296, 0.162682, 0.653938, 0.188706)
+
+[editable path="MagicRaccoon_Model"]

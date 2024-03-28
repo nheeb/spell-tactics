@@ -58,6 +58,12 @@ func tile_hovered(tile: Tile):
 			combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 
 func process_phase() -> bool:
+	# reset MovementPhase specific UI
+	combat.level._unhighlight_tile_set(combat.level.get_all_tiles(), Highlight.Type.Movement)
+	combat.level.immediate_arrows().clear()
+	combat.get_phase_node(Combat.RoundPhase.Movement).highlight_payable_spells(null)
+	combat.get_phase_node(Combat.RoundPhase.Movement).highlight_for_spell_energy(null)
+	
 	state = CastingState.Selecting  # reset state
 	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
 	
@@ -84,13 +90,16 @@ func select_spell(spell: Spell):
 			combat.animation.callback(combat.ui, "set_status", ["No targets available."])
 			combat.animation.wait(1.0)
 			combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
+			return
 
 		combat.animation.callback(combat.ui, "set_status", ["Choose the target!\n(Right-click to deselect)"])
+		combat.animation.callback(combat.player.visual_entity, "start_casting")
 		combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 		set_process(true)
 		state = CastingState.Targeting
 	else:
 		# else proceed to energy / casting
+		combat.animation.callback(combat.player.visual_entity, "start_casting")
 		state = CastingState.SettingEnergy
 
 func deselect_spell():

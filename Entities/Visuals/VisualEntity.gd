@@ -15,12 +15,25 @@ func _enter_tree() -> void:
 
 signal animation_done
 
+var tile_speed := 0.5  # s per tile
 func animation_move_to(tile: Tile) -> void:
 	var tween := VisualTime.new_tween()
-	tween.tween_property(self, "global_position", tile.global_position, .5)
+	tween.tween_property(self, "global_position", tile.global_position, tile_speed)
+	on_movement_visuals(tile)
 	#tween.set_speed_scale(.05)
 	await tween.finished
 	animation_done.emit()
+	
+func on_movement_visuals(tile: Tile) -> void:
+	# abstract, override for player/enemy
+	pass
+	
+func on_hurt_visuals() -> void:
+	# abstract, override for player/enemy
+	pass
+	
+func on_death_visuals():
+	hide()
 
 # TODO discuss this
 func update_visuals(entity: Entity):

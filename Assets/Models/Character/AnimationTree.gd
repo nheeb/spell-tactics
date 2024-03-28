@@ -41,6 +41,8 @@ func anim_death(AnimationSpeed:float = get_default_timescale_scale("ActionsTimeS
 	set_oneshot_actions(ActionsBlendSpace_target, AnimationSpeed)
 
 	# TODO stop animation tree / keep death anim end pose
+	await animation_finished
+	self.active = false
 
 # cast transition
 
@@ -54,6 +56,8 @@ func anim_cast_end(AnimationSpeed:float = get_default_timescale_scale("AttackCas
 	self.set("parameters/AttackCastTransition/transition_request", "AttackCastEnd")
 	
 	# TODO call reset_cast_blend after animation is ended
+	await animation_finished
+	reset_cast_blend()
 
 ### internal functions
 
