@@ -14,6 +14,8 @@ var internal_name: String = ""
 ## Fluff text shown on the card
 @export_multiline var fluff_text: String
 
+@export var icon: ImageTexture
+
 ## Logic script
 var logic: Script
 ## Spells are events when they have this flag

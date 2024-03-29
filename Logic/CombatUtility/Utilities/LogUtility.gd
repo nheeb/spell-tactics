@@ -28,3 +28,12 @@ func get_last_incident(text: String) -> LogEntry:
 	if incidents:
 		return incidents[-1]
 	return null
+
+func _register_entry(text: String, type: int):
+	var entry = LogEntry.new()
+	entry.type = type
+	entry.text = text
+	if combat:
+		entry.round_number = combat.current_round
+	log_entries.append(entry)
+	return entry

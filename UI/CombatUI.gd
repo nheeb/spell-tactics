@@ -200,11 +200,12 @@ func show_game_over(text: String) -> void:
 	#pass
 
 func set_enemy_meter(value: int) -> void:
-	var tween := VisualTime.new_tween()
-	for i in range(3):
-		tween.tween_callback(%EnemyArrow.show)
-		tween.tween_interval(.4)
-		tween.tween_callback(%EnemyArrow.hide)
-		tween.tween_interval(.4)
-	tween.tween_callback(func(): %EnemyMeterLabel.text = "Enemy Meter: %s / %s" %\
-			 [value, EventUtility.ENEMY_METER_MAX])
+	%EnemyEventIcon.transition_to_fill(value)
+	#var tween := VisualTime.new_tween()
+	#for i in range(3):
+		#tween.tween_callback(%EnemyArrow.show)
+		#tween.tween_interval(.4)
+		#tween.tween_callback(%EnemyArrow.hide)
+		#tween.tween_interval(.4)
+	#tween.tween_callback(func(): %EnemyMeterLabel.text = "Enemy Meter: %s / %s" %\
+			 #[value, EventUtility.ENEMY_METER_MAX])
