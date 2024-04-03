@@ -8505,7 +8505,7 @@ parameters/MovementTimeScale/scale = 1.0
 script = ExtResource("2_2odcd")
 
 [node name="RightHand" type="BoneAttachment3D" parent="."]
-transform = Transform3D(-0.999467, 0.02215, 0.0240046, 0.0219851, 0.999733, -0.00711703, -0.0241559, -0.00658524, -0.999687, 0.214814, 0.672417, -0.193255)
+transform = Transform3D(0.999466, -0.0221491, -0.0240053, 0.021984, 0.999733, -0.0071172, 0.0241565, 0.00658557, 0.999686, -0.214814, 0.672416, 0.193255)
 bone_name = "DEF-HandWeaponControl.R"
 bone_idx = 44
 use_external_skeleton = true
@@ -8516,7 +8516,7 @@ mesh = ExtResource("2_ayvm3")
 surface_material_override/0 = ExtResource("1_be7g4")
 
 [node name="LeftHand" type="BoneAttachment3D" parent="."]
-transform = Transform3D(-0.998101, -0.00434653, -0.0614469, -0.00193764, 0.999229, -0.0392101, 0.06157, -0.0390164, -0.99734, -0.162471, 0.653676, -0.189015)
+transform = Transform3D(0.998101, 0.00434665, 0.0614469, -0.00193771, 0.999229, -0.0392111, -0.06157, 0.0390175, 0.99734, 0.162471, 0.653676, 0.189015)
 bone_name = "DEF-HandWeaponControl.L"
 bone_idx = 18
 use_external_skeleton = true

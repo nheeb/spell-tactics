@@ -23,7 +23,7 @@ size = Vector2(1.5, 2)
 [node name="PrototypeBillboard" type="Node3D"]
 script = ExtResource("1_kqx6u")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Quad" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("ShaderMaterial_e6fqy")
 mesh = SubResource("QuadMesh_qkllw")

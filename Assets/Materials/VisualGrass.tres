@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b7ocoeo42jy56"]
+
+[ext_resource type="Texture2D" uid="uid://b2sebmr6mxdp1" path="res://Assets/Materials/Textures/grass_albedo.jpg" id="1_yhtmo"]
+[ext_resource type="Texture2D" uid="uid://crihvg8d1eeih" path="res://Assets/Materials/Textures/grass_ao.png" id="2_l8kif"]
+[ext_resource type="Texture2D" uid="uid://bfvle6vqdohpf" path="res://Assets/Materials/Textures/grass_normal.png" id="3_1xagw"]
+
+[resource]
+albedo_color = Color(0.188235, 0.380392, 0.145098, 1)
+albedo_texture = ExtResource("1_yhtmo")
+normal_scale = 0.3
+normal_texture = ExtResource("3_1xagw")
+ao_enabled = true
+ao_light_affect = 0.55
+ao_texture = ExtResource("2_l8kif")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+uv1_world_triplanar = true
