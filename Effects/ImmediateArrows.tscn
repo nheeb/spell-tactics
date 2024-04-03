@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://Effects/ImmediateArrows.gd" id="1_utnbb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oesjh"]
+transparency = 1
 cull_mode = 2
 shading_mode = 0
+albedo_color = Color(0.501961, 1, 1, 0.721569)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_lwrje"]
 
@@ -13,4 +15,5 @@ script = ExtResource("1_utnbb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_oesjh")
+cast_shadow = 0
 mesh = SubResource("ImmediateMesh_lwrje")

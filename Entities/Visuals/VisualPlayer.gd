@@ -4,6 +4,8 @@ class_name VisualPlayer extends VisualEntity
 @onready var anim_player := $MagicRaccoon_Model/MagicRaccoon/AnimationPlayer
 @onready var anim_tree := $MagicRaccoon_Model/AnimationTree
 
+@export_range(0.0, 1.0) var idle_break_chance := 1.0
+
 func _ready() -> void:
 	pass
 
@@ -19,19 +21,18 @@ func start_casting():
 	anim_tree.anim_cast_start()
 	emit_animation_done_signal()
 
-#func cast():
-	## TODO
-	#pass
-	#emit_animation_done_signal()
-	
 func stop_casting():
 	anim_tree.anim_cast_end()
 	emit_animation_done_signal()
 
+# the animation (start_walking) gets called from outside (PlayerMovement.gd)
 func on_movement_visuals(tile: Tile) -> void:
 	# rotate player model so it faces the target tile
-	var dir = self.global_position.direction_to(tile.global_position)
-	rotate_y(basis.z.signed_angle_to(dir, Vector3.UP))
+	var movement_direction = global_position.direction_to(tile.global_position)
+	var relative_forward: Vector3 = -basis.z
+	
+	# rotate by difference between forward direction and movement direction
+	rotate_y(relative_forward.signed_angle_to(movement_direction, Vector3.UP))
 	
 func on_hurt_visuals() -> void:
 	anim_tree.anim_get_hit()
@@ -43,3 +44,16 @@ func on_death_visuals() -> void:
 	emit_animation_done_signal()
 	
 
+
+func start_idling():
+	$IdleBreakChance.start()
+	emit_animation_done_signal()
+	
+func stop_idling():
+	$IdleBreakChance.stop()
+	emit_animation_done_signal()
+
+
+func _on_idle_break_chance_timeout() -> void:
+	if randf() < idle_break_chance:
+		anim_tree.anim_idle_break()

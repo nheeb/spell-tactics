@@ -4,10 +4,14 @@ var highlighted_tiles: Array[Tile]
 
 func tile_hovered(tile: Tile):
 	var path = combat.level.get_shortest_path(combat.player.current_tile, tile)
-	if len(path) > 0 and not combat.animation.is_playing():
+	var length = len(path)
+	# check if hovered tile is in movement range, in that case show the movement arrow and
+	# highlight the spells, that could be casted from there
+	if length > 0 and length <= combat.player.traits.movement_range and not combat.animation.is_playing():
 		var positions : Array[Vector3] = [combat.player.current_tile.global_position]
 		for t in path:
 			positions.append(t.global_position)
+
 		combat.level.immediate_arrows().render_path(positions)
 		highlight_payable_spells(tile)
 	
@@ -18,6 +22,8 @@ func tile_clicked(tile: Tile):
 func process_phase() -> bool:
 	combat.animation.callback(combat.level, "highlight_movement_range", [combat.player, combat.player.traits.movement_range])
 	combat.animation.callback(combat.ui, "set_status", ["Make your movement!"])
+	# player can start idling from this phase on
+	combat.animation.callback(combat.player.visual_entity, "start_idling")
 	
 	return true
 

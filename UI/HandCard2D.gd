@@ -95,7 +95,6 @@ func set_enabled(e: bool):
 	enabled = e
 	set_panel(PANEL_DISABLED, not e)
 
-var _last_pressed_state: bool = false
 
 func _gui_input(event):
 	if event is InputEventMouseButton:

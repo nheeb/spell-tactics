@@ -4,9 +4,10 @@ func process_phase() -> bool:
 	combat.animation.callback(combat.ui, "set_status", ["Enemies attacking..."])
 	
 	combat.animation.property(combat.camera, "player_input_enabled", false)
-	
+	# player can not idle from this phase on
+	combat.animation.callback(combat.player.visual_entity, "stop_idling")
 	combat.ui.disable_actions()
-	for active in combat.actives:
+	for active in combat.actives:  # can't trigger any actives
 		active.unlocked = false
 	
 	# Sort enemies by agility
