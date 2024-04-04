@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://ceosywo2l5xev"]
 
 [ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_6l65v"]
-[ext_resource type="Material" uid="uid://b7ocoeo42jy56" path="res://Assets/Materials/VisualGrass.tres" id="2_5plh6"]
+[ext_resource type="Material" path="res://Assets/Materials/VisualGrass.tres" id="2_d4dqp"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_f16xf"]
-material = ExtResource("2_5plh6")
+material = ExtResource("2_d4dqp")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 1.0
