@@ -67,6 +67,11 @@ float grayscale(vec3 color) {
 	return max2;
 }
 
+const float GRAY_BRIGHTNESS = 0.5;
+vec3 custom_grayscale(vec3 color) {
+	return GRAY_BRIGHTNESS * vec3(grayscale(color));
+}
+
 vec3 hsv_to_rgb(vec3 color) {
 	vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
 	vec3 p = abs(fract(color.xxx + K.xyz) * 6.0 - K.www);

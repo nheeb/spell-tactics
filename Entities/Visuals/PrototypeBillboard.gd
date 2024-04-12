@@ -15,4 +15,4 @@ func set_texture_from_entity_name(entity_name: String) -> void:
 	set_texture(PrototypeBillboard.get_billboard_filepath(entity_name))
 
 func drain_transition(drained: bool = true) -> void:
-	VisualTime.new_tween().tween_property($Quad.material_override, "shader_parameter/drain_progress", float(drained), 1.0)
+	VisualTime.new_tween().tween_property($Quad.material_override, "shader_parameter/drain_progress", float(drained), 0.8)
