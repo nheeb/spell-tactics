@@ -48,3 +48,16 @@ scale = Vector2(0.348, 0.348)
 [node name="Icon7" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(-299, -35)
 scale = Vector2(0.213, 0.213)
+
+[node name="EventIcons" type="Node2D" parent="Node2D"]
+unique_name_in_owner = true
+
+[node name="RoundText" type="Node2D" parent="Node2D"]
+position = Vector2(-121, -141)
+
+[node name="RoundLabel" type="Label" parent="Node2D/RoundText"]
+unique_name_in_owner = true
+offset_right = 256.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 64
+text = "Round 1"

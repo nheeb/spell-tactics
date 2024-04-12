@@ -2,6 +2,9 @@ class_name LogUtility extends CombatUtility
 
 var log_entries: Array[LogEntry] = []
 
+func entries_filtered_by_type(type: LogEntry.Type):
+	return log_entries.filter(func(x): return x.type == type)
+
 func add(text: String, print_this := true):
 	var info = LogEntry.new()
 	info.type = LogEntry.Type.Info
@@ -37,3 +40,6 @@ func _register_entry(text: String, type: int):
 		entry.round_number = combat.current_round
 	log_entries.append(entry)
 	return entry
+
+func get_current_round() -> int:
+	return log_entries[-1].round_number
