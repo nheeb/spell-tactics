@@ -59,3 +59,13 @@ float positive_direction_of_vec2(vec2 v) {
 float is_in_range_as_float(float value, float a, float b) {
 	return float( (value >= a && value <= b) || (value <= a && value >= b) );
 }
+
+float line_point_distance(vec3 line_origin, vec3 line_direction, vec3 point) {
+	vec3 a = line_origin;
+	vec3 b = line_origin + normalize(line_direction);
+	return length(cross(point-a, point-b));
+}
+
+float norm_to_negative(float x) {
+	return clamp_and_map(x, 0.0, 1.0, -1.0, 1.0);
+}
