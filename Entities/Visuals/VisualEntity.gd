@@ -8,6 +8,7 @@ class_name VisualEntity extends Node3D
 ## reference to the resource could be needed for variety of effects 
 ## (e.g. in VisualPrototype for the name)
 var type: EntityType
+var entity: Entity
 
 func _enter_tree() -> void:
 	if has_node("DebugTile"):
@@ -34,10 +35,6 @@ func on_hurt_visuals() -> void:
 	
 func on_death_visuals():
 	hide()
-
-# TODO discuss this
-func update_visuals(entity: Entity):
-	pass
 
 ## For overriding and making the drain effect
 func visual_drain(drained := true):

@@ -24,11 +24,11 @@ func execute(combat: Combat) -> void:
 	
 	for entity in target_tile.entities:
 		entity = entity as Entity
-		if not entity.is_drainable():
-			continue
+		#if not entity.is_drainable() and not entity.type.is_terrain:
+			#continue
 		# entity.drain() removes the energy from that entity as a side-effect
-		
-		combat.energy.gain(entity.drain())
+		if entity.is_drainable():
+			combat.energy.gain(entity.drain())
 		combat.animation.callback(entity.visual_entity, "visual_drain").set_max_duration(.5)
 		for tag in entity.get_tags():
 			combat.log.register_incident("drained_tag_%s" % tag)

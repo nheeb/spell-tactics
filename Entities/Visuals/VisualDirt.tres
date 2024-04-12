@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://biohwpkoakflf"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dsbaqn4fw7n17"]
 
-[ext_resource type="Texture2D" uid="uid://s27nj01hmo71" path="res://Assets/Materials/Textures/dirt_albedo_seamless_2.jpeg" id="1_n64hd"]
+[ext_resource type="Texture2D" uid="uid://s27nj01hmo71" path="res://Assets/Materials/Textures/dirt_albedo_seamless_2.jpeg" id="1_jwr33"]
 
 [sub_resource type="Shader" id="Shader_ferkc"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
@@ -49,4 +49,4 @@ shader_parameter/specular = 0.5
 shader_parameter/normal_scale = 1.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = ExtResource("1_n64hd")
+shader_parameter/texture_albedo = ExtResource("1_jwr33")

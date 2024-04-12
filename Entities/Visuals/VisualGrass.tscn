@@ -1,10 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://ceosywo2l5xev"]
 
-[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_6l65v"]
-[ext_resource type="Material" path="res://Assets/Materials/VisualGrass.tres" id="2_d4dqp"]
+[ext_resource type="Script" path="res://Entities/Visuals/VisualTerrain.gd" id="1_vo0a3"]
+[ext_resource type="Material" uid="uid://ct4ixvt4vev11" path="res://Entities/Visuals/VisualTerrain.tres" id="2_wmkj8"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_f16xf"]
-material = ExtResource("2_d4dqp")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 1.0
@@ -12,10 +11,12 @@ radial_segments = 6
 rings = 1
 
 [node name="VisualGrass" type="Node3D"]
-script = ExtResource("1_6l65v")
+script = ExtResource("1_vo0a3")
 
 [node name="Hexagon" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("2_wmkj8")
+instance_shader_parameters/drain_progress = 0.0
 mesh = SubResource("CylinderMesh_f16xf")
 
 [node name="Node3D" type="Node3D" parent="."]

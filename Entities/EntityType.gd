@@ -50,21 +50,16 @@ func create_entity(combat: Combat, call_on_create := true) -> Entity:
 
 func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	ent.combat = combat
-	
-	if self.visual_scene != null:
-		# CARE, this might lead to lag, depending on the use we might want to instantiate later
-		ent.visual_entity = self.visual_scene.instantiate()
-		ent.visual_entity.type = self
-		ent.type = self
-	else:
-		# for debugging
-		ent.visual_entity = Game.PROTOTYPE_VISUALS.instantiate()
-		ent.visual_entity.type = self
-		ent.type = self
-		
+	# CARE, instantiate() might lead to lag, depending on the use we might want to instantiate later
+	# use billboard prototype visuals if no visual scene is set:
+	ent.visual_entity = self.visual_scene.instantiate()	if self.visual_scene != null else Game.PROTOTYPE_VISUALS.instantiate()
+	# hehehe - but these references are safe since entity and visual entity exists together
+	ent.visual_entity.type = self
+	ent.visual_entity.entity = ent
+	ent.type = self
+
 	if self.entity_logic != null:
 		ent.logic = self.entity_logic.new(ent, combat)
-		#ent.logic.on_create()
 
 	ent.energy = ent.type.energy
 	if ent.energy == null:  # give empty stack if it was left blank
