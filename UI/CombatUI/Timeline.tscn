@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn2mfqtdouxdu"]
+
+[ext_resource type="Script" path="res://UI/CombatUI/Timeline.gd" id="1_cyn56"]
+[ext_resource type="Texture2D" uid="uid://x2d0b22yi88n" path="res://Assets/Sprites/UI/timeline_background.png" id="1_p3f3l"]
+[ext_resource type="PackedScene" uid="uid://seo7pqhgiwim" path="res://UI/CombatUI/TimelineEventIcon.tscn" id="2_earmn"]
+
+[node name="Timeline" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_cyn56")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TextureRect" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("1_p3f3l")
+
+[node name="IconTransforms" type="Node2D" parent="Node2D"]
+unique_name_in_owner = true
+
+[node name="Icon7" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(310, -33)
+scale = Vector2(0.213, 0.213)
+
+[node name="Icon6" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(233, 29)
+scale = Vector2(0.348, 0.348)
+
+[node name="Icon5" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(131, 68)
+scale = Vector2(0.482815, 0.482815)
+
+[node name="Icon4" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(5.96046e-08, 119)
+scale = Vector2(0.618518, 0.618518)
+
+[node name="Icon3" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(-127, 65)
+scale = Vector2(0.482815, 0.482815)
+
+[node name="Icon2" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(-224, 31)
+scale = Vector2(0.348, 0.348)
+
+[node name="Icon1" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(-299, -35)
+scale = Vector2(0.213, 0.213)
+
+[node name="EventIcons" type="Node2D" parent="Node2D"]
+unique_name_in_owner = true
+
+[node name="RoundText" type="Node2D" parent="Node2D"]
+position = Vector2(-121, -141)
+
+[node name="RoundLabel" type="Label" parent="Node2D/RoundText"]
+unique_name_in_owner = true
+offset_right = 256.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 64
+text = "Round X"

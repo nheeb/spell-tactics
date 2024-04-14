@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=13 format=3 uid="uid://bysejqqiloy1u"]
 
 [ext_resource type="Script" path="res://UI/CombatUI.gd" id="1_uhqdp"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_2hiqp"]
@@ -7,6 +7,8 @@
 [ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="5_jttea"]
 [ext_resource type="Texture2D" uid="uid://ditt5pum2lahc" path="res://Assets/Sprites/Icons/plain-arrow.png" id="5_myaa6"]
 [ext_resource type="PackedScene" uid="uid://ciug3sucml2b5" path="res://UI/EnergyIcon.tscn" id="6_2qxi4"]
+[ext_resource type="PackedScene" uid="uid://cp5c8if6axsd6" path="res://UI/CombatUI/EnemyEventIcon.tscn" id="8_isphm"]
+[ext_resource type="PackedScene" uid="uid://cn2mfqtdouxdu" path="res://UI/CombatUI/Timeline.tscn" id="9_denmg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqwoa"]
 bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.682353)
@@ -260,6 +262,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="EnemyMeterLabel" type="Label" parent="EnemyArea"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -271,6 +274,7 @@ label_settings = ExtResource("5_jttea")
 
 [node name="EnemyArrow" type="TextureRect" parent="EnemyArea"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -284,6 +288,38 @@ texture = ExtResource("5_myaa6")
 expand_mode = 1
 flip_v = true
 metadata/_edit_use_anchors_ = true
+
+[node name="EnemyEventIcon" parent="EnemyArea" instance=ExtResource("8_isphm")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.27321
+anchor_top = 0.566928
+anchor_right = 2.27321
+anchor_bottom = 1.56693
+metadata/_edit_use_anchors_ = true
+
+[node name="TimelineArea" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.402604
+anchor_top = 0.00555556
+anchor_right = 0.598729
+anchor_bottom = 0.122815
+offset_right = 0.439972
+offset_bottom = 0.359985
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_so122")
+metadata/_edit_use_anchors_ = true
+
+[node name="Timeline" parent="TimelineArea" instance=ExtResource("9_denmg")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 197.0
+offset_top = 89.0
+offset_right = 198.0
+offset_bottom = 184.0
+scale = Vector2(0.607886, 0.607886)
 
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]

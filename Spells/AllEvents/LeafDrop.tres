@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=2 format=3 uid="uid://dhkq4klm4snnk"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=3 format=3 uid="uid://dhkq4klm4snnk"]
 
+[ext_resource type="Texture2D" uid="uid://die4x4ov554pe" path="res://Assets/Sprites/Icons/falling-leaf.png" id="1_cgviq"]
 [ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_hui2k"]
 
 [resource]
@@ -9,6 +10,8 @@ keywords = Array[Resource("res://Spells/Keyword.gd")]([])
 effect_text = "Round 1 : A tree is chosen.;
 Round 2 : It looses all it leaves."
 fluff_text = ""
+icon = ExtResource("1_cgviq")
+color = Color(0.705882, 0.705882, 0.282353, 1)
 target = 0
 target_range = -1
 target_min_range = -1
