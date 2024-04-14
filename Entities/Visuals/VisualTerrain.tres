@@ -1,9 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://ct4ixvt4vev11"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ct4ixvt4vev11"]
 
 [ext_resource type="Shader" path="res://Entities/Visuals/VisualTerrainShader.gdshader" id="1_2wtwm"]
-[ext_resource type="Texture2D" uid="uid://kahbmtwi0dv8" path="res://Assets/Materials/Textures/VisualGrass_albedo.png" id="1_svr4i"]
-[ext_resource type="Texture2D" uid="uid://cw27cbr5btpjm" path="res://Assets/Materials/Textures/VisualGrass_normal.png" id="2_771qp"]
-[ext_resource type="Texture2D" uid="uid://bf5qkgpb8neuw" path="res://Assets/Materials/Textures/VisualGrass_orm.png" id="3_a0io7"]
+[ext_resource type="Texture2D" uid="uid://s27nj01hmo71" path="res://Assets/Materials/Textures/dirt_albedo_seamless_2.jpeg" id="2_t5d7p"]
 
 [resource]
 render_priority = 0
@@ -12,8 +10,7 @@ shader_parameter/albedo_modulate = Color(1, 1, 1, 1)
 shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/normal_scale = 1.0
-shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_scale = Vector3(0.3, 0.3, 0.3)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = ExtResource("1_svr4i")
-shader_parameter/texture_roughness = ExtResource("3_a0io7")
-shader_parameter/texture_normal = ExtResource("2_771qp")
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/texture_albedo = ExtResource("2_t5d7p")
