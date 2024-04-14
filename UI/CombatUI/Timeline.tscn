@@ -11,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_cyn56")
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -21,31 +22,31 @@ texture = ExtResource("1_p3f3l")
 [node name="IconTransforms" type="Node2D" parent="Node2D"]
 unique_name_in_owner = true
 
-[node name="Icon1" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+[node name="Icon7" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(310, -33)
 scale = Vector2(0.213, 0.213)
 
-[node name="Icon2" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+[node name="Icon6" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(233, 29)
 scale = Vector2(0.348, 0.348)
 
-[node name="Icon3" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+[node name="Icon5" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(131, 68)
 scale = Vector2(0.482815, 0.482815)
 
 [node name="Icon4" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(5.96046e-08, 119)
-scale = Vector2(0.74967, 0.74967)
+scale = Vector2(0.618518, 0.618518)
 
-[node name="Icon5" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+[node name="Icon3" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(-127, 65)
 scale = Vector2(0.482815, 0.482815)
 
-[node name="Icon6" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+[node name="Icon2" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(-224, 31)
 scale = Vector2(0.348, 0.348)
 
-[node name="Icon7" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+[node name="Icon1" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(-299, -35)
 scale = Vector2(0.213, 0.213)
 
@@ -60,4 +61,4 @@ unique_name_in_owner = true
 offset_right = 256.0
 offset_bottom = 88.0
 theme_override_font_sizes/font_size = 64
-text = "Round 1"
+text = "Round X"

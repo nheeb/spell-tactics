@@ -117,8 +117,8 @@ func update_active_entries(entries: Array[DrainableEntry]):
 			entry.reset()
 			
 func show_surrounding_drainable_entries():
-	var position: Tile = combat.player.current_tile
-	var neighbours: Array[Tile] = combat.level.get_all_tiles_in_distance_of_tile(position, 1)
+	var _position: Tile = combat.player.current_tile
+	var neighbours: Array[Tile] = combat.level.get_all_tiles_in_distance_of_tile(_position, 1)
 	
 	for neighbour in neighbours:
 		if neighbour in active_entries:

@@ -37,10 +37,14 @@ func process_event() -> void:
 	if regular_events.is_empty():
 		combat.log.add("No Events loaded")
 		return
+
+	# If no current event -> pick a new one 
 	if current_event == null:
 		current_event = regular_events.pick_random().get_reference()
+		
 		current_event.resolve(combat).event_logic.initialize_event()
 	
+	# If advancing the current events ends it -> set current event to null
 	if current_event.resolve(combat).event_logic.advance_event():
 		current_event = null
 

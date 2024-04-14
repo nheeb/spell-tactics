@@ -95,15 +95,17 @@ func add_card(card_2d: HandCard2D):
 const EVENT_CARD = preload("res://UI/EventCard3D.tscn")
 const EVENT_HEIGHT = 2.0
 var current_shown_event_card: EventCard3D
-func show_event(event: SpellType, round_highlight := -1) -> void:
+func show_event(event: SpellType, round_highlight := -1, speed_factor := 1.0) -> void:
+	if current_shown_event_card:
+		hide_event()
 	var event_card = EVENT_CARD.instantiate()
 	event_card.setup(event, round_highlight)
 	%EventCards.add_child(event_card)
 	event_card.position.y = EVENT_HEIGHT
 	event_card.rotation_degrees.y = 180.0
 	var tween := VisualTime.new_tween()
-	tween.tween_property(event_card, "position:y", 0.0, 1.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(event_card, "rotation_degrees:y", 0.0, 1.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(event_card, "position:y", 0.0, 1.0 / speed_factor).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(event_card, "rotation_degrees:y", 0.0, 1.0 / speed_factor).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	current_shown_event_card = event_card
 
 func hide_event() -> void:

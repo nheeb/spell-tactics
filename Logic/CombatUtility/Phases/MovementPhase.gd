@@ -37,11 +37,11 @@ func highlight_for_spell_energy(energy: EnergyStack):
 	highlight_payable_spells(null)
 	for tile in combat.level.get_all_tiles():
 		if energy:
-			var range := combat.player.traits.movement_range
+			var _range := combat.player.traits.movement_range
 			tile.set_highlight(Highlight.Type.HighSpellEnergy, \
 				tile.get_drainable_energy_in_range(1).can_pay_costs(energy) \
 				and (not tile.is_blocked() ) \
-				and tile.distance_to(combat.player.current_tile) <= range )
+				and tile.distance_to(combat.player.current_tile) <= _range )
 			tile.set_highlight(Highlight.Type.LowSpellEnergy, \
 				tile.get_drainable_energy().shares_type_with(energy))
 		else:

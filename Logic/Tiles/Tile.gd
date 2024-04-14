@@ -48,9 +48,9 @@ func get_drainable_energy() -> EnergyStack:
 		drainable_e.add(ent.energy)
 	return drainable_e
 
-func get_drainable_energy_in_range(range := 1) -> EnergyStack:
+func get_drainable_energy_in_range(_range := 1) -> EnergyStack:
 	var energy := get_drainable_energy()
-	for t in get_surrounding_tiles(range):
+	for t in get_surrounding_tiles(_range):
 		energy.add(t.get_drainable_energy())
 	return energy
 
