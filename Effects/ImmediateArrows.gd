@@ -163,12 +163,10 @@ func render():
 	ig.surface_end()
 
 func render_path(path: Array[Vector3]) -> void:
-	show()
 	set_path(path)
 	render()
 
 func clear() -> void:
-	hide()
 	arrow_list.clear()
 	var ig : ImmediateMesh = $MeshInstance3D.mesh
 	ig.clear_surfaces()

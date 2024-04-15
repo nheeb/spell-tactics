@@ -6,8 +6,10 @@
 transparency = 1
 albedo_color = Color(0.4, 0.509804, 1, 0.835294)
 albedo_texture = ExtResource("1_h70x2")
+metallic = 0.5
 roughness = 0.31
-refraction_scale = -0.31
+refraction_enabled = true
+refraction_scale = 0.13
 uv1_scale = Vector3(0.3, 0.3, 0.3)
 uv1_triplanar = true
 uv1_world_triplanar = true
