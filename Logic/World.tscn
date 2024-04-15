@@ -19,6 +19,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ypriw")
 background_mode = 2
 sky = SubResource("Sky_4htsq")
 ambient_light_source = 3
+ssr_enabled = true
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_i0b03")

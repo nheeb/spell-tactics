@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cvjghqsy2rnqy"]
+
+[ext_resource type="Texture2D" uid="uid://ci6b5ym58jqs4" path="res://Assets/Materials/Textures/water_terrain_albedo.jpg" id="1_qr7x3"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0.309804, 0.435294, 1, 0.631373)
+albedo_texture = ExtResource("1_qr7x3")
+roughness = 0.2
+refraction_scale = -0.31
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+uv1_world_triplanar = true
