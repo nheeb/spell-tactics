@@ -5,7 +5,8 @@ var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
 var actives: Array[Active]
 
-@onready var cards3d = %Cards3D
+@onready var cards3d : Cards3D = %Cards3D
+@onready var timeline: TimelineUI = %Timeline
 
 func setup(_combat: Combat):
 	self.combat = _combat
@@ -24,7 +25,9 @@ func setup(_combat: Combat):
 	
 	# connect to spell phase
 	combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)
-
+	
+	# Build timeline
+	%Timeline.build_timeline_from_log(combat.log)
 
 func _on_changed_casting_state(s: SpellPhase.CastingState):
 	if s == SpellPhase.CastingState.SettingEnergy:
@@ -200,11 +203,12 @@ func show_game_over(text: String) -> void:
 	#pass
 
 func set_enemy_meter(value: int) -> void:
-	var tween := VisualTime.new_tween()
-	for i in range(3):
-		tween.tween_callback(%EnemyArrow.show)
-		tween.tween_interval(.4)
-		tween.tween_callback(%EnemyArrow.hide)
-		tween.tween_interval(.4)
-	tween.tween_callback(func(): %EnemyMeterLabel.text = "Enemy Meter: %s / %s" %\
-			 [value, EventUtility.ENEMY_METER_MAX])
+	%EnemyEventIcon.transition_to_fill(value)
+	#var tween := VisualTime.new_tween()
+	#for i in range(3):
+		#tween.tween_callback(%EnemyArrow.show)
+		#tween.tween_interval(.4)
+		#tween.tween_callback(%EnemyArrow.hide)
+		#tween.tween_interval(.4)
+	#tween.tween_callback(func(): %EnemyMeterLabel.text = "Enemy Meter: %s / %s" %\
+			 #[value, EventUtility.ENEMY_METER_MAX])

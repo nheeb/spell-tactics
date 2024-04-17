@@ -10,6 +10,18 @@ vec2 rotateUV(vec2 uv, vec2 pivot, float angle) {
     return uv;
 }
 
+vec2 rotateVector(vec2 _v, float angle) {
+	float sine = sin(angle);
+    float cosine = cos(angle);
+	
+	vec2 v;
+	
+    v.x = _v.x * cosine - _v.y * sine;
+    v.y = _v.x * sine + _v.y * cosine;
+
+    return v;
+}
+
 mat3 rotation_matrix_x(float angle) {
     float sine = sin(angle);
     float cosine = cos(angle);
@@ -56,11 +68,12 @@ float positive_direction_of_vec2(vec2 v) {
 	return PI/2.0 + atan(v.y / v.x) + PI * float(v.x < 0.0);
 }
 
+
 float is_in_range_as_float(float value, float a, float b) {
 	return float( (value >= a && value <= b) || (value <= a && value >= b) );
 }
 
-//|-- Color Transformations, credit: https://github.com/paddy-exe/ShaderFunction-Extras
+// |-- Color Transformations, credit: https://github.com/paddy-exe/ShaderFunction-Extras
 float grayscale(vec3 color) {
 	float max1 = max(color.r, color.g);
 	float max2 = max(max1, color.b);
@@ -100,3 +113,8 @@ vec3 hsv_adjustment(vec3 col, float hue_offset, float sat_offset, float val_offs
 	return hsv;
 }
 // Color Transformations --|
+
+float circle_dist(float value, float circle_size) {
+	float mod_value = mod(value, circle_size);
+	return min(mod_value, circle_size - mod_value);
+}
