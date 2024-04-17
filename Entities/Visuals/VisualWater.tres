@@ -1,15 +1,94 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cvjghqsy2rnqy"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cvjghqsy2rnqy"]
 
 [ext_resource type="Texture2D" uid="uid://ci6b5ym58jqs4" path="res://Assets/Materials/Textures/water_terrain_albedo.jpg" id="1_h70x2"]
+[ext_resource type="Texture2D" uid="uid://cmjekesvhnjvc" path="res://Assets/Materials/Textures/water_terrain_albedo_offset.jpg" id="2_f6os2"]
+
+[sub_resource type="Shader" id="Shader_wyt3g"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_always,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D albedo_tex1 : source_color,filter_linear_mipmap,repeat_enable;
+uniform sampler2D albedo_tex2 : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+
+uniform vec4 metallic_texture_channel;
+
+uniform float specular;
+uniform float metallic;
+
+uniform float refraction : hint_range(-16,16);
+uniform vec4 refraction_texture_channel;
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear_mipmap;varying vec3 uv1_triplanar_pos;
+uniform float uv1_blend_sharpness;
+varying vec3 uv1_power_normal;
+uniform vec3 uv_scale;
+
+#include \"res://Shaders/lib.gdshaderinc\"
+
+void vertex() {
+	vec3 normal = MODEL_NORMAL_MATRIX * NORMAL;
+	TANGENT = vec3(0.0,0.0,-1.0) * abs(normal.x);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(normal.y);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(normal.z);
+	TANGENT = inverse(MODEL_NORMAL_MATRIX) * normalize(TANGENT);
+	BINORMAL = vec3(0.0,1.0,0.0) * abs(normal.x);
+	BINORMAL+= vec3(0.0,0.0,-1.0) * abs(normal.y);
+	BINORMAL+= vec3(0.0,1.0,0.0) * abs(normal.z);
+	BINORMAL = inverse(MODEL_NORMAL_MATRIX) * normalize(BINORMAL);
+	uv1_power_normal=pow(abs(normal),vec3(uv1_blend_sharpness));
+	uv1_triplanar_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0f)).xyz * uv_scale;
+	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
+	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+}
+
+
+
+
+vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
+	vec4 samp=vec4(0.0);
+	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
+	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
+	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
+	return samp;
+}
+
+instance uniform float drain_progress: hint_range(0.0, 1.0, 0.1) = 0.0;
+uniform float gray_scale_darken: hint_range(0.0, 1.0, 0.1) = 0.4;
+void fragment() {
+	vec4 tex1 = vec4(albedo.rgb, 1.0) * triplanar_texture(albedo_tex1,uv1_power_normal,uv1_triplanar_pos);
+	vec4 tex2 = vec4(albedo.rgb, 1.0) * triplanar_texture(albedo_tex2,uv1_power_normal,uv1_triplanar_pos);
+	float albedo_mix = 0.5 + 0.5 * sin((1.0 - drain_progress) * 1.4 * TIME);
+	vec4 albedo_tex = mix(tex1, tex2, albedo_mix);
+	albedo_tex = vec4(mix(albedo_tex.rgb, gray_scale_darken * custom_grayscale(albedo_tex.rgb), drain_progress), 1.0);
+	ALBEDO = albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS =  max(roughness + 0.1*(0.5*sin(TIME)), drain_progress);
+	SPECULAR = specular;
+	vec3 ref_normal = NORMAL;
+	vec2 ref_ofs = SCREEN_UV - ref_normal.xy * refraction;
+	float ref_amount = 1.0 - max(albedo.a * albedo_tex.a, drain_progress);
+	EMISSION += textureLod(screen_texture,ref_ofs,ROUGHNESS * 8.0).rgb * ref_amount * EXPOSURE;
+	ALBEDO *= 1.0 - ref_amount;
+	ALPHA = 1.0;
+}
+"
 
 [resource]
-transparency = 1
-albedo_color = Color(0.4, 0.509804, 1, 0.835294)
-albedo_texture = ExtResource("1_h70x2")
-metallic = 0.5
-roughness = 0.4
-refraction_enabled = true
-refraction_scale = 0.13
-uv1_scale = Vector3(0.3, 0.3, 0.3)
-uv1_triplanar = true
-uv1_world_triplanar = true
+render_priority = 0
+shader = SubResource("Shader_wyt3g")
+shader_parameter/albedo = Color(0.4, 0.509804, 1, 0.835294)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.45
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.5
+shader_parameter/refraction = 0.13
+shader_parameter/refraction_texture_channel = null
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv_scale = Vector3(0.3, 0.3, 0.3)
+shader_parameter/gray_scale_darken = 0.4
+shader_parameter/albedo_tex1 = ExtResource("1_h70x2")
+shader_parameter/albedo_tex2 = ExtResource("2_f6os2")

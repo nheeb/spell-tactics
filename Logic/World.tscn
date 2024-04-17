@@ -1,24 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs6vnuiljtmct"]
+[gd_scene load_steps=10 format=3 uid="uid://cs6vnuiljtmct"]
 
 [ext_resource type="Script" path="res://Logic/World.gd" id="1_i0b03"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="2_1cart"]
+[ext_resource type="Material" uid="uid://df3jh0bo0ta8h" path="res://Shaders/ShaderSky.tres" id="2_rkkwj"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_mpog2"]
 [ext_resource type="Script" path="res://Logic/Tiles/MouseInput.gd" id="4_xdvdf"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ypriw"]
-sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
-sky_curve = 0.197926
-ground_bottom_color = Color(0.227451, 0.352941, 0.592157, 1)
-ground_horizon_color = Color(0.286275, 0.521569, 0.290196, 1)
-ground_curve = 0.937017
+[ext_resource type="Material" uid="uid://cvjghqsy2rnqy" path="res://Entities/Visuals/VisualWater.tres" id="6_6m5c8"]
 
 [sub_resource type="Sky" id="Sky_4htsq"]
-sky_material = SubResource("ProceduralSkyMaterial_ypriw")
+sky_material = ExtResource("2_rkkwj")
 
 [sub_resource type="Environment" id="Environment_0glof"]
 background_mode = 2
 sky = SubResource("Sky_4htsq")
+sky_custom_fov = 80.0
 ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.85
+fog_light_color = Color(0.760784, 0.815686, 0.894118, 1)
+fog_sun_scatter = 0.5
+fog_aerial_perspective = 0.933
+fog_sky_affect = 0.662
+volumetric_fog_density = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_qm0ag"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_i0b03")
@@ -54,3 +60,11 @@ enabled = false
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
 script = ExtResource("4_xdvdf")
+
+[node name="WaterFloor" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WaterFloor"]
+transform = Transform3D(78.0244, 0, 0, 0, -3.41056e-06, 78.0244, 0, -78.0244, -3.41056e-06, 0, -8.55925, 0)
+material_override = ExtResource("6_6m5c8")
+mesh = SubResource("QuadMesh_qm0ag")
