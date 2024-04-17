@@ -32,7 +32,7 @@ void sky() {
 
     // Softening the texture near the poles
     float pole_blend = smoothstep(0.95, 1.0, abs(EYEDIR.y)); // Increases near the poles
-    sky = mix(sky.rgb, vec3(0.5, 0.5, 0.5), sky_top_color.rgb); // Blend with mid-grey or sky color
+    //sky = mix(sky.rgb, vec3(0.5, 0.5, 0.5), sky_top_color.rgb); // Blend with mid-grey or sky color
 
     vec4 ground_cover_texture = texture(ground_cover, vec2(u, v));
     vec3 ground_cover_color = (ground_cover_texture.rgb * ground_cover_modulate.rgb) * ground_cover_texture.a * ground_cover_modulate.a * ground_energy;
@@ -48,12 +48,12 @@ void sky() {
 [resource]
 shader = SubResource("Shader_scn34")
 shader_parameter/sky_top_color = Color(0.25098, 0.290196, 0.54902, 1)
-shader_parameter/sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
-shader_parameter/sky_curve = 0.197926
+shader_parameter/sky_horizon_color = Color(0.0980392, 0.223529, 0.290196, 1)
+shader_parameter/sky_curve = 0.863
 shader_parameter/sky_energy = 1.0
-shader_parameter/sky_cover_modulate = Color(0.835294, 0.835294, 0.835294, 1)
-shader_parameter/ground_bottom_color = Color(0.137255, 0.156863, 0.4, 1)
-shader_parameter/ground_horizon_color = Color(0.415686, 0.733333, 0.890196, 1)
+shader_parameter/sky_cover_modulate = Color(0.494118, 0.494118, 0.494118, 1)
+shader_parameter/ground_bottom_color = Color(0.231373, 0.247059, 0.380392, 1)
+shader_parameter/ground_horizon_color = Color(0.121569, 0.278431, 0.360784, 1)
 shader_parameter/ground_curve = 0.937017
 shader_parameter/ground_energy = 1.0
 shader_parameter/ground_cover_modulate = Color(1, 1, 1, 1)
