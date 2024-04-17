@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://comglywow87xc"]
+[gd_scene load_steps=10 format=3 uid="uid://comglywow87xc"]
 
 [ext_resource type="Script" path="res://Entities/Visuals/VisualTerrain.gd" id="1_pqm35"]
 [ext_resource type="Texture2D" uid="uid://ci6b5ym58jqs4" path="res://Assets/Materials/Textures/water_terrain_albedo.jpg" id="2_uh8kt"]
+[ext_resource type="Texture2D" uid="uid://cmjekesvhnjvc" path="res://Assets/Materials/Textures/water_terrain_albedo_offset.jpg" id="3_4fju5"]
 [ext_resource type="Texture2D" uid="uid://hkawty8jcy0e" path="res://Assets/Materials/Textures/dirt_albedo_seamless.jpeg" id="3_evw5i"]
 
 [sub_resource type="Shader" id="Shader_wyt3g"]
@@ -10,7 +11,8 @@ code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's
 shader_type spatial;
 render_mode blend_mix,depth_draw_always,cull_back,diffuse_burley,specular_schlick_ggx;
 uniform vec4 albedo : source_color;
-uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform sampler2D albedo_tex1 : source_color,filter_linear_mipmap,repeat_enable;
+uniform sampler2D albedo_tex2 : source_color,filter_linear_mipmap,repeat_enable;
 uniform float point_size : hint_range(0,128);
 uniform float roughness : hint_range(0,1);
 
@@ -58,7 +60,10 @@ vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) 
 instance uniform float drain_progress: hint_range(0.0, 1.0, 0.1) = 0.0;
 uniform float gray_scale_darken: hint_range(0.0, 1.0, 0.1) = 0.4;
 void fragment() {
-	vec4 albedo_tex = vec4(albedo.rgb, 1.0) * triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
+	vec4 tex1 = vec4(albedo.rgb, 1.0) * triplanar_texture(albedo_tex1,uv1_power_normal,uv1_triplanar_pos);
+	vec4 tex2 = vec4(albedo.rgb, 1.0) * triplanar_texture(albedo_tex2,uv1_power_normal,uv1_triplanar_pos);
+	float albedo_mix = 0.5 + 0.5 * sin((1.0 - drain_progress) * 1.4 * TIME);
+	vec4 albedo_tex = mix(tex1, tex2, albedo_mix);
 	albedo_tex = vec4(mix(albedo_tex.rgb, gray_scale_darken * custom_grayscale(albedo_tex.rgb), drain_progress), 1.0);
 	ALBEDO = albedo_tex.rgb;
 	METALLIC = metallic;
@@ -87,7 +92,8 @@ shader_parameter/refraction_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv_scale = Vector3(0.3, 0.3, 0.3)
 shader_parameter/gray_scale_darken = 0.4
-shader_parameter/texture_albedo = ExtResource("2_uh8kt")
+shader_parameter/albedo_tex1 = ExtResource("2_uh8kt")
+shader_parameter/albedo_tex2 = ExtResource("3_4fju5")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jwrwj"]
 material = SubResource("ShaderMaterial_m74wr")
