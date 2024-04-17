@@ -1,10 +1,96 @@
-[gd_scene load_steps=6 format=3 uid="uid://comglywow87xc"]
+[gd_scene load_steps=9 format=3 uid="uid://comglywow87xc"]
 
-[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_ppghb"]
-[ext_resource type="Material" uid="uid://cvjghqsy2rnqy" path="res://Entities/Visuals/VisualWater.tres" id="2_v2iqp"]
+[ext_resource type="Script" path="res://Entities/Visuals/VisualTerrain.gd" id="1_pqm35"]
+[ext_resource type="Texture2D" uid="uid://ci6b5ym58jqs4" path="res://Assets/Materials/Textures/water_terrain_albedo.jpg" id="2_uh8kt"]
+[ext_resource type="Texture2D" uid="uid://hkawty8jcy0e" path="res://Assets/Materials/Textures/dirt_albedo_seamless.jpeg" id="3_evw5i"]
+
+[sub_resource type="Shader" id="Shader_wyt3g"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_always,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+
+uniform vec4 metallic_texture_channel;
+
+uniform float specular;
+uniform float metallic;
+
+uniform float refraction : hint_range(-16,16);
+uniform vec4 refraction_texture_channel;
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear_mipmap;varying vec3 uv1_triplanar_pos;
+uniform float uv1_blend_sharpness;
+varying vec3 uv1_power_normal;
+uniform vec3 uv_scale;
+
+#include \"res://Shaders/lib.gdshaderinc\"
+
+void vertex() {
+	vec3 normal = MODEL_NORMAL_MATRIX * NORMAL;
+	TANGENT = vec3(0.0,0.0,-1.0) * abs(normal.x);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(normal.y);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(normal.z);
+	TANGENT = inverse(MODEL_NORMAL_MATRIX) * normalize(TANGENT);
+	BINORMAL = vec3(0.0,1.0,0.0) * abs(normal.x);
+	BINORMAL+= vec3(0.0,0.0,-1.0) * abs(normal.y);
+	BINORMAL+= vec3(0.0,1.0,0.0) * abs(normal.z);
+	BINORMAL = inverse(MODEL_NORMAL_MATRIX) * normalize(BINORMAL);
+	uv1_power_normal=pow(abs(normal),vec3(uv1_blend_sharpness));
+	uv1_triplanar_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0f)).xyz * uv_scale;
+	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
+	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+}
+
+
+
+
+vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
+	vec4 samp=vec4(0.0);
+	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
+	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
+	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
+	return samp;
+}
+
+instance uniform float drain_progress: hint_range(0.0, 1.0, 0.1) = 0.0;
+uniform float gray_scale_darken: hint_range(0.0, 1.0, 0.1) = 0.4;
+void fragment() {
+	vec4 albedo_tex = vec4(albedo.rgb, 1.0) * triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
+	albedo_tex = vec4(mix(albedo_tex.rgb, gray_scale_darken * custom_grayscale(albedo_tex.rgb), drain_progress), 1.0);
+	ALBEDO = albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS =  roughness;
+	SPECULAR = specular;
+	vec3 ref_normal = NORMAL;
+	vec2 ref_ofs = SCREEN_UV - ref_normal.xy * refraction;
+	float ref_amount = 1.0 - max(albedo.a * albedo_tex.a, drain_progress);
+	EMISSION += textureLod(screen_texture,ref_ofs,ROUGHNESS * 8.0).rgb * ref_amount * EXPOSURE;
+	ALBEDO *= 1.0 - ref_amount;
+	ALPHA = 1.0;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m74wr"]
+render_priority = 0
+shader = SubResource("Shader_wyt3g")
+shader_parameter/albedo = Color(0.4, 0.509804, 1, 0.835294)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.4
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.5
+shader_parameter/refraction = 0.13
+shader_parameter/refraction_texture_channel = null
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv_scale = Vector3(0.3, 0.3, 0.3)
+shader_parameter/gray_scale_darken = 0.4
+shader_parameter/texture_albedo = ExtResource("2_uh8kt")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jwrwj"]
-material = ExtResource("2_v2iqp")
+material = SubResource("ShaderMaterial_m74wr")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 0.001
@@ -12,7 +98,7 @@ radial_segments = 6
 rings = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2ud3"]
-albedo_color = Color(0.756863, 0.772549, 0.537255, 1)
+albedo_texture = ExtResource("3_evw5i")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_x53ak"]
 material = SubResource("StandardMaterial3D_u2ud3")
@@ -23,16 +109,17 @@ radial_segments = 6
 rings = 1
 
 [node name="WaterTile" type="Node3D"]
-script = ExtResource("1_ppghb")
+script = ExtResource("1_pqm35")
 
 [node name="DebugTile" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 visible = false
 
-[node name="Hexagon3" type="MeshInstance3D" parent="."]
+[node name="Hexagon" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.073937, 0)
+instance_shader_parameters/drain_progress = 0.0
 mesh = SubResource("CylinderMesh_jwrwj")
 
-[node name="Hexagon2" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("CylinderMesh_x53ak")
