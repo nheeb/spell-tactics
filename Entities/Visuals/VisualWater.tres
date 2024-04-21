@@ -65,7 +65,7 @@ void fragment() {
 	albedo_tex = vec4(mix(albedo_tex.rgb, gray_scale_darken * custom_grayscale(albedo_tex.rgb), drain_progress), 1.0);
 	ALBEDO = albedo_tex.rgb;
 	METALLIC = metallic;
-	ROUGHNESS =  max(roughness + 0.1*(0.5*sin(TIME)), drain_progress);
+	ROUGHNESS =  max(roughness + 0.2*(0.5*sin(TIME)), drain_progress);
 	SPECULAR = specular;
 	vec3 ref_normal = NORMAL;
 	vec2 ref_ofs = SCREEN_UV - ref_normal.xy * refraction;
