@@ -11,6 +11,11 @@ var ui_root : Node
 @export var debug_ui: Control
 @export var popup_handler: Control
 
+var relative_motion: Vector2:
+	set(m):
+		$GameCamera.relative_motion = m
+		relative_motion = m
+
 signal combat_changed (combat : Combat)
 
 func _ready() -> void:

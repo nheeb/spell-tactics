@@ -20,7 +20,6 @@ script = ExtResource("1_wrhl6")
 [node name="3DViewport" type="SubViewport" parent="."]
 unique_name_in_owner = true
 own_world_3d = true
-handle_input_locally = false
 msaa_3d = 1
 use_debanding = true
 physics_object_picking = true
@@ -32,7 +31,7 @@ unique_name_in_owner = true
 debug_ui = NodePath("../../DebugUI")
 popup_handler = NodePath("../../PopUpHandler")
 
-[node name="ViewportTexture" type="TextureRect" parent="."]
+[node name="ViewportTexture" type="TextureRect" parent="." groups=["ui_root"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,7 +39,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("ViewportTexture_qgsc2")
-stretch_mode = 3
 
 [node name="DebugUI" type="Control" parent="."]
 layout_mode = 3

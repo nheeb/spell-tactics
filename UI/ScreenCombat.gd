@@ -5,6 +5,10 @@ var activity: CombatActivity
 func set_activity(_activity: CombatActivity):
 	self.activity = _activity
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		%World.relative_motion = event.relative
+
 func _ready():
 	# set content size to 0 in windowed mode, so the render resolution stays
 	# identical to the window size on resize
