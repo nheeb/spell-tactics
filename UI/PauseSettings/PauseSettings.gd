@@ -1,3 +1,3 @@
 extends CanvasLayer
 
-#settings
+var settings: Settings
