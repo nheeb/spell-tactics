@@ -15,8 +15,7 @@ const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var world: World = null
 
-var start_debugging = false
-
+# todo: add these to Settings.gd
 const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false

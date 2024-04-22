@@ -71,7 +71,6 @@ func show_drainable_overlay():
 
 	
 func hide_drainable_overlay():
-	Game.start_debugging = true
 	#$Drainables.hide()
 	for drainable in $Drainables.get_children():
 		drainable.visible = false
