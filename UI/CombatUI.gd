@@ -172,6 +172,15 @@ func update_payable_cards():
 func _ready() -> void:
 	deselect_card()
 	%EnemyArrow.visible = false
+	Game.got_paused.connect(on_game_paused)
+	Game.got_unpaused.connect(on_game_unpaused)
+
+
+func on_game_paused():
+	hide()
+	
+func on_game_unpaused():
+	show()
 
 func _on_active_button_pressed(i: int) -> void:
 	combat.input.process_action(SelectActive.new(actives[i]))

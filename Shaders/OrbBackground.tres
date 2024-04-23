@@ -1,4 +1,4 @@
-[gd_resource type="Shader" format=3 uid="uid://c6y5aqkn12d5f"]
+[gd_resource type="Shader" format=3 uid="uid://4bqma1qx5xgw"]
 
 [resource]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.stable's StandardMaterial3D.
@@ -12,7 +12,7 @@ uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enab
 uniform sampler3D noise;
 uniform sampler2D flame_noise;
 
-#include \"lib.gdshaderinc\"
+#include \"res://Shaders/lib.gdshaderinc\"
 
 void vertex() {
 	//UV=UV*uv1_scale.xy+uv1_offset.xy;

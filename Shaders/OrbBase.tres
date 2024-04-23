@@ -1,4 +1,4 @@
-[gd_resource type="Shader" format=3 uid="uid://b56j6k13ivo61"]
+[gd_resource type="Shader" format=3 uid="uid://bankemuhjm2cp"]
 
 [resource]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.stable's StandardMaterial3D.
@@ -6,7 +6,8 @@ code = "// NOTE: Shader automatically converted from Godot Engine 4.2.stable's S
 shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx,unshaded;
 
-#include \"lib.gdshaderinc\"
+#include \"res://Shaders/lib.gdshaderinc\"
+
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;

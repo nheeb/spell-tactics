@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://brhegqlf0sm1x"]
+[gd_scene load_steps=27 format=3 uid="uid://brhegqlf0sm1x"]
 
 [ext_resource type="Script" path="res://Logic/Main.gd" id="1_u1dq5"]
 [ext_resource type="PackedScene" uid="uid://brewkay16y5my" path="res://UI/ScreenPostCombat.tscn" id="4_7jo8o"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dtahis2beh6hw" path="res://UI/ScreenDeckPurge.tscn" id="12_trg3p"]
 [ext_resource type="PackedScene" uid="uid://dxkg4yr5fq1ry" path="res://UI/PlayerChoice/ScreenCardChoice.tscn" id="13_uc4qp"]
 [ext_resource type="PackedScene" uid="uid://dibufukcm480e" path="res://UI/PauseSettings/PauseSettings.tscn" id="14_suebk"]
+[ext_resource type="Script" path="res://Logic/PauseManager.gd" id="15_5fod4"]
 
 [sub_resource type="Resource" id="Resource_mqai8"]
 script = ExtResource("11_qsh2o")
@@ -89,3 +90,8 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 activity_to_view_map = Array[ExtResource("11_qsh2o")]([SubResource("Resource_mqai8"), SubResource("Resource_ep884"), SubResource("Resource_8nmyv"), SubResource("Resource_y80su"), SubResource("Resource_7534x"), SubResource("Resource_ti6f6"), SubResource("Resource_nyjlp"), SubResource("Resource_4345y"), SubResource("Resource_pvi0c"), SubResource("Resource_wmb0h"), SubResource("Resource_1so6s")])
+
+[node name="PauseManager" type="Node" parent="."]
+process_mode = 3
+editor_description = "This node is needed, as it's process_mode is set to always, it can still catch pressing ESC when paused"
+script = ExtResource("15_5fod4")

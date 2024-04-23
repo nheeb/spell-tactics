@@ -3,9 +3,10 @@
 [ext_resource type="Script" path="res://UI/PauseSettings/PauseSettings.gd" id="1_xk68a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g41yr"]
-bg_color = Color(0.207031, 0.207031, 0.207031, 0.388235)
+bg_color = Color(0.14902, 0.14902, 0.14902, 0.6)
 
 [node name="PauseSettingsLayer" type="CanvasLayer"]
+process_mode = 3
 layer = 100
 script = ExtResource("1_xk68a")
 
@@ -65,7 +66,8 @@ text = "Render Resolution:"
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="CenterContainer/VBoxContainer/SettingRows/RenderResolutionRow"]
+[node name="RenderResOptions" type="OptionButton" parent="CenterContainer/VBoxContainer/SettingRows/RenderResolutionRow"]
+unique_name_in_owner = true
 layout_mode = 2
 item_count = 2
 selected = 0
@@ -112,3 +114,24 @@ text = "Resume"
 [node name="Gap3" type="Control" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 306.0
+offset_top = 319.0
+offset_right = 629.0
+offset_bottom = 757.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseTitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Controls & Tips :)"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Gap1" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[connection signal="item_selected" from="CenterContainer/VBoxContainer/SettingRows/RenderResolutionRow/RenderResOptions" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

@@ -15,6 +15,8 @@ const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var world: World = null
 
+var settings: Settings = load("res://Prototype/default_game_settings.tres")
+
 # todo: add these to Settings.gd
 const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
@@ -66,3 +68,25 @@ var spell_count: int = 0
 func add_to_spell_count() -> int:
 	spell_count += 1
 	return spell_count
+
+# --- PAUSE STUFF ---	
+@onready var pause_activity: PauseActivity = PauseActivity.new()
+signal got_paused
+signal got_unpaused
+func _input(e) -> void:
+	if Input.is_action_just_pressed("pause"):
+		if get_tree().paused:
+			unpause()
+		else:
+			pause()
+			
+func pause():
+	ActivityManager.push(pause_activity)
+	get_tree().paused = true
+	got_paused.emit()
+	
+func unpause():
+	ActivityManager.pop()
+	get_tree().paused = false
+	got_unpaused.emit()
+# --- PAUSE STUFF OVER ---

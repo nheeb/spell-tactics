@@ -27,9 +27,10 @@ func _ready():
 	
 	# connect resized event
 	#get_tree().root.connect("size_changed", _on_window_resized)
-	$DebugLabel.text = "3D size: " + str(%"3DViewport".size) + ", Root size: " + str(get_tree().root.size)
+	$DebugLabel.text = "3D size: " + str(%Viewport3D.size) + ", Root size: " + str(get_tree().root.size)
+	
+	Game.settings.changed_render_resolution.connect(on_changed_render_resolution)
 
-#func _on_window_resized():
-	#%"3DViewport".size = get_tree().root.size
-	#get_window().content_scale_size = get_tree().root.size
-	#$DebugLabel.text = "3D size: " + str(%"3DViewport".size) + ", Root size: " + str(get_tree().root.size)
+
+func on_changed_render_resolution(res: Vector2i):
+	%Viewport3D.size = res

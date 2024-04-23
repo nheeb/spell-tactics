@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://cprvtoo5si7sx"]
 
 [ext_resource type="Script" path="res://Effects/EnergyOrb.gd" id="1_2ps41"]
-[ext_resource type="Shader" uid="uid://dvhxu5tu3ut0l" path="res://Shaders/OrbBase.tres" id="1_r13mk"]
-[ext_resource type="Shader" uid="uid://cmluyc6dk1ebt" path="res://Shaders/OrbBackground.tres" id="2_2q3is"]
+[ext_resource type="Shader" uid="uid://jd31n4bmp7hl" path="res://Shaders/OrbBase.tres" id="1_r13mk"]
+[ext_resource type="Shader" uid="uid://ck5ew15kj3elp" path="res://Shaders/OrbBackground.tres" id="2_2q3is"]
 [ext_resource type="PackedScene" uid="uid://djujpfvecfgl2" path="res://Logic/GeneralUtility/OrbitalMovement.tscn" id="4_o3qko"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vga55"]
@@ -16,7 +16,7 @@ noise = SubResource("FastNoiseLite_vga55")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oixlq"]
 render_priority = 0
 shader = ExtResource("1_r13mk")
-shader_parameter/albedo = Color(1, 1, 0.231373, 1)
+shader_parameter/albedo = Color(0.5, 0.34775, 0.145714, 1)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = null
@@ -53,8 +53,8 @@ noise = SubResource("FastNoiseLite_awb8t")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7hbyl"]
 render_priority = 0
 shader = ExtResource("2_2q3is")
-shader_parameter/albedo = Color(0.913725, 0, 0.462745, 1)
-shader_parameter/albedo2 = Color(1, 0.364706, 0.866667, 1)
+shader_parameter/albedo = Color(0.899894, 0.913725, 0.24602, 1)
+shader_parameter/albedo2 = Color(0.898039, 0.913725, 0.247059, 1)
 shader_parameter/noise = SubResource("NoiseTexture3D_32knh")
 shader_parameter/flame_noise = SubResource("NoiseTexture2D_0fe2a")
 
@@ -66,13 +66,13 @@ script = ExtResource("1_2ps41")
 [node name="Orb" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_oixlq")
+cast_shadow = 0
 mesh = SubResource("SphereMesh_l3ict")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="OrbBackground" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_7hbyl")
+cast_shadow = 0
 mesh = SubResource("QuadMesh_36cb7")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
 
 [node name="OrbitalMovement" parent="." instance=ExtResource("4_o3qko")]

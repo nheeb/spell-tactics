@@ -21,7 +21,5 @@ func _ready() -> void:
 		ActivityManager.push(PurgeDeckActivity.new(20, false))
 
 
-func _input(e) -> void:
-	if Input.is_action_just_pressed("pause"):
-		ActivityManager.push(PauseActivity.new())
+
 		
