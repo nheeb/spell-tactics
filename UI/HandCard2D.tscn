@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://binwfa5e0th2w"]
+[gd_scene load_steps=12 format=3 uid="uid://binwfa5e0th2w"]
 
 [ext_resource type="Script" path="res://UI/HandCard2D.gd" id="1_5w608"]
 [ext_resource type="FontFile" uid="uid://hxpop83lvr07" path="res://Assets/Fonts/Gothica-Book.ttf" id="2_3qe8h"]
 [ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/HandCard2D_panel_default.tres" id="2_4erlu"]
 [ext_resource type="LabelSettings" uid="uid://bvmsibwfudvvs" path="res://Assets/Fonts/LabelSettings/HandCard2D_Title_LabelSettings.tres" id="4_gidae"]
 [ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="4_tjgd0"]
+[ext_resource type="StyleBox" uid="uid://dpdsrccqpqxih" path="res://UI/Theme/CardInteriorPanel.tres" id="6_cqcc5"]
+[ext_resource type="Texture2D" uid="uid://cta2n4shiew5p" path="res://Assets/Sprites/Icons/question.png" id="6_uxyjw"]
+[ext_resource type="LabelSettings" uid="uid://b763i3yueosu6" path="res://UI/DefaultLabelSettingsLarge.tres" id="7_3g2a7"]
+[ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="9_xcgcs"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2udtv"]
 resource_local_to_scene = true
@@ -36,6 +40,7 @@ theme_override_styles/panel = ExtResource("2_4erlu")
 
 [node name="Fluff" type="Label" parent="PanelContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 8
@@ -94,3 +99,90 @@ AAA sddfsdfs dfsd sdf sdfsssdfsdf sdfsdfsdfsdf sdfsdfsdf"
 label_settings = ExtResource("4_tjgd0")
 autowrap_mode = 3
 text_overrun_behavior = 1
+
+[node name="CardTopicIconsUI" type="PanelContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("6_cqcc5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CardTopicIconsUI"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/CardTopicIconsUI/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TopicIcon1" type="TextureRect" parent="PanelContainer/CardTopicIconsUI/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("6_uxyjw")
+expand_mode = 2
+
+[node name="TopicIcon2" type="TextureRect" parent="PanelContainer/CardTopicIconsUI/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("6_uxyjw")
+expand_mode = 2
+
+[node name="TopicText" type="Label" parent="PanelContainer/CardTopicIconsUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "2"
+label_settings = ExtResource("7_3g2a7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardTargetIconsUI" type="PanelContainer" parent="PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("6_cqcc5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CardTargetIconsUI"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/CardTargetIconsUI/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TargetIcon" type="TextureRect" parent="PanelContainer/CardTargetIconsUI/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("6_uxyjw")
+expand_mode = 2
+
+[node name="TargetText" type="Label" parent="PanelContainer/CardTargetIconsUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "2 - 4"
+label_settings = ExtResource("7_3g2a7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+alignment = 1
+
+[node name="MainIcon" type="TextureRect" parent="PanelContainer/IconContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("9_xcgcs")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Gap" type="Control" parent="PanelContainer/IconContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 1.7

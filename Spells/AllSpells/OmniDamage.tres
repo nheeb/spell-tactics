@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://djuhody4na5qo"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://djuhody4na5qo"]
 
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_up0ax"]
+[ext_resource type="Texture2D" uid="uid://b6w3gfcnr1m8y" path="res://Assets/Sprites/Icons/skull-crossed-bones.png" id="2_2yxbe"]
 [ext_resource type="Script" path="res://Spells/SpellType.gd" id="2_txoh5"]
 
 [sub_resource type="Resource" id="Resource_61ndi"]
@@ -16,8 +17,12 @@ effect_text = "Kills everything."
 fluff_text = "Happy times.
 
 "
-color = Color(1, 1, 1, 1)
+icon = ExtResource("2_2yxbe")
+color = Color(0, 0, 0, 1)
 target = 0
 target_range = -1
 target_min_range = -1
 target_tag = ""
+topic = 8
+topic_secondary = 0
+topic_caption = ""

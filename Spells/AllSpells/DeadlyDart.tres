@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://coxs5uvjtigok"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://coxs5uvjtigok"]
 
 [ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_3xw06"]
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_45yov"]
+[ext_resource type="Texture2D" uid="uid://ccnyf8c432pm" path="res://Assets/Sprites/Icons/dart.png" id="2_ayoco"]
 
 [sub_resource type="Resource" id="Resource_kfprs"]
 script = ExtResource("1_45yov")
@@ -14,8 +15,12 @@ costs = SubResource("Resource_kfprs")
 keywords = Array[Resource("res://Spells/Keyword.gd")]([])
 effect_text = "Poisons an enemy. Kills the enemy if it was already poisoned."
 fluff_text = ""
-color = Color(1, 1, 1, 1)
+icon = ExtResource("2_ayoco")
+color = Color(0.47451, 0, 0.47451, 1)
 target = 1
 target_range = 4
 target_min_range = -1
 target_tag = ""
+topic = 7
+topic_secondary = 8
+topic_caption = ""

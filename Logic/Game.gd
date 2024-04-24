@@ -66,3 +66,10 @@ var spell_count: int = 0
 func add_to_spell_count() -> int:
 	spell_count += 1
 	return spell_count
+
+func get_icon_from_name(icon_name) -> Texture:
+	if icon_name is Texture:
+		return icon_name
+	if icon_name == "" or icon_name == null:
+		return null
+	return load("res://Assets/Sprites/Icons/%s.png" % icon_name)

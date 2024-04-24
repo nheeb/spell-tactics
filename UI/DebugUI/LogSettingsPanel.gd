@@ -50,6 +50,7 @@ func advance():
 			printerr("Log UI has no combat reference")
 			return
 	clear_entries()
+	@warning_ignore("int_as_enum_without_cast")
 	current_mode += 1
 	if current_mode > Mode.SETTINGS:
 		current_mode = Mode.HIDDEN
