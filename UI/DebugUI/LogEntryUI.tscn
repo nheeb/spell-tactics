@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciqdnpnw1706g"]
+
+[ext_resource type="Script" path="res://UI/DebugUI/LogEntryUI.gd" id="1_8wwf5"]
+[ext_resource type="Script" path="res://UI/LabelFix.gd" id="1_fdkeb"]
+[ext_resource type="LabelSettings" uid="uid://bb6mt3elori61" path="res://UI/DefaultLabelSettingsSmall.tres" id="2_x1ym0"]
+
+[node name="Control" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_8wwf5")
+
+[node name="FixedLabel" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "<<< Log - Entry >>>"
+label_settings = ExtResource("2_x1ym0")
+script = ExtResource("1_fdkeb")

@@ -194,3 +194,12 @@ func array_safe_get(array: Array, index: int):
 		return array[index]
 	else:
 		return null
+
+func get_parent_of_type(n: Node, type) -> Node:
+	var parent: Node = n.get_parent()
+	while parent:
+		if is_instance_of(parent, type):
+			return parent
+		parent = parent.get_parent()
+	printerr("No parent of %s with type %s found." % [n, type])
+	return null

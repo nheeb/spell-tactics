@@ -14,3 +14,7 @@ func _on_load_level_pressed() -> void:
 
 func _on_save_load_game_pressed() -> void:
 	%SaveLoadMenu.setup()
+
+
+func _on_show_debug_pressed() -> void:
+	%List.visible = not %List.visible

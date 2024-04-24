@@ -2,7 +2,12 @@ class_name EventCard2D extends Control
 
 const ENTRY = preload("res://UI/EventCardEffectEntry.tscn")
 
-func set_event(event: SpellType, round_highlight := -1) -> void:
+var spell_type : SpellType
+var round_highlight : int
+
+func set_event(event: SpellType, _round_highlight := -1) -> void:
+	spell_type = event
+	round_highlight = _round_highlight
 	%Title.text = "Event - %s" % event.pretty_name
 	var effects := event.effect_text.split(";")
 	for i in len(effects):

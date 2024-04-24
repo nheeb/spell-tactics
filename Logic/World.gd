@@ -44,6 +44,7 @@ func load_combat_from_state(combat_state: CombatState) -> void:
 	ui_root = get_tree().get_first_node_in_group("ui_root") # This seems kinda weird to me
 	combat_ui = COMBAT_UI.instantiate()
 	ui_root.add_child(combat_ui)
+	ui_root.move_child(combat_ui, 1)
 	
 	camera = get_node("GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D")
 	

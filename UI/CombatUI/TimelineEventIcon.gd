@@ -48,5 +48,9 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	if visible and type:
-		timeline.combat_ui.cards3d.hide_event()
+		var number := int(%SubLabel.text)
+		if number <= 0:
+			number = -1
+		if timeline.combat_ui.cards3d.is_event_currently_shown(type, number):
+			timeline.combat_ui.cards3d.hide_event()
 
