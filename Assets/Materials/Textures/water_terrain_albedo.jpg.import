@@ -2,26 +2,27 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gm3812yylk"
-path="res://.godot/imported/dirt_albedo_seamless.jpeg-ee51e42cc3134f1d0f0c6cd88b5d163b.ctex"
+uid="uid://ci6b5ym58jqs4"
+path.s3tc="res://.godot/imported/water_terrain_albedo.jpg-501fa21aa4f1050b95ea06fb6f24feac.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://Shaders/dirt_albedo_seamless.jpeg"
-dest_files=["res://.godot/imported/dirt_albedo_seamless.jpeg-ee51e42cc3134f1d0f0c6cd88b5d163b.ctex"]
+source_file="res://Assets/Materials/Textures/water_terrain_albedo.jpg"
+dest_files=["res://.godot/imported/water_terrain_albedo.jpg-501fa21aa4f1050b95ea06fb6f24feac.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

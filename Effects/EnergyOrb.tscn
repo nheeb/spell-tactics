@@ -1,0 +1,78 @@
+[gd_scene load_steps=15 format=3 uid="uid://cprvtoo5si7sx"]
+
+[ext_resource type="Script" path="res://Effects/EnergyOrb.gd" id="1_2ps41"]
+[ext_resource type="Shader" path="res://Shaders/OrbBase.gdshader" id="2_gel2k"]
+[ext_resource type="Shader" path="res://Shaders/OrbBackground.gdshader" id="3_oj44r"]
+[ext_resource type="PackedScene" uid="uid://djujpfvecfgl2" path="res://Logic/GeneralUtility/OrbitalMovement.tscn" id="4_o3qko"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vga55"]
+fractal_gain = 1.105
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_1ep8l"]
+seamless = true
+seamless_blend_skirt = 0.183
+noise = SubResource("FastNoiseLite_vga55")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oixlq"]
+render_priority = 0
+shader = ExtResource("2_gel2k")
+shader_parameter/albedo = Color(1, 1, 0.231373, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/noise = SubResource("NoiseTexture3D_1ep8l")
+
+[sub_resource type="SphereMesh" id="SphereMesh_l3ict"]
+radial_segments = 16
+rings = 8
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nsbpj"]
+seed = 1
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0fe2a"]
+seamless = true
+noise = SubResource("FastNoiseLite_nsbpj")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_awb8t"]
+frequency = 0.1044
+fractal_type = 0
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_32knh"]
+seamless = true
+seamless_blend_skirt = 0.61
+noise = SubResource("FastNoiseLite_awb8t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7hbyl"]
+render_priority = 0
+shader = ExtResource("3_oj44r")
+shader_parameter/albedo = Color(0.913725, 0, 0.462745, 1)
+shader_parameter/albedo2 = Color(1, 0.364706, 0.866667, 1)
+shader_parameter/noise = SubResource("NoiseTexture3D_32knh")
+shader_parameter/flame_noise = SubResource("NoiseTexture2D_0fe2a")
+
+[sub_resource type="QuadMesh" id="QuadMesh_36cb7"]
+
+[node name="EnergyOrb" type="Node3D"]
+script = ExtResource("1_2ps41")
+
+[node name="Orb" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_oixlq")
+mesh = SubResource("SphereMesh_l3ict")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_7hbyl")
+mesh = SubResource("QuadMesh_36cb7")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+
+[node name="OrbitalMovement" parent="." instance=ExtResource("4_o3qko")]

@@ -138,7 +138,7 @@ func disable_actions():
 	pass
 
 
-const energy_min_size := 32
+const energy_min_size := 50
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 func set_current_energy(energy: EnergyStack):
 	for c in $EnergyArea/EnergyList.get_children():

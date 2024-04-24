@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://j0l5hc388gmj"]
+[gd_scene load_steps=7 format=3 uid="uid://j0l5hc388gmj"]
 
 [ext_resource type="Script" path="res://UI/HandCard.gd" id="1_qf1rt"]
 [ext_resource type="PackedScene" uid="uid://cr5uo2crw6yep" path="res://Logic/GeneralUtility/SmoothMovement.tscn" id="2_r8jtd"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dakll"]
+albedo_color = Color(1, 0.694118, 0.509804, 1)
+
 [sub_resource type="QuadMesh" id="QuadMesh_x50fm"]
+material = SubResource("StandardMaterial3D_dakll")
 size = Vector2(1, 1.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6j1g"]
@@ -29,6 +33,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_y6j1g")
 disable_3d = true
 transparent_bg = true
 size = Vector2i(563, 789)
+
+[node name="QuadBackside" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.00970364, 0, 4.2416e-10)
+mesh = SubResource("QuadMesh_x50fm")
 
 [node name="Area3D" type="Area3D" parent="." groups=["hand_area"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0412399, 0, 1.80265e-09)

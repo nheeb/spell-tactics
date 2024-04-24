@@ -1,13 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://comglywow87xc"]
+[gd_scene load_steps=7 format=3 uid="uid://comglywow87xc"]
 
-[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_ppghb"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6e8n2"]
-transparency = 1
-albedo_color = Color(0.0588235, 0.231373, 1, 0.631373)
+[ext_resource type="Script" path="res://Entities/Visuals/VisualTerrain.gd" id="1_pqm35"]
+[ext_resource type="Material" uid="uid://cvjghqsy2rnqy" path="res://Entities/Visuals/VisualWater.tres" id="2_j8qmn"]
+[ext_resource type="Texture2D" uid="uid://hkawty8jcy0e" path="res://Assets/Materials/Textures/dirt_albedo_seamless.jpeg" id="3_evw5i"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jwrwj"]
-material = SubResource("StandardMaterial3D_6e8n2")
+material = ExtResource("2_j8qmn")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 0.001
@@ -15,7 +13,8 @@ radial_segments = 6
 rings = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2ud3"]
-albedo_color = Color(0.756863, 0.772549, 0.537255, 1)
+albedo_color = Color(0.721569, 0.721569, 0.721569, 1)
+albedo_texture = ExtResource("3_evw5i")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_x53ak"]
 material = SubResource("StandardMaterial3D_u2ud3")
@@ -26,15 +25,17 @@ radial_segments = 6
 rings = 1
 
 [node name="WaterTile" type="Node3D"]
-script = ExtResource("1_ppghb")
+script = ExtResource("1_pqm35")
 
 [node name="DebugTile" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 visible = false
 
-[node name="Hexagon3" type="MeshInstance3D" parent="."]
+[node name="Hexagon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.073937, 0)
+instance_shader_parameters/drain_progress = 0.0
 mesh = SubResource("CylinderMesh_jwrwj")
 
-[node name="Hexagon2" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("CylinderMesh_x53ak")

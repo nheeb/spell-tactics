@@ -29,11 +29,15 @@ func _ready() -> void:
 	zoom_pivot.position.y = camera_zoom
 	
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		if event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
-			rotation_input += event.relative.x * mouse_rotation_factor * .5
-			rotation_input_vertical = - event.relative.y * mouse_rotation_factor
+# deprecated
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event is InputEventMouseMotion:
+		#if event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
+			#rotation_input += event.relative.x * mouse_rotation_factor * .5
+			#rotation_input_vertical = - event.relative.y * mouse_rotation_factor
+
+var relative_motion := Vector2(0.0, 0.0)
+
 
 func _physics_process(delta: float) -> void:
 	delta *= VisualTime.visual_time_scale
@@ -77,3 +81,8 @@ func _physics_process(delta: float) -> void:
 	camera_zoom += zoom_velocity
 	camera_zoom = clamp(camera_zoom, .80, 12.0)
 	zoom_pivot.position.y = camera_zoom
+	
+	# mouse wheel pan
+	if Input.is_action_pressed("mouse_pan"):
+		rotation_input += relative_motion.x * mouse_rotation_factor * .5
+		rotation_input_vertical = - relative_motion.y * mouse_rotation_factor

@@ -35,7 +35,8 @@ func disable_highlight(tile: Tile):
 
 var currently_hovering: Tile = null
 func _physics_process(delta: float) -> void:
-	var mouse_position := get_viewport().get_mouse_position()
+	var vp = get_viewport()
+	var mouse_position := get_window().get_mouse_position()
 	var camera := get_viewport().get_camera_3d()
 	var ray_origin := camera.project_ray_origin(mouse_position)
 	var ray_direction := camera.project_ray_normal(mouse_position)

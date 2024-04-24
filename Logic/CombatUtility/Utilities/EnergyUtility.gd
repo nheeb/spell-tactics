@@ -6,6 +6,7 @@ var drains_done_this_turn := 0
 
 func pay(payment: EnergyStack) -> AnimationCallback:
 	# style: is this utility method needed or should it be moved here?
+	# -> what?
 	player_energy.apply_payment(payment)
 	return show_energy_in_ui()
 	
@@ -19,7 +20,8 @@ func gain(energy: EnergyStack) -> AnimationCallback:
 
 func show_energy_in_ui() -> AnimationCallback:
 	player_energy.sort()
-	return combat.animation.callback(combat.ui, "set_current_energy", [player_energy.duplicate(true)])
+	return combat.animation.callback(combat.ui, "set_current_energy", \
+										 [player_energy.duplicate(true)])
 
 func reset_drains() -> AnimationCallback:
 	drains_done_this_turn = 0

@@ -11,6 +11,11 @@ var ui_root : Node
 @export var debug_ui: Control
 @export var popup_handler: Control
 
+var relative_motion: Vector2:
+	set(m):
+		$GameCamera.relative_motion = m
+		relative_motion = m
+
 signal combat_changed (combat : Combat)
 
 func _ready() -> void:
@@ -44,7 +49,9 @@ func load_combat_from_state(combat_state: CombatState) -> void:
 	ui_root = get_tree().get_first_node_in_group("ui_root") # This seems kinda weird to me
 	combat_ui = COMBAT_UI.instantiate()
 	ui_root.add_child(combat_ui)
-	ui_root.move_child(combat_ui, 1)
+	var i = ui_root.get_node("DebugUI").get_index()
+	ui_root.move_child(combat_ui, ui_root.get_node("DebugUI").get_index())
+	# TODO nitai remove cursed code
 	
 	camera = get_node("GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D")
 	

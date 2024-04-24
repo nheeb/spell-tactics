@@ -1,0 +1,14 @@
+[gd_resource type="ProceduralSkyMaterial" load_steps=2 format=3 uid="uid://d4acfqxpnaxvd"]
+
+[ext_resource type="Texture2D" uid="uid://cxxc8r6nl31w5" path="res://Assets/Materials/Textures/dirt_height.png" id="1_si8g3"]
+
+[resource]
+sky_horizon_color = Color(0.223529, 0.517647, 0.670588, 1)
+sky_curve = 0.204906
+sky_cover = ExtResource("1_si8g3")
+sky_cover_modulate = Color(0.960784, 0.87451, 0.843137, 1)
+ground_bottom_color = Color(0.227451, 0.352941, 0.592157, 1)
+ground_horizon_color = Color(0.286275, 0.521569, 0.290196, 1)
+ground_curve = 0.761092
+sun_angle_max = 45.53
+sun_curve = 0.791702
