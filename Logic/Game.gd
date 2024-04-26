@@ -1,16 +1,16 @@
 class_name GameSingleton extends Node
 
-var game_version_string : String = "1.0 - First Prototype"
-var review_questions : Array[String] = []
+var game_version_string: String = "1.0 - First Prototype"
+var review_questions: Array[String] = []
 const _SAVE_DIR_USER_REVIEWS = "user://reviews/"
 const GOOGLE_DRIVE_REVIEWS_LINK = "https://drive.google.com/drive/folders/1o0zJrVl51mmWTfiNKrZq-RvV7wg2pnY2?usp=sharing"
 var combat_to_review: Combat
 
-const PROTOTYPE_VISUALS = preload("res://Entities/Visuals/VisualPrototype.tscn")
+const PROTOTYPE_VISUALS = preload ("res://Entities/Visuals/VisualPrototype.tscn")
 
 const _SAVE_DIR_RES = "res://Prototype/Savefiles/"
 const _SAVE_DIR_USER = "user://"
-var SAVE_DIR = _SAVE_DIR_USER  if OS.has_feature("template") else _SAVE_DIR_RES
+var SAVE_DIR = _SAVE_DIR_USER if OS.has_feature("template") else _SAVE_DIR_RES
 const PROTOTYPE_BILLBOARD_DIR = "res://Assets/Sprites/PrototypeBillboard/"
 
 var world: World = null
@@ -27,14 +27,14 @@ var DEBUG_SPELL_TESTING := false # Not meant to be changed.
 var testing_deck: Array[SpellType]
 var testing_energy: EnergyStack
 
-var tree : SceneTree : 
+var tree: SceneTree:
 	get:
 		return get_tree()
 
 var combats: Array[Combat] # For debuging
 
 func get_prototype_deck(combat: Combat) -> Array[Spell]:
-	var prototype_deck : Array[Spell] = []
+	var prototype_deck: Array[Spell] = []
 	for i in range(5):
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/DoNothing.tres"), combat))
 		#prototype_deck.append(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/SelfDamage.tres"), combat))
@@ -53,7 +53,7 @@ func get_prototype_deck(combat: Combat) -> Array[Spell]:
 	return prototype_deck
 
 func get_prototype_events(combat: Combat) -> Array[Spell]:
-	var prototype_events : Array[Spell] = []
+	var prototype_events: Array[Spell] = []
 	
 	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/LeafDrop.tres"), combat))
 	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/StumpShroom.tres"), combat))
@@ -90,3 +90,10 @@ func unpause():
 	get_tree().paused = false
 	got_unpaused.emit()
 # --- PAUSE STUFF OVER ---
+
+func get_icon_from_name(icon_name) -> Texture:
+	if icon_name is Texture:
+		return icon_name
+	if icon_name == "" or icon_name == null:
+		return null
+	return load("res://Assets/Sprites/Icons/%s.png" % icon_name)

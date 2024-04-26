@@ -1,6 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmnkgdbb81cwt"]
+[gd_scene load_steps=3 format=3 uid="uid://cmnkgdbb81cwt"]
 
 [ext_resource type="Script" path="res://Prototype/ScriptResTest.gd" id="1_kartq"]
+[ext_resource type="Script" path="res://Prototype/InitReadyTest.gd" id="2_sjhb2"]
 
 [node name="ScriptResTest" type="Node3D"]
 script = ExtResource("1_kartq")
+
+[node name="ROOT" type="Node" parent="."]
+script = ExtResource("2_sjhb2")
+
+[node name="A" type="Node" parent="ROOT"]
+script = ExtResource("2_sjhb2")
+
+[node name="B" type="Node" parent="ROOT"]
+script = ExtResource("2_sjhb2")
+
+[node name="o1" type="Node" parent="ROOT/B"]
+script = ExtResource("2_sjhb2")
+
+[node name="o2" type="Node" parent="ROOT/B"]
+script = ExtResource("2_sjhb2")
+
+[node name="o3" type="Node" parent="ROOT/B"]
+script = ExtResource("2_sjhb2")
+
+[node name="C" type="Node" parent="ROOT"]
+script = ExtResource("2_sjhb2")

@@ -100,7 +100,9 @@ func setup_active_entries() -> Array[DrainableEntry]:
 		entry.owner = self
 		entry.show_energy(energy)
 		var _screen_pos = viewport.get_camera_3d().unproject_position(entry.connected_tile.global_position)
-		entry.position = _screen_pos - entry.size/2
+		# scale screen pos
+		_screen_pos = Utility.inv_scale_screen_pos(_screen_pos)
+		entry.position = (_screen_pos - entry.size/2).round()
 		entries.append(entry)
 		
 	return entries
@@ -134,6 +136,7 @@ func _process(delta: float) -> void:
 	if current_tile != null:
 		prev_screen_pos = screen_pos
 		screen_pos = viewport.get_camera_3d().unproject_position(current_tile.global_position)
+		screen_pos = Utility.inv_scale_screen_pos(screen_pos).round()
 		if prev_screen_pos.distance_to(screen_pos) > threshold:
 			popup.position = screen_pos
 	if not active_entries.is_empty():
@@ -142,6 +145,7 @@ func _process(delta: float) -> void:
 			if entry.visible:
 				entry.visible = not cam.is_position_behind(entry.connected_tile.global_position)
 			var _screen_pos = viewport.get_camera_3d().unproject_position(entry.connected_tile.global_position)
+			_screen_pos = Utility.inv_scale_screen_pos(_screen_pos).round()
 			entry.position = _screen_pos - entry.size/2  # unfortunately necessary..
 			
 				

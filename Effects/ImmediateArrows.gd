@@ -1,8 +1,10 @@
 class_name ImmediateArrows extends Node3D
 
-const CIRCLE_SEGMENTS = 8
-const ARROW_SCALE = 2.5
-const BASE_LIFT = .35
+static var CIRCLE_SEGMENTS := 8
+static var ARROW_SCALE := 2.5
+static var BASE_LIFT := .35
+static var DEFAULT_WIDTH := .2
+static var DEFAULT_HEIGHT := .04
 
 enum ArrowEnd {
 	Circle,
@@ -10,11 +12,19 @@ enum ArrowEnd {
 	None
 }
 
+func _ready() -> void:
+	DebugInfo.global_settings_config(ImmediateArrows, "Movement Arrow")
+	DebugInfo.global_settings_add("CIRCLE_SEGMENTS")
+	DebugInfo.global_settings_add("ARROW_SCALE", 1.0, 4.0)
+	DebugInfo.global_settings_add("BASE_LIFT", 0.0, 2.0)
+	DebugInfo.global_settings_add("DEFAULT_WIDTH", 0.05, .5)
+	DebugInfo.global_settings_add("DEFAULT_HEIGHT", 0.01, .2)
+
 class Arrow:
 	var start: Vector3
 	var end: Vector3
-	var width: float = .2
-	var height: float = .04
+	var width: float = ImmediateArrows.DEFAULT_WIDTH
+	var height: float = ImmediateArrows.DEFAULT_HEIGHT
 	var tail: ArrowEnd = ArrowEnd.Circle
 	var head: ArrowEnd = ArrowEnd.Circle
 
@@ -22,6 +32,7 @@ class Arrow:
 	var cross_direction: Vector3
 	var h: Vector3
 	var w: Vector3
+	
 	func calculate_util_variables() -> void:
 		# Validate
 		assert(start != end)
@@ -51,26 +62,6 @@ class Arrow:
 				triangles.append(end + aa - b)
 				triangles.append(end + aa + b)
 				triangles.append(start + aa - b)
-				
-		## Body - Top & Bottom
-		#for hh in [-h,h]:
-			#triangles.append(start + hh + w)
-			#triangles.append(start + hh - w)
-			#triangles.append(end + hh + w)
-			#
-			#triangles.append(end + hh - w)
-			#triangles.append(end + hh + w)
-			#triangles.append(start + hh - w)
-		#
-		## Body - Sides
-		#for ww in [-w, w]:
-			#triangles.append(start + ww + h)
-			#triangles.append(start + ww - h)
-			#triangles.append(end + ww + h)
-			#
-			#triangles.append(end + ww - h)
-			#triangles.append(end + ww + h)
-			#triangles.append(start + ww - h)
 		
 		return triangles
 
@@ -80,11 +71,11 @@ class Arrow:
 		match end_type:
 			ArrowEnd.Circle:
 				var circle_start_dir := (dir * w.length()).rotated(Vector3.UP, - PI / 2)
-				var angle_step := PI / (CIRCLE_SEGMENTS - 1)
+				var angle_step := PI / (ImmediateArrows.CIRCLE_SEGMENTS - 1)
 				var circle_points : Array[Vector3] = []
-				for i in range(CIRCLE_SEGMENTS):
+				for i in range(ImmediateArrows.CIRCLE_SEGMENTS):
 					circle_points.append(pos + circle_start_dir.rotated(Vector3.UP, i * angle_step))
-				for i in range(1, CIRCLE_SEGMENTS):
+				for i in range(1, ImmediateArrows.CIRCLE_SEGMENTS):
 					for hh in [-h, h]:
 						triangles.append(pos + hh)
 						triangles.append(circle_points[i-1] + hh)
@@ -96,10 +87,10 @@ class Arrow:
 					triangles.append(circle_points[i] - h)
 					triangles.append(circle_points[i-1] + h)
 			ArrowEnd.Arrow:
-				var top := pos + dir * w.length() * ARROW_SCALE
+				var top := pos + dir * w.length() * ImmediateArrows.ARROW_SCALE
 				for ww in [-w, w]:
 					var base : Vector3 = pos + ww
-					var arm : Vector3 = pos + ww * ARROW_SCALE
+					var arm : Vector3 = pos + ww * ImmediateArrows.ARROW_SCALE
 					triangles.append(base + h)
 					triangles.append(base - h)
 					triangles.append(arm + h)

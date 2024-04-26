@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://cprvtoo5si7sx"]
 
 [ext_resource type="Script" path="res://Effects/EnergyOrb.gd" id="1_2ps41"]
-[ext_resource type="Shader" uid="uid://jd31n4bmp7hl" path="res://Shaders/OrbBase.tres" id="1_r13mk"]
-[ext_resource type="Shader" uid="uid://ck5ew15kj3elp" path="res://Shaders/OrbBackground.tres" id="2_2q3is"]
+[ext_resource type="Shader" path="res://Shaders/OrbBase.gdshader" id="2_gel2k"]
+[ext_resource type="Shader" path="res://Shaders/OrbBackground.gdshader" id="3_oj44r"]
 [ext_resource type="PackedScene" uid="uid://djujpfvecfgl2" path="res://Logic/GeneralUtility/OrbitalMovement.tscn" id="4_o3qko"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vga55"]
@@ -15,8 +15,8 @@ noise = SubResource("FastNoiseLite_vga55")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oixlq"]
 render_priority = 0
-shader = ExtResource("1_r13mk")
-shader_parameter/albedo = Color(0.5, 0.34775, 0.145714, 1)
+shader = ExtResource("2_gel2k")
+shader_parameter/albedo = Color(1, 1, 0.231373, 1)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = null

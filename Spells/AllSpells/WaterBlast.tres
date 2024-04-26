@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://dejellym72t87"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://dejellym72t87"]
 
 [ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_3exxi"]
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_6h5bs"]
+[ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="2_yfs0k"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
 script = ExtResource("1_6h5bs")
@@ -15,8 +16,12 @@ keywords = Array[Resource("res://Spells/Keyword.gd")]([])
 effect_text = "Deal 3 Damage to an Enemy within Range 1.
 Knockback 2 and applies Wet status."
 fluff_text = "Lots of water"
-color = Color(1, 1, 1, 1)
+icon = ExtResource("2_yfs0k")
+color = Color(0.14902, 0.419608, 1, 1)
 target = 1
 target_range = 1
 target_min_range = -1
 target_tag = ""
+topic = 1
+topic_secondary = 17
+topic_caption = "3 2"

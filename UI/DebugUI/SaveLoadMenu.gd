@@ -1,6 +1,6 @@
 extends Control
 
-const SAVE_ENTRY = preload("res://UI/SavefileMenuEntry.tscn")
+const SAVE_ENTRY = preload("res://UI/DebugUI/SavefileMenuEntry.tscn")
 
 var selected_entry: SavefileMenuEntry
 var entries : Array[SavefileMenuEntry] = []

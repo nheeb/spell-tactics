@@ -21,5 +21,3 @@ func _ready() -> void:
 		ActivityManager.push(PurgeDeckActivity.new(20, false))
 
 
-
-		

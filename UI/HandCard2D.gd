@@ -34,9 +34,21 @@ func set_spell_state(_spell_state):
 
 func update():
 	if spell != null:
-		set_content(spell.type.pretty_name, spell.logic.get_costs(), spell.get_effect_text(), spell.type.fluff_text)
+		set_content(spell.type.pretty_name, spell.logic.get_costs(), \
+			spell.get_effect_text(), spell.type.fluff_text)
+		set_sub_icons(spell.type.icon, spell.type.color, \
+			SpellType.TopicIconName[spell.type.topic], \
+			SpellType.TopicIconName[spell.type.topic_secondary], spell.type.topic_caption,\
+			SpellType.TargetIconName[spell.type.target],spell.type.target_min_range,\
+			spell.type.target_range)
 	elif spell_type:
-		set_content(spell_type.pretty_name, spell_type.costs, spell_type.get_effect_text(), spell_type.fluff_text, true)
+		set_content(spell_type.pretty_name, spell_type.costs, \
+			spell_type.get_effect_text(), spell_type.fluff_text, true)
+		set_sub_icons(spell_type.icon, spell_type.color, \
+			SpellType.TopicIconName[spell_type.topic], \
+			SpellType.TopicIconName[spell_type.topic_secondary], spell_type.topic_caption,\
+			SpellType.TargetIconName[spell_type.target],spell_type.target_min_range,\
+			spell_type.target_range)
 
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 const SHRINKED_TITLE = preload("res://Assets/Fonts/LabelSettings/HandCard2D_Title_LabelSettings_shrinked.tres")
@@ -58,7 +70,44 @@ func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff:
 
 	# could always extend the fluff to 3 lines for consistent look
 	%Fluff.text = fluff
+
+func set_sub_icons(main_icon, color: Color, topic_icon_1, topic_icon_2, topic_text: String, \
+target_icon, target_range_start: int, target_range_end: int):
+	main_icon = Game.get_icon_from_name(main_icon)
+	topic_icon_1 = Game.get_icon_from_name(topic_icon_1)
+	topic_icon_2 = Game.get_icon_from_name(topic_icon_2)
+	target_icon = Game.get_icon_from_name(target_icon)
+
+	%MainIcon.texture = main_icon
+	%TopicIcon1.texture = topic_icon_1
+	%TopicIcon2.texture = topic_icon_2
+	%TargetIcon.texture = target_icon
 	
+	for text_rect in [%MainIcon, %TopicIcon1, %TopicIcon2, %TargetIcon]:
+		text_rect = text_rect as TextureRect
+		text_rect.visible = text_rect.texture != null
+		text_rect.modulate = color
+	
+	%TopicText.text = topic_text
+	%TopicText.visible = topic_text != ""
+	
+	var target_text := ""
+	if target_range_start == -1:
+		if target_range_end == -1:
+			target_text = ""
+		else:
+			target_text = "<%s" % target_range_end
+	else:
+		if target_range_end == -1:
+			target_text = ">%s" % target_range_start
+		else:
+			target_text = "%s-%s" % [target_range_start, target_range_end]
+	
+	%TargetText.text = target_text
+	%TargetText.visible = target_text != ""
+
+	if %TargetIcon.texture == null:
+		%CardTargetIconsUI.hide()
 
 const PANEL_DEFAULT = preload("res://UI/Theme/HandCard2D_panel_default.tres")
 const PANEL_HOVER = preload("res://UI/Theme/HandCard2D_panel_hover.tres")

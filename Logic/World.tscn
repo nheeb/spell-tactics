@@ -49,6 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 script = ExtResource("3_mpog2")
 
 [node name="Camera3D" type="Camera3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, 0, 0)
 
 [node name="MouseRaycast" type="RayCast3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D"]

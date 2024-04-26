@@ -33,6 +33,16 @@ enum Target {
 	Cone
 }
 
+const TargetIconName = {
+	Target.None: "",
+	Target.Enemy: "goblin",
+	Target.Tile: "hexagon", 
+	Target.TileWithoutObstacles: "hexagon",
+	Target.Tag: "question",
+	Target.Condition: "question",
+	Target.Cone: "cone"
+}
+
 ## Which, if any, targets this spell requires
 @export var target := Target.None
 
@@ -42,6 +52,52 @@ enum Target {
 
 ## when target is Tag, which Tag to target
 @export var target_tag := ""
+
+enum SpellTopic {
+	None,
+	Damage,
+	Defense,
+	Movement,
+	Energy,
+	Trap,
+	Totem,
+	Poison,
+	Death,
+	Grow,
+	AreaDamage,
+	Heal,
+	SpellDraw,
+	Buff,
+	Other,
+	Wet,
+	Snare,
+	Knockback
+}
+
+const TopicIconName = {
+	SpellTopic.None: "",
+	SpellTopic.Damage: "axe",
+	SpellTopic.Defense: "shield",
+	SpellTopic.Movement: "run",
+	SpellTopic.Energy: "question",
+	SpellTopic.Trap: "trap",
+	SpellTopic.Totem: "totem",
+	SpellTopic.Poison: "poison",
+	SpellTopic.Death: "skull",
+	SpellTopic.Grow: "sprout",
+	SpellTopic.AreaDamage: "area-damage",
+	SpellTopic.Heal: "hearts",
+	SpellTopic.SpellDraw: "card-pickup",
+	SpellTopic.Buff: "upgrade",
+	SpellTopic.Other: "question",
+	SpellTopic.Wet: "drop",
+	SpellTopic.Snare: "thorns",
+	SpellTopic.Knockback: "plain-arrow-right"
+}
+
+@export var topic: SpellTopic = SpellTopic.None
+@export var topic_secondary: SpellTopic = SpellTopic.None
+@export var topic_caption := ""
 
 static func load_from_file(path: String) -> SpellType:
 	var res = load(path)

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=4 format=3 uid="uid://cjit0u77ak3lu"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://cjit0u77ak3lu"]
 
 [ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_dgvjx"]
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_str82"]
+[ext_resource type="Texture2D" uid="uid://ua1w15qlqmok" path="res://Assets/Sprites/Icons/mushroom.png" id="2_37jli"]
 
 [sub_resource type="Resource" id="Resource_jf1pl"]
 script = ExtResource("1_str82")
@@ -16,8 +17,12 @@ effect_text = "Spawn a shroom. Draw 2 spells.
 (Min range: 3)
 "
 fluff_text = ""
-color = Color(1, 1, 1, 1)
+icon = ExtResource("2_37jli")
+color = Color(0.462745, 0.666667, 0.45098, 1)
 target = 3
 target_range = -1
 target_min_range = 3
 target_tag = ""
+topic = 9
+topic_secondary = 12
+topic_caption = "  2"

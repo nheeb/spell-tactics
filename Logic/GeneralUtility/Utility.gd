@@ -176,6 +176,23 @@ func take_screenshot(shrink_count := 0) -> ImageTexture:
 func get_mouse_pos_absolute() -> Vector2:
 	return get_viewport().get_mouse_position()
 
+## for when the viewport resolution doesn't match the content_scale	
+func scale_screen_pos(screen_pos: Vector2) -> Vector2:
+
+	var current_viewport_size: Vector2 = get_tree().root.size
+	var reference_viewport_size: Vector2 = get_tree().root.content_scale_size
+	var viewport_scale: Vector2 = current_viewport_size / reference_viewport_size
+	var scaled: Vector2 = Vector2(viewport_scale.x * screen_pos.x, viewport_scale.y * screen_pos.y)
+	return scaled
+
+## for when the viewport resolution doesn't match the content_scale		
+func inv_scale_screen_pos(screen_pos: Vector2) -> Vector2:
+	var current_viewport_size: Vector2 = get_tree().root.size
+	var reference_viewport_size: Vector2 = get_tree().root.content_scale_size
+	var viewport_scale: Vector2 = reference_viewport_size / current_viewport_size
+	var scaled: Vector2 = Vector2(viewport_scale.x * screen_pos.x, viewport_scale.y * screen_pos.y)
+	return scaled
+
 func get_mouse_pos_normalized(invert_y_axis := true) -> Vector2:
 	var absolute := get_mouse_pos_absolute()
 	if invert_y_axis:
@@ -194,3 +211,12 @@ func array_safe_get(array: Array, index: int):
 		return array[index]
 	else:
 		return null
+
+func get_parent_of_type(n: Node, type) -> Node:
+	var parent: Node = n.get_parent()
+	while parent:
+		if is_instance_of(parent, type):
+			return parent
+		parent = parent.get_parent()
+	printerr("No parent of %s with type %s found." % [n, type])
+	return null

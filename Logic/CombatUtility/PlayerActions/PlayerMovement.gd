@@ -17,7 +17,7 @@ func is_valid(combat: Combat) -> bool:
 	return distance <= combat.player.traits.movement_range
 
 func execute(combat: Combat) -> void:
-	print("Move Player to (%d, %d)" % [destination.r, destination.q])
+	combat.log.add("Move Player to (%d, %d)" % [destination.r, destination.q])
 	var path := combat.level.get_shortest_path(combat.player.current_tile, destination)
 	var actual_path = []
 	for tile in path:

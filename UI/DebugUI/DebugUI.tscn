@@ -1,0 +1,155 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2ge83in7j43k"]
+
+[ext_resource type="Script" path="res://UI/DebugUI/DebugUI.gd" id="1_anqro"]
+[ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_hgb3t"]
+[ext_resource type="PackedScene" uid="uid://mdk6ql82hwrt" path="res://UI/DebugUI/SaveLoadMenu.tscn" id="3_rq0co"]
+[ext_resource type="PackedScene" uid="uid://drxy2f6dh4jq0" path="res://UI/DebugUI/LogSettingsPanel.tscn" id="4_1ce17"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pghfn"]
+font_size = 24
+
+[node name="DebugUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_anqro")
+
+[node name="List" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0398148
+anchor_right = 0.164583
+anchor_bottom = 0.44
+metadata/_edit_use_anchors_ = true
+
+[node name="LineButton" type="Button" parent="List"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Draw Line (TODO)
+"
+
+[node name="NavButton" type="Button" parent="List"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Draw Shortest Path
+"
+
+[node name="EntityFindButton" type="Button" parent="List"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Highlight All Rocks
+"
+
+[node name="MovementRangeButton" type="Button" parent="List"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Highlight Movement Range"
+
+[node name="MoveRockButton" type="Button" parent="List"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Move Rock"
+
+[node name="DamagePlayer" type="Button" parent="List"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Damage Player"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="List"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="List/HBoxContainer"]
+layout_mode = 2
+text = "Save-Slot"
+label_settings = SubResource("LabelSettings_pghfn")
+
+[node name="SaveID" type="SpinBox" parent="List/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+rounded = true
+
+[node name="SaveLevel" type="Button" parent="List"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Save Level"
+
+[node name="LoadLevel" type="Button" parent="List"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Load Level"
+
+[node name="SaveLoadGame" type="Button" parent="List"]
+layout_mode = 2
+text = "Save / Load"
+
+[node name="ShowDebugList" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("2_hgb3t")
+theme_override_font_sizes/font_size = 24
+text = "Show Debug"
+
+[node name="SaveLoadMenu" parent="." instance=ExtResource("3_rq0co")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21875
+anchor_top = 0.0916667
+anchor_right = 0.832292
+anchor_bottom = 0.841667
+metadata/_edit_use_anchors_ = true
+
+[node name="LogSettingsPanel" parent="." instance=ExtResource("4_1ce17")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.603
+anchor_top = 0.00644441
+anchor_right = 0.995625
+anchor_bottom = 0.692778
+offset_left = 0.23999
+offset_top = 0.0400391
+offset_right = -0.600098
+offset_bottom = -0.200073
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="List/SaveLevel" to="." method="_on_save_level_pressed"]
+[connection signal="pressed" from="List/LoadLevel" to="." method="_on_load_level_pressed"]
+[connection signal="pressed" from="List/SaveLoadGame" to="." method="_on_save_load_game_pressed"]
+[connection signal="pressed" from="ShowDebugList" to="." method="_on_show_debug_pressed"]

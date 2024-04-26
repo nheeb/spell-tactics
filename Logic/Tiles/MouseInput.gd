@@ -34,15 +34,14 @@ func disable_highlight(tile: Tile):
 
 
 var currently_hovering: Tile = null
-func _physics_process(delta: float) -> void:
-	var vp = get_viewport()
-	var mouse_position := get_window().get_mouse_position()
-	var camera := get_viewport().get_camera_3d()
+func _physics_process(delta: float) -> void:	
+	var mouse_position := Utility.get_mouse_pos_absolute()
+	var camera: Camera3D = %Camera3D
 	var ray_origin := camera.project_ray_origin(mouse_position)
-	var ray_direction := camera.project_ray_normal(mouse_position)
+
+	var ray_direction := camera.project_ray_normal(Utility.scale_screen_pos(mouse_position))
 	var end := ray_origin + ray_direction * camera.far
 	self.target_position = to_local(end)
-		
 	
 	# if something has been hit and hasn't been hit in Cards3D as well
 	if is_colliding() and (cards3d == null or not cards3d.raycast_hit) and not disabled:

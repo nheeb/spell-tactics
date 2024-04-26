@@ -2,8 +2,11 @@ class_name LogUtility extends CombatUtility
 
 var log_entries: Array[LogEntry] = []
 
+signal log_entry_registered(entry: LogEntry)
+
 func register_entry(entry: LogEntry) -> void:
 	log_entries.append(entry)
+	log_entry_registered.emit(entry)
 
 func entries_filtered_by_type(type: LogEntry.Type):
 	return log_entries.filter(func(x): return x.type == type)

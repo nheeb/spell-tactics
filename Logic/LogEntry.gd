@@ -14,3 +14,8 @@ enum Type {
 @export var text: String
 @export var spell: SpellReference
 @export var number: int
+
+static func entry_to_string(entry: LogEntry) -> String:
+	var type_text : String = Type.keys()[Type.values().find(entry.type)]
+	return "[%s] <%s> \"%s\" %s" % [type_text, entry.round_number, entry.text, \
+									str(entry.number) if entry.number else ""]

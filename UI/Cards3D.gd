@@ -13,8 +13,8 @@ enum HandState {
 	Drag
 }
 
-const OPEN_Y = -1.3 # Height of open hand cards
-const CLOSED_Y = -2.15 # Height of closed hand cards
+static var OPEN_Y := -1.3 # Height of open hand cards
+static var CLOSED_Y := -2.15 # Height of closed hand cards
 const OPEN_AT_NORM_MOUSE_POS = .3 # Open hand when mouse at normalized y pos
 const CLOSE_AT_NORM_MOUSE_POS = .6 # Close hand when mouse at normalized y pos
 const BASE_ROTATION = Vector3(0.0, - PI / 2, 0.0)
@@ -22,10 +22,10 @@ const RADIAL_TURN = 1.0 # Rotate cards like in a real hand
 const RADIAL_ORIGIN_Y = -5.0 # 
 const PADDING = .9 # Distance between the cards
 const CLOSED_PADDING_EXTRA = -.39 # Distance change when hand closed
-const HOVER_SCALE = 1.3 # Scale of hovered card
-const HOVER_PUSH = .2 # Push Distance of adjacent cards
-const HOVER_LIFT = 0.0 # Y lift of hovered card
-const DRAG_SCALE = 1.15
+static var HOVER_SCALE := 1.3 # Scale of hovered card
+static var HOVER_PUSH := .2 # Push Distance of adjacent cards
+static var HOVER_LIFT := 0.0 # Y lift of hovered card
+static var DRAG_SCALE := 1.15
 const DRAG_PUSH = .3 # Gap size when rearranging cards
 const DRAG_ARRANGE_NORM_MOUSE_POS = .45
 const Z_BASE = -2.0
@@ -58,6 +58,15 @@ var combat: Combat
 
 const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 func _ready() -> void:
+	# Add attributes to global settings
+	DebugInfo.global_settings_config(self, "3D Cards")
+	DebugInfo.global_settings_add("OPEN_Y", -3.0, 0.0)
+	DebugInfo.global_settings_add("CLOSED_Y", -3.0, 0.0)
+	DebugInfo.global_settings_add("HOVER_SCALE", .5, 2.0)
+	DebugInfo.global_settings_add("HOVER_PUSH", 0.0, 1.0)
+	DebugInfo.global_settings_add("HOVER_LIFT", -1.0, 1.0)
+	DebugInfo.global_settings_add("DRAG_SCALE", .5, 2.0)
+	
 	# Set cam mode
 	camera.projection = Camera3D.PROJECTION_PERSPECTIVE if CAM_MODE_PERSPECTIVE \
 			 else Camera3D.PROJECTION_ORTHOGONAL
@@ -96,6 +105,8 @@ const EVENT_CARD = preload("res://UI/EventCard3D.tscn")
 const EVENT_HEIGHT = 2.0
 var current_shown_event_card: EventCard3D
 func show_event(event: SpellType, round_highlight := -1, speed_factor := 1.0) -> void:
+	if is_event_currently_shown(event, round_highlight):
+		return
 	if current_shown_event_card:
 		hide_event()
 	var event_card = EVENT_CARD.instantiate()
@@ -107,6 +118,13 @@ func show_event(event: SpellType, round_highlight := -1, speed_factor := 1.0) ->
 	tween.tween_property(event_card, "position:y", 0.0, 1.0 / speed_factor).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(event_card, "rotation_degrees:y", 0.0, 1.0 / speed_factor).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	current_shown_event_card = event_card
+
+func is_event_currently_shown(event: SpellType, round_highlight := -1):
+	if current_shown_event_card:
+		if current_shown_event_card.card_2d.spell_type == event:
+				return round_highlight == -1 or \
+					   round_highlight == current_shown_event_card.card_2d.round_highlight
+	return false
 
 func hide_event() -> void:
 	if current_shown_event_card:
