@@ -85,7 +85,9 @@ func movement_process(delta: float, control_value := 1.0):
 	else:
 		rotation_custom_node.rotation = rotation_custom_node.rotation.move_toward(target_rotation,delta * rotation_speed)
 	# Finalize Position
-	parent.global_position = pos + scale_lift
+	if (pos + scale_lift).is_finite():
+		parent.global_position = pos + scale_lift
+	
 
 func first_time_setup():
 	first_time = false

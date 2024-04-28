@@ -58,6 +58,8 @@ var combat: Combat
 
 const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 func _ready() -> void:
+	# enable this once everything is set up
+	#process_mode = Node.PROCESS_MODE_DISABLED
 	# Add attributes to global settings
 	DebugInfo.global_settings_config(self, "3D Cards")
 	DebugInfo.global_settings_add("OPEN_Y", -3.0, 0.0)
