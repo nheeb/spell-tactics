@@ -156,4 +156,4 @@ func _process(delta: float) -> void:
 
 func _on_world_combat_changed(_combat: Combat):
 	self.combat = _combat
-	combat.get_phase_node(Combat.RoundPhase.Spell).process_start.connect(show_surrounding_drainable_entries)
+	#combat.get_phase_node(Combat.RoundPhase.Spell).process_start.connect(show_surrounding_drainable_entries)

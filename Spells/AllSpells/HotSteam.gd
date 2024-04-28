@@ -33,4 +33,3 @@ func casting_effect() -> void:
 			enemy = enemy as EnemyEntity
 			enemy.inflict_damage_with_visuals(1)
 			enemy.apply_status_effect(WetEffect.new())
-

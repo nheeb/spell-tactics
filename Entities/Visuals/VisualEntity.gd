@@ -27,19 +27,19 @@ func animation_move_to(tile: Tile) -> void:
 	
 func on_movement_visuals(tile: Tile) -> void:
 	# abstract, override for player/enemy
-	pass
+	animation_done.emit()
 
-var animation_wait_on_hurt_visuals := true
 func on_hurt_visuals() -> void:
 	# abstract, override for player/enemy
-	pass
+	animation_done.emit()
 
 func on_death_visuals():
 	hide()
+	animation_done.emit()
 
 ## For overriding and making the drain effect
 func visual_drain(drained := true):
-	pass
+	animation_done.emit()
 
 var visual_effects := {}
 
