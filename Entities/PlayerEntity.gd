@@ -1,8 +1,5 @@
 class_name PlayerEntity extends HPEntity
 
-## arch_enemy for testing
-var arch_enemy : EntityReference
-
 var traits := PlayerTraits.new()
 
 func on_death():

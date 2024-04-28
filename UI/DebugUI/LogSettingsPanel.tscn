@@ -4,11 +4,11 @@
 [ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/DefaultLabelSettings.tres" id="1_yyowp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vbk4n"]
-content_margin_left = 40.0
-content_margin_top = 40.0
-content_margin_right = 40.0
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
 content_margin_bottom = 40.0
-bg_color = Color(0.870588, 0.870588, 0.870588, 0.705882)
+bg_color = Color(0.396078, 0.396078, 0.396078, 0.772549)
 border_width_left = 6
 border_width_top = 6
 border_width_right = 6
@@ -48,7 +48,7 @@ layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="PanelContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mnpkh")
 

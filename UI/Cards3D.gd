@@ -13,10 +13,10 @@ enum HandState {
 	Drag
 }
 
-static var OPEN_Y := -1.3 # Height of open hand cards
+static var OPEN_Y := -1.1 # Height of open hand cards
 static var CLOSED_Y := -2.15 # Height of closed hand cards
-const OPEN_AT_NORM_MOUSE_POS = .3 # Open hand when mouse at normalized y pos
-const CLOSE_AT_NORM_MOUSE_POS = .6 # Close hand when mouse at normalized y pos
+static var OPEN_AT_NORM_MOUSE_POS = .3 # Open hand when mouse at normalized y pos
+static var CLOSE_AT_NORM_MOUSE_POS = .48 # Close hand when mouse at normalized y pos
 const BASE_ROTATION = Vector3(0.0, - PI / 2, 0.0)
 const RADIAL_TURN = 1.0 # Rotate cards like in a real hand
 const RADIAL_ORIGIN_Y = -5.0 # 
@@ -58,6 +58,8 @@ var combat: Combat
 
 const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 func _ready() -> void:
+	# enable this once everything is set up
+	#process_mode = Node.PROCESS_MODE_DISABLED
 	# Add attributes to global settings
 	DebugInfo.global_settings_config(self, "3D Cards")
 	DebugInfo.global_settings_add("OPEN_Y", -3.0, 0.0)
@@ -66,6 +68,8 @@ func _ready() -> void:
 	DebugInfo.global_settings_add("HOVER_PUSH", 0.0, 1.0)
 	DebugInfo.global_settings_add("HOVER_LIFT", -1.0, 1.0)
 	DebugInfo.global_settings_add("DRAG_SCALE", .5, 2.0)
+	DebugInfo.global_settings_add("OPEN_AT_NORM_MOUSE_POS", 0.0, 1.0)
+	DebugInfo.global_settings_add("CLOSE_AT_NORM_MOUSE_POS", 0.0, 1.0)
 	
 	# Set cam mode
 	camera.projection = Camera3D.PROJECTION_PERSPECTIVE if CAM_MODE_PERSPECTIVE \
