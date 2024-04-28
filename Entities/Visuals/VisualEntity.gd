@@ -28,11 +28,12 @@ func animation_move_to(tile: Tile) -> void:
 func on_movement_visuals(tile: Tile) -> void:
 	# abstract, override for player/enemy
 	pass
-	
+
+var animation_wait_on_hurt_visuals := true
 func on_hurt_visuals() -> void:
 	# abstract, override for player/enemy
 	pass
-	
+
 func on_death_visuals():
 	hide()
 

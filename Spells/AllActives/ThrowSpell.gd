@@ -29,7 +29,7 @@ func casting_effect() -> void:
 	var discarded_spells : Array = card_choice.get_result()
 	for discarded_spell in discarded_spells:
 		combat.cards.discard(discarded_spell)
-	
+		
 		for enemy in target.get_enemies():
 			enemy = enemy as EnemyEntity
 			

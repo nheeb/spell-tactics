@@ -41,7 +41,7 @@ func inflict_damage(damage: int):
 func inflict_damage_with_visuals(damage: int, with_text := false) -> AnimationObject:
 	inflict_damage(damage)
 	
-	var animations = []	
+	var animations = []
 	animations.append(combat.animation.update_hp(self))
 	animations.append(combat.animation.callback(visual_entity, "on_hurt_visuals"))
 	if with_text:
