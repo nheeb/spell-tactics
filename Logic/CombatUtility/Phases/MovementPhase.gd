@@ -52,9 +52,10 @@ func highlight_for_spell_energy(energy: EnergyStack):
 
 func highlight_payable_spells(tile: Tile):
 	for spell in combat.hand:
-		if tile and (not tile.is_blocked()):
-			spell.visual_representation.set_payable_hint( \
-				tile.get_drainable_energy_in_range(1).can_pay_costs(spell.get_costs()))
-		else:
-			spell.visual_representation.set_payable_hint(false)
+		if spell.visual_representation:
+			if tile and (not tile.is_blocked()):
+				spell.visual_representation.set_payable_hint( \
+					tile.get_drainable_energy_in_range(1).can_pay_costs(spell.get_costs()))
+			else:
+				spell.visual_representation.set_payable_hint(false)
 

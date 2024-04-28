@@ -31,7 +31,7 @@ func on_movement_visuals(tile: Tile) -> void:
 	
 func on_hurt_visuals() -> void:
 	# abstract, override for player/enemy
-	pass
+	animation_done.emit()
 	
 func on_death_visuals():
 	hide()
