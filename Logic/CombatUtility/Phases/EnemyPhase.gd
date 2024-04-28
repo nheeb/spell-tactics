@@ -2,7 +2,6 @@ extends AbstractPhase
 
 func process_phase() -> bool:
 	combat.animation.callback(combat.ui, "set_status", ["Enemies attacking..."])
-	
 	combat.animation.property(combat.camera, "player_input_enabled", false)
 	# player can not idle from this phase on
 	combat.animation.callback(combat.player.visual_entity, "stop_idling")
@@ -20,8 +19,6 @@ func process_phase() -> bool:
 		combat.animation.wait(.3)
 		enemy.do_action()
 		combat.animation.camera_unfollow()
-		
-		combat.player.arch_enemy = enemy.get_reference()
 		
 		if combat.player.is_dead():
 			break

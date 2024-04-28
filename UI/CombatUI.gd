@@ -95,8 +95,8 @@ func select_card(spell: Spell):
 	selected_spell = spell
 	var selected_card = HAND_CARD_2D.instantiate()
 	selected_card.set_spell(spell, false)
-	$SelectedCardContainer.add_child(selected_card)
-	$EnergyPayment.visible = true
+	# don't show energy payment for first prototype:
+	#$EnergyPayment.visible = true
 	var payment = combat.energy.player_energy.get_possible_payment(spell.logic.get_costs())
 	if payment != null:
 		$EnergyPayment.text = "Payment: " + payment.to_string()
@@ -108,8 +108,6 @@ func select_card(spell: Spell):
 func deselect_card():
 	selected_spell = null
 	$EnergyPayment.visible = false
-	for c in $SelectedCardContainer.get_children():
-		c.queue_free()
 
 func set_status(text: String):
 	$Status.text = text

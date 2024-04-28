@@ -46,7 +46,7 @@ func do_forced_move(move_name: String) -> void:
 	_move.execute()
 	_move.free()
 	
-func do_random_move(moveset: Array[EnemyMove]) -> void:
+func do_random_move(moveset: Array[EnemyMove]):
 	var scores : Array[float] = []
 	scores.append_array(moveset.map(func(x): return x.get_score()))
 	var index := Utility.random_index_of_scores(scores)
@@ -54,7 +54,9 @@ func do_random_move(moveset: Array[EnemyMove]) -> void:
 		printerr("%s has no move to choose." % type.pretty_name)
 	else:
 		var selected_move : EnemyMove = moveset[index]
+		combat.log.create_and_register_entry(get_name() + " does " + type.actions[index], LogEntry.Type.Enemy)
 		selected_move.execute()
+		
 
 func on_create() -> void:
 	super.on_create()
@@ -74,3 +76,6 @@ func sync_with_type() -> void:
 	strength = type.strength
 	accuracy = type.accuracy
 	resistance = type.resistance
+
+func get_name() -> String:
+	return "%s_%s" % [type.pretty_name, id.to_string()]

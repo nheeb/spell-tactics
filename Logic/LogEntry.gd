@@ -6,6 +6,7 @@ enum Type {
 	TurnTransition,
 	Event,
 	EnemyEvent,
+	Enemy,
 	EventPrognose
 }
 
@@ -17,5 +18,5 @@ enum Type {
 
 static func entry_to_string(entry: LogEntry) -> String:
 	var type_text : String = Type.keys()[Type.values().find(entry.type)]
-	return "[%s] <%s> \"%s\" %s" % [type_text, entry.round_number, entry.text, \
+	return "[%s]: %s %s" % [type_text, entry.text, \
 									str(entry.number) if entry.number else ""]
