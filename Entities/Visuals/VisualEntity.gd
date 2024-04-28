@@ -27,7 +27,7 @@ func animation_move_to(tile: Tile) -> void:
 	
 func on_movement_visuals(tile: Tile) -> void:
 	# abstract, override for player/enemy
-	pass
+	animation_done.emit()
 	
 func on_hurt_visuals() -> void:
 	# abstract, override for player/enemy
