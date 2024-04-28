@@ -8,7 +8,6 @@ render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlic
 
 #include \"res://Shaders/lib.gdshaderinc\"
 
-
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
 uniform float point_size : hint_range(0,128);
@@ -35,11 +34,6 @@ void vertex() {
 	center_dist = line_point_distance(vec3(0.0), (INV_VIEW_MATRIX * vec4(0.0, 0.0, -1.0, 1.0)).xyz, VERTEX);
 }
 
-
-
-
-
-
 void fragment() {
 	vec2 base_uv = UV;
 	vec4 albedo_tex = texture(texture_albedo,base_uv);
@@ -50,5 +44,7 @@ void fragment() {
 	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
 	SPECULAR = specular;
+	EMISSION = ALBEDO;
+	ALPHA = 1.0-center_dist;
 }
 "

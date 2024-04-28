@@ -127,3 +127,11 @@ float line_point_distance(vec3 line_origin, vec3 line_direction, vec3 point) {
 float norm_to_negative(float x) {
 	return clamp_and_map(x, 0.0, 1.0, -1.0, 1.0);
 }
+
+float between(float x, float start, float end) {
+	return float((x < end && x > start) || (x > end && x < start));
+}
+
+float vec2_between(vec2 x, vec2 a, vec2 b) {
+	return between(x.x, a.x, b.x) * between(x.y, a.y, b.y);
+}

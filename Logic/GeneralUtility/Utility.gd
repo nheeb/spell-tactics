@@ -220,3 +220,6 @@ func get_parent_of_type(n: Node, type) -> Node:
 		parent = parent.get_parent()
 	printerr("No parent of %s with type %s found." % [n, type])
 	return null
+
+func array_sum(array: Array):
+	return array.reduce(func(a,b): return a+b)

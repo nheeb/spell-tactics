@@ -1,9 +1,80 @@
-[gd_scene load_steps=15 format=3 uid="uid://cprvtoo5si7sx"]
+[gd_scene load_steps=28 format=3 uid="uid://cprvtoo5si7sx"]
 
 [ext_resource type="Script" path="res://Effects/EnergyOrb.gd" id="1_2ps41"]
-[ext_resource type="Shader" path="res://Shaders/OrbBase.gdshader" id="2_gel2k"]
-[ext_resource type="Shader" path="res://Shaders/OrbBackground.gdshader" id="3_oj44r"]
+[ext_resource type="Shader" uid="uid://bankemuhjm2cp" path="res://Shaders/OrbBase.tres" id="1_r13mk"]
+[ext_resource type="Shader" uid="uid://4bqma1qx5xgw" path="res://Shaders/OrbBackground.tres" id="2_2q3is"]
+[ext_resource type="Texture2D" uid="uid://ckh1exvhdroly" path="res://Assets/Sprites/EnergyIconMasks/matter.png" id="2_4vnwi"]
 [ext_resource type="PackedScene" uid="uid://djujpfvecfgl2" path="res://Logic/GeneralUtility/OrbitalMovement.tscn" id="4_o3qko"]
+[ext_resource type="Texture2D" uid="uid://bvxvi7uyos3wo" path="res://Assets/Sprites/Effects/cloud_swirl_spritesheet.png" id="6_und61"]
+
+[sub_resource type="Shader" id="Shader_njmdv"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx,unshaded;
+
+#include \"res://Shaders/lib.gdshaderinc\"
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float grow;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+uniform float icon_scale  : hint_range(0,5) = 1.0;
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
+	MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+	VERTEX+=NORMAL*grow;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	base_uv.x = mod(base_uv.x, 1.0);
+	base_uv.y = mod(base_uv.y, 1.0);
+	base_uv = base_uv * icon_scale;
+	vec4 albedo_tex = texture(texture_albedo,base_uv) * vec2_between(base_uv, vec2(0.0), vec2(1.0));
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+	ALPHA *= albedo.a * albedo_tex.a;
+	ALPHA = float(length(ALBEDO) > .5);
+	ALBEDO = vec3(1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h4v2x"]
+render_priority = 0
+shader = SubResource("Shader_njmdv")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/grow = 0.45
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0.12, -0.375, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/icon_scale = 4.22
+shader_parameter/texture_albedo = ExtResource("2_4vnwi")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vga55"]
 fractal_gain = 1.105
@@ -14,9 +85,10 @@ seamless_blend_skirt = 0.183
 noise = SubResource("FastNoiseLite_vga55")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oixlq"]
-render_priority = 0
-shader = ExtResource("2_gel2k")
-shader_parameter/albedo = Color(1, 1, 0.231373, 1)
+render_priority = -6
+next_pass = SubResource("ShaderMaterial_h4v2x")
+shader = ExtResource("1_r13mk")
+shader_parameter/albedo = Color(0.882813, 0.882813, 0, 1)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = null
@@ -29,8 +101,8 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/noise = SubResource("NoiseTexture3D_1ep8l")
 
 [sub_resource type="SphereMesh" id="SphereMesh_l3ict"]
-radial_segments = 16
-rings = 8
+radial_segments = 6
+rings = 4
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nsbpj"]
 seed = 1
@@ -51,14 +123,71 @@ seamless_blend_skirt = 0.61
 noise = SubResource("FastNoiseLite_awb8t")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7hbyl"]
-render_priority = 0
+render_priority = -128
 shader = ExtResource("2_2q3is")
-shader_parameter/albedo = Color(0.899894, 0.913725, 0.24602, 1)
-shader_parameter/albedo2 = Color(0.898039, 0.913725, 0.247059, 1)
+shader_parameter/albedo = Color(0.913725, 0, 0.462745, 1)
+shader_parameter/albedo2 = Color(1, 0.364706, 0.866667, 1)
 shader_parameter/noise = SubResource("NoiseTexture3D_32knh")
 shader_parameter/flame_noise = SubResource("NoiseTexture2D_0fe2a")
 
 [sub_resource type="QuadMesh" id="QuadMesh_36cb7"]
+
+[sub_resource type="Curve" id="Curve_6ixxn"]
+min_value = -1.0
+max_value = 1.01
+_data = [Vector2(0, -1), 0.0, 2.01, 0, 1, Vector2(1, 1.01), 2.01, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3k86x"]
+curve = SubResource("Curve_6ixxn")
+
+[sub_resource type="Curve" id="Curve_eq47l"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 1, Vector2(1, 0.5), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r1kgq"]
+curve = SubResource("Curve_eq47l")
+
+[sub_resource type="Curve" id="Curve_e36jg"]
+_data = [Vector2(0, 0), 0.0, 7.3535, 0, 0, Vector2(0.36, 0.738606), -2.01986, -2.01986, 0, 0, Vector2(0.74, 0), -0.12822, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hs141"]
+curve = SubResource("Curve_e36jg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jnpxm"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.4
+angle_min = -100.0
+angle_max = 100.0
+angle_curve = SubResource("CurveTexture_3k86x")
+direction = Vector3(0, 1, 0)
+spread = 0.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.2
+orbit_velocity_curve = SubResource("CurveTexture_r1kgq")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.15
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_hs141")
+anim_speed_min = 2.0
+anim_speed_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25mo4"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("6_und61")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_okkle"]
+material = SubResource("StandardMaterial3D_25mo4")
 
 [node name="EnergyOrb" type="Node3D"]
 script = ExtResource("1_2ps41")
@@ -66,13 +195,21 @@ script = ExtResource("1_2ps41")
 [node name="Orb" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_oixlq")
-cast_shadow = 0
 mesh = SubResource("SphereMesh_l3ict")
 
-[node name="OrbBackground" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_7hbyl")
-cast_shadow = 0
 mesh = SubResource("QuadMesh_36cb7")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+
 [node name="OrbitalMovement" parent="." instance=ExtResource("4_o3qko")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.479204, 0, 0, 0, 0.479204, 0, 0, 0, 0.479204, 0, -0.12028, 0)
+visible = false
+lifetime = 2.0
+visibility_aabb = AABB(-1.28168, -1.24347, -1.26578, 2.57544, 2.51285, 2.46092)
+process_material = SubResource("ParticleProcessMaterial_jnpxm")
+draw_pass_1 = SubResource("QuadMesh_okkle")

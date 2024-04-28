@@ -9,7 +9,7 @@ uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enab
 uniform sampler3D noise;
 uniform sampler2D flame_noise;
 
-#include "lib.gdshaderinc"
+#include "res://Shaders/lib.gdshaderinc"
 
 void vertex() {
 	//UV=UV*uv1_scale.xy+uv1_offset.xy;
