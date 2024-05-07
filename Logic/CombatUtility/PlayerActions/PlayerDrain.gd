@@ -24,12 +24,18 @@ func execute(combat: Combat) -> void:
 	
 	for entity in target_tile.entities:
 		entity = entity as Entity
+		var energy_stack : EnergyStack = null
 		#if not entity.is_drainable() and not entity.type.is_terrain:
 			#continue
 		# entity.drain() removes the energy from that entity as a side-effect
 		if entity.is_drainable():
-			combat.energy.gain(entity.drain())
+			energy_stack = entity.drain()
+			combat.energy.gain(energy_stack)
 		combat.animation.callback(entity.visual_entity, "visual_drain").set_max_duration(.5)
+		if energy_stack:
+			combat.animation.callback(entity.visual_entity, "spawn_energy_orbs",\
+					[energy_stack, combat.player.visual_entity.orbital_movement_body])\
+					.set_max_duration(.5).set_flag_with()
 		for tag in entity.get_tags():
 			combat.log.register_incident("drained_tag_%s" % tag)
 	

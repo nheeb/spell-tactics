@@ -27,7 +27,7 @@ transform = Transform3D(0.317411, -0.288644, -0.903291, 0.189176, 0.952677, -0.2
 [node name="VisualPlayer" parent="." instance=ExtResource("4_i1qsp")]
 transform = Transform3D(-0.399261, 0, 0.916837, 0, 1, 0, -0.916837, 0, -0.399261, 2.392, 0, 1.988)
 
-[node name="OrbitalMovementBody" parent="VisualPlayer" instance=ExtResource("5_meear")]
+[node name="OrbitalMovementBody2" parent="VisualPlayer" instance=ExtResource("5_meear")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.873213, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

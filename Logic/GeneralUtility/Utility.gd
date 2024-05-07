@@ -235,3 +235,7 @@ func array_sum(array: Array):
 
 func array_average(array: Array):
 	return array_sum(array) * (1.0 / array.size())
+
+func random_direction() -> Vector3:
+	return Vector3.UP.rotated(Vector3.FORWARD, TAU * randf())\
+					 .rotated(Vector3.UP, TAU * randf())

@@ -4,7 +4,7 @@ static var BASE_RADUIS := .8
 static var ROUNDS_PER_SECOND := .4
 static var TILT_ROUNDS_PER_SECOND := .15
 static var TILT_ANGLE := PI / 12.0
-static var CORRECTION_RPS := 1.0
+static var CORRECTION_RPS := .4
 static var BOUND_LERP := .05
 
 var orbits: Array[Orbit] = []
@@ -119,5 +119,5 @@ func movement_process(delta: float) -> void:
 	for orbit in orbits:
 		orbit.movement_process(delta)
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	movement_process(VisualTime.visual_time_scale * delta)

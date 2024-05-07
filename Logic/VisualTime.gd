@@ -7,7 +7,9 @@ var visual_time_scale := 1.0:
 		for tween in tweens:
 			tween.set_speed_scale(visual_time_scale)
 		for ap in animation_players:
-			ap.speed_scale *= change_factor
+			if is_instance_valid(ap):
+				ap.speed_scale *= change_factor
+
 
 signal visual_process(delta: float)
 
@@ -66,11 +68,15 @@ func disconnect_animation_player(ap: AnimationPlayer) -> void:
 		animation_players.erase(ap)
 
 func _process(delta: float) -> void:
-	visual_time_scale = 1.0
+	var _visual_time_scale = 1.0
 	if Input.is_action_pressed("speed_up"):
-		visual_time_scale = 3.0
+		_visual_time_scale = 3.0
 		if Input.is_action_pressed("ultra_speed_up"):
-			visual_time_scale = 11.1
+			_visual_time_scale = 11.1
+			
+	if _visual_time_scale != visual_time_scale:
+		visual_time_scale = _visual_time_scale
+	
 	var fixed_delta := delta * visual_time_scale
 	visual_global_time += fixed_delta
 	visual_process.emit(fixed_delta)

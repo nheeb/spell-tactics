@@ -8,8 +8,25 @@ func pay(payment: EnergyStack) -> AnimationCallback:
 	# style: is this utility method needed or should it be moved here?
 	# -> what?
 	player_energy.apply_payment(payment)
+	explode_energy_orbs(payment)
 	return show_energy_in_ui()
-	
+
+func explode_energy_orbs(payment: EnergyStack) -> AnimationObject:
+	var anims := []
+	var orbs : Array = combat.player.visual_entity.orbital_movement_body.get_children()\
+			.filter(func(c): return c is EnergyOrb)
+	for type in payment.stack:
+		var target_orb = null
+		for orb in orbs:
+			if orb.get_type() == type:
+				target_orb = orb
+				break
+		if target_orb:
+			anims.append(combat.animation.callback(target_orb, "death"))
+			target_orb.death()
+			orbs.erase(target_orb)
+	return combat.animation.reappend_as_subqueue(anims).set_flag_with()
+
 func is_payable(payment: EnergyStack) -> bool:
 	var possible: EnergyStack = player_energy.get_possible_payment(payment)
 	return possible != null

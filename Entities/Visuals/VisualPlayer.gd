@@ -6,6 +6,8 @@ class_name VisualPlayer extends VisualEntity
 
 @export_range(0.0, 1.0) var idle_break_chance := 1.0
 
+@onready var orbital_movement_body : OrbitalMovementBody = $OrbitalMovementBody
+
 func _ready() -> void:
 	pass
 

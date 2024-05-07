@@ -56,7 +56,7 @@ class Movement:
 		return Vector3.ZERO
 
 static var GRAVITY_DIRECTION := Vector3(0, -1, 0)
-static var GRAVITY_FORCE := .25
+static var GRAVITY_FORCE := .12
 class MovementGravity extends Movement:
 	func _get_speed(delta: float) -> Vector3:
 		return om.GRAVITY_DIRECTION * om.GRAVITY_FORCE * delta
@@ -82,7 +82,7 @@ class MovementDamp extends Movement:
 		var damped := om.velocity * pow(om.DAMP_LERP, delta)
 		return damped - om.velocity
 
-static var DRAG_FORCE := 1.0
+static var DRAG_FORCE := .4
 class MovementDrag extends Movement:
 	var drag_targets := {} # Node3D target -> float force 
 	func _get_speed(delta: float) -> Vector3:
@@ -131,7 +131,7 @@ func detach_from_orbital_body():
 func jump(impulse: Vector3):
 	active_movements[MovementType.Impulse].add_impulse(impulse)
 
-static var BASE_JUMP_FORCE : float = .2
+static var BASE_JUMP_FORCE : float = .06
 func base_jump():
 	if attractor:
 		jump(attractor.get_dir() * BASE_JUMP_FORCE)

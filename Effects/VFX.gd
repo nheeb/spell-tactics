@@ -9,6 +9,7 @@ const BILLBOARD_PROJECTILE = preload("res://Effects/BillboardProjectile.tscn")
 const LINE = preload("res://Effects/LineEffect.tscn")
 const IMMEDIATE_ARROWS = preload("res://Effects/ImmediateArrows.tscn")
 const ENERGY_ORB = preload("res://Effects/EnergyOrb.tscn") 
+const ENERGY_ORB_ATTRACTOR = preload("res://Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
 
 @export var any_color: Color
 @export var matter_color: Color
@@ -35,3 +36,23 @@ func type_to_color(_type) -> Color:
 			return spectral_color
 	printerr("unknown type")
 	return Color.RED
+
+@export var energy_icons: Array[Texture]
+func type_to_icon(_type) -> Texture:
+	match _type:
+		EnergyStack.EnergyType.Any:
+			return energy_icons[0]
+		EnergyStack.EnergyType.Matter:
+			return energy_icons[1]
+		EnergyStack.EnergyType.Life:
+			return energy_icons[2]
+		EnergyStack.EnergyType.Harmony:
+			return energy_icons[3]
+		EnergyStack.EnergyType.Flow:
+			return energy_icons[4]
+		EnergyStack.EnergyType.Decay:
+			return energy_icons[5]
+		EnergyStack.EnergyType.Spectral:
+			return energy_icons[6]
+	printerr("unknown type")
+	return energy_icons[0]

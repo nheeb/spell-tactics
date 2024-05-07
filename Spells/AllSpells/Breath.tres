@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://c2gimhhja8fi6"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://c2gimhhja8fi6"]
 
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_jbbwj"]
+[ext_resource type="Texture2D" uid="uid://djq58j63r2xxn" path="res://Assets/Sprites/Icons/breath.png" id="2_1doss"]
 [ext_resource type="Script" path="res://Spells/SpellType.gd" id="2_kj4ag"]
 [ext_resource type="Resource" uid="uid://dyolf6cfwkmj1" path="res://Spells/AllKeywords/NoEnemies.tres" id="2_qeu0g"]
 
@@ -16,6 +17,7 @@ keywords = Array[Resource("res://Spells/Keyword.gd")]([ExtResource("2_qeu0g")])
 effect_text = "Draw 2 cards.
 Can only be played with no adjacent enemies."
 fluff_text = ""
+icon = ExtResource("2_1doss")
 color = Color(1, 1, 1, 1)
 target = 0
 target_range = -1
