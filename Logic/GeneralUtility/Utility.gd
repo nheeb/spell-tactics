@@ -210,8 +210,13 @@ func vec_xy_to_vec3(v: Vector2, z := 0.0) -> Vector3:
 func vec3_discard_z(v: Vector3) -> Vector2:
 	return Vector2(v.x, v.y)
 
-func array_safe_get(array: Array, index: int):
-	if index >= 0 and index < len(array):
+func array_safe_get(array: Array, index: int, mirror := false) -> Variant:
+	if mirror:
+		while not index < len(array):
+			index -= len(array)
+		while not index >= -len(array):
+			index += len(array)
+	if index >= -len(array) and index < len(array):
 		return array[index]
 	else:
 		return null
@@ -227,3 +232,6 @@ func get_parent_of_type(n: Node, type) -> Node:
 
 func array_sum(array: Array):
 	return array.reduce(func(a,b): return a+b)
+
+func array_average(array: Array):
+	return array_sum(array) * (1.0 / array.size())
