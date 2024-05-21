@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu5g84clr48vs"]
+
+[ext_resource type="Script" path="res://UI/HandCards/HandCardTexture.gd" id="1_7ojg0"]
+[ext_resource type="LabelSettings" uid="uid://8t400en6463g" path="res://UI/HandCards/SpellCardTitle.tres" id="2_pa4o0"]
+[ext_resource type="LabelSettings" uid="uid://chkhqxibm0gua" path="res://UI/HandCards/SpellCardText.tres" id="3_j5qev"]
+[ext_resource type="PackedScene" uid="uid://d1382bw2xmw6b" path="res://UI/HandCards/HandCardIconTexture.tscn" id="3_qxxye"]
+
+[node name="HandCardTexture" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_7ojg0")
+
+[node name="HandCardIconTexture" parent="." instance=ExtResource("3_qxxye")]
+position = Vector2(512, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="Container" type="Control" parent="."]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 1
+anchor_right = 0.267
+anchor_bottom = 0.474
+offset_right = -0.640015
+offset_bottom = 0.0799561
+
+[node name="GridContainer" type="VBoxContainer" parent="Container"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="VBoxContainer" parent="Container/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TitleLabel" type="Label" parent="Container/GridContainer/CenterContainer"]
+layout_mode = 2
+text = "Long Spell Name"
+label_settings = ExtResource("2_pa4o0")
+horizontal_alignment = 1
+clip_text = true
+
+[node name="CenterContainer2" type="VBoxContainer" parent="Container/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="SpellTextLabel" type="Label" parent="Container/GridContainer/CenterContainer2"]
+custom_minimum_size = Vector2(512, 384)
+layout_mode = 2
+text = "Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text "
+label_settings = ExtResource("3_j5qev")
+horizontal_alignment = 1
+autowrap_mode = 3

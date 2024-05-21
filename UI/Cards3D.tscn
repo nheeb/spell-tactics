@@ -6,7 +6,11 @@
 [sub_resource type="Environment" id="Environment_621vn"]
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-reflected_light_source = 1
+ambient_light_energy = 0.2
+glow_enabled = true
+glow_intensity = 0.35
+glow_strength = 0.74
+glow_blend_mode = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ic45"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -66,3 +70,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2ic45")
 script = ExtResource("2_dbt0i")
 create_preview_cards = true
 cards3d = NodePath("..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.974229, -0.108566, 0.197718, 0, 0.87655, 0.48131, -0.225563, -0.468906, 0.85396, 0, 0, 0)
+sky_mode = 1

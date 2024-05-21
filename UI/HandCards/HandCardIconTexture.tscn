@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1382bw2xmw6b"]
+
+[ext_resource type="Shader" path="res://UI/HandCards/HandCardMainIconCircle.gdshader" id="1_6xsoc"]
+[ext_resource type="Script" path="res://UI/HandCards/HandCardIconTexture.gd" id="1_8fqpw"]
+[ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="1_gny5x"]
+[ext_resource type="PackedScene" uid="uid://ddgi1ht0f4leb" path="res://UI/HandCards/HandCardSideIcon.tscn" id="2_1yjm5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xckbr"]
+shader = ExtResource("1_6xsoc")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wkypa"]
+radius = 256.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_020a4"]
+radius = 282.177
+
+[node name="HandCardIconTexture" type="Node2D"]
+script = ExtResource("1_8fqpw")
+
+[node name="PrototypeBackground" type="ColorRect" parent="."]
+visible = false
+offset_right = 1024.0
+offset_bottom = 1024.0
+color = Color(1, 1, 1, 0.145098)
+
+[node name="MainIcon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xckbr")
+position = Vector2(512, 512)
+texture = ExtResource("1_gny5x")
+
+[node name="HandCardSideIconLeft4" parent="." instance=ExtResource("2_1yjm5")]
+position = Vector2(136, 294)
+
+[node name="HandCardSideIconLeft3" parent="." instance=ExtResource("2_1yjm5")]
+position = Vector2(133, 440)
+
+[node name="HandCardSideIconLeft2" parent="." instance=ExtResource("2_1yjm5")]
+position = Vector2(137, 587)
+
+[node name="HandCardSideIconLeft1" parent="." instance=ExtResource("2_1yjm5")]
+position = Vector2(168, 725)
+
+[node name="HandCardSideIconRight3" parent="." instance=ExtResource("2_1yjm5")]
+position = Vector2(872, 440)
+
+[node name="HandCardSideIconRight2" parent="." instance=ExtResource("2_1yjm5")]
+position = Vector2(869, 587)
+
+[node name="HandCardSideIconRight1" parent="." instance=ExtResource("2_1yjm5")]
+position = Vector2(827, 725)
+
+[node name="PrototypeIconCircle" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(512, 512)
+shape = SubResource("CircleShape2D_wkypa")
+debug_color = Color(0.65625, 0.950893, 1, 0.42)
+
+[node name="PrototypeIconCircle2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(512, 512)
+shape = SubResource("CircleShape2D_020a4")
+debug_color = Color(0.470588, 0.701961, 1, 0.168627)

@@ -6,6 +6,9 @@ var card_2d: HandCard2D
 
 func _enter_tree() -> void:
 	$Quad.get_surface_override_material(0).albedo_texture = $Quad/SubViewport.get_texture()
+	%Cube.material_override.next_pass.set("shader_parameter/random_seed", randf())
+	%Cube.material_override.next_pass.set("shader_parameter/card_texture", $TextureViewport.get_texture())
+	%Cube.material_override.uv1_offset = Vector3(randf(), randf(), 0) * 10.0
 
 func get_spell() -> Spell:
 	var spell =  $Quad/SubViewport/HandCard2D.spell
@@ -14,9 +17,39 @@ func get_spell() -> Spell:
 func set_card(card: HandCard2D):
 	card_2d = card
 	$Quad/SubViewport.add_child(card)
+	set_spell(card.spell)
 	
 func set_render_prio(p: int) -> void:
 	$Quad.get_surface_override_material(0).set("render_priority", p)
+	%Cube.material_override.set("render_priority", p)
+	%Cube.material_override.next_pass.set("render_priority", p+1)
 
 func set_collision_scale(s: float) -> void:
 	$Area3D/CollisionShape3D.scale = Vector3.ONE * s
+
+ 
+func set_spell(s: Spell) -> void:
+	## TODO nitai remove card_2d
+	#card_2d.set_spell(s)
+	
+	set_spell_type(s.type)
+
+const ENERGY_SOCKET = preload("res://UI/HandCards/HandCardEnergySocket.tscn")
+func set_spell_type(type: SpellType) -> void:
+	# Spawn Energy Sockets
+	var costs : EnergyStack = type.costs
+	for i in costs.size():
+		var energy = costs.stack[i]
+		var socket = ENERGY_SOCKET.instantiate()
+		%EnergySocketPivot.add_child(socket)
+		socket.position = get_energy_socket_pos(i, costs.size())
+		socket.set_type(energy)
+	# Set Texture
+	%HandCardTexture.set_spell_type(type)
+	# Set Shader color
+	%Cube.material_override.next_pass.set("shader_parameter/albedo", type.color)
+
+const ENERGY_SOCKET_DIST = .15
+func get_energy_socket_pos(i: int, socket_count: int) -> Vector3:
+	var middle : float = (socket_count-1) / 2.0
+	return Vector3(0,0,1) * (float(i) - middle) * ENERGY_SOCKET_DIST
