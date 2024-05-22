@@ -1,4 +1,4 @@
-#@tool
+@tool
 class_name VisualPlayer extends VisualEntity
 
 @onready var anim_player := $MagicRaccoon_Model/MagicRaccoon/AnimationPlayer

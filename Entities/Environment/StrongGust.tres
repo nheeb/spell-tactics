@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EntityType" load_steps=4 format=3 uid="uid://dh4ll7t2j71pq"]
+
+[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_fymge"]
+[ext_resource type="Script" path="res://Entities/EntityType.gd" id="2_8f1fg"]
+
+[sub_resource type="Resource" id="Resource_m1ybh"]
+script = ExtResource("1_fymge")
+stack = Array[int]([4, 4])
+
+[resource]
+script = ExtResource("2_8f1fg")
+internal_name = "strong_gust"
+can_be_hovered = true
+pretty_name = "Strong Gust"
+fluff_text = ""
+prototype_scale = Vector2(1, 1)
+is_terrain = false
+is_drainable = true
+energy = SubResource("Resource_m1ybh")
+obstacle_layer = 0
+obstacle_mask = 0
+is_blocker = false
+cover_value = 0
+tags = Array[String]([])
