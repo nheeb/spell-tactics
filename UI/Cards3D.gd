@@ -29,7 +29,7 @@ static var DRAG_SCALE := 1.15
 const DRAG_PUSH = .3 # Gap size when rearranging cards
 const DRAG_ARRANGE_NORM_MOUSE_POS = .45
 const Z_BASE = -2.0
-#const Z_UNIT = .1
+const Z_UNIT = .05
 const BOW_HEIGHT = .15 # Bow shape of card hand
 const PINNED_SCALE = 1.5
 const PINNED_ROTATION = BASE_ROTATION + Vector3(PI / 12, - PI / 8, 0.0)
@@ -360,10 +360,12 @@ func calc_positions():
 		card.smooth_movement.target_rotation = rotations[card]
 		
 		# Set render prio
-		card.set_render_prio(hand_cards.find(card) \
-			+ 20 * int(card == hovered_card) \
-			+ 30 * int(card == pinned_card) \
-			+ 40 * int(card == dragged_card) )
+		var render_prio : int = 2 * hand_cards.find(card) \
+			+ 10 * int(card == hovered_card) \
+			+ 20 * int(card == pinned_card) \
+			+ 20 * int(card == dragged_card)
+		card.set_render_prio(render_prio)
+		card.smooth_movement.target_pos += Vector3.BACK * Z_UNIT * render_prio
 		
 		# Hover card bigger collision
 		card.set_collision_scale(1.2 if card == hovered_card else 1.0)

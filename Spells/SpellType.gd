@@ -97,6 +97,7 @@ const TopicIconName = {
 
 @export var topic: SpellTopic = SpellTopic.None
 @export var topic_secondary: SpellTopic = SpellTopic.None
+@export var topic_icons: Array[SpellTopic] = []
 @export var topic_caption := ""
 
 static func load_from_file(path: String) -> SpellType:
@@ -125,3 +126,36 @@ func get_effect_text(used_keywords: Array[Keyword] = []) -> String:
 	for k in used_keywords:
 		keyword_text = keyword_text + " [%s] " % k.pretty_name
 	return keyword_text + "\n" + effect_text
+
+func get_side_icon_infos() -> Array[HandCardSideIcon.SideIconInfo]:
+	# Left Topic Icons
+	var icons = topic_icons.duplicate()
+	for ic in [topic_secondary, topic]:
+		if ic != SpellTopic.None:
+			icons.push_front(ic)
+	var captions = topic_caption.split(",")
+	var icon_infos : Array[HandCardSideIcon.SideIconInfo] = []
+	for i in range(icons.size()):
+		var ic = icons[i]
+		icon_infos.append(HandCardSideIcon.SideIconInfo.new(
+			TopicIconName[ic], Utility.array_safe_get(captions, i, false, "")
+		))
+	# Right Target Icon
+	var target_text := ""
+	var target_range_start = target_min_range
+	var target_range_end = target_range
+	if target_range_start == -1:
+		if target_range_end == -1:
+			target_text = ""
+		else:
+			target_text = "<%s" % target_range_end
+	else:
+		if target_range_end == -1:
+			target_text = ">%s" % target_range_start
+		else:
+			target_text = "%s-%s" % [target_range_start, target_range_end]
+	icon_infos.append(HandCardSideIcon.SideIconInfo.new(
+		TargetIconName[target], target_text, false
+	))
+	
+	return icon_infos

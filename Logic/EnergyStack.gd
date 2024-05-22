@@ -10,6 +10,9 @@ enum EnergyType {
 	Any = 6,
 }
 
+static func type_to_str(type: EnergyType) -> String:
+	return EnergyType.keys()[type]
+
 @export var stack : Array[EnergyType] = []
 
 ## Returns an EnergyStack with possible payment arrangement if possible or null if not

@@ -135,3 +135,14 @@ float between(float x, float start, float end) {
 float vec2_between(vec2 x, vec2 a, vec2 b) {
 	return between(x.x, a.x, b.x) * between(x.y, a.y, b.y);
 }
+
+vec2 uv_project(vec2 uv, vec2 aa, vec2 bb, vec2 target_aa, vec2 target_bb) {
+	float x = clamp_and_map(uv.x, aa.x, bb.x, target_aa.x, target_bb.x);
+	float y = clamp_and_map(uv.y, aa.y, bb.y, target_aa.y, target_bb.y);
+	return vec2(x,y);
+}
+
+float random_float(vec2 seed) {
+    return fract(sin(dot(seed.xy,
+        vec2(12.9898,78.233))) * 43758.5453123);
+}

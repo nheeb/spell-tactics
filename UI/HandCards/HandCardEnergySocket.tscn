@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjuv8jfc5pykg"]
+
+[ext_resource type="Script" path="res://UI/HandCards/HandCardEnergySocket.gd" id="1_8rv3c"]
+[ext_resource type="PackedScene" uid="uid://rrw0utxp21s5" path="res://Assets/Models/HUD_Card/GLB/EnergySocket.glb" id="2_6krtn"]
+[ext_resource type="Material" uid="uid://b7modv1wtonne" path="res://Assets/Materials/HandCardEnergySocketCrystal.tres" id="3_dyw64"]
+[ext_resource type="Texture2D" uid="uid://b2an7ubkpk1mq" path="res://Assets/Materials/Textures/rock2k/rock_0005_color_2k.jpg" id="3_tjilx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybij4"]
+albedo_texture = ExtResource("3_tjilx")
+uv1_scale = Vector3(0.365, 0.365, 0.365)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwrm2"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_78fl2"]
+
+[node name="HandCardEnergySocket" type="Node3D"]
+script = ExtResource("1_8rv3c")
+
+[node name="EnergySocket" parent="." instance=ExtResource("2_6krtn")]
+unique_name_in_owner = true
+transform = Transform3D(9.17939e-09, 0.07, -3.0598e-09, -1.48231e-23, -3.0598e-09, -0.07, -0.07, 9.17939e-09, -4.01244e-16, 0, 0, 0)
+
+[node name="Socket" parent="EnergySocket" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ybij4")
+surface_material_override/2 = SubResource("StandardMaterial3D_jwrm2")
+
+[node name="MaterialPrototype" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.423309, 0)
+visible = false
+material_override = ExtResource("3_dyw64")
+mesh = SubResource("BoxMesh_78fl2")
+
+[editable path="EnergySocket"]

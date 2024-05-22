@@ -9,7 +9,8 @@ func _init(level: Level):
 func create_entity(location: Vector2i, entity_type: EntityType, create_with_active_visuals := true) -> Entity:
 	var tile = _level.get_tile(location)
 	if tile.has_entity(entity_type):
-		return
+		pass
+		# TODO delete old entity (still return the new one)
 
 	var entity := entity_type.create_entity(_level.combat, false) as Entity
 	

@@ -29,8 +29,9 @@ func set_log_entry(_log_entry: LogEntry, combat: Combat = null):
 func set_event_type(_type: SpellType):
 	type = _type
 	%TextureRect.texture = type.icon
-	%TextureRect.scale = Vector2.ONE * \
-						(float(BASE_SIZE_PIXEL) / %TextureRect.texture.get_width())
+	if %TextureRect.texture:
+		%TextureRect.scale = Vector2.ONE * \
+							(float(BASE_SIZE_PIXEL) / %TextureRect.texture.get_width())
 
 func set_sub_label(text: String):
 	%SubLabel.text = text

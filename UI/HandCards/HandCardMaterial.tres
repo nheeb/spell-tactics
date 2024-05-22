@@ -1,0 +1,105 @@
+[gd_resource type="StandardMaterial3D" load_steps=9 format=3 uid="uid://72pgvo6r6k7c"]
+
+[ext_resource type="Texture2D" uid="uid://pm47cyr36mlc" path="res://Assets/Materials/Textures/cardstone/concrete_0001_color_1k.jpg" id="1_eyb0m"]
+[ext_resource type="Texture2D" uid="uid://dvaivjm6driaw" path="res://Assets/Materials/Textures/cardstone/concrete_0001_normal_opengl_1k.png" id="2_vgsgm"]
+[ext_resource type="Texture2D" uid="uid://4obtweismhqm" path="res://Assets/Materials/Textures/cardstone/concrete_0001_roughness_1k_high.jpg" id="3_nddtx"]
+
+[sub_resource type="Shader" id="Shader_xxhw5"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+
+#include \"res://Shaders/lib.gdshaderinc\"
+
+uniform vec4 albedo : source_color;
+uniform vec4 glow : source_color;
+
+uniform float glow_uv_scale = 20.0;
+uniform float glow_time_scale = 5.0;
+uniform float glow_power = 1.0;
+uniform float glow_process: hint_range(0.0, 1.0);
+uniform sampler2D glow_noise_texture;
+
+uniform sampler2D card_texture;
+
+uniform vec2 title_uv_aa;
+uniform vec2 title_uv_bb;
+
+uniform vec2 icon_uv_aa;
+uniform vec2 icon_uv_bb;
+
+uniform vec2 text_uv_aa;
+uniform vec2 text_uv_bb;
+
+uniform float random_seed;
+
+void fragment() {
+	vec2 base_uv = UV;
+	//ALBEDO = albedo.rgb;
+	//ALBEDO = texture(card_texture, UV).rgb;
+	ALPHA = 0.0;
+	ALPHA = ALPHA + texture(card_texture, uv_project(UV, title_uv_aa, title_uv_bb, vec2(0), vec2(.5, .25) )).a;
+	ALPHA = ALPHA + texture(card_texture, uv_project(UV, icon_uv_aa, icon_uv_bb, vec2(0.5, 0), vec2(1) )).a;
+	ALPHA = ALPHA + texture(card_texture, uv_project(UV, text_uv_aa, text_uv_bb, vec2(0, .25), vec2(.5, 1) )).a;
+	
+	//float glow_noise = sin(UV.x * glow_uv_scale + UV.y * glow_uv_scale + TIME * glow_time_scale) -
+						//cos(UV.x * glow_uv_scale - UV.y * glow_uv_scale * 2.0 + TIME * .3 * glow_time_scale);
+	float glow_noise = texture(glow_noise_texture, UV * glow_uv_scale + vec2(TIME * glow_time_scale + random_seed * 100.0)).r;
+	float highlight_noise = pow(texture(glow_noise_texture, UV * glow_uv_scale * .4 + vec2(TIME * glow_time_scale * .4 + random_seed * 100.0)).r, 9.0);
+	
+	ALBEDO = mix(albedo.rgb, glow.rgb, glow_noise * .35 * glow_process);
+	ALBEDO = mix(ALBEDO.rgb, glow.rgb, highlight_noise * .7 * glow_process);
+	
+	EMISSION = ALBEDO * (1.0 + glow_process * (glow_noise + highlight_noise)) * glow_power;
+	
+	//float glow_noise_2 = texture(glow_noise_texture, UV * glow_uv_scale * 3.0 + vec2(TIME * glow_time_scale * .5 + random_seed * 100.0)).r;
+	//ALBEDO = mix(albedo.rgb, glow.rgb, .7);
+	//EMISSION = ALPHA * mix( ALBEDO.rgb , mix(ALBEDO.rgb, glow.rgb * glow_power, glow_noise + .05), glow_process);
+	//EMISSION = ALPHA * mix( EMISSION.rgb, albedo.rgb * glow_power * 1.5, .5 * glow_noise_2);
+}
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fkqlo"]
+viewport_path = NodePath("TextureViewport")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_phcjj"]
+noise_type = 0
+frequency = 0.0131
+fractal_type = 0
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yb5wr"]
+seamless = true
+seamless_blend_skirt = 0.182
+noise = SubResource("FastNoiseLite_phcjj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ip25q"]
+resource_local_to_scene = true
+render_priority = 127
+shader = SubResource("Shader_xxhw5")
+shader_parameter/albedo = Color(0, 0.859375, 0.0134277, 1)
+shader_parameter/glow = Color(1, 1, 1, 1)
+shader_parameter/glow_uv_scale = 0.9
+shader_parameter/glow_time_scale = 0.07
+shader_parameter/glow_power = 1.0
+shader_parameter/glow_process = 0.762
+shader_parameter/title_uv_aa = Vector2(0.04, 0.09)
+shader_parameter/title_uv_bb = Vector2(0.395, 0.202)
+shader_parameter/icon_uv_aa = Vector2(0.07, 0.125)
+shader_parameter/icon_uv_bb = Vector2(0.37, 0.415)
+shader_parameter/text_uv_aa = Vector2(0.085, 0.37)
+shader_parameter/text_uv_bb = Vector2(0.345, 0.62)
+shader_parameter/random_seed = null
+shader_parameter/glow_noise_texture = SubResource("NoiseTexture2D_yb5wr")
+shader_parameter/card_texture = SubResource("ViewportTexture_fkqlo")
+
+[resource]
+resource_local_to_scene = true
+next_pass = SubResource("ShaderMaterial_ip25q")
+transparency = 1
+albedo_texture = ExtResource("1_eyb0m")
+roughness_texture = ExtResource("3_nddtx")
+normal_enabled = true
+normal_texture = ExtResource("2_vgsgm")
+uv1_scale = Vector3(2, 2, 2)

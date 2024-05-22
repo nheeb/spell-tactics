@@ -1,39 +1,51 @@
 class_name OrbitalMovement extends Node3D
 
-## Orbital Movement consists of a mix of 3 types of movement:
+## Orbital Movement consists of a mix of 9 types of movement:
 ## Gravity - Accelerating down
 ## Impulse - One Time Acceleration
+## Damp - Reduce velocity
 ## Drag - Moving towards a Node3D
-## Follow - Following the Orbiting points of the body
+## Follow - Following along the orbits movement
+## Bound - Binding to the orbit circle
 ## Correct - Get orbital distance to other Movements
 ## Push - Getting pushed away from other Movements
+## Fixed - Getting moved to fixed points
 ## Each of them have an active variable float between 0 and 1
 
 enum MovementType {
-	Gravity, Impulse, Drag, Follow, Correct, Push
+	Gravity, Impulse, Damp, Drag, Follow, Bound, Correct, Push, Fixed
 }
 
 @onready var parent : Node3D = get_parent() as Node3D
 @onready var pos : Vector3 = parent.global_position
 
-var active_movements := {} # Movement Type -> Float [0.0 - 1.0]
+var active_movements := {} # Movement Type -> Movement Objects
 var orbit_body : OrbitalMovementBody
-
+var attractor : EnergyOrbAttractor
 var velocity := Vector3.ZERO
 
 func setup_active_movements():
 	active_movements[MovementType.Gravity] = MovementGravity.new(self)
 	active_movements[MovementType.Impulse] = MovementImpulse.new(self)
+	active_movements[MovementType.Damp] = MovementDamp.new(self)
 	active_movements[MovementType.Drag] = MovementDrag.new(self)
 	active_movements[MovementType.Follow] = MovementFollow.new(self)
+	active_movements[MovementType.Bound] = MovementBound.new(self)
 	active_movements[MovementType.Correct] = MovementCorrect.new(self)
 	active_movements[MovementType.Push] = MovementPush.new(self)
+	active_movements[MovementType.Fixed] = MovementFixed.new(self)
+
+func setup(_attractor, _orbit_body):
+	attractor = _attractor
+	attach_to_orbital_body(_orbit_body)
+	setup_active_movements()
 
 class Movement:
-	var activation := 0.0
+	var activation: float
 	var om: OrbitalMovement
-	func _init(_om: OrbitalMovement) -> void:
+	func _init(_om: OrbitalMovement, _activation := 0.0) -> void:
 		om = _om
+		activation = _activation
 	func get_speed(delta: float) -> Vector3:
 		return _get_speed(delta) * activation if activation else Vector3.ZERO
 	func _get_speed(delta: float) -> Vector3:
@@ -44,7 +56,7 @@ class Movement:
 		return Vector3.ZERO
 
 static var GRAVITY_DIRECTION := Vector3(0, -1, 0)
-static var GRAVITY_FORCE := 2.0
+static var GRAVITY_FORCE := .12
 class MovementGravity extends Movement:
 	func _get_speed(delta: float) -> Vector3:
 		return om.GRAVITY_DIRECTION * om.GRAVITY_FORCE * delta
@@ -54,21 +66,31 @@ class MovementImpulse extends Movement:
 	func add_impulse(i: Vector3) -> void:
 		impulse += i
 	func _get_speed(delta: float) -> Vector3:
-		var i := impulse
-		impulse = Vector3.ZERO
-		return i
+		if impulse != Vector3.ZERO:
+			var i := impulse
+			impulse = Vector3.ZERO
+			return i
+		else:
+			return Vector3.ZERO
 
-static var DRAG_FORCE := 1.0
-static var DRAG_MAX_VELOCITY := 2.0
+static var DAMP_LERP := .1
+static var DAMP_MINIMAL := .001
+class MovementDamp extends Movement:
+	func _get_speed(delta: float) -> Vector3:
+		if om.velocity.length() < om.DAMP_MINIMAL:
+			return Vector3.ZERO
+		var damped := om.velocity * pow(om.DAMP_LERP, delta)
+		return damped - om.velocity
+
+static var DRAG_FORCE := .4
 class MovementDrag extends Movement:
 	var drag_targets := {} # Node3D target -> float force 
 	func _get_speed(delta: float) -> Vector3:
 		var speed_change := Vector3.ZERO
 		for target in drag_targets.keys():
 			target = target as Node3D
-			var target_velocity := om.global_position.direction_to(target.global_position) \
-										* om.DRAG_MAX_VELOCITY
-			speed_change += om.velocity.direction_to(target_velocity) * delta * om.DRAG_FORCE
+			speed_change += om.global_position.direction_to(target.global_position) \
+									* delta * om.DRAG_FORCE * drag_targets[target]
 		return speed_change
 
 class MovementFollow extends Movement:
@@ -76,13 +98,28 @@ class MovementFollow extends Movement:
 		var body : OrbitalMovementBody = om.orbit_body
 		return body.get_orbital_move(om, delta)
 
+class MovementBound extends Movement:
+	func _get_move(delta: float) -> Vector3:
+		var body : OrbitalMovementBody = om.orbit_body
+		return body.get_bound_move(om, delta)
+
 class MovementCorrect extends Movement:
-	pass
+	func _get_move(delta: float) -> Vector3:
+		var body : OrbitalMovementBody = om.orbit_body
+		return body.get_correction_move(om, delta)
 
 class MovementPush extends Movement:
 	pass
+	# TODO nitai add push movement
+
+class MovementFixed extends Movement:
+	var fixed_pos : Vector3
+	func _get_move(delta: float) -> Vector3:
+		return fixed_pos - om.global_position
 
 func attach_to_orbital_body(body: OrbitalMovementBody):
+	if orbit_body:
+		detach_from_orbital_body()
 	orbit_body = body
 	orbit_body.attach_movement(self)
 
@@ -91,3 +128,63 @@ func detach_from_orbital_body():
 		orbit_body.detach_movement(self)
 		orbit_body = null
 
+func jump(impulse: Vector3):
+	active_movements[MovementType.Impulse].add_impulse(impulse)
+
+static var BASE_JUMP_FORCE : float = .06
+func base_jump():
+	if attractor:
+		jump(attractor.get_dir() * BASE_JUMP_FORCE)
+		#print(attractor.get_dir() * BASE_JUMP_FORCE)
+	else:
+		jump(Vector3.UP * BASE_JUMP_FORCE)
+
+@export var behaviour_fixed := true
+@export var behaviour_fixed_progress := 0.0
+@export var behaviour_physics := 0.0
+@export var behaviour_orbit := 0.0
+
+func calculate_movement_activations(delta: float):
+	for movement in active_movements.values():
+		movement = movement as Movement
+		movement.activation = 0.0
+	if behaviour_fixed:
+		active_movements[MovementType.Fixed].activation = 1.0
+	else:
+		active_movements[MovementType.Damp].activation = 1.0
+		active_movements[MovementType.Push].activation = 1.0
+		
+		active_movements[MovementType.Gravity].activation = behaviour_physics
+		active_movements[MovementType.Impulse].activation = behaviour_physics
+		
+		if orbit_body:
+			var approaching_progress : float = orbit_body.get_orbit_approaching_progress(self)
+			#print(approaching_progress)
+			active_movements[MovementType.Drag].activation = behaviour_orbit * (1.0 - approaching_progress)
+			active_movements[MovementType.Follow].activation = behaviour_orbit * approaching_progress
+			active_movements[MovementType.Correct].activation = behaviour_orbit * approaching_progress
+			active_movements[MovementType.Bound].activation = behaviour_orbit * approaching_progress
+
+var last_move := Vector3.ZERO
+func movement_process(delta: float) -> void:
+	# Activations
+	calculate_movement_activations(delta)
+	
+	# Fixed Progress
+	if behaviour_fixed:
+		if attractor:
+			active_movements[MovementType.Fixed].fixed_pos = \
+									attractor.get_pos(behaviour_fixed_progress)
+	if behaviour_orbit:
+		if orbit_body:
+			active_movements[MovementType.Drag].drag_targets[orbit_body] = 1.0
+	
+	# General Movement
+	var move := Vector3.ZERO
+	for m in active_movements.values():
+		m = m as Movement
+		velocity += m.get_speed(delta)
+		move += m.get_move(delta)
+	move += velocity
+	parent.global_position += move
+	last_move = move

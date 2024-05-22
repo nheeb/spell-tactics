@@ -1,11 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://cprvtoo5si7sx"]
+[gd_scene load_steps=30 format=3 uid="uid://cprvtoo5si7sx"]
 
 [ext_resource type="Script" path="res://Effects/EnergyOrb.gd" id="1_2ps41"]
 [ext_resource type="Shader" uid="uid://bankemuhjm2cp" path="res://Shaders/OrbBase.tres" id="1_r13mk"]
 [ext_resource type="Shader" uid="uid://4bqma1qx5xgw" path="res://Shaders/OrbBackground.tres" id="2_2q3is"]
-[ext_resource type="Texture2D" uid="uid://ckh1exvhdroly" path="res://Assets/Sprites/EnergyIconMasks/matter.png" id="2_4vnwi"]
 [ext_resource type="PackedScene" uid="uid://djujpfvecfgl2" path="res://Logic/GeneralUtility/OrbitalMovement.tscn" id="4_o3qko"]
-[ext_resource type="Texture2D" uid="uid://bvxvi7uyos3wo" path="res://Assets/Sprites/Effects/cloud_swirl_spritesheet.png" id="6_und61"]
 
 [sub_resource type="Shader" id="Shader_njmdv"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.stable's StandardMaterial3D.
@@ -60,6 +58,7 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4v2x"]
+resource_local_to_scene = true
 render_priority = 0
 shader = SubResource("Shader_njmdv")
 shader_parameter/albedo = Color(1, 1, 1, 1)
@@ -74,7 +73,6 @@ shader_parameter/uv1_offset = Vector3(0.12, -0.375, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/icon_scale = 4.22
-shader_parameter/texture_albedo = ExtResource("2_4vnwi")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vga55"]
 fractal_gain = 1.105
@@ -85,6 +83,7 @@ seamless_blend_skirt = 0.183
 noise = SubResource("FastNoiseLite_vga55")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oixlq"]
+resource_local_to_scene = true
 render_priority = -6
 next_pass = SubResource("ShaderMaterial_h4v2x")
 shader = ExtResource("1_r13mk")
@@ -179,7 +178,6 @@ anim_speed_max = 2.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25mo4"]
 transparency = 1
 shading_mode = 0
-albedo_texture = ExtResource("6_und61")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 10
@@ -188,6 +186,172 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_okkle"]
 material = SubResource("StandardMaterial3D_25mo4")
+
+[sub_resource type="Animation" id="Animation_d0mwv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OrbitalMovement:behaviour_fixed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OrbitalMovement:behaviour_fixed_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OrbitalMovement:behaviour_physics")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OrbitalMovement:behaviour_orbit")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeshInstance3D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.7, 0.7, 0.7)]
+}
+
+[sub_resource type="Animation" id="Animation_xptq4"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.7, 0.7, 0.7), Vector3(1, 1, 1), Vector3(0.1, 0.1, 0.1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"delete"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_j7sqj"]
+resource_name = "spawn"
+length = 5.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OrbitalMovement:behaviour_fixed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OrbitalMovement:behaviour_fixed_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OrbitalMovement")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.02),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"base_jump"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OrbitalMovement:behaviour_physics")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 1.01, 1.9, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("OrbitalMovement:behaviour_orbit")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.9, 2.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cuin4"]
+_data = {
+"RESET": SubResource("Animation_d0mwv"),
+"death": SubResource("Animation_xptq4"),
+"spawn": SubResource("Animation_j7sqj")
+}
 
 [node name="EnergyOrb" type="Node3D"]
 script = ExtResource("1_2ps41")
@@ -204,8 +368,6 @@ mesh = SubResource("QuadMesh_36cb7")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 
-[node name="OrbitalMovement" parent="." instance=ExtResource("4_o3qko")]
-
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.479204, 0, 0, 0, 0.479204, 0, 0, 0, 0.479204, 0, -0.12028, 0)
 visible = false
@@ -213,3 +375,10 @@ lifetime = 2.0
 visibility_aabb = AABB(-1.28168, -1.24347, -1.26578, 2.57544, 2.51285, 2.46092)
 process_material = SubResource("ParticleProcessMaterial_jnpxm")
 draw_pass_1 = SubResource("QuadMesh_okkle")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cuin4")
+}
+
+[node name="OrbitalMovement" parent="." instance=ExtResource("4_o3qko")]

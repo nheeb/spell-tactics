@@ -361,16 +361,16 @@ func immediate_arrows() -> ImmediateArrows:
 		add_child(_im_arr)
 	return _im_arr
 
-var player_orbit: OrbitalMovementBody
-const ORBIT_BODY = preload("res://Logic/GeneralUtility/OrbitalMovementBody.tscn")
-func create_energy_orbs(stack: EnergyStack, origin: Vector3):
-	if not player_orbit:
-		player_orbit = ORBIT_BODY.instantiate()
-		player.visual_entity.add_child(player_orbit)
-		VisualTime.visual_process.connect(player_orbit.movement_process)
-	for e in stack.stack:
-		var orb : EnergyOrb = VFX.ENERGY_ORB.instantiate() as EnergyOrb
-		visual_effects.add_child(orb)
-		orb.global_position = origin
-		VisualTime.visual_process.connect(orb.movement.movement_process)
-		orb.movement.attach_to_orbital_body(player_orbit)
+#var player_orbit: OrbitalMovementBody
+#const ORBIT_BODY = preload("res://Logic/GeneralUtility/OrbitalMovementBody.tscn")
+#func create_energy_orbs(stack: EnergyStack, origin: Vector3):
+	#if not player_orbit:
+		#player_orbit = ORBIT_BODY.instantiate()
+		#player.visual_entity.add_child(player_orbit)
+		#VisualTime.visual_process.connect(player_orbit.movement_process)
+	#for e in stack.stack:
+		#var orb = VFX.ENERGY_ORB.instantiate()
+		#visual_effects.add_child(orb)
+		#orb.global_position = origin
+		#VisualTime.visual_process.connect(orb.movement.movement_process)
+		#orb.movement.attach_to_orbital_body(player_orbit)
