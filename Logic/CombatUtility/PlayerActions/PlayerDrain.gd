@@ -36,6 +36,8 @@ func execute(combat: Combat) -> void:
 			combat.animation.callback(entity.visual_entity, "spawn_energy_orbs",\
 					[energy_stack, combat.player.visual_entity.orbital_movement_body])\
 					.set_max_duration(.5).set_flag_with()
+			combat.animation.callback(combat.ui.cards3d.energy_ui, "spawn_energy_orbs",\
+					[energy_stack]).set_max_duration(.5).set_flag_with()
 		for tag in entity.get_tags():
 			combat.log.register_incident("drained_tag_%s" % tag)
 	

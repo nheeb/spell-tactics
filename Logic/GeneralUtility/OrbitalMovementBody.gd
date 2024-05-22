@@ -1,13 +1,17 @@
 class_name OrbitalMovementBody extends Node3D
 
-static var BASE_RADUIS := .8
-static var ROUNDS_PER_SECOND := .4
+static var BASE_RADUIS := .7
+static var ROUNDS_PER_SECOND := .25
 static var TILT_ROUNDS_PER_SECOND := .15
 static var TILT_ANGLE := PI / 12.0
-static var CORRECTION_RPS := .4
+static var CORRECTION_RPS := .5
 static var BOUND_LERP := .05
 
 var orbits: Array[Orbit] = []
+
+@export var use_global_up_vector := false
+@export var radius_scale := 1.0
+@export var speed_scale := 1.0
 
 class Orbit:
 	var radius : float = OrbitalMovementBody.BASE_RADUIS
@@ -15,14 +19,21 @@ class Orbit:
 	var tilt_angle : float = OrbitalMovementBody.TILT_ANGLE
 	var tilt_rounds_per_second := OrbitalMovementBody.TILT_ROUNDS_PER_SECOND
 	var base_up_vector := Vector3.UP
+	var tilt_direction : Vector3
 	var tilted_up_vector : Vector3
 	var body: OrbitalMovementBody
 	var movements : Array[OrbitalMovement] = []
 	var movements_angle_dist : Array[float] = []
 	var movements_target_points : Dictionary = {} # Movement -> Target Point (Vec3)
-	func _init(_body: OrbitalMovementBody, tilt_direction: Vector3) -> void:
+	func _init(_body: OrbitalMovementBody, _tilt_direction: Vector3) -> void:
 		body = _body
-		var tilt_rotation_axis := base_up_vector.cross(tilt_direction)
+		tilt_direction = _tilt_direction
+		if body.use_global_up_vector:
+			base_up_vector = body.get_global_y_direction()
+		rounds_per_second *= body.speed_scale
+		tilt_rounds_per_second *= body.speed_scale
+		radius *= body.radius_scale
+		var tilt_rotation_axis := base_up_vector.cross(tilt_direction).normalized()
 		tilted_up_vector = base_up_vector.rotated(tilt_rotation_axis, tilt_angle)
 	func movement_process(delta: float) -> void:
 		# Rotate Tilt
@@ -35,17 +46,27 @@ class Orbit:
 		for movement in movements:
 			movements_target_points[movement] = get_nearest_point(movement.global_position)
 		movements.sort_custom(
-			func(a,b): 
-				return movements_target_points[a].signed_angle_to(Vector3.FORWARD, Vector3.UP) \
-						< movements_target_points[b].signed_angle_to(Vector3.FORWARD, Vector3.UP)
+			func(a,b):
+				var angle_a = (movements_target_points[a] - body.global_position)\
+								.signed_angle_to(tilt_direction, base_up_vector)
+				var angle_b = (movements_target_points[b] - body.global_position)\
+								.signed_angle_to(tilt_direction, base_up_vector)
+				return angle_a < angle_b
 		)
 		movements_angle_dist.clear()
 		for i in range(movements.size()):
 			var movement_a := movements[i-1]
 			var movement_b := movements[i]
-			var point_a = movements_target_points[movement_a]
-			var point_b = movements_target_points[movement_b]
-			movements_angle_dist.append(point_a.angle_to(point_b))
+			var point_a = movements_target_points[movement_a] - body.global_position
+			var point_b = movements_target_points[movement_b] - body.global_position
+			var angle : float = Utility.positive_angle(
+				-point_a.signed_angle_to(point_b, tilted_up_vector)
+			)
+			if is_nan(angle):
+				angle = 0.0
+			movements_angle_dist.append(angle)
+		if Input.is_action_just_pressed("test_u"):
+			print(movements_angle_dist)
 	func get_nearest_point(pos: Vector3) -> Vector3:
 		var dir := body.global_position.direction_to(pos)
 		var projected_dir := dir - dir.project(tilted_up_vector)
@@ -68,8 +89,10 @@ class Orbit:
 			return Vector3.ZERO
 		var dist_a = Utility.array_safe_get(movements_angle_dist, movements.find(om), true)
 		var dist_b = Utility.array_safe_get(movements_angle_dist, movements.find(om) + 1, true)
-		var v : float = dist_a / (dist_a + dist_b)
-		var turn := Utility.clamp_map(v, 0, 1, -1, 1)
+		var turn := 0.0
+		if (dist_a + dist_b) > 0.0:
+			var v : float = dist_a / (dist_a + dist_b)
+			turn = Utility.clamp_map(v, 0, 1, -1, 1)
 		var point := get_nearest_point(om.global_position) - body.global_position
 		var correction := point.rotated(tilted_up_vector, \
 							OrbitalMovementBody.CORRECTION_RPS * turn * delta)
@@ -79,7 +102,10 @@ func attach_movement(om: OrbitalMovement) -> void:
 	# For now we only use one orbit
 	# TODO nitai add multiple orbits
 	if orbits.is_empty():
-		orbits.append(Orbit.new(self, Vector3.FORWARD))
+		var tilt_direction := Vector3.FORWARD
+		if use_global_up_vector:
+			tilt_direction = to_global(tilt_direction).normalized()
+		orbits.append(Orbit.new(self,tilt_direction))
 	if not om in orbits[0].movements:
 		orbits[0].movements.append(om)
 
@@ -121,3 +147,7 @@ func movement_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	movement_process(VisualTime.visual_time_scale * delta)
+
+func get_global_y_direction() -> Vector3:
+	var dir : Vector3 = to_global(Vector3.ZERO).direction_to(to_global(Vector3.UP))
+	return dir

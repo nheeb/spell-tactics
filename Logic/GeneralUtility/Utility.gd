@@ -239,3 +239,6 @@ func array_average(array: Array):
 func random_direction() -> Vector3:
 	return Vector3.UP.rotated(Vector3.FORWARD, TAU * randf())\
 					 .rotated(Vector3.UP, TAU * randf())
+
+func positive_angle(radians: float) -> float:
+	return fposmod(radians, TAU)

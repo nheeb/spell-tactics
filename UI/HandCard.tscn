@@ -97,6 +97,7 @@ mesh = SubResource("QuadMesh_x50fm")
 
 [node name="Area3D" type="Area3D" parent="." groups=["hand_area"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0412399, 0, 1.80265e-09)
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, -6.75016e-14, 0, 1, 0, 6.75016e-14, 0, 1, -0.042862, 0.00741838, 1.11022e-15)

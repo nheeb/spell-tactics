@@ -53,6 +53,7 @@ var test_mode := false # This is true when the scene runs solo
 
 @onready var camera := %Camera3D
 @onready var cards := %Cards
+@onready var energy_ui := %EnergyUI
 
 var combat: Combat
 
@@ -79,7 +80,6 @@ func _ready() -> void:
 		camera.fov = 2 * rad_to_deg(atan(-Z_BASE/CAM_PERSPECTIVE_DISTANCE))
 		#print(camera.fov)
 		#print(camera.position.z)
-		
 	
 	# Move cards z
 	cards.global_position.z = Z_BASE
@@ -190,6 +190,8 @@ func check_hand_state():
 		if collider is Area3D and collider.is_in_group("hand_area"):
 			card_on_cursor = collider.get_parent()
 			raycast_hit = true
+		elif collider is Area3D and collider.is_in_group("energy_ui"):
+			collider.get_parent().ray_cast = %MouseRayCast
 	
 	match hand_state:
 		HandState.Closed:

@@ -45,6 +45,6 @@ void fragment() {
 	ROUGHNESS = roughness_tex * roughness;
 	SPECULAR = specular;
 	EMISSION = ALBEDO;
-	ALPHA = 1.0-center_dist;
+	ALPHA = 1.0;//-center_dist;
 }
 "
