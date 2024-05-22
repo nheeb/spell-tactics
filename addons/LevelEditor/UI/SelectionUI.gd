@@ -40,6 +40,8 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 		if not file.ends_with(".tres"):
 			continue
 		var entity_type = load(file) as EntityType
+		if entity_type == null: # loaded anbother Resource type, ignore this
+			continue
 		if mode == Mode.Terrain and not entity_type.is_terrain:
 			continue
 		if mode == Mode.Entities and entity_type.is_terrain:

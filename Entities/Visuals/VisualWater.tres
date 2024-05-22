@@ -12,7 +12,7 @@ uniform vec4 albedo : source_color;
 uniform sampler2D albedo_tex1 : source_color,filter_linear_mipmap,repeat_enable;
 uniform sampler2D albedo_tex2 : source_color,filter_linear_mipmap,repeat_enable;
 uniform float point_size : hint_range(0,128);
-uniform float roughness : hint_range(0,1);
+uniform float base_roughness : hint_range(0,1) = 0.45;
 
 uniform vec4 metallic_texture_channel;
 
@@ -55,8 +55,8 @@ vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) 
 	return samp;
 }
 
-instance uniform float drain_progress: hint_range(0.0, 1.0, 0.1) = 0.0;
-uniform float gray_scale_darken: hint_range(0.0, 1.0, 0.1) = 0.4;
+instance uniform float drain_progress: hint_range(0.0, 1.0) = 0.0;
+const float gray_scale_darken = 0.4;
 void fragment() {
 	vec4 tex1 = vec4(albedo.rgb, 1.0) * triplanar_texture(albedo_tex1,uv1_power_normal,uv1_triplanar_pos);
 	vec4 tex2 = vec4(albedo.rgb, 1.0) * triplanar_texture(albedo_tex2,uv1_power_normal,uv1_triplanar_pos);
@@ -65,7 +65,8 @@ void fragment() {
 	albedo_tex = vec4(mix(albedo_tex.rgb, gray_scale_darken * custom_grayscale(albedo_tex.rgb), drain_progress), 1.0);
 	ALBEDO = albedo_tex.rgb;
 	METALLIC = metallic;
-	ROUGHNESS =  max(roughness + 0.2*(0.5*sin(TIME)), drain_progress);
+	float roughness = base_roughness + 0.2*(0.5*sin((1.0-drain_progress) * TIME));
+	ROUGHNESS =  clamp(roughness - drain_progress, 0, 1);
 	SPECULAR = specular;
 	vec3 ref_normal = NORMAL;
 	vec2 ref_ofs = SCREEN_UV - ref_normal.xy * refraction;
@@ -81,7 +82,7 @@ render_priority = 0
 shader = SubResource("Shader_wyt3g")
 shader_parameter/albedo = Color(0.4, 0.509804, 1, 0.835294)
 shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.45
+shader_parameter/base_roughness = 0.45
 shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.5
@@ -89,6 +90,5 @@ shader_parameter/refraction = 0.13
 shader_parameter/refraction_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv_scale = Vector3(0.3, 0.3, 0.3)
-shader_parameter/gray_scale_darken = 0.4
 shader_parameter/albedo_tex1 = ExtResource("1_h70x2")
 shader_parameter/albedo_tex2 = ExtResource("2_f6os2")

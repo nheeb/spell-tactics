@@ -20,6 +20,8 @@ func _ready():
 		add_child(level, true)
 		level.clear()
 		level.init_basic_grid(grid_size)
+		
+	print("LEVEL: ", level)
 
 @export var grid_size: int = 6 : set = _set_grid_size, get = _get_grid_size
 func _set_grid_size(new_value):

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=434 format=3 uid="uid://ckq8v1s3aruw7"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=444 format=3 uid="uid://ckq8v1s3aruw7"]
 
 [ext_resource type="Script" path="res://Logic/CombatState.gd" id="1_a77op"]
 [ext_resource type="Script" path="res://Logic/Tiles/State/LevelState.gd" id="1_worvi"]
@@ -20,7 +20,9 @@
 [ext_resource type="Resource" uid="uid://dq2qgws5vu0i2" path="res://Entities/Environment/TallGrass.tres" id="15_s3iof"]
 [ext_resource type="Script" path="res://Entities/PlayerTraits.gd" id="15_uvvh0"]
 [ext_resource type="Resource" uid="uid://d1wcrekyije7v" path="res://Entities/PlayerResource.tres" id="16_0ybmk"]
+[ext_resource type="Resource" uid="uid://bftmj7ayhlcs2" path="res://Entities/Environment/LightGust.tres" id="16_j2ocy"]
 [ext_resource type="Resource" uid="uid://bhq0pkvdokid6" path="res://Entities/Environment/Pebbles.tres" id="17_73e5m"]
+[ext_resource type="Resource" uid="uid://dh4ll7t2j71pq" path="res://Entities/Environment/StrongGust.tres" id="19_25pqm"]
 [ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Entities/Enemies/GoblinBard.tres" id="19_amp3j"]
 [ext_resource type="Resource" uid="uid://iq34rfnf6t4w" path="res://Entities/Environment/WaterTile.tres" id="19_ncl4f"]
 
@@ -29,7 +31,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 29
 
-[sub_resource type="Resource" id="Resource_o0lyw"]
+[sub_resource type="Resource" id="Resource_ggiiq"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -49,7 +51,7 @@ id = 7
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 0, 2])
 
-[sub_resource type="Resource" id="Resource_sgfft"]
+[sub_resource type="Resource" id="Resource_0wax6"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -60,18 +62,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_vw33a"]
+[sub_resource type="Resource" id="Resource_xpe68"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_o0lyw"), SubResource("Resource_sgfft")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ggiiq"), SubResource("Resource_0wax6")])
 
 [sub_resource type="Resource" id="Resource_kb7tj"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 18
 
-[sub_resource type="Resource" id="Resource_0wtc4"]
+[sub_resource type="Resource" id="Resource_6jrdh"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -91,7 +93,7 @@ id = 2
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 1])
 
-[sub_resource type="Resource" id="Resource_4uwln"]
+[sub_resource type="Resource" id="Resource_m5u4n"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
@@ -102,18 +104,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_rkaor"]
+[sub_resource type="Resource" id="Resource_5cnoq"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0wtc4"), SubResource("Resource_4uwln")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6jrdh"), SubResource("Resource_m5u4n")])
 
 [sub_resource type="Resource" id="Resource_jnhih"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 2
 
-[sub_resource type="Resource" id="Resource_7eiba"]
+[sub_resource type="Resource" id="Resource_qiog0"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -124,18 +126,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_8kgaa"]
+[sub_resource type="Resource" id="Resource_bdi3b"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_7eiba")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qiog0")])
 
 [sub_resource type="Resource" id="Resource_7yj30"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 41
 
-[sub_resource type="Resource" id="Resource_aeun8"]
+[sub_resource type="Resource" id="Resource_kaljk"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -155,7 +157,7 @@ id = 4
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 4])
 
-[sub_resource type="Resource" id="Resource_66yw4"]
+[sub_resource type="Resource" id="Resource_kalnk"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -166,18 +168,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_jo1yq"]
+[sub_resource type="Resource" id="Resource_57q4t"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_aeun8"), SubResource("Resource_66yw4")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_kaljk"), SubResource("Resource_kalnk")])
 
 [sub_resource type="Resource" id="Resource_flbpx"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 4
 
-[sub_resource type="Resource" id="Resource_3y87p"]
+[sub_resource type="Resource" id="Resource_cjjy0"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -197,7 +199,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([2])
 
-[sub_resource type="Resource" id="Resource_5o8gg"]
+[sub_resource type="Resource" id="Resource_v64up"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
@@ -208,18 +210,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_302nb"]
+[sub_resource type="Resource" id="Resource_bf1kx"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3y87p"), SubResource("Resource_5o8gg")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cjjy0"), SubResource("Resource_v64up")])
 
 [sub_resource type="Resource" id="Resource_2i7ss"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 5
 
-[sub_resource type="Resource" id="Resource_dlg5t"]
+[sub_resource type="Resource" id="Resource_jj0sj"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -239,7 +241,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([2, 2, 2])
 
-[sub_resource type="Resource" id="Resource_c6jlu"]
+[sub_resource type="Resource" id="Resource_5h2fs"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -250,18 +252,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_f4b05"]
+[sub_resource type="Resource" id="Resource_lrixh"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_dlg5t"), SubResource("Resource_c6jlu")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jj0sj"), SubResource("Resource_5h2fs")])
 
 [sub_resource type="Resource" id="Resource_aaskx"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 28
 
-[sub_resource type="Resource" id="Resource_5eo0d"]
+[sub_resource type="Resource" id="Resource_3egir"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -277,7 +279,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 2
 
-[sub_resource type="Resource" id="Resource_tdsxx"]
+[sub_resource type="Resource" id="Resource_2ssut"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -288,18 +290,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_sfgid"]
+[sub_resource type="Resource" id="Resource_cwtfk"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5eo0d"), SubResource("Resource_tdsxx")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3egir"), SubResource("Resource_2ssut")])
 
 [sub_resource type="Resource" id="Resource_t32jh"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 56
 
-[sub_resource type="Resource" id="Resource_blp3x"]
+[sub_resource type="Resource" id="Resource_iwhq2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -310,18 +312,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_2rdep"]
+[sub_resource type="Resource" id="Resource_w4hpn"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_blp3x")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_iwhq2")])
 
 [sub_resource type="Resource" id="Resource_may3j"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 57
 
-[sub_resource type="Resource" id="Resource_qfdjw"]
+[sub_resource type="Resource" id="Resource_p7et0"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -337,7 +339,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 1
 
-[sub_resource type="Resource" id="Resource_wmuq8"]
+[sub_resource type="Resource" id="Resource_dmihi"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -348,18 +350,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_xeimu"]
+[sub_resource type="Resource" id="Resource_i6cut"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qfdjw"), SubResource("Resource_wmuq8")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_p7et0"), SubResource("Resource_dmihi")])
 
 [sub_resource type="Resource" id="Resource_u8ptc"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 58
 
-[sub_resource type="Resource" id="Resource_svqe1"]
+[sub_resource type="Resource" id="Resource_2rl13"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -379,7 +381,7 @@ id = 3
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 0])
 
-[sub_resource type="Resource" id="Resource_iyuqb"]
+[sub_resource type="Resource" id="Resource_bbpdp"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("9_b8i77")
 entity_props = {
@@ -390,18 +392,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_3fn05"]
+[sub_resource type="Resource" id="Resource_qqxai"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_svqe1"), SubResource("Resource_iyuqb")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_2rl13"), SubResource("Resource_bbpdp")])
 
 [sub_resource type="Resource" id="Resource_qwgqp"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 42
 
-[sub_resource type="Resource" id="Resource_q2oi2"]
+[sub_resource type="Resource" id="Resource_ki1wr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -421,7 +423,7 @@ id = 21
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 0, 2])
 
-[sub_resource type="Resource" id="Resource_2mk2m"]
+[sub_resource type="Resource" id="Resource_aktw0"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -432,18 +434,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_865n3"]
+[sub_resource type="Resource" id="Resource_1a80b"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_q2oi2"), SubResource("Resource_2mk2m")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ki1wr"), SubResource("Resource_aktw0")])
 
 [sub_resource type="Resource" id="Resource_f7vrg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 59
 
-[sub_resource type="Resource" id="Resource_ywiy6"]
+[sub_resource type="Resource" id="Resource_nk8kn"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -463,7 +465,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([2])
 
-[sub_resource type="Resource" id="Resource_qc0w4"]
+[sub_resource type="Resource" id="Resource_5di6e"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
@@ -474,18 +476,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_yqky0"]
+[sub_resource type="Resource" id="Resource_krmmv"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ywiy6"), SubResource("Resource_qc0w4")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nk8kn"), SubResource("Resource_5di6e")])
 
 [sub_resource type="Resource" id="Resource_ln7nh"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 6
 
-[sub_resource type="Resource" id="Resource_rcgmq"]
+[sub_resource type="Resource" id="Resource_18nlu"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -501,7 +503,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 2
 
-[sub_resource type="Resource" id="Resource_r8gwe"]
+[sub_resource type="Resource" id="Resource_5bd8v"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -512,18 +514,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_n2vvw"]
+[sub_resource type="Resource" id="Resource_t4wcv"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rcgmq"), SubResource("Resource_r8gwe")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_18nlu"), SubResource("Resource_5bd8v")])
 
 [sub_resource type="Resource" id="Resource_3q8ae"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 27
 
-[sub_resource type="Resource" id="Resource_w5mp4"]
+[sub_resource type="Resource" id="Resource_4egbg"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -539,7 +541,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 3
 
-[sub_resource type="Resource" id="Resource_0lcia"]
+[sub_resource type="Resource" id="Resource_atgq4"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -550,18 +552,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_u17bc"]
+[sub_resource type="Resource" id="Resource_gi6gl"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_w5mp4"), SubResource("Resource_0lcia")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_4egbg"), SubResource("Resource_atgq4")])
 
 [sub_resource type="Resource" id="Resource_sugdk"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 90
 
-[sub_resource type="Resource" id="Resource_tryta"]
+[sub_resource type="Resource" id="Resource_yxfuq"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -572,18 +574,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_mequ7"]
+[sub_resource type="Resource" id="Resource_vbi0b"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tryta")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_yxfuq")])
 
 [sub_resource type="Resource" id="Resource_l1458"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 55
 
-[sub_resource type="Resource" id="Resource_4kgp2"]
+[sub_resource type="Resource" id="Resource_ctqtf"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -594,18 +596,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_e3dg4"]
+[sub_resource type="Resource" id="Resource_5tq2g"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_4kgp2")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ctqtf")])
 
 [sub_resource type="Resource" id="Resource_w5c4k"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 61
 
-[sub_resource type="Resource" id="Resource_bmupq"]
+[sub_resource type="Resource" id="Resource_xb2dh"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -621,7 +623,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("12_xip6r")
 id = 1
 
-[sub_resource type="Resource" id="Resource_ndqpx"]
+[sub_resource type="Resource" id="Resource_67gg8"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("12_xip6r")
 entity_props = {
@@ -641,18 +643,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_u0h7d"]
+[sub_resource type="Resource" id="Resource_d0g4d"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bmupq"), SubResource("Resource_ndqpx")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xb2dh"), SubResource("Resource_67gg8")])
 
 [sub_resource type="Resource" id="Resource_tv4qm"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 43
 
-[sub_resource type="Resource" id="Resource_voicf"]
+[sub_resource type="Resource" id="Resource_m0aum"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -672,7 +674,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 1])
 
-[sub_resource type="Resource" id="Resource_gl8jd"]
+[sub_resource type="Resource" id="Resource_xlcpn"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
@@ -683,18 +685,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_xlfoc"]
+[sub_resource type="Resource" id="Resource_i6ed5"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_voicf"), SubResource("Resource_gl8jd")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_m0aum"), SubResource("Resource_xlcpn")])
 
 [sub_resource type="Resource" id="Resource_r2qb0"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 44
 
-[sub_resource type="Resource" id="Resource_40cx4"]
+[sub_resource type="Resource" id="Resource_oggng"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -714,7 +716,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([5])
 
-[sub_resource type="Resource" id="Resource_0fde1"]
+[sub_resource type="Resource" id="Resource_go3bv"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("13_l3am2")
 entity_props = {
@@ -725,18 +727,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_sct5l"]
+[sub_resource type="Resource" id="Resource_r5f3c"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_40cx4"), SubResource("Resource_0fde1")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_oggng"), SubResource("Resource_go3bv")])
 
 [sub_resource type="Resource" id="Resource_k5dr0"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 57
 
-[sub_resource type="Resource" id="Resource_tev8l"]
+[sub_resource type="Resource" id="Resource_awjxu"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -756,7 +758,7 @@ id = 7
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 4])
 
-[sub_resource type="Resource" id="Resource_3wbwy"]
+[sub_resource type="Resource" id="Resource_racdi"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -767,18 +769,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_jrdhs"]
+[sub_resource type="Resource" id="Resource_dil7y"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tev8l"), SubResource("Resource_3wbwy")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_awjxu"), SubResource("Resource_racdi")])
 
 [sub_resource type="Resource" id="Resource_eljp3"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 7
 
-[sub_resource type="Resource" id="Resource_e0x5m"]
+[sub_resource type="Resource" id="Resource_is3gj"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -794,7 +796,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 6
 
-[sub_resource type="Resource" id="Resource_vko8a"]
+[sub_resource type="Resource" id="Resource_oq82g"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -805,18 +807,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_krm4g"]
+[sub_resource type="Resource" id="Resource_d8d7l"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_e0x5m"), SubResource("Resource_vko8a")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_is3gj"), SubResource("Resource_oq82g")])
 
 [sub_resource type="Resource" id="Resource_o0nhg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 25
 
-[sub_resource type="Resource" id="Resource_3rmtf"]
+[sub_resource type="Resource" id="Resource_ykpii"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -832,7 +834,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 4
 
-[sub_resource type="Resource" id="Resource_mkxo3"]
+[sub_resource type="Resource" id="Resource_fm13n"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -843,18 +845,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_iujwm"]
+[sub_resource type="Resource" id="Resource_o2yvc"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3rmtf"), SubResource("Resource_mkxo3")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ykpii"), SubResource("Resource_fm13n")])
 
 [sub_resource type="Resource" id="Resource_xsa65"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 26
 
-[sub_resource type="Resource" id="Resource_5cu3f"]
+[sub_resource type="Resource" id="Resource_2fpxs"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -865,18 +867,38 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_kyujp"]
+[sub_resource type="Resource" id="Resource_pi5kt"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_j2ocy")
+id = 1
+
+[sub_resource type="Resource" id="Resource_jsre5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
+[sub_resource type="Resource" id="Resource_xx6c3"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_j2ocy")
+entity_props = {
+"custom_props": {},
+"energy": SubResource("Resource_jsre5"),
+"id": SubResource("Resource_pi5kt"),
+"status_effects": Array[Resource("res://Logic/StatusEffects/StatusEffect.gd")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_db3l4"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5cu3f")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_2fpxs"), SubResource("Resource_xx6c3")])
 
 [sub_resource type="Resource" id="Resource_2xhne"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 93
 
-[sub_resource type="Resource" id="Resource_de5pt"]
+[sub_resource type="Resource" id="Resource_sl5bb"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -892,7 +914,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_54udb")
 id = 2
 
-[sub_resource type="Resource" id="Resource_eyg3p"]
+[sub_resource type="Resource" id="Resource_74nnj"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_54udb")
 entity_props = {
@@ -912,18 +934,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_1oibp"]
+[sub_resource type="Resource" id="Resource_2om4j"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_de5pt"), SubResource("Resource_eyg3p")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sl5bb"), SubResource("Resource_74nnj")])
 
 [sub_resource type="Resource" id="Resource_hw624"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 91
 
-[sub_resource type="Resource" id="Resource_0e288"]
+[sub_resource type="Resource" id="Resource_k0di6"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -943,7 +965,7 @@ id = 2
 script = ExtResource("8_d2swj")
 stack = Array[int]([1, 3])
 
-[sub_resource type="Resource" id="Resource_1318e"]
+[sub_resource type="Resource" id="Resource_q715u"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
@@ -954,18 +976,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_vlqo1"]
+[sub_resource type="Resource" id="Resource_0oxws"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0e288"), SubResource("Resource_1318e")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_k0di6"), SubResource("Resource_q715u")])
 
 [sub_resource type="Resource" id="Resource_bklsd"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 82
 
-[sub_resource type="Resource" id="Resource_sc0l2"]
+[sub_resource type="Resource" id="Resource_m5o6e"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -976,18 +998,38 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_e0ef1"]
+[sub_resource type="Resource" id="Resource_1k8qr"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_25pqm")
+id = 1
+
+[sub_resource type="Resource" id="Resource_m1ybh"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4, 4])
+
+[sub_resource type="Resource" id="Resource_l34gq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_25pqm")
+entity_props = {
+"custom_props": {},
+"energy": SubResource("Resource_m1ybh"),
+"id": SubResource("Resource_1k8qr"),
+"status_effects": Array[Resource("res://Logic/StatusEffects/StatusEffect.gd")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_y4lny"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sc0l2")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_m5o6e"), SubResource("Resource_l34gq")])
 
 [sub_resource type="Resource" id="Resource_4ai4x"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 45
 
-[sub_resource type="Resource" id="Resource_pe7nk"]
+[sub_resource type="Resource" id="Resource_pqwac"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1003,7 +1045,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 3
 
-[sub_resource type="Resource" id="Resource_pypg3"]
+[sub_resource type="Resource" id="Resource_bovpe"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -1014,11 +1056,11 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_nbw74"]
+[sub_resource type="Resource" id="Resource_d57sp"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pe7nk"), SubResource("Resource_pypg3")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pqwac"), SubResource("Resource_bovpe")])
 
 [sub_resource type="Resource" id="Resource_oaucm"]
 script = ExtResource("2_2i3es")
@@ -1029,7 +1071,7 @@ id = 4
 script = ExtResource("8_d2swj")
 stack = Array[int]([3, 4])
 
-[sub_resource type="Resource" id="Resource_k71gr"]
+[sub_resource type="Resource" id="Resource_7ghr1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
@@ -1040,18 +1082,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_li1fr"]
+[sub_resource type="Resource" id="Resource_xgmjr"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_k71gr")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_7ghr1")])
 
 [sub_resource type="Resource" id="Resource_4jp04"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 3
 
-[sub_resource type="Resource" id="Resource_bcdpw"]
+[sub_resource type="Resource" id="Resource_aqo6u"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
@@ -1062,18 +1104,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_sqcim"]
+[sub_resource type="Resource" id="Resource_cwkge"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bcdpw")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_aqo6u")])
 
 [sub_resource type="Resource" id="Resource_2iepg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 8
 
-[sub_resource type="Resource" id="Resource_maupy"]
+[sub_resource type="Resource" id="Resource_ppqaa"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1089,7 +1131,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 5
 
-[sub_resource type="Resource" id="Resource_a24li"]
+[sub_resource type="Resource" id="Resource_405qv"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -1100,18 +1142,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_srk6c"]
+[sub_resource type="Resource" id="Resource_qyb6m"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_maupy"), SubResource("Resource_a24li")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ppqaa"), SubResource("Resource_405qv")])
 
 [sub_resource type="Resource" id="Resource_7v3sp"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 24
 
-[sub_resource type="Resource" id="Resource_mjq45"]
+[sub_resource type="Resource" id="Resource_hj8ju"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1127,7 +1169,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 8
 
-[sub_resource type="Resource" id="Resource_o2hxt"]
+[sub_resource type="Resource" id="Resource_tyxn6"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -1138,18 +1180,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_gttnq"]
+[sub_resource type="Resource" id="Resource_i3yad"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mjq45"), SubResource("Resource_o2hxt")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hj8ju"), SubResource("Resource_tyxn6")])
 
 [sub_resource type="Resource" id="Resource_ce0aw"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 30
 
-[sub_resource type="Resource" id="Resource_v32km"]
+[sub_resource type="Resource" id="Resource_g8h2t"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1165,7 +1207,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 1
 
-[sub_resource type="Resource" id="Resource_mmo65"]
+[sub_resource type="Resource" id="Resource_hcbyf"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
@@ -1176,18 +1218,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_6iq1y"]
+[sub_resource type="Resource" id="Resource_fvw7x"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_v32km"), SubResource("Resource_mmo65")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_g8h2t"), SubResource("Resource_hcbyf")])
 
 [sub_resource type="Resource" id="Resource_pend8"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 94
 
-[sub_resource type="Resource" id="Resource_gf62y"]
+[sub_resource type="Resource" id="Resource_f8j24"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1198,18 +1240,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_fhejn"]
+[sub_resource type="Resource" id="Resource_ysq1b"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gf62y")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f8j24")])
 
 [sub_resource type="Resource" id="Resource_skjpa"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 84
 
-[sub_resource type="Resource" id="Resource_xaq13"]
+[sub_resource type="Resource" id="Resource_fc5jx"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1225,7 +1267,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 3
 
-[sub_resource type="Resource" id="Resource_jch0y"]
+[sub_resource type="Resource" id="Resource_fsgph"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
@@ -1236,18 +1278,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_synqy"]
+[sub_resource type="Resource" id="Resource_dqovt"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xaq13"), SubResource("Resource_jch0y")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_fc5jx"), SubResource("Resource_fsgph")])
 
 [sub_resource type="Resource" id="Resource_kc6lw"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 83
 
-[sub_resource type="Resource" id="Resource_66cwr"]
+[sub_resource type="Resource" id="Resource_vt4rm"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1258,18 +1300,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_2hvbj"]
+[sub_resource type="Resource" id="Resource_b2a8c"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_66cwr")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vt4rm")])
 
 [sub_resource type="Resource" id="Resource_gvgte"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 62
 
-[sub_resource type="Resource" id="Resource_0bipw"]
+[sub_resource type="Resource" id="Resource_4qb4x"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1285,7 +1327,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 2
 
-[sub_resource type="Resource" id="Resource_6qhud"]
+[sub_resource type="Resource" id="Resource_kfq38"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
@@ -1296,18 +1338,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_e6mcl"]
+[sub_resource type="Resource" id="Resource_4see5"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0bipw"), SubResource("Resource_6qhud")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_4qb4x"), SubResource("Resource_kfq38")])
 
 [sub_resource type="Resource" id="Resource_g6soj"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 46
 
-[sub_resource type="Resource" id="Resource_0rptk"]
+[sub_resource type="Resource" id="Resource_wrkua"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1327,7 +1369,7 @@ id = 3
 script = ExtResource("8_d2swj")
 stack = Array[int]([1, 3])
 
-[sub_resource type="Resource" id="Resource_yxhdr"]
+[sub_resource type="Resource" id="Resource_p0enx"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
@@ -1338,18 +1380,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_wg51e"]
+[sub_resource type="Resource" id="Resource_bqim6"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0rptk"), SubResource("Resource_yxhdr")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wrkua"), SubResource("Resource_p0enx")])
 
 [sub_resource type="Resource" id="Resource_uqdun"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 5
 
-[sub_resource type="Resource" id="Resource_blu2r"]
+[sub_resource type="Resource" id="Resource_cnywb"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
@@ -1360,18 +1402,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_k8ntw"]
+[sub_resource type="Resource" id="Resource_10dtt"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_blu2r")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cnywb")])
 
 [sub_resource type="Resource" id="Resource_a4sok"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 2
 
-[sub_resource type="Resource" id="Resource_44mgv"]
+[sub_resource type="Resource" id="Resource_vx4rr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
@@ -1382,18 +1424,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_1h5uy"]
+[sub_resource type="Resource" id="Resource_hwcfg"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_44mgv")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vx4rr")])
 
 [sub_resource type="Resource" id="Resource_tru5f"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 9
 
-[sub_resource type="Resource" id="Resource_jaexx"]
+[sub_resource type="Resource" id="Resource_v1mxm"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1409,7 +1451,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 5
 
-[sub_resource type="Resource" id="Resource_f7rla"]
+[sub_resource type="Resource" id="Resource_geulk"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -1420,18 +1462,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_iswmu"]
+[sub_resource type="Resource" id="Resource_qf5p7"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jaexx"), SubResource("Resource_f7rla")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_v1mxm"), SubResource("Resource_geulk")])
 
 [sub_resource type="Resource" id="Resource_frtvy"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 23
 
-[sub_resource type="Resource" id="Resource_8cbc6"]
+[sub_resource type="Resource" id="Resource_u87aj"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1451,7 +1493,7 @@ id = 4
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 0])
 
-[sub_resource type="Resource" id="Resource_d8x58"]
+[sub_resource type="Resource" id="Resource_g42dq"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("9_b8i77")
 entity_props = {
@@ -1462,18 +1504,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_h4ivg"]
+[sub_resource type="Resource" id="Resource_qlshl"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8cbc6"), SubResource("Resource_d8x58")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_u87aj"), SubResource("Resource_g42dq")])
 
 [sub_resource type="Resource" id="Resource_ixb76"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 31
 
-[sub_resource type="Resource" id="Resource_3pmyr"]
+[sub_resource type="Resource" id="Resource_ltogi"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1489,7 +1531,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 27
 
-[sub_resource type="Resource" id="Resource_axivn"]
+[sub_resource type="Resource" id="Resource_mi3ry"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -1500,18 +1542,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_w87be"]
+[sub_resource type="Resource" id="Resource_4bf3k"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3pmyr"), SubResource("Resource_axivn")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ltogi"), SubResource("Resource_mi3ry")])
 
 [sub_resource type="Resource" id="Resource_f0vox"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 39
 
-[sub_resource type="Resource" id="Resource_6mj20"]
+[sub_resource type="Resource" id="Resource_druba"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1527,7 +1569,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 3
 
-[sub_resource type="Resource" id="Resource_cwg77"]
+[sub_resource type="Resource" id="Resource_seuph"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
@@ -1538,18 +1580,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_tepvk"]
+[sub_resource type="Resource" id="Resource_bd0go"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6mj20"), SubResource("Resource_cwg77")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_druba"), SubResource("Resource_seuph")])
 
 [sub_resource type="Resource" id="Resource_7cgwk"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 79
 
-[sub_resource type="Resource" id="Resource_5m1yx"]
+[sub_resource type="Resource" id="Resource_3de31"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1565,7 +1607,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 12
 
-[sub_resource type="Resource" id="Resource_g0ed3"]
+[sub_resource type="Resource" id="Resource_iyys1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -1576,18 +1618,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_83elp"]
+[sub_resource type="Resource" id="Resource_5lk5x"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5m1yx"), SubResource("Resource_g0ed3")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3de31"), SubResource("Resource_iyys1")])
 
 [sub_resource type="Resource" id="Resource_gby3q"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 80
 
-[sub_resource type="Resource" id="Resource_ytnb3"]
+[sub_resource type="Resource" id="Resource_kv816"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1598,18 +1640,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_j2asp"]
+[sub_resource type="Resource" id="Resource_hq7go"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ytnb3")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_kv816")])
 
 [sub_resource type="Resource" id="Resource_ym36i"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 81
 
-[sub_resource type="Resource" id="Resource_iq8kt"]
+[sub_resource type="Resource" id="Resource_8ap6b"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1620,18 +1662,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_oajyp"]
+[sub_resource type="Resource" id="Resource_ian5t"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_iq8kt")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8ap6b")])
 
 [sub_resource type="Resource" id="Resource_8wmgq"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 67
 
-[sub_resource type="Resource" id="Resource_hu7fj"]
+[sub_resource type="Resource" id="Resource_ekrlr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1647,7 +1689,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 9
 
-[sub_resource type="Resource" id="Resource_7qntv"]
+[sub_resource type="Resource" id="Resource_0enx1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -1658,18 +1700,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_2p206"]
+[sub_resource type="Resource" id="Resource_ymy1u"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hu7fj"), SubResource("Resource_7qntv")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ekrlr"), SubResource("Resource_0enx1")])
 
 [sub_resource type="Resource" id="Resource_qm8mu"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 66
 
-[sub_resource type="Resource" id="Resource_cuun2"]
+[sub_resource type="Resource" id="Resource_08clo"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1680,18 +1722,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_n0w5f"]
+[sub_resource type="Resource" id="Resource_e3hy6"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cuun2")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_08clo")])
 
 [sub_resource type="Resource" id="Resource_hokop"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 1
 
-[sub_resource type="Resource" id="Resource_tx5vn"]
+[sub_resource type="Resource" id="Resource_06y2a"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
@@ -1702,18 +1744,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_kyrwa"]
+[sub_resource type="Resource" id="Resource_xbw0f"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tx5vn")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_06y2a")])
 
 [sub_resource type="Resource" id="Resource_ogme0"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 53
 
-[sub_resource type="Resource" id="Resource_si2ok"]
+[sub_resource type="Resource" id="Resource_i0sww"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1724,18 +1766,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_yh3tk"]
+[sub_resource type="Resource" id="Resource_puakm"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_si2ok")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_i0sww")])
 
 [sub_resource type="Resource" id="Resource_x7a3h"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 2
 
-[sub_resource type="Resource" id="Resource_hhfa5"]
+[sub_resource type="Resource" id="Resource_vt6k5"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1751,7 +1793,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 6
 
-[sub_resource type="Resource" id="Resource_4wx0b"]
+[sub_resource type="Resource" id="Resource_dukje"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -1762,18 +1804,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_yyhjl"]
+[sub_resource type="Resource" id="Resource_6oq57"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hhfa5"), SubResource("Resource_4wx0b")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vt6k5"), SubResource("Resource_dukje")])
 
 [sub_resource type="Resource" id="Resource_cq2rq"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 22
 
-[sub_resource type="Resource" id="Resource_3bhe4"]
+[sub_resource type="Resource" id="Resource_lc3tx"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1789,7 +1831,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 6
 
-[sub_resource type="Resource" id="Resource_6wuxh"]
+[sub_resource type="Resource" id="Resource_gdh32"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -1800,18 +1842,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_71bl4"]
+[sub_resource type="Resource" id="Resource_wxfft"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3bhe4"), SubResource("Resource_6wuxh")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lc3tx"), SubResource("Resource_gdh32")])
 
 [sub_resource type="Resource" id="Resource_1q36g"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 32
 
-[sub_resource type="Resource" id="Resource_33tfb"]
+[sub_resource type="Resource" id="Resource_587ph"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1831,7 +1873,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_bmj4p"]
+[sub_resource type="Resource" id="Resource_u80fn"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_amp3j")
 entity_props = {
@@ -1851,18 +1893,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_36uuv"]
+[sub_resource type="Resource" id="Resource_bbkxh"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_33tfb"), SubResource("Resource_bmj4p")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_587ph"), SubResource("Resource_u80fn")])
 
 [sub_resource type="Resource" id="Resource_uemo2"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 38
 
-[sub_resource type="Resource" id="Resource_8h3as"]
+[sub_resource type="Resource" id="Resource_wrske"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -1878,7 +1920,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 5
 
-[sub_resource type="Resource" id="Resource_1bite"]
+[sub_resource type="Resource" id="Resource_ths6d"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
@@ -1889,18 +1931,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ymyos"]
+[sub_resource type="Resource" id="Resource_vrncr"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8h3as"), SubResource("Resource_1bite")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wrske"), SubResource("Resource_ths6d")])
 
 [sub_resource type="Resource" id="Resource_b5a52"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 85
 
-[sub_resource type="Resource" id="Resource_nbofq"]
+[sub_resource type="Resource" id="Resource_vfnv4"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1911,18 +1953,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_wmufp"]
+[sub_resource type="Resource" id="Resource_nxy76"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nbofq")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vfnv4")])
 
 [sub_resource type="Resource" id="Resource_7l5rb"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 74
 
-[sub_resource type="Resource" id="Resource_lj325"]
+[sub_resource type="Resource" id="Resource_qdfq5"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1933,18 +1975,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_gqclq"]
+[sub_resource type="Resource" id="Resource_ccelc"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lj325")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qdfq5")])
 
 [sub_resource type="Resource" id="Resource_2473n"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 73
 
-[sub_resource type="Resource" id="Resource_734jj"]
+[sub_resource type="Resource" id="Resource_6ws2w"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1955,18 +1997,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_72mk3"]
+[sub_resource type="Resource" id="Resource_sif15"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_734jj")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6ws2w")])
 
 [sub_resource type="Resource" id="Resource_26vah"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 68
 
-[sub_resource type="Resource" id="Resource_jrnbs"]
+[sub_resource type="Resource" id="Resource_csaqc"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -1982,7 +2024,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 3
 
-[sub_resource type="Resource" id="Resource_su25h"]
+[sub_resource type="Resource" id="Resource_tjw1b"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
@@ -1993,18 +2035,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_sfesg"]
+[sub_resource type="Resource" id="Resource_c00nc"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jrnbs"), SubResource("Resource_su25h")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_csaqc"), SubResource("Resource_tjw1b")])
 
 [sub_resource type="Resource" id="Resource_lwjr2"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 49
 
-[sub_resource type="Resource" id="Resource_ih7yx"]
+[sub_resource type="Resource" id="Resource_byku7"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2024,7 +2066,7 @@ id = 2
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 1])
 
-[sub_resource type="Resource" id="Resource_y5sgi"]
+[sub_resource type="Resource" id="Resource_aorfr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
@@ -2035,18 +2077,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ikpqj"]
+[sub_resource type="Resource" id="Resource_oifp0"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ih7yx"), SubResource("Resource_y5sgi")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_byku7"), SubResource("Resource_aorfr")])
 
 [sub_resource type="Resource" id="Resource_ohqbn"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 1
 
-[sub_resource type="Resource" id="Resource_ll7ad"]
+[sub_resource type="Resource" id="Resource_0ndfm"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2062,7 +2104,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 2
 
-[sub_resource type="Resource" id="Resource_1ev0j"]
+[sub_resource type="Resource" id="Resource_1nid2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -2073,18 +2115,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_2hd57"]
+[sub_resource type="Resource" id="Resource_tc1qy"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ll7ad"), SubResource("Resource_1ev0j")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0ndfm"), SubResource("Resource_1nid2")])
 
 [sub_resource type="Resource" id="Resource_s7t5o"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 52
 
-[sub_resource type="Resource" id="Resource_1kwml"]
+[sub_resource type="Resource" id="Resource_5ukhy"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2100,7 +2142,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 2
 
-[sub_resource type="Resource" id="Resource_1ac66"]
+[sub_resource type="Resource" id="Resource_1dxnf"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -2111,18 +2153,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_brxl5"]
+[sub_resource type="Resource" id="Resource_opawe"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1kwml"), SubResource("Resource_1ac66")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5ukhy"), SubResource("Resource_1dxnf")])
 
 [sub_resource type="Resource" id="Resource_bytmc"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 21
 
-[sub_resource type="Resource" id="Resource_hv0hr"]
+[sub_resource type="Resource" id="Resource_wa1dx"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2142,7 +2184,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([0, 1])
 
-[sub_resource type="Resource" id="Resource_4j5m2"]
+[sub_resource type="Resource" id="Resource_kdcfn"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
@@ -2153,18 +2195,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_amstw"]
+[sub_resource type="Resource" id="Resource_ydvui"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hv0hr"), SubResource("Resource_4j5m2")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wa1dx"), SubResource("Resource_kdcfn")])
 
 [sub_resource type="Resource" id="Resource_0odk8"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 33
 
-[sub_resource type="Resource" id="Resource_gqjud"]
+[sub_resource type="Resource" id="Resource_ao0k3"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2180,7 +2222,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 1
 
-[sub_resource type="Resource" id="Resource_ihgyd"]
+[sub_resource type="Resource" id="Resource_aio37"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -2191,18 +2233,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_emxqq"]
+[sub_resource type="Resource" id="Resource_5oo3s"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gqjud"), SubResource("Resource_ihgyd")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ao0k3"), SubResource("Resource_aio37")])
 
 [sub_resource type="Resource" id="Resource_clrpf"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 37
 
-[sub_resource type="Resource" id="Resource_xpbf5"]
+[sub_resource type="Resource" id="Resource_ceo8o"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2213,18 +2255,34 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_f3hj3"]
+[sub_resource type="Resource" id="Resource_8g8yh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_25pqm")
+id = 2
+
+[sub_resource type="Resource" id="Resource_btjmx"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_25pqm")
+entity_props = {
+"custom_props": {},
+"energy": SubResource("Resource_m1ybh"),
+"id": SubResource("Resource_8g8yh"),
+"status_effects": Array[Resource("res://Logic/StatusEffects/StatusEffect.gd")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_e6dja"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xpbf5")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ceo8o"), SubResource("Resource_btjmx")])
 
 [sub_resource type="Resource" id="Resource_2ye8h"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 75
 
-[sub_resource type="Resource" id="Resource_66shy"]
+[sub_resource type="Resource" id="Resource_haq7k"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2240,7 +2298,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 6
 
-[sub_resource type="Resource" id="Resource_ydwx7"]
+[sub_resource type="Resource" id="Resource_ibfin"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
@@ -2251,18 +2309,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_3tm0x"]
+[sub_resource type="Resource" id="Resource_nrjyf"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_66shy"), SubResource("Resource_ydwx7")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_haq7k"), SubResource("Resource_ibfin")])
 
 [sub_resource type="Resource" id="Resource_fn11g"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 72
 
-[sub_resource type="Resource" id="Resource_m8aii"]
+[sub_resource type="Resource" id="Resource_cd3wi"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2273,18 +2331,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ib0ap"]
+[sub_resource type="Resource" id="Resource_4r8x0"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_m8aii")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cd3wi")])
 
 [sub_resource type="Resource" id="Resource_6vmw6"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 69
 
-[sub_resource type="Resource" id="Resource_sn0sa"]
+[sub_resource type="Resource" id="Resource_1e1df"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2295,18 +2353,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ck8ot"]
+[sub_resource type="Resource" id="Resource_ko6f7"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sn0sa")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1e1df")])
 
 [sub_resource type="Resource" id="Resource_t22j2"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 41
 
-[sub_resource type="Resource" id="Resource_gan00"]
+[sub_resource type="Resource" id="Resource_ubesr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2322,7 +2380,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("9_b8i77")
 id = 1
 
-[sub_resource type="Resource" id="Resource_0wfqh"]
+[sub_resource type="Resource" id="Resource_bvjns"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("9_b8i77")
 entity_props = {
@@ -2333,18 +2391,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_dtvva"]
+[sub_resource type="Resource" id="Resource_3jr0u"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gan00"), SubResource("Resource_0wfqh")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ubesr"), SubResource("Resource_bvjns")])
 
 [sub_resource type="Resource" id="Resource_35y1w"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 50
 
-[sub_resource type="Resource" id="Resource_47fq7"]
+[sub_resource type="Resource" id="Resource_87gst"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2355,18 +2413,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_885tg"]
+[sub_resource type="Resource" id="Resource_ojqb0"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_47fq7")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_87gst")])
 
 [sub_resource type="Resource" id="Resource_8rsn7"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 51
 
-[sub_resource type="Resource" id="Resource_h221g"]
+[sub_resource type="Resource" id="Resource_yrtfe"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2382,7 +2440,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 4
 
-[sub_resource type="Resource" id="Resource_bijh7"]
+[sub_resource type="Resource" id="Resource_dowyl"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
@@ -2393,18 +2451,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_foh63"]
+[sub_resource type="Resource" id="Resource_uaab5"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_h221g"), SubResource("Resource_bijh7")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_yrtfe"), SubResource("Resource_dowyl")])
 
 [sub_resource type="Resource" id="Resource_sf6sg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 20
 
-[sub_resource type="Resource" id="Resource_kykit"]
+[sub_resource type="Resource" id="Resource_ugjil"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2420,7 +2478,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 10
 
-[sub_resource type="Resource" id="Resource_hirg2"]
+[sub_resource type="Resource" id="Resource_y5exx"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -2431,18 +2489,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_10ik6"]
+[sub_resource type="Resource" id="Resource_bok3g"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_kykit"), SubResource("Resource_hirg2")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ugjil"), SubResource("Resource_y5exx")])
 
 [sub_resource type="Resource" id="Resource_ncx8v"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 40
 
-[sub_resource type="Resource" id="Resource_gwqf3"]
+[sub_resource type="Resource" id="Resource_sjpje"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2458,7 +2516,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 5
 
-[sub_resource type="Resource" id="Resource_fs337"]
+[sub_resource type="Resource" id="Resource_u4kd8"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
@@ -2469,11 +2527,11 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_spp3l"]
+[sub_resource type="Resource" id="Resource_q6bm8"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gwqf3"), SubResource("Resource_fs337")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sjpje"), SubResource("Resource_u4kd8")])
 
 [sub_resource type="Resource" id="Resource_b7ag6"]
 script = ExtResource("2_2i3es")
@@ -2484,7 +2542,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([3, 4])
 
-[sub_resource type="Resource" id="Resource_6len8"]
+[sub_resource type="Resource" id="Resource_s12cs"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
@@ -2495,18 +2553,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_p8t41"]
+[sub_resource type="Resource" id="Resource_r6wco"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6len8")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_s12cs")])
 
 [sub_resource type="Resource" id="Resource_pcm55"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 71
 
-[sub_resource type="Resource" id="Resource_d2b60"]
+[sub_resource type="Resource" id="Resource_ks6bv"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2522,7 +2580,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 1
 
-[sub_resource type="Resource" id="Resource_6k88c"]
+[sub_resource type="Resource" id="Resource_e7bnw"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
@@ -2533,18 +2591,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_p0sc3"]
+[sub_resource type="Resource" id="Resource_docvd"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_d2b60"), SubResource("Resource_6k88c")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ks6bv"), SubResource("Resource_e7bnw")])
 
 [sub_resource type="Resource" id="Resource_xvikx"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 70
 
-[sub_resource type="Resource" id="Resource_chtgk"]
+[sub_resource type="Resource" id="Resource_bpa8e"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2555,18 +2613,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_3sge6"]
+[sub_resource type="Resource" id="Resource_b73me"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_chtgk")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bpa8e")])
 
 [sub_resource type="Resource" id="Resource_jkxij"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 40
 
-[sub_resource type="Resource" id="Resource_wbr55"]
+[sub_resource type="Resource" id="Resource_e5lxd"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2577,18 +2635,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_aktyw"]
+[sub_resource type="Resource" id="Resource_86lf0"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wbr55")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_e5lxd")])
 
 [sub_resource type="Resource" id="Resource_nor5m"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 42
 
-[sub_resource type="Resource" id="Resource_wn2cf"]
+[sub_resource type="Resource" id="Resource_bekek"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2610,11 +2668,10 @@ script = ExtResource("2_2i3es")
 type = ExtResource("16_0ybmk")
 id = 1
 
-[sub_resource type="Resource" id="Resource_p23vw"]
+[sub_resource type="Resource" id="Resource_xq1t7"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("16_0ybmk")
 entity_props = {
-"arch_enemy": null,
 "armor": 0,
 "custom_props": {},
 "energy": null,
@@ -2625,18 +2682,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_4fhph"]
+[sub_resource type="Resource" id="Resource_gi36g"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wn2cf"), SubResource("Resource_p23vw")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bekek"), SubResource("Resource_xq1t7")])
 
 [sub_resource type="Resource" id="Resource_gdkwn"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 6
 
-[sub_resource type="Resource" id="Resource_tj5vd"]
+[sub_resource type="Resource" id="Resource_mrlkb"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2652,7 +2709,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 4
 
-[sub_resource type="Resource" id="Resource_biqyv"]
+[sub_resource type="Resource" id="Resource_0hrsd"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
@@ -2663,18 +2720,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_1u7fy"]
+[sub_resource type="Resource" id="Resource_86xr3"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tj5vd"), SubResource("Resource_biqyv")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mrlkb"), SubResource("Resource_0hrsd")])
 
 [sub_resource type="Resource" id="Resource_5x6n7"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 19
 
-[sub_resource type="Resource" id="Resource_s7r5r"]
+[sub_resource type="Resource" id="Resource_ij51k"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2685,11 +2742,11 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_fvqkc"]
+[sub_resource type="Resource" id="Resource_2letp"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_s7r5r")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ij51k")])
 
 [sub_resource type="Resource" id="Resource_mp706"]
 script = ExtResource("2_2i3es")
@@ -2700,7 +2757,7 @@ id = 1
 script = ExtResource("8_d2swj")
 stack = Array[int]([3, 4])
 
-[sub_resource type="Resource" id="Resource_7cwdo"]
+[sub_resource type="Resource" id="Resource_5imn2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
@@ -2711,18 +2768,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_gljgd"]
+[sub_resource type="Resource" id="Resource_cpfib"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_7cwdo")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5imn2")])
 
 [sub_resource type="Resource" id="Resource_lw87u"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 2
 
-[sub_resource type="Resource" id="Resource_sxu3r"]
+[sub_resource type="Resource" id="Resource_gndkw"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
@@ -2733,18 +2790,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_aotm0"]
+[sub_resource type="Resource" id="Resource_o6wpy"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sxu3r")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gndkw")])
 
 [sub_resource type="Resource" id="Resource_o5ttf"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 33
 
-[sub_resource type="Resource" id="Resource_t886y"]
+[sub_resource type="Resource" id="Resource_4ysh4"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2764,7 +2821,7 @@ id = 2
 script = ExtResource("8_d2swj")
 stack = Array[int]([1, 2])
 
-[sub_resource type="Resource" id="Resource_v63j1"]
+[sub_resource type="Resource" id="Resource_qyky6"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("10_q3j68")
 entity_props = {
@@ -2775,18 +2832,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_51jfn"]
+[sub_resource type="Resource" id="Resource_14sdp"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_t886y"), SubResource("Resource_v63j1")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_4ysh4"), SubResource("Resource_qyky6")])
 
 [sub_resource type="Resource" id="Resource_t6f63"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 38
 
-[sub_resource type="Resource" id="Resource_5s8yk"]
+[sub_resource type="Resource" id="Resource_dtair"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2797,18 +2854,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_7aosf"]
+[sub_resource type="Resource" id="Resource_ic5ao"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5s8yk")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_dtair")])
 
 [sub_resource type="Resource" id="Resource_x2umi"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 39
 
-[sub_resource type="Resource" id="Resource_mca2w"]
+[sub_resource type="Resource" id="Resource_ks650"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2824,7 +2881,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 4
 
-[sub_resource type="Resource" id="Resource_lew8b"]
+[sub_resource type="Resource" id="Resource_yeplh"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
@@ -2835,18 +2892,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_eypm3"]
+[sub_resource type="Resource" id="Resource_bouj2"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mca2w"), SubResource("Resource_lew8b")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ks650"), SubResource("Resource_yeplh")])
 
 [sub_resource type="Resource" id="Resource_03sds"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 5
 
-[sub_resource type="Resource" id="Resource_x6you"]
+[sub_resource type="Resource" id="Resource_8bimr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -2857,18 +2914,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_nbxhf"]
+[sub_resource type="Resource" id="Resource_dr4s3"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_x6you")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8bimr")])
 
 [sub_resource type="Resource" id="Resource_t6yuj"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 18
 
-[sub_resource type="Resource" id="Resource_q2uwh"]
+[sub_resource type="Resource" id="Resource_juaxa"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2879,18 +2936,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_rq5av"]
+[sub_resource type="Resource" id="Resource_vb7jr"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_q2uwh")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_juaxa")])
 
 [sub_resource type="Resource" id="Resource_2abkn"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 17
 
-[sub_resource type="Resource" id="Resource_42i58"]
+[sub_resource type="Resource" id="Resource_cb2kf"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2906,7 +2963,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 5
 
-[sub_resource type="Resource" id="Resource_bvibo"]
+[sub_resource type="Resource" id="Resource_safr4"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -2917,18 +2974,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_1302v"]
+[sub_resource type="Resource" id="Resource_6hhhr"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_42i58"), SubResource("Resource_bvibo")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cb2kf"), SubResource("Resource_safr4")])
 
 [sub_resource type="Resource" id="Resource_jd0fv"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 16
 
-[sub_resource type="Resource" id="Resource_c05d6"]
+[sub_resource type="Resource" id="Resource_xhhm2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2944,7 +3001,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 4
 
-[sub_resource type="Resource" id="Resource_f3l3g"]
+[sub_resource type="Resource" id="Resource_j7sc5"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
@@ -2955,18 +3012,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_wm64h"]
+[sub_resource type="Resource" id="Resource_1lom3"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_c05d6"), SubResource("Resource_f3l3g")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xhhm2"), SubResource("Resource_j7sc5")])
 
 [sub_resource type="Resource" id="Resource_22pxl"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 15
 
-[sub_resource type="Resource" id="Resource_rwtvb"]
+[sub_resource type="Resource" id="Resource_rya2j"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -2977,18 +3034,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_gsyhb"]
+[sub_resource type="Resource" id="Resource_vdtmw"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rwtvb")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rya2j")])
 
 [sub_resource type="Resource" id="Resource_k1jkw"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 13
 
-[sub_resource type="Resource" id="Resource_12is3"]
+[sub_resource type="Resource" id="Resource_q43s6"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
@@ -3004,7 +3061,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("9_b8i77")
 id = 3
 
-[sub_resource type="Resource" id="Resource_xrqaf"]
+[sub_resource type="Resource" id="Resource_v5neg"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("9_b8i77")
 entity_props = {
@@ -3015,18 +3072,18 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_nin0x"]
+[sub_resource type="Resource" id="Resource_eswgk"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_12is3"), SubResource("Resource_xrqaf")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_q43s6"), SubResource("Resource_v5neg")])
 
 [sub_resource type="Resource" id="Resource_foa5s"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 4
 
-[sub_resource type="Resource" id="Resource_epu1f"]
+[sub_resource type="Resource" id="Resource_fp7l2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
@@ -3042,7 +3099,7 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 11
 
-[sub_resource type="Resource" id="Resource_rvdqw"]
+[sub_resource type="Resource" id="Resource_3wtei"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
@@ -3053,22 +3110,22 @@ entity_props = {
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_gg7o0"]
+[sub_resource type="Resource" id="Resource_85a7r"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_epu1f"), SubResource("Resource_rvdqw")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_fp7l2"), SubResource("Resource_3wtei")])
 
-[sub_resource type="Resource" id="Resource_qv6vm"]
+[sub_resource type="Resource" id="Resource_401in"]
 script = ExtResource("1_worvi")
-tiles = Array[ExtResource("5_6hme5")]([SubResource("Resource_vw33a"), SubResource("Resource_rkaor"), SubResource("Resource_8kgaa"), SubResource("Resource_jo1yq"), SubResource("Resource_302nb"), SubResource("Resource_f4b05"), SubResource("Resource_sfgid"), SubResource("Resource_2rdep"), SubResource("Resource_xeimu"), SubResource("Resource_3fn05"), SubResource("Resource_865n3"), SubResource("Resource_yqky0"), SubResource("Resource_n2vvw"), SubResource("Resource_u17bc"), SubResource("Resource_mequ7"), SubResource("Resource_e3dg4"), SubResource("Resource_u0h7d"), SubResource("Resource_xlfoc"), SubResource("Resource_sct5l"), SubResource("Resource_jrdhs"), SubResource("Resource_krm4g"), SubResource("Resource_iujwm"), SubResource("Resource_kyujp"), SubResource("Resource_1oibp"), SubResource("Resource_vlqo1"), SubResource("Resource_e0ef1"), SubResource("Resource_nbw74"), SubResource("Resource_li1fr"), SubResource("Resource_sqcim"), SubResource("Resource_srk6c"), SubResource("Resource_gttnq"), SubResource("Resource_6iq1y"), SubResource("Resource_fhejn"), SubResource("Resource_synqy"), SubResource("Resource_2hvbj"), SubResource("Resource_e6mcl"), SubResource("Resource_wg51e"), SubResource("Resource_k8ntw"), SubResource("Resource_1h5uy"), SubResource("Resource_iswmu"), SubResource("Resource_h4ivg"), SubResource("Resource_w87be"), SubResource("Resource_tepvk"), SubResource("Resource_83elp"), SubResource("Resource_j2asp"), SubResource("Resource_oajyp"), SubResource("Resource_2p206"), SubResource("Resource_n0w5f"), SubResource("Resource_kyrwa"), SubResource("Resource_yh3tk"), SubResource("Resource_yyhjl"), SubResource("Resource_71bl4"), SubResource("Resource_36uuv"), SubResource("Resource_ymyos"), SubResource("Resource_wmufp"), SubResource("Resource_gqclq"), SubResource("Resource_72mk3"), SubResource("Resource_sfesg"), SubResource("Resource_ikpqj"), SubResource("Resource_2hd57"), SubResource("Resource_brxl5"), SubResource("Resource_amstw"), SubResource("Resource_emxqq"), SubResource("Resource_f3hj3"), SubResource("Resource_3tm0x"), SubResource("Resource_ib0ap"), SubResource("Resource_ck8ot"), SubResource("Resource_dtvva"), SubResource("Resource_885tg"), SubResource("Resource_foh63"), SubResource("Resource_10ik6"), SubResource("Resource_spp3l"), SubResource("Resource_p8t41"), SubResource("Resource_p0sc3"), SubResource("Resource_3sge6"), SubResource("Resource_aktyw"), SubResource("Resource_4fhph"), SubResource("Resource_1u7fy"), SubResource("Resource_fvqkc"), SubResource("Resource_gljgd"), SubResource("Resource_aotm0"), SubResource("Resource_51jfn"), SubResource("Resource_7aosf"), SubResource("Resource_eypm3"), SubResource("Resource_nbxhf"), SubResource("Resource_rq5av"), SubResource("Resource_1302v"), SubResource("Resource_wm64h"), SubResource("Resource_gsyhb"), SubResource("Resource_nin0x"), SubResource("Resource_gg7o0")])
+tiles = Array[ExtResource("5_6hme5")]([SubResource("Resource_xpe68"), SubResource("Resource_5cnoq"), SubResource("Resource_bdi3b"), SubResource("Resource_57q4t"), SubResource("Resource_bf1kx"), SubResource("Resource_lrixh"), SubResource("Resource_cwtfk"), SubResource("Resource_w4hpn"), SubResource("Resource_i6cut"), SubResource("Resource_qqxai"), SubResource("Resource_1a80b"), SubResource("Resource_krmmv"), SubResource("Resource_t4wcv"), SubResource("Resource_gi6gl"), SubResource("Resource_vbi0b"), SubResource("Resource_5tq2g"), SubResource("Resource_d0g4d"), SubResource("Resource_i6ed5"), SubResource("Resource_r5f3c"), SubResource("Resource_dil7y"), SubResource("Resource_d8d7l"), SubResource("Resource_o2yvc"), SubResource("Resource_db3l4"), SubResource("Resource_2om4j"), SubResource("Resource_0oxws"), SubResource("Resource_y4lny"), SubResource("Resource_d57sp"), SubResource("Resource_xgmjr"), SubResource("Resource_cwkge"), SubResource("Resource_qyb6m"), SubResource("Resource_i3yad"), SubResource("Resource_fvw7x"), SubResource("Resource_ysq1b"), SubResource("Resource_dqovt"), SubResource("Resource_b2a8c"), SubResource("Resource_4see5"), SubResource("Resource_bqim6"), SubResource("Resource_10dtt"), SubResource("Resource_hwcfg"), SubResource("Resource_qf5p7"), SubResource("Resource_qlshl"), SubResource("Resource_4bf3k"), SubResource("Resource_bd0go"), SubResource("Resource_5lk5x"), SubResource("Resource_hq7go"), SubResource("Resource_ian5t"), SubResource("Resource_ymy1u"), SubResource("Resource_e3hy6"), SubResource("Resource_xbw0f"), SubResource("Resource_puakm"), SubResource("Resource_6oq57"), SubResource("Resource_wxfft"), SubResource("Resource_bbkxh"), SubResource("Resource_vrncr"), SubResource("Resource_nxy76"), SubResource("Resource_ccelc"), SubResource("Resource_sif15"), SubResource("Resource_c00nc"), SubResource("Resource_oifp0"), SubResource("Resource_tc1qy"), SubResource("Resource_opawe"), SubResource("Resource_ydvui"), SubResource("Resource_5oo3s"), SubResource("Resource_e6dja"), SubResource("Resource_nrjyf"), SubResource("Resource_4r8x0"), SubResource("Resource_ko6f7"), SubResource("Resource_3jr0u"), SubResource("Resource_ojqb0"), SubResource("Resource_uaab5"), SubResource("Resource_bok3g"), SubResource("Resource_q6bm8"), SubResource("Resource_r6wco"), SubResource("Resource_docvd"), SubResource("Resource_b73me"), SubResource("Resource_86lf0"), SubResource("Resource_gi36g"), SubResource("Resource_86xr3"), SubResource("Resource_2letp"), SubResource("Resource_cpfib"), SubResource("Resource_o6wpy"), SubResource("Resource_14sdp"), SubResource("Resource_ic5ao"), SubResource("Resource_bouj2"), SubResource("Resource_dr4s3"), SubResource("Resource_vb7jr"), SubResource("Resource_6hhhr"), SubResource("Resource_1lom3"), SubResource("Resource_vdtmw"), SubResource("Resource_eswgk"), SubResource("Resource_85a7r")])
 graveyard = Array[ExtResource("4_qk5jy")]([])
 rows = 11
 columns = 11
 
 [resource]
 script = ExtResource("1_a77op")
-level_state = SubResource("Resource_qv6vm")
+level_state = SubResource("Resource_401in")
 current_round = 1
 current_phase = 0
 deck_states = Array[Resource("res://Spells/SpellState.gd")]([])
