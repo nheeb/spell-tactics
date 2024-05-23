@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdxsjdsubtly2"]
+
+[ext_resource type="PackedScene" uid="uid://5a2ti741ua47" path="res://Assets/Models/Stefan_models/mushroom.01.gltf" id="1_tnh52"]
+[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="2_7wbuw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tkce"]
+albedo_color = Color(0.423529, 0.231373, 0.541176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0m0f2"]
+albedo_color = Color(0.423529, 0.231373, 0.541176, 1)
+
+[node name="MediumMushrooms" instance=ExtResource("1_tnh52")]
+script = ExtResource("2_7wbuw")
+
+[node name="Mushrooms_01" parent="." index="0"]
+transform = Transform3D(0.395459, 0, 0, 0, 0.395459, 0, 0, 0, 0.395459, -0.0210157, 0.00562015, 0.0233772)
+surface_material_override/0 = SubResource("StandardMaterial3D_6tkce")
+surface_material_override/2 = SubResource("StandardMaterial3D_0m0f2")

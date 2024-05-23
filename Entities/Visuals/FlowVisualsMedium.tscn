@@ -1,0 +1,209 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2hebr57qx1r8"]
+
+[ext_resource type="Script" path="res://Entities/Visuals/FlowVisuals.gd" id="1_3nu4g"]
+[ext_resource type="Texture2D" uid="uid://dlnicryo4m3ai" path="res://Assets/Sprites/KenneyParticles/star_01.png" id="2_2pvha"]
+[ext_resource type="Texture2D" uid="uid://dcwvix8xn8ek1" path="res://Assets/Sprites/KenneyParticles/circle_05.png" id="3_1qbik"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4j6nr"]
+render_priority = -1
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_color = Color(0.93, 0.55149, 0.2418, 1)
+albedo_texture = ExtResource("3_1qbik")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_33eg3"]
+material = SubResource("StandardMaterial3D_4j6nr")
+size = Vector2(2, 2)
+
+[sub_resource type="Curve" id="Curve_3jg71"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0191083, 0.814138), 2.80013, 2.80013, 0, 0, Vector2(0.0679405, 0.989674), 0.0, 0.0, 0, 0, Vector2(0.496815, 0.994837), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_viv7y"]
+curve = SubResource("Curve_3jg71")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_32cbt"]
+lifetime_randomness = 0.2
+emission_shape = 2
+emission_sphere_radius = 0.5
+angle_max = 360.0
+spread = 180.0
+flatness = 0.494
+initial_velocity_min = 0.1
+initial_velocity_max = 0.2
+gravity = Vector3(0, 0, 0)
+damping_min = 0.1
+damping_max = 0.1
+alpha_curve = SubResource("CurveTexture_viv7y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7i23"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.83, 0.478495, 0.1909, 1)
+albedo_texture = ExtResource("2_2pvha")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_junkn"]
+material = SubResource("StandardMaterial3D_l7i23")
+size = Vector2(0.6, 0.6)
+
+[sub_resource type="Animation" id="Animation_03nmj"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:mesh:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Base:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.769531, 0.494424, 0.269336, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Base2:mesh:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Base2:mesh:material:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.93, 0.55149, 0.2418, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_66bjl"]
+resource_name = "flow"
+length = 4.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:mesh:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1.6, 1.6), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Base:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.93, 0.55149, 0.2418, 1), Color(0.768627, 0.494118, 0.270588, 1), Color(0.929412, 0.552941, 0.243137, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Base2:mesh:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1.6, 1.6), Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Base2:mesh:material:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.93, 0.55149, 0.2418, 1), Color(0.768627, 0.494118, 0.270588, 1), Color(0.93, 0.55149, 0.2418, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfyle"]
+_data = {
+"RESET": SubResource("Animation_03nmj"),
+"flow": SubResource("Animation_66bjl")
+}
+
+[node name="FlowVisualsMedium" type="Node3D"]
+script = ExtResource("1_3nu4g")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, 0.257365, 0.368249, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_33eg3")
+
+[node name="Particles" type="GPUParticles3D" parent="Base"]
+transform = Transform3D(0.544374, 0, 0, 0, 0.544374, 0, 0, 0, 0.544374, 0, 0, 0)
+cast_shadow = 0
+amount = 20
+lifetime = 22.2
+preprocess = 30.0
+fixed_fps = 60
+visibility_aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)
+trail_lifetime = 1.69
+process_material = SubResource("ParticleProcessMaterial_32cbt")
+draw_pass_1 = SubResource("QuadMesh_junkn")
+
+[node name="Base2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, -0.225968, 0.929567, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_33eg3")
+
+[node name="Particles" type="GPUParticles3D" parent="Base2"]
+transform = Transform3D(0.544374, 0, 0, 0, 0.544374, 0, 0, 0, 0.544374, 0, 0, 0)
+cast_shadow = 0
+amount = 20
+lifetime = 22.2
+preprocess = 30.0
+fixed_fps = 60
+visibility_aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)
+trail_lifetime = 1.69
+process_material = SubResource("ParticleProcessMaterial_32cbt")
+draw_pass_1 = SubResource("QuadMesh_junkn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kfyle")
+}
+autoplay = "flow"

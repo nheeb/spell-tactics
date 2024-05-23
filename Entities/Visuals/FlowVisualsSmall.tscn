@@ -1,0 +1,144 @@
+[gd_scene load_steps=14 format=3 uid="uid://bqtitkeoc62n"]
+
+[ext_resource type="Script" path="res://Entities/Visuals/FlowVisuals.gd" id="1_gyypb"]
+[ext_resource type="Texture2D" uid="uid://dlnicryo4m3ai" path="res://Assets/Sprites/KenneyParticles/star_01.png" id="2_tv0gl"]
+[ext_resource type="Texture2D" uid="uid://dcwvix8xn8ek1" path="res://Assets/Sprites/KenneyParticles/circle_05.png" id="3_fev6q"]
+
+[sub_resource type="Curve" id="Curve_fg0qq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.127389, 0.994837), 0.0, 0.0, 0, 0, Vector2(0.496815, 0.994837), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_heors"]
+curve = SubResource("Curve_fg0qq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_526el"]
+lifetime_randomness = 0.2
+emission_shape = 2
+emission_sphere_radius = 0.5
+angle_max = 360.0
+spread = 180.0
+flatness = 0.494
+initial_velocity_min = 0.1
+initial_velocity_max = 0.2
+gravity = Vector3(0, 0, 0)
+damping_min = 0.1
+damping_max = 0.1
+alpha_curve = SubResource("CurveTexture_heors")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4hyjy"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.83, 0.478495, 0.1909, 1)
+albedo_texture = ExtResource("2_tv0gl")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_eyy7s"]
+material = SubResource("StandardMaterial3D_4hyjy")
+size = Vector2(0.6, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4j6nr"]
+render_priority = -1
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_color = Color(0.769531, 0.494424, 0.269336, 1)
+albedo_texture = ExtResource("3_fev6q")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_33eg3"]
+material = SubResource("StandardMaterial3D_4j6nr")
+size = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_03nmj"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:mesh:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Base:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.769531, 0.494424, 0.269336, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_66bjl"]
+resource_name = "flow"
+length = 4.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:mesh:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1.6, 1.6), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Base:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.93, 0.55149, 0.2418, 1), Color(0.768627, 0.494118, 0.270588, 1), Color(0.929412, 0.552941, 0.243137, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfyle"]
+_data = {
+"RESET": SubResource("Animation_03nmj"),
+"flow": SubResource("Animation_66bjl")
+}
+
+[node name="FlowVisualsSmall" type="Node3D"]
+script = ExtResource("1_gyypb")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980911, 0)
+cast_shadow = 0
+amount = 30
+lifetime = 22.0
+preprocess = 30.0
+fixed_fps = 60
+visibility_aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)
+trail_lifetime = 1.69
+process_material = SubResource("ParticleProcessMaterial_526el")
+draw_pass_1 = SubResource("QuadMesh_eyy7s")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, 0, 0.887737, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_33eg3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kfyle")
+}
+autoplay = "flow"

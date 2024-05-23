@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://cd3p0i6kbwcd4"]
 
 [ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_mrahy"]
-[ext_resource type="PackedScene" uid="uid://cy0j1bn0gs03r" path="res://Assets/Models/Prototype/Rock2.gltf" id="2_bh1n4"]
+[ext_resource type="PackedScene" uid="uid://bxwp81rui6iq1" path="res://Entities/Visuals/RockVisuals.tscn" id="2_vlgva"]
 
 [node name="VisualRock" type="Node3D"]
 script = ExtResource("1_mrahy")
 
-[node name="Rock2" parent="." instance=ExtResource("2_bh1n4")]
-transform = Transform3D(0.482915, 0, 0.528305, 0, 0.545093, 0, -0.496783, 0, 0.513557, 0.0137449, 0, 0.136572)
+[node name="Rock2" parent="." instance=ExtResource("2_vlgva")]
+transform = Transform3D(0.693734, 0, 0, 0, 0.693734, 0, 0, 0, 0.693734, 0, 0, 0)
