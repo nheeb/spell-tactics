@@ -1,10 +1,9 @@
-class_name ActiveType extends SpellType
+class_name ActiveType extends CastableType
 
 enum Limitation {
 	X_PER_ROUND,
 	CONSUMABLE,
 	ALWAYS,
-	
 }
 
 @export_category("Active Attributes")

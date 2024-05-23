@@ -1,13 +1,6 @@
 @tool
 class_name Combat extends Node
 
-#const LEVEL = preload("res://Logic/Tiles/Level.tscn")
-#const ROCK_ENTITY = preload("res://Entities/Environment/Rock.tres")
-#const WATER_ENTITY = preload("res://Entities/Environment/Water.tres")
-#const GRASS_TERRAIN_ENTITY = preload("res://Entities/Environment/GrassTile.tres")
-#const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
-#const GOBLIN_TYPE = preload("res://Entities/Enemies/Goblin.tres")
-
 enum RoundPhase {
 	CombatBegin = 0, # Unreachable
 	Start = 1,
@@ -106,9 +99,10 @@ func setup() -> void:
 				printerr("Entity without ID in savegame")
 
 	
-	actives = [ \
-		Active.new(SpellType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self),\
-		Active.new(SpellType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self)]
+	actives = [
+		Active.new(ActiveType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self)
+	]
 
 
 	# Check if all spells have ids

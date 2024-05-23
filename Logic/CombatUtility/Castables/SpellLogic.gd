@@ -33,20 +33,12 @@ func pay_for_spell(payment: EnergyStack) -> void:
 
 ## Pays for the costs. Activates the cards effect. Also discards the card from hand
 func cast(payment: EnergyStack = null) -> void:
-	if not spell is Active:
-		pay_for_spell(payment)
+	pay_for_spell(payment)
 	for keyword in spell.get_keywords():
 		keyword.logic.before_spell(spell)
 	casting_effect()
-	if spell is Active:
-		var type = spell.type as ActiveType
-		if type.limitation == ActiveType.Limitation.X_PER_ROUND:  # if this is a once-per-round active, lock it
-			spell.uses_left -= 1
-			if spell.uses_left == 0:
-				spell.unlocked = false
-	else:  # else the spell comes from the hand, discard it
-		combat.cards.discard(spell)
-		combat.get_phase_node(Combat.RoundPhase.Spell).state = SpellPhase.CastingState.Selecting
+	combat.cards.discard(spell)
+	combat.get_phase_node(Combat.RoundPhase.Spell).state = SpellPhase.CastingState.Selecting
 	for keyword in spell.get_keywords():
 		keyword.logic.after_spell(spell)
 	

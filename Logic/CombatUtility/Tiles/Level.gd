@@ -24,7 +24,7 @@ var combat: Combat
 
 var entity_type_count := {}
 
-var TileScene = preload("res://Logic/Tiles/Tile.tscn")
+var TileScene = preload("res://Logic/CombatUtility/Tiles/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
 

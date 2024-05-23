@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://d3xtwb7dcaenq"]
 
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_wvq2y"]
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_yj2vf"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_wvq2y"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_yj2vf"]
 [ext_resource type="Texture2D" uid="uid://de62u4t80farb" path="res://Assets/Sprites/Icons/plant-heal.png" id="2_ih41x"]
 
 [sub_resource type="Resource" id="Resource_mktb5"]
@@ -12,7 +12,7 @@ stack = Array[int]([0, 0])
 script = ExtResource("1_yj2vf")
 pretty_name = "Plant Healing"
 costs = SubResource("Resource_mktb5")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
 effect_text = "Heals 2."
 fluff_text = ""
 icon = ExtResource("2_ih41x")

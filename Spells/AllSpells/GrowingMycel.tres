@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://cjit0u77ak3lu"]
 
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_dgvjx"]
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_str82"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_dgvjx"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_str82"]
 [ext_resource type="Texture2D" uid="uid://ua1w15qlqmok" path="res://Assets/Sprites/Icons/mushroom.png" id="2_37jli"]
 
 [sub_resource type="Resource" id="Resource_jf1pl"]
@@ -12,7 +12,7 @@ stack = Array[int]([0, 1])
 script = ExtResource("1_dgvjx")
 pretty_name = "Growing Mycelium"
 costs = SubResource("Resource_jf1pl")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
 effect_text = "Spawn a shroom. Draw 2 spells.
 (Min range: 3)
 "

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://dqy48gh8w80m0"]
 
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_8p5mh"]
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_ve8pr"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_8p5mh"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_ve8pr"]
 [ext_resource type="Texture2D" uid="uid://fwpgjubsutfa" path="res://Assets/Sprites/Icons/lightning-storm.png" id="2_6m0fi"]
 
 [sub_resource type="Resource" id="Resource_a4kwb"]
@@ -12,7 +12,7 @@ stack = Array[int]([3, 3, 4, 4])
 script = ExtResource("1_ve8pr")
 pretty_name = "Lightning Strike"
 costs = SubResource("Resource_a4kwb")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
 effect_text = "Deals 3 damage. (Double damage to wet enemies)"
 fluff_text = ""
 icon = ExtResource("2_6m0fi")

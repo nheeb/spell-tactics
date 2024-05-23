@@ -1,14 +1,11 @@
 @tool
-class_name SpellType extends Resource
+class_name CastableType extends Resource
 
 @export_category("Spell Attributes")
 ## Lowercase unique entity identifier
 var internal_name: String = ""
 ## Name that will be shown ingame
 @export var pretty_name: String
-## Energy costs of the card
-@export var costs: EnergyStack
-@export var keywords: Array[Keyword]
 ## Effect text shown on the card
 @export_multiline var effect_text: String
 ## Fluff text shown on the card
@@ -100,8 +97,10 @@ const TopicIconName = {
 @export var topic_icons: Array[SpellTopic] = []
 @export var topic_caption := ""
 
-static func load_from_file(path: String) -> SpellType:
+static func load_from_file(path: String) -> CastableType:
 	var res = load(path)
+	if res == null:
+		printerr("Castable could not be loaded. Path is %s" % path)
 	res._on_load()
 	return res
 
@@ -113,15 +112,7 @@ func _on_load() -> void:
 		is_enemy_event_spell = "EnemyEvent" in directory
 		logic = load(directory + "/" + internal_name + ".gd")
 
-	if costs == null:
-		costs = EnergyStack.new([])
-
-	for keyword in keywords:
-		keyword.on_load()
-
 func get_effect_text(used_keywords: Array[Keyword] = []) -> String:
-	if not used_keywords:
-		used_keywords = keywords
 	var keyword_text = ""
 	for k in used_keywords:
 		keyword_text = keyword_text + " [%s] " % k.pretty_name

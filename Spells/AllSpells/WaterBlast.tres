@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://dejellym72t87"]
 
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_3exxi"]
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_6h5bs"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_3exxi"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_6h5bs"]
 [ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="2_yfs0k"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
@@ -12,7 +12,7 @@ stack = Array[int]([3, 3, 6, 6])
 script = ExtResource("1_3exxi")
 pretty_name = "Water Blast"
 costs = SubResource("Resource_gkkbv")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
 effect_text = "Deal 3 Damage to an Enemy within Range 1.
 Knockback 2 and applies Wet status."
 fluff_text = "Lots of water"

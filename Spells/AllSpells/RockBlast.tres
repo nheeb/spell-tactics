@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://bmmnjqd2apbv0"]
 
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_gd7ug"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_gd7ug"]
 [ext_resource type="Texture2D" uid="uid://r1cjym6wndxs" path="res://Assets/Sprites/Icons/menhir.png" id="2_mv6un"]
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="2_tlmru"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="2_tlmru"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
 script = ExtResource("1_gd7ug")
@@ -12,7 +12,7 @@ stack = Array[int]([2])
 script = ExtResource("2_tlmru")
 pretty_name = "Rock Blast"
 costs = SubResource("Resource_gkkbv")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
 effect_text = "Deal 1 damage (range 4) and draw 1 card"
 fluff_text = "Fun
 

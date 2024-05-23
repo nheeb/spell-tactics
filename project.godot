@@ -17,14 +17,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Game="*res://Logic/Game.gd"
+Game="*res://Logic/AutoLoad/Game.gd"
 Utility="*res://Logic/GeneralUtility/Utility.gd"
-Events="*res://Logic/Events.gd"
-VisualTime="*res://Logic/VisualTime.gd"
-DebugInfo="*res://Logic/DebugInfo.gd"
+Events="*res://Logic/AutoLoad/Events.gd"
+VisualTime="*res://Logic/AutoLoad/VisualTime.gd"
+DebugInfo="*res://Logic/AutoLoad/DebugInfo.gd"
 ActivityManager="*res://Logic/Activities/ActivityManager.gd"
 Adventure="*res://Logic/Adventure/Adventure.gd"
-VFX="*res://Effects/VFX.tscn"
+VFX="*res://Logic/AutoLoad/VFX.tscn"
 
 [debug]
 

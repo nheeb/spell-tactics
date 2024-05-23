@@ -14,7 +14,7 @@ var location: Vector2i
 
 @onready var level: Level = get_parent()
 
-const TILE = preload("res://Logic/Tiles/Tile.tscn")
+const TILE = preload("res://Logic/CombatUtility/Tiles/Tile.tscn")
 static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	# center position is needed to properly align the tile
 	var tile = TILE.instantiate()

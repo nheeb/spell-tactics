@@ -14,7 +14,7 @@ class_name CombatState extends Resource
 @export var combat_log: Array[LogEntry]
 @export var drains_done: int
 
-const COMBAT = preload("res://Logic/Combat.tscn")
+const COMBAT = preload("res://Logic/CombatUtility/Combat.tscn")
 
 func deserialize() -> Combat:
 	var combat := COMBAT.instantiate()
