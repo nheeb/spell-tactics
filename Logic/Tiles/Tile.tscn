@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Logic/Tiles/TileHighlight.gd" id="3_ho6t1"]
 [ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/Materials/TileHighlightMaterial.tres" id="4_eqav3"]
 [ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://Shaders/HoverHighlight.tres" id="5_ihgi2"]
-[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://Shaders/SpellTargetHighlight.tres" id="6_bryv2"]
+[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://Shaders/MovementTarget.tres" id="6_alyjn"]
 [ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://Shaders/SpellTargetHighlightStatic.tres" id="7_p4ipm"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wyt28"]
@@ -190,13 +190,13 @@ mesh = SubResource("QuadMesh_m1xtl")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("5_ihgi2")
 
-[node name="HoverTargetHexQuad" type="MeshInstance3D" parent="Highlight"]
-transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+[node name="MovementTarget" type="MeshInstance3D" parent="Highlight"]
+transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
 visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("6_bryv2")
+surface_material_override/0 = ExtResource("6_alyjn")
 
 [node name="CombatHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -221,6 +221,13 @@ cast_shadow = 0
 mesh = SubResource("QuadMesh_opmr3")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_w71nl")
+
+[node name="HoverHexQuad2" type="MeshInstance3D" parent="Highlight"]
+transform = Transform3D(2.89861, 1.67351, 1.9324, 1.9324, -3.34702, -3.15239e-07, 1.67351, 0.966203, -3.34702, 0.143543, 0.146032, -0.248624)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_m1xtl")
+surface_material_override/0 = ExtResource("6_alyjn")
 
 [node name="HoverTimer" type="Timer" parent="."]
 wait_time = 0.6

@@ -108,11 +108,11 @@ albedo_color = Color(0.423529, 0.231373, 0.541176, 1)
 script = ExtResource("1_k563n")
 
 [node name="TreeStump" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.269567, 0, 0, 0, 0.325928, 0, 0, 0, 0.307608, -0.0062344, -0.0907575, 0.0134824)
+transform = Transform3D(0.269567, 0, 0, 0, 0.198196, 0, 0, 0, 0.307608, -0.0062344, -0.0907575, 0.0134824)
 mesh = ExtResource("2_n4iwn")
 
 [node name="Mushrooms_01" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.157518, 0, 0, 0, 0.190451, 0, 0, 0, 0.179746, -0.030739, 0.790718, 0.0971611)
+transform = Transform3D(0.157518, 0, 0, 0, 0.190451, 0, 0, 0, 0.179746, -0.030739, 0.431609, 0.0971611)
 mesh = SubResource("ArrayMesh_lc1k1")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_6tkce")

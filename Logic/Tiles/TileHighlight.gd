@@ -55,6 +55,8 @@ func enable_highlight(type: Type):
 			$LowSpellEnergyHexQuad.visible = true
 		elif type == Type.HighSpellEnergy:
 			$HighSpellEnergyHexQuad.visible = true
+		elif type == Type.Movement:
+			$MovementTarget.visible = true
 		else:
 			current_material = highlight_materials[type]
 			$Edges.visible = true
@@ -79,6 +81,9 @@ func disable_highlight(type: Type):
 	
 	if type == Type.HighSpellEnergy:
 		$HighSpellEnergyHexQuad.visible = false
+	
+	if type == Type.Movement:
+		$MovementTarget.visible = false
 	
 	if current_highlights.is_empty():
 		$Edges.visible = false

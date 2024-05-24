@@ -268,7 +268,7 @@ func highlight_movement_range(entity: Entity, movement_range: int) -> Array[Tile
 			distance_filtered.append(tile)
 			
 	# filter obstacles
-	distance_filtered = distance_filtered.filter(func(t): return not t.is_obstacle())
+	distance_filtered = distance_filtered.filter(func(t): return not t.is_blocked())
 	
 	_highlight_tile_set(distance_filtered, Highlight.Type.Movement)
 	return distance_filtered
