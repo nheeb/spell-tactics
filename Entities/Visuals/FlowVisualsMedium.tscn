@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2hebr57qx1r8"]
+[gd_scene load_steps=13 format=3 uid="uid://c2hebr57qx1r8"]
 
 [ext_resource type="Script" path="res://Entities/Visuals/FlowVisuals.gd" id="1_3nu4g"]
 [ext_resource type="Texture2D" uid="uid://dlnicryo4m3ai" path="res://Assets/Sprites/KenneyParticles/star_01.png" id="2_2pvha"]
 [ext_resource type="PackedScene" uid="uid://cprvtoo5si7sx" path="res://Effects/EnergyOrb.tscn" id="3_ecmsq"]
+[ext_resource type="PackedScene" uid="uid://bns7gujnghjmt" path="res://Effects/EnergyOrbs/EnergyOrbAttractor.tscn" id="4_kf6su"]
 
 [sub_resource type="Animation" id="Animation_03nmj"]
 length = 0.001
@@ -114,3 +115,9 @@ visibility_aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)
 trail_lifetime = 1.69
 process_material = SubResource("ParticleProcessMaterial_32cbt")
 draw_pass_1 = SubResource("QuadMesh_junkn")
+
+[node name="EnergyOrbAttractor" parent="." instance=ExtResource("4_kf6su")]
+transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, 0, 0.80407, 0.2)
+
+[node name="EnergyOrbAttractor2" parent="." instance=ExtResource("4_kf6su")]
+transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, 0, 0.40407, -0.2)
