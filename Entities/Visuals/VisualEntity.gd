@@ -37,7 +37,12 @@ func on_death_visuals():
 	animation_done.emit()
 
 ## For overriding and making the drain effect
+const GREY_OUT_MAT: Material = preload("res://Effects/GreyOut3D.material")
 func visual_drain(drained := true):
+	for child in get_children():
+		if child is MeshInstance3D:
+			child = child as MeshInstance3D
+			child.material_overlay = GREY_OUT_MAT
 	animation_done.emit()
 
 var visual_effects := {}
