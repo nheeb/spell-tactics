@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfogoxklwja60"]
+
+[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_lept4"]
+[ext_resource type="ArrayMesh" uid="uid://d0b1vwdkfcdju" path="res://Assets/Models/Stefan_models/Tree.res" id="2_oe71s"]
+
+[node name="VisualTree" type="Node3D"]
+script = ExtResource("1_lept4")
+
+[node name="Tree_03" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.687362, 0, 0, 0, 0.687362, 0, 0, 0, 0.687362, 0, 0, 0)
+mesh = ExtResource("2_oe71s")
+skeleton = NodePath("")

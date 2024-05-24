@@ -30,3 +30,11 @@ func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
 	Events.tile_hovered.connect(tile_hovered)
 	Events.card_hovered.connect(card_hovered)
+
+
+
+# focus player
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("focus_on_player"):
+		combat.animation.camera_reach(combat.player.visual_entity)
+		combat.animation.play_animation_queue()

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="EntityType" load_steps=4 format=3 uid="uid://b7xqo2ltiqbwk"]
+[gd_resource type="Resource" script_class="EntityType" load_steps=5 format=3 uid="uid://b7xqo2ltiqbwk"]
 
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_n4yhp"]
 [ext_resource type="Script" path="res://Entities/EntityType.gd" id="1_s4teh"]
+[ext_resource type="PackedScene" uid="uid://dpvdg6fd82yer" path="res://Entities/Visuals/VisualBush.tscn" id="3_awi6x"]
 
 [sub_resource type="Resource" id="Resource_tsnpt"]
 script = ExtResource("1_n4yhp")
@@ -13,6 +14,7 @@ internal_name = "bush"
 can_be_hovered = true
 pretty_name = "Bush"
 fluff_text = ""
+visual_scene = ExtResource("3_awi6x")
 prototype_scale = Vector2(1, 1)
 is_terrain = false
 is_drainable = true

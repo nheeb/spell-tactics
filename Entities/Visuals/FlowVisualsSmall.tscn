@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqtitkeoc62n"]
+[gd_scene load_steps=15 format=3 uid="uid://bqtitkeoc62n"]
 
 [ext_resource type="Script" path="res://Entities/Visuals/FlowVisuals.gd" id="1_gyypb"]
 [ext_resource type="Texture2D" uid="uid://dlnicryo4m3ai" path="res://Assets/Sprites/KenneyParticles/star_01.png" id="2_tv0gl"]
 [ext_resource type="Texture2D" uid="uid://dcwvix8xn8ek1" path="res://Assets/Sprites/KenneyParticles/circle_05.png" id="3_fev6q"]
+[ext_resource type="PackedScene" uid="uid://cprvtoo5si7sx" path="res://Effects/EnergyOrb.tscn" id="4_vptsa"]
 
 [sub_resource type="Curve" id="Curve_fg0qq"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.127389, 0.994837), 0.0, 0.0, 0, 0, Vector2(0.496815, 0.994837), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -121,7 +122,7 @@ _data = {
 script = ExtResource("1_gyypb")
 
 [node name="Particles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980911, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.637098, 0)
 cast_shadow = 0
 amount = 30
 lifetime = 22.0
@@ -133,7 +134,8 @@ process_material = SubResource("ParticleProcessMaterial_526el")
 draw_pass_1 = SubResource("QuadMesh_eyy7s")
 
 [node name="Base" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, 0, 0.887737, 0)
+transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, 0, 0.543924, 0)
+visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_33eg3")
 
@@ -142,3 +144,8 @@ libraries = {
 "": SubResource("AnimationLibrary_kfyle")
 }
 autoplay = "flow"
+
+[node name="EnergyOrb" parent="." instance=ExtResource("4_vptsa")]
+transform = Transform3D(1.88265, 0, 0, 0, 1.88265, 0, 0, 0, 1.88265, 0, 0.625052, 0)
+type = 4
+orbital_movement_active = false

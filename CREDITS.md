@@ -11,4 +11,8 @@ https://fontesk.com/rogue-font/
 ### Textures / Materials
 
 ### Models
+- High quality grass - nevayashka
+  - https://free3d.com/3d-model/high-quality-grass-78178.html
+- Tree Stump - quentinus76
+  - https://free3d.com/3d-model/souche-151824.html
 ### Sound

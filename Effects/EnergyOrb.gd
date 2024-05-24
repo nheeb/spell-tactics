@@ -1,18 +1,21 @@
+#@tool
 class_name EnergyOrb extends Node3D
 
-var type : int
+# see https://github.com/godotengine/godot/issues/4236
+var vfx_singleton = load("res://Effects/VFX.tscn").instantiate();
+
+@export_enum("Any", "Matter", "Life", "Harmony", "Flow", "Decay", "Spectral") var type : int = 0:
+	set(_type):
+		type = _type
+		$Orb.material_override.set("albedo_color", vfx_singleton.type_to_color(_type))
+		$OmniLight3D.light_color = vfx_singleton.type_to_color(_type)
+		$Orb.material_override.next_pass.set("shader_parameter/texture_albedo", \
+							vfx_singleton.type_to_icon(_type))
+@export var orbital_movement_active: bool = true
 var in_ui := false
 
-func set_type(_type):
-	type = _type
-	#$Orb.material_override.set("shader_parameter/albedo", VFX.type_to_color(_type))
-	$Orb.material_override.set("albedo_color", VFX.type_to_color(_type))
-	$OmniLight3D.light_color = VFX.type_to_color(_type)
-	$Orb.material_override.next_pass.set("shader_parameter/texture_albedo", \
-						VFX.type_to_icon(_type))
-
-func get_type():
-	return type
+#func get_type():
+	#return type
 
 @onready var movement : OrbitalMovement = $OrbitalMovement
 
@@ -28,6 +31,10 @@ func spawn_in_ui(orbit_body, attractor = null):
 	%MouseArea.monitoring = true
 
 func _ready() -> void:
+	if orbital_movement_active:
+		set_process(true)
+	else:
+		set_process(false)
 	VisualTime.connect_animation_player($AnimationPlayer)
 	%Outline.hide()
 

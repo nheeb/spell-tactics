@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="EntityType" load_steps=4 format=3 uid="uid://brvjvj8i7f7kw"]
+[gd_resource type="Resource" script_class="EntityType" load_steps=5 format=3 uid="uid://brvjvj8i7f7kw"]
 
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_40caj"]
 [ext_resource type="Script" path="res://Entities/EntityType.gd" id="1_lkvqb"]
+[ext_resource type="PackedScene" uid="uid://cfogoxklwja60" path="res://Entities/Visuals/VisualTree.tscn" id="3_qd3lb"]
 
 [sub_resource type="Resource" id="Resource_vir08"]
 script = ExtResource("1_40caj")
@@ -13,6 +14,7 @@ internal_name = "tree"
 can_be_hovered = true
 pretty_name = "Tree"
 fluff_text = "A beautiful source of wood"
+visual_scene = ExtResource("3_qd3lb")
 prototype_scale = Vector2(1.5, 1.5)
 is_terrain = false
 is_drainable = true

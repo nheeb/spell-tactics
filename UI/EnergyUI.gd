@@ -12,7 +12,7 @@ func spawn_energy_orbs(stack: EnergyStack):
 		var orb = VFX.ENERGY_ORB.instantiate()
 		omb.add_child(orb)
 		orb.scale *= ORB_SCALE
-		orb.set_type(stack.stack[i])
+		orb.type = stack.stack[i]
 		orb._ready()
 		orb.spawn_in_ui(omb, attractor)
 

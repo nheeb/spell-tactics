@@ -15,10 +15,10 @@ func explode_energy_orbs(payment: EnergyStack) -> AnimationObject:
 	var anims := []
 	var orbs : Array = combat.player.visual_entity.orbital_movement_body.get_children()\
 			.filter(func(c): return c is EnergyOrb)
-	for type in payment.stack:
+	for payment_type in payment.stack:
 		var target_orb = null
 		for orb in orbs:
-			if orb.get_type() == type:
+			if orb.type == payment_type:
 				target_orb = orb
 				break
 		if target_orb:
