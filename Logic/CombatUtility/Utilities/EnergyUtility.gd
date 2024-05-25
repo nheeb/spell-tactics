@@ -13,18 +13,18 @@ func pay(payment: EnergyStack) -> AnimationCallback:
 
 func explode_energy_orbs(payment: EnergyStack) -> AnimationObject:
 	var anims := []
-	var orbs : Array = combat.player.visual_entity.orbital_movement_body.get_children()\
-			.filter(func(c): return c is EnergyOrb)
-	for payment_type in payment.stack:
-		var target_orb = null
-		for orb in orbs:
-			if orb.type == payment_type:
-				target_orb = orb
-				break
-		if target_orb:
-			anims.append(combat.animation.callback(target_orb, "death"))
-			target_orb.death()
-			orbs.erase(target_orb)
+	for body in [combat.player.visual_entity.orbital_movement_body, combat.ui.cards3d.energy_ui.omb]:
+		var orbs : Array = body.get_children().filter(func(c): return c is EnergyOrb)
+		for payment_type in payment.stack:
+			var target_orb = null
+			for orb in orbs:
+				if orb.type == payment_type:
+					target_orb = orb
+					break
+			if target_orb:
+				anims.append(combat.animation.callback(target_orb, "death"))
+				target_orb.death()
+				orbs.erase(target_orb)
 	return combat.animation.reappend_as_subqueue(anims).set_flag_with()
 
 func is_payable(payment: EnergyStack) -> bool:

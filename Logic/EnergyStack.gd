@@ -52,6 +52,9 @@ func shares_type_with(other: EnergyStack) -> bool:
 
 func sort() -> void:
 	stack.sort()
+	#stack = stack.slice(0, -stack.size()-1, -1)  # invert
+	stack.reverse()
+	
 	
 func add(e: EnergyStack) -> EnergyStack:
 	stack.append_array(e.stack)

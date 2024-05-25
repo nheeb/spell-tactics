@@ -41,6 +41,7 @@ const ENERGY_SOCKET = preload("res://UI/HandCards/HandCardEnergySocket.tscn")
 func set_spell_type(type: SpellType) -> void:
 	# Spawn Energy Sockets
 	var costs : EnergyStack = type.costs
+	costs.sort()
 	for i in costs.size():
 		var energy = costs.stack[i]
 		var socket = ENERGY_SOCKET.instantiate()

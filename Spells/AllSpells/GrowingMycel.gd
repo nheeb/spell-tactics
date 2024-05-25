@@ -28,6 +28,6 @@ func casting_effect() -> void:
 	var shroom : Entity = combat.level.entities().create_entity(target.location, type, false)
 	combat.animation.effect(VFX.HEX_RINGS, target, {"color": Color.DARK_VIOLET})
 	combat.animation.show(shroom.visual_entity).set_flag_with()
-	for i in range(2):
-		combat.cards.draw()
+	#for i in range(2):
+	combat.cards.draw()
 
