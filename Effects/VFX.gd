@@ -11,6 +11,8 @@ const IMMEDIATE_ARROWS = preload("res://Effects/ImmediateArrows.tscn")
 const ENERGY_ORB = preload("res://Effects/EnergyOrb.tscn") 
 const ENERGY_ORB_ATTRACTOR = preload("res://Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
 
+const DRAIN_DURATION: float = 0.8
+
 @export var any_color: Color
 @export var matter_color: Color
 @export var life_color: Color

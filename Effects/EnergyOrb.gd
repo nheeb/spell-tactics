@@ -2,15 +2,15 @@
 class_name EnergyOrb extends Node3D
 
 # see https://github.com/godotengine/godot/issues/4236
-var vfx_singleton = load("res://Effects/VFX.tscn").instantiate();
+#var vfx_singleton = load("res://Effects/VFX.tscn").instantiate();
 
 @export_enum("Any", "Matter", "Life", "Harmony", "Flow", "Decay", "Spectral") var type : int = 0:
 	set(_type):
 		type = _type
-		$Orb.material_override.set("albedo_color", vfx_singleton.type_to_color(_type))
-		$OmniLight3D.light_color = vfx_singleton.type_to_color(_type)
+		$Orb.material_override.set("albedo_color", VFX.type_to_color(_type))
+		$OmniLight3D.light_color = VFX.type_to_color(_type)
 		$Orb.material_override.next_pass.set("shader_parameter/texture_albedo", \
-							vfx_singleton.type_to_icon(_type))
+							VFX.type_to_icon(_type))
 @export var orbital_movement_active: bool = true
 var in_ui := false
 
@@ -29,6 +29,7 @@ func spawn_in_ui(orbit_body, attractor = null):
 	in_ui = true
 	%MouseArea.monitorable = true
 	%MouseArea.monitoring = true
+	$OmniLight3D.visible = false
 
 func _ready() -> void:
 	if orbital_movement_active:

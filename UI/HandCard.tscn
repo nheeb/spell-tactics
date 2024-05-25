@@ -72,7 +72,7 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2.05456e
 [node name="HandCardEnergySocket" parent="Model/EnergySocketPivot" instance=ExtResource("8_bto4h")]
 visible = false
 
-[node name="Cube" type="MeshInstance3D" parent="Model"]
+[node name="CardModel" type="MeshInstance3D" parent="Model"]
 unique_name_in_owner = true
 transform = Transform3D(-0.733761, 0, 2.33237e-08, 0, 0.733761, 0, -2.33237e-08, 0, -0.733761, 0, 0, 0)
 material_override = ExtResource("4_x6kpx")

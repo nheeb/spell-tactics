@@ -13,7 +13,7 @@ enum HandState {
 	Drag
 }
 
-static var OPEN_Y := -1.1 # Height of open hand cards
+static var OPEN_Y := -1.23 # Height of open hand cards
 static var CLOSED_Y := -2.15 # Height of closed hand cards
 static var OPEN_AT_NORM_MOUSE_POS = .3 # Open hand when mouse at normalized y pos
 static var CLOSE_AT_NORM_MOUSE_POS = .48 # Close hand when mouse at normalized y pos
@@ -278,9 +278,11 @@ func check_hand_state():
 func _set_hovered_card(card):
 	if hovered_card != null:
 		hovered_card.card_2d.set_hover(false)
+		hovered_card.unhover()
 	hovered_card = card
 	if hovered_card != null:
 		hovered_card.card_2d.set_hover(true)
+		hovered_card.hover()
 	Events.card_hovered.emit(card)
 
 func calc_positions():
