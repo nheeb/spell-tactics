@@ -3,19 +3,37 @@ class_name InputUtility extends CombatUtility
 signal performed_action(action: PlayerAction)
 
 ## returns whether it is valid
+# TODO Nitai remove return value
 func process_action(action: PlayerAction) -> bool:
-	if action.is_valid(combat):
-		print("Doing Player Action: %s" % action.action_string)
+	if not is_taking_actions():
+		return false
+	var valid := action.is_valid(combat)
+	action.log_me(combat, valid)
+	if valid:
 		action.execute(combat)
 		performed_action.emit(action)
 		combat.animation.play_animation_queue()
-		combat.ui.update_payable_cards()
-		return true
+		update_ui()
 	else:
-		# should we throw an error msg here or will this happen in normal play?
-		# printerr("Invalid Player Action: %s" % action.action_string)
 		action.on_fail(combat)
-		return false
+	return valid
+
+var current_castable : Castable
+
+func select_castable(castable: Castable):
+	current_castable = castable
+	current_castable.select()
+
+func deselect_castable():
+	current_castable.deselect()
+	current_castable = null
+
+func is_taking_actions() -> bool:
+	return combat.current_phase == Combat.RoundPhase.Spell or \
+		   combat.current_phase == Combat.RoundPhase.Movement
+
+func update_ui():
+	combat.ui.update_payable_cards()
 
 func tile_hovered(tile: Tile) -> void:
 	combat.get_current_phase_node().tile_hovered(tile)
@@ -26,7 +44,15 @@ func tile_clicked(tile: Tile) -> void:
 func card_hovered(card: HandCard3D) -> void:
 	combat.get_current_phase_node().card_hovered(card)
 
+func card_selected(card: HandCard3D) -> void:
+	process_action(PASelectCastable.new(card.get_castable()))
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("deselect"):
+		process_action(PADeselectCastable.new())
+
 func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
 	Events.tile_hovered.connect(tile_hovered)
 	Events.card_hovered.connect(card_hovered)
+	Events.card_selected.connect(card_selected)

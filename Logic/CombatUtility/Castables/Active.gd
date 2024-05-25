@@ -1,15 +1,12 @@
-class_name Active extends Object
+class_name Active extends Castable
 
 signal got_locked
 signal got_unlocked
 
 var type: ActiveType
 var id: ActiveID
-var combat: Combat
-var logic: ActiveLogic
 
-var combat_persistant_properties := {}
-var round_persistant_properties := {}
+var logic: ActiveLogic
 
 func _init(_type: ActiveType, _combat : Combat = null) -> void:
 	type = _type
@@ -47,7 +44,20 @@ var unlocked: bool = false:
 			got_unlocked.emit()
 		unlocked = u
 		round_persistant_properties["unlocked"] = u
-
-
+		
 var uses_left := 0
 
+func is_selectable() -> bool:
+	return unlocked and logic.is_selectable()
+
+func select():
+	combat.ui.cards3d.add_active_to_pin(self)
+
+func deselect():
+	if combat.ui.cards3d.pinned_card: 
+		if combat.ui.cards3d.pinned_card.get_castable() == self:
+			combat.ui.cards3d.unpin_card()
+		else:
+			printerr("Tried to deselect active which wasnt pinned")
+	else:
+		printerr("Tried to deselect active which wasnt pinned")

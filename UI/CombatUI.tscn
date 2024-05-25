@@ -320,4 +320,3 @@ scale = Vector2(0.607886, 0.607886)
 [connection signal="mouse_entered" from="Cast" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Cast" to="." method="_on_button_exited"]
 [connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]
-[connection signal="card_selected" from="AspectRatioContainer/CardViewportContainer/CardViewport/Cards3D" to="." method="select_card"]

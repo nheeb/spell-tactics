@@ -1,8 +1,6 @@
-class_name ActiveLogic extends Object
+class_name ActiveLogic extends CastableLogic
 
 var active: Active
-var combat: Combat
-var target  # Entity or Tile or maybe Array[Tile]
 
 func _init(_active: Active):
 	active = _active

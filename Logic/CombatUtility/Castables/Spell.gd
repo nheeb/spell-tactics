@@ -1,19 +1,16 @@
-class_name Spell extends Object
+class_name Spell extends Castable
 
 var type: SpellType
 var id: SpellID
-var combat: Combat
 var logic: SpellLogic
 var visual_representation: HandCard2D
+var card: HandCard3D
 var event_logic: EventSpellLogic:
 	get:
 		if not type.is_event_spell:
 			pass
 			#printerr("Trying to get an EventSpellLogic from a non event spell")
 		return logic as EventSpellLogic
-
-var combat_persistant_properties := {}
-var round_persistant_properties := {}
 
 func _init(_type: SpellType, _combat : Combat = null) -> void:
 	type = _type
@@ -48,3 +45,19 @@ func get_effect_text() -> String:
 
 func get_costs() -> EnergyStack:
 	return logic.get_costs()
+
+func player_has_enough_energy() -> bool:
+	var energy := combat.energy.player_energy
+	return energy.get_possible_payment(get_costs()) != null
+
+func is_selectable() -> bool:
+	return player_has_enough_energy() and logic.is_selectable()
+
+func select():
+	combat.ui.cards3d.pin_card(card)
+
+func deselect():
+	if combat.ui.cards3d.pinned_card == card:
+		combat.ui.cards3d.unpin_card()
+	else:
+		printerr("Tried to deselect spell which wasnt pinned")

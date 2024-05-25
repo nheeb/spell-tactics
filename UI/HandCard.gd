@@ -1,6 +1,4 @@
-class_name HandCard3D extends Node3D
-
-@onready var smooth_movement: SmoothMovement = $SmoothMovement
+class_name HandCard3D extends Card3D
 
 var card_2d: HandCard2D
 
@@ -9,6 +7,9 @@ func _enter_tree() -> void:
 	%Cube.material_override.next_pass.set("shader_parameter/random_seed", randf())
 	%Cube.material_override.next_pass.set("shader_parameter/card_texture", $TextureViewport.get_texture())
 	%Cube.material_override.uv1_offset = Vector3(randf(), randf(), 0) * 10.0
+
+func get_castable() -> Castable:
+	return get_spell()
 
 func get_spell() -> Spell:
 	var spell =  $Quad/SubViewport/HandCard2D.spell
@@ -31,7 +32,7 @@ func set_collision_scale(s: float) -> void:
 func set_spell(s: Spell) -> void:
 	## TODO nitai remove card_2d
 	#card_2d.set_spell(s)
-	
+	s.card = self
 	set_spell_type(s.type)
 
 const ENERGY_SOCKET = preload("res://UI/HandCards/HandCardEnergySocket.tscn")
@@ -53,3 +54,24 @@ const ENERGY_SOCKET_DIST = .15
 func get_energy_socket_pos(i: int, socket_count: int) -> Vector3:
 	var middle : float = (socket_count-1) / 2.0
 	return Vector3(0,0,1) * (float(i) - middle) * ENERGY_SOCKET_DIST
+
+func get_empty_energy_socket(type : EnergyStack.EnergyType) -> HandCardEnergySocket:
+	for c in %EnergySocketPivot.get_children():
+		c = c as HandCardEnergySocket
+		if c:
+			if c.visible and (not c.is_loaded()):
+				if type == EnergyStack.EnergyType.Any:
+					return c
+				else:
+					if type == c.loaded_energy:
+						return c
+	return null
+
+func unload_all_sockets() -> Array[EnergyStack.EnergyType]:
+	var energy : Array[EnergyStack.EnergyType] = []
+	for c in %EnergySocketPivot.get_children():
+		c = c as HandCardEnergySocket
+		if c:
+			if c.is_loaded:
+				energy.append(c.unload_energy())
+	return energy

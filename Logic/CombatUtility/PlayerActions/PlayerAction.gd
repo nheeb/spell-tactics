@@ -9,4 +9,8 @@ func execute(combat: Combat) -> void:
 	pass
 
 func on_fail(combat: Combat) -> void:
-	combat.log.add("Action failed: %s" % action_string)
+	pass
+
+func log_me(combat: Combat, valid: bool) -> void:
+	combat.log.add("New Action: %s [%s]" % [action_string,
+							"VALID" if valid else "INVALID"])

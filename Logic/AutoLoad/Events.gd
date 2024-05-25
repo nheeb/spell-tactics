@@ -11,3 +11,4 @@ signal tile_unhovered(tile)
 signal tile_clicked(tile)
 
 signal card_hovered(card)
+signal card_selected(card)

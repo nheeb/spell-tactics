@@ -218,8 +218,8 @@ static func deserialize_level_from_combat_state(combat_state: CombatState) -> Le
 	var combat := combat_state.deserialize()
 	return combat.level
 
-func get_all_spells() -> Array[Spell]:
-	var all_spells : Array[Spell] = []
+func get_all_spells() -> Array[Castable]:
+	var all_spells : Array[Castable] = []
 	all_spells.append_array(hand)
 	all_spells.append_array(deck)
 	all_spells.append_array(discard_pile)

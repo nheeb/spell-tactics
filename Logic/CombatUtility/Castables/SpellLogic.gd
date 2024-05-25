@@ -1,8 +1,6 @@
-class_name SpellLogic extends Object
+class_name SpellLogic extends CastableLogic
 
 var spell: Spell
-var combat: Combat
-var target  # Entity or Tile or maybe Array[Tile]
 
 func _init(_spell: Spell):
 	spell = _spell

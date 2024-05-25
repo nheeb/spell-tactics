@@ -4,8 +4,6 @@ const CAM_MODE_PERSPECTIVE = true
 const CAM_MODE_ORTHOGONAL = not CAM_MODE_PERSPECTIVE
 const CAM_PERSPECTIVE_DISTANCE = 16.0
 
-signal card_selected(spell: Spell)
-
 enum HandState {
 	Closed,
 	Open,
@@ -39,14 +37,14 @@ const HOVER_BALANCE_Y_BONUS = 1.5
 const CHOSEN_LIFT = .5
 
 var hand_state: HandState = HandState.Closed
-var all_cards : Array[HandCard3D] = []
-var hand_cards : Array[HandCard3D] = []
-var hovered_card : HandCard3D = null
-var dragged_card : HandCard3D = null
+var all_cards : Array[Card3D] = []
+var hand_cards : Array[Card3D] = []
+var hovered_card : Card3D = null
+var dragged_card : Card3D = null
 var dragged_on_hand := false
-var dragged_before : HandCard3D = null
+var dragged_before : Card3D = null
 var drag_target_pos : Vector3
-var pinned_card : HandCard3D = null
+var pinned_card : Card3D = null
 var mouse_pos_on_card_layer : Vector3
 
 var test_mode := false # This is true when the scene runs solo
@@ -95,15 +93,27 @@ func setup(_combat : Combat):
 	combat = _combat
 
 const HAND_CARD = preload("res://UI/HandCard.tscn")
+const ACTIVE_CARD = preload("res://UI/ActiveCard.tscn")
 func add_card(card_2d: HandCard2D):
 	var hand_card = HAND_CARD.instantiate()
 	hand_card.set_card(card_2d)
 	cards.add_child(hand_card)
-	#hand_card.owner = self
 	all_cards.append(hand_card)
 	hand_cards.push_front(hand_card)
 	hand_card.global_position = %CardSpawn.global_position
 	hand_card.global_position.z = Z_BASE
+
+func add_active_to_pin(active: Active):
+	if not pinned_card:
+		var active_card = ACTIVE_CARD.instantiate()
+		active_card.set_active(active)
+		cards.add_child(active_card)
+		all_cards.append(active_card)
+		pinned_card = active_card
+		active_card.global_position = %ActiveCardSpawn.global_position
+		active_card.global_position.z = Z_BASE
+	else:
+		printerr("Tried to add pinned active while another card is pinned")
 
 const EVENT_CARD = preload("res://UI/EventCard3D.tscn")
 const EVENT_HEIGHT = 2.0
@@ -135,16 +145,29 @@ func hide_event() -> void:
 		current_shown_event_card.queue_free()
 		current_shown_event_card = null
 
-func remove_card(card2d: HandCard2D):
-	var to_be_removed : HandCard3D = null
+func remove_card(card_hint):
+	var to_be_removed : Card3D = null
 
-	for card_3d in all_cards:
-		if card_3d.card_2d.spell == card2d.spell:
-			cards.remove_child(card_3d)
-			to_be_removed = card_3d
+	if card_hint is HandCard2D:
+		card_hint = card_hint.spell
+
+	if card_hint is Castable:
+		var castable := card_hint as Castable
+		for card_3d in all_cards:
+			if card_3d is HandCard3D:
+				if card_3d.get_spell() == castable:
+					cards.remove_child(card_3d)
+					to_be_removed = card_3d
+			if card_3d is ActiveCard:
+				if card_3d.get_active() == castable:
+					cards.remove_child(card_3d)
+					to_be_removed = card_3d
+
+	if card_hint is Card3D:
+		to_be_removed = card_hint
 
 	if not to_be_removed:
-		printerr("Card ", card2d, " which should be removed not found.")
+		printerr("Card of ", card_hint, " which should be removed not found.")
 		return
 	
 	all_cards.erase(to_be_removed)
@@ -184,7 +207,7 @@ func check_hand_state():
 		mouse_pos_on_card_layer = mouse_pos_3d
 	
 	raycast_hit = false
-	var card_on_cursor: HandCard3D = null
+	var card_on_cursor: Card3D = null
 	if %MouseRayCast.is_colliding():
 		var collider = %MouseRayCast.get_collider()
 		if collider is Area3D and collider.is_in_group("hand_area"):
@@ -236,44 +259,22 @@ func check_hand_state():
 					.reduce(func(a, b): return a if a.global_position.x < b.global_position.x else b)
 			if not Input.is_action_pressed("select"):
 				hand_state = HandState.Open
-				
-				var card_got_played := false
-				
+				# Card got rearranged or not selectable
+				dragged_card.card_2d.set_hover(false)
+				if dragged_before:
+					hand_cards.insert(hand_cards.find(dragged_before), dragged_card)
+				else:
+					hand_cards.append(dragged_card)
+				# Player tried to select
 				if not dragged_on_hand:
-					# Player tried to play the card
-					var combat_agrees = true
-					if combat != null:
-						if combat.current_phase != Combat.RoundPhase.Spell:
-							combat_agrees = false
-					if test_mode or (dragged_card.card_2d.enabled and combat_agrees):
-						card_got_played = true
-						get_viewport().set_input_as_handled()
-						card_selected.emit(dragged_card.get_spell())
-						if pinned_card:
-							pinned_card.card_2d.set_hover(false)
-							if dragged_before:
-								hand_cards.insert(hand_cards.find(dragged_before), pinned_card)
-							else:
-								hand_cards.append(pinned_card)
-						pinned_card = dragged_card
-						dragged_card = null
-				if not card_got_played:
-					# Card got rearranged
-					dragged_card.card_2d.set_hover(false)
-					if dragged_before:
-						hand_cards.insert(hand_cards.find(dragged_before), dragged_card)
-					else:
-						hand_cards.append(dragged_card)
-					dragged_card = null
+					Events.card_selected.emit(dragged_card)
+					if test_mode:
+						pin_card(dragged_card)
+				dragged_card = null
 
 	if choice_running:
 		if Input.is_action_just_pressed("deselect"):
 			clear_chosen_cards()
-
-	if pinned_card and Input.is_action_just_pressed("deselect"):
-		pinned_card.card_2d.set_hover(false)
-		hand_cards.push_back(pinned_card)
-		pinned_card = null
 
 func _set_hovered_card(card):
 	if hovered_card != null:
@@ -428,3 +429,19 @@ func choose_card(card) -> void:
 func clear_chosen_cards():
 	for card in chosen_cards:
 		unchoose_card(card)
+
+func pin_card(card: Card3D):
+	if pinned_card:
+		printerr("Tried to pin a card while another card is pinned")
+		return
+	pinned_card = card
+	if card in hand_cards:
+		hand_cards.erase(card)
+
+func unpin_card():
+	if pinned_card:
+		if pinned_card is HandCard3D:
+			hand_cards.append(pinned_card)
+			pinned_card = null
+		elif pinned_card is ActiveCard:
+			remove_card(pinned_card)

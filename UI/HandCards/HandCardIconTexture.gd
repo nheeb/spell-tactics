@@ -5,7 +5,7 @@ func _ready() -> void:
 
 const MAIN_ICON_SIZE = 512.0
 
-func set_spell_type(type: SpellType):
+func set_castable_type(type: CastableType):
 	# Hide all
 	for c in get_children():
 		c.hide()
