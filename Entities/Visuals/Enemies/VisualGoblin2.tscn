@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7vo53pxdnwps"]
+
+[ext_resource type="Script" path="res://Entities/Visuals/Enemies/VisualEnemy.gd" id="1_47iq4"]
+[ext_resource type="PackedScene" uid="uid://bxdl5jg7evhch" path="res://UI/HealthBar.tscn" id="1_l15f7"]
+[ext_resource type="PackedScene" uid="uid://mvc85428jtln" path="res://Assets/Models/Quaternius_Monsters/Orc.gltf" id="2_74e6r"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_3o3lm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cujqv"]
+resource_local_to_scene = true
+render_priority = 2
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+billboard_mode = 1
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_47iq4")
+
+[node name="Orc2" parent="." instance=ExtResource("2_74e6r")]
+transform = Transform3D(0.503869, 0, 0, 0, 0.503869, 0, 0, 0, 0.503869, 0, 0, 0)
+
+[node name="HealthbarQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.27998, 0, 0, 0, 1.27998, 0, 0, 0, 1.27998, 0, 1.74297, 0)
+mesh = SubResource("QuadMesh_3o3lm")
+surface_material_override/0 = SubResource("StandardMaterial3D_cujqv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="HealthBar2D" parent="SubViewport" instance=ExtResource("1_l15f7")]

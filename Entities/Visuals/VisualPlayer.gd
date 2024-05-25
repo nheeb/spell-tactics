@@ -11,6 +11,9 @@ class_name VisualPlayer extends VisualEntity
 func _ready() -> void:
 	pass
 
+func _enter_tree() -> void:
+	$HealthbarQuad.get_active_material(0).albedo_texture = $SubViewport.get_texture()
+
 func start_walking():
 	anim_tree.anim_run()
 	emit_animation_done_signal()
@@ -59,3 +62,6 @@ func stop_idling():
 func _on_idle_break_chance_timeout() -> void:
 	if randf() < idle_break_chance:
 		anim_tree.anim_idle_break()
+		
+func update_hp(hp, armor, max_hp):
+	$SubViewport/HealthBar2D.set_hp(hp, armor, max_hp)

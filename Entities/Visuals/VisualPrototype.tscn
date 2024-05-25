@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgqy5qey6ohu8"]
+[gd_scene load_steps=9 format=3 uid="uid://cgqy5qey6ohu8"]
 
 [ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="1_61762"]
 [ext_resource type="Script" path="res://Entities/Visuals/VisualPrototype.gd" id="2_r6y1o"]
 [ext_resource type="PackedScene" uid="uid://cno3vyggwl5f0" path="res://Entities/Visuals/PrototypeBillboard.tscn" id="3_5kcc0"]
 [ext_resource type="PackedScene" uid="uid://71nxh6lmao86" path="res://UI/HPLabel.tscn" id="4_nudxs"]
+[ext_resource type="PackedScene" uid="uid://bxdl5jg7evhch" path="res://UI/HealthBar.tscn" id="5_240do"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_048ek"]
 material = ExtResource("1_61762")
@@ -12,6 +13,16 @@ bottom_radius = 1.0
 height = 0.2
 radial_segments = 6
 rings = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_h1h6n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7l0xd"]
+resource_local_to_scene = true
+render_priority = 2
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+billboard_mode = 1
 
 [node name="VisualPrototype" type="Node3D"]
 script = ExtResource("2_r6y1o")
@@ -34,3 +45,15 @@ visible = false
 [node name="HPLabel" parent="." instance=ExtResource("4_nudxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 visible = false
+
+[node name="HealthbarQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.27998, 0, 0, 0, 1.27998, 0, 0, 0, 1.27998, 0, 0.326663, 0)
+mesh = SubResource("QuadMesh_h1h6n")
+surface_material_override/0 = SubResource("StandardMaterial3D_7l0xd")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="HealthBar2D" parent="SubViewport" instance=ExtResource("5_240do")]

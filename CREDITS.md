@@ -9,6 +9,8 @@ https://fontesk.com/rogue-font/
 	- https://github.com/lawnjelly/smoothing-addon/tree/4.x
 
 ### Textures / Materials
+- Water Color Sky Texture - Image by Supichaya Sookprasert from Pixabay
+  - https://pixabay.com/illustrations/watercolor-texture-background-paint-5062356/
 
 ### Models
 - High quality grass - nevayashka

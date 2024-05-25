@@ -29,6 +29,7 @@ func spawn_in_ui(orbit_body, attractor = null):
 	in_ui = true
 	%MouseArea.monitorable = true
 	%MouseArea.monitoring = true
+	%MouseArea.collision_layer = 1
 	$OmniLight3D.visible = false
 
 func _ready() -> void:

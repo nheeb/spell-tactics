@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://2hog155pphl4"]
+
+[ext_resource type="PackedScene" uid="uid://bjxju4g0xo1ta" path="res://Entities/Visuals/Enemies/VisualEnemy.tscn" id="1_fyw7b"]
+[ext_resource type="PackedScene" uid="uid://mvc85428jtln" path="res://Assets/Models/Quaternius_Monsters/Orc.gltf" id="2_dykio"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edila"]
+resource_local_to_scene = true
+render_priority = 2
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+billboard_mode = 1
+
+[node name="VisualGoblin" instance=ExtResource("1_fyw7b")]
+
+[node name="HealthbarQuad" parent="." index="0"]
+transform = Transform3D(1.224, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.82418, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_edila")
+
+[node name="Orc2" parent="." index="2" instance=ExtResource("2_dykio")]
+transform = Transform3D(0.503869, 0, 0, 0, 0.503869, 0, 0, 0, 0.503869, 0, 0, 0)

@@ -199,6 +199,14 @@ mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("6_alyjn")
 
+[node name="PlayerFocus" type="MeshInstance3D" parent="Highlight"]
+transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_g7058")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("6_alyjn")
+
 [node name="CombatHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
 visible = false
