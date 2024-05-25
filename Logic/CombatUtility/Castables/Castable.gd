@@ -31,3 +31,6 @@ func select():
 
 func deselect():
 	pass
+
+func get_card() -> Card3D:
+	return null

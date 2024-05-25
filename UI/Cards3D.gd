@@ -51,7 +51,8 @@ var test_mode := false # This is true when the scene runs solo
 
 @onready var camera := %Camera3D
 @onready var cards := %Cards
-@onready var energy_ui := %EnergyUI
+@onready var energy_ui : EnergyUI = %EnergyUI
+@onready var energy_bezier_point := %EnergyBezierPoint
 
 var combat: Combat
 
@@ -92,7 +93,7 @@ func _ready() -> void:
 func setup(_combat : Combat):
 	combat = _combat
 
-const HAND_CARD = preload("res://UI/HandCard.tscn")
+const HAND_CARD = preload("res://UI/HandCard3D.tscn")
 const ACTIVE_CARD = preload("res://UI/ActiveCard.tscn")
 func add_card(card_2d: HandCard2D):
 	var hand_card = HAND_CARD.instantiate()
@@ -435,11 +436,13 @@ func pin_card(card: Card3D):
 		printerr("Tried to pin a card while another card is pinned")
 		return
 	pinned_card = card
+	card.set_pinned(true)
 	if card in hand_cards:
 		hand_cards.erase(card)
 
 func unpin_card():
 	if pinned_card:
+		pinned_card.set_pinned(false)
 		if pinned_card is HandCard3D:
 			hand_cards.append(pinned_card)
 			pinned_card = null

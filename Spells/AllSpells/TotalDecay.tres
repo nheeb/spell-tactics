@@ -10,9 +10,9 @@ stack = Array[int]([1, 6])
 
 [resource]
 script = ExtResource("1_l2jrd")
-pretty_name = "Total decay"
 costs = SubResource("Resource_f4asu")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Total decay"
 effect_text = "Does 1 damage to an enemy.  You can use any amount of additional Decay Energy to increase the damage by that amount. "
 fluff_text = ""
 icon = ExtResource("2_hsywt")

@@ -61,3 +61,6 @@ func deselect():
 		combat.ui.cards3d.unpin_card()
 	else:
 		printerr("Tried to deselect spell which wasnt pinned")
+
+func get_card() -> Card3D:
+	return card

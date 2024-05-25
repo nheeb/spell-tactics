@@ -16,6 +16,7 @@ var active: Active
 
 func set_active(_active: Active):
 	active = _active
+	active.card = self
 	# Set Texture
 	%HandCardTexture.set_castable(active)
 	# Set Shader color

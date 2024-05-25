@@ -133,6 +133,8 @@ class MovementBezier extends Movement:
 		if active:
 			progress = min(1.0, progress + delta / duration)
 			var pos : Vector3 = Utility.quadratic_bezier_3D(p0, p1, p2, progress)
+			if progress >= .99:
+				finish()
 			return pos - om.global_position
 		else:
 			return Vector3.ZERO
@@ -167,7 +169,7 @@ func base_jump():
 	else:
 		jump(Vector3.UP * BASE_JUMP_FORCE)
 
-const BEZIER_JUMP_LERP_DURATION = .2
+const BEZIER_JUMP_LERP_DURATION = .3
 func bezier_jump(p0: Vector3, p1: Vector3, p2: Vector3, duration: float = .65):
 	active_movements[MovementType.Bezier].p0 = p0
 	active_movements[MovementType.Bezier].p1 = p1

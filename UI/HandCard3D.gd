@@ -7,6 +7,7 @@ func _enter_tree() -> void:
 	%Cube.material_override.next_pass.set("shader_parameter/random_seed", randf())
 	%Cube.material_override.next_pass.set("shader_parameter/card_texture", $TextureViewport.get_texture())
 	%Cube.material_override.uv1_offset = Vector3(randf(), randf(), 0) * 10.0
+	$Model/EnergySocketPivot/HandCardEnergySocket.queue_free()
 
 func get_castable() -> Castable:
 	return get_spell()
@@ -56,15 +57,18 @@ func get_energy_socket_pos(i: int, socket_count: int) -> Vector3:
 	return Vector3(0,0,1) * (float(i) - middle) * ENERGY_SOCKET_DIST
 
 func get_empty_energy_socket(type : EnergyStack.EnergyType) -> HandCardEnergySocket:
-	for c in %EnergySocketPivot.get_children():
+	var socket_children := %EnergySocketPivot.get_children()
+	socket_children.reverse()
+	for c in socket_children:
 		c = c as HandCardEnergySocket
 		if c:
-			if c.visible and (not c.is_loaded()):
+			if c.visible and (not c.is_loaded) and (not c.is_soon_loaded):
 				if type == EnergyStack.EnergyType.Any:
 					return c
-				else:
-					if type == c.loaded_energy:
-						return c
+				elif c.type == EnergyStack.EnergyType.Any:
+					return c
+				elif type == c.type:
+					return c
 	return null
 
 func unload_all_sockets() -> Array[EnergyStack.EnergyType]:
@@ -75,3 +79,9 @@ func unload_all_sockets() -> Array[EnergyStack.EnergyType]:
 			if c.is_loaded:
 				energy.append(c.unload_energy())
 	return energy
+
+func set_pinned(s: bool):
+	for c in %EnergySocketPivot.get_children():
+		c = c as HandCardEnergySocket
+		if c:
+			c.set_hoverarble(s)

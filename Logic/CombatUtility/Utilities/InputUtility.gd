@@ -47,6 +47,12 @@ func card_hovered(card: HandCard3D) -> void:
 func card_selected(card: HandCard3D) -> void:
 	process_action(PASelectCastable.new(card.get_castable()))
 
+func energy_orb_clicked(orb : EnergyOrb):
+	process_action(PALoadEnergy.new(orb))
+
+func energy_socket_clicked(socket : HandCardEnergySocket):
+	process_action(PAUnloadSocket.new(socket))
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("deselect"):
 		process_action(PADeselectCastable.new())
@@ -56,3 +62,5 @@ func connect_with_event_signals() -> void:
 	Events.tile_hovered.connect(tile_hovered)
 	Events.card_hovered.connect(card_hovered)
 	Events.card_selected.connect(card_selected)
+	Events.energy_orb_clicked.connect(energy_orb_clicked)
+	Events.energy_socket_clicked.connect(energy_socket_clicked)

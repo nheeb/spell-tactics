@@ -1,6 +1,6 @@
 class_name EnergyOrb extends Node3D
 
-var type : int
+var type : EnergyStack.EnergyType
 var in_ui := false
 
 func set_type(_type):
@@ -11,7 +11,7 @@ func set_type(_type):
 	$Orb.material_override.next_pass.set("shader_parameter/texture_albedo", \
 						VFX.type_to_icon(_type))
 
-func get_type():
+func get_type() -> EnergyStack.EnergyType:
 	return type
 
 @onready var movement : OrbitalMovement = $OrbitalMovement
@@ -34,7 +34,7 @@ func _ready() -> void:
 var ray_cast: RayCast3D
 func _process(delta: float) -> void:
 	movement.movement_process(delta * VisualTime.visual_time_scale)
-	if in_ui:
+	if in_ui and hoverable:
 		var hovered : bool = false
 		if ray_cast:
 			if ray_cast.get_collider() == %MouseArea:
@@ -42,8 +42,15 @@ func _process(delta: float) -> void:
 		%Outline.visible = hovered
 		if hovered:
 			if Input.is_action_just_pressed("select"):
-				pass
-				# TODO Pay
+				Events.energy_orb_clicked.emit(self)
+
+var hoverable := true
+func set_hoverable(h: bool):
+	hoverable = h
+	%MouseArea.monitorable = h
+	%MouseArea.monitoring = h
+	$MouseArea/CollisionShape3D.disabled = not h
+	%Outline.visible = %Outline.visible and h
 
 func death():
 	$AnimationPlayer.play("death")

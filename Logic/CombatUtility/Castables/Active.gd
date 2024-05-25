@@ -61,3 +61,7 @@ func deselect():
 			printerr("Tried to deselect active which wasnt pinned")
 	else:
 		printerr("Tried to deselect active which wasnt pinned")
+
+var card: ActiveCard
+func get_card() -> Card3D:
+	return card

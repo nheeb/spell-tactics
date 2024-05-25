@@ -7,3 +7,6 @@ func get_empty_energy_socket(type : EnergyStack.EnergyType) -> HandCardEnergySoc
 
 func get_castable() -> Castable:
 	return null
+
+func set_pinned(s: bool):
+	pass
