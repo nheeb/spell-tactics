@@ -1,34 +1,49 @@
 shader_type canvas_item;
 
-uniform vec4 healthy_color: source_color;
-uniform vec4 bg_color: source_color;
-uniform vec4 tick_color: source_color;
-uniform vec4 shield_color: source_color;
-uniform vec4 shield_tick_color: source_color;
-
-
-uniform float shield: hint_range(0.0, 30, 1.0) = 0.0;
-
+group_uniforms logic;
 uniform float health: hint_range(0.0, 30, 1.0) = 4.0;
 uniform float max_health: hint_range(0.0, 30, 1.0) = 4.0;
+uniform float shield: hint_range(0.0, 30, 1.0) = 0.0;
+
+group_uniforms colors;
+uniform vec4 healthy_color: source_color;
+uniform vec4 bg_color: source_color;
+uniform vec4 tick_base_color: source_color;
+uniform vec4 shield_color: source_color;
+
+group_uniforms styling;
 uniform float tick_width = 0.02;
 
+uniform float border_width_px: hint_range(0.0, 100.0, 1.0) = 30.0;
+
 void fragment() {
-	float max_total = max_health + shield;
-	float tick_offset = 0.5 * float(int(max_total + 1.0) % 2);
-	float tick_grid = fract(tick_offset + (UV.x - 0.5) * max_total);
-	float tick_idx = floor(tick_offset + (UV.x - 0.5) * max_total);
-	float in_tick = float(tick_grid < 0.5 + tick_width / 2.0 && tick_grid > 0.5 - tick_width / 2.0);
-	// filter 0 and last tick
-	in_tick = float(tick_idx > -max_total/2.0) * float(tick_idx < floor(max_total/2.0)) * in_tick;
-	// mix healthy, bg and shield
-	vec4 color = mix(healthy_color, bg_color, float(health / max_total < UV.x));
-	float is_shield = float(shield / max_total > (1.0 - UV.x));
+	// this is my custom way of transforming uv_x
+	// this successfully increases the width of the first cell on the left
+	// (though I have to set border_width
+	// the last cell on the right is still too narrow though
+	float border_width_uv = SCREEN_PIXEL_SIZE.x * (border_width_px * 0.5);
+	float uv_x = (UV.x - .5 * border_width_uv) / (1.0 - border_width_uv);
+	uv_x = clamp(uv_x, 0.0, 1.0);
+	
+	float cell_count = max_health + shield;
+	float tick_offset = 0.5 * float(int(cell_count + 1.0) % 2);
+	float cell_uv_x = fract(tick_offset + (uv_x - 0.5) * cell_count);
+	float cell_idx = floor(tick_offset + (uv_x - 0.5) * cell_count);
+
+	// make tick width relative to number of cells (~= cell size)
+	float rel_half_tick_width = tick_width * cell_count / 2.0;
+	// determine if tick should be drawn at this uv_x
+	float in_tick = float(cell_uv_x < 0.5 + rel_half_tick_width && cell_uv_x > 0.5 - rel_half_tick_width);
+	// filter ticks at left and right ends of the healthbar
+	in_tick *= float(cell_idx > -cell_count/2.0) * float(cell_idx < floor(cell_count/2.0));
+	// mix healthy and background colors
+	vec4 color = mix(healthy_color, bg_color, float(health / cell_count < uv_x));
+	float is_shield = float(shield / cell_count > (1.0 - uv_x));
+	// mix in shield color
 	color = is_shield * shield_color + (1.0 - is_shield) * color;
-	// mix in ticks
-	//color = mix(color, is_shield * shield_tick_color + (1. - is_shield) * tick_color, in_tick);
-	color = mix(color, tick_color, in_tick);
-	// finally blend mult with flatbox
-	COLOR = COLOR * color;
+	// mix in visual ticks
+	color = mix(color, tick_base_color, in_tick);
+	// blend mult with the Panel flatbox
+	COLOR *= color;
 }
 

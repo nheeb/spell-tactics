@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxdl5jg7evhch"]
+
+[ext_resource type="Script" path="res://UI/HealthBar.gd" id="1_xn35j"]
+[ext_resource type="Shader" path="res://UI/HealthBar.gdshader" id="2_eyi4n"]
+[ext_resource type="StyleBox" uid="uid://bc37bwhf24iof" path="res://UI/Theme/HealthBar2DPanel.tres" id="3_tg6kl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tduh5"]
+resource_local_to_scene = true
+shader = ExtResource("2_eyi4n")
+shader_parameter/health = 7.0
+shader_parameter/max_health = 4.0
+shader_parameter/shield = 4.0
+shader_parameter/healthy_color = Color(0.4233, 0.83, 0.332, 1)
+shader_parameter/bg_color = Color(0.140625, 0.0680443, 0.031754, 1)
+shader_parameter/tick_base_color = Color(0.203125, 0.163313, 0.089375, 1)
+shader_parameter/shield_color = Color(0.1288, 0.788133, 0.92, 1)
+shader_parameter/tick_width = 0.024
+shader_parameter/border_width_px = 30.0
+
+[node name="HealthBar2D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xn35j")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 3.5165
+
+[node name="Bar" type="Panel" parent="AspectRatioContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_tduh5")
+clip_contents = true
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_tg6kl")

@@ -1,3 +1,33 @@
-[gd_scene format=3 uid="uid://dc2gg8bgdk7wd"]
+[gd_scene load_steps=4 format=3 uid="uid://dc2gg8bgdk7wd"]
+
+[ext_resource type="ArrayMesh" uid="uid://c8a4q1gdrgybc" path="res://Assets/Models/Character/MagicRaccoon_Staff_Staff_Wood.res" id="1_d21cf"]
+[ext_resource type="Material" uid="uid://b0wjmmu5rjjis" path="res://Assets/Materials/Palette/palette.tres" id="2_rtyfv"]
+
+[sub_resource type="Environment" id="Environment_7o081"]
+background_mode = 1
+background_color = Color(0.203125, 0.203125, 0.203125, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="FilmStudio" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7o081")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.82461, -0.565701, 0, 0.565701, 0.82461, 0.020084, -0.186601, -0.117241)
+mesh = ExtResource("1_d21cf")
+surface_material_override/0 = ExtResource("2_rtyfv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0633131, 0, -0.997994, 0, 1, 0, 0.997994, 0, -0.0633131, -0.44877, 0, 0)
+keep_aspect = 0
+projection = 1
+fov = 60.4404
+size = 0.739
+
+[node name="EnergyOrb" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.749395, 0.230202, -0.620817, -0.285104, 0.734056, 0.616342, 0.597598, 0.638881, -0.484466, -0.602083, 0, -1.7703)
+light_energy = 1.17

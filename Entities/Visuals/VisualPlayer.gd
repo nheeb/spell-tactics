@@ -12,6 +12,7 @@ func _ready() -> void:
 	pass
 
 func _enter_tree() -> void:
+	$HealthbarQuad.get_active_material(0).albedo_color = Color.WHITE 	# was transparent for editor beauty ;)
 	$HealthbarQuad.get_active_material(0).albedo_texture = $SubViewport.get_texture()
 
 func start_walking():
