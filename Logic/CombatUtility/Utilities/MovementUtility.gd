@@ -7,6 +7,9 @@ func move_entity(entity: Entity, target: Tile):
 
 func apply_knockback(entity: Entity, direction: Vector2i, force := 1):
 	var current_tile := entity.current_tile
+	if current_tile == null:
+		# enemy has died, this should be fixed once death-check is only at end of effects
+		return
 	for i in range(force):
 		var next_tile := current_tile.step_in_direction(direction)
 		if next_tile:

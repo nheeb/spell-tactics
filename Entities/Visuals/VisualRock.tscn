@@ -49,7 +49,7 @@ albedo_color = Color(0.496094, 0.312568, 0.272421, 1)
 script = ExtResource("1_mrahy")
 
 [node name="stein 2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.598508, 0, -0.15439, 0, 0.508832, 0, 0.142243, 0, 0.649619, -0.110706, 0, 0.092255)
+transform = Transform3D(0.598508, 0, -0.15439, 0, 0.508832, 0, 0.142243, 0, 0.649619, -0.110706, -0.0143799, 0.092255)
 mesh = SubResource("ArrayMesh_aisca")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_dea3c")

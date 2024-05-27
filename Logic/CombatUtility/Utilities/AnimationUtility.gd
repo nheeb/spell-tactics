@@ -76,15 +76,15 @@ func camera_reach(target: Node3D) -> AnimationObject:
 	return reappend_as_subqueue(animations)
 
 func update_hp(ent: HPEntity) -> AnimationObject:
-	if ent.visual_entity.has_method("update_hp"):
-		return callback(ent.visual_entity, "update_hp", [ent.hp, ent.armor, ent.type.max_hp]).set_flag_with()
+	if ent.visual_entity.has_node("HealthBar3D"):
+		return callback(ent.visual_entity.get_node("HealthBar3D"), "update_hp", [ent.hp, ent.type.max_hp, ent.armor]).set_flag_with()
 	elif ent.visual_entity.has_node("HPLabel"):
 		if ent.armor:
 			return property(ent.visual_entity.get_node("HPLabel"), "text", "%s [+%s] / %s" % [ent.hp, ent.armor, ent.type.max_hp])
 		else:
 			return property(ent.visual_entity.get_node("HPLabel"), "text", "%s / %s" % [ent.hp, ent.type.max_hp])
 
-	printerr("Neither HPLabel nor HealthBar for ent %s" % ent)
+	printerr("Neither HPLabel nor HealthBar3D for ent %s" % ent)
 	return null
 
 func show(node: Node3D) -> AnimationProperty:

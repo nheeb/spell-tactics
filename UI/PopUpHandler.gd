@@ -126,9 +126,9 @@ func show_surrounding_drainable_entries():
 			active_entries[neighbour].show()
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("show_drain_overlay"):
+	if Input.is_action_just_pressed("show_drain_overlay") and get_window().has_focus():
 		show_drainable_overlay()
-	if Input.is_action_just_released("show_drain_overlay"):
+	if Input.is_action_just_released("show_drain_overlay") or (not get_window().has_focus()):
 		hide_drainable_overlay()
 
 const threshold: float = .1

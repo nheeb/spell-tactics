@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_iuoy4"]
 [ext_resource type="ArrayMesh" uid="uid://d5gr0d5a2voj" path="res://Assets/Models/tall_grass.obj" id="2_d4gt4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umpjl"]
-albedo_color = Color(0.345098, 0.568627, 0.243137, 1)
+[ext_resource type="Material" uid="uid://bf8wo18fkrith" path="res://Assets/Materials/Plant.tres" id="3_48e5m"]
 
 [node name="VisualTallGrass" type="Node3D"]
 script = ExtResource("1_iuoy4")
@@ -12,4 +10,4 @@ script = ExtResource("1_iuoy4")
 [node name="Grass" type="MeshInstance3D" parent="."]
 transform = Transform3D(5.11961, 0, 0, 0, 4.35052, 0, 0, 0, 5.11961, -0.0954323, -1.19209e-07, -0.0310713)
 mesh = ExtResource("2_d4gt4")
-surface_material_override/0 = SubResource("StandardMaterial3D_umpjl")
+surface_material_override/0 = ExtResource("3_48e5m")

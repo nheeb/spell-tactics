@@ -37,24 +37,24 @@ void sky() {
     vec4 ground_cover_texture = texture(ground_cover, vec2(u, v));
     vec3 ground_cover_color = (ground_cover_texture.rgb * ground_cover_modulate.rgb) * ground_cover_texture.a * ground_cover_modulate.a * ground_energy;
 
-    vec3 ground = mix(ground_horizon_color.rgb, ground_bottom_color.rgb, clamp(1.0 - pow(1.0 - (v_angle - (PI * 0.5)) / (PI * 0.5), 1.9 / ground_curve), 0.0, 1.0));
+    vec3 ground = mix(sky_cover_texture.rgb, ground_bottom_color.rgb, clamp(1.0 - pow(1.0 - (v_angle - (PI * 0.5)) / (PI * 0.5), 2.4 / 1.0), 0.0, 1.0));
     ground *= ground_energy;
     ground += ground_cover_color;
 
-    COLOR = mix(ground, sky, smoothstep(-.80, -.60, EYEDIR.y));
+    COLOR = mix(ground, sky, smoothstep(-.80, -.15, EYEDIR.y));
 }
 "
 
 [resource]
 shader = SubResource("Shader_scn34")
-shader_parameter/sky_top_color = Color(0.25098, 0.290196, 0.54902, 1)
-shader_parameter/sky_horizon_color = Color(0.0980392, 0.223529, 0.290196, 1)
-shader_parameter/sky_curve = 0.863
+shader_parameter/sky_top_color = Color(0.3956, 0.64328, 0.86, 1)
+shader_parameter/sky_horizon_color = Color(0.173034, 0.257203, 0.332031, 1)
+shader_parameter/sky_curve = 0.443
 shader_parameter/sky_energy = 1.0
 shader_parameter/sky_cover_modulate = Color(0.664063, 0.664063, 0.664063, 1)
-shader_parameter/ground_bottom_color = Color(0.231373, 0.247059, 0.380392, 1)
-shader_parameter/ground_horizon_color = Color(0.121569, 0.278431, 0.360784, 1)
-shader_parameter/ground_curve = 0.937017
+shader_parameter/ground_bottom_color = Color(0.16918, 0.226867, 0.277344, 1)
+shader_parameter/ground_horizon_color = Color(0.144787, 0.331607, 0.429688, 1)
+shader_parameter/ground_curve = 0.791
 shader_parameter/ground_energy = 1.0
 shader_parameter/ground_cover_modulate = Color(1, 1, 1, 1)
 shader_parameter/sky_scale = 2.0

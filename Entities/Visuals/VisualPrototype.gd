@@ -1,8 +1,6 @@
 @tool
 extends VisualEntity
 
-func _enter_tree() -> void:
-	$HealthbarQuad.get_active_material(0).albedo_texture = $SubViewport.get_texture()
 
 func _ready() -> void:
 	if is_instance_valid($Label) and is_instance_valid(type):
@@ -14,9 +12,8 @@ func _ready() -> void:
 			$Label.visible = false
 			$PrototypeBillboard.visible = true
 			if type is HPEntityType:
-				$HPLabel.visible = false
-				$HPLabel.position.y += 1.7 * type.prototype_scale.y
-				$HealthbarQuad.position.y += 1.7 * type.prototype_scale.y
+				$HealthBar3D.visible = true
+				$HealthBar3D.position.y += 2.00 * type.prototype_scale.y
 		else:
 			$PrototypeBillboard.visible = false
 			$Label.visible = true
@@ -25,6 +22,3 @@ func _ready() -> void:
 func visual_drain(drained := true):
 	if $PrototypeBillboard.visible:
 		$PrototypeBillboard.drain_transition(drained)
-		
-func update_hp(hp, armor, max_hp):
-	$SubViewport/HealthBar2D.set_hp(hp, armor, max_hp)

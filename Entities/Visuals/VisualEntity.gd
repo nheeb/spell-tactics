@@ -43,7 +43,7 @@ func visual_drain(drained := true):
 		if child is MeshInstance3D:
 			child = child as MeshInstance3D
 			child.material_overlay = GREY_OUT_MAT
-			var tween = VisualTime.create_tween()
+			var tween = VisualTime.new_tween()
 			child.set_instance_shader_parameter("grey_out_progress", 0.0)
 			tween.tween_property(child, "instance_shader_parameters/grey_out_progress", 1.0, VFX.DRAIN_DURATION)
 	animation_done.emit()

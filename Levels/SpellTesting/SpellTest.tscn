@@ -1,25 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1eod0pbyip4b"]
+[gd_scene load_steps=8 format=3 uid="uid://b1eod0pbyip4b"]
 
 [ext_resource type="Script" path="res://Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://addons/LevelEditor/GridLevelEditor.gd" id="1_wcyqb"]
-[ext_resource type="Resource" uid="uid://bhbal4070u1qk" path="res://Spells/AllSpells/SummonWitchTotem.tres" id="2_7xwg7"]
 [ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="2_rjkex"]
 [ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Spells/AllSpells/WaterBlast.tres" id="4_6sho4"]
 [ext_resource type="Resource" uid="uid://cf8mbclv7giqd" path="res://Spells/AllSpells/HotSteam.tres" id="5_mgrks"]
-[ext_resource type="Resource" uid="uid://d2k4vhkqurk7r" path="res://Spells/AllSpells/Haunting.tres" id="6_issit"]
 [ext_resource type="Resource" uid="uid://bmmnjqd2apbv0" path="res://Spells/AllSpells/RockBlast.tres" id="7_ygnqq"]
 
 [sub_resource type="Resource" id="Resource_vfkqf"]
 script = ExtResource("2_rjkex")
-stack = Array[int]([0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5])
+stack = Array[int]([0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 2, 2])
 
 [node name="SpellTest" type="Node3D"]
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
-test_spell_1 = ExtResource("2_7xwg7")
+test_spell_1 = ExtResource("7_ygnqq")
 test_spell_2 = ExtResource("4_6sho4")
 test_spell_3 = ExtResource("5_mgrks")
-test_spell_4 = ExtResource("6_issit")
+test_spell_4 = ExtResource("7_ygnqq")
 test_spell_5 = ExtResource("7_ygnqq")
 
 [node name="Editor" type="Node" parent="."]
