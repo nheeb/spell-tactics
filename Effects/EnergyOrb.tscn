@@ -70,7 +70,7 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(2, 2, 2)
-shader_parameter/uv1_offset = Vector3(0.485, 0.52, -0.135)
+shader_parameter/uv1_offset = Vector3(0.48, 0.5, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/icon_scale = 1.0
@@ -84,8 +84,6 @@ shading_mode = 0
 albedo_color = Color(0.620141, 0.177496, 0.360633, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_l3ict"]
-radial_segments = 6
-rings = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_napv1"]
 cull_mode = 1
@@ -441,7 +439,9 @@ speed_scale = 2.0
 
 [node name="MouseArea" type="Area3D" parent="." groups=["energy_ui"]]
 unique_name_in_owner = true
+collision_layer = 0
 collision_mask = 0
+input_ray_pickable = false
 monitoring = false
 monitorable = false
 

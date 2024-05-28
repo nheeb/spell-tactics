@@ -59,6 +59,8 @@ func destroy_tween(tween: Tween) -> void:
 	#tween.free()
 
 func connect_animation_player(ap: AnimationPlayer) -> void:
+	if ap == null:
+		return
 	if not ap in animation_players:
 		animation_players.append(ap)
 		ap.speed_scale += visual_time_scale

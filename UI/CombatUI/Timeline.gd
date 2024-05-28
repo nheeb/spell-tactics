@@ -68,7 +68,7 @@ func animate_step(step : int = 0):
 			continue
 		current_round += direction
 		refresh_round_label()
-		var tween := VisualTime.create_tween()
+		var tween := VisualTime.new_tween()
 		tween.set_parallel()
 		for j in range(EVENT_ICON_COUNT):
 			var old_index = old_first + j

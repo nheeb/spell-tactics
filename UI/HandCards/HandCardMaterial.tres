@@ -142,6 +142,7 @@ shader_parameter/card_texture = SubResource("ViewportTexture_kpogh")
 
 [resource]
 resource_local_to_scene = true
+render_priority = 1
 next_pass = SubResource("ShaderMaterial_ip25q")
 transparency = 1
 albedo_texture = ExtResource("1_eyb0m")

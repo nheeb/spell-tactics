@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpvdg6fd82yer"]
+
+[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_bchrp"]
+[ext_resource type="ArrayMesh" uid="uid://cqj5indgm4df6" path="res://Assets/Models/Stefan_models/Bush.res" id="2_30a0f"]
+[ext_resource type="Material" uid="uid://bf8wo18fkrith" path="res://Assets/Materials/Plant.tres" id="3_piekq"]
+
+[node name="VisualBush" type="Node3D"]
+script = ExtResource("1_bchrp")
+
+[node name="bush1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.110539, -0.373059, 0.165815, -0.12513, 0.178114, 0.387829, -0.418927, 0.0452348, -0.159594, 0, 0, 0)
+mesh = ExtResource("2_30a0f")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("3_piekq")

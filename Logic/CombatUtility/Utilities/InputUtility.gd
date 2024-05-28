@@ -58,10 +58,6 @@ func energy_socket_clicked(socket : HandCardEnergySocket):
 func pinned_card_clicked(card: Card3D):
 	process_action(PAActivateCastable.new(true))
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("deselect"):
-		process_action(PADeselectCastable.new())
-
 func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
 	Events.tile_hovered.connect(tile_hovered)
@@ -70,3 +66,10 @@ func connect_with_event_signals() -> void:
 	Events.energy_orb_clicked.connect(energy_orb_clicked)
 	Events.energy_socket_clicked.connect(energy_socket_clicked)
 	Events.pinned_card_clicked.connect(pinned_card_clicked)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("deselect"):
+		process_action(PADeselectCastable.new())
+	if Input.is_action_just_pressed("focus_on_player"):
+		combat.animation.camera_reach(combat.player.visual_entity)
+		combat.animation.play_animation_queue()

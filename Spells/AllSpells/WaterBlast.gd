@@ -29,6 +29,7 @@ func casting_effect() -> void:
 		enemy = enemy as EnemyEntity
 		enemy.inflict_damage_with_visuals(3)
 		enemy.apply_status_effect(WetEffect.new())
+
 		combat.movement.apply_knockback(enemy, \
 				combat.player.current_tile.direction_to(enemy.current_tile), 2)
 

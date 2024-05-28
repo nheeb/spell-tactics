@@ -1,6 +1,7 @@
 @tool
 extends VisualEntity
 
+
 func _ready() -> void:
 	if is_instance_valid($Label) and is_instance_valid(type):
 		$Label.text = type.internal_name
@@ -11,8 +12,8 @@ func _ready() -> void:
 			$Label.visible = false
 			$PrototypeBillboard.visible = true
 			if type is HPEntityType:
-				$HPLabel.visible = true
-				$HPLabel.position.y += 1.7 * type.prototype_scale.y
+				$HealthBar3D.visible = true
+				$HealthBar3D.position.y += 2.00 * type.prototype_scale.y
 		else:
 			$PrototypeBillboard.visible = false
 			$Label.visible = true

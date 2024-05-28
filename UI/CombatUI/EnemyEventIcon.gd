@@ -13,7 +13,7 @@ func set_max_fill(max_fill: int):
 	icon_material.set_shader_parameter("sections", max_fill)
 
 func transition_to_fill(fill: int):
-	var tween := VisualTime.create_tween()
+	var tween := VisualTime.new_tween()
 	tween.tween_property(mesh2d, "scale", 1.4 * base_scale, .6)
 	while current_fill != fill:
 		if fill < current_fill:

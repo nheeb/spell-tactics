@@ -37,7 +37,15 @@ func on_death_visuals():
 	animation_done.emit()
 
 ## For overriding and making the drain effect
+const GREY_OUT_MAT: Material = preload("res://Effects/GreyOut3D.material")
 func visual_drain(drained := true):
+	for child in get_children():
+		if child is MeshInstance3D:
+			child = child as MeshInstance3D
+			child.material_overlay = GREY_OUT_MAT
+			var tween = VisualTime.new_tween()
+			child.set_instance_shader_parameter("grey_out_progress", 0.0)
+			tween.tween_property(child, "instance_shader_parameters/grey_out_progress", 1.0, VFX.DRAIN_DURATION)
 	animation_done.emit()
 
 var visual_effects := {}
@@ -82,6 +90,6 @@ func spawn_energy_orbs(stack: EnergyStack, omb: OrbitalMovementBody):
 		await VisualTime.new_timer(ORB_DELAY).timeout
 		var orb = VFX.ENERGY_ORB.instantiate()
 		omb.add_child(orb)
-		orb.set_type(stack.stack[i])
+		orb.type = stack.stack[i]
 		orb._ready()
 		orb.spawn(omb, attractors[i])

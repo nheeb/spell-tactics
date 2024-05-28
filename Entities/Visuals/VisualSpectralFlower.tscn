@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ugpkmnuhrffv"]
+
+[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_fy8n7"]
+[ext_resource type="ArrayMesh" uid="uid://dhkal0i6q3swl" path="res://Assets/Models/Stefan_models/spectral_flower.res" id="2_s02js"]
+[ext_resource type="Material" uid="uid://bf8wo18fkrith" path="res://Assets/Materials/Plant.tres" id="3_007w3"]
+
+[node name="VisualSpectralFlower" type="Node3D"]
+script = ExtResource("1_fy8n7")
+
+[node name="rainbow_flower_01" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0457586, -0.0338914, 0.0413151, 0.0272292, 0.0320136, 0.056419, -0.0459797, 0.0526869, -0.00770504, 0, 0, 0)
+mesh = ExtResource("2_s02js")
+skeleton = NodePath("")
+surface_material_override/7 = ExtResource("3_007w3")
+surface_material_override/8 = ExtResource("3_007w3")

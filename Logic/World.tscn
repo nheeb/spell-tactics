@@ -1,26 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cs6vnuiljtmct"]
+[gd_scene load_steps=8 format=3 uid="uid://cs6vnuiljtmct"]
 
 [ext_resource type="Script" path="res://Logic/World.gd" id="1_i0b03"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="2_1cart"]
-[ext_resource type="Material" uid="uid://df3jh0bo0ta8h" path="res://Shaders/ShaderSky.tres" id="2_rkkwj"]
+[ext_resource type="Environment" uid="uid://bo53exqy8qxwh" path="res://Logic/world_environment.tres" id="2_suwfn"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_mpog2"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/MouseInput.gd" id="4_xdvdf"]
 [ext_resource type="Material" uid="uid://cvjghqsy2rnqy" path="res://Entities/Visuals/VisualWater.tres" id="6_6m5c8"]
-
-[sub_resource type="Sky" id="Sky_4htsq"]
-sky_material = ExtResource("2_rkkwj")
-
-[sub_resource type="Environment" id="Environment_0glof"]
-background_mode = 2
-sky = SubResource("Sky_4htsq")
-ambient_light_source = 3
-reflected_light_source = 2
-tonemap_mode = 2
-fog_light_color = Color(0.760784, 0.815686, 0.894118, 1)
-fog_sun_scatter = 0.5
-fog_aerial_perspective = 0.933
-fog_sky_affect = 0.662
-volumetric_fog_density = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_qm0ag"]
 
@@ -28,11 +13,10 @@ volumetric_fog_density = 0.0
 script = ExtResource("1_i0b03")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_0glof")
+environment = ExtResource("2_suwfn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.756722, -0.538054, 0.371309, -0.0137619, 0.580964, 0.813813, -0.653592, 0.61072, -0.447032, 0, 0, 0)
-light_energy = 1.645
 shadow_enabled = true
 directional_shadow_max_distance = 14.0
 

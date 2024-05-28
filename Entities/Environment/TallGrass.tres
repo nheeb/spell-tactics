@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="EntityType" load_steps=4 format=3 uid="uid://dq2qgws5vu0i2"]
+[gd_resource type="Resource" script_class="EntityType" load_steps=5 format=3 uid="uid://dq2qgws5vu0i2"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_u2aul"]
 [ext_resource type="Script" path="res://Entities/EntityType.gd" id="1_vtr3c"]
+[ext_resource type="PackedScene" uid="uid://dat25l1rjkna1" path="res://Entities/Visuals/VisualTallGrass.tscn" id="3_3xy54"]
 
 [sub_resource type="Resource" id="Resource_lqpe5"]
 script = ExtResource("1_u2aul")
@@ -13,6 +14,7 @@ internal_name = "tall_grass"
 can_be_hovered = true
 pretty_name = "Tall grass"
 fluff_text = ""
+visual_scene = ExtResource("3_3xy54")
 prototype_scale = Vector2(0.7, 0.7)
 is_terrain = false
 is_drainable = true

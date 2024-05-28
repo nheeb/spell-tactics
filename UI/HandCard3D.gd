@@ -4,27 +4,30 @@ var card_2d: HandCard2D
 
 func _enter_tree() -> void:
 	$Quad.get_surface_override_material(0).albedo_texture = $Quad/SubViewport.get_texture()
-	%Cube.material_override.next_pass.set("shader_parameter/random_seed", randf())
-	%Cube.material_override.next_pass.set("shader_parameter/card_texture", $TextureViewport.get_texture())
-	%Cube.material_override.uv1_offset = Vector3(randf(), randf(), 0) * 10.0
+	%CardModel.material_override.next_pass.set("shader_parameter/random_seed", randf())
+	%CardModel.material_override.next_pass.set("shader_parameter/card_texture", $TextureViewport.get_texture())
+	%CardModel.material_override.uv1_offset = Vector3(randf(), randf(), 0) * 10.0
 	$Model/EnergySocketPivot/HandCardEnergySocket.queue_free()
 
 func get_castable() -> Castable:
 	return get_spell()
 
 func get_spell() -> Spell:
+	# deprecated?
 	var spell =  $Quad/SubViewport/HandCard2D.spell
 	return spell
 
 func set_card(card: HandCard2D):
 	card_2d = card
-	$Quad/SubViewport.add_child(card)
+	$Quad/SubViewport.add_child(card)  # does Quad still get used?
 	set_spell(card.spell)
 	
 func set_render_prio(p: int) -> void:
 	$Quad.get_surface_override_material(0).set("render_priority", p)
-	%Cube.material_override.set("render_priority", p)
-	%Cube.material_override.next_pass.set("render_priority", p+1)
+	%CardModel.material_override.set("render_priority", p)
+	if %CardModel.material_overlay:
+		%CardModel.material_overlay.set("render_priority", p-1)
+	%CardModel.material_override.next_pass.set("render_priority", p+1)
 
 func set_collision_scale(s: float) -> void:
 	$Area3D/CollisionShape3D.scale = Vector3.ONE * s
@@ -40,6 +43,7 @@ const ENERGY_SOCKET = preload("res://UI/HandCards/HandCardEnergySocket.tscn")
 func set_spell_type(type: SpellType) -> void:
 	# Spawn Energy Sockets
 	var costs : EnergyStack = type.costs
+	costs.sort()
 	for i in costs.size():
 		var energy = costs.stack[i]
 		var socket = ENERGY_SOCKET.instantiate()
@@ -50,7 +54,7 @@ func set_spell_type(type: SpellType) -> void:
 	# Set Texture
 	%HandCardTexture.set_spell_type(type)
 	# Set Shader color
-	%Cube.material_override.next_pass.set("shader_parameter/albedo", type.color)
+	%CardModel.material_override.next_pass.set("shader_parameter/albedo", type.color)
 
 const ENERGY_SOCKET_DIST = .15
 func get_energy_socket_pos(i: int, socket_count: int) -> Vector3:
@@ -97,3 +101,9 @@ func set_pinned(s: bool):
 			c.set_hoverarble(s)
 
 
+const HOVER_MAT = preload("res://Effects/HandCardHover.tres")
+func hover():
+	%CardModel.material_overlay = HOVER_MAT
+	
+func unhover():
+	%CardModel.material_overlay = null

@@ -6,14 +6,14 @@
 
 [sub_resource type="Resource" id="Resource_jf1pl"]
 script = ExtResource("1_str82")
-stack = Array[int]([0, 1])
+stack = Array[int]([1])
 
 [resource]
 script = ExtResource("1_dgvjx")
 pretty_name = "Growing Mycelium"
 costs = SubResource("Resource_jf1pl")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
-effect_text = "Spawn a shroom. Draw 2 spells.
+effect_text = "Spawn a shroom. Draw a Spell.
 (Min range: 3)
 "
 fluff_text = ""

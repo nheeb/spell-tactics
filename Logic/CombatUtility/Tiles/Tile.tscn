@@ -1,15 +1,16 @@
 [gd_scene load_steps=21 format=3 uid="uid://dgrhssy80ss18"]
 
-[ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/Tile.gd" id="1_3wb2e"]
-[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="2_0ytmi"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/TileHighlight.gd" id="3_lr31r"]
-[ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/Materials/TileHighlightMaterial.tres" id="4_2ncve"]
-[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://Shaders/HoverHighlight.tres" id="5_6fffg"]
-[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://Shaders/SpellTargetHighlight.tres" id="6_ng0ir"]
-[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://Shaders/SpellTargetHighlightStatic.tres" id="7_p3srl"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/Tile.gd" id="1_scmar"]
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="2_c24a5"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/TileHighlight.gd" id="3_ho6t1"]
+[ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/Materials/TileHighlightMaterial.tres" id="4_eqav3"]
+[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://Shaders/HoverHighlight.tres" id="5_ihgi2"]
+[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://Shaders/MovementTarget.tres" id="6_alyjn"]
+[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://Shaders/SpellTargetHighlight.tres" id="6_bryv2"]
+[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://Shaders/SpellTargetHighlightStatic.tres" id="7_p4ipm"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wyt28"]
-material = ExtResource("2_0ytmi")
+material = ExtResource("2_c24a5")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 1.0
@@ -17,7 +18,7 @@ radial_segments = 6
 rings = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_ltq8m"]
-material = ExtResource("4_2ncve")
+material = ExtResource("4_eqav3")
 
 [sub_resource type="QuadMesh" id="QuadMesh_m1xtl"]
 
@@ -65,50 +66,6 @@ shader_parameter/smooth_edge = 0.13
 shader_parameter/width = 0.09
 shader_parameter/alpha = 1.0
 
-[sub_resource type="QuadMesh" id="QuadMesh_4yaub"]
-
-[sub_resource type="Shader" id="Shader_umg0b"]
-code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
-
-shader_type spatial;
-render_mode unshaded, blend_mix,depth_draw_opaque,cull_back, shadows_disabled;
-uniform vec4 albedo : source_color;
-uniform float time_scale = 1.0;
-uniform float range = 0.04;
-uniform float smooth_edge = 0.1;
-uniform float width = 0.1;
-
-uniform float alpha = 1.0;
-
-float sdHexagon( in vec2 p, in float r )
-{
-    const vec3 k = vec3(-0.866025404,0.5,0.577350269);
-    p = abs(p);
-    p -= 2.0*min(dot(k.xy,p),0.0)*k.xy;
-    p -= vec2(clamp(p.x, -k.z*r, k.z*r), r);
-    return length(p)*sign(p.y);
-}
-
-void fragment() {
-	float d = sdHexagon(2.59 * (vec2(UV.x - 0.5, UV.y - 0.5)), 1.0);
-	ALBEDO = albedo.rgb;
-	//float time_offset = range * sin(TIME * time_scale);
-	float outer_edge = 1.0 - smoothstep(smooth_edge, smooth_edge, d);
-	float inner_edge = smoothstep(width - smooth_edge, width + smooth_edge, d);
-	ALPHA = outer_edge * inner_edge * alpha;
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifodc"]
-render_priority = 0
-shader = SubResource("Shader_umg0b")
-shader_parameter/albedo = Color(0, 0.376471, 0, 1)
-shader_parameter/time_scale = 4.0
-shader_parameter/range = -0.15
-shader_parameter/smooth_edge = 0.13
-shader_parameter/width = -0.075
-shader_parameter/alpha = 0.465
-
 [sub_resource type="QuadMesh" id="QuadMesh_opmr3"]
 
 [sub_resource type="Shader" id="Shader_8f2ry"]
@@ -155,19 +112,52 @@ shader_parameter/width = 0.08
 shader_parameter/scale = 0.87
 shader_parameter/alpha = 0.415
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lt6pk"]
+[sub_resource type="QuadMesh" id="QuadMesh_4yaub"]
+
+[sub_resource type="Shader" id="Shader_umg0b"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode unshaded, blend_mix,depth_draw_opaque,cull_back, shadows_disabled;
+uniform vec4 albedo : source_color;
+uniform float time_scale = 1.0;
+uniform float range = 0.04;
+uniform float smooth_edge = 0.1;
+uniform float width = 0.1;
+
+uniform float alpha = 1.0;
+
+float sdHexagon( in vec2 p, in float r )
+{
+    const vec3 k = vec3(-0.866025404,0.5,0.577350269);
+    p = abs(p);
+    p -= 2.0*min(dot(k.xy,p),0.0)*k.xy;
+    p -= vec2(clamp(p.x, -k.z*r, k.z*r), r);
+    return length(p)*sign(p.y);
+}
+
+void fragment() {
+	float d = sdHexagon(2.59 * (vec2(UV.x - 0.5, UV.y - 0.5)), 1.0);
+	ALBEDO = albedo.rgb;
+	//float time_offset = range * sin(TIME * time_scale);
+	float outer_edge = 1.0 - smoothstep(smooth_edge, smooth_edge, d);
+	float inner_edge = smoothstep(width - smooth_edge, width + smooth_edge, d);
+	ALPHA = outer_edge * inner_edge * alpha;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifodc"]
 render_priority = 0
-shader = SubResource("Shader_8f2ry")
-shader_parameter/albedo = Color(1, 0.703125, 0, 1)
+shader = SubResource("Shader_umg0b")
+shader_parameter/albedo = Color(0, 0.376471, 0, 1)
 shader_parameter/time_scale = 4.0
-shader_parameter/range = 0.04
-shader_parameter/smooth_edge = 0.05
-shader_parameter/width = 0.08
-shader_parameter/scale = 0.87
-shader_parameter/alpha = 0.415
+shader_parameter/range = -0.15
+shader_parameter/smooth_edge = 0.13
+shader_parameter/width = -0.075
+shader_parameter/alpha = 0.465
 
 [node name="Tile" type="Node3D"]
-script = ExtResource("1_3wb2e")
+script = ExtResource("1_scmar")
 
 [node name="Hexagon" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -194,7 +184,7 @@ polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866,
 
 [node name="Highlight" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.117866, 0)
-script = ExtResource("3_lr31r")
+script = ExtResource("3_ho6t1")
 
 [node name="Edges" type="Node3D" parent="Highlight"]
 visible = false
@@ -241,15 +231,23 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("5_6fffg")
+surface_material_override/0 = ExtResource("5_ihgi2")
 
-[node name="HoverTargetHexQuad" type="MeshInstance3D" parent="Highlight"]
-transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+[node name="MovementTarget" type="MeshInstance3D" parent="Highlight"]
+transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
 visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("6_ng0ir")
+surface_material_override/0 = ExtResource("6_alyjn")
+
+[node name="PlayerFocus" type="MeshInstance3D" parent="Highlight"]
+transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_g7058")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("6_alyjn")
 
 [node name="CombatHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -257,7 +255,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("7_p3srl")
+surface_material_override/0 = ExtResource("7_p4ipm")
 
 [node name="PossibleTargetQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -266,6 +264,14 @@ cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_yh362")
+
+[node name="SelectedTargetQuad" type="MeshInstance3D" parent="Highlight"]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_opmr3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_w71nl")
 
 [node name="LowSpellEnergyHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -283,13 +289,12 @@ mesh = SubResource("QuadMesh_opmr3")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_w71nl")
 
-[node name="SelectedTargetQuad" type="MeshInstance3D" parent="Highlight"]
-transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+[node name="HoverTargetHexQuad" type="MeshInstance3D" parent="Highlight"]
+transform = Transform3D(1.70261, 0.983, 4.29683e-08, 0, -8.59366e-08, 1.966, 0.983, -1.70261, -7.44233e-08, 0, 0.146, 0)
 visible = false
 cast_shadow = 0
-mesh = SubResource("QuadMesh_opmr3")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_lt6pk")
+mesh = SubResource("QuadMesh_m1xtl")
+surface_material_override/0 = ExtResource("6_bryv2")
 
 [node name="HoverTimer" type="Timer" parent="."]
 wait_time = 0.6

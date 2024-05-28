@@ -5,7 +5,7 @@ var energy_type: EnergyStack.EnergyType
 
 func _init(_orb: EnergyOrb) -> void:
 	orb = _orb
-	energy_type = orb.get_type()
+	energy_type = orb.type
 	action_string = "Load Energy <%s>" % orb
 
 func is_valid(combat: Combat) -> bool:

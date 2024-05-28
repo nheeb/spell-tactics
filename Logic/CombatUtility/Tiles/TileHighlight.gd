@@ -63,6 +63,8 @@ func enable_highlight(type: Type):
 			$PossibleTargetQuad.visible = true
 		elif type == Type.SelectedTarget:
 			$SelectedTargetQuad.visible = true
+		elif type == Type.Movement:
+			$MovementTarget.visible = true
 		else:
 			current_material = highlight_materials[type]
 			$Edges.visible = true
@@ -93,6 +95,9 @@ func disable_highlight(type: Type):
 	
 	if type == Type.SelectedTarget:
 		$SelectedTargetQuad.visible = false
+		
+	if type == Type.Movement:
+		$MovementTarget.visible = false
 	
 	if current_highlights.is_empty():
 		$Edges.visible = false

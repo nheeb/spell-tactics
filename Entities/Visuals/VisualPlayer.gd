@@ -45,8 +45,6 @@ func on_death_visuals() -> void:
 	await VisualTime.new_timer(4.5).timeout
 	emit_animation_done_signal()
 	
-
-
 func start_idling():
 	$IdleBreakChance.start()
 	emit_animation_done_signal()
@@ -54,7 +52,6 @@ func start_idling():
 func stop_idling():
 	$IdleBreakChance.stop()
 	emit_animation_done_signal()
-
 
 func _on_idle_break_chance_timeout() -> void:
 	if randf() < idle_break_chance:

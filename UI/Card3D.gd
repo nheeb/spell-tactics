@@ -1,7 +1,7 @@
 class_name Card3D extends Node3D
 
 @onready var smooth_movement: SmoothMovement = $SmoothMovement
-@onready var cube: MeshInstance3D = %Cube
+@onready var cube: MeshInstance3D = %CardModel
 
 func get_empty_energy_socket(type : EnergyStack.EnergyType) -> HandCardEnergySocket:
 	return null
