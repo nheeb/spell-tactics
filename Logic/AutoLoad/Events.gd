@@ -12,6 +12,9 @@ signal tile_clicked(tile)
 
 signal card_hovered(card)
 signal card_selected(card)
+signal pinned_card_clicked(card)
 
 signal energy_orb_clicked(orb)
 signal energy_socket_clicked(socket)
+
+var cards3d_ray_collision_point: Vector3

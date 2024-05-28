@@ -2,6 +2,8 @@ class_name HandCardEnergySocket extends Node3D
 
 @onready var socket : MeshInstance3D = $EnergySocket/Socket
 
+var card: HandCard3D
+
 var energy_color : Color
 var mi : MeshInstance3D
 var type : EnergyStack.EnergyType
@@ -47,6 +49,7 @@ func load_energy(type: EnergyStack.EnergyType):
 	mi.material_override.emission = loaded_color
 	mi.material_override.emission_energy_multiplier = 2
 	%AnimationPlayer.play("load")
+	card.get_spell().on_energy_load()
 
 func unload_energy() -> EnergyStack.EnergyType:
 	is_loaded = false

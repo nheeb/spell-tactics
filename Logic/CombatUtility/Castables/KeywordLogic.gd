@@ -13,15 +13,13 @@ func _after_spell(combat: Combat, spell: Spell):
 	pass
 
 func get_updated_energy_price(price: EnergyStack, spell: Spell) -> EnergyStack:
-	if has_method("_get_updated_energy_price"):
-		call("_get_updated_energy_price", price, spell)
+	return _get_updated_energy_price(price, spell)
+
+func _get_updated_energy_price(price: EnergyStack, spell: Spell) -> EnergyStack:
 	return price
 
-#func _get_updated_energy_price(price: EnergyStack, spell: Spell) -> EnergyStack:
-	#return price
+func is_selectable(spell: Spell) -> bool:
+	return _is_selectable(spell.combat, spell)
 
-func is_unlocked(spell: Spell) -> bool:
-	return _is_unlocked(spell.combat, spell)
-
-func _is_unlocked(combat: Combat, spell: Spell) -> bool:
+func _is_selectable(combat: Combat, spell: Spell) -> bool:
 	return true

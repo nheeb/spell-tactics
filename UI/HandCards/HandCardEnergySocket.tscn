@@ -147,7 +147,8 @@ mesh = SubResource("BoxMesh_78fl2")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112064, 0, 0)
 light_energy = 0.0
-omni_range = 0.423053
+omni_range = 0.33
+omni_attenuation = 1.6245
 
 [node name="SparkParticles" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true

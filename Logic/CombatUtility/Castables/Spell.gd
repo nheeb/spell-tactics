@@ -53,14 +53,39 @@ func player_has_enough_energy() -> bool:
 func is_selectable() -> bool:
 	return player_has_enough_energy() and logic.is_selectable()
 
+func is_energy_loaded_fully() -> bool:
+	return not get_card().has_empty_energy_sockets()
+
+func is_castable() -> bool:
+	return super.is_castable() and is_energy_loaded_fully()
+
 func select():
-	combat.ui.cards3d.pin_card(card)
+	super.select()
+	combat.animation.callable(combat.ui.cards3d.pin_card.bind(card))
 
 func deselect():
+	super.deselect()
 	if combat.ui.cards3d.pinned_card == card:
-		combat.ui.cards3d.unpin_card()
+		combat.animation.callable(combat.ui.cards3d.unpin_card)
 	else:
 		printerr("Tried to deselect spell which wasnt pinned")
 
 func get_card() -> Card3D:
 	return card
+
+func get_logic() -> CastableLogic:
+	return logic
+
+func get_type() -> CastableType:
+	return type
+
+func on_energy_load():
+	update_current_state()
+
+func update_current_state():
+	super.update_current_state()
+	update_energy_ui()
+
+func update_energy_ui():
+	if not is_energy_loaded_fully():
+		combat.ui.error_lines.add("Select missing energy")

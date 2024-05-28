@@ -49,6 +49,11 @@ const TargetIconName = {
 
 ## when target is Tag, which Tag to target
 @export var target_tag := ""
+@export var target_count_min := 1
+@export var target_count_max := 1
+
+@export var target_possible_highlight: Highlight.Type = Highlight.Type.PossibleTarget
+@export var target_selected_highlight: Highlight.Type = Highlight.Type.SelectedTarget
 
 enum SpellTopic {
 	None,

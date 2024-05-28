@@ -43,6 +43,7 @@ func set_spell_type(type: SpellType) -> void:
 	for i in costs.size():
 		var energy = costs.stack[i]
 		var socket = ENERGY_SOCKET.instantiate()
+		socket.card = self
 		%EnergySocketPivot.add_child(socket)
 		socket.position = get_energy_socket_pos(i, costs.size())
 		socket.set_type(energy)
@@ -80,8 +81,19 @@ func unload_all_sockets() -> Array[EnergyStack.EnergyType]:
 				energy.append(c.unload_energy())
 	return energy
 
+func get_loaded_energy() -> EnergyStack:
+	var energy : Array[EnergyStack.EnergyType] = []
+	for c in %EnergySocketPivot.get_children():
+		c = c as HandCardEnergySocket
+		if c:
+			if c.is_loaded:
+				energy.append(c.loaded_energy)
+	return EnergyStack.new(energy)
+
 func set_pinned(s: bool):
 	for c in %EnergySocketPivot.get_children():
 		c = c as HandCardEnergySocket
 		if c:
 			c.set_hoverarble(s)
+
+

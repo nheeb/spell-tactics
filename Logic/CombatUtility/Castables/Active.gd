@@ -51,9 +51,11 @@ func is_selectable() -> bool:
 	return unlocked and logic.is_selectable()
 
 func select():
+	super.select()
 	combat.ui.cards3d.add_active_to_pin(self)
 
 func deselect():
+	super.deselect()
 	if combat.ui.cards3d.pinned_card: 
 		if combat.ui.cards3d.pinned_card.get_castable() == self:
 			combat.ui.cards3d.unpin_card()
@@ -65,3 +67,9 @@ func deselect():
 var card: ActiveCard
 func get_card() -> Card3D:
 	return card
+
+func get_logic() -> CastableLogic:
+	return logic
+
+func get_type() -> CastableType:
+	return type

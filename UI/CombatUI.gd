@@ -5,8 +5,9 @@ var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
 var actives: Array[Active]
 
-@onready var cards3d : Cards3D = %Cards3D
+@onready var cards3d: Cards3D = %Cards3D
 @onready var timeline: TimelineUI = %Timeline
+@onready var error_lines: StatusLines = %ErrorLines
 
 func setup(_combat: Combat):
 	self.combat = _combat
@@ -24,16 +25,16 @@ func setup(_combat: Combat):
 	#cards3d.combat = _combat
 	
 	# connect to spell phase
-	combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)
+	# combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)
 	
 	# Build timeline
 	%Timeline.build_timeline_from_log(combat.log)
 
-func _on_changed_casting_state(s: SpellPhase.CastingState):
-	if s == SpellPhase.CastingState.SettingEnergy:
-		$Cast.disabled = false
-	else:
-		$Cast.disabled = true
+#func _on_changed_casting_state(s: SpellPhase.CastingState):
+	#if s == SpellPhase.CastingState.SettingEnergy:
+		#$Cast.disabled = false
+	#else:
+		#$Cast.disabled = true
 
 func next_round(current_round: int):
 	pass
@@ -154,7 +155,7 @@ func set_current_energy(energy: EnergyStack):
 func update_payable_cards():
 	for hand_card2d in cards:
 		var spell: Spell = hand_card2d.spell
-		if combat.energy.is_payable(spell.type.costs) and spell.logic.is_unlocked():
+		if spell.is_selectable():
 			# spell is available
 			hand_card2d.set_enabled(true)
 		else:

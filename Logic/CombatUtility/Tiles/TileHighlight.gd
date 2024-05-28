@@ -8,6 +8,8 @@ enum Type {
 	Energy,
 	LowSpellEnergy,
 	HighSpellEnergy,
+	PossibleTarget,
+	SelectedTarget,
 }
 
 var current_highlights: Array[Type] = []
@@ -20,7 +22,9 @@ const type_to_color := {
 	Type.Energy: Color.LIME,
 	Type.Combat: Color.LIGHT_CORAL,
 	Type.LowSpellEnergy: Color.YELLOW,
-	Type.HighSpellEnergy: Color.DARK_ORANGE
+	Type.HighSpellEnergy: Color.DARK_ORANGE,
+	Type.PossibleTarget: Color.YELLOW,
+	Type.SelectedTarget: Color.RED
 }
 
 var highlight_materials = {}
@@ -55,6 +59,10 @@ func enable_highlight(type: Type):
 			$LowSpellEnergyHexQuad.visible = true
 		elif type == Type.HighSpellEnergy:
 			$HighSpellEnergyHexQuad.visible = true
+		elif type == Type.PossibleTarget:
+			$PossibleTargetQuad.visible = true
+		elif type == Type.SelectedTarget:
+			$SelectedTargetQuad.visible = true
 		else:
 			current_material = highlight_materials[type]
 			$Edges.visible = true
@@ -79,6 +87,12 @@ func disable_highlight(type: Type):
 	
 	if type == Type.HighSpellEnergy:
 		$HighSpellEnergyHexQuad.visible = false
+	
+	if type == Type.PossibleTarget:
+		$PossibleTargetQuad.visible = false
+	
+	if type == Type.SelectedTarget:
+		$SelectedTargetQuad.visible = false
 	
 	if current_highlights.is_empty():
 		$Edges.visible = false

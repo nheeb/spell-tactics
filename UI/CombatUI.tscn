@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=14 format=3 uid="uid://bysejqqiloy1u"]
 
 [ext_resource type="Script" path="res://UI/CombatUI.gd" id="1_uhqdp"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_2hiqp"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ciug3sucml2b5" path="res://UI/EnergyIcon.tscn" id="6_2qxi4"]
 [ext_resource type="PackedScene" uid="uid://cp5c8if6axsd6" path="res://UI/CombatUI/EnemyEventIcon.tscn" id="8_isphm"]
 [ext_resource type="PackedScene" uid="uid://cn2mfqtdouxdu" path="res://UI/CombatUI/Timeline.tscn" id="9_denmg"]
+[ext_resource type="PackedScene" uid="uid://k4w38jjb4tmp" path="res://UI/CombatUI/StatusLines.tscn" id="10_gtdym"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqwoa"]
 bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.682353)
@@ -66,6 +67,7 @@ text = "NEXT"
 metadata/_edit_use_anchors_ = true
 
 [node name="Cast" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.764583
@@ -166,6 +168,7 @@ label_settings = ExtResource("3_wybdv")
 metadata/_edit_use_anchors_ = true
 
 [node name="EnergyList" type="GridContainer" parent="EnergyArea"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.744792
@@ -313,6 +316,11 @@ offset_top = 89.0
 offset_right = 198.0
 offset_bottom = 184.0
 scale = Vector2(0.607886, 0.607886)
+
+[node name="ErrorLines" parent="." instance=ExtResource("10_gtdym")]
+unique_name_in_owner = true
+layout_mode = 1
+color = Color(1, 0, 0, 1)
 
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]

@@ -64,6 +64,10 @@ material_override = ExtResource("3_uh570")
 mesh = SubResource("ArrayMesh_b1ayi")
 skeleton = NodePath("")
 
+[node name="IconOrigin" type="Marker3D" parent="Model/Cube"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0132882, -0.0531537, -0.113039)
+
 [node name="Area3D" type="Area3D" parent="." groups=["hand_area"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0412399, 0, 1.80265e-09)
 collision_mask = 0

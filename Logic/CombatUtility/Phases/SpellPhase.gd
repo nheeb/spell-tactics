@@ -77,63 +77,63 @@ func process_phase() -> bool:
 	return true
 	
 
-func select_spell(spell: Spell):
-	if state == CastingState.Targeting:
-		# already targeting another spell, need to unhighlight here
-		combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
-	assert(combat.current_phase == combat.RoundPhase.Spell, "selected a spell outside of spell phase")
-	selected_spell = spell
-	if spell.type.target != SpellType.Target.None:
-		highlighted_targets = get_spell_targets(selected_spell)
-		
-		if len(highlighted_targets) == 0 and spell.type.target != SpellType.Target.Cone:
-			combat.animation.callback(combat.ui, "set_status", ["No targets available."])
-			combat.animation.wait(1.0)
-			combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
-			return
+#func select_spell(spell: Spell):
+	#if state == CastingState.Targeting:
+		## already targeting another spell, need to unhighlight here
+		#combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+	#assert(combat.current_phase == combat.RoundPhase.Spell, "selected a spell outside of spell phase")
+	#selected_spell = spell
+	#if spell.type.target != SpellType.Target.None:
+		#highlighted_targets = get_spell_targets(selected_spell)
+		#
+		#if len(highlighted_targets) == 0 and spell.type.target != SpellType.Target.Cone:
+			#combat.animation.callback(combat.ui, "set_status", ["No targets available."])
+			#combat.animation.wait(1.0)
+			#combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
+			#return
+#
+		#combat.animation.callback(combat.ui, "set_status", ["Choose the target!\n(Right-click to deselect)"])
+		#combat.animation.callback(combat.player.visual_entity, "start_casting")
+		#combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+		#set_process(true)
+		#state = CastingState.Targeting
+	#else:
+		## else proceed to energy / casting
+		#combat.animation.callback(combat.player.visual_entity, "start_casting")
+		#state = CastingState.SettingEnergy
+#
+#func deselect_spell():
+	#assert(is_instance_valid(selected_spell))
+	#return_to_spell_selection()
 
-		combat.animation.callback(combat.ui, "set_status", ["Choose the target!\n(Right-click to deselect)"])
-		combat.animation.callback(combat.player.visual_entity, "start_casting")
-		combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
-		set_process(true)
-		state = CastingState.Targeting
-	else:
-		# else proceed to energy / casting
-		combat.animation.callback(combat.player.visual_entity, "start_casting")
-		state = CastingState.SettingEnergy
-
-func deselect_spell():
-	assert(is_instance_valid(selected_spell))
-	return_to_spell_selection()
-
-func get_spell_targets(spell: Spell) -> Array[Tile]:
-	var target_range = spell.type.target_range
-	var target_min_range = spell.type.target_min_range
-	var tiles: Array[Tile]
-	if target_range != -1:
-		tiles = combat.level.get_all_tiles_in_distance_of_tile(combat.player.current_tile, 
-															   target_range)
-	else:
-		tiles = combat.level.get_all_tiles()
-	
-	if target_min_range != -1:
-		var min_range_tiles = combat.level.get_all_tiles_with_min_distance_of_tile(combat.player.current_tile, target_min_range)
-		tiles = tiles.filter(func (t): return t in min_range_tiles)
-	
-	# for now just Spells targeted on Enemy, 
-	# later we have to check the target type in SpellType
-	if spell.type.target == SpellType.Target.Enemy:
-		tiles = tiles.filter(func(t): return t.has_enemy())
-	elif spell.type.target == SpellType.Target.TileWithoutObstacles:
-		tiles = tiles.filter(func(t): return not(t.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER))
-	elif spell.type.target == SpellType.Target.Tag:
-		tiles = tiles.filter(func(t): return spell.type.target_tag in t.get_tags())
-	elif spell.type.target == SpellType.Target.Cone:
-		var none : Array[Tile] = []
-		return none
-	return tiles 
+#func get_spell_targets(spell: Spell) -> Array[Tile]:
+	#var target_range = spell.type.target_range
+	#var target_min_range = spell.type.target_min_range
+	#var tiles: Array[Tile]
+	#if target_range != -1:
+		#tiles = combat.level.get_all_tiles_in_distance_of_tile(combat.player.current_tile, 
+															   #target_range)
+	#else:
+		#tiles = combat.level.get_all_tiles()
+	#
+	#if target_min_range != -1:
+		#var min_range_tiles = combat.level.get_all_tiles_with_min_distance_of_tile(combat.player.current_tile, target_min_range)
+		#tiles = tiles.filter(func (t): return t in min_range_tiles)
+	#
+	## for now just Spells targeted on Enemy, 
+	## later we have to check the target type in SpellType
+	#if spell.type.target == SpellType.Target.Enemy:
+		#tiles = tiles.filter(func(t): return t.has_enemy())
+	#elif spell.type.target == SpellType.Target.TileWithoutObstacles:
+		#tiles = tiles.filter(func(t): return not(t.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER))
+	#elif spell.type.target == SpellType.Target.Tag:
+		#tiles = tiles.filter(func(t): return spell.type.target_tag in t.get_tags())
+	#elif spell.type.target == SpellType.Target.Cone:
+		#var none : Array[Tile] = []
+		#return none
+	#return tiles 
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("deselect"):
-		combat.input.process_action(DeselectSpell.new())
+#func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed("deselect"):
+		#combat.input.process_action(DeselectSpell.new())

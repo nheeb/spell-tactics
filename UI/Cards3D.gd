@@ -58,6 +58,7 @@ var combat: Combat
 
 const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 func _ready() -> void:
+	RenderingServer.global_shader_parameter_set("pinned_card_global_pos", %PinnedCard.global_position)
 	# enable this once everything is set up
 	#process_mode = Node.PROCESS_MODE_DISABLED
 	# Add attributes to global settings
@@ -210,10 +211,14 @@ func check_hand_state():
 	raycast_hit = false
 	var card_on_cursor: Card3D = null
 	if %MouseRayCast.is_colliding():
+		Events.cards3d_ray_collision_point = %MouseRayCast.get_collision_point()
 		var collider = %MouseRayCast.get_collider()
 		if collider is Area3D and collider.is_in_group("hand_area"):
 			card_on_cursor = collider.get_parent()
 			raycast_hit = true
+			if card_on_cursor == pinned_card:
+				if Input.is_action_just_pressed("select"):
+					Events.pinned_card_clicked.emit(pinned_card)
 		elif collider is Area3D and collider.is_in_group("energy_ui"):
 			collider.get_parent().ray_cast = %MouseRayCast
 	

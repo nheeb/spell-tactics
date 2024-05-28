@@ -79,6 +79,10 @@ material_override = ExtResource("3_cro0o")
 mesh = SubResource("ArrayMesh_b1ayi")
 skeleton = NodePath("")
 
+[node name="IconOrigin" type="Marker3D" parent="Model/Cube"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0132882, -0.0531537, -0.113039)
+
 [node name="Quad" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 visible = false
