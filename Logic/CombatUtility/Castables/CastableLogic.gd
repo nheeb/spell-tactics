@@ -58,17 +58,17 @@ func _is_selectable() -> bool:
 func _is_castable() -> bool:
 	return true
 
-func _is_target_suitable(target: Tile, target_index: int = 0) -> bool:
+func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
 	return true
 
 func _on_select_deselect(select: bool) -> void:
 	pass
 
-func _are_targets_full(targets: Array[Tile]) -> bool:
+func _are_targets_full(_targets: Array[Tile]) -> bool:
 	return true
 
-func _are_targets_castable(targets: Array[Tile]) -> bool:
+func _are_targets_castable(_targets: Array[Tile]) -> bool:
 	return true
 
-func _set_preview_visuals(target: Tile, active: bool) -> void:
+func _set_preview_visuals(_target: Tile, active: bool) -> void:
 	pass

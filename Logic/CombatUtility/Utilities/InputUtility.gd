@@ -43,6 +43,9 @@ func tile_clicked(tile: Tile) -> void:
 	combat.get_current_phase_node().tile_clicked(tile)
 	process_action(PASelectTile.new(tile))
 
+func tile_rightclicked(tile: Tile) -> void:
+	process_action(PADeselectTile.new(tile))
+
 func card_hovered(card: HandCard3D) -> void:
 	combat.get_current_phase_node().card_hovered(card)
 
@@ -58,18 +61,21 @@ func energy_socket_clicked(socket : HandCardEnergySocket):
 func pinned_card_clicked(card: Card3D):
 	process_action(PAActivateCastable.new(true))
 
+func pinned_card_rightclicked(card: Card3D):
+	process_action(PADeselectCastable.new())
+
 func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
+	Events.tile_rightclicked.connect(tile_rightclicked)
 	Events.tile_hovered.connect(tile_hovered)
 	Events.card_hovered.connect(card_hovered)
 	Events.card_selected.connect(card_selected)
 	Events.energy_orb_clicked.connect(energy_orb_clicked)
 	Events.energy_socket_clicked.connect(energy_socket_clicked)
 	Events.pinned_card_clicked.connect(pinned_card_clicked)
+	Events.pinned_card_rightclicked.connect(pinned_card_rightclicked)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("deselect"):
-		process_action(PADeselectCastable.new())
 	if Input.is_action_just_pressed("focus_on_player"):
 		combat.animation.camera_reach(combat.player.visual_entity)
 		combat.animation.play_animation_queue()

@@ -12,7 +12,7 @@ var r: int
 var q: int
 var location: Vector2i
 
-@onready var level: Level = get_parent()
+@onready var level: Level = get_parent() as Level
 
 const TILE = preload("res://Logic/CombatUtility/Tiles/Tile.tscn")
 static func create(r_tile, q_tile, r_center, q_center) -> Tile:

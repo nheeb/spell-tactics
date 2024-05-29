@@ -16,5 +16,6 @@ func execute(combat: Combat) -> void:
 	combat.input.current_castable.remove_target(tile)
 
 func on_fail(combat: Combat) -> void:
-	pass
+	if combat.input.current_castable:
+		combat.input.process_action(PADeselectCastable.new())
 

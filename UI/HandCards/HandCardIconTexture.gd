@@ -1,4 +1,6 @@
-extends Node2D
+class_name CardIconTexture extends Node2D
+
+@onready var main_icon : Sprite2D = $MainIcon
 
 func _ready() -> void:
 	pass

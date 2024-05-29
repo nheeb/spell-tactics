@@ -51,8 +51,8 @@ func is_selectable() -> bool:
 	return unlocked and logic.is_selectable()
 
 func select():
-	super.select()
 	combat.ui.cards3d.add_active_to_pin(self)
+	super.select()
 
 func deselect():
 	super.deselect()

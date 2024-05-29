@@ -1,6 +1,8 @@
 class_name HandCard3D extends Card3D
 
-var card_2d: HandCard2D
+#var card_2d: HandCard2D
+
+var spell: Spell
 
 func _enter_tree() -> void:
 	$Quad.get_surface_override_material(0).albedo_texture = $Quad/SubViewport.get_texture()
@@ -14,13 +16,13 @@ func get_castable() -> Castable:
 
 func get_spell() -> Spell:
 	# deprecated?
-	var spell =  $Quad/SubViewport/HandCard2D.spell
+	#var spell =  $Quad/SubViewport/HandCard2D.spell
 	return spell
 
-func set_card(card: HandCard2D):
-	card_2d = card
-	$Quad/SubViewport.add_child(card)  # does Quad still get used?
-	set_spell(card.spell)
+#func set_card(card: HandCard2D):
+	#card_2d = card
+	#$Quad/SubViewport.add_child(card)  # does Quad still get used?
+	#set_spell(card.spell)
 	
 func set_render_prio(p: int) -> void:
 	$Quad.get_surface_override_material(0).set("render_priority", p)
@@ -36,6 +38,7 @@ func set_collision_scale(s: float) -> void:
 func set_spell(s: Spell) -> void:
 	## TODO nitai remove card_2d
 	#card_2d.set_spell(s)
+	spell = s
 	s.card = self
 	set_spell_type(s.type)
 
@@ -52,7 +55,7 @@ func set_spell_type(type: SpellType) -> void:
 		socket.position = get_energy_socket_pos(i, costs.size())
 		socket.set_type(energy)
 	# Set Texture
-	%HandCardTexture.set_spell_type(type)
+	%CardTexture.set_spell_type(type)
 	# Set Shader color
 	%CardModel.material_override.next_pass.set("shader_parameter/albedo", type.color)
 

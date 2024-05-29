@@ -4,7 +4,8 @@ class_name EnergyOrb extends Node3D
 # see https://github.com/godotengine/godot/issues/4236
 #var vfx_singleton = load("res://Effects/VFX.tscn").instantiate();
 
-@export_enum("Any", "Matter", "Life", "Harmony", "Flow", "Decay", "Spectral") var type : int = 0:
+#@export_enum("Any", "Matter", "Life", "Harmony", "Flow", "Decay", "Spectral") var type : int = 0:
+@export var type : EnergyStack.EnergyType = EnergyStack.EnergyType.Any:
 	set(_type):
 		type = _type
 		$Orb.material_override.set("albedo_color", VFX.type_to_color(_type))

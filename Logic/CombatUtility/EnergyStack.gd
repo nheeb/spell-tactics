@@ -17,8 +17,8 @@ static func type_to_str(type: EnergyType) -> String:
 
 ## Returns an EnergyStack with possible payment arrangement if possible or null if not
 func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
-	stack.sort()
-	cost_stack.sort()
+	sort(false)
+	cost_stack.sort(false)
 	var bank := stack.duplicate()
 	var cost := cost_stack.stack.duplicate()
 	if EnergyType.Any in bank:
@@ -50,10 +50,10 @@ func shares_type_with(other: EnergyStack) -> bool:
 				return true
 	return false
 
-func sort() -> void:
+func sort(reversed := true) -> void:
 	stack.sort()
-	#stack = stack.slice(0, -stack.size()-1, -1)  # invert
-	stack.reverse()
+	if reversed:
+		stack.reverse()
 	
 	
 func add(e: EnergyStack) -> EnergyStack:

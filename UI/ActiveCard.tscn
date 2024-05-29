@@ -57,14 +57,14 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2.05456e
 [node name="HandCardEnergySocket" parent="Model/EnergySocketPivot" instance=ExtResource("2_wfqqg")]
 visible = false
 
-[node name="Cube" type="MeshInstance3D" parent="Model"]
+[node name="CardModel" type="MeshInstance3D" parent="Model"]
 unique_name_in_owner = true
 transform = Transform3D(-0.733761, 0, 2.33237e-08, 0, 0.733761, 0, -2.33237e-08, 0, -0.733761, 0, 0, 0)
 material_override = ExtResource("3_uh570")
 mesh = SubResource("ArrayMesh_b1ayi")
 skeleton = NodePath("")
 
-[node name="IconOrigin" type="Marker3D" parent="Model/Cube"]
+[node name="IconOrigin" type="Marker3D" parent="Model/CardModel"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0132882, -0.0531537, -0.113039)
 
@@ -87,7 +87,7 @@ disable_3d = true
 transparent_bg = true
 size = Vector2i(1024, 512)
 
-[node name="HandCardTexture" parent="TextureViewport" instance=ExtResource("6_1hx5m")]
+[node name="CardTexture" parent="TextureViewport" instance=ExtResource("6_1hx5m")]
 unique_name_in_owner = true
 
 [editable path="SmoothMovement"]

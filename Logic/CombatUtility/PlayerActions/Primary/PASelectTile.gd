@@ -1,5 +1,7 @@
 class_name PASelectTile extends PlayerAction
 
+const DESELECT_ON_FULL_TARGETS = true
+
 var tile: Tile
 
 func _init(_tile: Tile) -> void:
@@ -9,14 +11,23 @@ func _init(_tile: Tile) -> void:
 func is_valid(combat: Combat) -> bool:
 	if combat.input.current_castable:
 		var full := combat.input.current_castable.are_targets_full()
+		if DESELECT_ON_FULL_TARGETS:
+			if not combat.input.current_castable.targets.is_empty():
+				full = false
 		var suitable := combat.input.current_castable.is_target_possible(tile)
 		var already_target := tile in combat.input.current_castable.targets
 		return suitable and (not full) and (not already_target)
 	return false
 
 func execute(combat: Combat) -> void:
+	if DESELECT_ON_FULL_TARGETS:
+		var full := combat.input.current_castable.are_targets_full()
+		if full:
+			combat.input.process_action(PADeselectTile.new(
+				combat.input.current_castable.targets[0]
+			))
 	combat.input.current_castable.add_target(tile)
-	# TODO nitai tile highlight Visuals
+
 
 func on_fail(combat: Combat) -> void:
 	pass

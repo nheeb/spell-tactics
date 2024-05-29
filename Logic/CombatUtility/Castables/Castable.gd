@@ -33,6 +33,7 @@ func deselect():
 		tile.set_highlight(get_type().target_possible_highlight, false)
 		tile.set_highlight(get_type().target_selected_highlight, false)
 	get_logic()._on_select_deselect(false)
+	combat.ui.error_lines.clear()
 
 func get_card() -> Card3D:
 	return null

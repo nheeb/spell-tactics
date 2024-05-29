@@ -48,10 +48,13 @@ func get_costs() -> EnergyStack:
 
 func player_has_enough_energy() -> bool:
 	var energy := combat.energy.player_energy
-	return energy.get_possible_payment(get_costs()) != null
+	var costs := get_costs()
+	return energy.get_possible_payment(costs) != null
 
 func is_selectable() -> bool:
-	return player_has_enough_energy() and logic.is_selectable()
+	var enough := player_has_enough_energy()
+	var logic_selectable := logic.is_selectable()
+	return enough and logic_selectable
 
 func is_energy_loaded_fully() -> bool:
 	return not get_card().has_empty_energy_sockets()

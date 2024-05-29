@@ -1,4 +1,6 @@
-extends Control
+class_name CardTexture extends Control
+
+@onready var icon_texture : CardIconTexture = $HandCardIconTexture
 
 func set_spell_type(type: SpellType):
 	$HandCardIconTexture.set_castable_type(type)
@@ -12,3 +14,4 @@ func set_castable(castable: Castable):
 
 func set_error(text: String = ""):
 	%ErrorLabel.text = text
+

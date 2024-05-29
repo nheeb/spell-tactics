@@ -29,7 +29,7 @@ func process_phase() -> bool:
 
 func card_hovered(card: HandCard3D):
 	if card:
-		var spell := card.card_2d.spell as Spell
+		var spell := card.get_spell()
 		if not combat.animation.is_playing():
 			highlight_for_spell_energy(spell.get_costs())
 	else:

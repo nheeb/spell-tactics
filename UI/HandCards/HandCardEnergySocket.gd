@@ -38,11 +38,11 @@ var is_soon_loaded := false
 var is_loaded := false
 var loaded_energy: EnergyStack.EnergyType
 var loaded_color: Color
-func load_energy(type: EnergyStack.EnergyType):
+func load_energy(_type: EnergyStack.EnergyType):
 	is_soon_loaded = false
 	is_loaded = true
-	loaded_energy = type
-	loaded_color = VFX.type_to_color(type)
+	loaded_energy = _type
+	loaded_color = VFX.type_to_color(_type)
 	%Light.light_color = loaded_color
 	%Light.show()
 	mi.material_override.albedo_color = loaded_color.lerp(Color.DARK_GRAY, .1)
