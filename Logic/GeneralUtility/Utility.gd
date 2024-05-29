@@ -57,7 +57,8 @@ func random_index_of_scores(scores: Array[float]) -> int:
 
 ## the hit chance should be between 0 and 100
 func random_hit(hit_chance: float) -> bool:
-	assert(hit_chance >= 0.0 and hit_chance <= 100.0)
+	hit_chance = clamp(hit_chance, 0.0, 100.0)
+	#assert(hit_chance >= 0.0 and hit_chance <= 100.0)
 	return randf() <= (hit_chance * 0.01)
 
 ## could maybe be put in Utils singleton

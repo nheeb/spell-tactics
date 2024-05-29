@@ -92,12 +92,6 @@ func setup() -> void:
 			e.id = EntityID.new(e.type, level.add_type_count(e.type))
 			# set energy to the EntityType's energy in case it changed from level creation
 			e.sync_with_type()
-			#e.energy = e.type.energy
-			## same for hp
-			#if e is HPEntity:
-				#e.hp = e.type.max_hp
-				#animation.update_hp(e)
-				#print(e.type.internal_name, " ", e.hp)
 	else:
 		for e in level.entities().get_all_entities():
 			if e.id != null:

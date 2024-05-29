@@ -2,11 +2,12 @@ shader_type canvas_item;
 
 group_uniforms logic;
 uniform float health: hint_range(0.0, 30, .01) = 0.0;
-uniform float max_health: hint_range(0.0, 30, .5) = 0.0;
-uniform float shield: hint_range(0.0, 30, .5) = 0.0;
+uniform float max_health: hint_range(0.0, 10, .05) = 0.0;
+uniform float shield: hint_range(0.0, 30, 1.0) = 0.0;
 //uniform float highlight_damage: hint_range(0.0, 20.0, .5) = 0.0;
 uniform float highlight_progress: hint_range(0.0, 1.0, 0.01) = 0.0;
-uniform float target_health: hint_range(0.0, 20.0, .5) = 4.0;
+uniform float shield_damage_progress: hint_range(0.0, 1.0, 0.01) = 0.0;
+uniform float target_health: hint_range(-10.0, 20.0, .5) = 0.0;
 
 group_uniforms colors;
 uniform vec4 healthy_color: source_color;
@@ -28,6 +29,9 @@ void fragment() {
 	float uv_x = (UV.x - .5 * border_width_uv) / (1.0 - border_width_uv);
 	uv_x = clamp(uv_x, 0.0, 1.0);
 	
+	float total_health = health + shield;
+	//float health = total_health - shield;
+	
 	// define a grid of "cells" (can be health, shield, or empty/bg)
 	float cell_count = max_health + shield;
 	float tick_offset = 0.5 * float(int(cell_count + 1.0) % 2);
@@ -48,20 +52,32 @@ void fragment() {
 	// mix in visual ticks
 	color = mix(color, tick_base_color, in_tick);
 	
-		// mix in damage highlighting
-	// slightly different cell indexing for the damage highlighting
-	float highlight_damage = health - target_health;
+	// mix in damage highlighting
+	// use left-bound cell indexing for the damage highlighting
+	float highlight_damage = total_health - target_health;
 	float leftbound_offset = 0.5 * float(int(cell_count) % 2);
 	float cell_idx_left_bound = floor(leftbound_offset + (uv_x - 0.5) * cell_count) + cell_count/2.0;
 	float highlight_threshold = cell_count -  highlight_damage; // 
 	// special case for mixed highlight, still needed?
 	if(shield - highlight_damage < 0.0) {
-		highlight_threshold += (health - max_health);
+		highlight_threshold += health - max_health;
 	}
 	float in_highlight = float(cell_idx_left_bound >= highlight_threshold);
-	// filter already removed health (animation)
-	//in_highlight *= float(uv_x + cell_idx_left_bound - 1.0 < health);
-	in_highlight *= float(health / cell_count > uv_x);
+	
+	if (is_shield > 0.0) { // is this a shield cell?
+		// the damage
+		float damage = health + shield - target_health;
+		float shield_cells_affected = min(damage, shield);
+		// highlight shield cells
+		in_highlight *= float(cell_idx_left_bound > cell_count - shield_cells_affected);
+	} else {
+		in_highlight *= float(uv_x + cell_idx_left_bound - 1.0 < health);
+		// filter already removed health (animation) that is not shield
+		in_highlight *= float(health / cell_count > uv_x);	
+	}
+	
+	// clamp for safety
+	in_highlight = clamp(in_highlight, 0.0, 1.0);
 	color = mix(color, mix(color, highlight_color, highlight_progress), in_highlight);
 	
 	// blend mult with the Panel flatbox

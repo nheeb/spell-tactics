@@ -146,6 +146,8 @@ func play_animation_queue() -> void:
 			await aq.queue_finished
 			currently_playing_queues.erase(aq)
 		animation_queue_empty.emit()
+		VisualTime.visual_time_scale = 1.0
+		VisualTime.current_speed_idx = 0
 
 func is_playing() -> bool:
 	return not currently_playing_queues.is_empty()

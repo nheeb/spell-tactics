@@ -22,3 +22,6 @@ func _ready() -> void:
 func visual_drain(drained := true):
 	if $PrototypeBillboard.visible:
 		$PrototypeBillboard.drain_transition(drained)
+		
+		
+
