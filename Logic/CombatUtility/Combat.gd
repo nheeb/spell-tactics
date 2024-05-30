@@ -101,7 +101,8 @@ func setup() -> void:
 	
 	actives = [
 		Active.new(ActiveType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self)
+		Active.new(ActiveType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Spells/AllActives/BasicMovement.tres"), self),
 	]
 
 

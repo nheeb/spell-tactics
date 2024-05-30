@@ -15,17 +15,17 @@ func tile_hovered(tile: Tile):
 		combat.level.immediate_arrows().render_path(positions)
 		highlight_payable_spells(tile)
 	
-func tile_clicked(tile: Tile):
-	# state gets reset in process_phase() in SpellPhase
-	combat.input.process_action(PlayerMovement.new(tile))
+#func tile_clicked(tile: Tile):
+	## state gets reset in process_phase() in SpellPhase
+	#combat.input.process_action(PlayerMovement.new(tile))
 
 func process_phase() -> bool:
-	combat.animation.callback(combat.level, "highlight_movement_range", [combat.player, combat.player.traits.movement_range])
-	combat.animation.callback(combat.ui, "set_status", ["Make your movement!"])
+	#combat.animation.callback(combat.level, "highlight_movement_range", [combat.player, combat.player.traits.movement_range])
+	#combat.animation.callback(combat.ui, "set_status", ["Make your movement!"])
 	# player can start idling from this phase on
 	combat.animation.callback(combat.player.visual_entity, "start_idling")
 	
-	return true
+	return false
 
 func card_hovered(card: HandCard3D):
 	if card:

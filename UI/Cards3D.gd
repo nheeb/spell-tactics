@@ -414,7 +414,7 @@ func end_choice_and_get_result() -> Array:
 	var _chosen_spells = []
 	for c in chosen_cards:
 		c = c as HandCard3D
-		_chosen_spells.append(c.card_2d.spell)
+		_chosen_spells.append(c.get_spell())
 	chosen_cards = []
 	choice_running = false
 	return _chosen_spells
@@ -434,7 +434,7 @@ func choose_card(card) -> void:
 	
 		card_chosen.emit(chosen_cards.size())
 		
-		card.card_2d.set_chosen(true)
+		#card.card_2d.set_chosen(true)
 
 func clear_chosen_cards():
 	for card in chosen_cards:

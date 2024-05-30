@@ -17,10 +17,14 @@ static func type_to_str(type: EnergyType) -> String:
 
 ## Returns an EnergyStack with possible payment arrangement if possible or null if not
 func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
-	sort(false)
-	cost_stack.sort(false)
+	sort()
+	cost_stack.sort()
 	var bank := stack.duplicate()
 	var cost := cost_stack.stack.duplicate()
+	## Ever since the sort reversal we need to reverse the duplicates here
+	## TODO nitai make payment algorithm order-robust
+	bank.reverse()
+	cost.reverse()
 	if EnergyType.Any in bank:
 		printerr("Any Type Energy should not be in a bank Stack")
 	var possible_payment : Array[EnergyType] = []

@@ -1,26 +1,22 @@
-extends SpellLogic
+extends ActiveLogic
 
 ## Usable references:
-## spell - Corresponding spell
+## active - Corresponding active
 ##   (with round_persistant_properties & combat_persistant_properties)
-## combat - The current combat for which the spell was created
-## target - The target Tile (if Spell is targetable)
-## targets - Array of target tiles (if Spell has multiple targets)
+## combat - The current combat for which the active was created
+## target - The target Tile (if active is targetable)
+## targets - Array of target tiles (if active has multiple targets)
 
 
 ## Here should be the effect
 func casting_effect() -> void:
 	pass
 
-## Change the spells costs
-#func _get_costs() -> EnergyStack:
-	#return spell.type.costs
-
-## Spell can be selected
+## active can be selected
 #func _is_selectable() -> bool:
 	#return true
 
-## Spell can be casted
+## active can be casted
 #func _is_castable() -> bool:
 	#return true
 
@@ -28,11 +24,11 @@ func casting_effect() -> void:
 #func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
 	#return true
 
-## Visuals or something else on spell select / deselect
+## Visuals or something else on active select / deselect
 #func _on_select_deselect(select: bool) -> void:
 	#pass
 
-## Does the spell take additional targets
+## Does the active take additional targets
 #func _are_targets_full(_targets: Array[Tile]) -> bool:
 	#return true
 
