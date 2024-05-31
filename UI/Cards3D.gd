@@ -83,27 +83,21 @@ func _ready() -> void:
 	
 	# Move cards z
 	cards.global_position.z = Z_BASE
-	
-	# add dummy cards if debugging this scene alone
-	if get_tree().current_scene.name == "Cards3D":
-		test_mode = true
-		for i in range(5):
-			add_card(HAND_CARD_2D.instantiate())
-			await get_tree().create_timer(.5).timeout
 
 func setup(_combat : Combat):
 	combat = _combat
 
 const HAND_CARD = preload("res://UI/HandCard.tscn")
-func add_card(card_2d: HandCard2D):
-	var hand_card = HAND_CARD.instantiate()
-	hand_card.set_card(card_2d)
-	cards.add_child(hand_card)
-	#hand_card.owner = self
-	all_cards.append(hand_card)
-	hand_cards.push_front(hand_card)
-	hand_card.global_position = %CardSpawn.global_position
-	hand_card.global_position.z = Z_BASE
+func add_card(card_2d: HandCard2D):  # probably deprecated?
+	printerr("Called deprecated Cards3D.add_card()")
+	#var hand_card = HAND_CARD.instantiate()
+	#hand_card.set_card(card_2d)
+	#cards.add_child(hand_card)
+	##hand_card.owner = self
+	#all_cards.append(hand_card)
+	#hand_cards.push_front(hand_card)
+	#hand_card.global_position = %CardSpawn.global_position
+	#hand_card.global_position.z = Z_BASE
 
 const EVENT_CARD = preload("res://UI/EventCard3D.tscn")
 const EVENT_HEIGHT = 2.0
