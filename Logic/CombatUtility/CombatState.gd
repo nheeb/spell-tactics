@@ -23,6 +23,8 @@ func deserialize() -> Combat:
 	combat.current_round = current_round
 	combat.current_phase = current_phase
 	combat.energy.player_energy = player_energy
+	if level_state == null:
+		printerr("Error deserializing: LevelState null in CombatState.gd")
 	combat.level = level_state.deserialize(combat) #its important that level is deserialized after current round phase is set
 	combat.deck.append_array(deck_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.hand.append_array(hand_states.map(func(x: SpellState): return x.deserialize(combat)))

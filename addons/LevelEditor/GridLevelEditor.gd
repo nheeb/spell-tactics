@@ -52,6 +52,7 @@ func _load_level() -> Level:
 	return loaded_level_state.deserialize(null)
 	
 func save_changes():
+	print("Editor saving changes to level.")
 	var level_file = _get_level_file()
 	var state: CombatState = serialize_level_as_combat_state(level)
 	var err = ResourceSaver.save(state, level_file)

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://yua82lvmi5rk"]
+
+[sub_resource type="Shader" id="Shader_juy48"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 modulate: source_color;
+
+void fragment() {
+	COLOR = modulate * COLOR;
+}"
+
+[resource]
+shader = SubResource("Shader_juy48")
+shader_parameter/modulate = Color(1, 1, 1, 1)

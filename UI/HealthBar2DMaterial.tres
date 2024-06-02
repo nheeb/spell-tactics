@@ -5,11 +5,12 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_igdxg")
-shader_parameter/health = 2.26
-shader_parameter/max_health = 5.0
+shader_parameter/health = 4.0
+shader_parameter/max_health = 4.0
 shader_parameter/shield = 0.0
-shader_parameter/highlight_progress = 0.51
-shader_parameter/target_health = 2.0
+shader_parameter/highlight_progress = 0.0
+shader_parameter/shield_damage_progress = 0.0
+shader_parameter/target_health = 0.0
 shader_parameter/healthy_color = Color(0.4233, 0.83, 0.332, 1)
 shader_parameter/bg_color = Color(0.140625, 0.0680443, 0.031754, 1)
 shader_parameter/tick_base_color = Color(0.203125, 0.163313, 0.089375, 1)

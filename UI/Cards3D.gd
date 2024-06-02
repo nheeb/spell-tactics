@@ -83,13 +83,6 @@ func _ready() -> void:
 	
 	# Move cards z
 	cards.global_position.z = Z_BASE
-	
-	# add dummy cards if debugging this scene alone
-	if get_tree().current_scene.name == "Cards3D":
-		test_mode = true
-		for i in range(5):
-			add_card(null)
-			await get_tree().create_timer(.5).timeout
 
 func setup(_combat : Combat):
 	combat = _combat

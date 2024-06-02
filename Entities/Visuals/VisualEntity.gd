@@ -9,6 +9,8 @@ class_name VisualEntity extends Node3D
 var type: EntityType
 var entity: Entity
 
+@onready var entity_name = str(entity.id) if entity != null else "null_entity"
+
 func _enter_tree() -> void:
 	if has_node("DebugTile"):
 		$DebugTile.visible = false

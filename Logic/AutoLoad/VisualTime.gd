@@ -69,15 +69,25 @@ func disconnect_animation_player(ap: AnimationPlayer) -> void:
 	if ap in animation_players:
 		animation_players.erase(ap)
 
+signal changed_speed(speed_index)
+const SPEED_SETTINGS = [1.0, 3.0, 10.0]
+var current_speed_idx: int = 0:
+	set(c):
+		if c != current_speed_idx:
+			changed_speed.emit(c)
+		current_speed_idx = c
+		
 func _process(delta: float) -> void:
-	var _visual_time_scale = 1.0
-	if Input.is_action_pressed("speed_up"):
-		_visual_time_scale = 3.0
-		if Input.is_action_pressed("ultra_speed_up"):
-			_visual_time_scale = 11.1
-			
-	if _visual_time_scale != visual_time_scale:
-		visual_time_scale = _visual_time_scale
+	var animation_speed = 1.0
+	if Input.is_action_just_pressed("cycle_animation_speed"):
+		current_speed_idx = (current_speed_idx + 1) % len(SPEED_SETTINGS)
+		animation_speed = SPEED_SETTINGS[current_speed_idx]
+		#changed_speed.emit(current_speed_idx)
+		#print("Set speed to ", animation_speed)
+		visual_time_scale = animation_speed
+		
+	#if animation_speed != visual_time_scale:
+		#visual_time_scale = animation_speed
 	
 	var fixed_delta := delta * visual_time_scale
 	visual_global_time += fixed_delta

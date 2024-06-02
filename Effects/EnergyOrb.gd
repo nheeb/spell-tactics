@@ -65,3 +65,6 @@ func death():
 func delete():
 	movement.detach_from_orbital_body()
 	queue_free()
+	
+func set_render_priority(render_prio: int):  # used in ui to draw orbs behind cards
+	$Orb.material_override.render_priority = render_prio

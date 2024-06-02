@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bdikekkfgipvi"]
+
+[sub_resource type="Shader" id="Shader_juy48"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's CanvasItemMaterial.
+shader_type canvas_item;
+uniform vec4 modulate: source_color;
+
+void fragment() {
+	float is_border = COLOR.a * float(COLOR.r < 0.1);
+	vec4 color = modulate * (1.0 - is_border) * COLOR + COLOR * (is_border);
+	vec4 is_border_col = vec4(is_border);
+	COLOR = color;
+}"
+
+[resource]
+shader = SubResource("Shader_juy48")
+shader_parameter/modulate = Color(0.199219, 0.199219, 0.199219, 0.964706)
