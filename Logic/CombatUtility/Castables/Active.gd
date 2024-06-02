@@ -58,7 +58,7 @@ func deselect():
 	super.deselect()
 	if combat.ui.cards3d.pinned_card: 
 		if combat.ui.cards3d.pinned_card.get_castable() == self:
-			combat.ui.cards3d.unpin_card()
+			combat.animation.callable(combat.ui.cards3d.unpin_card)
 		else:
 			printerr("Tried to deselect active which wasnt pinned")
 	else:
