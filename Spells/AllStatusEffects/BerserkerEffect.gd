@@ -35,16 +35,11 @@ func extend(other_status: StatusEffect) -> void:
 func on_remove() -> void:
 	var melee_attacks = combat.actives.filter(func(x): return "Melee" in x.type.pretty_name)
 	for melee in melee_attacks:
-		melee.uses_left = 0
+		melee.add_to_max_uses(-1)
 	combat.animation.remove_staying_effect(entity.visual_entity, "berserker_icons")
 
 func make_meele_two_uses():
 	var melee_attacks = combat.actives.filter(func(x): return "Melee" in x.type.pretty_name)
 	for melee in melee_attacks:
-		if combat.current_phase == Combat.RoundPhase.Spell:
-			# if this has just been casted, the active will be unlocked again for this round
-			melee.unlocked = true
-			melee.uses_left += 1
-		else: # else, we're in ending phase and the active will be unlocked at the start of spell phase
-			melee.uses_left = 2
+		melee.add_to_max_uses(1)
 

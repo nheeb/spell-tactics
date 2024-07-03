@@ -296,6 +296,13 @@ cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
 surface_material_override/0 = ExtResource("6_bryv2")
 
+[node name="DrainProgressHexQuad" type="MeshInstance3D" parent="Highlight"]
+transform = Transform3D(1.78401, 1.03, 4.50226e-08, 0, -9.00455e-08, 2.06, 1.03, -1.78401, -7.79817e-08, 0, 0.146, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_m1xtl")
+surface_material_override/0 = ExtResource("6_bryv2")
+
 [node name="HoverTimer" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true

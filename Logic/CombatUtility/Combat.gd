@@ -94,9 +94,10 @@ func setup() -> void:
 
 	
 	actives = [
-		Active.new(ActiveType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self),
 		Active.new(ActiveType.load_from_file("res://Spells/AllActives/BasicMovement.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Spells/AllActives/Drain.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self),
 	]
 
 
@@ -117,8 +118,9 @@ func setup() -> void:
 	ui.setup(self)
 	
 	# Initial Animations
-	energy.show_drains_in_ui()
-	energy.show_energy_in_ui()
+	# TODO Nitai replace show drain and energy??
+	#energy.show_drains_in_ui()
+	#energy.show_energy_in_ui()
 	animation.camera_reach(player.current_tile)
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:

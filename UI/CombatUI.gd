@@ -123,10 +123,12 @@ func initialize_active_buttons(new_actives: Array[Active]):
 	for active in actives:
 		var button = ACTIVE_BUTTON.instantiate()
 		button.name = "ActiveButton%d" % i
-		button.text = active.type.pretty_name
+		button.active = active
+		button.text = active.get_button_caption()#active.type.pretty_name
 		button.pressed.connect(_on_active_button_pressed.bind(i))
 		active.got_locked.connect(_on_active_locked.bind(i))
 		active.got_unlocked.connect(_on_active_unlocked.bind(i))
+		active.got_updated.connect(_on_active_updated.bind(i))
 		button.disabled = not active.unlocked
 		i += 1
 		$Actives/VBoxContainer.add_child(button)
@@ -163,12 +165,6 @@ func update_payable_cards():
 		#else:
 			#hand_card2d.set_enabled(false)
 			## can't cast spell
-			
-#func update_actives():
-	#for i in range(len(actives)):
-		#var active = actives[i]
-		#if active.uses_left > 0:
-			#_on_active_unlocked(i)
 
 func _ready() -> void:
 	deselect_card()
@@ -194,6 +190,10 @@ func _on_active_unlocked(i: int) -> void:
 func _on_active_locked(i: int) -> void:
 	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
 	button.disabled = true
+
+func _on_active_updated(i: int) -> void:
+	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	button.text = button.active.get_button_caption()
 
 func _on_button_entered() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = true

@@ -30,6 +30,8 @@ func return_to_spell_selection():
 	combat.ui.deselect_card()
 
 func tile_clicked(tile: Tile):
+	# TODO Nitai remove this method completely
+	return
 	# for now try draining anytime a tile is clicked. later we'll need state,
 	# whether we're targeting a spell or draining
 	if state == CastingState.Selecting:
@@ -69,13 +71,11 @@ func process_phase() -> bool:
 	
 	# unlock all actives that are available once per round
 	for active in combat.actives:
-		if active.type.limitation == ActiveType.Limitation.X_PER_ROUND:
-			active.unlocked = true
-			active.uses_left = max(active.uses_left, active.type.max_uses_per_round)
-		# check active unlocked conditions
+		if active.is_limited_per_round():
+			active.refresh_uses_left()
 	
 	return true
-	
+
 
 #func select_spell(spell: Spell):
 	#if state == CastingState.Targeting:

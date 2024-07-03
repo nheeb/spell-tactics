@@ -179,7 +179,6 @@ func get_mouse_pos_absolute() -> Vector2:
 
 ## for when the viewport resolution doesn't match the content_scale	
 func scale_screen_pos(screen_pos: Vector2) -> Vector2:
-	
 	var current_viewport_size: Vector2 = get_tree().root.size
 	var reference_viewport_size: Vector2 = get_tree().root.content_scale_size
 	var viewport_scale: Vector2 = current_viewport_size / reference_viewport_size
@@ -221,6 +220,9 @@ func array_safe_get(array: Array, index: int, mirror := false, default = null) -
 		return array[index]
 	else:
 		return default
+
+func dict_safe_get(dict: Dictionary, key: Variant, default = null) -> Variant:
+	return dict.get(key, default)
 
 func get_parent_of_type(n: Node, type) -> Node:
 	var parent: Node = n.get_parent()

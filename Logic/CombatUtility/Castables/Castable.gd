@@ -105,6 +105,9 @@ func get_possible_targets() -> Array[Tile]:
 	elif get_type().target == SpellType.Target.Cone:
 		var none : Array[Tile] = []
 		return none
+	elif get_type().target == SpellType.Target.None:
+		var none : Array[Tile] = []
+		return none
 	tiles = tiles.filter(func(t): return is_target_suitable_as_next_target(t))
 	return tiles 
 
@@ -118,7 +121,10 @@ func update_current_state():
 		tile.set_highlight(highlight_possible, true)
 	
 	combat.ui.error_lines.clear()
-	get_card().set_glow(is_castable())
+	if get_card():
+		get_card().set_glow(is_castable())
+	else:
+		printerr("Card for Castable visual update not found")
 	update_target_ui()
 
 func update_target_ui():

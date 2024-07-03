@@ -2,6 +2,7 @@ class_name Active extends Castable
 
 signal got_locked
 signal got_unlocked
+signal got_updated
 
 var type: ActiveType
 var id: ActiveID
@@ -44,8 +45,6 @@ var unlocked: bool = false:
 			got_unlocked.emit()
 		unlocked = u
 		round_persistant_properties["unlocked"] = u
-		
-var uses_left := 0
 
 func is_selectable() -> bool:
 	return unlocked and logic.is_selectable()
@@ -73,3 +72,47 @@ func get_logic() -> CastableLogic:
 
 func get_type() -> CastableType:
 	return type
+
+func get_button_caption() -> String:
+	if is_limited_per_round():
+		return "%s (%s / %s)" % [type.pretty_name, get_limitation_uses_left(), \
+													get_limitation_max_uses()]
+	else:
+		return type.pretty_name
+
+#######################################################
+## Wrappers for (most common) X per round limitation ##
+## We have to use round_pers_props for serialization ##
+#######################################################
+
+func is_limited_per_round() -> bool:
+	return type.limitation == ActiveType.Limitation.X_PER_ROUND
+
+func set_limitation_uses_left(i: int) -> void:
+	i = max(0, i)
+	round_persistant_properties["uses_left"] = i
+	got_updated.emit()
+	if i == 0:
+		unlocked = false
+	else:
+		unlocked = true
+
+func set_limitation_max_uses(i: int) -> void:
+	round_persistant_properties["max_uses"] = i
+	got_updated.emit()
+
+func get_limitation_uses_left() -> int:
+	return round_persistant_properties.get("uses_left", 0)
+
+func get_limitation_max_uses() -> int:
+	return round_persistant_properties.get("max_uses", type.max_uses_per_round)
+
+func refresh_uses_left() -> void:
+	set_limitation_uses_left(get_limitation_max_uses())
+
+func reset_limitation_max_uses() -> void:
+	set_limitation_max_uses(type.max_uses_per_round)
+
+func add_to_max_uses(i: int) -> void:
+	set_limitation_max_uses(get_limitation_max_uses() + i)
+	set_limitation_uses_left(get_limitation_uses_left() + i)
