@@ -29,35 +29,35 @@ func return_to_spell_selection():
 	set_process(false)
 	combat.ui.deselect_card()
 
-func tile_clicked(tile: Tile):
-	# TODO Nitai remove this method completely
-	return
-	# for now try draining anytime a tile is clicked. later we'll need state,
-	# whether we're targeting a spell or draining
-	if state == CastingState.Selecting:
-		combat.input.process_action(PlayerDrain.new(tile))
-	elif state == CastingState.Targeting:
-		# try casting the spell onto the selected tile
-		# TODO support targetted spells with X/Any type Energy
-		# for now read the cost out of the spell (hack)
-		var target = tile
-		match selected_spell.type.target:
-			SpellType.Target.Cone:
-				target = highlighted_targets
-		
-		var payment = combat.ui.extract_payment()  # for now: reading payment from text input
-		var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, payment, target))
-		if valid:
-			return_to_spell_selection()
+#func tile_clicked(tile: Tile):
+	## TODO Nitai remove this method completely
+	#return
+	## for now try draining anytime a tile is clicked. later we'll need state,
+	## whether we're targeting a spell or draining
+	#if state == CastingState.Selecting:
+		#combat.input.process_action(PlayerDrain.new(tile))
+	#elif state == CastingState.Targeting:
+		## try casting the spell onto the selected tile
+		## TODO support targetted spells with X/Any type Energy
+		## for now read the cost out of the spell (hack)
+		#var target = tile
+		#match selected_spell.type.target:
+			#SpellType.Target.Cone:
+				#target = highlighted_targets
+		#
+		#var payment = combat.ui.extract_payment()  # for now: reading payment from text input
+		#var valid: bool = combat.input.process_action(PlayerCastTargeted.new(selected_spell, payment, target))
+		#if valid:
+			#return_to_spell_selection()
 
-func tile_hovered(tile: Tile):
-	if state == CastingState.Targeting:
-		if selected_spell.type.target == SpellType.Target.Cone:
-			combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
-			highlighted_targets = combat.level.get_cone_tiles(\
-					combat.player.current_tile, tile, selected_spell.type.target_min_range,\
-							selected_spell.type.target_range, 1)
-			combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+#func tile_hovered(tile: Tile):
+	#if state == CastingState.Targeting:
+		#if selected_spell.type.target == SpellType.Target.Cone:
+			#combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+			#highlighted_targets = combat.level.get_cone_tiles(\
+					#combat.player.current_tile, tile, selected_spell.type.target_min_range,\
+							#selected_spell.type.target_range, 1)
+			#combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 
 func process_phase() -> bool:
 	# reset MovementPhase specific UI

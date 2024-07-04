@@ -25,7 +25,7 @@ func set_pinned(s: bool):
 func warp(pos: Vector3 = %IconOrigin.global_position):
 	RenderingServer.global_shader_parameter_set("card_warp_origin", pos)
 	VisualTime.new_tween().tween_property(card_model.material_override.next_pass, \
-				"shader_parameter/warp_progress", 1.0, .7).from(0.0)
+				"shader_parameter/warp_progress", 2.0, 1.4).from(0.0)
 
 func set_glow(g : bool):
 	VisualTime.new_tween().tween_property(card_model.material_override.next_pass, \
@@ -35,4 +35,4 @@ func set_distort(d : bool):
 	VisualTime.new_tween().tween_property( \
 						card_texture.icon_texture.main_icon.material, \
 						"shader_parameter/distort_progress", 1.0 if d else 0.0, .45)
-	
+

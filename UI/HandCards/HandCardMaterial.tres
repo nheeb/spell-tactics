@@ -21,7 +21,7 @@ uniform vec4 error : source_color;
 uniform float glow_uv_scale = 20.0;
 uniform float glow_time_scale = 5.0;
 uniform float glow_power = 1.0;
-uniform float glow_process: hint_range(0.0, 1.0);
+uniform float glow_process: hint_range(-1.0, 1.0);
 uniform float brightness: hint_range(0.0, 1.0);
 uniform sampler2D glow_noise_texture;
 
@@ -44,7 +44,7 @@ uniform float random_seed;
 uniform vec3 warp_global_pos;
 varying vec3 warp_pos;
 
-uniform float warp_progress: hint_range(0.0, 1.0);
+uniform float warp_progress: hint_range(0.0, 2.0);
 uniform float warp_scale = 1.0;
 
 global uniform vec3 card_warp_origin;
@@ -122,8 +122,8 @@ shader_parameter/glow3 = null
 shader_parameter/error = Color(1, 0.34375, 0.34375, 1)
 shader_parameter/glow_uv_scale = 0.9
 shader_parameter/glow_time_scale = 0.07
-shader_parameter/glow_power = 2.0
-shader_parameter/glow_process = 0.0
+shader_parameter/glow_power = 1.5
+shader_parameter/glow_process = 4.75e-08
 shader_parameter/brightness = 0.2
 shader_parameter/title_uv_aa = Vector2(0.04, 0.09)
 shader_parameter/title_uv_bb = Vector2(0.395, 0.202)

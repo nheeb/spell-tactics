@@ -1,17 +1,19 @@
 @tool
 class_name Entity
+## Base Class for every Object on the Tile-Grid-Level like the player, enemies or environment.
 
-## The EntityType (Resource) this Entity is an instance of
+
+## The EntityType (Resource) this Entity is an instance of.
 var type: EntityType
-## ID for serializing references to the entity
+## ID for serializing references to the entity.
 var id: EntityID
 ## The visual representation of this Entity optional (can be null).
 ## This Node is only part of the scene tree if this Entity has been added to a tile.
 var visual_entity: VisualEntity
-## optional:
+## Optional EntityLogic.
 var logic: EntityLogic
 
-## Reference to the Tile this Entity is residing on
+## A reference to the Tile this Entity is residing on.
 var current_tile: Tile
 ## Reference to the current combat
 var combat: Combat
@@ -58,16 +60,27 @@ func move(target: Tile):
 	current_tile.remove_entity(self)
 	target.add_entity(self)
 
-func drain() -> EnergyStack:
+## Removes the entitys energy and returns the visual DrainAnimation.
+## The drained energy can be accessed only once with get_drained_energy().
+func drain() -> AnimationObject:
 	assert(is_drainable(), "Tried draining entity which is not drainable.")
-	var drained_energy = energy
+	drained_energy = energy
 	energy = EnergyStack.new([])
-	return drained_energy
+	return combat.animation.callback(visual_entity, "visual_drain").set_max_duration(.5)
 
+var drained_energy: EnergyStack
+## Returns an EnergyStack only if the entity was drained previously.
+func get_drained_energy() -> EnergyStack:
+	assert(drained_energy != null, "The entity wasn't drained before")
+	var _drained_energy = drained_energy
+	drained_energy = null
+	return _drained_energy
+
+## Returns true if the entity has drainable energy on it.
 func is_drainable():
 	return type.is_drainable and energy != null and not energy.is_empty()
 
-## This will be executed after an entity has been created from a type
+## This will be executed after an entity has been created from a type.
 func on_create() -> void:
 	visual_entity.visible = false
 	for status_effect in status_effects:
@@ -79,12 +92,15 @@ func get_reference() -> EntityReference:
 func is_dead() -> bool:
 	return current_tile == null
 
-func die() -> void:
+## Removes the entity from the level and moves it into the graveyard.
+## Returns the die animation (hiding the model for now).
+func die() -> AnimationObject:
 	combat.level.move_entity_to_graveyard(self)
-	combat.animation.hide(visual_entity)
+	return combat.animation.hide(visual_entity)
 
-func go_to_graveyard() -> void:
-	die()
+## Wrapper function for the method die(). Not sure why we have this...
+func go_to_graveyard() -> AnimationObject:
+	return die()
 
 func apply_status_effect(effect: StatusEffect) -> void:
 	var existing_effect := get_status_effect(effect.get_status_name())
@@ -133,6 +149,6 @@ func _to_string() -> String:
 func get_tags() -> Array[String]:
 	return type.tags
 
-## This takes all relevant information from the type in CombatBegin Phase
+## This takes all relevant information from the type in CombatBegin Phase.
 func sync_with_type() -> void:
 	energy = type.energy

@@ -2,18 +2,18 @@ class_name MovementPhase extends AbstractPhase
 
 var highlighted_tiles: Array[Tile]
 
-func tile_hovered(tile: Tile):
-	var path = combat.level.get_shortest_path(combat.player.current_tile, tile)
-	var length = len(path)
-	# check if hovered tile is in movement range, in that case show the movement arrow and
-	# highlight the spells, that could be casted from there
-	if length > 0 and length <= combat.player.traits.movement_range and not combat.animation.is_playing():
-		var positions : Array[Vector3] = [combat.player.current_tile.global_position]
-		for t in path:
-			positions.append(t.global_position)
-
-		combat.level.immediate_arrows().render_path(positions)
-		highlight_payable_spells(tile)
+#func tile_hovered(tile: Tile):
+	#var path = combat.level.get_shortest_path(combat.player.current_tile, tile)
+	#var length = len(path)
+	## check if hovered tile is in movement range, in that case show the movement arrow and
+	## highlight the spells, that could be casted from there
+	#if length > 0 and length <= combat.player.traits.movement_range and not combat.animation.is_playing():
+		#var positions : Array[Vector3] = [combat.player.current_tile.global_position]
+		#for t in path:
+			#positions.append(t.global_position)
+#
+		#combat.level.immediate_arrows().render_path(positions)
+		#highlight_payable_spells(tile)
 	
 #func tile_clicked(tile: Tile):
 	## state gets reset in process_phase() in SpellPhase
@@ -27,13 +27,13 @@ func process_phase() -> bool:
 	
 	return false
 
-func card_hovered(card: HandCard3D):
-	if card:
-		var spell := card.get_spell()
-		if not combat.animation.is_playing():
-			highlight_for_spell_energy(spell.get_costs())
-	else:
-		highlight_for_spell_energy(null)
+#func card_hovered(card: HandCard3D):
+	#if card:
+		#var spell := card.get_spell()
+		#if not combat.animation.is_playing():
+			#highlight_for_spell_energy(spell.get_costs())
+	#else:
+		#highlight_for_spell_energy(null)
 
 func highlight_for_spell_energy(energy: EnergyStack):
 	highlight_payable_spells(null)

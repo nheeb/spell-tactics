@@ -37,17 +37,19 @@ func update_ui():
 	combat.ui.update_payable_cards()
 
 func tile_hovered(tile: Tile) -> void:
-	combat.get_current_phase_node().tile_hovered(tile)
+	pass # TODO Nitai Connect this to some PA
+	#combat.get_current_phase_node().tile_hovered(tile)
 
 func tile_clicked(tile: Tile) -> void:
-	combat.get_current_phase_node().tile_clicked(tile)
+	#combat.get_current_phase_node().tile_clicked(tile)
 	process_action(PASelectTile.new(tile))
 
 func tile_rightclicked(tile: Tile) -> void:
 	process_action(PADeselectTile.new(tile))
 
 func card_hovered(card: HandCard3D) -> void:
-	combat.get_current_phase_node().card_hovered(card)
+	pass # TODO Nitai Connect this to some PA
+	#combat.get_current_phase_node().card_hovered(card)
 
 func card_selected(card: HandCard3D) -> void:
 	process_action(PASelectCastable.new(card.get_castable()))
