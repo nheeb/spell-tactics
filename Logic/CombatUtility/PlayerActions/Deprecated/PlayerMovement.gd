@@ -5,6 +5,7 @@ var destination : Tile
 func _init(_destination : Tile) -> void:
 	destination = _destination
 	action_string = "Move to %s" % destination
+	printerr("Using deprecated PlayerAction %s" % action_string)
 
 func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Movement:

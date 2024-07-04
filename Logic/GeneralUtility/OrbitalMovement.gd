@@ -161,7 +161,7 @@ func detach_from_orbital_body():
 func jump(impulse: Vector3):
 	active_movements[MovementType.Impulse].add_impulse(impulse)
 
-static var BASE_JUMP_FORCE : float = .06
+static var BASE_JUMP_FORCE : float = .04
 func base_jump():
 	if attractor:
 		jump(attractor.get_dir() * BASE_JUMP_FORCE)

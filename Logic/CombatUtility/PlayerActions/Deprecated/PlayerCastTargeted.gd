@@ -6,7 +6,7 @@ func _init(_spell: Spell, _payment: EnergyStack, _target) -> void:
 	super(_spell, _payment)
 	self.target = _target
 	action_string = "Cast targeted %s on %s" % [_spell, _target]
-	
+	printerr("Using deprecated PlayerAction %s" % action_string)
 
 func is_valid(combat: Combat) -> bool:
 	var super_valid: bool = super(combat)

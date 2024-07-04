@@ -49,11 +49,11 @@ float clamp_and_map(float value, float istart, float istop, float ostart, float 
 }
 
 float clamp_and_map_and_pow(float value, float istart, float istop, float ostart, float ostop, float exponent) {
-    value = clamp(value, istart, istop);
-	float progress = ((value - istart) / (istop - istart));
-	float clamped_progress = clamp(progress, 0.0, 1.0);
-	float middle_value = pow(clamped_progress, exponent);
-    return ostart + (ostop - ostart) * middle_value;
+    float _value = clamp(value, istart, istop);
+    float raw_progress = abs(abs(_value - istart) / abs(istop - istart));
+    float clamped_progress = abs(clamp(raw_progress, 0.0, 1.0));
+    float middle_value = pow(clamped_progress, exponent);
+    return ostart + ((ostop - ostart) * middle_value);
 }
 
 float invert(float value) {

@@ -5,6 +5,7 @@ var target_tile: Tile
 func _init(tile: Tile) -> void:
 	target_tile = tile
 	action_string = "Drain tile %s" % target_tile
+	printerr("Using deprecated PlayerAction %s" % action_string)
 
 func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Spell:
@@ -29,7 +30,8 @@ func execute(combat: Combat) -> void:
 			#continue
 		# entity.drain() removes the energy from that entity as a side-effect
 		if entity.is_drainable():
-			energy_stack = entity.drain()
+			entity.drain()
+			energy_stack = entity.get_drained_energy()
 			combat.energy.gain(energy_stack)
 		combat.animation.callback(entity.visual_entity, "visual_drain").set_max_duration(.5)
 		if energy_stack:
