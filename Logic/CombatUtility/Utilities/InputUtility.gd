@@ -25,9 +25,10 @@ func select_castable(castable: Castable):
 	current_castable.select()
 	# remove all tile highlights
 
-func deselect_castable():
-	current_castable.deselect()
-	current_castable = null
+func deselect_castable(castable: Castable = null):
+	if current_castable == castable or castable == null:
+		current_castable.deselect()
+		current_castable = null
 
 func is_taking_actions() -> bool:
 	return combat.current_phase == Combat.RoundPhase.Spell or \
@@ -43,6 +44,7 @@ func tile_hovered(tile: Tile) -> void:
 func tile_clicked(tile: Tile) -> void:
 	#combat.get_current_phase_node().tile_clicked(tile)
 	process_action(PASelectTile.new(tile))
+	process_action(PAInstantDrain.new(tile))
 
 func tile_rightclicked(tile: Tile) -> void:
 	process_action(PADeselectTile.new(tile))

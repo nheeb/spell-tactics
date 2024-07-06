@@ -2,7 +2,7 @@
 class_name CastableType extends Resource
 
 @export_category("Spell Attributes")
-## Lowercase unique entity identifier
+## Unique entity identifier (name of the resource file)
 var internal_name: String = ""
 ## Name that will be shown ingame
 @export var pretty_name: String

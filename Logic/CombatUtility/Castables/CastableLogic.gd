@@ -40,7 +40,7 @@ func before_cast() -> void:
 	pass
 
 func after_cast() -> void:
-	combat.input.deselect_castable()
+	combat.input.deselect_castable(get_castable())
 
 func get_castable() -> Castable:
 	return null

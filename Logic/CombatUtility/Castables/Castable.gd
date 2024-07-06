@@ -111,9 +111,13 @@ func get_possible_targets() -> Array[Tile]:
 	tiles = tiles.filter(func(t): return is_target_suitable_as_next_target(t))
 	return tiles 
 
-## This updates all ui / highlights / possible targets
-func update_current_state():
+## This calculates which targets are possible to choose in the current state.
+func update_possible_targets() -> void:
 	possible_targets = get_possible_targets()
+
+## This updates all ui / highlights / possible targets.
+func update_current_state() -> void:
+	update_possible_targets()
 	var highlight_possible := get_type().target_possible_highlight
 	for tile in combat.level.get_all_tiles():
 		tile.set_highlight(highlight_possible, false)

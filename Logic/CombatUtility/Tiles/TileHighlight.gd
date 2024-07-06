@@ -103,3 +103,9 @@ func disable_highlight(type: Type):
 		$Edges.visible = false
 	else:
 		current_material = highlight_materials[current_highlights[0]]
+
+## Shows and sets the progress of the drain-hex-bar to a value between 0.0 and 1.0 .
+func set_drain_progress(p := 0.0) -> void:
+	$DrainProgressHexQuad.visible = p != 0.0
+	$DrainProgressHexQuad.get_surface_override_material(0).set("shader_parameter/progress", p)
+	
