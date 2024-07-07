@@ -13,6 +13,7 @@ var speed_idx: int = 0
 
 
 func _enter_tree() -> void:
+	visible = false
 	# register itself to VisualTime
 	VisualTime.changed_speed.connect(set_speed)
 	
