@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://dcbq3ohb123xy"]
 
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_l2jrd"]
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_soxba"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_l2jrd"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_soxba"]
 [ext_resource type="Texture2D" uid="uid://fnkmhfwqb3wx" path="res://Assets/Sprites/Icons/half-body-crawling.png" id="2_hsywt"]
 
 [sub_resource type="Resource" id="Resource_f4asu"]
@@ -10,9 +10,9 @@ stack = Array[int]([1, 6])
 
 [resource]
 script = ExtResource("1_l2jrd")
-pretty_name = "Total decay"
 costs = SubResource("Resource_f4asu")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Total decay"
 effect_text = "Does 1 damage to an enemy.  You can use any amount of additional Decay Energy to increase the damage by that amount. "
 fluff_text = ""
 icon = ExtResource("2_hsywt")

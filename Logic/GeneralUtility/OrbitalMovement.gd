@@ -13,7 +13,7 @@ class_name OrbitalMovement extends Node3D
 ## Each of them have an active variable float between 0 and 1
 
 enum MovementType {
-	Gravity, Impulse, Damp, Drag, Follow, Bound, Correct, Push, Fixed
+	Gravity, Impulse, Damp, Drag, Follow, Bound, Correct, Push, Fixed, Bezier
 }
 
 @onready var parent : Node3D = get_parent() as Node3D
@@ -34,6 +34,7 @@ func setup_active_movements():
 	active_movements[MovementType.Correct] = MovementCorrect.new(self)
 	active_movements[MovementType.Push] = MovementPush.new(self)
 	active_movements[MovementType.Fixed] = MovementFixed.new(self)
+	active_movements[MovementType.Bezier] = MovementBezier.new(self)
 
 func setup(_attractor, _orbit_body):
 	attractor = _attractor
@@ -117,6 +118,35 @@ class MovementFixed extends Movement:
 	func _get_move(delta: float) -> Vector3:
 		return fixed_pos - om.global_position
 
+signal bezier_finished
+class MovementBezier extends Movement:
+	var progress: float
+	var duration: float = .6
+	var p0: Vector3
+	var p1: Vector3
+	var p2: Vector3
+	var active := false
+	func start():
+		active = true
+		progress = 0.0
+	func _get_move(delta: float) -> Vector3:
+		if active:
+			progress = min(1.0, progress + delta / duration)
+			var pos : Vector3 = Utility.quadratic_bezier_3D(p0, p1, p2, progress)
+			if progress >= .99:
+				finish()
+			return pos - om.global_position
+		else:
+			return Vector3.ZERO
+	func finish():
+		active = false
+		om.bezier_finished.emit()
+
+
+###############
+## Functions ##
+###############
+
 func attach_to_orbital_body(body: OrbitalMovementBody):
 	if orbit_body:
 		detach_from_orbital_body()
@@ -131,7 +161,7 @@ func detach_from_orbital_body():
 func jump(impulse: Vector3):
 	active_movements[MovementType.Impulse].add_impulse(impulse)
 
-static var BASE_JUMP_FORCE : float = .06
+static var BASE_JUMP_FORCE : float = .04
 func base_jump():
 	if attractor:
 		jump(attractor.get_dir() * BASE_JUMP_FORCE)
@@ -139,10 +169,21 @@ func base_jump():
 	else:
 		jump(Vector3.UP * BASE_JUMP_FORCE)
 
+const BEZIER_JUMP_LERP_DURATION = .3
+func bezier_jump(p0: Vector3, p1: Vector3, p2: Vector3, duration: float = .65):
+	active_movements[MovementType.Bezier].p0 = p0
+	active_movements[MovementType.Bezier].p1 = p1
+	active_movements[MovementType.Bezier].p2 = p2
+	active_movements[MovementType.Bezier].duration = duration
+	active_movements[MovementType.Bezier].start()
+	VisualTime.create_tween().tween_property(self, "behaviour_bezier", \
+											1.0, BEZIER_JUMP_LERP_DURATION)
+
 @export var behaviour_fixed := true
 @export var behaviour_fixed_progress := 0.0
 @export var behaviour_physics := 0.0
 @export var behaviour_orbit := 0.0
+@export var behaviour_bezier := 0.0
 
 func calculate_movement_activations(delta: float):
 	for movement in active_movements.values():
@@ -164,6 +205,12 @@ func calculate_movement_activations(delta: float):
 			active_movements[MovementType.Follow].activation = behaviour_orbit * approaching_progress
 			active_movements[MovementType.Correct].activation = behaviour_orbit * approaching_progress
 			active_movements[MovementType.Bound].activation = behaviour_orbit * approaching_progress
+
+	if behaviour_bezier > 0.0:
+		for movement in active_movements.values():
+			movement = movement as Movement
+			movement.activation *= 1.0 - behaviour_bezier
+		active_movements[MovementType.Bezier].activation = behaviour_bezier
 
 var last_move := Vector3.ZERO
 func movement_process(delta: float) -> void:

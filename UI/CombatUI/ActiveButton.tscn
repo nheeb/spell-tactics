@@ -4,11 +4,13 @@
 [ext_resource type="Script" path="res://UI/CombatUI/ActiveButton.gd" id="2_o25rt"]
 
 [node name="ActiveButton" type="Button"]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(150, 80)
+offset_right = 150.0
+offset_bottom = 80.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("1_7euso")
-theme_override_font_sizes/font_size = 43
+theme_override_font_sizes/font_size = 38
 text = "Melee"
 alignment = 0
 text_direction = 1

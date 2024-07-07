@@ -1,11 +1,13 @@
-extends Node2D
+class_name CardIconTexture extends Node2D
+
+@onready var main_icon : Sprite2D = $MainIcon
 
 func _ready() -> void:
 	pass
 
 const MAIN_ICON_SIZE = 512.0
 
-func set_spell_type(type: SpellType):
+func set_castable_type(type: CastableType):
 	# Hide all
 	for c in get_children():
 		c.hide()

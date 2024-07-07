@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp2hxq66fqsfr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7tfd4"]
+transparency = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_xwl46"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ienwl"]
+transparency = 1
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_7tfd4")
+mesh = SubResource("BoxMesh_xwl46")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.419228, 0, -0.414036, -0.278047, 0.436585, -0.281533, 0.306783, 0.395691, 0.31063, 0.00480628, 0, -0.0298368)
+sorting_offset = 1.79
+material_override = SubResource("StandardMaterial3D_ienwl")
+mesh = SubResource("BoxMesh_xwl46")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965332, 0.261027, 0, -0.261027, 0.965332, 0, 0.590544, 2.55055)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13548, 0, 0.912663)

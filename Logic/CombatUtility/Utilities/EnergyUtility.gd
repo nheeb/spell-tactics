@@ -4,14 +4,11 @@ class_name EnergyUtility extends CombatUtility
 
 var drains_done_this_turn := 0
 
-func pay(payment: EnergyStack) -> AnimationCallback:
-	# style: is this utility method needed or should it be moved here?
-	# -> what?
+func pay(payment: EnergyStack, explode_in_ui := false) -> AnimationObject:
 	player_energy.apply_payment(payment)
-	explode_energy_orbs(payment)
-	return show_energy_in_ui()
+	return explode_energy_orbs(payment, explode_in_ui)
 
-func explode_energy_orbs(payment: EnergyStack) -> AnimationObject:
+func explode_energy_orbs(payment: EnergyStack, explode_in_ui: bool) -> AnimationObject:
 	var anims := []
 	for body in [combat.player.visual_entity.orbital_movement_body, combat.ui.cards3d.energy_ui.omb]:
 		var orbs : Array = body.get_children().filter(func(c): return c is EnergyOrb)
@@ -25,29 +22,47 @@ func explode_energy_orbs(payment: EnergyStack) -> AnimationObject:
 				anims.append(combat.animation.callback(target_orb, "death"))
 				target_orb.death()
 				orbs.erase(target_orb)
+	if explode_in_ui:
+		pass
+		# TODO nitai explode in ui
 	return combat.animation.reappend_as_subqueue(anims).set_flag_with()
 
 func is_payable(payment: EnergyStack) -> bool:
 	var possible: EnergyStack = player_energy.get_possible_payment(payment)
 	return possible != null
 
-func gain(energy: EnergyStack) -> AnimationCallback:
+func gain(energy: EnergyStack, entity: Entity = null) -> AnimationObject:
 	player_energy.stack.append_array(energy.stack)
-	return show_energy_in_ui()
+	return spawn_orbs(energy, entity)
 
-func show_energy_in_ui() -> AnimationCallback:
-	player_energy.sort()
-	return combat.animation.callback(combat.ui, "set_current_energy", \
-										 [player_energy.duplicate(true)])
+func spawn_orbs(energy: EnergyStack, entity: Entity) -> AnimationObject:
+	var anims: Array[AnimationObject] = []
+	if entity and entity.visual_entity:
+		anims.append(
+			combat.animation.callback(entity.visual_entity, "spawn_energy_orbs",\
+				[energy, combat.player.visual_entity.orbital_movement_body])\
+				.set_max_duration(.5).set_flag_with()
+		)
+	anims.append(
+		combat.animation.callback(combat.ui.cards3d.energy_ui, "spawn_energy_orbs",\
+			[energy]).set_max_duration(.5).set_flag_with()
+	)
+	return combat.animation.reappend_as_subqueue(anims)
 
-func reset_drains() -> AnimationCallback:
-	drains_done_this_turn = 0
-	return show_drains_in_ui()
 
-func add_a_drain(drains := 1) -> AnimationCallback:
-	drains_done_this_turn += drains
-	return show_drains_in_ui()
+#func show_energy_in_ui() -> AnimationCallback:
+	#player_energy.sort()
+	#return combat.animation.callback(combat.ui, "set_current_energy", \
+										 #[player_energy.duplicate(true)])
 
-func show_drains_in_ui() -> AnimationCallback:
-	var drains_left : int = combat.player.traits.max_drains - drains_done_this_turn
-	return combat.animation.callback(combat.ui, "set_drains_left", [drains_left])
+#func reset_drains() -> AnimationCallback:
+	#drains_done_this_turn = 0
+	#return show_drains_in_ui()
+#
+#func add_a_drain(drains := 1) -> AnimationCallback:
+	#drains_done_this_turn += drains
+	#return show_drains_in_ui()
+#
+#func show_drains_in_ui() -> AnimationCallback:
+	#var drains_left : int = combat.player.traits.max_drains - drains_done_this_turn
+	#return combat.animation.callback(combat.ui, "set_drains_left", [drains_left])

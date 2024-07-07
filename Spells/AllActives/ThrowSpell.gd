@@ -1,4 +1,4 @@
-extends SpellLogic
+extends ActiveLogic
 
 ## Usable references:
 ## spell - Corresponding spell

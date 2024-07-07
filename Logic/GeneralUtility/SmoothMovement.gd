@@ -28,8 +28,13 @@ var target_scale := Vector3.ONE
 var target_rotation := Vector3.ZERO
 
 @export var time_scale := 3.0
+
 ## The control_value controls the strength of swinging forces
-func movement_process(delta: float, control_value := 1.0):
+func movement_process(delta: float, control_value := 1.0, precision := 2):
+	for i in range(precision):
+		_movement_process(delta / float(precision), control_value)
+
+func _movement_process(delta: float, control_value := 1.0):
 	if first_time:
 		first_time_setup()
 	delta *= time_scale

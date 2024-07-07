@@ -1,15 +1,3 @@
-vec2 rotateUV(vec2 uv, vec2 pivot, float angle) {
-    float sine = sin(angle);
-    float cosine = cos(angle);
-
-    uv -= pivot;
-    uv.x = uv.x * cosine - uv.y * sine;
-    uv.y = uv.x * sine + uv.y * cosine;
-    uv += pivot;
-
-    return uv;
-}
-
 vec2 rotateVector(vec2 _v, float angle) {
 	float sine = sin(angle);
     float cosine = cos(angle);
@@ -20,6 +8,12 @@ vec2 rotateVector(vec2 _v, float angle) {
     v.y = _v.x * sine + _v.y * cosine;
 
     return v;
+}
+
+vec2 rotateUV(vec2 uv, vec2 pivot, float angle) {
+    vec2 v = uv - pivot;
+	v = rotateVector(v, angle);
+	return v + pivot;
 }
 
 mat3 rotation_matrix_x(float angle) {
@@ -55,9 +49,11 @@ float clamp_and_map(float value, float istart, float istop, float ostart, float 
 }
 
 float clamp_and_map_and_pow(float value, float istart, float istop, float ostart, float ostop, float exponent) {
-    value = clamp(value, istart, istop);
-	float middle_value = pow(((value - istart) / (istop - istart)), exponent);
-    return ostart + (ostop - ostart) * middle_value;
+    float _value = clamp(value, istart, istop);
+    float raw_progress = abs(abs(_value - istart) / abs(istop - istart));
+    float clamped_progress = abs(clamp(raw_progress, 0.0, 1.0));
+    float middle_value = pow(clamped_progress, exponent);
+    return ostart + ((ostop - ostart) * middle_value);
 }
 
 float invert(float value) {

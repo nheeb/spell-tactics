@@ -2,7 +2,7 @@
 extends Node
 class_name GridLevelEditor
 
-const LEVEL = preload("res://Logic/Tiles/Level.tscn")
+const LEVEL = preload("res://Logic/CombatUtility/Tiles/Level.tscn")
 
 @export var level_name: String = "level_01"
 

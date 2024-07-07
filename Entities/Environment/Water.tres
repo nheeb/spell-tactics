@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="EntityType" load_steps=5 format=3 uid="uid://qtscnlalmb8s"]
 
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_484iy"]
 [ext_resource type="Script" path="res://Entities/EntityType.gd" id="1_py3jk"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_rjl63"]
 [ext_resource type="PackedScene" uid="uid://comglywow87xc" path="res://Entities/Visuals/VisualWaterTile.tscn" id="2_6hx8k"]
 
 [sub_resource type="Resource" id="Resource_68nty"]
-script = ExtResource("1_484iy")
+script = ExtResource("1_rjl63")
 stack = Array[int]([3, 3])
 
 [resource]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjuv8jfc5pykg"]
+[gd_scene load_steps=20 format=3 uid="uid://bjuv8jfc5pykg"]
 
 [ext_resource type="Script" path="res://UI/HandCards/HandCardEnergySocket.gd" id="1_8rv3c"]
 [ext_resource type="PackedScene" uid="uid://rrw0utxp21s5" path="res://Assets/Models/HUD_Card/GLB/EnergySocket.glb" id="2_6krtn"]
 [ext_resource type="Material" uid="uid://b7modv1wtonne" path="res://Assets/Materials/HandCardEnergySocketCrystal.tres" id="3_dyw64"]
 [ext_resource type="Texture2D" uid="uid://b2an7ubkpk1mq" path="res://Assets/Materials/Textures/rock2k/rock_0005_color_2k.jpg" id="3_tjilx"]
+[ext_resource type="Texture2D" uid="uid://bbp5f3p2f3t6u" path="res://Assets/Sprites/Effects/muzzleFlash0.png" id="5_vuddu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybij4"]
 albedo_texture = ExtResource("3_tjilx")
@@ -14,6 +15,115 @@ resource_local_to_scene = true
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_78fl2"]
+
+[sub_resource type="Curve" id="Curve_pesvf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0478261, 1), 0.0, 0.0, 0, 0, Vector2(0.595652, 0.307692), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3msjg"]
+curve = SubResource("Curve_pesvf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ibu7w"]
+emission_shape_scale = Vector3(0, 1, 1)
+emission_shape = 1
+emission_sphere_radius = 0.08
+angle_min = -1392.0
+angle_max = 720.0
+direction = Vector3(1, 1, 0)
+spread = 20.0
+flatness = 0.388
+initial_velocity_min = 0.6
+initial_velocity_max = 0.8
+gravity = Vector3(0, -1.8, 0)
+scale_min = 1.1
+scale_max = 1.7
+scale_curve = SubResource("CurveTexture_3msjg")
+anim_offset_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnkdc"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("5_vuddu")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_cwdmc"]
+material = SubResource("StandardMaterial3D_tnkdc")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="Animation" id="Animation_lvvse"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SparkParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2eral"]
+resource_name = "load"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.7, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 1)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SparkParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_auypc"]
+_data = {
+"RESET": SubResource("Animation_lvvse"),
+"load": SubResource("Animation_2eral")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huxd8"]
+shading_mode = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gddo0"]
+radial_segments = 12
+rings = 1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kg8gc"]
+height = 0.0948774
+radius = 0.0898822
 
 [node name="HandCardEnergySocket" type="Node3D"]
 script = ExtResource("1_8rv3c")
@@ -32,5 +142,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.423309, 0)
 visible = false
 material_override = ExtResource("3_dyw64")
 mesh = SubResource("BoxMesh_78fl2")
+
+[node name="Light" type="OmniLight3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112064, 0, 0)
+light_energy = 0.0
+omni_range = 0.33
+omni_attenuation = 1.6245
+
+[node name="SparkParticles" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 24
+lifetime = 3.0
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.95
+fixed_fps = 60
+visibility_aabb = AABB(-0.05001, -7.13344, -0.64911, 1.80398, 7.29627, 1.31276)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ibu7w")
+draw_pass_1 = SubResource("QuadMesh_cwdmc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_auypc")
+}
+
+[node name="Outline" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-7.02856e-09, 0.00817055, 0, -0.160795, -3.57147e-10, 0, 0, 0, 0.160795, -0.00921501, 0, 0)
+material_override = SubResource("StandardMaterial3D_huxd8")
+mesh = SubResource("CylinderMesh_gddo0")
+
+[node name="HoverArea" type="Area3D" parent="." groups=["energy_ui"]]
+unique_name_in_owner = true
+
+[node name="HoverAreaCollisionShape" type="CollisionShape3D" parent="HoverArea"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0232356, 0, 0)
+shape = SubResource("CylinderShape3D_kg8gc")
 
 [editable path="EnergySocket"]

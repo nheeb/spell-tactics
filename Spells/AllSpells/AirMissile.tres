@@ -1,18 +1,18 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://bu7gx0wc5bbuh"]
 
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_ra3ys"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_766p2"]
 [ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="2_31ckx"]
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="2_xyors"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="2_xyors"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
-script = ExtResource("1_ra3ys")
+script = ExtResource("1_766p2")
 stack = Array[int]([4, 6])
 
 [resource]
 script = ExtResource("2_xyors")
-pretty_name = "Air Missile"
 costs = SubResource("Resource_gkkbv")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Air Missile"
 effect_text = "A short range burst of air deals 2 damage to enemy in range 3."
 fluff_text = "Fun
 
@@ -23,6 +23,10 @@ target = 1
 target_range = 3
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 1
 topic_secondary = 0
 topic_icons = Array[int]([])

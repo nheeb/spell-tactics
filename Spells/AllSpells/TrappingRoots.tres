@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://qhnw7yi6brvf"]
 
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="1_khymq"]
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_ojgum"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_khymq"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_ojgum"]
 [ext_resource type="Texture2D" uid="uid://bbrkmv3445iks" path="res://Assets/Sprites/Icons/root-tip.png" id="2_8d6xg"]
 
 [sub_resource type="Resource" id="Resource_duit4"]
@@ -12,7 +12,7 @@ stack = Array[int]([0, 6])
 script = ExtResource("1_khymq")
 pretty_name = "Trapping Roots"
 costs = SubResource("Resource_duit4")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
 effect_text = "Traps an enemy for 2 rounds"
 fluff_text = "Wurzel Wurzel"
 icon = ExtResource("2_8d6xg")

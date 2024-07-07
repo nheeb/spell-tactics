@@ -4,7 +4,8 @@ class_name EnergyOrb extends Node3D
 # see https://github.com/godotengine/godot/issues/4236
 #var vfx_singleton = load("res://Effects/VFX.tscn").instantiate();
 
-@export_enum("Any", "Matter", "Life", "Harmony", "Flow", "Decay", "Spectral") var type : int = 0:
+#@export_enum("Any", "Matter", "Life", "Harmony", "Flow", "Decay", "Spectral") var type : int = 0:
+@export var type : EnergyStack.EnergyType = EnergyStack.EnergyType.Any:
 	set(_type):
 		type = _type
 		$Orb.material_override.set("albedo_color", VFX.type_to_color(_type))
@@ -13,9 +14,6 @@ class_name EnergyOrb extends Node3D
 							VFX.type_to_icon(_type))
 @export var orbital_movement_active: bool = true
 var in_ui := false
-
-#func get_type():
-	#return type
 
 @onready var movement : OrbitalMovement = $OrbitalMovement
 
@@ -43,7 +41,7 @@ func _ready() -> void:
 var ray_cast: RayCast3D
 func _process(delta: float) -> void:
 	movement.movement_process(delta * VisualTime.visual_time_scale)
-	if in_ui:
+	if in_ui and hoverable:
 		var hovered : bool = false
 		if ray_cast:
 			if ray_cast.get_collider() == %MouseArea:
@@ -51,8 +49,15 @@ func _process(delta: float) -> void:
 		%Outline.visible = hovered
 		if hovered:
 			if Input.is_action_just_pressed("select"):
-				pass
-				# TODO Pay
+				Events.energy_orb_clicked.emit(self)
+
+var hoverable := true
+func set_hoverable(h: bool):
+	hoverable = h
+	%MouseArea.monitorable = h
+	%MouseArea.monitoring = h
+	$MouseArea/CollisionShape3D.disabled = not h
+	%Outline.visible = %Outline.visible and h
 
 func death():
 	$AnimationPlayer.play("death")

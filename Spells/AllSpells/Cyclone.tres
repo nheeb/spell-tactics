@@ -1,18 +1,18 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://cd42nwwenro"]
 
-[ext_resource type="Script" path="res://Logic/EnergyStack.gd" id="1_25jik"]
-[ext_resource type="Script" path="res://Spells/SpellType.gd" id="2_8b4eb"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_t6bkq"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="2_8b4eb"]
 [ext_resource type="Texture2D" uid="uid://coreekhuqc5m2" path="res://Assets/Sprites/Icons/whirlwind.png" id="2_50yhd"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
-script = ExtResource("1_25jik")
+script = ExtResource("1_t6bkq")
 stack = Array[int]([6, 6])
 
 [resource]
 script = ExtResource("2_8b4eb")
-pretty_name = "Cyclone"
 costs = SubResource("Resource_gkkbv")
-keywords = Array[Resource("res://Spells/Keyword.gd")]([])
+keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Cyclone"
 effect_text = "Create a cyclone that deals 2 damage per turn to units standing on it. Lasts 3 rounds."
 fluff_text = "
 "
@@ -22,6 +22,10 @@ target = 3
 target_range = 4
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 5
 topic_secondary = 0
 topic_icons = Array[int]([])

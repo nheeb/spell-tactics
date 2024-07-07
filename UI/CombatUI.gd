@@ -1,18 +1,19 @@
 class_name CombatUI extends Control
 
 var combat : Combat
-var cards : Array[HandCard2D]  # is this needed?
+#var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
 var actives: Array[Active]
 
-@onready var cards3d : Cards3D = %Cards3D
+@onready var cards3d: Cards3D = %Cards3D
 @onready var timeline: TimelineUI = %Timeline
+@onready var error_lines: StatusLines = %ErrorLines
 
 func setup(_combat: Combat):
 	self.combat = _combat
 	# Update UI
 	for spell in self.combat.hand:
-		add_card(spell)
+		cards3d.add_card(spell)
 	$GameOverText.visible = false
 
 	# set actives
@@ -24,46 +25,46 @@ func setup(_combat: Combat):
 	#cards3d.combat = _combat
 	
 	# connect to spell phase
-	combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)
+	# combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)
 	
 	# Build timeline
 	%Timeline.build_timeline_from_log(combat.log)
 
-func _on_changed_casting_state(s: SpellPhase.CastingState):
-	if s == SpellPhase.CastingState.SettingEnergy:
-		$Cast.disabled = false
-	else:
-		$Cast.disabled = true
+#func _on_changed_casting_state(s: SpellPhase.CastingState):
+	#if s == SpellPhase.CastingState.SettingEnergy:
+		#$Cast.disabled = false
+	#else:
+		#$Cast.disabled = true
 
 func next_round(current_round: int):
 	pass
 
 const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
-func add_card(spell: Spell):
-	var card = HAND_CARD_2D.instantiate()
-	card.set_spell(spell)
-	cards.append(card)
-	%Cards3D.add_card(card)
-	if combat.energy.is_payable(spell.type.costs):
-		# spell is available
-		card.set_enabled(true)
-	else:
-		card.set_enabled(false)
+#func add_card(spell: Spell):
+	#var card = HAND_CARD_2D.instantiate()
+	#card.set_spell(spell)
+	#cards.append(card)
+	#%Cards3D.add_card(card)
+	#if combat.energy.is_payable(spell.type.costs):
+		## spell is available
+		#card.set_enabled(true)
+	#else:
+		#card.set_enabled(false)
 
-func remove_card(spell: Spell):
-	var card_to_remove = null
-	for c in cards:
-		if c.spell == spell:
-			if card_to_remove == null:
-				card_to_remove = c
-			else:
-				printerr("Two HandCard2Ds share the same spell")
-	if card_to_remove != null:
-		%Cards3D.remove_card(card_to_remove)
-		cards.erase(card_to_remove)
-		card_to_remove.queue_free()
-	else:
-		printerr("Failed to remove a card whose spell is not in the hand")
+#func remove_card(spell: Spell):
+	#var card_to_remove = null
+	#for c in cards:
+		#if c.spell == spell:
+			#if card_to_remove == null:
+				#card_to_remove = c
+			#else:
+				#printerr("Two HandCard2Ds share the same spell")
+	#if card_to_remove != null:
+		#%Cards3D.remove_card(card_to_remove)
+		#cards.erase(card_to_remove)
+		#card_to_remove.queue_free()
+	#else:
+		#printerr("Failed to remove a card whose spell is not in the hand")
 
 func _on_next_pressed():
 	combat.input.process_action(PlayerPass.new())
@@ -122,10 +123,12 @@ func initialize_active_buttons(new_actives: Array[Active]):
 	for active in actives:
 		var button = ACTIVE_BUTTON.instantiate()
 		button.name = "ActiveButton%d" % i
-		button.text = active.type.pretty_name
+		button.active = active
+		button.text = active.get_button_caption()#active.type.pretty_name
 		button.pressed.connect(_on_active_button_pressed.bind(i))
 		active.got_locked.connect(_on_active_locked.bind(i))
 		active.got_unlocked.connect(_on_active_unlocked.bind(i))
+		active.got_updated.connect(_on_active_updated.bind(i))
 		button.disabled = not active.unlocked
 		i += 1
 		$Actives/VBoxContainer.add_child(button)
@@ -152,20 +155,16 @@ func set_current_energy(energy: EnergyStack):
 		
 		
 func update_payable_cards():
-	for hand_card2d in cards:
-		var spell: Spell = hand_card2d.spell
-		if combat.energy.is_payable(spell.type.costs) and spell.logic.is_unlocked():
-			# spell is available
-			hand_card2d.set_enabled(true)
-		else:
-			hand_card2d.set_enabled(false)
-			# can't cast spell
-			
-#func update_actives():
-	#for i in range(len(actives)):
-		#var active = actives[i]
-		#if active.uses_left > 0:
-			#_on_active_unlocked(i)
+	for hand_card in cards3d.hand_cards:
+		hand_card.set_distort(not hand_card.get_castable().is_selectable())
+	#for hand_card2d in cards:
+		#var spell: Spell = hand_card2d.spell
+		#if spell.is_selectable():
+			## spell is available
+			#hand_card2d.set_enabled(true)
+		#else:
+			#hand_card2d.set_enabled(false)
+			## can't cast spell
 
 func _ready() -> void:
 	deselect_card()
@@ -181,7 +180,8 @@ func on_game_unpaused():
 	show()
 
 func _on_active_button_pressed(i: int) -> void:
-	combat.input.process_action(SelectActive.new(actives[i]))
+	#combat.input.process_action(SelectActive.new(actives[i]))
+	combat.input.process_action(PASelectCastable.new(actives[i]))
 	
 func _on_active_unlocked(i: int) -> void:
 	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
@@ -190,6 +190,10 @@ func _on_active_unlocked(i: int) -> void:
 func _on_active_locked(i: int) -> void:
 	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
 	button.disabled = true
+
+func _on_active_updated(i: int) -> void:
+	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	button.text = button.active.get_button_caption()
 
 func _on_button_entered() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = true

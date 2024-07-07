@@ -1,5 +1,6 @@
 extends Button
 
+var active: Active
 
 func _on_mouse_entered() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = true

@@ -179,7 +179,6 @@ func get_mouse_pos_absolute() -> Vector2:
 
 ## for when the viewport resolution doesn't match the content_scale	
 func scale_screen_pos(screen_pos: Vector2) -> Vector2:
-	
 	var current_viewport_size: Vector2 = get_tree().root.size
 	var reference_viewport_size: Vector2 = get_tree().root.content_scale_size
 	var viewport_scale: Vector2 = current_viewport_size / reference_viewport_size
@@ -222,6 +221,9 @@ func array_safe_get(array: Array, index: int, mirror := false, default = null) -
 	else:
 		return default
 
+func dict_safe_get(dict: Dictionary, key: Variant, default = null) -> Variant:
+	return dict.get(key, default)
+
 func get_parent_of_type(n: Node, type) -> Node:
 	var parent: Node = n.get_parent()
 	while parent:
@@ -243,3 +245,9 @@ func random_direction() -> Vector3:
 
 func positive_angle(radians: float) -> float:
 	return fposmod(radians, TAU)
+
+func quadratic_bezier_3D(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vector3:
+	var q0 = p0.lerp(p1, t)
+	var q1 = p1.lerp(p2, t)
+	var r = q0.lerp(q1, t)
+	return r
