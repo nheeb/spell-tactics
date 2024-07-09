@@ -11,8 +11,16 @@ func _init(_reference: Object, _command: String, _parameters := []):
 
 func play(level: Level) -> void:
 	if is_instance_valid(reference):
-		if reference.has_signal("animation_done"):
-			#print("Waiting for %s to send a signal" % reference.name)
+		if reference.has_method("get_wait_ticket_handler"):
+			var handler := reference.get_wait_ticket_handler() as WaitTicketHandler
+			assert(handler)
+			var ticket := WaitTicket.new()
+			ticket.resolved.connect(func(): animation_done_internally.emit(),CONNECT_ONE_SHOT)
+			handler.handle_ticket(ticket)
+			reference.callv(command, parameters)
+			handler.clear()
+		elif reference.has_signal("animation_done"):
+			printerr("Using deprecated signal animation_done (Use WaitTickets instead)")
 			reference.animation_done.connect(func(): animation_done_internally.emit(),CONNECT_ONE_SHOT)
 			reference.callv(command, parameters)
 		else:

@@ -15,28 +15,31 @@ func _enter_tree() -> void:
 	if has_node("DebugTile"):
 		$DebugTile.visible = false
 
-signal animation_done
+var ticket_handler := WaitTicketHandler.new()
+func get_wait_ticket_handler() -> WaitTicketHandler:
+	return ticket_handler
 
 var tile_speed := 0.5  # s per tile
 func animation_move_to(tile: Tile) -> void:
+	var ticket = ticket_handler.get_ticket()
 	var tween := VisualTime.new_tween()
 	tween.tween_property(self, "global_position", tile.global_position, tile_speed)
 	on_movement_visuals(tile)
 	#tween.set_speed_scale(.05)
 	await tween.finished
-	animation_done.emit()
+	ticket.resolve()
 	
 func on_movement_visuals(tile: Tile) -> void:
 	# abstract, override for player/enemy
-	animation_done.emit()
+	pass
 
 func on_hurt_visuals() -> void:
 	# abstract, override for player/enemy
-	animation_done.emit()
+	pass
 
 func on_death_visuals():
 	hide()
-	animation_done.emit()
+	pass
 
 ## For overriding and making the drain effect
 const GREY_OUT_MAT: Material = preload("res://Effects/GreyOut3D.material")
@@ -48,7 +51,6 @@ func visual_drain(drained := true):
 			var tween = VisualTime.new_tween()
 			child.set_instance_shader_parameter("grey_out_progress", 0.0)
 			tween.tween_property(child, "instance_shader_parameters/grey_out_progress", 1.0, VFX.DRAIN_DURATION)
-	animation_done.emit()
 
 var visual_effects := {}
 
@@ -61,15 +63,11 @@ func add_visual_effect(id: String, effect: StayingVisualEffect) -> void:
 func remove_visual_effect(id: String) -> void:
 	if id in visual_effects.keys():
 		var effect := (visual_effects[id] as StayingVisualEffect)
-		effect.effect_died.connect(emit_animation_done_signal, CONNECT_ONE_SHOT)
+		ticket_handler.get_ticket().resolve_on(effect.effect_died)
 		effect.on_effect_end()
 		visual_effects.erase(id)
 	else:
 		printerr("VisualEntity has no effect %s" % id)
-		animation_done.emit()
-
-func emit_animation_done_signal():
-	animation_done.emit()
 
 const ENERGY_ORB_ATTRACTOR = preload("res://Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
 const ENERGY_ORB = preload("res://Effects/EnergyOrb.tscn")

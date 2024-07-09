@@ -1,3 +1,9 @@
 class_name WaitTicket extends Object
 
-# TODO nitai do this
+signal resolved
+
+func resolve():
+	resolved.emit()
+
+func resolve_on(s: Signal):
+	s.connect(resolve, CONNECT_ONE_SHOT)
