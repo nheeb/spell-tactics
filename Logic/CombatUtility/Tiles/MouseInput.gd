@@ -12,14 +12,16 @@ var disabled := false
 var targeting: bool = false
 func enable_highlight(tile: Tile):
 	if combat != null:  # check if targeting with a spell
-		if combat.current_phase == Combat.RoundPhase.Spell:
-			var spell_phase = combat.get_phase_node(combat.current_phase)
-			if spell_phase.state == SpellPhase.CastingState.Targeting:
-				targeting = true
-			else:
-				targeting = false
-		else:
-			targeting = false
+		targeting = combat.current_phase == Combat.RoundPhase.Spell \
+					and combat.input.current_castable
+		#if combat.current_phase == Combat.RoundPhase.Spell:
+			#var spell_phase = combat.get_phase_node(combat.current_phase)
+			#if spell_phase.state == SpellPhase.CastingState.Targeting:
+				#targeting = true
+			#else:
+				#targeting = false
+		#else:
+			#targeting = false
 		
 	tile.set_highlight(Highlight.Type.HoverTarget if targeting else Highlight.Type.Hover, true)
 	Events.tile_hovered.emit(tile)

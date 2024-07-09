@@ -1,22 +1,22 @@
 class_name InputUtility extends CombatUtility
 
-signal performed_action(action: PlayerAction)
+signal action_executed(action: PlayerAction)
+signal action_failed(action: PlayerAction)
 
-## returns whether it is valid
-# TODO Nitai remove return value
-func process_action(action: PlayerAction) -> bool:
+## Checks whether an action is valid and executes it.
+func process_action(action: PlayerAction) -> void:
 	if not is_taking_actions():
-		return false
+		return
 	var valid := action.is_valid(combat)
 	action.log_me(combat, valid)
 	if valid:
 		action.execute(combat)
-		performed_action.emit(action)
+		action_executed.emit(action)
 		combat.animation.play_animation_queue()
 		update_ui()
 	else:
 		action.on_fail(combat)
-	return valid
+		action_failed.emit(action)
 
 var current_castable : Castable
 

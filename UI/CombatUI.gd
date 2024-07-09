@@ -67,23 +67,25 @@ const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 		#printerr("Failed to remove a card whose spell is not in the hand")
 
 func _on_next_pressed():
-	combat.input.process_action(PlayerPass.new())
+	combat.input.process_action(PAPass.new())
 
-
-func extract_payment() -> EnergyStack:
-	var payment_text : String = $EnergyPayment.text
-	var clean_payment_text : String = payment_text
-	if ":" in clean_payment_text:
-		clean_payment_text = clean_payment_text.split(":")[-1]
-	else:
-		clean_payment_text = ""
-	var payment := EnergyStack.string_to_energy(clean_payment_text)
-	return payment
+# TODO Delete
+#func extract_payment() -> EnergyStack:
+	#var payment_text : String = $EnergyPayment.text
+	#var clean_payment_text : String = payment_text
+	#if ":" in clean_payment_text:
+		#clean_payment_text = clean_payment_text.split(":")[-1]
+	#else:
+		#clean_payment_text = ""
+	#var payment := EnergyStack.string_to_energy(clean_payment_text)
+	#return payment
 
 func _on_cast_pressed():
-	var payment := extract_payment()
-	if is_instance_valid(selected_spell):
-		combat.input.process_action(PlayerCast.new(selected_spell, payment))
+	printerr("Deprecated cast button method was used.")
+	return
+	#var payment := extract_payment()
+	#if is_instance_valid(selected_spell):
+		#combat.input.process_action(PlayerCast.new(selected_spell, payment))
 		
 
 #func _input(event):
@@ -92,19 +94,21 @@ func _on_cast_pressed():
 
 
 func select_card(spell: Spell):
-	deselect_card()
-	selected_spell = spell
-	var selected_card = HAND_CARD_2D.instantiate()
-	selected_card.set_spell(spell, false)
-	# don't show energy payment for first prototype:
-	#$EnergyPayment.visible = true
-	var payment = combat.energy.player_energy.get_possible_payment(spell.logic.get_costs())
-	if payment != null:
-		$EnergyPayment.text = "Payment: " + payment.to_string()
-	else:
-		$EnergyPayment.text = "Not enough energy"
-		
-	combat.input.process_action(SelectSpell.new(selected_spell))
+	printerr("Deprecated spell selection.")
+	return
+	#deselect_card()
+	#selected_spell = spell
+	#var selected_card = HAND_CARD_2D.instantiate()
+	#selected_card.set_spell(spell, false)
+	## don't show energy payment for first prototype:
+	##$EnergyPayment.visible = true
+	#var payment = combat.energy.player_energy.get_possible_payment(spell.logic.get_costs())
+	#if payment != null:
+		#$EnergyPayment.text = "Payment: " + payment.to_string()
+	#else:
+		#$EnergyPayment.text = "Not enough energy"
+		#
+	#combat.input.process_action(SelectSpell.new(selected_spell))
 
 func deselect_card():
 	selected_spell = null
@@ -215,11 +219,3 @@ func show_game_over(text: String) -> void:
 
 func set_enemy_meter(value: int) -> void:
 	%EnemyEventIcon.transition_to_fill(value)
-	#var tween := VisualTime.new_tween()
-	#for i in range(3):
-		#tween.tween_callback(%EnemyArrow.show)
-		#tween.tween_interval(.4)
-		#tween.tween_callback(%EnemyArrow.hide)
-		#tween.tween_interval(.4)
-	#tween.tween_callback(func(): %EnemyMeterLabel.text = "Enemy Meter: %s / %s" %\
-			 #[value, EventUtility.ENEMY_METER_MAX])
