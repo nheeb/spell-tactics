@@ -1,6 +1,6 @@
 class_name UniversalReference extends Resource
 
-## If this is true
+## If this is false, resolve() will call connect_reference() every time.
 @export var cache_result := true
 
 ## Is called by resolve(combat)
@@ -39,6 +39,14 @@ func get_reference_type() -> String:
 func get_spell(combat: Combat) -> Spell:
 	assert(resolve(combat) is Spell)
 	return resolve(combat) as Spell
+
+func get_active(combat: Combat) -> Active:
+	assert(resolve(combat) is Active)
+	return resolve(combat) as Active
+
+func get_event(combat: Combat) -> CombatEvent:
+	assert(resolve(combat) is CombatEvent)
+	return resolve(combat) as CombatEvent
 
 func get_entity(combat: Combat) -> Entity:
 	assert(resolve(combat) is Entity)
