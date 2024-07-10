@@ -8,6 +8,7 @@ var actives: Array[Active]
 @onready var cards3d: Cards3D = %Cards3D
 @onready var timeline: TimelineUI = %Timeline
 @onready var error_lines: StatusLines = %ErrorLines
+@onready var event_icons: CombatEventIcons = %CombatEventIcons
 
 func setup(_combat: Combat):
 	self.combat = _combat

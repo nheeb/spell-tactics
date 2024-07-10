@@ -87,11 +87,11 @@ func animate_step(step : int = 0):
 func jump_to_round(_round: int):
 	animate_step(_round - current_round)
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_right"):
-		animate_step(1)
-	elif event.is_action_pressed("ui_left"):
-		animate_step(-1)
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_right"):
+		#animate_step(1)
+	#elif event.is_action_pressed("ui_left"):
+		#animate_step(-1)
 		
 func process_log_entry_queue() -> void:
 	if log_entry_queue.is_empty():

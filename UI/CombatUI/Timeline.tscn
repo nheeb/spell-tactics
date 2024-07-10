@@ -31,6 +31,7 @@ script = ExtResource("1_cyn56")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="TextureRect" type="Sprite2D" parent="Node2D"]
+visible = false
 modulate = Color(0.741176, 0.741176, 0.741176, 0.819608)
 texture = ExtResource("1_p3f3l")
 
@@ -49,6 +50,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_40adw")
 
 [node name="IconTransforms" type="Node2D" parent="Node2D"]
 unique_name_in_owner = true
+visible = false
 
 [node name="Icon7" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
 position = Vector2(250, -86)

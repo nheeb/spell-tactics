@@ -1,9 +1,12 @@
 class_name EventUtility extends CombatUtility
 
+## 
+var event_timeline: Dictionary
+
 var events: Array[Spell]
 var current_event: SpellReference
 
-# TODO serialize me
+# TODO Nitai serialize this
 var enemy_meter := 0
 const ENEMY_METER_MAX = 5
 

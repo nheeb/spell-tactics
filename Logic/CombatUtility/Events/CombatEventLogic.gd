@@ -2,3 +2,31 @@ class_name CombatEventLogic extends Object
 
 var combat: Combat
 var event: CombatEvent
+
+func on_advance(round_number: int) -> void:
+	_on_advance(round_number)
+
+func on_finish() -> void:
+	_on_finish()
+
+func on_show_info() -> void:
+	_on_show_info()
+
+func on_hover() -> void:
+	_on_hover()
+
+############################
+## Methods for overriding ##
+############################
+
+func _on_advance(round_number: int) -> void:
+	pass
+
+func _on_finish() -> void:
+	pass
+
+func _on_show_info() -> void:
+	pass
+
+func _on_hover() -> void:
+	pass

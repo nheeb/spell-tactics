@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=16 format=3 uid="uid://bysejqqiloy1u"]
 
-[ext_resource type="Script" path="res://UI/CombatUI.gd" id="1_uhqdp"]
+[ext_resource type="Script" path="res://UI/CombatUI/CombatUI.gd" id="1_uhqdp"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_2hiqp"]
 [ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/DefaultLabelSettings.tres" id="3_wybdv"]
 [ext_resource type="PackedScene" uid="uid://upcefttcpy6o" path="res://UI/Cards3D.tscn" id="4_a38j0"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cn2mfqtdouxdu" path="res://UI/CombatUI/Timeline.tscn" id="9_denmg"]
 [ext_resource type="PackedScene" uid="uid://k4w38jjb4tmp" path="res://UI/CombatUI/StatusLines.tscn" id="10_gtdym"]
 [ext_resource type="PackedScene" uid="uid://cm4ux8unrhhbi" path="res://UI/CombatUI/AnimationSpeedUI.tscn" id="11_ups4t"]
+[ext_resource type="PackedScene" uid="uid://b7cdtyuptrypr" path="res://UI/CombatUI/CombatEventIcons.tscn" id="12_8b75y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqwoa"]
 bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.682353)
@@ -315,7 +316,7 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.402604
-anchor_top = -0.012963
+anchor_top = -0.00462963
 anchor_right = 0.598729
 anchor_bottom = 0.104296
 offset_right = 0.439972
@@ -337,6 +338,16 @@ scale = Vector2(0.607886, 0.607886)
 unique_name_in_owner = true
 layout_mode = 1
 color = Color(1, 0, 0, 1)
+
+[node name="CombatEventIcons" parent="." instance=ExtResource("12_8b75y")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.159896
+anchor_top = 0.00555556
+anchor_right = 0.415104
+anchor_bottom = 0.1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]
