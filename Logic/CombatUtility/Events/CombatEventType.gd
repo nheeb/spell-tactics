@@ -14,15 +14,18 @@ var internal_name: String = ""
 ## Fluff text shown on the card
 @export_multiline var fluff_text: String
 
+enum OrderPrio {First = 5, Middle = 10, Last = 15}
+@export var order: OrderPrio = OrderPrio.Middle
+
 ## Icon (and variants) that will be shown in the top screen when active.
 @export var icons: Array[Texture]
 
 ## If true, the event won't be shown in the current event icons.
-@export var hidden := false
+@export var hidden_icon := false
 
 ## Logic script
 var logic: Script
 
+const DEFAULT_ICON = preload("res://Assets/Sprites/Icons/circle.png")
 func get_icon(index := 0) -> Texture:
-	# TODO Nitai default texture for CombatEvent Icons?
-	return Utility.array_safe_get(icons, index, false, null)
+	return Utility.array_safe_get(icons, index, false, DEFAULT_ICON)

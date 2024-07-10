@@ -9,6 +9,7 @@ var actives: Array[Active]
 @onready var timeline: TimelineUI = %Timeline
 @onready var error_lines: StatusLines = %ErrorLines
 @onready var event_icons: CombatEventIcons = %CombatEventIcons
+@onready var event_info: CombatEventInfo = %CombatEventInfo
 
 func setup(_combat: Combat):
 	self.combat = _combat

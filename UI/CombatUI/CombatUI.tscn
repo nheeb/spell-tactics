@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=17 format=3 uid="uid://bysejqqiloy1u"]
 
 [ext_resource type="Script" path="res://UI/CombatUI/CombatUI.gd" id="1_uhqdp"]
 [ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_2hiqp"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://k4w38jjb4tmp" path="res://UI/CombatUI/StatusLines.tscn" id="10_gtdym"]
 [ext_resource type="PackedScene" uid="uid://cm4ux8unrhhbi" path="res://UI/CombatUI/AnimationSpeedUI.tscn" id="11_ups4t"]
 [ext_resource type="PackedScene" uid="uid://b7cdtyuptrypr" path="res://UI/CombatUI/CombatEventIcons.tscn" id="12_8b75y"]
+[ext_resource type="PackedScene" uid="uid://rsv86yvvojk4" path="res://UI/CombatUI/CombatEventInfo.tscn" id="13_37g1a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqwoa"]
 bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.682353)
@@ -347,6 +348,17 @@ anchor_left = 0.159896
 anchor_top = 0.00555556
 anchor_right = 0.415104
 anchor_bottom = 0.1
+metadata/_edit_use_anchors_ = true
+
+[node name="CombatEventInfo" parent="." instance=ExtResource("13_37g1a")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.19375
+anchor_top = 0.0833333
+anchor_right = 0.46875
+anchor_bottom = 0.389815
 metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
