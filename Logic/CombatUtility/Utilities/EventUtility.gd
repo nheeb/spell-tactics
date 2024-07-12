@@ -1,10 +1,33 @@
 class_name EventUtility extends CombatUtility
 
-## 
+## { RoundNumber (int) -> ScheduledEvents (Array[CombatEventSchedule]) }
 var event_timeline: Dictionary
 
 var events: Array[Spell]
 var current_event: SpellReference
+
+func add_event_schedule(event_schedule: CombatEventSchedule, round_number: int):
+	for schedule_list in event_timeline.values():
+		schedule_list.erase(event_schedule)
+	if event_timeline.has(round_number):
+		var schedules := event_timeline[round_number] as Array
+		assert(schedules)
+		schedules.append(event_schedule)
+		schedules.sort_custom(
+			func (a, b):
+				if not a.event_type: return true
+				if not b.event_type: return false
+				return a.event_type.order < b.event_type.order
+		)
+	else:
+		event_timeline[round_number] = [event_schedule]
+
+func get_event_schedule_round_number(event_schedule: CombatEventSchedule) -> int:
+	for round_number in event_timeline.keys():
+		if event_schedule in event_timeline[round_number]:
+			return round_number
+	printerr("EventSchedule not in timeline")
+	return 0
 
 # TODO Nitai serialize this
 var enemy_meter := 0

@@ -5,6 +5,10 @@ var id: CombatEventID
 var type: CombatEventType
 var logic: CombatEventLogic
 
+## The event's parameters based on type.default_params. [br]
+## { ParamName (String) -> Value (something serializable) }
+var params := {}
+
 ## Active CombatEvents will be advaced each round by the EventUtility.
 var active: bool = false
 ## Finished events cannot be reactivated. (Create new events instead)
@@ -29,7 +33,7 @@ func activate() -> void:
 	update_ui_icon()
 	logic.on_activate()
 
-## Triggers the main effect of the event.
+## Triggers the "main effect" of the event.
 ## Will be called in every end step as long as the event is active.
 func advance() -> void:
 	rounds += 1

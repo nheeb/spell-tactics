@@ -23,9 +23,20 @@ enum OrderPrio {First = 5, Middle = 10, Last = 15}
 ## If true, the event won't be shown in the current event icons.
 @export var hidden_icon := false
 
+## The event effect's parameters (e.g. spawn location of an enemy) as property
+## names should go here along with their default values.
+@export var default_params := {}
+
 ## Logic script
 var logic: Script
 
 const DEFAULT_ICON = preload("res://Assets/Sprites/Icons/circle.png")
 func get_icon(index := 0) -> Texture:
 	return Utility.array_safe_get(icons, index, false, DEFAULT_ICON)
+
+func create_event(combat: Combat, params := {}) -> CombatEvent:
+	var event := CombatEvent.new()
+	# TODO Nitai give Event ID
+	event.params = default_params.duplicate(true)
+	event.params.merge(params, true)
+	return event
