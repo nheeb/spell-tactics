@@ -1,6 +1,21 @@
 class_name CombatEventState extends Resource
 
-# TODO Nitai Implement CombatEvent (de)serialize
+@export var id: CombatEventID
+@export var type: CombatEventType
+@export var params := {}
+@export var active: bool = false
+@export var finished: bool = false
+@export var rounds: int
+@export var persistant_properties := {}
 
 func deserialize(combat: Combat) -> CombatEvent:
-	return null
+	var event = CombatEvent.new()
+	event.combat = combat
+	event.id = id
+	event.type = type
+	event.params = params
+	event.active = active
+	event.finished = finished
+	event.rounds = rounds
+	event.persistant_properties = persistant_properties
+	return event

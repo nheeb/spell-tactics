@@ -22,6 +22,10 @@ enum OrderPrio {First = 5, Middle = 10, Last = 15}
 
 ## If true, the event won't be shown in the current event icons.
 @export var hidden_icon := false
+## If true, the effect text will be shown during the advance / main effect.
+@export var show_info_on_advancing := true
+## If the value is > 0, the event will finish automatically after X rounds.
+@export var max_duration := 0
 
 ## The event effect's parameters (e.g. spawn location of an enemy) as property
 ## names should go here along with their default values.
@@ -36,6 +40,7 @@ func get_icon(index := 0) -> Texture:
 
 func create_event(combat: Combat, params := {}) -> CombatEvent:
 	var event := CombatEvent.new()
+	event.combat = combat
 	# TODO Nitai give Event ID
 	event.params = default_params.duplicate(true)
 	event.params.merge(params, true)

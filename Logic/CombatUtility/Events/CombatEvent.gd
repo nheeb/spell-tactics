@@ -35,18 +35,31 @@ func activate() -> void:
 
 ## Triggers the "main effect" of the event.
 ## Will be called in every end step as long as the event is active.
+## This will also remove the icon if the event is finished afterwards.
 func advance() -> void:
 	rounds += 1
 	highlight_icon(true)
+	if type.show_info_on_advancing:
+		show_info(true)
 	logic.on_advance(rounds)
+	if type.show_info_on_advancing:
+		show_info(false)
 	highlight_icon(false)
+	if type.max_duration > 0:
+		if rounds >= type.max_duration:
+			finish()
+	if finished:
+		remove_icon()
 
 ## Sets active to false. The event won't be advanced further and can't be
-## reativated.
+## reativated. This won't remove the icon directly.
 func finish() -> void:
 	active = false
 	finished = true
 	logic._on_finish()
+
+func finish_and_remove_icon():
+	finish()
 	remove_icon()
 
 ## Shows the effect text in UI as animation in the AQ.
@@ -56,9 +69,14 @@ func show_info(visible := true) -> AnimationObject:
 	else:
 		return combat.animation.callable(combat.ui.event_info.hide)
 
+## Is called when the player hovers over the event icon.
 func hover(hovering := true) -> void:
 	show_info(hovering)
 	logic.on_hover(hovering)
+
+## Is called when the player clicks on the event icon.
+func click() -> void:
+	logic.on_click()
 
 ## Creates an invisble icon node in the UI and connects it to the event.
 func create_icon():
@@ -85,10 +103,18 @@ func highlight_icon(highlight := true) -> AnimationObject:
 	return combat.animation.callable(icon.animate_highlight.bind(highlight))
 
 func serialize() -> CombatEventState:
-	return CombatEventState.new()
+	var state := CombatEventState.new()
+	state.id = id
+	state.type = type
+	state.params = params
+	state.active = active
+	state.finished = finished
+	state.rounds = rounds
+	state.persistant_properties = persistant_properties
+	return state
 
 func get_reference() -> CombatEventReference:
-	return null
+	return CombatEventReference.new(self)
 
 func get_effect_text() -> String:
 	return type.effect_text

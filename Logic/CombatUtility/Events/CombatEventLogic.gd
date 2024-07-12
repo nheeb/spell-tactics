@@ -18,6 +18,9 @@ func on_show_info() -> void:
 func on_hover(hovering: bool) -> void:
 	_on_hover(hovering)
 
+func on_click() -> void:
+	_on_click()
+
 ############################
 ## Methods for overriding ##
 ############################
@@ -35,4 +38,7 @@ func _on_show_info() -> void:
 	pass
 
 func _on_hover(hovering: bool) -> void:
+	pass
+
+func _on_click() -> void:
 	pass
