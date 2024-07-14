@@ -49,7 +49,7 @@ func process_events() -> void:
 	process_active_events()
 
 func process_enemy_events():
-	process_enemy_event()
+	pass
 
 func process_event_schedules():
 	var round := combat.current_round
@@ -70,14 +70,6 @@ func process_active_events():
 # TODO Nitai serialize this
 var enemy_meter := 0
 const ENEMY_METER_MAX = 5
-
-func get_regular_events() -> Array[Spell]:
-	assert(false)
-	return []
-	#var array : Array[Spell] = []
-	#array.append_array(events.filter(\
-		#func (e): return e.type.is_event_spell and not e.type.is_enemy_event_spell))
-	#return array
 
 func get_enemy_events() -> Array[Spell]:
 	var array : Array[Spell] = []
@@ -100,32 +92,32 @@ func is_enemy_meter_full() -> bool:
 func reset_enemy_meter() -> AnimationCallback:
 	return set_enemy_meter(0)
 
-#func process_event() -> void:
-	#var regular_events := get_regular_events()
-	#if regular_events.is_empty():
-		#combat.log.add("No Events loaded")
-		#return
+##func process_event() -> void:
+	##var regular_events := get_regular_events()
+	##if regular_events.is_empty():
+		##combat.log.add("No Events loaded")
+		##return
+##
+	### If no current event -> pick a new one 
+	##if current_event == null:
+		##current_event = regular_events.pick_random().get_reference()
+		##
+		##current_event.resolve(combat).event_logic.initialize_event()
+	##
+	### If advancing the current events ends it -> set current event to null
+	##if current_event.resolve(combat).event_logic.advance_event():
+		##current_event = null
 #
-	## If no current event -> pick a new one 
-	#if current_event == null:
-		#current_event = regular_events.pick_random().get_reference()
+#func process_enemy_event() -> void:
+	#if is_enemy_meter_full():
+		#var enemy_events := get_enemy_events()
+		#if enemy_events.is_empty():
+			#combat.log.add("No Enemy Events loaded")
+			#return
+		#reset_enemy_meter()
+		#var enemy_event : Spell = enemy_events.pick_random() as Spell
+		#assert(enemy_event)
+		#assert(enemy_event.type.is_enemy_event_spell)
+		#enemy_event.logic.initialize_event()
+		#enemy_event.logic.advance_event()
 		#
-		#current_event.resolve(combat).event_logic.initialize_event()
-	#
-	## If advancing the current events ends it -> set current event to null
-	#if current_event.resolve(combat).event_logic.advance_event():
-		#current_event = null
-
-func process_enemy_event() -> void:
-	if is_enemy_meter_full():
-		var enemy_events := get_enemy_events()
-		if enemy_events.is_empty():
-			combat.log.add("No Enemy Events loaded")
-			return
-		reset_enemy_meter()
-		var enemy_event : Spell = enemy_events.pick_random() as Spell
-		assert(enemy_event)
-		assert(enemy_event.type.is_enemy_event_spell)
-		enemy_event.logic.initialize_event()
-		enemy_event.logic.advance_event()
-		
