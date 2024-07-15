@@ -38,7 +38,14 @@ const DEFAULT_ICON = preload("res://Assets/Sprites/Icons/circle.png")
 func get_icon(index := 0) -> Texture:
 	return Utility.array_safe_get(icons, index, false, DEFAULT_ICON)
 
+func _on_load() -> void:
+	if internal_name == "":
+		internal_name = resource_path.split("/")[-1].split(".")[0]
+		var directory = "/".join(resource_path.split("/").slice(0, -1))
+		logic = load(directory + "/" + internal_name + ".gd")
+
 func create_event(combat: Combat, params := {}) -> CombatEvent:
+	_on_load()
 	var event := CombatEvent.new()
 	event.combat = combat
 	# TODO Nitai give Event ID

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyEventType" load_steps=2 format=3 uid="uid://cyfghwiu5p4y4"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Events/EnemyEventType.gd" id="1_pmh82"]
+
+[resource]
+script = ExtResource("1_pmh82")
+enemy_meter_costs = 5
+unactive_name = "Enemy Reinforcement"
+unactive_effect_text = "They are calling for help."
+pretty_name = "New Goblin Fighter"
+effect_text = "Spawns a new goblin fighter."
+fluff_text = "He is strong."
+order = 5
+icons = Array[Texture]([])
+hidden_icon = false
+show_info_on_advancing = true
+max_duration = 0
+default_params = {}

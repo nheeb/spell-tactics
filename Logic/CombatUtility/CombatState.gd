@@ -8,16 +8,20 @@ class_name CombatState extends Resource
 @export var deck_states: Array[SpellState]
 @export var hand_states: Array[SpellState]
 @export var discard_pile_states: Array[SpellState]
-@export var event_states: Array[SpellState]
-@export var current_event: SpellReference
 @export var timed_effects: Array[TimedEffect]
 @export var combat_log: Array[LogEntry]
-@export var drains_done: int
+@export var active_states: Array[ActiveState]
+# Events
+@export var all_events: Array[CombatEventState]
+@export var event_timeline: Dictionary
+@export var enemy_event_queue: Array[EnemyEventPlan]
+@export var current_enemy_event: CombatEventReference
+@export var enemy_meter: int
 
 const COMBAT = preload("res://Logic/CombatUtility/Combat.tscn")
 
 func deserialize() -> Combat:
-	var combat := COMBAT.instantiate()
+	var combat : Combat = COMBAT.instantiate() as Combat
 	combat._ready()
 	combat.log.add("Deserializing Combat...")
 	combat.current_round = current_round
@@ -36,13 +40,19 @@ func deserialize() -> Combat:
 	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 1:
 		combat.log.add("CombatState has no deck -> PrototypeDeck will be loaded")
 		combat.deck.append_array(Utility.DeckUtils.create_test_deck(combat))
-	combat.event.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
-	combat.event.current_event = current_event
-	if combat.event.events.is_empty():
-		combat.event.events.append_array(Game.get_prototype_events(combat))
+	#combat.event.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
+	#combat.event.current_event = current_event
+	#if combat.event.events.is_empty():
+		#combat.event.events.append_array(Game.get_prototype_events(combat))
+	combat.event.all_events.append_array(all_events.map(
+		func (e): return e.deserialize(combat)
+	))
+	combat.event.event_timeline = event_timeline
+	combat.event.enemy_event_queue = enemy_event_queue
+	combat.event.current_enemy_event = current_enemy_event
+	combat.event.enemy_meter = enemy_meter
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
-	combat.energy.drains_done_this_turn = drains_done
 	combat.log.add("Combat was deserialized.")
 	return combat
 

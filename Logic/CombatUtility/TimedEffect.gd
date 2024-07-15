@@ -209,7 +209,6 @@ static func new_end_phase_trigger_from_callable(callable: Callable) -> TimedEffe
 	var end_phase_ref = CombatNodeReference.new("Phases/EndPhase")
 	return TimedEffect.new(end_phase_ref, "process_start")._set_callable(callable)
 
-# TODO Test this
 ## Only works of the owners of the signal and callable have "get_reference()"
 static func new_from_signal_and_callable(sig: Signal, callable: Callable) -> TimedEffect:
 	return TimedEffect.new()._set_signal(sig)._set_callable(callable)

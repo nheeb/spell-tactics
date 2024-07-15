@@ -9,7 +9,11 @@ class_name CombatEventState extends Resource
 @export var persistant_properties := {}
 
 func deserialize(combat: Combat) -> CombatEvent:
-	var event = CombatEvent.new()
+	var event: CombatEvent
+	if type is EnemyEventType:
+		event = EnemyEvent.new()
+	else:
+		event = CombatEvent.new()
 	event.combat = combat
 	event.id = id
 	event.type = type
