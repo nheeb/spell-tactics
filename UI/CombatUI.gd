@@ -125,11 +125,11 @@ func initialize_active_buttons(new_actives: Array[Active]):
 	actives = new_actives
 	var i = 0
 	for active in actives:
-		var active_button = buttons[i]
-		#var active_button = ACTIVE_BUTTON.instantiate()
-		#active_button.name = "ActiveButton%d" % i
-		#active_button.active = active
-		#$Actives/VBoxContainer.add_child(active_button)
+		#var active_button = buttons[i]
+		var active_button = ACTIVE_BUTTON.instantiate()
+		active_button.name = "ActiveButton%d" % i
+		active_button.active = active
+		$Actives/VBoxContainer.add_child(active_button)
 		# no text, we have active textures now
 		# though the text will be needed as a hint :) (TODO)
 		#button.text = active.get_button_caption()#active.type.pretty_name
