@@ -2,7 +2,7 @@ class_name EventUtility extends CombatUtility
 
 ## { RoundNumber (int) -> ScheduledEvents (Array[CombatEventSchedule]) }
 var event_timeline: Dictionary
-
+var enemy_event_queue: Array[EnemyEventPlan]
 var all_events: Array[CombatEvent]
 
 func add_event_schedule(event_schedule: CombatEventSchedule, round_number: int):
@@ -31,6 +31,11 @@ func get_event_schedule_round_number(event_schedule: CombatEventSchedule) -> int
 	printerr("EventSchedule not in timeline")
 	return 0
 
+#func get_next_enemy_event_plan() -> EnemyEventPlan:
+	#return Utility.array_safe_get(enemy_event_queue.filter(
+		#func (e): return e.
+	#))
+
 func get_active_events() -> Array[CombatEvent]:
 	return all_events.filter(func (e): return e.active)
 
@@ -48,9 +53,6 @@ func process_events() -> void:
 	process_event_schedules()
 	process_active_events()
 
-func process_enemy_events():
-	pass
-
 func process_event_schedules():
 	var round := combat.current_round
 	if round in event_timeline.keys():
@@ -63,61 +65,24 @@ func process_active_events():
 	for event in get_active_events():
 		event.advance()
 
-
-
-
-
 # TODO Nitai serialize this
 var enemy_meter := 0
-const ENEMY_METER_MAX = 5
+var enemy_meter_max := 1
+var current_enemy_event: CombatEventReference
 
-func get_enemy_events() -> Array[Spell]:
-	var array : Array[Spell] = []
-	assert(false)
-	return []
-	#array.append_array(events.filter(\
-		#func (e): return e.type.is_enemy_event_spell))
-	#return array
+func process_enemy_events():
+	if not current_enemy_event:
+		pass
 
 func set_enemy_meter(value) -> AnimationCallback:
-	enemy_meter = clamp(value, 0, ENEMY_METER_MAX)
+	enemy_meter = clamp(value, 0, enemy_meter_max)
 	return combat.animation.callback(combat.ui, "set_enemy_meter", [enemy_meter]).set_min_duration(3)
 
 func add_to_enemy_meter(value := 1) -> AnimationCallback:
 	return set_enemy_meter(enemy_meter + value)
 
 func is_enemy_meter_full() -> bool:
-	return enemy_meter == ENEMY_METER_MAX
+	return enemy_meter == enemy_meter_max
 
 func reset_enemy_meter() -> AnimationCallback:
 	return set_enemy_meter(0)
-
-##func process_event() -> void:
-	##var regular_events := get_regular_events()
-	##if regular_events.is_empty():
-		##combat.log.add("No Events loaded")
-		##return
-##
-	### If no current event -> pick a new one 
-	##if current_event == null:
-		##current_event = regular_events.pick_random().get_reference()
-		##
-		##current_event.resolve(combat).event_logic.initialize_event()
-	##
-	### If advancing the current events ends it -> set current event to null
-	##if current_event.resolve(combat).event_logic.advance_event():
-		##current_event = null
-#
-#func process_enemy_event() -> void:
-	#if is_enemy_meter_full():
-		#var enemy_events := get_enemy_events()
-		#if enemy_events.is_empty():
-			#combat.log.add("No Enemy Events loaded")
-			#return
-		#reset_enemy_meter()
-		#var enemy_event : Spell = enemy_events.pick_random() as Spell
-		#assert(enemy_event)
-		#assert(enemy_event.type.is_enemy_event_spell)
-		#enemy_event.logic.initialize_event()
-		#enemy_event.logic.advance_event()
-		#
