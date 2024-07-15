@@ -1,10 +1,10 @@
-extends Button
-
-var active: Active
-
-func _on_mouse_entered() -> void:
-	Game.world.get_node("%MouseRaycast").disabled = true
+class_name ActiveButton extends TextureButton
 
 
-func _on_mouse_exited() -> void:
-	Game.world.get_node("%MouseRaycast").disabled = false
+
+@onready var icon = $Icon
+
+
+
+
+

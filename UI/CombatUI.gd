@@ -9,6 +9,9 @@ var actives: Array[Active]
 @onready var timeline: TimelineUI = %Timeline
 @onready var error_lines: StatusLines = %ErrorLines
 
+@onready var buttons = [$Actives/ActiveButtonWithUses1, $Actives/ActiveButtonWithUses2,
+						$Actives/ActiveButtonWithUses3, $Actives/ActiveButtonWithUses4]
+
 func setup(_combat: Combat):
 	self.combat = _combat
 	# Update UI
@@ -116,23 +119,29 @@ func set_status(text: String):
 func set_drains_left(x: int) -> void:
 	$Drains.text = "Drains left: %s" % x
 
-const ACTIVE_BUTTON = preload("res://UI/CombatUI/ActiveButton.tscn")
+const ACTIVE_BUTTON = preload("res://UI/CombatUI/ActiveButtonWithUses.tscn")
+
 func initialize_active_buttons(new_actives: Array[Active]):
 	actives = new_actives
 	var i = 0
 	for active in actives:
-		var button = ACTIVE_BUTTON.instantiate()
-		button.name = "ActiveButton%d" % i
-		button.active = active
-		button.text = active.get_button_caption()#active.type.pretty_name
-		button.pressed.connect(_on_active_button_pressed.bind(i))
+		var active_button = buttons[i]
+		#var active_button = ACTIVE_BUTTON.instantiate()
+		#active_button.name = "ActiveButton%d" % i
+		#active_button.active = active
+		#$Actives/VBoxContainer.add_child(active_button)
+		# no text, we have active textures now
+		# though the text will be needed as a hint :) (TODO)
+		#button.text = active.get_button_caption()#active.type.pretty_name
+		active_button.button.pressed.connect(_on_active_button_pressed.bind(i))
 		active.got_locked.connect(_on_active_locked.bind(i))
 		active.got_unlocked.connect(_on_active_unlocked.bind(i))
 		active.got_updated.connect(_on_active_updated.bind(i))
-		button.disabled = not active.unlocked
+		active_button.button.disabled = not active.unlocked
+		active_button.owner = self
+
+		
 		i += 1
-		$Actives/VBoxContainer.add_child(button)
-		button.owner = self
 		
 func disable_actions():
 	# TODO disable card selection / others?
@@ -184,16 +193,18 @@ func _on_active_button_pressed(i: int) -> void:
 	combat.input.process_action(PASelectCastable.new(actives[i]))
 	
 func _on_active_unlocked(i: int) -> void:
-	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
-	button.disabled = false
+	var active_button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	active_button.button.disabled = false
 	
 func _on_active_locked(i: int) -> void:
-	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
-	button.disabled = true
+	var active_button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	active_button.button.disabled = true
 
 func _on_active_updated(i: int) -> void:
-	var button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
-	button.text = button.active.get_button_caption()
+	# deprecated, active signal gets connected inside the activebutton
+	var active_button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	# TODO make this nicer
+	#active_button.update_active(active_button.active)
 
 func _on_button_entered() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = true
