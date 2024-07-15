@@ -1,7 +1,6 @@
 class_name CombatUI extends Control
 
 var combat : Combat
-#var cards : Array[HandCard2D]  # is this needed?
 var selected_spell: Spell
 var actives: Array[Active]
 
@@ -10,6 +9,10 @@ var actives: Array[Active]
 @onready var error_lines: StatusLines = %ErrorLines
 @onready var event_icons: CombatEventIcons = %CombatEventIcons
 @onready var event_info: CombatEventInfo = %CombatEventInfo
+@onready var enemy_event_info: CombatEventInfo = %EnemyEventInfo
+
+var ticket_handler := WaitTicketHandler.new()
+func get_wait_ticket_handler(): return ticket_handler
 
 func setup(_combat: Combat):
 	self.combat = _combat
@@ -24,93 +27,20 @@ func setup(_combat: Combat):
 	initialize_active_buttons(actives)
 	update_payable_cards()
 	cards3d.setup(_combat)
-	#cards3d.combat = _combat
-	
-	# connect to spell phase
-	# combat.get_phase_node(Combat.RoundPhase.Spell).changed_casting_state.connect(_on_changed_casting_state)
-	
-	# Build timeline
-	%Timeline.build_timeline_from_log(combat.log)
 
-#func _on_changed_casting_state(s: SpellPhase.CastingState):
-	#if s == SpellPhase.CastingState.SettingEnergy:
-		#$Cast.disabled = false
-	#else:
-		#$Cast.disabled = true
+	# Build timeline
+	# TODO Delete Timeline Code
+	%Timeline.build_timeline_from_log(combat.log)
 
 func next_round(current_round: int):
 	pass
 
-const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
-#func add_card(spell: Spell):
-	#var card = HAND_CARD_2D.instantiate()
-	#card.set_spell(spell)
-	#cards.append(card)
-	#%Cards3D.add_card(card)
-	#if combat.energy.is_payable(spell.type.costs):
-		## spell is available
-		#card.set_enabled(true)
-	#else:
-		#card.set_enabled(false)
-
-#func remove_card(spell: Spell):
-	#var card_to_remove = null
-	#for c in cards:
-		#if c.spell == spell:
-			#if card_to_remove == null:
-				#card_to_remove = c
-			#else:
-				#printerr("Two HandCard2Ds share the same spell")
-	#if card_to_remove != null:
-		#%Cards3D.remove_card(card_to_remove)
-		#cards.erase(card_to_remove)
-		#card_to_remove.queue_free()
-	#else:
-		#printerr("Failed to remove a card whose spell is not in the hand")
-
 func _on_next_pressed():
 	combat.input.process_action(PAPass.new())
-
-# TODO Delete
-#func extract_payment() -> EnergyStack:
-	#var payment_text : String = $EnergyPayment.text
-	#var clean_payment_text : String = payment_text
-	#if ":" in clean_payment_text:
-		#clean_payment_text = clean_payment_text.split(":")[-1]
-	#else:
-		#clean_payment_text = ""
-	#var payment := EnergyStack.string_to_energy(clean_payment_text)
-	#return payment
 
 func _on_cast_pressed():
 	printerr("Deprecated cast button method was used.")
 	return
-	#var payment := extract_payment()
-	#if is_instance_valid(selected_spell):
-		#combat.input.process_action(PlayerCast.new(selected_spell, payment))
-		
-
-#func _input(event):
-	#if event.is_action_pressed("cancel"):
-		#deselect_card()
-
-
-func select_card(spell: Spell):
-	printerr("Deprecated spell selection.")
-	return
-	#deselect_card()
-	#selected_spell = spell
-	#var selected_card = HAND_CARD_2D.instantiate()
-	#selected_card.set_spell(spell, false)
-	## don't show energy payment for first prototype:
-	##$EnergyPayment.visible = true
-	#var payment = combat.energy.player_energy.get_possible_payment(spell.logic.get_costs())
-	#if payment != null:
-		#$EnergyPayment.text = "Payment: " + payment.to_string()
-	#else:
-		#$EnergyPayment.text = "Not enough energy"
-		#
-	#combat.input.process_action(SelectSpell.new(selected_spell))
 
 func deselect_card():
 	selected_spell = null
@@ -139,11 +69,10 @@ func initialize_active_buttons(new_actives: Array[Active]):
 		i += 1
 		$Actives/VBoxContainer.add_child(button)
 		button.owner = self
-		
+
 func disable_actions():
 	# TODO disable card selection / others?
 	pass
-
 
 const energy_min_size := 50
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
@@ -158,19 +87,10 @@ func set_current_energy(energy: EnergyStack):
 		icon.min_size = energy_min_size
 		
 	update_payable_cards()
-		
-		
+
 func update_payable_cards():
 	for hand_card in cards3d.hand_cards:
 		hand_card.set_distort(not hand_card.get_castable().is_selectable())
-	#for hand_card2d in cards:
-		#var spell: Spell = hand_card2d.spell
-		#if spell.is_selectable():
-			## spell is available
-			#hand_card2d.set_enabled(true)
-		#else:
-			#hand_card2d.set_enabled(false)
-			## can't cast spell
 
 func _ready() -> void:
 	deselect_card()
@@ -220,4 +140,11 @@ func show_game_over(text: String) -> void:
 	#pass
 
 func set_enemy_meter(value: int) -> void:
+	ticket_handler.get_ticket().resolve_on(%EnemyEventIcon.transition_done)
 	%EnemyEventIcon.transition_to_fill(value)
+
+func set_enemy_meter_max(value: int, event : EnemyEvent = null) -> void:
+	%EnemyEventIcon.set_max_fill(value, event)
+
+func set_enemy_meter_event(event: EnemyEvent) -> void:
+	%EnemyEventIcon.set_event(event)

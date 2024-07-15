@@ -43,3 +43,12 @@ func clear() -> void:
 		_current_ticket.resolve()
 	_current_ticket = null
 	_ticket_touched = false
+
+## Delegates the ticket responsibility to another object.
+## (Only if that object has or is a handler)
+func delegate(other_object: Object) -> void:
+	if other_object.has_method("get_wait_ticket_handler"):
+		var handler : WaitTicketHandler = other_object.get_wait_ticket_handler()
+		handler.handle_ticket(get_ticket())
+	elif other_object is WaitTicketHandler:
+		other_object.handle_ticket(get_ticket())

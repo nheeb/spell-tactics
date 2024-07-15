@@ -48,6 +48,10 @@ func get_event(combat: Combat) -> CombatEvent:
 	assert(resolve(combat) is CombatEvent)
 	return resolve(combat) as CombatEvent
 
+func get_enemy_event(combat: Combat) -> EnemyEvent:
+	assert(resolve(combat) is EnemyEvent)
+	return resolve(combat) as EnemyEvent
+
 func get_entity(combat: Combat) -> Entity:
 	assert(resolve(combat) is Entity)
 	return resolve(combat) as Entity

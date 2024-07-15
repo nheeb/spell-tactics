@@ -31,17 +31,20 @@ func get_event_schedule_round_number(event_schedule: CombatEventSchedule) -> int
 	printerr("EventSchedule not in timeline")
 	return 0
 
-#func get_next_enemy_event_plan() -> EnemyEventPlan:
-	#return Utility.array_safe_get(enemy_event_queue.filter(
-		#func (e): return e.
-	#))
+func get_next_enemy_event_plan() -> EnemyEventPlan:
+	return Utility.array_safe_get(enemy_event_queue.filter(
+		func (e): return not e.event_created
+	), 0) as EnemyEventPlan
 
 func get_active_events() -> Array[CombatEvent]:
 	return all_events.filter(func (e): return e.active)
 
-func add_event_and_activate(event: CombatEvent, advance_when_activate := false):
+func add_event(event: CombatEvent):
 	assert(not event in all_events, "Added event that was already in the list")
 	all_events.append(event)
+
+func add_event_and_activate(event: CombatEvent, advance_when_activate := false):
+	add_event(event)
 	event.activate()
 	if advance_when_activate:
 		event.advance()
@@ -67,16 +70,46 @@ func process_active_events():
 
 # TODO Nitai serialize this
 var enemy_meter := 0
-var enemy_meter_max := 1
+var enemy_meter_max := 0
 var current_enemy_event: CombatEventReference
 
 func process_enemy_events():
 	if not current_enemy_event:
-		pass
+		discover_next_enemy_event()
+	add_to_enemy_meter()
+	try_to_activate_enemy_event()
+	if not current_enemy_event:
+		discover_next_enemy_event()
 
-func set_enemy_meter(value) -> AnimationCallback:
+func discover_next_enemy_event():
+	if current_enemy_event:
+		assert(not current_enemy_event.get_enemy_event(combat).active, \
+				"Discovering a new enemy event although the previous one \
+				has not been activated.")
+	var plan := get_next_enemy_event_plan()
+	if plan:
+		var event : EnemyEvent = plan.create_event(combat) as EnemyEvent
+		add_event(event)
+		current_enemy_event = event.get_reference()
+		connect_enemy_meter_to_event(event)
+		event.discover()
+
+func try_to_activate_enemy_event():
+	if current_enemy_event:
+		if is_enemy_meter_full():
+			current_enemy_event.get_enemy_event(combat).activate()
+			current_enemy_event = null
+			reset_enemy_meter()
+
+func connect_enemy_meter_to_event(event: EnemyEvent) -> AnimationObject:
+	return combat.animation.callback(combat.ui, "set_enemy_meter_event", [event])
+
+func set_enemy_meter(value: int) -> AnimationCallback:
 	enemy_meter = clamp(value, 0, enemy_meter_max)
-	return combat.animation.callback(combat.ui, "set_enemy_meter", [enemy_meter]).set_min_duration(3)
+	return combat.animation.callback(combat.ui, "set_enemy_meter", [enemy_meter])
+
+func set_enemy_meter_max(value: int) -> AnimationObject:
+	return combat.animation.callback(combat.ui, "set_enemy_meter_max", [value])
 
 func add_to_enemy_meter(value := 1) -> AnimationCallback:
 	return set_enemy_meter(enemy_meter + value)

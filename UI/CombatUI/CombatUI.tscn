@@ -361,6 +361,17 @@ anchor_right = 0.46875
 anchor_bottom = 0.389815
 metadata/_edit_use_anchors_ = true
 
+[node name="EnemyEventInfo" parent="." instance=ExtResource("13_37g1a")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.550521
+anchor_top = 0.107407
+anchor_right = 0.844271
+anchor_bottom = 0.389815
+metadata/_edit_use_anchors_ = true
+
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
