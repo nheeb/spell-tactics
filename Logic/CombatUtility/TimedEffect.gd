@@ -85,6 +85,9 @@ func set_flag(flag: int, value := true) -> TimedEffect:
 func give_timed_effect_as_parameter() -> TimedEffect:
 	return set_flag(Flags.AppendSelfReferenceToCall)
 
+func give_signal_params_as_parameter() -> TimedEffect:
+	return set_flag(Flags.AppendSignalParamsToCall)
+
 func set_death_callback(replace: bool, ref: UniversalReference, method: String, params := []) -> TimedEffect:
 	assert(not effect_connected)
 	death_ref = ref
@@ -187,8 +190,13 @@ func _set_callable(callable: Callable) -> TimedEffect:
 	call_method = callable.get_method()
 	return self
 
-func set_owner(ref: UniversalReference) -> TimedEffect:
-	owner_ref = ref
+func set_owner(ref_or_obj: Object) -> TimedEffect:
+	assert(ref_or_obj)
+	assert(ref_or_obj is UniversalReference or ref_or_obj.has_method("get_reference"))
+	if ref_or_obj is UniversalReference:
+		owner_ref = ref_or_obj
+	else:
+		owner_ref = ref_or_obj.get_reference()
 	return self
 
 func get_owner() -> Object:
@@ -204,6 +212,9 @@ func get_id() -> String:
 ## This should be the last thing executed on a Timed Effect. No more changes after it was connected
 func register(combat: Combat) -> void:
 	combat.t_effects.add_effect(self)
+
+func kill() -> void:
+	dead = true
 
 static func new_end_phase_trigger_from_callable(callable: Callable) -> TimedEffect:
 	var end_phase_ref = CombatNodeReference.new("Phases/EndPhase")

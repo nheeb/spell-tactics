@@ -18,6 +18,7 @@ func is_castable() -> bool:
 
 func try_cast() -> void:
 	get_logic().try_cast()
+	combat.log.register_cast(self)
 
 var selected := false
 func select():
@@ -137,3 +138,6 @@ func update_target_ui():
 			combat.ui.error_lines.add("No suitable targets")
 		else:
 			combat.ui.error_lines.add("Select target tile(s)")
+
+func get_reference_castable() -> CastableReference:
+	return CastableReference.new(self)

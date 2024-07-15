@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="CombatEventType" load_steps=3 format=3 uid="uid://ovrqq0tqoc0w"]
+[gd_resource type="Resource" script_class="CombatEventType" load_steps=6 format=3 uid="uid://ovrqq0tqoc0w"]
 
 [ext_resource type="Texture2D" uid="uid://ckiqt6ejs1puy" path="res://Assets/Sprites/Icons/sun-cloud.png" id="1_qe7vw"]
+[ext_resource type="Resource" uid="uid://dap6q37wvddfs" path="res://Spells/AllEvents/FallWeatherClear.tres" id="1_qiluo"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventType.gd" id="1_ukva8"]
+[ext_resource type="Resource" uid="uid://dm0qkqxrppqop" path="res://Spells/AllEvents/FallWeatherRainy.tres" id="2_m7f0q"]
+[ext_resource type="Resource" uid="uid://df7lvpmm8xf44" path="res://Spells/AllEvents/FallWeatherWindy.tres" id="3_37uxe"]
 
 [resource]
 script = ExtResource("1_ukva8")
@@ -13,4 +16,6 @@ icons = Array[Texture]([ExtResource("1_qe7vw")])
 hidden_icon = false
 show_info_on_advancing = true
 max_duration = 0
-default_params = {}
+default_params = {
+"weather_pool": [ExtResource("1_qiluo"), ExtResource("2_m7f0q"), ExtResource("3_37uxe")]
+}

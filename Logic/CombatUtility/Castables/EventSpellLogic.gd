@@ -1,5 +1,11 @@
 class_name EventSpellLogic extends SpellLogic
 
+## TODO Delete this script
+
+####################
+## DEPRECATED !!! ##
+####################
+
 ## For overriding to give the event length (Could be also moved to SpellRes)
 func get_event_length() -> int:
 	return 0

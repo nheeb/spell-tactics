@@ -32,6 +32,10 @@ func mark_cast_failed() -> void:
 func was_cast_successful() -> bool:
 	return cast_success
 
+## This is for easy use of TimedEffects and callables
+func get_reference() -> PropertyReference:
+	return PropertyReference.new(get_castable().get_reference(), "logic")
+
 ################################################
 ## For overriding in SpellLogic & ActiveLogic ##
 ################################################

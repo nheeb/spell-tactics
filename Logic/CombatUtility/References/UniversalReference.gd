@@ -36,6 +36,10 @@ func get_reference_type() -> String:
 ## Getters for the different References ##
 ##########################################
 
+func get_castable(combat: Combat) -> Castable:
+	assert(resolve(combat) is Castable)
+	return resolve(combat) as Castable
+
 func get_spell(combat: Combat) -> Spell:
 	assert(resolve(combat) is Spell)
 	return resolve(combat) as Spell

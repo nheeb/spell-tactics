@@ -21,7 +21,7 @@ func connect_effect(te: TimedEffect) -> void:
 			return a.priority > b.priority if a.priority != b.priority else a.call_method <= b.call_method)
 	else:
 		connected_effects[te.connected_signal] = [te]
-		te.connected_signal.connect(signal_triggered.bind(te.connected_signal), )
+		te.connected_signal.connect(signal_triggered.bind(te.connected_signal))
 
 func get_effects(effect_owner: Object, id := "") -> Array[TimedEffect]:
 	var _effects : Array[TimedEffect] = []
