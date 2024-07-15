@@ -9,8 +9,7 @@ var actives: Array[Active]
 @onready var timeline: TimelineUI = %Timeline
 @onready var error_lines: StatusLines = %ErrorLines
 
-@onready var buttons = [$Actives/ActiveButtonWithUses1, $Actives/ActiveButtonWithUses2,
-						$Actives/ActiveButtonWithUses3, $Actives/ActiveButtonWithUses4]
+var buttons: Array[ActiveButtonWithUses] = []
 
 func setup(_combat: Combat):
 	self.combat = _combat
@@ -42,32 +41,7 @@ func setup(_combat: Combat):
 func next_round(current_round: int):
 	pass
 
-const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
-#func add_card(spell: Spell):
-	#var card = HAND_CARD_2D.instantiate()
-	#card.set_spell(spell)
-	#cards.append(card)
-	#%Cards3D.add_card(card)
-	#if combat.energy.is_payable(spell.type.costs):
-		## spell is available
-		#card.set_enabled(true)
-	#else:
-		#card.set_enabled(false)
 
-#func remove_card(spell: Spell):
-	#var card_to_remove = null
-	#for c in cards:
-		#if c.spell == spell:
-			#if card_to_remove == null:
-				#card_to_remove = c
-			#else:
-				#printerr("Two HandCard2Ds share the same spell")
-	#if card_to_remove != null:
-		#%Cards3D.remove_card(card_to_remove)
-		#cards.erase(card_to_remove)
-		#card_to_remove.queue_free()
-	#else:
-		#printerr("Failed to remove a card whose spell is not in the hand")
 
 func _on_next_pressed():
 	combat.input.process_action(PlayerPass.new())
@@ -87,16 +61,12 @@ func _on_cast_pressed():
 	var payment := extract_payment()
 	if is_instance_valid(selected_spell):
 		combat.input.process_action(PlayerCast.new(selected_spell, payment))
-		
-
-#func _input(event):
-	#if event.is_action_pressed("cancel"):
-		#deselect_card()
 
 
-func select_card(spell: Spell):
+func select_card(spell: Spell):  # @@@@@ Method deprecated?
 	deselect_card()
 	selected_spell = spell
+	const HAND_CARD_2D = preload("res://UI/HandCard2D.tscn")
 	var selected_card = HAND_CARD_2D.instantiate()
 	selected_card.set_spell(spell, false)
 	# don't show energy payment for first prototype:
