@@ -9,23 +9,24 @@ var active: Active = null:
 		active = new_active
 	
 		if is_inside_tree() and old_active == null:
-			init_active()
+			init_active(new_active)
 @onready var bubbles: Array[ActiveUseBubble] = [$ActiveUseBubble1, $ActiveUseBubble2, $ActiveUseBubble3]
 
 const TWO_BUBBLES_OFFSET: Vector2 = Vector2(8.0, -8.0)
 #func update_active(new_active: Active):
 	
 func _ready() -> void:
-	init_active()
+	if active != null:
+		init_active(active)
 				
 
-func init_active(): 
+func init_active(new_active: Active): 
 	#print("new_active %s connected.", active.type.pretty_name)
-	active.got_updated.connect(_on_active_uses_updated)
+	new_active.got_updated.connect(_on_active_uses_updated)
 
-	button.icon.texture = active.type.icon
+	button.icon.texture = new_active.type.icon
 
-	var max_uses = active.get_limitation_max_uses()
+	var max_uses = new_active.get_limitation_max_uses()
 	assert(len(bubbles) == 3, "Expecting original bubbles array")
 	match max_uses:
 		1:
@@ -46,7 +47,7 @@ func init_active():
 		3:
 			pass # do nothing
 		_: 
-			printerr("Active %s  max_uses = %d" % [active.type.pretty_name, max_uses])
+			printerr("Active %s  max_uses = %d" % [new_active.type.pretty_name, max_uses])
 	
 func _on_active_uses_updated():
 	var uses_left = active.get_limitation_uses_left()

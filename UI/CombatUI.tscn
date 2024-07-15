@@ -7,7 +7,6 @@
 [ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="5_jttea"]
 [ext_resource type="Texture2D" uid="uid://ditt5pum2lahc" path="res://Assets/Sprites/Icons/plain-arrow.png" id="5_myaa6"]
 [ext_resource type="PackedScene" uid="uid://ciug3sucml2b5" path="res://UI/EnergyIcon.tscn" id="6_2qxi4"]
-[ext_resource type="PackedScene" uid="uid://1421ngumthvb" path="res://UI/CombatUI/ActiveButtonWithUses.tscn" id="7_3c82r"]
 [ext_resource type="PackedScene" uid="uid://cp5c8if6axsd6" path="res://UI/CombatUI/EnemyEventIcon.tscn" id="8_isphm"]
 [ext_resource type="PackedScene" uid="uid://cn2mfqtdouxdu" path="res://UI/CombatUI/Timeline.tscn" id="9_denmg"]
 [ext_resource type="PackedScene" uid="uid://k4w38jjb4tmp" path="res://UI/CombatUI/StatusLines.tscn" id="10_gtdym"]
@@ -255,23 +254,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Active1Posqweqweqw" type="Marker2D" parent="Actives"]
 position = Vector2(29.0001, 140)
 
-[node name="ActiveButtonWithUses1" parent="Actives" instance=ExtResource("7_3c82r")]
 
-[node name="ActiveButtonWithUses2" parent="Actives" instance=ExtResource("7_3c82r")]
-offset_left = 73.0
-offset_top = -93.0
-offset_right = 185.0
-offset_bottom = 19.0
-
-[node name="ActiveButtonWithUses3" parent="Actives" instance=ExtResource("7_3c82r")]
-offset_left = 70.0
-offset_top = 68.0
-offset_right = 182.0
-offset_bottom = 180.0
-
-[node name="ActiveButtonWithUses4" parent="Actives" instance=ExtResource("7_3c82r")]
-offset_left = 149.0
-offset_right = 261.0
 
 [node name="EnemyArea" type="Panel" parent="."]
 layout_mode = 1
