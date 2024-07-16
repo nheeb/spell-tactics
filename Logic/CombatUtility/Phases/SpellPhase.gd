@@ -1,33 +1,33 @@
 class_name SpellPhase extends AbstractPhase
 
-enum CastingState {
-	Selecting,
-	SettingEnergy,
-	Targeting,
-	Casting
-}
+#enum CastingState {
+	#Selecting,
+	#SettingEnergy,
+	#Targeting,
+	#Casting
+#}
 
-signal changed_casting_state(s: CastingState)
-var state: CastingState = CastingState.Selecting:
-	set(s):
-		if state != s:
-			state = s
-			changed_casting_state.emit(s)
-var selected_spell: Spell
+#signal changed_casting_state(s: CastingState)
+#var state: CastingState = CastingState.Selecting:
+	#set(s):
+		#if state != s:
+			#state = s
+			#changed_casting_state.emit(s)
+#var selected_spell: Spell
 var highlighted_targets: Array[Tile]
 
 func _ready() -> void:
 	pass
 
 
-func return_to_spell_selection():
-	state = CastingState.Selecting
-	combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
-	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
-	combat.animation.play_animation_queue()
-	selected_spell = null
-	set_process(false)
-	combat.ui.deselect_card()
+#func return_to_spell_selection():
+	#state = CastingState.Selecting
+	#combat.level._unhighlight_tile_set(highlighted_targets, Highlight.Type.Combat)
+	#combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
+	#combat.animation.play_animation_queue()
+	#selected_spell = null
+	#set_process(false)
+	#combat.ui.deselect_card()
 
 #func tile_clicked(tile: Tile):
 	## TODO Nitai remove this method completely
@@ -66,7 +66,7 @@ func process_phase() -> bool:
 	combat.get_phase_node(Combat.RoundPhase.Movement).highlight_payable_spells(null)
 	combat.get_phase_node(Combat.RoundPhase.Movement).highlight_for_spell_energy(null)
 	
-	state = CastingState.Selecting  # reset state
+	#state = CastingState.Selecting  # reset state
 	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
 	
 	# unlock all actives that are available once per round
