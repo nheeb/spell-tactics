@@ -47,7 +47,7 @@ func init_active(new_active: Active):
 		3:
 			pass # do nothing
 		_: 
-			printerr("Active %s  max_uses = %d" % [new_active.type.pretty_name, max_uses])
+			printerr("Active %s  max_uses = %d. weird, huh?" % [new_active.type.pretty_name, max_uses])
 	
 func _on_active_uses_updated():
 	var uses_left = active.get_limitation_uses_left()
@@ -64,10 +64,11 @@ func _on_active_uses_updated():
 
 
 func _on_mouse_entered() -> void:
-	if Game.world != null:
+	# TODO doesn't seem to have the desired effect! (still showing tile hover effect)
+	if Game.world != null:  
 		Game.world.get_node("%MouseRaycast").disabled = true
 
 
 func _on_mouse_exited() -> void:
-	if Game.world != null:
+	if Game.world != null: 
 		Game.world.get_node("%MouseRaycast").disabled = false

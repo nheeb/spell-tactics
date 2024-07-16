@@ -232,10 +232,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Actives" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.04375
+anchor_left = 0.0520833
 anchor_top = 0.393519
-anchor_right = 0.322917
-anchor_bottom = 0.715741
+anchor_right = 0.133333
+anchor_bottom = 0.622222
 theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
 metadata/_edit_use_anchors_ = true
 
@@ -251,8 +251,41 @@ grow_horizontal = 0
 theme_override_constants/separation = 70
 metadata/_edit_use_anchors_ = true
 
-[node name="Active1Posqweqweqw" type="Marker2D" parent="Actives"]
-position = Vector2(29.0001, 140)
+[node name="ActivePos1" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 120.0
+offset_right = 35.0
+offset_bottom = 120.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos1"]
+
+[node name="ActivePos2" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 79.0
+offset_top = 82.0
+offset_right = 79.0
+offset_bottom = 82.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos2"]
+
+[node name="ActivePos3" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 79.0
+offset_top = 168.0
+offset_right = 79.0
+offset_bottom = 168.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos3"]
+
+[node name="ActivePos4" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 124.0
+offset_top = 120.0
+offset_right = 124.0
+offset_bottom = 120.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos4"]
 
 [node name="EnemyArea" type="Panel" parent="."]
 layout_mode = 1
