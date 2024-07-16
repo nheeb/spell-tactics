@@ -113,7 +113,7 @@ label_settings = ExtResource("5_jttea")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+[node name="CardsAspectContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,13 +126,13 @@ ratio = 1.7778
 alignment_vertical = 2
 metadata/_edit_group_ = true
 
-[node name="CardViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer"]
+[node name="CardViewportContainer" type="SubViewportContainer" parent="CardsAspectContainer"]
 layout_mode = 2
 size_flags_horizontal = 7
 mouse_filter = 2
 stretch = true
 
-[node name="CardViewport" type="SubViewport" parent="AspectRatioContainer/CardViewportContainer"]
+[node name="CardViewport" type="SubViewport" parent="CardsAspectContainer/CardViewportContainer"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
@@ -140,7 +140,7 @@ msaa_3d = 1
 size = Vector2i(1920, 1079)
 render_target_update_mode = 4
 
-[node name="Cards3D" parent="AspectRatioContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
+[node name="Cards3D" parent="CardsAspectContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
 unique_name_in_owner = true
 
 [node name="EnergyArea" type="Panel" parent="."]
@@ -234,34 +234,71 @@ metadata/_edit_use_anchors_ = true
 [node name="Actives" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0177083
-anchor_top = 0.65
-anchor_right = 0.130208
-anchor_bottom = 0.980556
+anchor_left = 0.0520833
+anchor_top = 0.393519
+anchor_right = 0.133333
+anchor_bottom = 0.622222
 theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Actives"]
+[node name="VBoxContainer" type="HBoxContainer" parent="Actives"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0925928
+anchor_left = 0.0928899
 anchor_top = -0.254902
-anchor_right = 1.41667
-anchor_bottom = 0.999999
+anchor_right = 0.923165
+anchor_bottom = 0.770308
 offset_bottom = -3.05176e-05
-grow_horizontal = 2
-grow_vertical = 2
+grow_horizontal = 0
+theme_override_constants/separation = 70
 metadata/_edit_use_anchors_ = true
+
+[node name="ActivePos1" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 120.0
+offset_right = 35.0
+offset_bottom = 120.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos1"]
+
+[node name="ActivePos2" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 79.0
+offset_top = 82.0
+offset_right = 79.0
+offset_bottom = 82.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos2"]
+
+[node name="ActivePos3" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 79.0
+offset_top = 168.0
+offset_right = 79.0
+offset_bottom = 168.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos3"]
+
+[node name="ActivePos4" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 124.0
+offset_top = 120.0
+offset_right = 124.0
+offset_bottom = 120.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos4"]
 
 [node name="EnemyArea" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.421354
 anchor_top = 0.00555556
-anchor_right = 0.617479
+anchor_right = 0.656021
 anchor_bottom = 0.122815
 offset_right = 0.439972
 offset_bottom = 0.359985
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_so122")
 metadata/_edit_use_anchors_ = true
 
@@ -298,10 +335,11 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.973476
-anchor_top = 0.062992
-anchor_right = 1.94695
+anchor_left = 0.698448
+anchor_top = 0.0629921
+anchor_right = 1.67192
 anchor_bottom = 1.04724
+mouse_filter = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationSpeedUI" parent="." instance=ExtResource("11_ups4t")]
@@ -342,7 +380,9 @@ scale = Vector2(0.607886, 0.607886)
 [node name="ErrorLines" parent="." instance=ExtResource("10_gtdym")]
 unique_name_in_owner = true
 layout_mode = 1
+mouse_filter = 2
 color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="CombatEventIcons" parent="." instance=ExtResource("12_8b75y")]
 unique_name_in_owner = true

@@ -126,7 +126,7 @@ func update_current_state() -> void:
 		tile.set_highlight(highlight_possible, true)
 	
 	combat.ui.error_lines.clear()
-	if get_card():
+	if is_instance_valid(get_card()):
 		get_card().set_glow(is_castable())
 	else:
 		printerr("Card for Castable visual update not found")

@@ -10,9 +10,9 @@ stack = Array[int]([6])
 
 [resource]
 script = ExtResource("1_c844k")
-pretty_name = "Do Nothing"
 costs = SubResource("Resource_ufdj6")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Do Nothing"
 effect_text = "Does nothing."
 fluff_text = "When nothing is done,
 nothing is left undone.
@@ -23,6 +23,10 @@ target = 0
 target_range = -1
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 14
 topic_secondary = 0
 topic_icons = Array[int]([])
