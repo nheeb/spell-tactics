@@ -62,7 +62,8 @@ func initialize_active_buttons(new_actives: Array[Active]):
 		var active_button = ACTIVE_BUTTON.instantiate()
 		active_button.name = "ActiveButton%d" % i
 		active_button.active = active
-		$Actives/VBoxContainer.add_child(active_button)
+		$Actives.add_child(active_button)
+		active_button.position = get_node("Actives/ActivePos%d" % (i+1)).position
 		# no text, we have active textures now
 		# though the text will be needed as a hint :) (TODO)
 		#button.text = active.get_button_caption()#active.type.pretty_name
@@ -83,14 +84,14 @@ func disable_actions():
 const energy_min_size := 50
 const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 func set_current_energy(energy: EnergyStack):
-	for c in $EnergyArea/EnergyList.get_children():
-		if c is EnergyIcon:
-			c.queue_free()
-	for e in energy.stack:
-		var icon = ENERGY_ICON.instantiate()
-		$EnergyArea/EnergyList.add_child(icon)
-		icon.type = e
-		icon.min_size = energy_min_size
+	#for c in $EnergyArea/EnergyList.get_children():
+		#if c is EnergyIcon:
+			#c.queue_free()
+	#for e in energy.stack:
+		#var icon = ENERGY_ICON.instantiate()
+		#$EnergyArea/EnergyList.add_child(icon)
+		#icon.type = e
+		#icon.min_size = energy_min_size
 		
 	update_payable_cards()
 
@@ -112,22 +113,20 @@ func on_game_unpaused():
 	show()
 
 func _on_active_button_pressed(i: int) -> void:
-	#combat.input.process_action(SelectActive.new(actives[i]))
 	combat.input.process_action(PASelectCastable.new(actives[i]))
 	
 func _on_active_unlocked(i: int) -> void:
-	var active_button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	var active_button = $Actives.get_node("ActiveButton%d" % i)
 	active_button.button.disabled = false
 	
 func _on_active_locked(i: int) -> void:
-	var active_button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
+	var active_button = $Actives.get_node("ActiveButton%d" % i)
 	active_button.button.disabled = true
 
 func _on_active_updated(i: int) -> void:
 	# deprecated, active signal gets connected inside the activebutton
-	var active_button = $Actives/VBoxContainer.get_node("ActiveButton%d" % i)
-	# TODO make this nicer
-	#active_button.update_active(active_button.active)
+	var active_button = $Actives.get_node("ActiveButton%d" % i)
+	printerr("deprecated call to _on_active_updated")
 
 func _on_button_entered() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = true
