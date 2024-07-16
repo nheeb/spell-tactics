@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=456 format=3 uid="uid://ckq8v1s3aruw7"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=462 format=3 uid="uid://ckq8v1s3aruw7"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/CombatState.gd" id="1_a77op"]
+[ext_resource type="Resource" uid="uid://cyfghwiu5p4y4" path="res://Spells/AllEnemyEvents/SpawnNewFighter.tres" id="1_wolby"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/LevelState.gd" id="1_worvi"]
 [ext_resource type="Script" path="res://Entities/EntityID.gd" id="2_2i3es"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Events/EnemyEventPlan.gd" id="2_kcnt0"]
+[ext_resource type="Resource" uid="uid://ovrqq0tqoc0w" path="res://Spells/AllEvents/FallWeather.tres" id="3_eh8fp"]
 [ext_resource type="Resource" uid="uid://b1uiotlalbmul" path="res://Entities/Environment/GrassTile.tres" id="3_vhrki"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventSchedule.gd" id="4_lakkw"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/EntityState.gd" id="4_qk5jy"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/TileState.gd" id="5_6hme5"]
 [ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Entities/Environment/DirtTile.tres" id="6_8em4m"]
@@ -25,6 +29,19 @@
 [ext_resource type="Resource" uid="uid://dh4ll7t2j71pq" path="res://Entities/Environment/FlowMedium.tres" id="19_25pqm"]
 [ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Entities/Enemies/GoblinBard.tres" id="19_amp3j"]
 [ext_resource type="Resource" uid="uid://iq34rfnf6t4w" path="res://Entities/Environment/WaterTile.tres" id="19_ncl4f"]
+
+[sub_resource type="Resource" id="Resource_t7fuw"]
+script = ExtResource("2_kcnt0")
+event_type = ExtResource("1_wolby")
+params = {}
+event_created = false
+use_as_default = true
+
+[sub_resource type="Resource" id="Resource_ggb53"]
+script = ExtResource("4_lakkw")
+event_type = ExtResource("3_eh8fp")
+params = {}
+event_created = false
 
 [sub_resource type="Resource" id="Resource_25aem"]
 script = ExtResource("2_2i3es")
@@ -3211,7 +3228,12 @@ current_phase = 0
 deck_states = Array[Resource("res://Logic/CombatUtility/Castables/SpellState.gd")]([])
 hand_states = Array[Resource("res://Logic/CombatUtility/Castables/SpellState.gd")]([])
 discard_pile_states = Array[Resource("res://Logic/CombatUtility/Castables/SpellState.gd")]([])
-event_states = Array[Resource("res://Logic/CombatUtility/Castables/SpellState.gd")]([])
 timed_effects = Array[Resource("res://Logic/CombatUtility/TimedEffect.gd")]([])
 combat_log = Array[Resource("res://Logic/CombatUtility/Utilities/LogEntry.gd")]([])
-drains_done = 0
+active_states = Array[Resource("res://Logic/CombatUtility/Castables/ActiveState.gd")]([])
+all_events = Array[Resource("res://Logic/CombatUtility/Events/CombatEventState.gd")]([])
+event_timeline = {
+1: [SubResource("Resource_ggb53")]
+}
+enemy_event_queue = Array[ExtResource("2_kcnt0")]([SubResource("Resource_t7fuw")])
+enemy_meter = 0

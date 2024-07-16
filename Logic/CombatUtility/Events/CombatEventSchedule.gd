@@ -6,11 +6,11 @@ class_name CombatEventSchedule extends Resource
 
 func set_scheduled_round(combat: Combat, value: int) -> void:
 	if combat:
-		combat.event.add_event_schedule(self, value)
+		combat.events.add_event_schedule(self, value)
 
 func get_scheduled_round(combat: Combat) -> int:
 	if combat:
-		return combat.event.get_event_schedule_round_number(self)
+		return combat.events.get_event_schedule_round_number(self)
 	return 0
 
 func _init(_event_type: CombatEventType = null, _params := {}) -> void:

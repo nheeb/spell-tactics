@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7cdtyuptrypr"]
+[gd_scene load_steps=2 format=3 uid="uid://b7cdtyuptrypr"]
 
 [ext_resource type="Script" path="res://UI/CombatUI/CombatEventIcons.gd" id="1_2uw3i"]
-[ext_resource type="PackedScene" uid="uid://bcdmd2tsdad2e" path="res://UI/CombatUI/CombatEventIcon.tscn" id="2_bbwvx"]
 
 [node name="CombatEventIcons" type="Control"]
 layout_mode = 3
@@ -10,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_2uw3i")
 
 [node name="Container" type="HBoxContainer" parent="."]
@@ -19,16 +19,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
-
-[node name="CombatEventIcon" parent="Container" instance=ExtResource("2_bbwvx")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="CombatEventIcon4" parent="Container" instance=ExtResource("2_bbwvx")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="CombatEventIcon5" parent="Container" instance=ExtResource("2_bbwvx")]
-layout_mode = 2
-size_flags_horizontal = 0

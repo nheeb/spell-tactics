@@ -3,6 +3,10 @@ class_name CombatEventLogic extends Object
 var combat: Combat
 var event: CombatEvent
 
+func setup(_combat: Combat, _event: CombatEvent):
+	combat = _combat
+	event = _event
+
 func get_reference() -> PropertyReference:
 	return PropertyReference.new(event.get_reference(), "logic")
 

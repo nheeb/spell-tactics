@@ -298,10 +298,10 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.02387
-anchor_top = 0.346456
-anchor_right = 2.02387
-anchor_bottom = 1.34646
+anchor_left = 0.973476
+anchor_top = 0.062992
+anchor_right = 1.94695
+anchor_bottom = 1.04724
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationSpeedUI" parent="." instance=ExtResource("11_ups4t")]
@@ -316,10 +316,10 @@ metadata/_edit_use_anchors_ = true
 [node name="TimelineArea" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.402604
+anchor_left = 0.443229
 anchor_top = -0.00462963
-anchor_right = 0.598729
-anchor_bottom = 0.104296
+anchor_right = 0.591958
+anchor_bottom = 0.0792963
 offset_right = 0.439972
 offset_bottom = 0.359985
 mouse_filter = 1
@@ -329,10 +329,14 @@ metadata/_edit_use_anchors_ = true
 [node name="Timeline" parent="TimelineArea" instance=ExtResource("9_denmg")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 197.0
+anchors_preset = -1
+anchor_left = -0.093
+anchor_right = 0.855
+anchor_bottom = 1.135
+offset_left = 163.598
 offset_top = 89.0
-offset_right = 198.0
-offset_bottom = 184.0
+offset_right = -76.53
+offset_bottom = 29.715
 scale = Vector2(0.607886, 0.607886)
 
 [node name="ErrorLines" parent="." instance=ExtResource("10_gtdym")]

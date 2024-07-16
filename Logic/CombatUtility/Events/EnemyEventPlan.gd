@@ -3,6 +3,8 @@ class_name EnemyEventPlan extends Resource
 @export var event_type: EnemyEventType
 @export var params := {}
 @export var event_created := false
+## If this is true, the EventPlan will be copied when there are no other plans left
+@export var use_as_default := false
 
 func _init(_event_type: CombatEventType = null, _params := {}) -> void:
 	event_type = _event_type

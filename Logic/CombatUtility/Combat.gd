@@ -26,10 +26,11 @@ enum Result {
 @warning_ignore("shadowed_global_identifier")
 @onready var log: LogUtility = %LogUtility
 @onready var input: InputUtility = %InputUtility as InputUtility
-@onready var event: EventUtility = %EventUtility
+@onready var events: EventUtility = %EventUtility
 @onready var t_effects: TimedEffectsUtility = %TimedEffectsUtility
 @onready var attack: AttackUtility = %AttackUtility
 
+# TODO Nitai move those to the log utility
 signal round_ended
 signal spell_casted_successfully(spell: SpellReference)
 
@@ -103,7 +104,7 @@ func setup() -> void:
 
 	# Check if all spells have ids
 	# TODO change this when Overworld is done
-	for s in get_all_spells():
+	for s in get_all_castables():
 		if s.id == null:
 			printerr("Warning: Spell without id (gets a new dangerous id)")
 			s.id = SpellID.new(Game.add_to_spell_count())
@@ -190,11 +191,11 @@ func serialize() -> CombatState:
 	state.deck_states.append_array(deck.map(func(x: Spell): return x.serialize()))
 	state.hand_states.append_array(hand.map(func(x: Spell): return x.serialize()))
 	state.discard_pile_states.append_array(discard_pile.map(func(x: Spell): return x.serialize()))
-	state.event_states.append_array(event.events.map(func(x: Spell): return x.serialize()))
-	state.current_event = event.current_event
+	# TODO Nitai serialize events
+	#state.event_states.append_array(events.events.map(func(x: Spell): return x.serialize()))
+	#state.current_event = events.current_event
 	state.timed_effects = t_effects.effects
 	state.combat_log = self.log.log_entries
-	state.drains_done = energy.drains_done_this_turn
 	return state
 
 func save_to_disk(path: String = ""):
@@ -215,12 +216,11 @@ static func deserialize_level_from_combat_state(combat_state: CombatState) -> Le
 	var combat := combat_state.deserialize()
 	return combat.level
 
-func get_all_spells() -> Array[Castable]:
+func get_all_castables() -> Array[Castable]:
 	var all_spells : Array[Castable] = []
 	all_spells.append_array(hand)
 	all_spells.append_array(deck)
 	all_spells.append_array(discard_pile)
-	all_spells.append_array(event.events)
 	all_spells.append_array(actives)
 	return all_spells
 

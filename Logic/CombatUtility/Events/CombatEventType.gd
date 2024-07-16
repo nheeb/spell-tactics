@@ -24,6 +24,8 @@ enum OrderPrio {First = 5, Middle = 10, Last = 15}
 @export var hidden_icon := false
 ## If true, the effect text will be shown during the advance / main effect.
 @export var show_info_on_advancing := true
+## If true, the effect text will be shown during the "creation".
+@export var show_info_on_activation := false
 ## If the value is > 0, the event will finish automatically after X rounds.
 @export var max_duration := 0
 
@@ -46,9 +48,17 @@ func _on_load() -> void:
 
 func create_event(combat: Combat, params := {}) -> CombatEvent:
 	_on_load()
-	var event := CombatEvent.new()
+	var event : CombatEvent
+	if self is EnemyEventType:
+		event = EnemyEvent.new()
+	else:
+		event = CombatEvent.new()
+	event.type = self
 	event.combat = combat
-	# TODO Nitai give Event ID
+	event.logic = logic.new()
+	event.logic.setup(combat, event)
+	# TODO Nitai Make a better ID System
+	event.id = CombatEventID.new(Game.add_to_spell_count())
 	event.params = default_params.duplicate(true)
 	event.params.merge(params, true)
 	return event

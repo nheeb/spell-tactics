@@ -32,15 +32,25 @@ func get_event_schedule_round_number(event_schedule: CombatEventSchedule) -> int
 	return 0
 
 func get_next_enemy_event_plan() -> EnemyEventPlan:
-	return Utility.array_safe_get(enemy_event_queue.filter(
+	var plan := Utility.array_safe_get(enemy_event_queue.filter(
 		func (e): return not e.event_created
 	), 0) as EnemyEventPlan
+	if plan: return plan
+	var default := Utility.array_safe_get(enemy_event_queue.filter(
+		func (e): return e.use_as_default
+	), 0) as EnemyEventPlan
+	if default:
+		var new_plan : EnemyEventPlan = default.duplicate() as EnemyEventPlan
+		new_plan.event_created = false
+		enemy_event_queue.append(new_plan)
+		return new_plan
+	return null
 
 func get_active_events() -> Array[CombatEvent]:
 	return all_events.filter(func (e): return e.active)
 
 func add_event(event: CombatEvent):
-	assert(not event in all_events, "Added event that was already in the list")
+	assert(not (event in all_events), "Added event that was already in the list")
 	all_events.append(event)
 
 func add_event_and_activate(event: CombatEvent, advance_when_activate := false):
@@ -102,6 +112,7 @@ func try_to_activate_enemy_event():
 			reset_enemy_meter()
 
 func connect_enemy_meter_to_event(event: EnemyEvent) -> AnimationObject:
+	enemy_meter_max = event.enemy_event_type().enemy_meter_costs
 	return combat.animation.callback(combat.ui, "set_enemy_meter_event", [event])
 
 func set_enemy_meter(value: int) -> AnimationCallback:
@@ -112,6 +123,8 @@ func set_enemy_meter_max(value: int) -> AnimationObject:
 	return combat.animation.callback(combat.ui, "set_enemy_meter_max", [value])
 
 func add_to_enemy_meter(value := 1) -> AnimationCallback:
+	if not current_enemy_event:
+		discover_next_enemy_event()
 	return set_enemy_meter(enemy_meter + value)
 
 func is_enemy_meter_full() -> bool:

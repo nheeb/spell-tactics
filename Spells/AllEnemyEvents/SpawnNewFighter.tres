@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="EnemyEventType" load_steps=2 format=3 uid="uid://cyfghwiu5p4y4"]
+[gd_resource type="Resource" script_class="EnemyEventType" load_steps=3 format=3 uid="uid://cyfghwiu5p4y4"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/Events/EnemyEventType.gd" id="1_pmh82"]
+[ext_resource type="Texture2D" uid="uid://clymh7um08n1b" path="res://Assets/Sprites/Icons/ugly-face.png" id="1_qvj2l"]
 
 [resource]
 script = ExtResource("1_pmh82")
@@ -11,8 +12,9 @@ pretty_name = "New Goblin Fighter"
 effect_text = "Spawns a new goblin fighter."
 fluff_text = "He is strong."
 order = 5
-icons = Array[Texture]([])
-hidden_icon = false
+icons = Array[Texture]([ExtResource("1_qvj2l")])
+hidden_icon = true
 show_info_on_advancing = true
+show_info_on_activation = true
 max_duration = 0
 default_params = {}

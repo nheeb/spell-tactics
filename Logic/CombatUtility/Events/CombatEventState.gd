@@ -17,6 +17,8 @@ func deserialize(combat: Combat) -> CombatEvent:
 	event.combat = combat
 	event.id = id
 	event.type = type
+	event.logic = type.logic.new()
+	event.logic.setup(combat, event)
 	event.params = params
 	event.active = active
 	event.finished = finished

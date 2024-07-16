@@ -14,7 +14,7 @@ func _init(_spell: Spell = null) -> void:
 
 ## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
-	for s in combat.get_all_spells():
+	for s in combat.get_all_castables():
 		if not s.id:
 			continue
 		if s.id.equals(id):

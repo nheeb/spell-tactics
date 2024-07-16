@@ -4,12 +4,7 @@ func process_phase() -> bool:
 	combat.round_ended.emit(combat.current_round)
 	
 	# Events
-	combat.event.process_event()
-	
-	combat.event.add_to_enemy_meter()
-	
-	# Enemy Events
-	combat.event.process_enemy_event()
+	combat.events.process_events()
 	
 	# All stat resets here
 	combat.energy.pay(combat.energy.player_energy)

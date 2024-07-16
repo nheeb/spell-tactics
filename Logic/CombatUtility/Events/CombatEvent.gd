@@ -31,7 +31,11 @@ func activate() -> void:
 	rounds = 0
 	create_icon()
 	update_ui_icon()
+	if type.show_info_on_activation:
+		show_info(true)
 	logic.on_activate()
+	if type.show_info_on_activation:
+		show_info(false)
 
 ## Triggers the "main effect" of the event.
 ## Will be called in every end step as long as the event is active.
@@ -41,6 +45,7 @@ func advance() -> void:
 	highlight_icon(true)
 	if type.show_info_on_advancing:
 		show_info(true)
+		combat.animation.wait(1)
 	logic.on_advance(rounds)
 	if type.show_info_on_advancing:
 		show_info(false)
@@ -73,6 +78,7 @@ func show_info(visible := true) -> AnimationObject:
 func hover(hovering := true) -> void:
 	show_info(hovering)
 	logic.on_hover(hovering)
+	combat.animation.play_animation_queue()
 
 ## Is called when the player clicks on the event icon.
 func click() -> void:

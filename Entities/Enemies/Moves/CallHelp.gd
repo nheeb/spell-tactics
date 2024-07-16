@@ -14,4 +14,4 @@ func execute() -> void:
 	combat.animation.effect(VFX.BILLBOARD_EFFECT, enemy.visual_entity, \
 		{"grow_size": 1.5, "texture_name": "notes", "color": Color.RED}) \
 		.set_max_duration(1)
-	combat.event.add_to_enemy_meter(2)
+	combat.events.add_to_enemy_meter(2)

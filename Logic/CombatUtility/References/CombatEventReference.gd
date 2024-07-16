@@ -12,7 +12,7 @@ func _init(_event: CombatEvent = null) -> void:
 	assert(id, "CombatEventReference was created without ID.")
 
 func connect_reference(combat: Combat) -> void:
-	for e in combat.event.all_events:
+	for e in combat.events.all_events:
 		if not e.id:
 			continue
 		if e.id.equals(id):

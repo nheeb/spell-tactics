@@ -27,7 +27,7 @@ func initialize_with_combat(combat: Combat) -> void:
 	date = Time.get_date_string_from_system()
 	combat_log = combat.log.log_entries.duplicate(true)
 	deck = []
-	deck.append_array(Utility.array_unique(combat.get_all_spells().map(func(s): return s.type)))
+	deck.append_array(Utility.array_unique(combat.get_all_castables().map(func(s): return s.type)))
 	entities = []
 	entities.append_array(Utility.array_unique(combat.level.entities().get_all_entities().map(func(e): return e.type)))
 	game_version = Game.game_version_string

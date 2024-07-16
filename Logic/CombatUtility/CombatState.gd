@@ -40,17 +40,17 @@ func deserialize() -> Combat:
 	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 1:
 		combat.log.add("CombatState has no deck -> PrototypeDeck will be loaded")
 		combat.deck.append_array(Utility.DeckUtils.create_test_deck(combat))
-	#combat.event.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
-	#combat.event.current_event = current_event
-	#if combat.event.events.is_empty():
-		#combat.event.events.append_array(Game.get_prototype_events(combat))
-	combat.event.all_events.append_array(all_events.map(
+	#combat.events.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
+	#combat.events.current_event = current_event
+	#if combat.events.events.is_empty():
+		#combat.events.events.append_array(Game.get_prototype_events(combat))
+	combat.events.all_events.append_array(all_events.map(
 		func (e): return e.deserialize(combat)
 	))
-	combat.event.event_timeline = event_timeline
-	combat.event.enemy_event_queue = enemy_event_queue
-	combat.event.current_enemy_event = current_enemy_event
-	combat.event.enemy_meter = enemy_meter
+	combat.events.event_timeline = event_timeline
+	combat.events.enemy_event_queue = enemy_event_queue
+	combat.events.current_enemy_event = current_enemy_event
+	combat.events.enemy_meter = enemy_meter
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
 	combat.log.add("Combat was deserialized.")
