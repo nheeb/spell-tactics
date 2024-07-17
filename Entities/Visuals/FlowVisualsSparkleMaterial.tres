@@ -1,0 +1,23 @@
+[gd_resource type="QuadMesh" load_steps=3 format=3 uid="uid://dalpd0u4p81tm"]
+
+[ext_resource type="Texture2D" uid="uid://dlnicryo4m3ai" path="res://Assets/Sprites/KenneyParticles/star_01.png" id="1_4gpi0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7i23"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.83, 0.478495, 0.1909, 1)
+albedo_texture = ExtResource("1_4gpi0")
+emission_enabled = true
+emission = Color(0.831373, 0.478431, 0.192157, 1)
+emission_energy_multiplier = 4.37
+emission_operator = 1
+emission_texture = ExtResource("1_4gpi0")
+disable_receive_shadows = true
+billboard_mode = 1
+
+[resource]
+material = SubResource("StandardMaterial3D_l7i23")
+size = Vector2(0.6, 0.6)
