@@ -22,9 +22,9 @@ func load_file():
 	print(obj)
 	
 
-const Level = preload("res://Logic/Tiles/Level.tscn")
+const LEVEL = preload("res://Logic/CombatUtility/Tiles/Level.tscn")
 func save_Level_scene():
-	var level = Level.instantiate()
+	var level = LEVEL.instantiate()
 	add_child(level)
 	level.owner = self
 	$Level.init_basic_grid(3)

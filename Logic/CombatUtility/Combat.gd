@@ -106,7 +106,8 @@ func setup() -> void:
 	# TODO change this when Overworld is done
 	for s in get_all_castables():
 		if s.id == null:
-			printerr("Warning: Spell without id (gets a new dangerous id)")
+			if not s.get_type() is ActiveType:  # for Actives it's fine atm
+				printerr("Warning: Spell without id (gets a new dangerous id)")
 			s.id = SpellID.new(Game.add_to_spell_count())
 		else:
 			Game.add_to_spell_count()

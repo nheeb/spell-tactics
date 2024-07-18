@@ -13,8 +13,8 @@ enum HandState {
 
 static var OPEN_Y := -1.23 # Height of open hand cards
 static var CLOSED_Y := -2.15 # Height of closed hand cards
-static var OPEN_AT_NORM_MOUSE_POS = .6 # Open hand when mouse at normalized y pos
-static var CLOSE_AT_NORM_MOUSE_POS = .9 # Close hand when mouse at normalized y pos
+static var OPEN_AT_NORM_MOUSE_POS = .4 # Open hand when mouse at normalized y pos
+static var CLOSE_AT_NORM_MOUSE_POS = .6 # Close hand when mouse at normalized y pos
 const BASE_ROTATION = Vector3(0.0, - PI / 2, 0.0)
 const RADIAL_TURN = 1.0 # Rotate cards like in a real hand
 const RADIAL_ORIGIN_Y = -5.0 # 
