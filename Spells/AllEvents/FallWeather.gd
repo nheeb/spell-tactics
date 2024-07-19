@@ -4,8 +4,8 @@ func _on_advance(round_number: int) -> void:
 	var current_weather_ref := event.persistant_properties.get("current_weather") \
 			as CombatEventReference
 	if current_weather_ref:
-		var event := current_weather_ref.get_event(combat)
-		if event.finished:
+		var _event := current_weather_ref.get_event(combat)
+		if _event.finished:
 			start_new_weather()
 	else:
 		start_new_weather()
