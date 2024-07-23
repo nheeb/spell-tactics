@@ -7,7 +7,10 @@ func _on_activate() -> void:
 		.register(combat)
 
 func _on_finish() -> void:
-	combat.t_effects.get_effects(self, "te").front().kill()
+	# TODO what if game has already ended? (I got a null pointer here, don't know if my null check breaks something - Nils)
+	var effect = combat.t_effects.get_effects(self, "te").front()
+	if effect != null:
+		effect.kill()
 
 func te_on_cast(castable: Castable):
 	if castable is Active and "Drain" in castable.get_type().internal_name:

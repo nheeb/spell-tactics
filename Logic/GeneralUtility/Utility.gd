@@ -192,10 +192,18 @@ func inv_scale_screen_pos(screen_pos: Vector2) -> Vector2:
 	var current_viewport_size: Vector2 = get_tree().root.size
 	var reference_viewport_size: Vector2 = get_tree().root.content_scale_size
 	var viewport_scale: Vector2 = reference_viewport_size / current_viewport_size
-	var size_scale: float = minf(viewport_scale.x, viewport_scale.y)
-	#var scaled: Vector2 = Vector2(viewport_scale.x * screen_pos.x, viewport_scale.y * screen_pos.y)
-	var scaled: Vector2 = size_scale * screen_pos
-	return scaled
+	
+	# Calculate the aspect ratio difference
+	var aspect_ratio_current = current_viewport_size.x / current_viewport_size.y
+	var aspect_ratio_reference = reference_viewport_size.x / reference_viewport_size.y
+	var aspect_ratio_scale = aspect_ratio_reference / aspect_ratio_current
+	
+	# Apply scaling
+	var scaled_x = screen_pos.x * viewport_scale.x * aspect_ratio_scale
+	var scaled_y = screen_pos.y * viewport_scale.y
+	
+	return Vector2(scaled_x, scaled_y).round()
+
 
 func get_mouse_pos_normalized(invert_y_axis := true) -> Vector2:
 	var absolute := get_mouse_pos_absolute()

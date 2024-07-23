@@ -5,7 +5,7 @@ var tile: Tile
 static var on_tile_hovered: Signal = Utils.create_static_signal(PAHoverTile, "on_tile_hovered")
 static var on_drainable_tile_hovered: Signal = Utils.create_static_signal(PAHoverTile, "on_drainable_tile_hovered")
 
-static var on_drainable_tile_unhovered: Signal = Utils.create_static_signal(PAHoverTile, "on_drainable_tile_hovered")
+static var on_drainable_tile_unhovered: Signal = Utils.create_static_signal(PAHoverTile, "on_drainable_tile_unhovered")
 
 func _init(_tile: Tile) -> void:
 	tile = _tile
@@ -18,11 +18,19 @@ func is_valid(combat: Combat) -> bool:
 	
 	
 
-var currently_draining: Tile = tile
+static var currently_hovering_drainable: Tile
 func execute(combat: Combat) -> void:
 	# TODO ideally, move tile_hovered signals from Events into this script and bundle the logic here
 	if tile.distance_to(combat.player.current_tile) <= 1:
-		on_drainable_tile_hovered.emit(tile)
+		if tile != currently_hovering_drainable:
+			on_drainable_tile_hovered.emit(tile)
+			if currently_hovering_drainable != null:
+				on_drainable_tile_unhovered.emit(currently_hovering_drainable)
+			currently_hovering_drainable = tile
+	else:
+		if currently_hovering_drainable != null:
+			on_drainable_tile_unhovered.emit(currently_hovering_drainable)
+			currently_hovering_drainable = null
 
 
 func on_fail(combat: Combat) -> void:

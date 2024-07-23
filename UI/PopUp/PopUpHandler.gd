@@ -1,6 +1,7 @@
 class_name PopUpHandler extends Control
 
 @export var viewport: Viewport
+@export var drainable_root: Control
 
 @onready var popup
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 	Events.tile_hovered_long.connect(show_tile_popup)
 	Events.tile_unhovered_long.connect(hide_tile_popup)
 	PAHoverTile.on_drainable_tile_hovered.connect(on_drainable_tile_hovered)
+	PAHoverTile.on_drainable_tile_unhovered.connect(on_drainable_tile_unhovered)
 	popup = POPUP.instantiate()
 
 func _exit_tree():
@@ -58,7 +60,7 @@ func start():
 ## Reference to the list of control popup entries. 
 var active_entries: Dictionary = {}
 func show_drainable_overlay():
-	$Drainables.show()
+	drainable_root.show()
 	if combat == null:
 		printerr("can't show overlay without combat reference")
 		return
@@ -83,8 +85,8 @@ func on_drainable_tile_unhovered(tile: Tile):
 	entry.hide()
 	
 func hide_drainable_overlay():
-	#$Drainables.hide()
-	for drainable in $Drainables.get_children():
+	drainable_root.hide()
+	for drainable in drainable_root.get_children():
 		drainable.visible = false
 	#for entry in active_entries:
 		#entry.hide()
@@ -123,7 +125,7 @@ func place_drainable_entry(tile: Tile) -> DrainableEntry:
 	var entry = DRAINABLE_ENTRY.instantiate()
 	entry.connected_tile = tile
 	entry.name = "DrainableEntry_%d_%d" % [tile.r, tile.q]
-	$Drainables.add_child(entry)
+	drainable_root.add_child(entry)
 	entry.owner = self
 	entry.show_energy(energy)
 	var _screen_pos = viewport.get_camera_3d().unproject_position(entry.connected_tile.global_position)
@@ -162,10 +164,19 @@ const threshold: float = .1
 func _process(delta: float) -> void:
 	if current_tile != null:
 		prev_screen_pos = screen_pos
+		print("Viewport size: ", get_viewport().size)
+		print("Window size: ", DisplayServer.window_get_size())
+
 		screen_pos = viewport.get_camera_3d().unproject_position(current_tile.global_position)
-		screen_pos = Utility.inv_scale_screen_pos(screen_pos).round()
+		print("Original screen pos: ", screen_pos)
+
+		#screen_pos = Utility.inv_scale_screen_pos(screen_pos).round()
+		print("Scaled screen pos: ", screen_pos)
+		print("------------")
+		# doesn't work properly, might remove this if clause (was meant to reduce stutter)
 		if prev_screen_pos.distance_to(screen_pos) > threshold:
 			popup.position = screen_pos
+
 	if not active_entries.is_empty():
 		for tile in active_entries:
 			tile = tile as Tile
