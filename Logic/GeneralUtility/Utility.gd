@@ -32,6 +32,14 @@ func recursive_set_light_layers(node: Node, layers: int):
 		if c is VisualInstance3D:
 			(c as VisualInstance3D).layers = layers
 
+func get_recursive_mesh_instances(node: Node) -> Array[MeshInstance3D]:
+	var mesh_instances : Array[MeshInstance3D] = []
+	for c in node.get_children():
+		mesh_instances.append_array(get_recursive_mesh_instances(c))
+		if c is MeshInstance3D:
+			mesh_instances.append(c)
+	return mesh_instances
+
 # ----- Hex functions -----
 func cube_add(r1: int, q1: int, s1: int, r2: int, q2: int, s2: int) -> Vector3i:
 	return Vector3i(r1 + r2, q1 + q2, s1 + s2)

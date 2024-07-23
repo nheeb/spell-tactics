@@ -1,0 +1,24 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://5ropjlumwvx6"]
+
+[sub_resource type="Curve" id="Curve_3jg71"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210619, 0.780662), 2.80013, 2.80013, 0, 0, Vector2(0.550442, 0.974692), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_viv7y"]
+curve = SubResource("Curve_3jg71")
+
+[resource]
+lifetime_randomness = 0.2
+emission_shape = 2
+emission_sphere_radius = 0.5
+angle_max = 360.0
+spread = 180.0
+flatness = 0.494
+initial_velocity_min = 0.1
+initial_velocity_max = 0.2
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 0.2
+tangential_accel_max = 0.2
+damping_min = 0.08
+damping_max = 0.1
+alpha_curve = SubResource("CurveTexture_viv7y")
