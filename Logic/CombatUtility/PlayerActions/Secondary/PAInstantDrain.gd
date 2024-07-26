@@ -16,7 +16,7 @@ func is_valid(combat: Combat) -> bool:
 			func (a: Active): return a.type.internal_name == "Drain"
 		), 0)
 	if drain_active == null:
-		printerr("No Drain Active found for PAInstantDrain")
+		push_error("No Drain Active found for PAInstantDrain")
 	drain_active.update_possible_targets()
 	return drain_active.is_selectable() and drain_active.is_target_possible(target_tile)
 

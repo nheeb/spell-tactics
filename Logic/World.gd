@@ -24,7 +24,7 @@ func _ready() -> void:
 func load_combat_from_path(level_path: String) -> void:
 	var combat_state: CombatState = load(level_path) as CombatState
 	if combat_state == null:
-		printerr("Not combat state at path: %s" % level_path)
+		push_error("Not combat state at path: %s" % level_path)
 	load_combat_from_state(combat_state)
 
 func load_combat_from_state(combat_state: CombatState) -> void:

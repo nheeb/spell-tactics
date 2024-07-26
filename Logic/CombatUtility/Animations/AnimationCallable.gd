@@ -20,7 +20,7 @@ func play(level: Level) -> void:
 			callable.call()
 			animation_done_internally.emit()
 	else:
-		printerr("Callable has no valid object")
+		push_error("Callable has no valid object")
 		animation_done_internally.emit()
 
 func _to_string() -> String:

@@ -148,11 +148,11 @@ func _FindTarget():
 	var targ = get_node(target)
 
 	if ! targ:
-		printerr("ERROR SmoothingNode : Target " + str(target) + " not found")
+		push_error("ERROR SmoothingNode : Target " + str(target) + " not found")
 		return
 
 	if not targ is Node3D:
-		printerr("ERROR SmoothingNode : Target " + str(target) + " is not node 3D")
+		push_error("ERROR SmoothingNode : Target " + str(target) + " is not node 3D")
 		target = ""
 		return
 
@@ -162,7 +162,7 @@ func _FindTarget():
 	# certain targets are disallowed
 	if _m_Target == self:
 		var msg = str(_m_Target.get_name()) + " assigned to " + str(self.get_name()) + "]"
-		printerr("ERROR SmoothingNode : Target should not be self [", msg)
+		push_error("ERROR SmoothingNode : Target should not be self [", msg)
 
 		# error message
 		#OS.alert("Target cannot be a parent or grandparent in the scene tree.", "SmoothingNode")

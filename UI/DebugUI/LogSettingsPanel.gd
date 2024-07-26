@@ -47,7 +47,7 @@ func advance():
 	if not is_instance_valid(combat):
 		try_setup()
 		if not is_instance_valid(combat):
-			printerr("Log UI has no combat reference")
+			push_error("Log UI has no combat reference")
 			return
 	clear_entries()
 	@warning_ignore("int_as_enum_without_cast")

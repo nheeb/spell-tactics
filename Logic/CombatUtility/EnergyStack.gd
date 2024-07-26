@@ -26,7 +26,7 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 	bank.reverse()
 	cost.reverse()
 	if EnergyType.Any in bank:
-		printerr("Any Type Energy should not be in a bank Stack")
+		push_error("Any Type Energy should not be in a bank Stack")
 	var possible_payment : Array[EnergyType] = []
 	for e in cost:
 		if e != EnergyType.Any:
@@ -41,7 +41,7 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 			else:
 				return null
 	if cost.size() != possible_payment.size():
-		printerr("Something went wrong in the Payment calculation")
+		push_error("Something went wrong in the Payment calculation")
 	return EnergyStack.new(possible_payment)
 
 func can_pay_costs(costs: EnergyStack) -> bool:
@@ -70,7 +70,7 @@ func apply_payment(payment: EnergyStack) -> void:
 		if e in stack:
 			stack.erase(e)
 		else:
-			printerr("Non existing energy was payed.")
+			push_error("Non existing energy was payed.")
 
 const ENERGY_TO_LETTER = {
 	EnergyType.Any: "X",

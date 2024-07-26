@@ -86,7 +86,7 @@ func _on_button_save_pressed() -> void:
 			overworld = activity.overworld
 	
 	if not overworld:
-		printerr("No Overworld found for saving")
+		push_error("No Overworld found for saving")
 		return
 	
 	var title : String = %SavenameEdit.text

@@ -62,7 +62,7 @@ func init_active(new_active: Active):
 		3:
 			pass # do nothing
 		_: 
-			printerr("Active %s  max_uses = %d. weird, huh?" % [new_active.type.pretty_name, max_uses])
+			push_error("Active %s  max_uses = %d. weird, huh?" % [new_active.type.pretty_name, max_uses])
 	
 func _on_active_uses_updated():
 	var uses_left: int = active.get_limitation_uses_left()

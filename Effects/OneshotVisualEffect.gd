@@ -5,6 +5,6 @@ class_name OneshotVisualEffect extends Node3D
 signal effect_done
 
 func effect_start() -> void:
-	printerr("Not implemented")
+	push_error("Not implemented")
 	effect_done.emit()
 	queue_free()

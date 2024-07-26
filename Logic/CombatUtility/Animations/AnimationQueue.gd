@@ -13,7 +13,7 @@ func _init(queue) -> void:
 
 func play(combat: Combat) -> void:
 	if not combat:
-		printerr("Animation Queue played without combat?")
+		push_error("Animation Queue played without combat?")
 	currently_playing = true
 	
 	await VisualTime.visual_process

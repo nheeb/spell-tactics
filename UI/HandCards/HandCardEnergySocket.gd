@@ -18,7 +18,7 @@ func set_type(_type: EnergyStack.EnergyType):
 	_ready()
 	mi = %EnergySocket.get_node(EnergyStack.type_to_str(type)) as MeshInstance3D
 	if not mi:
-		printerr("Energy Socket Mesh not found")
+		push_error("Energy Socket Mesh not found")
 		return
 	
 	for c in %EnergySocket.get_children():

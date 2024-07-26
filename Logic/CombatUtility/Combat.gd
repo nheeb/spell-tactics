@@ -69,13 +69,13 @@ func setup() -> void:
 	for entity in level.entities().get_all_entities():
 		if entity is PlayerEntity:
 			if player != entity and player != null:
-				printerr("Two players in a level??")
+				push_error("Two players in a level??")
 			player = entity
 		if entity is EnemyEntity:
 			if not entity.is_dead():
 				enemies.append(entity)
 	if player == null:
-		printerr("No Player entity was found. Creating a new one.")
+		push_error("No Player entity was found. Creating a new one.")
 		@warning_ignore("integer_division")
 		var position = Vector2i(level.n_rows / 2 , level.n_cols / 2)
 		player = level.entities().create_entity(position, load("res://Entities/PlayerResource.tres"))
@@ -98,7 +98,7 @@ func setup() -> void:
 			if e.id != null:
 				level.add_type_count(e.type)
 			else:
-				printerr("Entity without ID in savegame")
+				push_error("Entity without ID in savegame")
 
 	
 	actives = [
@@ -114,7 +114,7 @@ func setup() -> void:
 	for s in get_all_castables():
 		if s.id == null:
 			if not s.get_type() is ActiveType:  # for Actives it's fine atm
-				printerr("Warning: Spell without id (gets a new dangerous id)")
+				push_error("Warning: Spell without id (gets a new dangerous id)")
 			s.id = SpellID.new(Game.add_to_spell_count())
 		else:
 			Game.add_to_spell_count()
@@ -166,7 +166,7 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 		RoundPhase.End:
 			return %EndPhase
 		RoundPhase.RoundRepeats:
-			printerr("Processes unreachble phase RoundRepeats")
+			push_error("Processes unreachble phase RoundRepeats")
 	return null
 
 func advance_and_process_until_next_player_action_needed():
@@ -188,7 +188,7 @@ func process_initial_phase() -> void:
 		RoundPhase.Spell:
 			process_current_phase()
 		_:
-			printerr("Savefiles should not be in phase %s" % current_phase)
+			push_error("Savefiles should not be in phase %s" % current_phase)
 			advance_and_process_until_next_player_action_needed()
 
 func serialize() -> CombatState:

@@ -105,7 +105,7 @@ const TopicIconName = {
 static func load_from_file(path: String) -> CastableType:
 	var res = load(path)
 	if res == null:
-		printerr("Castable could not be loaded. Path is %s" % path)
+		push_error("Castable could not be loaded. Path is %s" % path)
 	res._on_load()
 	return res
 

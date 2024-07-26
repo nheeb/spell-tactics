@@ -6,7 +6,7 @@ func _init(_active: Active):
 	active = _active
 	combat = active.combat
 	if active.type.logic != self.get_script():
-		printerr("Weird creation of SpellLogic Object")
+		push_error("Weird creation of SpellLogic Object")
 
 func get_castable() -> Castable:
 	return active

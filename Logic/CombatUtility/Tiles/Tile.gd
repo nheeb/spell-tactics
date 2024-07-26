@@ -71,7 +71,7 @@ func add_entity(entity: Entity):
 func remove_entity(entity: Entity):
 	var i = entities.find(entity)
 	if i == -1:
-		printerr("remove_entity(): entity not found")
+		push_error("remove_entity(): entity not found")
 		return
 	
 	entities.remove_at(i)

@@ -9,7 +9,7 @@ static func exists(path: String) -> bool:
 static func save_to_disk(overworld_state: OverworldState, path: String) -> void:
 	var err = ResourceSaver.save(overworld_state, path)
 	if not err == OK:
-		printerr("Err when saving level state: ", err)
+		push_error("Err when saving level state: ", err)
 
 static func load_from_disk(path: String) -> OverworldState:
 	var overworld_state = ResourceLoader.load(path) as OverworldState

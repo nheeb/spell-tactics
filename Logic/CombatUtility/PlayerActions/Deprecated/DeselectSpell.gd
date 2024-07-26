@@ -2,7 +2,7 @@ class_name DeselectSpell extends PlayerAction
 
 func _init() -> void:
 	action_string = "Deselect spell"
-	printerr("Using deprecated PlayerAction %s" % action_string)
+	push_error("Using deprecated PlayerAction %s" % action_string)
 	
 func is_valid(combat: Combat) -> bool:
 	return combat.get_phase_node(Combat.RoundPhase.Spell).selected_spell != null

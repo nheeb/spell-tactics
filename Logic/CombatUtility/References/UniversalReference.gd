@@ -16,7 +16,7 @@ func resolve(combat: Combat = null) -> Object:
 			connect_reference(combat)
 			return _resolve()
 		else:
-			printerr("%s was not connected yet. Either connect it first or call resolve(combat)" % get_reference_type())
+			push_error("%s was not connected yet. Either connect it first or call resolve(combat)" % get_reference_type())
 			return null
 
 ## Is being called by resolve and should never be called from outside.

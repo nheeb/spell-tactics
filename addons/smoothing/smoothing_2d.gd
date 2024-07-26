@@ -147,11 +147,11 @@ func _FindTarget():
 	var targ = get_node(target)
 
 	if ! targ:
-		printerr("ERROR SmoothingNode2D : Target " + str(target) + " not found")
+		push_error("ERROR SmoothingNode2D : Target " + str(target) + " not found")
 		return
 
 	if not targ is Node2D:
-		printerr("ERROR SmoothingNode2D : Target " + str(target) + " is not Node2D")
+		push_error("ERROR SmoothingNode2D : Target " + str(target) + " is not Node2D")
 		target = ""
 		return
 

@@ -22,7 +22,7 @@ func _ready():
 	elif activity.level_path:
 		%World.load_combat_from_path(activity.level_path)
 	else:
-		printerr("Invalid Combat Activity")
+		push_error("Invalid Combat Activity")
 	activity.combat = %World.get_node("Combat")
 	
 	# connect resized event

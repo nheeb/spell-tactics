@@ -45,7 +45,7 @@ func signal_triggered(sig_param0 = null, sig_param1 = null, sig_param2 = null, \
 		if param != null:
 			if param is Signal:
 				if not sig.is_null():
-					printerr("Timed effect signal has a signal in its parameters")
+					push_error("Timed effect signal has a signal in its parameters")
 				sig = param
 			else:
 				sig_params.append(param)

@@ -5,7 +5,7 @@ var target_tile: Tile
 func _init(tile: Tile) -> void:
 	target_tile = tile
 	action_string = "Drain tile %s" % target_tile
-	printerr("Using deprecated PlayerAction %s" % action_string)
+	push_error("Using deprecated PlayerAction %s" % action_string)
 
 func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Spell:

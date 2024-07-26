@@ -55,7 +55,7 @@ func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	ent.visual_entity = self.visual_scene.instantiate()	if self.visual_scene != null else Game.PROTOTYPE_VISUALS.instantiate()
 	# hehehe - but these references are safe since entity and visual entity exists together
 	if "type" not in ent.visual_entity:
-		printerr("Error in initializing VisualEntity for type %s, maybe it's missing VisualEntity.gd assignment?" % internal_name)
+		push_error("Error in initializing VisualEntity for type %s, maybe it's missing VisualEntity.gd assignment?" % internal_name)
 	ent.visual_entity.type = self
 	ent.visual_entity.entity = ent
 	ent.type = self

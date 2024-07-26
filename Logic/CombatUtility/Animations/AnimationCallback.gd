@@ -20,7 +20,7 @@ func play(level: Level) -> void:
 			reference.callv(command, parameters)
 			handler.clear()
 		elif reference.has_signal("animation_done"):
-			printerr("Using deprecated signal animation_done (Use WaitTickets instead)")
+			push_error("Using deprecated signal animation_done (Use WaitTickets instead)")
 			reference.animation_done.connect(func(): animation_done_internally.emit(),CONNECT_ONE_SHOT)
 			reference.callv(command, parameters)
 		else:

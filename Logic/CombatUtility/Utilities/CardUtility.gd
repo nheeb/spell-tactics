@@ -10,7 +10,7 @@ func discard(spell: Spell):
 		combat.animation.callback(combat.ui.cards3d, "remove_card", [spell])
 		combat.animation.callback(combat.ui, "deselect_card", [])
 	else:
-		printerr("Tried to discard spell which is not in hand")
+		push_error("Tried to discard spell which is not in hand")
 
 func fetch_from_discard(spell: Spell):
 	if combat.discard_pile.has(spell):
@@ -18,7 +18,7 @@ func fetch_from_discard(spell: Spell):
 		combat.hand.append(spell)
 		combat.animation.callback(combat.ui.cards3d, "add_card", [spell])
 	else:
-		printerr("Tried to fetch a spell from discard_pile which is not there")
+		push_error("Tried to fetch a spell from discard_pile which is not there")
 
 func draw() -> AnimationObject:
 	if combat.deck.is_empty():

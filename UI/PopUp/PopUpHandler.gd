@@ -36,7 +36,7 @@ func show_tile_popup(tile: Tile):
 	if not popup.is_inside_tree():
 		popup_root.add_child(popup)
 	else:
-		printerr("trying to show 2nd popup while 1st still showing")
+		push_error("trying to show 2nd popup while 1st still showing")
 	popup.position = screen_pos
 	popup.show_tile(tile)
 
@@ -44,7 +44,7 @@ func hide_tile_popup(tile: Tile):
 	if popup.is_inside_tree():
 		popup_root.remove_child(popup)
 	else:
-		printerr("weird not inside tree")
+		push_error("weird not inside tree")
 	current_tile = null
 	popup.hide_popup()
 
@@ -61,7 +61,7 @@ func start():
 func show_drainable_overlay():
 	drainable_root.show()
 	if combat == null:
-		printerr("can't show overlay without combat reference")
+		push_error("can't show overlay without combat reference")
 		return
 	if not active_entries.is_empty():
 		for key in active_entries.keys():
@@ -190,7 +190,7 @@ func _process(delta: float) -> void:
 	for tile in active_entries:
 		var entry: DrainableEntry = active_entries[tile]
 		if tile == null or entry == null:
-			printerr("unexpected key", tile, "in active entries. (expecting a Tile)")
+			push_error("unexpected key", tile, "in active entries. (expecting a Tile)")
 			return
 		
 		update_entry_position(entry)

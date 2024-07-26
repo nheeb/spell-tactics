@@ -11,7 +11,7 @@ func _init(_castable: Castable, _targets: Array[Tile] = []) -> void:
 func is_valid(combat: Combat) -> bool:
 	if castable is Spell:
 		# TODO Nitai implement for spells? Is this necesarry?
-		printerr("Quick cast for spells is not implemented.")
+		push_error("Quick cast for spells is not implemented.")
 		return false
 	castable.update_possible_targets()
 	castable.reset_targets()

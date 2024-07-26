@@ -4,10 +4,10 @@ signal effect_done # Should be emmited when the effect init animation is done
 signal effect_died # Should be emmited when the effect death animation is done
 
 func effect_start() -> void:
-	printerr("Not implemented")
+	push_error("Not implemented")
 	effect_done.emit()
 
 func on_effect_end() -> void:
-	printerr("Not implemented")
+	push_error("Not implemented")
 	effect_died.emit()
 	queue_free()

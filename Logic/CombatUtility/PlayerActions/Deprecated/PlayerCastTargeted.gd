@@ -6,7 +6,7 @@ func _init(_spell: Spell, _payment: EnergyStack, _target) -> void:
 	super(_spell, _payment)
 	self.target = _target
 	action_string = "Cast targeted %s on %s" % [_spell, _target]
-	printerr("Using deprecated PlayerAction %s" % action_string)
+	push_error("Using deprecated PlayerAction %s" % action_string)
 
 func is_valid(combat: Combat) -> bool:
 	var super_valid: bool = super(combat)
@@ -21,7 +21,7 @@ func is_valid(combat: Combat) -> bool:
 			elif target is Entity:
 				dist = Utility.entity_distance(target, combat.player)
 			else:
-				printerr("Currently expecting Tile, Tile Array or Entity target for ranged spells.")
+				push_error("Currently expecting Tile, Tile Array or Entity target for ranged spells.")
 		
 			if spell.type.target_range != -1:
 				range_valid = dist <= spell.type.target_range
@@ -52,7 +52,7 @@ func is_valid(combat: Combat) -> bool:
 				assert(target is Tile)
 				target_valid = spell.type.target_tag in target.get_tags()
 			SpellType.Target.Condition:
-				printerr("Target custom condition not implemented yet.")
+				push_error("Target custom condition not implemented yet.")
 				target_valid = false
 			SpellType.Target.Cone:
 				target_valid = len(target) > 0

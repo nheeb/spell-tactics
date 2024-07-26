@@ -39,7 +39,7 @@ func fill_entity(entity_type: EntityType):
 	
 func remove_entity(location: Vector2i, entity: Entity):
 		if not Engine.is_editor_hint():
-			printerr("Level remove_entity: This method maybe shouldn't be executed in the running game.")
+			push_error("Level remove_entity: This method maybe shouldn't be executed in the running game.")
 		
 		var tile = _level.get_tile(location)
 		var pos = tile.entities.find(entity)

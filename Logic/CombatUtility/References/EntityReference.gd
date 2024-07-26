@@ -11,20 +11,20 @@ func _init(entity: Entity = null) -> void:
 	id = entity.id
 	assert(id)
 	if id == null:
-		printerr("EntityReference was created on an entity with empty id")
+		push_error("EntityReference was created on an entity with empty id")
 
 ## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
 	for e in combat.level.entities().get_all_entities():
 		if e.id.equals(id):
 			if ent == e:
-				printerr("EntityReference already connected to that object")
+				push_error("EntityReference already connected to that object")
 			else:
 				if ent != null:
-					printerr("EntityReference already connected to another object")
+					push_error("EntityReference already connected to another object")
 			ent = e
 	if ent == null:
-		printerr("EntityReference did not get connected")
+		push_error("EntityReference did not get connected")
 
 ## Is being called by resolve and should never be called from outside.
 func _resolve() -> Object:

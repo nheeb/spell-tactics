@@ -49,18 +49,18 @@ func axial_add():
 
 func random_index_of_scores(scores: Array[float]) -> int:
 	if scores.is_empty():
-		printerr("Random index: Empty list")
+		push_error("Random index: Empty list")
 		return -1
 	var total_size : float = scores.reduce(func(a,b): return a + b, 0.0)
 	if total_size == 0.0:
-		printerr("Random index: Only Zero entries")
+		push_error("Random index: Only Zero entries")
 		return -1
 	var random_value := randf_range(0.0, total_size)
 	for i in range(scores.size()):
 		random_value -= scores[i]
 		if random_value < 0.0:
 			return i
-	printerr("Random index: Something went wrong")
+	push_error("Random index: Something went wrong")
 	return -1
 
 ## the hit chance should be between 0 and 100
@@ -229,7 +229,7 @@ func get_parent_of_type(n: Node, type) -> Node:
 		if is_instance_of(parent, type):
 			return parent
 		parent = parent.get_parent()
-	printerr("No parent of %s with type %s found." % [n, type])
+	push_error("No parent of %s with type %s found." % [n, type])
 	return null
 
 func array_sum(array: Array):

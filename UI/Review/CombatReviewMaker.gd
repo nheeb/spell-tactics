@@ -10,7 +10,7 @@ func _ready() -> void:
 		review = CombatReview.from_combat(Game.combat_to_review)
 		create_questions()
 	else:
-		printerr("No Combat to review given")
+		push_error("No Combat to review given")
 
 func create_questions():
 	for q in questions:

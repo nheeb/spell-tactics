@@ -54,17 +54,17 @@ func _connect_with_combat(combat: Combat) -> void:
 		if signal_obj.has_signal(signal_name):
 			connected_signal = signal_obj.get(signal_name)
 		else:
-			printerr("Timed Effect: signal object %s has no signal %s" % [signal_obj, signal_name])
+			push_error("Timed Effect: signal object %s has no signal %s" % [signal_obj, signal_name])
 	else:
-		printerr("Timed Effect: signal reference %s is invalid" % signal_ref)
+		push_error("Timed Effect: signal reference %s is invalid" % signal_ref)
 	call_obj = call_ref.resolve(combat)
 	if call_obj:
 		if call_obj.has_method(call_method):
 			connected_method = call_obj.get(call_method)
 		else:
-			printerr("Timed Effect: call object %s has no method %s" % [call_obj, call_method])
+			push_error("Timed Effect: call object %s has no method %s" % [call_obj, call_method])
 	else:
-		printerr("Timed Effect: call reference %s is invalid" % call_ref)
+		push_error("Timed Effect: call reference %s is invalid" % call_ref)
 	if owner_ref:
 		owner_obj = owner_ref.resolve(combat)
 	else:
@@ -134,7 +134,7 @@ func set_params(params: Array) -> TimedEffect:
 
 func _validate() -> bool:
 	if not effect_connected:
-		printerr("Not connected TimedEffect tries to validate")
+		push_error("Not connected TimedEffect tries to validate")
 		return false
 
 	if connected_signal.is_null():

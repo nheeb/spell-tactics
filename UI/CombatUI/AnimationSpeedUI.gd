@@ -44,7 +44,7 @@ func set_speed(_speed_idx: int):
 			ticks[1].material = ON_MATERIAL
 			ticks[2].material = ON_MATERIAL
 		_:
-			printerr("Invalid speed_idx passed in UI set_speed().")
+			push_error("Invalid speed_idx passed in UI set_speed().")
 
 
 func _on_fade_out_timer_timeout() -> void:

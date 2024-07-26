@@ -36,7 +36,7 @@ func type_to_color(_type) -> Color:
 			return decay_color
 		EnergyStack.EnergyType.Spectral:
 			return spectral_color
-	printerr("unknown type")
+	push_error("unknown type")
 	return Color.RED
 
 @export var energy_icons: Array[Texture]
@@ -56,5 +56,5 @@ func type_to_icon(_type) -> Texture:
 			return energy_icons[5]
 		EnergyStack.EnergyType.Spectral:
 			return energy_icons[6]
-	printerr("unknown type")
+	push_error("unknown type")
 	return energy_icons[0]
