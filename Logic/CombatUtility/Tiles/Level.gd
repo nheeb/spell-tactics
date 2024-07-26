@@ -90,7 +90,7 @@ func get_tile(location: Vector2i) -> Tile:
 	var r = location.x
 	var q = location.y
 	
-	if tiles[r][q] == null:
+	if (not is_location_in_bounds(location)) or tiles[r] == null or tiles[r][q] == null:
 		printerr("Tried getting tile %d, %d, which does not exist." % [r, q])
 	return tiles[r][q] as Tile
 

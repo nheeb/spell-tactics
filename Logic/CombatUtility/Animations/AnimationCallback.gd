@@ -27,7 +27,7 @@ func play(level: Level) -> void:
 			reference.callv(command, parameters)
 			animation_done_internally.emit()
 	else:
-		printerr("Animation on null reference")
+		push_error("Animation on null reference")
 		animation_done_internally.emit()
 
 func _to_string() -> String:

@@ -79,5 +79,14 @@ offset_bottom = 15.0
 enabled_color = Color(0.362162, 0.800781, 0.764565, 1)
 disabled_color = Color(0.25, 0.25, 0.25, 1)
 
+[node name="Position1" type="Marker2D" parent="."]
+position = Vector2(43, 15)
+
+[node name="Position2" type="Marker2D" parent="."]
+position = Vector2(62, 10)
+
+[node name="Position3" type="Marker2D" parent="."]
+position = Vector2(81, 15)
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

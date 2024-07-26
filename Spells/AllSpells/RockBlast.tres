@@ -10,9 +10,9 @@ stack = Array[int]([2])
 
 [resource]
 script = ExtResource("2_tlmru")
-pretty_name = "Rock Blast"
 costs = SubResource("Resource_gkkbv")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Rock Blast"
 effect_text = "Deal 1 damage (range 4) and draw 1 card"
 fluff_text = "Fun
 
@@ -23,6 +23,10 @@ target = 1
 target_range = 4
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 1
 topic_secondary = 12
 topic_icons = Array[int]([])

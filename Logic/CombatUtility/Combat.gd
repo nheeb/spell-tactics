@@ -61,6 +61,7 @@ func _ready() -> void:
 			Game.combats.append(self)
 
 ## is called when the Combat is created to connect all the references and signals
+#const PLAYER = preload("res://Entities/PlayerResource.tres")
 func setup() -> void:
 	# Get player and enemy references
 	player = null
@@ -73,6 +74,12 @@ func setup() -> void:
 		if entity is EnemyEntity:
 			if not entity.is_dead():
 				enemies.append(entity)
+	if player == null:
+		printerr("No Player entity was found. Creating a new one.")
+		@warning_ignore("integer_division")
+		var position = Vector2i(level.n_rows / 2 , level.n_cols / 2)
+		player = level.entities().create_entity(position, load("res://Entities/PlayerResource.tres"))
+		
 
 	# Connect input signals
 	input.connect_with_event_signals()
@@ -123,7 +130,8 @@ func setup() -> void:
 	# TODO Nitai replace show drain and energy??
 	#energy.show_drains_in_ui()
 	#energy.show_energy_in_ui()
-	animation.camera_reach(player.current_tile)
+	if player.current_tile != null:
+		animation.camera_reach(player.current_tile)
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui

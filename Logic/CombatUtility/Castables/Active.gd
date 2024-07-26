@@ -9,6 +9,9 @@ var id: ActiveID
 
 var logic: ActiveLogic
 
+## set by the UI. Every Active should have an ActiveButton :)
+var button: ActiveButton
+
 func _init(_type: ActiveType, _combat : Combat = null) -> void:
 	type = _type
 	combat = _combat

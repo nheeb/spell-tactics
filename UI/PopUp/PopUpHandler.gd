@@ -2,6 +2,7 @@ class_name PopUpHandler extends Control
 
 @export var viewport: Viewport
 @export var drainable_root: Control
+@export var popup_root: Control
 
 @onready var popup
 
@@ -10,11 +11,10 @@ const DRAINABLE_ENTRY = preload ("res://UI/PopUp/DrainableEntry.tscn")
 var current_tile: Tile
 var screen_pos: Vector2 # target from unprojecting the camera
 var prev_screen_pos: Vector2
-
-# TODO fix it so that PopUps get centered onto the Tile again :)
-#    the issue is when resizing. so in base size it looks fine but in full screen it's not centered
-
+var active_entries: Dictionary = {}
+var active_hovers: Dictionary = {}  # don't ask..
 var combat: Combat
+var is_showing_energy_overlay: bool = false
 
 func _ready() -> void:
 	Events.tile_hovered_long.connect(show_tile_popup)
@@ -34,7 +34,7 @@ func show_tile_popup(tile: Tile):
 	screen_pos = viewport.get_camera_3d().unproject_position(tile.global_position)
 	
 	if not popup.is_inside_tree():
-		add_child(popup)
+		popup_root.add_child(popup)
 	else:
 		printerr("trying to show 2nd popup while 1st still showing")
 	popup.position = screen_pos
@@ -42,7 +42,7 @@ func show_tile_popup(tile: Tile):
 
 func hide_tile_popup(tile: Tile):
 	if popup.is_inside_tree():
-		remove_child(popup)
+		popup_root.remove_child(popup)
 	else:
 		printerr("weird not inside tree")
 	current_tile = null
@@ -58,7 +58,6 @@ func start():
 	set_process(true)
 
 ## Reference to the list of control popup entries. 
-var active_entries: Dictionary = {}
 func show_drainable_overlay():
 	drainable_root.show()
 	if combat == null:
@@ -71,34 +70,43 @@ func show_drainable_overlay():
 
 	# recalculate every time for now..
 	active_entries = setup_active_entries()
+	is_showing_energy_overlay = true
 
-var drainable_hovered: Tile
+var tile_hovered: Tile
 func on_drainable_tile_hovered(tile: Tile):
-	show_tile_energies(tile)
-	drainable_hovered
+	var entry: DrainableEntry
+	#print("show ", tile)
+	if not tile in active_hovers:  # active_hovers
+		entry = place_drainable_entry(tile)
+		active_hovers[tile] = entry
+	else:
+		entry = active_hovers[tile]
+	
+	entry.show()
+	tile_hovered = tile
 
 func on_drainable_tile_unhovered(tile: Tile):
-	if not tile in active_entries:
+	if not tile in active_hovers:
 		return
+		
+	#if drainable_hovered != null: # is this needed??
+		#active_entries[drainable_hovered].hide()
+		#drainable_hovered = null
 
-	var entry: DrainableEntry = active_entries[tile]
+	var entry: DrainableEntry = active_hovers[tile]
+	#print("hide ", tile)
 	entry.hide()
 	
 func hide_drainable_overlay():
 	drainable_root.hide()
 	for drainable in drainable_root.get_children():
-		drainable.visible = false
+		if tile_hovered in active_entries and drainable == active_entries[tile_hovered]:
+			continue
+		else:
+			drainable.visible = false
+	is_showing_energy_overlay = true
 	#for entry in active_entries:
 		#entry.hide()
-
-func show_tile_energies(tile: Tile):
-	var entry: DrainableEntry
-	if not tile in active_entries:
-		entry = place_drainable_entry(tile)
-	else:
-		entry = active_entries[tile]
-	active_entries[tile] = entry
-	entry.show()
 
 ## This should ideally be called on loading the level, so the PopUps don't have to
 ## get instantiated on the fly. It instantiates all Overlay Control nodes.
@@ -126,11 +134,11 @@ func place_drainable_entry(tile: Tile) -> DrainableEntry:
 	entry.connected_tile = tile
 	entry.name = "DrainableEntry_%d_%d" % [tile.r, tile.q]
 	drainable_root.add_child(entry)
-	entry.owner = self
+	entry.owner = drainable_root
 	entry.show_energy(energy)
 	var _screen_pos = viewport.get_camera_3d().unproject_position(entry.connected_tile.global_position)
 	# scale screen pos
-	_screen_pos = Utility.inv_scale_screen_pos(_screen_pos)
+	#_screen_pos = Utility.inv_scale_screen_pos(_screen_pos)
 	entry.position = (_screen_pos - entry.size / 2).round()
 	return entry
 
@@ -157,45 +165,38 @@ func show_surrounding_drainable_entries():  # broken?!?
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("show_drain_overlay") and get_window().has_focus():
 		show_drainable_overlay()
+		
 	if Input.is_action_just_released("show_drain_overlay") or (not get_window().has_focus()):
 		hide_drainable_overlay()
+
+func update_entry_position(entry: DrainableEntry):
+	var cam = viewport.get_camera_3d()
+	if entry.visible:
+		entry.visible = not cam.is_position_behind(entry.connected_tile.global_position)
+	var _screen_pos = viewport.get_camera_3d().unproject_position(entry.connected_tile.global_position)
+	#_screen_pos = Utility.inv_scale_screen_pos(_screen_pos).round()
+	entry.position = _screen_pos - entry.size / 2 # unfortunately necessary..	
 
 const threshold: float = .1
 func _process(delta: float) -> void:
 	if current_tile != null:
 		prev_screen_pos = screen_pos
-		print("Viewport size: ", get_viewport().size)
-		print("Window size: ", DisplayServer.window_get_size())
-
 		screen_pos = viewport.get_camera_3d().unproject_position(current_tile.global_position)
-		print("Original screen pos: ", screen_pos)
 
-		#screen_pos = Utility.inv_scale_screen_pos(screen_pos).round()
-		print("Scaled screen pos: ", screen_pos)
-		print("------------")
 		# doesn't work properly, might remove this if clause (was meant to reduce stutter)
 		if prev_screen_pos.distance_to(screen_pos) > threshold:
 			popup.position = screen_pos
 
-	if not active_entries.is_empty():
-		for tile in active_entries:
-			tile = tile as Tile
-			var entry = active_entries[tile]
-			if tile == null or entry == null:
-				printerr("unexpected key", tile, "in active entries. (expecting a Tile)")
-				return
-			
-			var cam = viewport.get_camera_3d()
-			if entry.visible:
-				entry.visible = not cam.is_position_behind(entry.connected_tile.global_position)
-			var _screen_pos = viewport.get_camera_3d().unproject_position(entry.connected_tile.global_position)
-			_screen_pos = Utility.inv_scale_screen_pos(_screen_pos).round()
-			entry.position = _screen_pos - entry.size / 2 # unfortunately necessary..
-				
-	#if current_tile != null:  # lerp towards camera to beat this stutter
-		#var f = Engine.get_physics_interpolation_fraction()
-		#var target_position: Vector2 = prev_screen_pos.lerp(screen_pos, f)
-		#$PopUp.position = target_position
+	for tile in active_entries:
+		var entry: DrainableEntry = active_entries[tile]
+		if tile == null or entry == null:
+			printerr("unexpected key", tile, "in active entries. (expecting a Tile)")
+			return
+		
+		update_entry_position(entry)
+		
+	for tile in active_hovers:
+		update_entry_position(active_hovers[tile])
 
 func _on_world_combat_changed(_combat: Combat):
 	self.combat = _combat

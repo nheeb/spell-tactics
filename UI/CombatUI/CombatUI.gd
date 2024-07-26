@@ -37,10 +37,8 @@ func setup(_combat: Combat):
 func next_round(current_round: int):
 	pass
 
-
 func _on_next_pressed():
 	combat.input.process_action(PAPass.new())
-
 
 func deselect_card():
 	selected_spell = null
@@ -60,39 +58,25 @@ func initialize_active_buttons(new_actives: Array[Active]):
 	for active in actives:
 		#var active_button = buttons[i]
 		var active_button = ACTIVE_BUTTON.instantiate()
+		active.button = active_button
 		active_button.name = "ActiveButton%d" % i
 		active_button.active = active
 		$Actives.add_child(active_button)
+		
 		active_button.position = get_node("Actives/ActivePos%d" % (i+1)).position
-		# no text, we have active textures now
-		# though the text will be needed as a hint :) (TODO)
-		#button.text = active.get_button_caption()#active.type.pretty_name
 		active_button.button.pressed.connect(_on_active_button_pressed.bind(i))
 		active.got_locked.connect(_on_active_locked.bind(i))
 		active.got_unlocked.connect(_on_active_unlocked.bind(i))
-		active.got_updated.connect(_on_active_updated.bind(i))
 		active_button.button.disabled = not active.unlocked
 		active_button.owner = self
 
-		
 		i += 1
 		
 func disable_actions():
 	# TODO disable card selection / others?
 	pass
 
-const energy_min_size := 50
-const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
 func set_current_energy(energy: EnergyStack):
-	#for c in $EnergyArea/EnergyList.get_children():
-		#if c is EnergyIcon:
-			#c.queue_free()
-	#for e in energy.stack:
-		#var icon = ENERGY_ICON.instantiate()
-		#$EnergyArea/EnergyList.add_child(icon)
-		#icon.type = e
-		#icon.min_size = energy_min_size
-		
 	update_payable_cards()
 
 func update_payable_cards():
@@ -104,7 +88,6 @@ func _ready() -> void:
 	%EnemyArrow.visible = false
 	Game.got_paused.connect(on_game_paused)
 	Game.got_unpaused.connect(on_game_unpaused)
-
 
 func on_game_paused():
 	hide()
@@ -123,11 +106,6 @@ func _on_active_locked(i: int) -> void:
 	var active_button = $Actives.get_node("ActiveButton%d" % i)
 	active_button.button.disabled = true
 
-func _on_active_updated(i: int) -> void:
-	# deprecated, active signal gets connected inside the activebutton
-	var active_button = $Actives.get_node("ActiveButton%d" % i)
-	printerr("deprecated call to _on_active_updated")
-
 func _on_button_entered() -> void:
 	Game.world.get_node("%MouseRaycast").disabled = true
 
@@ -141,10 +119,6 @@ func show_victory(text: String) -> void:
 func show_game_over(text: String) -> void:
 	Game.combat_to_review = combat
 	ActivityManager.substitute(DeathActivity.new())
-	
-#func show_no_targets_popup():
-	## TODO
-	#pass
 
 func set_enemy_meter(value: int) -> void:
 	ticket_handler.get_ticket().resolve_on(%EnemyEventIcon.transition_done)

@@ -181,10 +181,7 @@ func take_screenshot(shrink_count := 0) -> ImageTexture:
 	#image.compress(Image.COMPRESS_ASTC)
 	var texture := ImageTexture.create_from_image(image)
 	return texture
-
-func get_mouse_pos_absolute() -> Vector2:
-	return get_viewport().get_mouse_position()
-
+	
 ## for when the viewport resolution doesn't match the content_scale	
 func scale_screen_pos(screen_pos: Vector2) -> Vector2:
 	var current_viewport_size: Vector2 = get_tree().root.size
@@ -195,23 +192,9 @@ func scale_screen_pos(screen_pos: Vector2) -> Vector2:
 	var scaled: Vector2 = screen_pos * size_scale
 	return scaled
 
-## for when the viewport resolution doesn't match the content_scale		
-func inv_scale_screen_pos(screen_pos: Vector2) -> Vector2:
-	var current_viewport_size: Vector2 = get_tree().root.size
-	var reference_viewport_size: Vector2 = get_tree().root.content_scale_size
-	var viewport_scale: Vector2 = reference_viewport_size / current_viewport_size
-	
-	# Calculate the aspect ratio difference
-	var aspect_ratio_current = current_viewport_size.x / current_viewport_size.y
-	var aspect_ratio_reference = reference_viewport_size.x / reference_viewport_size.y
-	var aspect_ratio_scale = aspect_ratio_reference / aspect_ratio_current
-	
-	# Apply scaling
-	var scaled_x = screen_pos.x * viewport_scale.x * aspect_ratio_scale
-	var scaled_y = screen_pos.y * viewport_scale.y
-	
-	return Vector2(scaled_x, scaled_y).round()
 
+func get_mouse_pos_absolute() -> Vector2:
+	return get_viewport().get_mouse_position()
 
 func get_mouse_pos_normalized(invert_y_axis := true) -> Vector2:
 	var absolute := get_mouse_pos_absolute()
