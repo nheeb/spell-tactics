@@ -11,7 +11,7 @@ class_name SimpleMelee extends ActiveLogic
 	#return true
 	
 
-var modifiers: Array[CallbackReference] = []  # (dmg, target_enemy) -> dmg
+var modifiers: Array[CallableReference] = []  # (dmg, target_enemy) -> dmg
 
 ## Here should be the effect
 func casting_effect() -> void:
@@ -22,8 +22,12 @@ func casting_effect() -> void:
 	var enemy: EnemyEntity = enemies[0]
 	var damage := 1
 	for modifier in modifiers:
-		#damage = modifier.call(damage, enemy)
-		pass
+		var callable: Callable = modifier.resolve(combat)
+		print(callable.get_method())
+		print(callable)
+		damage = callable.call(damage, enemy)
+		print(callable.get_method())
+
 	enemy.inflict_damage(damage)
 	combat.animation.update_hp(enemy)
 	combat.animation.say(combat.player.current_tile, "ATTACK!", {"color": Color.CORAL, "font": "bold"})

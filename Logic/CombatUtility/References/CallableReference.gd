@@ -8,6 +8,7 @@ var callable: Callable
 func _init(_origin_reference: UniversalReference = null, _method_name: String = "") -> void:
 	origin_reference = _origin_reference
 	method_name = _method_name
+	cache_result = false
 
 ## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
