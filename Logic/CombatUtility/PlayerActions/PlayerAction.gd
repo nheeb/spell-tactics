@@ -1,5 +1,8 @@
 class_name PlayerAction extends Object
 
+signal executed
+signal failed
+
 var action_string := "Undefined"
 
 func is_valid(combat: Combat) -> bool:

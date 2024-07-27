@@ -13,11 +13,13 @@ func process_action(action: PlayerAction, force_action := false) -> void:
 	action.log_me(combat, valid)
 	if valid:
 		action.execute(combat)
-		action_executed.emit(action)
 		combat.animation.play_animation_queue()
 		update_ui()
+		action.executed.emit()
+		action_executed.emit(action)
 	else:
 		action.on_fail(combat)
+		action.failed.emit()
 		action_failed.emit(action)
 
 var current_castable : Castable
