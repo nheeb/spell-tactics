@@ -28,7 +28,7 @@ func connect_reference(combat: Combat) -> void:
 		push_error("ActiveReference did not get connected")
 
 ## Is being called by resolve and should never be called from outside.
-func _resolve() -> Object:
+func _resolve() -> Variant:
 	return active
 
 func get_reference_type() -> String:

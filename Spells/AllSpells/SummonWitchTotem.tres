@@ -10,9 +10,9 @@ stack = Array[int]([2, 6, 6])
 
 [resource]
 script = ExtResource("1_xaj57")
-pretty_name = "Witch Totem"
 costs = SubResource("Resource_6ekvi")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Witch Totem"
 effect_text = "The witch totem gives 1 Decay Energy whenever you cast a spell next to it."
 fluff_text = ""
 icon = ExtResource("2_1hxqo")
@@ -21,6 +21,10 @@ target = 3
 target_range = -1
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 6
 topic_secondary = 0
 topic_icons = Array[int]([])

@@ -11,9 +11,9 @@ stack = Array[int]([1, 1])
 
 [resource]
 script = ExtResource("1_wm1qt")
-pretty_name = "Haunting"
 costs = SubResource("Resource_yiuyf")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([ExtResource("2_mwy2q")])
+pretty_name = "Haunting"
 effect_text = "Reduce an enemy's accuracy. Deal 3 damage if you drained a corpse this turn."
 fluff_text = ""
 icon = ExtResource("2_ersji")
@@ -22,6 +22,10 @@ target = 1
 target_range = -1
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 1
 topic_secondary = 0
 topic_icons = Array[int]([])

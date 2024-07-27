@@ -10,9 +10,9 @@ stack = Array[int]([1, 5])
 
 [resource]
 script = ExtResource("1_3xw06")
-pretty_name = "Deadly Dart"
 costs = SubResource("Resource_kfprs")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Deadly Dart"
 effect_text = "Poisons an enemy. Kills the enemy if it was already poisoned."
 fluff_text = ""
 icon = ExtResource("2_ayoco")
@@ -21,6 +21,10 @@ target = 1
 target_range = 4
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 7
 topic_secondary = 8
 topic_icons = Array[int]([])

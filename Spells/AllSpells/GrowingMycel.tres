@@ -10,9 +10,9 @@ stack = Array[int]([1])
 
 [resource]
 script = ExtResource("1_dgvjx")
-pretty_name = "Growing Mycelium"
 costs = SubResource("Resource_jf1pl")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Growing Mycelium"
 effect_text = "Spawn a shroom. Draw a Spell.
 (Min range: 3)
 "
@@ -23,6 +23,10 @@ target = 3
 target_range = -1
 target_min_range = 3
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 9
 topic_secondary = 12
 topic_icons = Array[int]([])
