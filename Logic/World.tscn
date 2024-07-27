@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs6vnuiljtmct"]
+[gd_scene load_steps=6 format=3 uid="uid://cs6vnuiljtmct"]
 
 [ext_resource type="Script" path="res://Logic/World.gd" id="1_i0b03"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="2_1cart"]
 [ext_resource type="Environment" uid="uid://bo53exqy8qxwh" path="res://Logic/world_environment.tres" id="2_suwfn"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_mpog2"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/MouseInput.gd" id="4_xdvdf"]
-[ext_resource type="Material" uid="uid://cvjghqsy2rnqy" path="res://Entities/Visuals/VisualWater.tres" id="6_6m5c8"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_qm0ag"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_i0b03")
@@ -47,11 +44,3 @@ enabled = false
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
 script = ExtResource("4_xdvdf")
-
-[node name="WaterFloor" type="Node3D" parent="."]
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WaterFloor"]
-transform = Transform3D(78.0244, 0, 0, 0, -3.41056e-06, 78.0244, 0, -78.0244, -3.41056e-06, 0, -8.55925, 0)
-material_override = ExtResource("6_6m5c8")
-mesh = SubResource("QuadMesh_qm0ag")

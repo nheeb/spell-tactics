@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7dxgf4vovuq1"]
+
+[ext_resource type="Script" path="res://Logic/LevelEditor/LevelEditor.gd" id="1_bl8t1"]
+[ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_85xti"]
+[ext_resource type="PackedScene" uid="uid://c3t7dsskwul4j" path="res://UI/ScreenCombat/ScreenCombat.tscn" id="3_ag4yn"]
+
+[node name="LevelEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bl8t1")
+
+[node name="World" parent="." instance=ExtResource("2_85xti")]
+
+[node name="ScreenCombat" parent="." instance=ExtResource("3_ag4yn")]
+
+[editable path="World"]

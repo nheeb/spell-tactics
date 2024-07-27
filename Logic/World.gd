@@ -27,7 +27,7 @@ func load_combat_from_path(level_path: String) -> void:
 		push_error("Not combat state at path: %s" % level_path)
 	load_combat_from_state(combat_state)
 
-func load_combat_from_state(combat_state: CombatState) -> void:
+func load_combat_from_state(combat_state: CombatState, combat_active: bool = true) -> void:
 	# If we always create a new ScreenCombat for every Combat (which I think
 	# we should) then some of the following lines could be cut & simplified
 	
@@ -36,7 +36,6 @@ func load_combat_from_state(combat_state: CombatState) -> void:
 	
 	# Create combat
 	combat = combat_state.deserialize()
-	self.combat = combat # What?
 	add_child(combat)
 	
 	# Add level to tree
@@ -49,10 +48,11 @@ func load_combat_from_state(combat_state: CombatState) -> void:
 	# construct references to ui_root which lives outside this 3d viewport
 	# ui_root/combat_ui and ui_root/debug_ui
 	ui_root = get_tree().get_first_node_in_group("ui_root") # This seems kinda weird to me
-	combat_ui = COMBAT_UI.instantiate()
-	ui_root.add_child(combat_ui)
-	var i = ui_root.get_node("DebugUI").get_index()
-	ui_root.move_child(combat_ui, ui_root.get_node("DebugUI").get_index())
+	if ui_root != null:
+		combat_ui = COMBAT_UI.instantiate()
+		ui_root.add_child(combat_ui)
+		var i = ui_root.get_node("DebugUI").get_index()
+		ui_root.move_child(combat_ui, ui_root.get_node("DebugUI").get_index())
 	# TODO nitai remove cursed code
 	
 	camera = get_node("GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D")
@@ -62,22 +62,25 @@ func load_combat_from_state(combat_state: CombatState) -> void:
 
 	
 	# Do initial phase process (if any)
-	combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
-	combat.setup()
+	if combat_active:
+		combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
+		combat.setup()
 
-	combat.process_initial_phase()
-	
+		combat.process_initial_phase()
+		
 	# Play initial animations
 	combat.animation.play_animation_queue()
 	
 	# Connect the raycast & start pop up handler
 	# await get_tree().process_frame
 	# FIXME looser coupling World with Cards3D and Combat would be preferable
-	%MouseRaycast.cards3d = combat_ui.cards3d
+	if combat_ui != null and combat_active:
+		%MouseRaycast.cards3d = combat_ui.cards3d
 	%MouseRaycast.combat = combat
 	%MouseRaycast.enabled = true
 	
-	popup_handler.start()
+	if popup_handler != null:
+		popup_handler.start()
 
 #func _reset_combat():
 	#if combat == null:
