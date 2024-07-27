@@ -9,7 +9,7 @@ var event_logic: EventSpellLogic:
 	get:
 		if not type.is_event_spell:
 			pass
-			#printerr("Trying to get an EventSpellLogic from a non event spell")
+			#push_error("Trying to get an EventSpellLogic from a non event spell")
 		return logic as EventSpellLogic
 
 func _init(_type: SpellType, _combat : Combat = null) -> void:
@@ -71,7 +71,7 @@ func deselect():
 	if combat.ui.cards3d.pinned_card == card:
 		combat.animation.callable(combat.ui.cards3d.unpin_card)
 	else:
-		printerr("Tried to deselect spell which wasnt pinned")
+		push_error("Tried to deselect spell which wasnt pinned")
 
 func get_card() -> Card3D:
 	return card

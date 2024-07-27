@@ -20,14 +20,14 @@ func play(level: Level) -> void:
 			reference.callv(command, parameters)
 			handler.clear()
 		elif reference.has_signal("animation_done"):
-			printerr("Using deprecated signal animation_done (Use WaitTickets instead)")
+			push_error("Using deprecated signal animation_done (Use WaitTickets instead)")
 			reference.animation_done.connect(func(): animation_done_internally.emit(),CONNECT_ONE_SHOT)
 			reference.callv(command, parameters)
 		else:
 			reference.callv(command, parameters)
 			animation_done_internally.emit()
 	else:
-		printerr("Animation on null reference")
+		push_error("Animation on null reference")
 		animation_done_internally.emit()
 
 func _to_string() -> String:

@@ -1,12 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=15 format=3 uid="uid://bysejqqiloy1u"]
 
 [ext_resource type="Script" path="res://UI/CombatUI/CombatUI.gd" id="1_uhqdp"]
-[ext_resource type="FontFile" uid="uid://vv23ki1g4lrd" path="res://Assets/Fonts/Inter-Medium.ttf" id="2_2hiqp"]
 [ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/DefaultLabelSettings.tres" id="3_wybdv"]
 [ext_resource type="PackedScene" uid="uid://upcefttcpy6o" path="res://UI/Cards3D.tscn" id="4_a38j0"]
 [ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="5_jttea"]
 [ext_resource type="Texture2D" uid="uid://ditt5pum2lahc" path="res://Assets/Sprites/Icons/plain-arrow.png" id="5_myaa6"]
-[ext_resource type="PackedScene" uid="uid://ciug3sucml2b5" path="res://UI/EnergyIcon.tscn" id="6_2qxi4"]
 [ext_resource type="PackedScene" uid="uid://cp5c8if6axsd6" path="res://UI/CombatUI/EnemyEventIcon.tscn" id="8_isphm"]
 [ext_resource type="PackedScene" uid="uid://cn2mfqtdouxdu" path="res://UI/CombatUI/Timeline.tscn" id="9_denmg"]
 [ext_resource type="PackedScene" uid="uid://k4w38jjb4tmp" path="res://UI/CombatUI/StatusLines.tscn" id="10_gtdym"]
@@ -156,52 +154,6 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
 metadata/_edit_use_anchors_ = true
 
-[node name="EnergyLabel" type="Label" parent="EnergyArea"]
-layout_mode = 2
-anchor_left = -0.282655
-anchor_top = -0.100936
-anchor_right = -0.00140627
-anchor_bottom = -0.084407
-offset_left = 7.26965
-offset_top = 48.6401
-offset_right = 137.27
-offset_bottom = 92.6401
-mouse_filter = 1
-theme_override_fonts/font = ExtResource("2_2hiqp")
-text = "Energy:"
-label_settings = ExtResource("3_wybdv")
-metadata/_edit_use_anchors_ = true
-
-[node name="EnergyList" type="GridContainer" parent="EnergyArea"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.744792
-anchor_top = 0.506881
-anchor_right = 1.45313
-anchor_bottom = 0.917345
-grow_vertical = 0
-columns = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="EnergyIcon" parent="EnergyArea/EnergyList" instance=ExtResource("6_2qxi4")]
-layout_mode = 2
-
-[node name="EnergyIcon2" parent="EnergyArea/EnergyList" instance=ExtResource("6_2qxi4")]
-layout_mode = 2
-
-[node name="EnergyIcon3" parent="EnergyArea/EnergyList" instance=ExtResource("6_2qxi4")]
-layout_mode = 2
-
-[node name="EnergyIcon4" parent="EnergyArea/EnergyList" instance=ExtResource("6_2qxi4")]
-layout_mode = 2
-
-[node name="EnergyIcon5" parent="EnergyArea/EnergyList" instance=ExtResource("6_2qxi4")]
-layout_mode = 2
-
-[node name="EnergyIcon6" parent="EnergyArea/EnergyList" instance=ExtResource("6_2qxi4")]
-layout_mode = 2
-
 [node name="Drains" type="Label" parent="."]
 visible = false
 layout_mode = 1
@@ -234,20 +186,20 @@ metadata/_edit_use_anchors_ = true
 [node name="Actives" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0520833
-anchor_top = 0.393519
-anchor_right = 0.133333
-anchor_bottom = 0.622222
+anchor_left = 0.00677083
+anchor_top = 0.383333
+anchor_right = 0.0880205
+anchor_bottom = 0.612036
 theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="HBoxContainer" parent="Actives"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0928899
-anchor_top = -0.254902
-anchor_right = 0.923165
-anchor_bottom = 0.770308
+anchor_left = 0.0897439
+anchor_top = 0.0688261
+anchor_right = 1.36539
+anchor_bottom = 0.919031
 offset_bottom = -3.05176e-05
 grow_horizontal = 0
 theme_override_constants/separation = 70
@@ -264,27 +216,27 @@ offset_bottom = 120.0
 
 [node name="ActivePos2" type="Control" parent="Actives"]
 anchors_preset = 0
-offset_left = 79.0
-offset_top = 82.0
-offset_right = 79.0
-offset_bottom = 82.0
+offset_left = 120.0
+offset_top = 35.0
+offset_right = 120.0
+offset_bottom = 35.0
 
 [node name="Position" type="Marker2D" parent="Actives/ActivePos2"]
 
 [node name="ActivePos3" type="Control" parent="Actives"]
 anchors_preset = 0
-offset_left = 79.0
-offset_top = 168.0
-offset_right = 79.0
-offset_bottom = 168.0
+offset_left = 120.0
+offset_top = 205.0
+offset_right = 120.0
+offset_bottom = 205.0
 
 [node name="Position" type="Marker2D" parent="Actives/ActivePos3"]
 
 [node name="ActivePos4" type="Control" parent="Actives"]
 anchors_preset = 0
-offset_left = 124.0
+offset_left = 205.0
 offset_top = 120.0
-offset_right = 124.0
+offset_right = 205.0
 offset_bottom = 120.0
 
 [node name="Position" type="Marker2D" parent="Actives/ActivePos4"]

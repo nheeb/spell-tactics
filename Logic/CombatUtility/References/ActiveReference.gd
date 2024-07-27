@@ -10,7 +10,7 @@ func _init(_active: Active = null) -> void:
 	active = _active
 	id = _active.id
 	if id == null:
-		printerr("ActiveReference was created on an active with empty id")
+		push_error("ActiveReference was created on an active with empty id")
 
 ## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
@@ -19,13 +19,13 @@ func connect_reference(combat: Combat) -> void:
 			continue
 		if s.id.equals(id):
 			if active == s:
-				printerr("ActiveReference already connected to that object")
+				push_error("ActiveReference already connected to that object")
 			else:
 				if active != null:
-					printerr("ActiveReference already connected to another object")
+					push_error("ActiveReference already connected to another object")
 			active = s
 	if active == null:
-		printerr("ActiveReference did not get connected")
+		push_error("ActiveReference did not get connected")
 
 ## Is being called by resolve and should never be called from outside.
 func _resolve() -> Object:

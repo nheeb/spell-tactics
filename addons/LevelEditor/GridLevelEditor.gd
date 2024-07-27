@@ -57,7 +57,7 @@ func save_changes():
 	var state: CombatState = serialize_level_as_combat_state(level)
 	var err = ResourceSaver.save(state, level_file)
 	if not err == OK:
-		printerr("Err when saving level state: ", err)
+		push_error("Err when saving level state: ", err)
 
 func serialize_level_as_combat_state(_level: Level) -> CombatState:
 	var state := CombatState.new()

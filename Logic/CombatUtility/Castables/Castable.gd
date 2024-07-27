@@ -79,7 +79,7 @@ func are_targets_castable() -> bool:
 		if targets.is_empty():
 			return true
 		else:
-			printerr("NoneTarget Castable has targets???")
+			push_error("NoneTarget Castable has targets???")
 	var target_count := targets.size()
 	var logic_castable = get_logic()._are_targets_castable(targets)
 	return target_count >= get_type().target_count_min and logic_castable
@@ -129,7 +129,7 @@ func update_current_state() -> void:
 	if is_instance_valid(get_card()):
 		get_card().set_glow(is_castable())
 	else:
-		printerr("Card for Castable visual update not found")
+		push_error("Card for Castable visual update not found")
 	update_target_ui()
 
 func update_target_ui():

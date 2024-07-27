@@ -24,7 +24,7 @@ func _ready() -> void:
 const ON_MATERIAL = preload("res://Shaders/UI/SpeedTickOn.tres")
 const OFF_MATERIAL = preload("res://Shaders/UI/SpeedTickOff.tres")
 func set_speed(_speed_idx: int):
-	print("Set speed to ", _speed_idx)
+	#print("Set speed to ", _speed_idx)
 	self.speed_idx = _speed_idx
 	if speed_idx > 0:
 		self.active = true
@@ -44,7 +44,7 @@ func set_speed(_speed_idx: int):
 			ticks[1].material = ON_MATERIAL
 			ticks[2].material = ON_MATERIAL
 		_:
-			printerr("Invalid speed_idx passed in UI set_speed().")
+			push_error("Invalid speed_idx passed in UI set_speed().")
 
 
 func _on_fade_out_timer_timeout() -> void:

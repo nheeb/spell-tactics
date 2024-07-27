@@ -1,6 +1,6 @@
 class_name ActiveUseBubble extends Control
 
-@export var enabled_color: Color = Color("5ac7be")
+@export var enabled_color: Color = Color("63dad0")
 @export var disabled_color: Color = Color("444444")
 
 @onready var circle = %Circle

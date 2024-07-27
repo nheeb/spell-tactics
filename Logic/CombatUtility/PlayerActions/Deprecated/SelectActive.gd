@@ -5,7 +5,7 @@ var selected_active: Active
 func _init(selected: Active) -> void:
 	selected_active = selected
 	action_string = "Select spell %s" % selected
-	printerr("Using deprecated PlayerAction %s" % action_string)
+	push_error("Using deprecated PlayerAction %s" % action_string)
 	
 func is_valid(combat: Combat) -> bool:
 	# is payable (validation, but unpayable spell should not be able to be selected in UI)

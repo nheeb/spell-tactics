@@ -13,9 +13,9 @@ func play(level: Level):
 		if obj.has_signal(signal_name):
 			await obj.get(signal_name)
 		else:
-			printerr("Anim: WaitforSignal Signal does not exist")
+			push_error("Anim: WaitforSignal Signal does not exist")
 	else:
-		printerr("Anim: WaitforSignal Object does not exist")
+		push_error("Anim: WaitforSignal Object does not exist")
 	animation_done_internally.emit()
 
 func _to_string() -> String:

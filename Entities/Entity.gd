@@ -129,14 +129,14 @@ func call_on_status_effect(status_name: String, method: String, params := []) ->
 		if effect.has_method(method):
 			effect.callv(method, params)
 		else:
-			printerr("Status effect %s has no method %s" % [status_effects, method])
+			push_error("Status effect %s has no method %s" % [status_effects, method])
 			
 func call_logic(method: String, params := []):
 	if logic == null:
-		printerr("%s does not have logic." % self)
+		push_error("%s does not have logic." % self)
 		return
 	if not logic.has_method(method):
-		printerr("%s logic does not have method '%s'." % [self, method])
+		push_error("%s logic does not have method '%s'." % [self, method])
 		return
 	logic.callv(method, params)
 	

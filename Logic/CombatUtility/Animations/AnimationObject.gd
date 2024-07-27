@@ -35,19 +35,19 @@ func has_flag(f: Flags) -> bool:
 
 func set_delay(d: float) -> AnimationObject:
 	if d <= 0.0:
-		printerr("Invalid Animation delay")
+		push_error("Invalid Animation delay")
 	delay = d
 	return self
 
 func set_min_duration(d: float) -> AnimationObject:
 	if d < 0.0:
-		printerr("Invalid Min Duration")
+		push_error("Invalid Min Duration")
 	min_duration = d
 	return self
 
 func set_max_duration(d: float) -> AnimationObject:
 	if d < 0.0:
-		printerr("Invalid Max Duration")
+		push_error("Invalid Max Duration")
 	if d == 0.0:
 		d = 0.01
 	max_duration = d
@@ -71,7 +71,7 @@ func _play(level: Level) -> void:
 	global_start_time = VisualTime.visual_global_time
 	if max_duration != 0.0:
 		if max_duration < max(min_duration, 0.0) :
-			printerr("AnimationObject: Invalid max / min durations")
+			push_error("AnimationObject: Invalid max / min durations")
 		VisualTime.new_timer(max_duration).timeout.connect(internal_animation_done)
 	play(level)
 

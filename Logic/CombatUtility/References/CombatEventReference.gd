@@ -17,13 +17,13 @@ func connect_reference(combat: Combat) -> void:
 			continue
 		if e.id.equals(id):
 			if event == e:
-				printerr("SpellReference already connected to that object")
+				push_error("SpellReference already connected to that object")
 			else:
 				if event != null:
-					printerr("SpellReference already connected to another object")
+					push_error("SpellReference already connected to another object")
 			event = e
 	if event == null:
-		printerr("SpellReference did not get connected")
+		push_error("SpellReference did not get connected")
 
 ## Is being called by resolve and should never be called from outside.
 func _resolve() -> Object:

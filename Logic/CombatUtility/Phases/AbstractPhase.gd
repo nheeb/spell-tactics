@@ -19,7 +19,7 @@ signal process_end
 
 ## For overriding Processes the phase. Returns true if Player input is needed to advance to the next phase
 func process_phase() -> bool:
-	printerr("Abstract Phase used")
+	push_error("Abstract Phase used")
 	return false
 
 func _process_phase() -> bool:

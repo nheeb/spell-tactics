@@ -69,7 +69,7 @@ var visual_effects := {}
 
 func add_visual_effect(id: String, effect: StayingVisualEffect) -> void:
 	if id in visual_effects:
-		printerr("VisualEntity already has effect %s" % id)
+		push_error("VisualEntity already has effect %s" % id)
 	visual_effects[id] = effect
 	add_child(effect)
 
@@ -80,7 +80,7 @@ func remove_visual_effect(id: String) -> void:
 		effect.on_effect_end()
 		visual_effects.erase(id)
 	else:
-		printerr("VisualEntity has no effect %s" % id)
+		push_error("VisualEntity has no effect %s" % id)
 
 const ENERGY_ORB_ATTRACTOR = preload("res://Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
 const ENERGY_ORB = preload("res://Effects/EnergyOrb.tscn")

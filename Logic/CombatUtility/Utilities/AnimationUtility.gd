@@ -84,7 +84,7 @@ func update_hp(ent: HPEntity) -> AnimationObject:
 		else:
 			return property(ent.visual_entity.get_node("HPLabel"), "text", "%s / %s" % [ent.hp, ent.type.max_hp])
 
-	printerr("Neither HPLabel nor HealthBar3D for ent %s" % ent)
+	push_error("Neither HPLabel nor HealthBar3D for ent %s" % ent)
 	return null
 
 func show(node: Node3D) -> AnimationProperty:
@@ -125,7 +125,7 @@ func get_flat_animation_array(anims) -> Array[AnimationObject]:
 			elif a is Array:
 				anim_array.append_array(get_flat_animation_array(a))
 	else:
-		printerr("No array or animobj given to flatten")
+		push_error("No array or animobj given to flatten")
 	return anim_array
 	
 

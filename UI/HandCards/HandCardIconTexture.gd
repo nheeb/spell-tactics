@@ -29,7 +29,7 @@ func set_castable_type(type: CastableType):
 				icon.setup(info)
 				icon.show()
 			else:
-				printerr("SideIcon not found")
+				push_error("SideIcon not found")
 		else:
 			icons_right += 1
 			var node_name := "HandCardSideIconRight%s" % icons_right
@@ -38,4 +38,4 @@ func set_castable_type(type: CastableType):
 				icon.setup(info)
 				icon.show()
 			else:
-				printerr("SideIcon not found")
+				push_error("SideIcon not found")

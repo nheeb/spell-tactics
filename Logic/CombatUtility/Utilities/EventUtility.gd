@@ -28,7 +28,7 @@ func get_event_schedule_round_number(event_schedule: CombatEventSchedule) -> int
 	for round_number in event_timeline.keys():
 		if event_schedule in event_timeline[round_number]:
 			return round_number
-	printerr("EventSchedule not in timeline")
+	push_error("EventSchedule not in timeline")
 	return 0
 
 func get_next_enemy_event_plan() -> EnemyEventPlan:
@@ -67,9 +67,9 @@ func process_events() -> void:
 	process_active_events()
 
 func process_event_schedules():
-	var round := combat.current_round
-	if round in event_timeline.keys():
-		for schedule in event_timeline[round]:
+	var game_round := combat.current_round
+	if game_round in event_timeline.keys():
+		for schedule in event_timeline[game_round]:
 			schedule = schedule as CombatEventSchedule
 			assert(schedule)
 			add_event_and_activate(schedule.create_event(combat))

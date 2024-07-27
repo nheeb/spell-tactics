@@ -6,7 +6,7 @@ func _init(_spell: Spell):
 	spell = _spell
 	combat = spell.combat
 	if spell.type.logic != self.get_script():
-		printerr("Weird creation of SpellLogic Object")
+		push_error("Weird creation of SpellLogic Object")
 
 func get_castable() -> Castable:
 	return spell
@@ -22,7 +22,7 @@ func pay_for_spell(payment: EnergyStack) -> void:
 	if is_payment_valid(payment):
 		combat.energy.pay(payment)
 	else:
-		printerr("Wrong payment done")
+		push_error("Wrong payment done")
 
 func before_cast():
 	super.before_cast()
@@ -33,7 +33,7 @@ func after_cast():
 	for keyword in spell.get_keywords():
 		keyword.logic.after_spell(spell)
 	if spell.get_card().has_empty_energy_sockets():
-		printerr("Spell has empty energy sockets after cast!?!?!?")
+		push_error("Spell has empty energy sockets after cast!?!?!?")
 	var payment := spell.get_card().get_loaded_energy()
 	pay_for_spell(payment)
 	super.after_cast()

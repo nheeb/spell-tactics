@@ -25,7 +25,7 @@ func auto_save():
 			overworld = activity.overworld
 	
 	if not overworld:
-		printerr("No Overworld found for auto-saving")
+		push_error("No Overworld found for auto-saving")
 		return
 	
 	var state = overworld.serialize(combat.serialize())

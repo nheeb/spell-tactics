@@ -99,10 +99,10 @@ func global_settings_add(attr_name, range_start := 0.0, range_end := 0.0):
 
 func global_settings_get_entry(folder, attr) -> GlobalSettingsEntry:
 	if not folder in global_settings_folders:
-		printerr("Gloabal Settings: Get objects with wrong folder")
+		push_error("Gloabal Settings: Get objects with wrong folder")
 		return null
 	if not attr in global_settings_folders[folder].keys():
-		printerr("Gloabal Settings: Get objects with wrong attr")
+		push_error("Gloabal Settings: Get objects with wrong attr")
 		return null
 	return global_settings_folders[folder][attr]
 

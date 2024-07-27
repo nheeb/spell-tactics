@@ -90,8 +90,8 @@ func get_tile(location: Vector2i) -> Tile:
 	var r = location.x
 	var q = location.y
 	
-	if tiles[r][q] == null:
-		printerr("Tried getting tile %d, %d, which does not exist." % [r, q])
+	if (not is_location_in_bounds(location)) or tiles[r] == null or tiles[r][q] == null:
+		push_error("Tried getting tile %d, %d, which does not exist." % [r, q])
 	return tiles[r][q] as Tile
 
 ## go through visual instances of this tile and assert that they are visible and
@@ -284,7 +284,7 @@ func move_entity_to_graveyard(entity: Entity):
 		entity.entered_graveyard.emit()
 		graveyard.append(entity)
 	else:
-		printerr("Entity has not tile (Maybe its already in the graveyard)")
+		push_error("Entity has not tile (Maybe its already in the graveyard)")
 
 func get_all_tiles() -> Array[Tile]:
 	var all_tiles: Array[Tile] = []

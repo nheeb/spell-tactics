@@ -13,8 +13,8 @@ enum HandState {
 
 static var OPEN_Y := -1.23 # Height of open hand cards
 static var CLOSED_Y := -2.15 # Height of closed hand cards
-static var OPEN_AT_NORM_MOUSE_POS = .6 # Open hand when mouse at normalized y pos
-static var CLOSE_AT_NORM_MOUSE_POS = .9 # Close hand when mouse at normalized y pos
+static var OPEN_AT_NORM_MOUSE_POS = .4 # Open hand when mouse at normalized y pos
+static var CLOSE_AT_NORM_MOUSE_POS = .6 # Close hand when mouse at normalized y pos
 const BASE_ROTATION = Vector3(0.0, - PI / 2, 0.0)
 const RADIAL_TURN = 1.0 # Rotate cards like in a real hand
 const RADIAL_ORIGIN_Y = -5.0 # 
@@ -110,7 +110,7 @@ func add_active_to_pin(active: Active):
 		active_card.global_position.z = Z_BASE
 		active_card._ready()
 	else:
-		printerr("Tried to add pinned active while another card is pinned")
+		push_error("Tried to add pinned active while another card is pinned")
 
 const EVENT_CARD = preload("res://UI/EventCard3D.tscn")
 const EVENT_HEIGHT = 2.0
@@ -158,7 +158,7 @@ func remove_card(card_hint):
 		to_be_removed = card_hint
 
 	if not to_be_removed:
-		printerr("Card of ", card_hint, " which should be removed not found.")
+		push_error("Card of ", card_hint, " which should be removed not found.")
 		return
 	
 	cards.remove_child(to_be_removed)
@@ -437,7 +437,7 @@ func clear_chosen_cards():
 
 func pin_card(card: Card3D):
 	if pinned_card:
-		printerr("Tried to pin a card while another card is pinned")
+		push_error("Tried to pin a card while another card is pinned")
 		return
 	pinned_card = card
 	card.set_pinned(true)

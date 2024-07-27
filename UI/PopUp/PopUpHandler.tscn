@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhjgr5kq0vfdw"]
 
-[ext_resource type="Script" path="res://UI/PopUpHandler.gd" id="1_4cslg"]
+[ext_resource type="Script" path="res://UI/PopUp/PopUpHandler.gd" id="1_it7hp"]
 [ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp.tscn" id="2_35ane"]
 
 [node name="PopUpHandler" type="Control"]
@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_4cslg")
+script = ExtResource("1_it7hp")
 
 [node name="PopUp" parent="." instance=ExtResource("2_35ane")]
 visible = false
@@ -20,13 +20,4 @@ offset_left = 855.0
 offset_top = 451.0
 offset_right = 966.0
 offset_bottom = 504.0
-mouse_filter = 2
-
-[node name="Drainables" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2

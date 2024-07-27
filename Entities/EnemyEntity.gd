@@ -51,7 +51,7 @@ func do_random_move(moveset: Array[EnemyMove]):
 	scores.append_array(moveset.map(func(x): return x.get_score()))
 	var index := Utility.random_index_of_scores(scores)
 	if index == -1:
-		printerr("%s has no move to choose." % type.pretty_name)
+		push_error("%s has no move to choose." % type.pretty_name)
 	else:
 		var selected_move : EnemyMove = moveset[index]
 		combat.log.create_and_register_entry(get_name() + " does " + type.actions[index], LogEntry.Type.Enemy)

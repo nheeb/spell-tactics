@@ -40,7 +40,7 @@ func type_to_color(_type) -> Color:
 			return decay_color
 		EnergyStack.EnergyType.Spectral:
 			return spectral_color
-	printerr("unknown type")
+	push_error("unknown type")
 	return Color.RED
 
 @export var icons: Array[Texture]
@@ -61,7 +61,7 @@ func type_to_icon(_type) -> Texture:
 			return icons[5]
 		EnergyStack.EnergyType.Spectral:
 			return icons[6]
-	printerr("unknown type")
+	push_error("unknown type")
 	return icons[0]
 	
 func type_to_icon_color(_type) -> Color:
@@ -80,7 +80,7 @@ func type_to_icon_color(_type) -> Color:
 			return icon_colors[5]
 		EnergyStack.EnergyType.Spectral:
 			return icon_colors[6]
-	printerr("unknown type")
+	push_error("unknown type")
 	return icon_colors[0]
 
 # Called when the node enters the scene tree for the first time.

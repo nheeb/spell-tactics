@@ -38,8 +38,8 @@ func update_ui():
 	combat.ui.update_payable_cards()
 
 func tile_hovered(tile: Tile) -> void:
-	pass # TODO Nitai Connect this to some PA
 	#combat.get_current_phase_node().tile_hovered(tile)
+	process_action(PAHoverTile.new(tile))
 
 func tile_clicked(tile: Tile) -> void:
 	#combat.get_current_phase_node().tile_clicked(tile)

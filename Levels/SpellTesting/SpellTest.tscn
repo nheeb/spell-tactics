@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1eod0pbyip4b"]
+[gd_scene load_steps=9 format=3 uid="uid://b1eod0pbyip4b"]
 
 [ext_resource type="Script" path="res://Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://addons/LevelEditor/GridLevelEditor.gd" id="1_wcyqb"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="2_rjkex"]
 [ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Spells/AllSpells/WaterBlast.tres" id="4_6sho4"]
 [ext_resource type="Resource" uid="uid://cf8mbclv7giqd" path="res://Spells/AllSpells/HotSteam.tres" id="5_mgrks"]
+[ext_resource type="Resource" uid="uid://c4yj8j5clqch8" path="res://Spells/AllSpells/Berserker.tres" id="6_5ajo0"]
 [ext_resource type="Resource" uid="uid://bmmnjqd2apbv0" path="res://Spells/AllSpells/RockBlast.tres" id="7_ygnqq"]
 
 [sub_resource type="Resource" id="Resource_vfkqf"]
@@ -18,7 +19,7 @@ test_spell_1 = ExtResource("7_ygnqq")
 test_spell_2 = ExtResource("4_6sho4")
 test_spell_3 = ExtResource("5_mgrks")
 test_spell_4 = ExtResource("7_ygnqq")
-test_spell_5 = ExtResource("7_ygnqq")
+test_spell_5 = ExtResource("6_5ajo0")
 
 [node name="Editor" type="Node" parent="."]
 script = ExtResource("1_wcyqb")

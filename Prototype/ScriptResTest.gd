@@ -1,6 +1,5 @@
 extends Node3D
 
-const LEVEL = preload("res://Logic/Tiles/Level.tscn")
 
 var test = ["ast", "mast", "past"]
 

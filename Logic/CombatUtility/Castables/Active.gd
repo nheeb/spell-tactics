@@ -9,6 +9,9 @@ var id: ActiveID
 
 var logic: ActiveLogic
 
+## set by the UI. Every Active should have an ActiveButton :)
+var button: ActiveButton
+
 func _init(_type: ActiveType, _combat : Combat = null) -> void:
 	type = _type
 	combat = _combat
@@ -59,9 +62,9 @@ func deselect():
 		if combat.ui.cards3d.pinned_card.get_castable() == self:
 			combat.animation.callable(combat.ui.cards3d.unpin_card)
 		else:
-			printerr("Tried to deselect active which wasnt pinned")
+			push_error("Tried to deselect active which wasnt pinned")
 	else:
-		printerr("Tried to deselect active which wasnt pinned")
+		push_error("Tried to deselect active which wasnt pinned")
 
 var card: ActiveCard
 func get_card() -> Card3D:

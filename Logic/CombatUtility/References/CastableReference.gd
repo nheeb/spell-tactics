@@ -13,7 +13,7 @@ func _init(_castable: Castable = null) -> void:
 	elif castable is Spell:
 		spell_ref = castable.get_reference()
 	else:
-		printerr("CastableRef: Something went wrong.")
+		push_error("CastableRef: Something went wrong.")
 
 ## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
@@ -22,7 +22,7 @@ func connect_reference(combat: Combat) -> void:
 	elif active_ref:
 		castable = active_ref.resolve(combat)
 	else:
-		printerr("Empty Castable Reference")
+		push_error("Empty Castable Reference")
 
 ## Is being called by resolve and should never be called from outside.
 func _resolve() -> Object:

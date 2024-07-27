@@ -21,7 +21,7 @@ script = ExtResource("1_bp58t")
 [node name="ActiveButton" type="TextureButton" parent="."]
 clip_children = 2
 texture_filter = 4
-custom_minimum_size = Vector2(92, 92)
+custom_minimum_size = Vector2(102, 102)
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -29,6 +29,7 @@ offset_right = 102.0
 offset_bottom = 102.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
+toggle_mode = true
 texture_normal = ExtResource("2_m227v")
 texture_pressed = ExtResource("3_qibmm")
 texture_hover = ExtResource("3_qibmm")
@@ -41,8 +42,8 @@ script = ExtResource("5_n1wvt")
 modulate = Color(0, 0, 0, 1)
 clip_children = 2
 layout_mode = 0
-offset_right = 92.0
-offset_bottom = 92.0
+offset_right = 102.0
+offset_bottom = 102.0
 texture = ExtResource("6_j43rt")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
@@ -50,32 +51,42 @@ metadata/_edit_use_anchors_ = true
 [node name="Icon" type="TextureRect" parent="ActiveButton"]
 texture_filter = 4
 layout_mode = 0
-offset_left = 15.0
+offset_left = 16.0
 offset_top = 16.0
-offset_right = 79.0
-offset_bottom = 80.0
+offset_right = 86.0
+offset_bottom = 86.0
 texture = ExtResource("7_sdsmr")
 expand_mode = 1
 
 [node name="ActiveUseBubble1" parent="." instance=ExtResource("8_178h3")]
-offset_left = 38.0
+offset_left = 43.0
 offset_top = 15.0
-offset_right = 38.0
+offset_right = 43.0
 offset_bottom = 15.0
+enabled_color = Color(0.386895, 0.855469, 0.816779, 1)
 
 [node name="ActiveUseBubble2" parent="." instance=ExtResource("8_178h3")]
-offset_left = 57.0
+offset_left = 62.0
 offset_top = 10.0
-offset_right = 57.0
+offset_right = 62.0
 offset_bottom = 10.0
 
 [node name="ActiveUseBubble3" parent="." instance=ExtResource("8_178h3")]
-offset_left = 76.0
+offset_left = 81.0
 offset_top = 15.0
-offset_right = 76.0
+offset_right = 81.0
 offset_bottom = 15.0
 enabled_color = Color(0.362162, 0.800781, 0.764565, 1)
 disabled_color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="Position1" type="Marker2D" parent="."]
+position = Vector2(43, 15)
+
+[node name="Position2" type="Marker2D" parent="."]
+position = Vector2(62, 10)
+
+[node name="Position3" type="Marker2D" parent="."]
+position = Vector2(81, 15)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

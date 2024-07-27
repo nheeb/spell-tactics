@@ -49,18 +49,18 @@ func axial_add():
 
 func random_index_of_scores(scores: Array[float]) -> int:
 	if scores.is_empty():
-		printerr("Random index: Empty list")
+		push_error("Random index: Empty list")
 		return -1
 	var total_size : float = scores.reduce(func(a,b): return a + b, 0.0)
 	if total_size == 0.0:
-		printerr("Random index: Only Zero entries")
+		push_error("Random index: Only Zero entries")
 		return -1
 	var random_value := randf_range(0.0, total_size)
 	for i in range(scores.size()):
 		random_value -= scores[i]
 		if random_value < 0.0:
 			return i
-	printerr("Random index: Something went wrong")
+	push_error("Random index: Something went wrong")
 	return -1
 
 ## the hit chance should be between 0 and 100
@@ -181,10 +181,7 @@ func take_screenshot(shrink_count := 0) -> ImageTexture:
 	#image.compress(Image.COMPRESS_ASTC)
 	var texture := ImageTexture.create_from_image(image)
 	return texture
-
-func get_mouse_pos_absolute() -> Vector2:
-	return get_viewport().get_mouse_position()
-
+	
 ## for when the viewport resolution doesn't match the content_scale	
 func scale_screen_pos(screen_pos: Vector2) -> Vector2:
 	var current_viewport_size: Vector2 = get_tree().root.size
@@ -195,15 +192,9 @@ func scale_screen_pos(screen_pos: Vector2) -> Vector2:
 	var scaled: Vector2 = screen_pos * size_scale
 	return scaled
 
-## for when the viewport resolution doesn't match the content_scale		
-func inv_scale_screen_pos(screen_pos: Vector2) -> Vector2:
-	var current_viewport_size: Vector2 = get_tree().root.size
-	var reference_viewport_size: Vector2 = get_tree().root.content_scale_size
-	var viewport_scale: Vector2 = reference_viewport_size / current_viewport_size
-	var size_scale: float = minf(viewport_scale.x, viewport_scale.y)
-	#var scaled: Vector2 = Vector2(viewport_scale.x * screen_pos.x, viewport_scale.y * screen_pos.y)
-	var scaled: Vector2 = size_scale * screen_pos
-	return scaled
+
+func get_mouse_pos_absolute() -> Vector2:
+	return get_viewport().get_mouse_position()
 
 func get_mouse_pos_normalized(invert_y_axis := true) -> Vector2:
 	var absolute := get_mouse_pos_absolute()
@@ -238,7 +229,7 @@ func get_parent_of_type(n: Node, type) -> Node:
 		if is_instance_of(parent, type):
 			return parent
 		parent = parent.get_parent()
-	printerr("No parent of %s with type %s found." % [n, type])
+	push_error("No parent of %s with type %s found." % [n, type])
 	return null
 
 func array_sum(array: Array):

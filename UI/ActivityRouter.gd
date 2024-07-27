@@ -32,7 +32,7 @@ func _on_activity_pushed(activity: Activity):
 			_show_top()
 			return
 
-	printerr('unsupported activity script: %s' % script)
+	push_error('unsupported activity script: %s' % script)
 
 func _hide_all_but_top():
 	for i in range(len(views)-1):

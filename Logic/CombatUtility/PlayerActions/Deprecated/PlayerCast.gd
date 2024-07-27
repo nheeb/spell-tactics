@@ -7,7 +7,7 @@ func _init(_spell: Spell, _payment: EnergyStack) -> void:
 	spell = _spell
 	payment = _payment
 	action_string = "Cast Spell %s with payment %s" % [spell.type.internal_name, payment.to_string()]
-	printerr("Using deprecated PlayerAction %s" % action_string)
+	push_error("Using deprecated PlayerAction %s" % action_string)
 
 func is_valid(combat: Combat) -> bool:
 	if combat.current_phase != Combat.RoundPhase.Spell:

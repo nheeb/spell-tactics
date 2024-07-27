@@ -28,7 +28,7 @@ func deserialize() -> Combat:
 	combat.current_phase = current_phase
 	combat.energy.player_energy = player_energy
 	if level_state == null:
-		printerr("Error deserializing: LevelState null in CombatState.gd")
+		push_error("Error deserializing: LevelState null in CombatState.gd")
 	combat.level = level_state.deserialize(combat) #its important that level is deserialized after current round phase is set
 	combat.deck.append_array(deck_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.hand.append_array(hand_states.map(func(x: SpellState): return x.deserialize(combat)))
@@ -59,7 +59,7 @@ func deserialize() -> Combat:
 func save_to_disk(path: String) -> void:
 	var err = ResourceSaver.save(self, path) # , ResourceSaver.FLAG_BUNDLE_RESOURCES)
 	if not err == OK:
-		printerr("Err when saving level state: ", err)
+		push_error("Err when saving level state: ", err)
 
 static func load_from_disk(path: String) -> CombatState:
 	return ResourceLoader.load(path) as CombatState
