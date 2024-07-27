@@ -1,9 +1,15 @@
 class_name MovementUtility extends CombatUtility
 
-func move_entity(entity: Entity, target: Tile):
+func move_entity(entity: Entity, target: Tile) -> AnimationObject:
 	entity.move(target)
-	if not entity is PlayerEntity:
-		combat.animation.callback(entity.visual_entity, "animation_move_to", [target])
+	if not entity is PlayerEntity: 
+		# TODO Clean up this dirty if -> Rather override animation move to
+		return combat.animation.callback(entity.visual_entity, "animation_move_to", [target])
+	return null
+
+func blink_entity(entity: Entity, target: Tile) -> AnimationObject:
+	entity.move(target)
+	return combat.animation.callback(entity.visual_entity, "animation_blink_to", [target])
 
 func apply_knockback(entity: Entity, direction: Vector2i, force := 1):
 	var current_tile := entity.current_tile
