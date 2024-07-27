@@ -3,9 +3,11 @@ class_name InputUtility extends CombatUtility
 signal action_executed(action: PlayerAction)
 signal action_failed(action: PlayerAction)
 
+var input_blocked := false
+
 ## Checks whether an action is valid and executes it.
-func process_action(action: PlayerAction) -> void:
-	if not is_taking_actions():
+func process_action(action: PlayerAction, force_action := false) -> void:
+	if not (is_taking_actions() or force_action):
 		return
 	var valid := action.is_valid(combat)
 	action.log_me(combat, valid)
@@ -31,18 +33,17 @@ func deselect_castable(castable: Castable = null):
 		current_castable = null
 
 func is_taking_actions() -> bool:
-	return combat.current_phase == Combat.RoundPhase.Spell or \
-		   combat.current_phase == Combat.RoundPhase.Movement
+	return not input_blocked and \
+		(combat.current_phase == Combat.RoundPhase.Spell or \
+		 combat.current_phase == Combat.RoundPhase.Movement)
 
 func update_ui():
 	combat.ui.update_payable_cards()
 
 func tile_hovered(tile: Tile) -> void:
-	#combat.get_current_phase_node().tile_hovered(tile)
 	process_action(PAHoverTile.new(tile))
 
 func tile_clicked(tile: Tile) -> void:
-	#combat.get_current_phase_node().tile_clicked(tile)
 	process_action(PASelectTile.new(tile))
 	process_action(PAInstantDrain.new(tile))
 
@@ -51,7 +52,6 @@ func tile_rightclicked(tile: Tile) -> void:
 
 func card_hovered(card: HandCard3D) -> void:
 	pass # TODO Nitai Connect this to some PA
-	#combat.get_current_phase_node().card_hovered(card)
 
 func card_selected(card: HandCard3D) -> void:
 	process_action(PASelectCastable.new(card.get_castable()))

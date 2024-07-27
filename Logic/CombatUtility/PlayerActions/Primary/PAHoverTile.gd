@@ -15,7 +15,6 @@ func is_valid(combat: Combat) -> bool:
 	# maybe invalid when doing some kinds of actions, but this is fine for now
 	return true
 
-
 static var currently_hovering_drainable: Tile
 func execute(combat: Combat) -> void:
 	if combat.input.current_castable != null:

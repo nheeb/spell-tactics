@@ -2,7 +2,7 @@ class_name AnimationUtility extends CombatUtility
 
 const SAY_EFFECT = preload("res://Effects/SayEffect.tscn")
 
-signal animation_queue_empty
+signal animation_queues_empty
 
 var animation_queue: Array[AnimationObject]
 var currently_playing_queues: Array[AnimationQueue]
@@ -136,16 +136,18 @@ func get_flat_animation_array(anims) -> Array[AnimationObject]:
 func add_animation_object(a: AnimationObject) -> void:
 	animation_queue.append(a)
 
-func play_animation_queue() -> void:
-	if currently_playing_queues.is_empty():
-		while not animation_queue.is_empty():
-			var aq := AnimationQueue.new(animation_queue.duplicate())
-			currently_playing_queues.append(aq)
-			animation_queue.clear()
-			aq.play(combat)
-			await aq.queue_finished
-			currently_playing_queues.erase(aq)
-		animation_queue_empty.emit()
+func play_animation_queue(start_immediately := false) -> void:
+	if not start_immediately:
+		while is_playing():
+			await animation_queues_empty
+	var aq := AnimationQueue.new(animation_queue.duplicate())
+	currently_playing_queues.append(aq)
+	animation_queue.clear()
+	aq.play(combat)
+	await aq.queue_finished
+	currently_playing_queues.erase(aq)
+	if not is_playing():
+		animation_queues_empty.emit()
 		VisualTime.visual_time_scale = 1.0
 		VisualTime.current_speed_idx = 0
 

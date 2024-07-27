@@ -13,6 +13,8 @@ func execute(combat: Combat) -> void:
 	if combat.input.current_castable:
 		combat.input.deselect_castable()
 	combat.input.select_castable(castable)
+	await VisualTime.new_timer(.15).timeout
+	combat.input.process_action(PAAutoLoadEnergy.new())
 
 func on_fail(combat: Combat) -> void:
 	pass
