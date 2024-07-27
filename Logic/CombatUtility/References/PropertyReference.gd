@@ -15,7 +15,7 @@ func connect_reference(combat: Combat) -> void:
 	obj = origin_node.get(property_name)
 
 ## Is being called by resolve and should never be called from outside.
-func _resolve() -> Object:
+func _resolve() -> Variant:
 	return obj
 
 func get_reference_type() -> String:

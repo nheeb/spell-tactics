@@ -26,7 +26,7 @@ func connect_reference(combat: Combat) -> void:
 		push_error("SpellReference did not get connected")
 
 ## Is being called by resolve and should never be called from outside.
-func _resolve() -> Object:
+func _resolve() -> Variant:
 	return event
 
 func get_reference_type() -> String:

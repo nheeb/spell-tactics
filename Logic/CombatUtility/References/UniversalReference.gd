@@ -7,7 +7,7 @@ class_name UniversalReference extends Resource
 func connect_reference(combat: Combat) -> void:
 	pass # TODO Conncet to object with combat
 
-func resolve(combat: Combat = null) -> Object:
+func resolve(combat: Combat = null) -> Variant:
 	assert(cache_result or combat != null)
 	if _resolve() != null and cache_result:
 		return _resolve()
@@ -20,7 +20,7 @@ func resolve(combat: Combat = null) -> Object:
 			return null
 
 ## Is being called by resolve and should never be called from outside.
-func _resolve() -> Object:
+func _resolve() -> Variant:
 	return null # TODO Return the object
 
 func is_valid(combat: Combat = null) -> bool:

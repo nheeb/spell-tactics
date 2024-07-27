@@ -12,7 +12,7 @@ func connect_reference(combat: Combat) -> void:
 	tile = combat.level.get_tile_by_location(location)
 
 ## Is being called by resolve and should never be called from outside.
-func _resolve() -> Object:
+func _resolve() -> Variant:
 	return tile
 
 func get_reference_type() -> String:

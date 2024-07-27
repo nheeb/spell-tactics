@@ -16,7 +16,7 @@ func connect_reference(combat: Combat) -> void:
 	node = origin_node.get_node(node_path)
 
 ## Is being called by resolve and should never be called from outside.
-func _resolve() -> Object:
+func _resolve() -> Variant:
 	return node
 
 func get_reference_type() -> String:
