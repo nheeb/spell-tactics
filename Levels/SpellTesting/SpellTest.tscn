@@ -13,6 +13,7 @@ script = ExtResource("2_rjkex")
 stack = Array[int]([0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 2, 2])
 
 [node name="SpellTest" type="Node3D"]
+transform = Transform3D(0.519788, 0, 0, 0, 0.519788, 0, 0, 0, 0.519788, 0, 0, 0)
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
 test_spell_1 = ExtResource("7_ygnqq")

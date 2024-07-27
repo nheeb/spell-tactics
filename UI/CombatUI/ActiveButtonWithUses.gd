@@ -27,13 +27,17 @@ func _ready() -> void:
 func restart_bubbles():
 	while not bubbles.is_empty():
 		var bubble_to_delete = bubbles.pop_back()
-		bubble_to_delete.queue_free()
-		
+		bubble_to_delete.free()
+	
+	#await get_tree().process_frame
+	
 	var bubble: ActiveUseBubble
-	for i in range(3):
+	for i in range(MAX_USES):
 		bubble = ACTIVE_USE_BUBBLE.instantiate()
 		bubble.name = "ActiveUseBubble%d" % (i+1)
+		
 		add_child(bubble)
+		bubble.position = get_node("Position" + str(i+1)).position
 		bubbles.append(bubble)
 
 

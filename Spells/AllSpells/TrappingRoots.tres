@@ -10,9 +10,9 @@ stack = Array[int]([0, 6])
 
 [resource]
 script = ExtResource("1_khymq")
-pretty_name = "Trapping Roots"
 costs = SubResource("Resource_duit4")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Trapping Roots"
 effect_text = "Traps an enemy for 2 rounds"
 fluff_text = "Wurzel Wurzel"
 icon = ExtResource("2_8d6xg")
@@ -21,6 +21,10 @@ target = 1
 target_range = -1
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 16
 topic_secondary = 0
 topic_icons = Array[int]([])

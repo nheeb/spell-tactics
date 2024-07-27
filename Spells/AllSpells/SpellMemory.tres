@@ -10,9 +10,9 @@ stack = Array[int]([6, 6])
 
 [resource]
 script = ExtResource("2_x2nta")
-pretty_name = "Spell Memory"
 costs = SubResource("Resource_gkkbv")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Spell Memory"
 effect_text = "Draw 3 Spells."
 fluff_text = "The spell at the tip of one's tongue..
 "
@@ -22,6 +22,10 @@ target = 0
 target_range = -1
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 12
 topic_secondary = 0
 topic_icons = Array[int]([])

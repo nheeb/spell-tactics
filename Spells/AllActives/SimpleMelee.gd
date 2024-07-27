@@ -1,4 +1,4 @@
-extends ActiveLogic
+class_name SimpleMelee extends ActiveLogic
 
 ## Usable references:
 ## spell - Corresponding spell
@@ -9,6 +9,9 @@ extends ActiveLogic
 ## This is for overriding if there are conditions for targets
 #func is_current_cast_valid() -> bool:
 	#return true
+	
+
+var modifiers: Array[CallbackReference] = []  # (dmg, target_enemy) -> dmg
 
 ## Here should be the effect
 func casting_effect() -> void:
@@ -16,7 +19,12 @@ func casting_effect() -> void:
 	target = target as Tile
 	var enemies = target.get_enemies()
 	assert(len(enemies) >= 1, "Melee expects min 1 enemy on tile")
-	enemies[0].inflict_damage(1)
-	combat.animation.update_hp(enemies[0])
+	var enemy: EnemyEntity = enemies[0]
+	var damage := 1
+	for modifier in modifiers:
+		#damage = modifier.call(damage, enemy)
+		pass
+	enemy.inflict_damage(damage)
+	combat.animation.update_hp(enemy)
 	combat.animation.say(combat.player.current_tile, "ATTACK!", {"color": Color.CORAL, "font": "bold"})
 

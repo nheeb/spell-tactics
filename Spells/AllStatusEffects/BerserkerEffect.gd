@@ -17,8 +17,14 @@ func _init(_length := 2) -> void:
 ## For overwriting: Logic when status effect enters the game
 ## This will only be called when the status effect is applied, not when it is loaded
 func setup_logic() -> void:
-	make_meele_two_uses()
-	TimedEffect.new_end_phase_trigger_from_callable(make_meele_two_uses).set_trigger_count(length) \
+	var melee_attacks = combat.actives.filter(func(x): return "Melee" in x.type.pretty_name)
+	for melee in melee_attacks:
+		melee = melee as SimpleMelee
+		if melee == null:
+			push_error("Expected SimpleMelee")
+			return
+		melee.modifiers.append(func(dmg, target): dmg+1)
+	TimedEffect.new_end_phase_trigger_from_callable(func(): pass).set_trigger_count(length) \
 			.replace_last_callable(self_remove).register(combat)
 
 ## For overwriting: Visual changes when status effect enters the game
@@ -37,9 +43,4 @@ func on_remove() -> void:
 	for melee in melee_attacks:
 		melee.add_to_max_uses(-1)
 	combat.animation.remove_staying_effect(entity.visual_entity, "berserker_icons")
-
-func make_meele_two_uses():
-	var melee_attacks = combat.actives.filter(func(x): return "Melee" in x.type.pretty_name)
-	for melee in melee_attacks:
-		melee.add_to_max_uses(1)
 

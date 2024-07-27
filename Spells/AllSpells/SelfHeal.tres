@@ -10,9 +10,9 @@ stack = Array[int]([0, 0])
 
 [resource]
 script = ExtResource("1_yj2vf")
-pretty_name = "Plant Healing"
 costs = SubResource("Resource_mktb5")
 keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+pretty_name = "Plant Healing"
 effect_text = "Heals 2."
 fluff_text = ""
 icon = ExtResource("2_ih41x")
@@ -21,6 +21,10 @@ target = 0
 target_range = -1
 target_min_range = -1
 target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
 topic = 11
 topic_secondary = 0
 topic_icons = Array[int]([])
