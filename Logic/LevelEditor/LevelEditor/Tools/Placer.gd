@@ -1,4 +1,4 @@
-@tool
+
 class_name Placer extends Tool
 
 func _selected():

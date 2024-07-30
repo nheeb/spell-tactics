@@ -1,4 +1,4 @@
-@tool
+
 class_name Tool extends Object
 
 func _selected():

@@ -1,4 +1,4 @@
-@tool
+
 class_name EntityType extends Resource
 
 @export_category("Entity")

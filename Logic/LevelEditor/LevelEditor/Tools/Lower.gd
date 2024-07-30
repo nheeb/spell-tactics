@@ -1,5 +1,5 @@
-@tool
-class_name Raise extends Tool
+
+class_name Lower extends Tool
 
 var _active_set: Array[Tile] = []
 
@@ -19,9 +19,9 @@ func _drag(_level: Level, tile: Tile, eitorUI: EditorUI):
 	_active_set.append(tile)
 	_set_tile(tile)
 
-func _set_tile(tile):
-	tile.global_position += Vector3.UP * 0.4
+func _set_tile(tile: Tile):
+	tile.global_position += Vector3.DOWN * 0.4
 	for entity in tile.entities:
 		if entity.visual_entity:
-			entity.visual_entity.global_position += Vector3.UP * 0.4
+			entity.visual_entity.global_position += Vector3.DOWN * 0.4
 	

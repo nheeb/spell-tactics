@@ -1,4 +1,4 @@
-@tool
+
 class_name VisualEntity extends Node3D
 
 # Here we could define some common callbacks / signals that other VisualEntities inheriting

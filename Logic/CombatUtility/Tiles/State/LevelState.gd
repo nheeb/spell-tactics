@@ -1,4 +1,4 @@
-@tool
+
 class_name LevelState extends Resource
 
 @export var tiles: Array[TileState]

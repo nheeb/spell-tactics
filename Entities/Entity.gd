@@ -1,4 +1,4 @@
-@tool
+
 class_name Entity
 ## Base Class for every Object on the Tile-Grid-Level like the player, enemies or environment.
 

@@ -1,4 +1,4 @@
-@tool
+
 class_name EditorUIOld extends Control
 
 @export var selection_ui: SelectionUI = null

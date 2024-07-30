@@ -1,4 +1,4 @@
-@tool
+
 class_name CastableType extends Resource
 
 @export_category("Spell Attributes")

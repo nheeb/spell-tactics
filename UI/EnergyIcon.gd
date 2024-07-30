@@ -1,4 +1,4 @@
-@tool
+
 class_name EnergyIcon extends Control
 
 @onready var color_rect := $ColorRect

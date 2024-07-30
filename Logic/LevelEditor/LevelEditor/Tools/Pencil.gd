@@ -1,4 +1,4 @@
-@tool
+
 class_name Pencil extends Tool
 
 var _active_set: Array[Tile] = []

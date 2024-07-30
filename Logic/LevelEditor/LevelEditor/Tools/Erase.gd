@@ -1,4 +1,3 @@
-@tool
 class_name Erase extends Tool
 
 var _active_set: Array[Tile] = []

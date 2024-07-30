@@ -1,4 +1,4 @@
-@tool
+
 class_name SelectionUI extends Control
 
 @export var editor_ui: EditorUI = null
@@ -65,7 +65,7 @@ func _get_all_file_paths(path: String) -> Array[String]:
 	return file_paths
 
 func _add(name: String, res: EntityType):
-	var item = preload("res://addons/LevelEditor/UI/SelectionItem.tscn").instantiate()
+	var item = preload("res://Logic/LevelEditor/LevelEditor/UI/SelectionItem.tscn").instantiate()
 	item.display_name = name
 	item.res = res
 	item.editor_ui = editor_ui

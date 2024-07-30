@@ -1,4 +1,4 @@
-@tool
+
 extends Control
 
 @export var texture: Texture2D

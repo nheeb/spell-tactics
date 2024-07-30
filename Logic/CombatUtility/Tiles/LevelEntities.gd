@@ -1,4 +1,4 @@
-@tool
+
 class_name LevelEntities extends Object
 
 var _level: Level
