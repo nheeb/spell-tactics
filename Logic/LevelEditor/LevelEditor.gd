@@ -1,22 +1,62 @@
-extends Node3D
+class_name EditorUI extends Control
 
-@onready var world: World = $World
+@onready var world: World = $"%World"
+@onready var selection_ui = $SelectionUi
 @export var combat_state: CombatState = ResourceLoader.load("res://Levels/SpellTesting/spell_test.tres") as CombatState
 
 
-#func _get_level_file():
-	#var scene_location = get_tree().edited_scene_root.scene_file_path
-	#var file_name = level_name + '.tres'
-	#return scene_location.path_join('../').path_join(file_name)
+var tool_pencil = Pencil.new()
+var tool_raise = Raise.new()
+var tool_lower = Lower.new()
+var tool_placer = Placer.new()
+var tool_erase = Erase.new()
 
-func _load_level() -> Level:
-	#var level_file = _get_level_file()
-	#var combat_state: CombatState = ResourceLoader.load(level_file) as CombatState
-	var loaded_level_state = combat_state.level_state as LevelState
-	return loaded_level_state.deserialize(null)
+var ENT_PLAYER = preload("res://Entities/PlayerResource.tres")
+
+const ROCK_ENTITY = preload("res://Entities/Environment/Rock.tres")
+const WATER_ENTITY = preload("res://Entities/Environment/Water.tres")
+const GRASS_TILE_ENTITY = preload("res://Entities/Environment/GrassTile.tres")
+const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
+
+var placement_active: EntityType = GRASS_TILE_ENTITY
+var tool_active = tool_pencil
+
+var ent_active: EntityType = ENT_PLAYER
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		%World.relative_motion = event.relative
+	
+func on_changed_render_resolution(res: Vector2i):
+	%Viewport3D.size = res
+
 
 ## LevelEditor should load with a combat state
 func _ready() -> void:
-	#var level: Level = _load_level()
 	world.load_combat_from_state(combat_state, false)
-	#add_child(level, true)
+	Game.settings.changed_render_resolution.connect(on_changed_render_resolution)
+	Events.tile_clicked.connect(tile_clicked)
+
+
+func _on_pencil_pressed():
+	tool_active = tool_pencil	
+	selection_ui.set_mode(SelectionUI.Mode.Terrain)
+
+func _on_raise_pressed():
+	tool_active = tool_raise	
+	selection_ui.set_mode(SelectionUI.Mode.Terrain)
+
+func _on_lower_pressed():
+	tool_active = tool_lower
+	selection_ui.set_mode(SelectionUI.Mode.None)
+
+func _on_place_pressed():
+	tool_active = tool_placer
+	selection_ui.set_mode(SelectionUI.Mode.Entities)
+
+func _on_erase_pressed():
+	tool_active = tool_erase
+	selection_ui.set_mode(SelectionUI.Mode.None)
+	
+func tile_clicked(tile):
+	tool_active._apply(world.level, tile, self)

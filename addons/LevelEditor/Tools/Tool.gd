@@ -7,8 +7,8 @@ func _selected():
 func _deselected():
 	pass
 
-func _apply(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
+func _apply(level: Level, tile: Tile, eitorUI: EditorUI):
 	pass
 
-func _drag(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
+func _drag(level: Level, tile: Tile, eitorUI: EditorUI):
 	pass

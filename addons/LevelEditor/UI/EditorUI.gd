@@ -1,5 +1,5 @@
 @tool
-class_name EditorUI extends Control
+class_name EditorUIOld extends Control
 
 @export var selection_ui: SelectionUI = null
 

@@ -9,19 +9,19 @@ func _selected():
 func _deselected():
 	pass
 
-func _apply(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
+func _apply(level: Level, tile: Tile, eitorUI: EditorUI):
 	_active_set = [tile]
-	_set_tile(editor, tile, eitorUI.placement_active)
+	_set_tile(level, tile, eitorUI.placement_active)
 
-func _drag(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
+func _drag(_level: Level, tile: Tile, eitorUI: EditorUI):
 	if _active_set.has(tile):
 		return
 	_active_set.append(tile)
-	_set_tile(editor, tile, eitorUI.placement_active)
+	_set_tile(_level, tile, eitorUI.placement_active)
 
-func _set_tile(editor: GridLevelEditor, tile: Tile, placement_active: EntityType):
-	var entities = editor.level.tiles[tile.r][tile.q].entities
+func _set_tile(level: Level, tile: Tile, placement_active: EntityType):
+	var entities = level.tiles[tile.r][tile.q].entities
 	for ent in entities:
 		if not ent.type.is_terrain:
-			editor.level.entities().remove_entity(tile.location, ent)
+			level.entities().remove_entity(tile.location, ent)
 	

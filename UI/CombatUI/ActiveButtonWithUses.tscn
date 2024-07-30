@@ -88,5 +88,5 @@ position = Vector2(62, 10)
 [node name="Position3" type="Marker2D" parent="."]
 position = Vector2(81, 15)
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActiveButton" to="." method="_on_active_button_mouse_entered"]
+[connection signal="mouse_exited" from="ActiveButton" to="." method="_on_active_button_mouse_exited"]

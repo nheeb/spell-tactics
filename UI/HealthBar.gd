@@ -27,7 +27,7 @@ func update_container_offsets():  # cells ~= max_hp
 	var total_width = min(MAX_WIDTH, number_of_cells * DEFAULT_CELL_WIDTH)
 	var width_diff_halved = (MAX_WIDTH - total_width) / 2.0
 	
-	print("width for ", get_parent().entity_name, " = ", width_diff_halved)
+	#print("width for ", get_parent().entity_name, " = ", width_diff_halved)
 	container.offset_left = width_diff_halved
 	container.offset_right = -width_diff_halved
 	
@@ -97,10 +97,10 @@ func damage_by(damage: int):
 	
 
 func shield_by(by: int):
-	print("shield by ", by)
+	#print("shield by ", by)
 	bar.material.set_shader_parameter("shield", shield + by)
 	
 func heal_by(heal: int):
-	print("heal %s by %d" % [get_parent().entity_name, heal])
+	#print("heal %s by %d" % [get_parent().entity_name, heal])
 	var old_hp = bar.material.get_shader_parameter("health")
 	bar.material.set_shader_parameter("health", old_hp + heal)

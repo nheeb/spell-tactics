@@ -16,14 +16,14 @@ func _ready():
 		#get_window().content_scale_size = Vector2(0, 0)
 	if get_tree().current_scene == self:
 		activity = CombatActivity.new("res://Levels/Area1/clearing.tres")
-	
-	if activity.combat_state:
-		%World.load_combat_from_state(activity.combat_state)
-	elif activity.level_path:
-		%World.load_combat_from_path(activity.level_path)
-	else:
-		push_error("Invalid Combat Activity")
-	activity.combat = %World.get_node("Combat")
+	if activity:
+		if activity.combat_state:
+			%World.load_combat_from_state(activity.combat_state)
+		elif activity.level_path:
+			%World.load_combat_from_path(activity.level_path)
+		else:
+			push_error("Invalid Combat Activity")
+		activity.combat = %World.get_node("Combat")
 	
 	# connect resized event
 	#get_tree().root.connect("size_changed", _on_window_resized)
