@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://bjuv8jfc5pykg"]
+[gd_scene load_steps=28 format=3 uid="uid://bjuv8jfc5pykg"]
 
 [ext_resource type="Script" path="res://UI/HandCards/HandCardEnergySocket.gd" id="1_8rv3c"]
 [ext_resource type="PackedScene" uid="uid://rrw0utxp21s5" path="res://Assets/Models/HUD_Card/GLB/EnergySocket.glb" id="2_6krtn"]
 [ext_resource type="Material" uid="uid://b7modv1wtonne" path="res://Assets/Materials/HandCardEnergySocketCrystal.tres" id="3_dyw64"]
 [ext_resource type="Texture2D" uid="uid://b2an7ubkpk1mq" path="res://Assets/Materials/Textures/rock2k/rock_0005_color_2k.jpg" id="3_tjilx"]
 [ext_resource type="Texture2D" uid="uid://bbp5f3p2f3t6u" path="res://Assets/Sprites/Effects/muzzleFlash0.png" id="5_vuddu"]
+[ext_resource type="Texture2D" uid="uid://dcwvix8xn8ek1" path="res://Assets/Sprites/KenneyParticles/circle_05.png" id="6_s55jd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybij4"]
 albedo_texture = ExtResource("3_tjilx")
@@ -26,15 +27,14 @@ curve = SubResource("Curve_pesvf")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ibu7w"]
 emission_shape_scale = Vector3(0, 1, 1)
 emission_shape = 1
-emission_sphere_radius = 0.08
+emission_sphere_radius = 0.1
 angle_min = -1392.0
 angle_max = 720.0
-direction = Vector3(1, 1, 0)
-spread = 20.0
-flatness = 0.388
-initial_velocity_min = 0.6
-initial_velocity_max = 0.8
-gravity = Vector3(0, -1.8, 0)
+direction = Vector3(1, 1.2, 0)
+spread = 30.0
+initial_velocity_min = 0.7
+initial_velocity_max = 0.95
+gravity = Vector3(0, -1.4, 0)
 scale_min = 1.1
 scale_max = 1.7
 scale_curve = SubResource("CurveTexture_3msjg")
@@ -55,6 +55,55 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_cwdmc"]
 material = SubResource("StandardMaterial3D_tnkdc")
 size = Vector2(0.05, 0.05)
+
+[sub_resource type="Curve" id="Curve_5tywc"]
+min_value = -2.0
+max_value = 2.0
+_data = [Vector2(0, -0.536586), 0.0, -0.211382, 0, 0, Vector2(0.241477, 0.0975609), 1.52195, 47.8328, 0, 1, Vector2(0.28125, 2), 5.53437, 5.53437, 0, 0, Vector2(0.375, 2), 1.27157e-06, 0.0, 1, 0, Vector2(0.403409, 0.039911), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_0vos5"]
+curve = SubResource("Curve_5tywc")
+
+[sub_resource type="Curve" id="Curve_ug8mx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.215909, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7yw16"]
+curve = SubResource("Curve_ug8mx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8yxjs"]
+emission_shape_offset = Vector3(0.15, 0, 0)
+emission_shape_scale = Vector3(0.5, 3, 3)
+emission_shape = 2
+emission_sphere_radius = 0.05
+spread = 0.0
+orbit_velocity_max = 0.05
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 1.0
+radial_accel_max = 1.0
+radial_accel_curve = SubResource("CurveTexture_0vos5")
+damping_min = 0.1
+damping_max = 0.1
+scale_curve = SubResource("CurveTexture_7yw16")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ompxv"]
+resource_local_to_scene = true
+render_priority = 100
+transparency = 1
+shading_mode = 0
+albedo_color = Color(2, 2, 2, 1)
+albedo_texture = ExtResource("6_s55jd")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_q6607"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ompxv")
+size = Vector2(0.1, 0.1)
 
 [sub_resource type="Animation" id="Animation_lvvse"]
 length = 0.001
@@ -152,17 +201,34 @@ omni_attenuation = 1.6245
 
 [node name="SparkParticles" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
+cast_shadow = 0
 emitting = false
 amount = 24
 lifetime = 3.0
 one_shot = true
 speed_scale = 1.5
-explosiveness = 0.95
+explosiveness = 0.97
 fixed_fps = 60
-visibility_aabb = AABB(-0.05001, -7.13344, -0.64911, 1.80398, 7.29627, 1.31276)
+visibility_aabb = AABB(-0.05001, -5.57091, -1.40473, 2.74129, 5.8964, 2.79614)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_ibu7w")
 draw_pass_1 = SubResource("QuadMesh_cwdmc")
+
+[node name="GlowParticles" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.624584, 0, 0, 0, 0.624584, 0, 0, 0, 0.624584, 0, 0, 0)
+cast_shadow = 0
+emitting = false
+amount = 20
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.99
+fixed_fps = 60
+visibility_aabb = AABB(-0.10001, -0.94334, -0.886261, 1.35724, 1.84626, 1.81716)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_8yxjs")
+draw_pass_1 = SubResource("QuadMesh_q6607")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

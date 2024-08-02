@@ -703,6 +703,7 @@ shape = SubResource("SphereShape3D_xbhwi")
 transform = Transform3D(0.55357, 0, 0, 0, 0.55357, 0, 0, 0, 0.55357, 0, 0, 0)
 
 [node name="Rings" type="GPUParticles3D" parent="Visual"]
+cast_shadow = 0
 amount = 4
 lifetime = 3.0
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
@@ -711,6 +712,7 @@ process_material = SubResource("ParticleProcessMaterial_vdxn8")
 draw_pass_1 = SubResource("QuadMesh_fnroj")
 
 [node name="Core" type="GPUParticles3D" parent="Visual"]
+cast_shadow = 0
 amount = 16
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
 local_coords = true
@@ -718,6 +720,7 @@ process_material = SubResource("ParticleProcessMaterial_8obyo")
 draw_pass_1 = SubResource("QuadMesh_rocvn")
 
 [node name="Energy" type="GPUParticles3D" parent="Visual"]
+cast_shadow = 0
 amount = 16
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
 local_coords = true
@@ -725,6 +728,7 @@ process_material = SubResource("ParticleProcessMaterial_8obyo")
 draw_pass_1 = SubResource("QuadMesh_crb73")
 
 [node name="Sparks" type="GPUParticles3D" parent="Visual"]
+cast_shadow = 0
 amount = 4
 visibility_aabb = AABB(-1.18586, -1.0932, -1.17149, 2.33288, 2.30955, 2.3185)
 local_coords = true
@@ -732,6 +736,7 @@ process_material = SubResource("ParticleProcessMaterial_6hhrv")
 draw_pass_1 = SubResource("QuadMesh_pa47w")
 
 [node name="Particles" type="GPUParticles3D" parent="Visual"]
+cast_shadow = 0
 amount = 10
 visibility_aabb = AABB(-1.17894, -1.19363, -1.18363, 2.42038, 2.39935, 2.33977)
 local_coords = true
@@ -741,4 +746,5 @@ draw_pass_1 = SubResource("QuadMesh_hwspv")
 [node name="Icon" type="MeshInstance3D" parent="Visual"]
 transform = Transform3D(0.526425, 0, 0, 0, 0.526425, 0, 0, 0, 0.526425, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_0l4xb")
+cast_shadow = 0
 mesh = SubResource("QuadMesh_vybco")

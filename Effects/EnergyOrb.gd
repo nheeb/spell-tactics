@@ -87,3 +87,11 @@ func set_particles_color(color: Color):
 	$Visual/Energy.draw_pass_1.material.albedo_color = color_glow
 	$Visual/Sparks.draw_pass_1.material.albedo_color = color_bright
 	$Visual/Particles.draw_pass_1.material.albedo_color = color_bright
+
+func add_to_render_prio(x: int):
+	$Visual/Rings.draw_pass_1.material.render_priority += x
+	$Visual/Core.draw_pass_1.material.render_priority += x
+	$Visual/Energy.draw_pass_1.material.render_priority += x
+	$Visual/Sparks.draw_pass_1.material.render_priority += x
+	$Visual/Particles.draw_pass_1.material.render_priority += x
+	$Visual/Icon.material_override.render_priority += x
