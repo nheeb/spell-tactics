@@ -27,6 +27,8 @@ func execute(combat: Combat) -> void:
 				combat.input.current_castable.targets[0]
 			))
 	combat.input.current_castable.add_target(tile)
+	await VisualTime.new_timer(.35).timeout
+	combat.input.process_action(PAActivateCastable.new(false))
 
 
 func on_fail(combat: Combat) -> void:

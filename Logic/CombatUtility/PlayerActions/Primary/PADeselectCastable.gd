@@ -7,7 +7,12 @@ func is_valid(combat: Combat) -> bool:
 	return combat.input.current_castable != null
 
 func execute(combat: Combat) -> void:
-	combat.input.deselect_castable()
+	var unload := PAAutoUnloadEnergy.new()
+	Sx.merge([
+		Sx.from(unload.executed),
+		Sx.from(unload.failed)
+	]).subscribe(combat.input.deselect_castable, CONNECT_ONE_SHOT)
+	combat.input.process_action(unload, true)
 
 func on_fail(combat: Combat) -> void:
 	pass

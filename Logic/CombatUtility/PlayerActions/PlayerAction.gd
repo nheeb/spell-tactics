@@ -1,6 +1,9 @@
 class_name PlayerAction extends Object
 
-var action_string := "<Undefined>"
+signal executed
+signal failed
+
+var action_string := "Undefined"
 
 func is_valid(combat: Combat) -> bool:
 	return true
@@ -14,3 +17,6 @@ func on_fail(combat: Combat) -> void:
 func log_me(combat: Combat, valid: bool) -> void:
 	combat.log.add("New Action: %s [%s]" % [action_string,
 							"VALID" if valid else "INVALID"])
+
+func _to_string() -> String:
+	return "<PA:%s>" % action_string

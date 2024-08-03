@@ -9,8 +9,11 @@ class_name EnergyOrb extends Node3D
 	set(_type):
 		type = _type
 		$Orb.material_override.set("albedo_color", VFX.type_to_color(_type))
+		set_particles_color(VFX.type_to_color(_type))
 		$OmniLight3D.light_color = VFX.type_to_color(_type)
 		$Orb.material_override.next_pass.set("shader_parameter/texture_albedo", \
+							VFX.type_to_icon(_type))
+		$Visual/Icon.material_override.set("shader_parameter/texture_albedo", \
 							VFX.type_to_icon(_type))
 @export var orbital_movement_active: bool = true
 var in_ui := false
@@ -68,3 +71,27 @@ func delete():
 	
 func set_render_priority(render_prio: int):  # used in ui to draw orbs behind cards
 	$Orb.material_override.render_priority = render_prio
+
+
+func set_particles_color(color: Color):
+	var color_base = color * 1.2
+	var color_glow = color * 1.6
+	var color_dark = color.darkened(.3) * 1.2
+	var color_bright = color.lightened(.8) * 2.0
+	color_base.a = color.a
+	color_glow.a = color.a
+	color_dark.a = color.a
+	color_bright.a = color.a
+	$Visual/Rings.draw_pass_1.material.albedo_color = color_glow
+	$Visual/Core.draw_pass_1.material.albedo_color = color_dark
+	$Visual/Energy.draw_pass_1.material.albedo_color = color_glow
+	$Visual/Sparks.draw_pass_1.material.albedo_color = color_bright
+	$Visual/Particles.draw_pass_1.material.albedo_color = color_bright
+
+func add_to_render_prio(x: int):
+	$Visual/Rings.draw_pass_1.material.render_priority += x
+	$Visual/Core.draw_pass_1.material.render_priority += x
+	$Visual/Energy.draw_pass_1.material.render_priority += x
+	$Visual/Sparks.draw_pass_1.material.render_priority += x
+	$Visual/Particles.draw_pass_1.material.render_priority += x
+	$Visual/Icon.material_override.render_priority += x

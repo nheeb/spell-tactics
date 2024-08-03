@@ -64,6 +64,15 @@ func get_energy_socket_pos(i: int, socket_count: int) -> Vector3:
 	var middle : float = (socket_count-1) / 2.0
 	return Vector3(0,0,1) * (float(i) - middle) * ENERGY_SOCKET_DIST
 
+func get_loaded_energy_sockets() -> Array[HandCardEnergySocket]:
+	var a: Array[HandCardEnergySocket] = []
+	var socket_children := %EnergySocketPivot.get_children()
+	a.append_array(socket_children.filter(
+		func (s):
+			return s is HandCardEnergySocket and s.is_loaded and s.visible
+	))
+	return a
+
 func get_empty_energy_socket(type : EnergyStack.EnergyType) -> HandCardEnergySocket:
 	var socket_children := %EnergySocketPivot.get_children()
 	socket_children.reverse()

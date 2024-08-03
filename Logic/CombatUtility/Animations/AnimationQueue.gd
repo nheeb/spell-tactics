@@ -18,6 +18,10 @@ func play(combat: Combat) -> void:
 	
 	await VisualTime.visual_process
 	
+	if animation_objects.is_empty():
+		queue_finished.emit()
+		return
+	
 	animation_steps = [AnimationStep.new()]
 	for animation in animation_objects:
 		if animation.has_flag(AnimationObject.Flags.PlayAfterStep):

@@ -125,14 +125,21 @@ class MovementBezier extends Movement:
 	var p0: Vector3
 	var p1: Vector3
 	var p2: Vector3
+	var node0: Node3D = null
+	var node1: Node3D = null
+	var node2: Node3D = null
 	var active := false
 	func start():
 		active = true
 		progress = 0.0
 	func _get_move(delta: float) -> Vector3:
 		if active:
+			if node0: p0 = node0.global_position
+			if node1: p1 = node1.global_position
+			if node2: p2 = node2.global_position
 			progress = min(1.0, progress + delta / duration)
-			var pos : Vector3 = Utility.quadratic_bezier_3D(p0, p1, p2, progress)
+			var eased_progress = ease(progress, 2.0)
+			var pos : Vector3 = Utility.quadratic_bezier_3D(p0, p1, p2, eased_progress)
 			if progress >= .99:
 				finish()
 			return pos - om.global_position
@@ -169,15 +176,24 @@ func base_jump():
 	else:
 		jump(Vector3.UP * BASE_JUMP_FORCE)
 
-const BEZIER_JUMP_LERP_DURATION = .3
-func bezier_jump(p0: Vector3, p1: Vector3, p2: Vector3, duration: float = .65):
-	active_movements[MovementType.Bezier].p0 = p0
-	active_movements[MovementType.Bezier].p1 = p1
-	active_movements[MovementType.Bezier].p2 = p2
+const BEZIER_JUMP_LERP_DURATION = .35
+func bezier_jump(x0, x1, x2, duration: float = .65):
+	if x0 is Node3D:
+		active_movements[MovementType.Bezier].node0 = x0
+	else:
+		active_movements[MovementType.Bezier].p0 = x0
+	if x1 is Node3D:
+		active_movements[MovementType.Bezier].node1 = x1
+	else:
+		active_movements[MovementType.Bezier].p1 = x1
+	if x2 is Node3D:
+		active_movements[MovementType.Bezier].node2 = x2
+	else:
+		active_movements[MovementType.Bezier].p2 = x2
 	active_movements[MovementType.Bezier].duration = duration
 	active_movements[MovementType.Bezier].start()
 	VisualTime.create_tween().tween_property(self, "behaviour_bezier", \
-											1.0, BEZIER_JUMP_LERP_DURATION)
+				1.0, BEZIER_JUMP_LERP_DURATION)
 
 @export var behaviour_fixed := true
 @export var behaviour_fixed_progress := 0.0

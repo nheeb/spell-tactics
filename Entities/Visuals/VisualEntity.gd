@@ -32,15 +32,15 @@ func animation_move_to(tile: Tile) -> void:
 func animation_blink_to(tile: Tile) -> void:
 	var ticket = ticket_handler.get_ticket()
 	var tween := VisualTime.new_tween()
-	tween.tween_property(self, "scale", Vector3.ONE * .1, .3)\
-			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_callback(func(): global_position = tile.global_position)
-	tween.tween_property(self, "scale", Vector3.ONE * 1.0, .3)\
+	tween.tween_property(self, "scale", Vector3.ONE * .1, .4)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback(func(): global_position = tile.global_position)
+	tween.tween_property(self, "scale", Vector3.ONE * 1.0, .4)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	ticket.resolve_on(tween.finished)
 	var turn_tween := VisualTime.new_tween()
 	turn_tween.tween_property(self, "rotation_degrees:y", \
-			rotation_degrees.y + 360 * 2, .6)
+			rotation_degrees.y + 360 * 3, .8)
 
 func on_movement_visuals(tile: Tile) -> void:
 	# abstract, override for player/enemy

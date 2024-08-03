@@ -7,6 +7,10 @@ class_name Card3D extends Node3D
 func _ready() -> void:
 	pass
 
+func get_loaded_energy_sockets() -> Array[HandCardEnergySocket]:
+	var a: Array[HandCardEnergySocket] = []
+	return a
+
 func get_empty_energy_socket(type : EnergyStack.EnergyType) -> HandCardEnergySocket:
 	return null
 

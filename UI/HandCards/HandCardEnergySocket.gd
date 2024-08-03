@@ -51,6 +51,10 @@ func load_energy(_type: EnergyStack.EnergyType):
 	%AnimationPlayer.play("load")
 	card.get_spell().on_energy_load()
 
+func pre_load_particles(_type: EnergyStack.EnergyType, seconds_to_load: float):
+	%GlowParticles.draw_pass_1.material.albedo_color = VFX.type_to_color(_type).lightened(.15) * 2.0
+	VisualTime.new_timer(max(0.0, seconds_to_load - .44)).timeout.connect(%GlowParticles.restart)
+
 func unload_energy() -> EnergyStack.EnergyType:
 	is_loaded = false
 	%Light.hide()
