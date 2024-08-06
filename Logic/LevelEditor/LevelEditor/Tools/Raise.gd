@@ -1,4 +1,4 @@
-@tool
+
 class_name Raise extends Tool
 
 var _active_set: Array[Tile] = []
@@ -9,11 +9,11 @@ func _selected():
 func _deselected():
 	pass
 
-func _apply(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
+func _apply(_level: Level, tile: Tile, eitorUI: EditorUI):
 	_active_set = [tile]
 	_set_tile(tile)
 
-func _drag(editor: GridLevelEditor, tile: Tile, eitorUI: EditorUI):
+func _drag(_level: Level, tile: Tile, eitorUI: EditorUI):
 	if _active_set.has(tile):
 		return
 	_active_set.append(tile)

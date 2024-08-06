@@ -1,4 +1,4 @@
-@tool
+
 class_name FlowVisuals extends VisualEntity
 
 func on_death_visuals():

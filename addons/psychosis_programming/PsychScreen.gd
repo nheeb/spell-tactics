@@ -1,4 +1,4 @@
-@tool
+
 extends Control
 
 func _on_visibility_changed() -> void:

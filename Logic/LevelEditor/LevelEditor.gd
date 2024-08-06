@@ -1,7 +1,9 @@
-@tool
 class_name EditorUI extends Control
 
-@export var selection_ui: SelectionUI = null
+@onready var world: World = $"%World"
+@onready var selection_ui = $SelectionUi
+@export var combat_state: CombatState = ResourceLoader.load("res://Levels/SpellTesting/spell_test.tres") as CombatState
+
 
 var tool_pencil = Pencil.new()
 var tool_raise = Raise.new()
@@ -20,6 +22,21 @@ var placement_active: EntityType = GRASS_TILE_ENTITY
 var tool_active = tool_pencil
 
 var ent_active: EntityType = ENT_PLAYER
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		%World.relative_motion = event.relative
+	
+func on_changed_render_resolution(res: Vector2i):
+	%Viewport3D.size = res
+
+
+## LevelEditor should load with a combat state
+func _ready() -> void:
+	world.load_combat_from_state(combat_state, false)
+	Game.settings.changed_render_resolution.connect(on_changed_render_resolution)
+	Events.tile_clicked.connect(tile_clicked)
+
 
 func _on_pencil_pressed():
 	tool_active = tool_pencil	
@@ -40,4 +57,6 @@ func _on_place_pressed():
 func _on_erase_pressed():
 	tool_active = tool_erase
 	selection_ui.set_mode(SelectionUI.Mode.None)
-
+	
+func tile_clicked(tile):
+	tool_active._apply(world.level, tile, self)

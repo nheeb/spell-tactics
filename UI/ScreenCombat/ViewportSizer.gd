@@ -35,4 +35,5 @@ func update_size():
 	#var scaled_size: Vector2i = (_base_render_size * size_scale)
 	target_viewport.size = scaled_size
 	
-	debug_label.text = "3D size: " + str(target_viewport.size) + ", Root size: " + str(get_tree().root.size)
+	if debug_label != null:
+		debug_label.text = "3D size: " + str(target_viewport.size) + ", Root size: " + str(get_tree().root.size)

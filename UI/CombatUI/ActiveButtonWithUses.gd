@@ -9,6 +9,8 @@ const ACTIVE_USE_BUBBLE = preload("res://UI/CombatUI/Actives/ActiveUseBubble.tsc
 @onready var bubbles: Array[ActiveUseBubble] = [$ActiveUseBubble1, $ActiveUseBubble2, $ActiveUseBubble3]
 @onready var positions: Array[Marker2D] = [$Position1, $Position2, $Position3]
 
+var combat
+
 var active: Active = null:
 	set(new_active):
 		var old_active = active
@@ -22,18 +24,24 @@ func _ready() -> void:
 	if active != null:
 		active.got_updated.connect(_on_active_uses_updated)
 		init_active(active)
+	else:
+		push_warning("no active set on initializing ActiveButton")
 
 
 func restart_bubbles():
 	while not bubbles.is_empty():
 		var bubble_to_delete = bubbles.pop_back()
-		bubble_to_delete.queue_free()
-		
+		bubble_to_delete.free()
+	
+	#await get_tree().process_frame
+	
 	var bubble: ActiveUseBubble
-	for i in range(3):
+	for i in range(MAX_USES):
 		bubble = ACTIVE_USE_BUBBLE.instantiate()
 		bubble.name = "ActiveUseBubble%d" % (i+1)
+		
 		add_child(bubble)
+		bubble.position = get_node("Position" + str(i+1)).position
 		bubbles.append(bubble)
 
 
@@ -87,9 +95,22 @@ func _on_mouse_entered() -> void:
 	# TODO doesn't seem to have the desired effect! (still showing tile hover effect)
 	# TODO RayCast.register_new_blocker() -> blocker.block/unblock()
 	if Game.world != null:  
+		print("disable")
 		Game.world.get_node("%MouseRaycast").disabled = true
 
 
 func _on_mouse_exited() -> void:
+	if Game.world != null:  
+		print("disable")
+		Game.world.get_node("%MouseRaycast").disabled = true
+
+
+func _on_active_button_mouse_entered() -> void:
+	if Game.world != null:  
+		print("disable")
+		Game.world.get_node("%MouseRaycast").disabled = true
+
+
+func _on_active_button_mouse_exited() -> void:
 	if Game.world != null: 
 		Game.world.get_node("%MouseRaycast").disabled = false

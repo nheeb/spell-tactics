@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b1eod0pbyip4b"]
 
 [ext_resource type="Script" path="res://Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
-[ext_resource type="Script" path="res://addons/LevelEditor/GridLevelEditor.gd" id="1_wcyqb"]
+[ext_resource type="Script" path="res://Logic/LevelEditor/LevelEditor/GridLevelEditor.gd" id="1_wcyqb"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="2_rjkex"]
 [ext_resource type="Resource" uid="uid://c38oh270u86ke" path="res://Spells/AllSpells/Teleport.tres" id="3_fvp7d"]
 [ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Spells/AllSpells/WaterBlast.tres" id="4_6sho4"]
@@ -14,6 +14,7 @@ script = ExtResource("2_rjkex")
 stack = Array[int]([0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4])
 
 [node name="SpellTest" type="Node3D"]
+transform = Transform3D(0.519788, 0, 0, 0, 0.519788, 0, 0, 0, 0.519788, 0, 0, 0)
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
 test_spell_1 = ExtResource("3_fvp7d")

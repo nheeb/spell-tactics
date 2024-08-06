@@ -1,4 +1,4 @@
-@tool
+
 class_name Tile extends Node3D
 
 var entities: Array[Entity] = []

@@ -1,4 +1,4 @@
-@tool
+
 class_name TileState extends Resource
 
 @export var r: int

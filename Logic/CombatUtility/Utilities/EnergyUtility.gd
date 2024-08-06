@@ -18,9 +18,11 @@ func explode_energy_orbs(payment: EnergyStack, explode_in_ui: bool) -> Animation
 				if orb.type == payment_type:
 					target_orb = orb
 					break
-			if target_orb:
+			if is_instance_valid(target_orb):
 				anims.append(combat.animation.callback(target_orb, "death"))
-				target_orb.death()
+				# wait why was death called both with animation and without?
+				# commenting the second one:
+				#target_orb.death()
 				orbs.erase(target_orb)
 	if explode_in_ui:
 		pass

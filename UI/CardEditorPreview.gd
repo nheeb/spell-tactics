@@ -1,4 +1,4 @@
-#@tool
+#
 extends Node3D
 
 @export var create_preview_cards: bool:

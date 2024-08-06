@@ -1,4 +1,4 @@
-@tool
+
 class_name VisualTerrain extends VisualEntity
 
 @export var drain_visuals_duration := 0.8

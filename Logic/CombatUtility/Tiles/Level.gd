@@ -1,4 +1,4 @@
-@tool
+
 class_name Level extends Node3D
 
 ## Different initialization functions should be implemented.

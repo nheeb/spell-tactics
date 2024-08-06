@@ -4,6 +4,8 @@ class_name BerserkerEffect extends StatusEffect
 
 @export var length := 2
 
+@export var callable_reference: CallableReference 
+
 ## Name of the status effect
 func get_status_name() -> String:
 	return "berserker"
@@ -13,13 +15,25 @@ func get_icon_name() -> String:
 
 func _init(_length := 2) -> void:
 	length = _length
+	
+	
+func berserker_effect(dmg: int, _target: EnemyEntity):
+	return dmg + 1
 
 ## For overwriting: Logic when status effect enters the game
 ## This will only be called when the status effect is applied, not when it is loaded
 func setup_logic() -> void:
-	make_meele_two_uses()
-	TimedEffect.new_end_phase_trigger_from_callable(make_meele_two_uses).set_trigger_count(length) \
-			.replace_last_callable(self_remove).register(combat)
+	var melee_attacks = combat.actives.filter(func(x): return "Melee" in x.type.pretty_name)
+	for melee in melee_attacks:
+		if melee == null:
+			push_error("Found no SimpleMelee active.")
+			return
+		callable_reference = CallableReference.from_callable(berserker_effect)
+		melee.logic.modifiers.append(callable_reference)
+	
+	# effect for removing effect after length rounds
+	TimedEffect.new_end_phase_trigger_from_callable(self_remove).set_delay(1) \
+			.register(combat)
 
 ## For overwriting: Visual changes when status effect enters the game
 func setup_visually() -> void:
@@ -34,12 +48,18 @@ func extend(other_status: StatusEffect) -> void:
 ## For overwriting: Effects on being removed
 func on_remove() -> void:
 	var melee_attacks = combat.actives.filter(func(x): return "Melee" in x.type.pretty_name)
-	for melee in melee_attacks:
-		melee.add_to_max_uses(-1)
+	assert(len(melee_attacks) == 1)
+	var melee = melee_attacks[0]
+	var i = 0
+	var found_idx: int = -1
+	for modifier in melee.logic.modifiers:
+		var cb_reference: CallableReference = modifier as CallableReference
+		var obj = cb_reference.origin_reference.resolve(combat)
+		print("resolve obj: ", obj)
+		if obj == self:
+			found_idx = i
+		i += 1
+	assert(found_idx != -1)
+	melee.logic.modifiers.remove_at(found_idx)
 	combat.animation.remove_staying_effect(entity.visual_entity, "berserker_icons")
-
-func make_meele_two_uses():
-	var melee_attacks = combat.actives.filter(func(x): return "Melee" in x.type.pretty_name)
-	for melee in melee_attacks:
-		melee.add_to_max_uses(1)
 

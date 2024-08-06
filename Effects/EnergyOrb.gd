@@ -1,4 +1,4 @@
-#@tool
+#
 class_name EnergyOrb extends Node3D
 
 # see https://github.com/godotengine/godot/issues/4236

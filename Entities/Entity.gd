@@ -1,4 +1,4 @@
-@tool
+
 class_name Entity
 ## Base Class for every Object on the Tile-Grid-Level like the player, enemies or environment.
 
@@ -120,8 +120,9 @@ func get_status_effect(status_name: String) -> StatusEffect:
 func remove_status_effect(status_name: String) -> void:
 	var effect := get_status_effect(status_name)
 	if effect:
-		status_effects.erase(effect)
 		effect.on_remove()
+		status_effects.erase(effect)
+
 
 func call_on_status_effect(status_name: String, method: String, params := []) -> void:
 	var effect := get_status_effect(status_name)

@@ -8,6 +8,7 @@ var callable: Callable
 func _init(_origin_reference: UniversalReference = null, _method_name: String = "") -> void:
 	origin_reference = _origin_reference
 	method_name = _method_name
+	cache_result = false
 
 ## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
@@ -21,9 +22,9 @@ func _resolve() -> Variant:
 func get_reference_type() -> String:
 	return "CallableReference"
 
-static func from_callable(callable: Callable) -> CallableReference:
-	var obj = callable.get_object()
+static func from_callable(_callable: Callable) -> CallableReference:
+	var obj = _callable.get_object()
 	if obj.has_method("get_reference"):
-		return CallableReference.new(obj.get_reference(), callable.get_method())
+		return CallableReference.new(obj.get_reference(), _callable.get_method())
 	push_error("Invalid Callable to make a reference")
 	return null

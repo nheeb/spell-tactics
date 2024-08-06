@@ -25,7 +25,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc21w"]
-bg_color = Color(0.113725, 0.117647, 0.113725, 0)
+bg_color = Color(0.321569, 0.333333, 0.321569, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_so122"]
 
@@ -65,7 +65,6 @@ offset_bottom = 8.0
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_bqwoa")
 text = "PASS"
-metadata/_edit_use_anchors_ = true
 
 [node name="Cast" type="Button" parent="."]
 visible = false
@@ -135,7 +134,7 @@ own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 msaa_3d = 1
-size = Vector2i(2, 2)
+size = Vector2i(1920, 1079)
 render_target_update_mode = 4
 
 [node name="Cards3D" parent="CardsAspectContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
@@ -188,8 +187,8 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.00677083
 anchor_top = 0.383333
-anchor_right = 0.0880205
-anchor_bottom = 0.612036
+anchor_right = 0.142708
+anchor_bottom = 0.668519
 theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
 metadata/_edit_use_anchors_ = true
 
@@ -332,8 +331,10 @@ scale = Vector2(0.607886, 0.607886)
 [node name="ErrorLines" parent="." instance=ExtResource("10_gtdym")]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.156481
 mouse_filter = 2
-color = Color(1, 0, 0, 1)
+color = Color(0.32, 0.16, 0.16, 1)
 metadata/_edit_lock_ = true
 
 [node name="CombatEventIcons" parent="." instance=ExtResource("12_8b75y")]
