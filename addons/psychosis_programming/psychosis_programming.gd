@@ -1,4 +1,4 @@
-
+@tool
 extends EditorPlugin
 
 const PSYCH_CONTROL = preload("res://addons/psychosis_programming/PsychControl.tscn")
