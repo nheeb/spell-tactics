@@ -1,4 +1,3 @@
-
 class_name SpellType extends CastableType
 
 @export_category("Spell Attributes")
