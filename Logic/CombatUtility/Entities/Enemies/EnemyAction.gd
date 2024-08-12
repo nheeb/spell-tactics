@@ -15,10 +15,6 @@ enum TargetConsiderMethod {Best, WeightSquaredRandom}
 
 ## Logic script
 var logic_script: Script
-var logic: Object:
-	get:
-		_on_load()
-		return logic
 
 static func load_from_file(path: String) -> CastableType:
 	var res = load(path)
@@ -32,5 +28,3 @@ func _on_load() -> void:
 		internal_name = resource_path.split("/")[-1].split(".")[0]
 		var directory = "/".join(resource_path.split("/").slice(0, -1))
 		logic_script = load(directory + "/" + internal_name + ".gd")
-		logic = logic_script.new()
-	assert(logic, "No logic object was created.")

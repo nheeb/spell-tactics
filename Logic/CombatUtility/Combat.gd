@@ -1,15 +1,14 @@
-
 class_name Combat extends Node
 
 enum RoundPhase {
 	CombatBegin = 0, # Unreachable
 	Start = 1,
-	Movement = 2, # Player Input
-	Spell = 3, # Player Input
-	Pass = 4,
-	Enemy = 5,
-	End = 6,
-	RoundRepeats = 7, # Unreachable
+	# DEPRECATED Movement,
+	Spell = 2, # Player Input
+	# DEPRECATED Pass,
+	Enemy = 3,
+	End = 4,
+	RoundRepeats = 5, # Unreachable
 }
 
 enum Result {
@@ -52,6 +51,8 @@ var actives: Array[Active]
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
+var global_enemy_actions: Array[EnemyAction]
+
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		if self not in Game.combats:
@@ -61,7 +62,6 @@ func _ready() -> void:
 			Game.combats.append(self)
 
 ## is called when the Combat is created to connect all the references and signals
-#const PLAYER = preload("res://Entities/PlayerResource.tres")
 func setup() -> void:
 	# Get player and enemy references
 	player = null
@@ -79,7 +79,6 @@ func setup() -> void:
 		@warning_ignore("integer_division")
 		var position = Vector2i(level.n_rows / 2 , level.n_cols / 2)
 		player = level.entities().create_entity(position, load("res://Entities/PlayerResource.tres"))
-		
 
 	# Connect input signals
 	input.connect_with_event_signals()
@@ -100,14 +99,13 @@ func setup() -> void:
 			else:
 				push_error("Entity without ID in savegame")
 
-	
 	actives = [
 		Active.new(ActiveType.load_from_file("res://Spells/AllActives/BasicMovement.tres"), self),
 		Active.new(ActiveType.load_from_file("res://Spells/AllActives/Drain.tres"), self),
 		Active.new(ActiveType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self),
 		Active.new(ActiveType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self),
 	]
-
+	for i in range(actives.size()): actives[i].id = ActiveID.new(i)
 
 	# Check if all spells have ids
 	# TODO change this when Overworld is done
@@ -155,12 +153,8 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 	match phase:
 		RoundPhase.Start:
 			return %StartPhase
-		RoundPhase.Movement:
-			return %MovementPhase
 		RoundPhase.Spell:
 			return %SpellPhase
-		RoundPhase.Pass:
-			return %PassPhase
 		RoundPhase.Enemy:
 			return %EnemyPhase
 		RoundPhase.End:
@@ -180,11 +174,6 @@ func process_initial_phase() -> void:
 	match current_phase:
 		RoundPhase.CombatBegin:
 			advance_and_process_until_next_player_action_needed()
-		RoundPhase.Start:
-			advance_current_phase()
-			process_current_phase()
-		RoundPhase.Movement:
-			process_current_phase()
 		RoundPhase.Spell:
 			process_current_phase()
 		_:

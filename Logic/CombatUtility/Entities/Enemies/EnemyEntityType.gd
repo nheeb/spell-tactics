@@ -11,9 +11,7 @@ enum Behaviour {
 @export var strength: int = 1
 @export var accuracy: int = 0
 @export var resistance: int = 0
-@export var actions: Array[String]
-@export var movements: Array[String]
-@export var passives: Array[String]
+@export var actions: Array[EnemyAction]
 
 ## Overriding base entity method to return more specific type
 func create_entity(combat: Combat, call_on_create := true) -> EnemyEntity:

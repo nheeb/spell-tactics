@@ -60,6 +60,7 @@ func _ready() -> void:
 			#combat.level._highlight_tile_set(highlighted_targets, Highlight.Type.Combat)
 
 func process_phase() -> bool:
+	combat.animation.callback(combat.player.visual_entity, "start_idling") # was in movement phase before
 	# reset MovementPhase specific UI
 	combat.level._unhighlight_tile_set(combat.level.get_all_tiles(), Highlight.Type.Movement)
 	combat.level.immediate_arrows().clear()

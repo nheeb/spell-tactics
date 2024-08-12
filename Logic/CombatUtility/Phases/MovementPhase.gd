@@ -1,5 +1,9 @@
 class_name MovementPhase extends AbstractPhase
 
+################
+## DEPRECATED ##
+################
+
 var highlighted_tiles: Array[Tile]
 
 #func tile_hovered(tile: Tile):
@@ -23,7 +27,7 @@ func process_phase() -> bool:
 	#combat.animation.callback(combat.level, "highlight_movement_range", [combat.player, combat.player.traits.movement_range])
 	#combat.animation.callback(combat.ui, "set_status", ["Make your movement!"])
 	# player can start idling from this phase on
-	combat.animation.callback(combat.player.visual_entity, "start_idling")
+	push_error("Processing deprecated phase: Movement")
 	
 	return false
 
@@ -39,7 +43,7 @@ func highlight_for_spell_energy(energy: EnergyStack):
 	highlight_payable_spells(null)
 	for tile in combat.level.get_all_tiles():
 		if energy:
-			var _range := combat.player.traits.movement_range
+			var _range = combat.player.traits.movement_range
 			tile.set_highlight(Highlight.Type.HighSpellEnergy, \
 				tile.get_drainable_energy_in_range(1).can_pay_costs(energy) \
 				and (not tile.is_blocked() ) \
