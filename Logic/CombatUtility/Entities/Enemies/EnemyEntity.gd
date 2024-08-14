@@ -29,6 +29,7 @@ func get_action_pool() -> Array[EnemyAction]:
 func create_action_logic(action: EnemyAction) -> EnemyActionLogic:
 	var logic = action.logic_script.new() as EnemyActionLogic
 	assert(logic, "Enemy Action Logic wasn't created.")
+	logic.action = action
 	logic.combat = combat
 	logic.enemy = self
 	action_logic[action] = logic

@@ -5,11 +5,17 @@ var internal_name: String = ""
 @export var icon: Texture
 @export var color: Color = Color.WHITE
 
+@export_group("Target")
 enum TargetType {None, Foes, Allies, Tiles, Entities}
 @export var target_type : TargetType = TargetType.None
 @export_range(1,8) var target_consider_count := 2
 enum TargetConsiderMethod {Best, WeightSquaredRandom}
 @export var target_consider_method : TargetConsiderMethod = TargetConsiderMethod.Best
+
+@export_group("Scores")
+@export var default_scores : Array[EnemyActionCriteriaValue]
+
+@export_group("Extras")
 @export var cooldown := 0
 @export var alternative_action : EnemyAction = null
 
