@@ -1,4 +1,3 @@
-
 class_name Level extends Node3D
 
 ## Different initialization functions should be implemented.
@@ -299,6 +298,12 @@ func get_all_tiles() -> Array[Tile]:
 				all_tiles.append(tile)
 	
 	return all_tiles
+
+func get_all_entities() -> Array[Entity]:
+	var ents: Array[Entity] = []
+	for t in get_all_tiles():
+		ents.append_array(t.entities)
+	return ents
 
 func find_all_tiles_with(type: EntityType) -> Array[Tile]:
 	var tiles_with: Array[Tile] = []

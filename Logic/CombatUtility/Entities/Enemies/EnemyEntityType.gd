@@ -1,12 +1,6 @@
 class_name EnemyEntityType extends HPEntityType
 
-enum Behaviour {
-	Fighter,
-	Archer,
-	Support
-}
-
-@export var behaviour: Behaviour
+@export var behaviour: EnemyBehaviour
 @export var agility: int = 0
 @export var strength: int = 1
 @export var accuracy: int = 0

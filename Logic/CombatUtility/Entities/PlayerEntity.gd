@@ -1,5 +1,6 @@
 class_name PlayerEntity extends HPEntity
 
+var team := EnemyEntity.Teams.Good
 var traits := PlayerTraits.new()
 
 func on_death():

@@ -1,6 +1,6 @@
 class_name EnemyBehaviour extends Resource
 
-@export var associated_enum_entry: EnemyEntityType.Behaviour
+@export var name: String
 @export var criteria_preferences: Array[EnemyActionCriteriaValue]
 var criteria_dict: Dictionary = {}: 
 	get:

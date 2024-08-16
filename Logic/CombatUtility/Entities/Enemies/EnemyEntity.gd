@@ -8,9 +8,6 @@ class_name EnemyEntity extends HPEntity
 #var forced_movement_name: String
 #var forced_action_name: String
 
-enum Teams {Evil, Neutral, Good}
-var team := Teams.Evil
-
 var agility: int = 0
 var strength: int = 1
 var accuracy: int = 0

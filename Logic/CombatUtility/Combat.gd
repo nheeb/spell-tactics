@@ -225,6 +225,14 @@ func get_all_castables() -> Array[Castable]:
 func get_all_enemies() -> Array[EnemyEntity]:
 	return enemies.duplicate()
 
+func get_all_hp_entities() -> Array[HPEntity]:
+	var hps : Array[HPEntity] = []
+	hps.append_array(get_all_enemies())
+	hps.append(player)
+	# TODO What about HP Entities != player or enemies?
+	# Destructable environment? Will those exist?
+	return hps
+
 func get_reference() -> CombatReference:
 	return CombatReference.new()
 

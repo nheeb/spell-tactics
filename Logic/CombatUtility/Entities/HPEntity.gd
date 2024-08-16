@@ -10,6 +10,7 @@ signal died
 			died.emit()
 
 var armor := 0
+var team : HPEntityType.Teams
 
 func on_create():
 	super.on_create()
