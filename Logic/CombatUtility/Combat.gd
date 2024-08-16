@@ -115,7 +115,9 @@ func setup() -> void:
 		if s.id == null:
 			if not s.get_type() is ActiveType:  # for Actives it's fine atm
 				push_error("Warning: Spell without id (gets a new dangerous id)")
-			s.id = SpellID.new(Game.add_to_spell_count())
+			var id: SpellID = SpellID.new(Game.add_to_spell_count())
+			# normal assignment didn't work since Godot 4.3?? does this break things? FIXME
+			s.set("id", id)
 		else:
 			Game.add_to_spell_count()
 

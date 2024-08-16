@@ -1,4 +1,4 @@
-
+@tool
 extends EditorPlugin
 
 const PSYCH_CONTROL = preload("res://addons/psychosis_programming/PsychControl.tscn")
@@ -40,4 +40,3 @@ var icon: Texture2D = preload("res://Assets/Sprites/Icons/blind_tiny.png")
 func _get_plugin_icon():
 	# return EditorInterface.get_editor_theme().get_icon("Node", "EditorIcons")
 	return icon
-

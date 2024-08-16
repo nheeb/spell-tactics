@@ -86,4 +86,3 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("mouse_pan"):
 		rotation_input += relative_motion.x * mouse_rotation_factor * .5
 		rotation_input_vertical = - relative_motion.y * mouse_rotation_factor
-

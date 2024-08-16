@@ -40,4 +40,3 @@ func _on_place_pressed():
 func _on_erase_pressed():
 	tool_active = tool_erase
 	selection_ui.set_mode(SelectionUI.Mode.None)
-

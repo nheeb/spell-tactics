@@ -23,4 +23,3 @@ func _on_button_pressed():
 		editor_ui.placement_active = res
 	if mode == SelectionUI.Mode.Entities:
 		editor_ui.ent_active = res
-

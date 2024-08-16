@@ -24,4 +24,3 @@ func visual_drain(drained := true):
 		$PrototypeBillboard.drain_transition(drained)
 		
 		
-

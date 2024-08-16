@@ -21,4 +21,3 @@ extends SpellLogic
 ## Here should be the effect
 func casting_effect() -> void:
 	combat.player.apply_status_effect(BerserkerEffect.new())
-
