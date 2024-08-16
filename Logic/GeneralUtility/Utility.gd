@@ -1,5 +1,5 @@
 
-extends Node
+class_name Utils extends Node
 
 func remove_y_value(pos: Vector3) -> Vector3:
 	pos.y = 0.0
@@ -250,3 +250,11 @@ func quadratic_bezier_3D(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vec
 	var q1 = p1.lerp(p2, t)
 	var r = q0.lerp(q1, t)
 	return r
+	
+## Creates a signal without needing to bind it to an instance. This means the signal can be assigned to a static var and accessed globally. `cls` should be a global class identifier. 
+##
+## Taken from https://stackoverflow.com/questions/77026156/how-to-write-a-static-event-emitter-in-gdscript
+static func create_static_signal(cls: Object, signal_name: StringName) -> Signal:
+	if not cls.has_user_signal(signal_name):
+		cls.add_user_signal(signal_name)
+	return Signal(cls, signal_name)

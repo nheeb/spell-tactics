@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7dxgf4vovuq1"]
+[gd_scene load_steps=10 format=3 uid="uid://b7dxgf4vovuq1"]
 
 [ext_resource type="Script" path="res://Logic/LevelEditor/LevelEditor.gd" id="1_bl8t1"]
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_85xti"]
 [ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="4_q1uoy"]
+[ext_resource type="LabelSettings" uid="uid://cxgi1adxsmvqn" path="res://Logic/LevelEditor/UI/LevelEditorFontSmall.tres" id="5_73if2"]
 [ext_resource type="Script" path="res://Logic/LevelEditor/UI/SelectionUI.gd" id="5_ep6w4"]
 [ext_resource type="Script" path="res://UI/ScreenCombat/ViewportSizer.gd" id="6_jgjps"]
+[ext_resource type="PackedScene" uid="uid://cdfhkpehk0qn0" path="res://Logic/LevelEditor/UI/SelectionItem.tscn" id="7_xnq21"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2ukqi"]
 viewport_path = NodePath("Viewport3D")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5q5bw"]
+content_margin_left = 5.0
+content_margin_top = 8.0
+content_margin_right = 5.0
 
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
@@ -90,66 +97,109 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BottomBar" type="VBoxContainer" parent="LevelEditorUI"]
+[node name="BottomBar" type="Panel" parent="LevelEditorUI"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = -1
+anchor_top = 0.969444
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -112.0
 grow_horizontal = 2
 grow_vertical = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="HFlowContainer" type="HFlowContainer" parent="LevelEditorUI/BottomBar"]
-layout_mode = 2
+[node name="HFlowContainer" type="GridContainer" parent="LevelEditorUI/BottomBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00416667
+anchor_top = 0.0275862
+anchor_right = 0.138021
+anchor_bottom = 0.951724
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 10
+columns = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Terrain" type="Label" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
 text = "Terrain"
+label_settings = ExtResource("5_73if2")
 
-[node name="Pencil" type="Button" parent="LevelEditorUI/BottomBar/HFlowContainer"]
+[node name="TerrainPlace" type="Button" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 layout_mode = 2
-text = "Pencil"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Place
+"
+
+[node name="Empty" type="Control" parent="LevelEditorUI/BottomBar/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
 
 [node name="Fill" type="Button" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
 text = "Fill"
 
 [node name="Entity" type="Label" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
 text = "Entity"
+label_settings = ExtResource("5_73if2")
 
 [node name="Place" type="Button" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
 text = "Place"
 
 [node name="Erase" type="Button" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
 text = "Erase"
 
 [node name="Elevation" type="Label" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
 text = "Elevation"
+label_settings = ExtResource("5_73if2")
 
 [node name="Raise" type="Button" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
 text = "Raise"
 
 [node name="Lower" type="Button" parent="LevelEditorUI/BottomBar/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
 text = "Lower"
 
-[node name="Label" type="Label" parent="LevelEditorUI/BottomBar"]
-layout_mode = 2
+[node name="RightBar" type="Panel" parent="LevelEditorUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.797396
+anchor_right = 1.0
+anchor_bottom = 0.865741
+metadata/_edit_use_anchors_ = true
 
-[node name="Label2" type="Label" parent="LevelEditorUI/BottomBar"]
-layout_mode = 2
-
-[node name="Label3" type="Label" parent="LevelEditorUI/BottomBar"]
-layout_mode = 2
-
-[node name="SelectionUi" type="Control" parent="." node_paths=PackedStringArray("editor_ui")]
+[node name="SelectionUi" type="Control" parent="LevelEditorUI/RightBar" node_paths=PackedStringArray("editor_ui")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -158,28 +208,46 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_ep6w4")
-editor_ui = NodePath("..")
+editor_ui = NodePath("../../..")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="SelectionUi"]
+[node name="ScrollContainer" type="ScrollContainer" parent="LevelEditorUI/RightBar/SelectionUi"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.322917
-anchor_bottom = 0.323148
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5q5bw")
 horizontal_scroll_mode = 0
-metadata/_edit_use_anchors_ = true
 
-[node name="Container" type="GridContainer" parent="SelectionUi/ScrollContainer"]
+[node name="Container" type="GridContainer" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 16
 columns = 3
 
+[node name="SelectionItem" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer/Container" instance=ExtResource("7_xnq21")]
+layout_mode = 2
+
+[node name="SelectionItem2" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer/Container" instance=ExtResource("7_xnq21")]
+layout_mode = 2
+
+[node name="SelectionItem3" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer/Container" instance=ExtResource("7_xnq21")]
+layout_mode = 2
+
+[node name="SelectionItem4" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer/Container" instance=ExtResource("7_xnq21")]
+layout_mode = 2
+
 [connection signal="combat_changed" from="Viewport3D/World" to="PopUpHandler" method="_on_world_combat_changed"]
-[connection signal="pressed" from="LevelEditorUI/BottomBar/HFlowContainer/Pencil" to="." method="_on_pencil_pressed"]
+[connection signal="mouse_entered" from="LevelEditorUI/BottomBar" to="." method="mouse_entered_editor_ui"]
+[connection signal="mouse_exited" from="LevelEditorUI/BottomBar" to="." method="mouse_exited_editor_ui"]
+[connection signal="pressed" from="LevelEditorUI/BottomBar/HFlowContainer/TerrainPlace" to="." method="_on_terrain_place_pressed"]
 [connection signal="pressed" from="LevelEditorUI/BottomBar/HFlowContainer/Place" to="." method="_on_place_pressed"]
 [connection signal="pressed" from="LevelEditorUI/BottomBar/HFlowContainer/Erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="LevelEditorUI/BottomBar/HFlowContainer/Raise" to="." method="_on_raise_pressed"]
 [connection signal="pressed" from="LevelEditorUI/BottomBar/HFlowContainer/Lower" to="." method="_on_lower_pressed"]
+[connection signal="mouse_entered" from="LevelEditorUI/RightBar" to="." method="mouse_entered_editor_ui"]
+[connection signal="mouse_exited" from="LevelEditorUI/RightBar" to="." method="mouse_exited_editor_ui"]

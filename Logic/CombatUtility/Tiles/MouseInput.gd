@@ -1,5 +1,24 @@
-extends RayCast3D
+class_name MouseInput extends RayCast3D
 
+## Class where any parts of the game can register to block tile hovering/clicking.
+## For example for UI nodes that cover the 3D World. The UI nodes are responsible for
+## holding onto the blocker_idx.
+class Block:
+	var blockers: Array[bool] = []
+	func register_blocker() -> int: ## returns blocker_idx 
+		blockers.append(false)
+		return len(blockers) - 1
+		
+	func block(idx: int):
+		blockers[idx] = true
+		
+	func unblock(idx: int):
+		blockers[idx] = false
+		
+	func is_blocked() -> bool:
+		return blockers.any(func(b: bool): return b)
+
+static var mouse_block: Block = Block.new()
 
 # A reference to cards3d is needed here to see if the hover/click input is meant for this RayCast
 # or the one in Cards3D (cards3d has priority, since it is "on top" visually)
@@ -10,24 +29,18 @@ var combat: Combat
 var disabled := false
 
 var targeting: bool = false
-func enable_highlight(tile: Tile):
+func hover_tile(tile: Tile):
+	if mouse_block.is_blocked():
+		return
 	if combat != null:  # check if targeting with a spell
 		targeting = combat.current_phase == Combat.RoundPhase.Spell \
 					and combat.input.current_castable
-		#if combat.current_phase == Combat.RoundPhase.Spell:
-			#var spell_phase = combat.get_phase_node(combat.current_phase)
-			#if spell_phase.state == SpellPhase.CastingState.Targeting:
-				#targeting = true
-			#else:
-				#targeting = false
-		#else:
-			#targeting = false
-		
+
 	tile.set_highlight(Highlight.Type.HoverTarget if targeting else Highlight.Type.Hover, true)
 	Events.tile_hovered.emit(tile)
 	tile.get_node("HoverTimer").start()
 	
-func disable_highlight(tile: Tile):
+func unhover_tile(tile: Tile):
 	tile.set_highlight(Highlight.Type.Hover, false)
 	tile.set_highlight(Highlight.Type.HoverTarget, false)
 	tile.hovering = false
@@ -36,7 +49,7 @@ func disable_highlight(tile: Tile):
 
 
 var currently_hovering: Tile = null
-func _physics_process(delta: float) -> void:	
+func _process(delta: float) -> void:
 	var mouse_position := Utility.get_mouse_pos_absolute()
 	var camera: Camera3D = %Camera3D
 	var ray_origin := camera.project_ray_origin(mouse_position)
@@ -52,23 +65,23 @@ func _physics_process(delta: float) -> void:
 			if collider.is_in_group("tile_area"):
 				var tile: Tile = collider.get_parent()
 				if tile != currently_hovering:
-					enable_highlight(tile)
+					hover_tile(tile)
 				
 				if currently_hovering != null and currently_hovering != tile:
-					disable_highlight(currently_hovering)
+					unhover_tile(currently_hovering)
 
 				currently_hovering = tile
 	else:
 		if currently_hovering != null:
-			disable_highlight(currently_hovering)
+			unhover_tile(currently_hovering)
 			currently_hovering = null
 			
-	if currently_hovering and Input.is_action_just_pressed("select"):
+	if currently_hovering and Input.is_action_just_pressed("select") and not mouse_block.is_blocked():
 		#var connections = Events.tile_clicked.get_connections()
 		Events.tile_clicked.emit(currently_hovering)
 	
 	if currently_hovering and Input.is_action_just_released("select"):
 		Events.tile_click_released.emit(currently_hovering)
 	
-	if currently_hovering and Input.is_action_just_pressed("deselect"):
+	if currently_hovering and Input.is_action_just_pressed("deselect") and not mouse_block.is_blocked():
 		Events.tile_rightclicked.emit(currently_hovering)

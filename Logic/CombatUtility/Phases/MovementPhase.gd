@@ -58,4 +58,3 @@ func highlight_payable_spells(tile: Tile):
 					tile.get_drainable_energy_in_range(1).can_pay_costs(spell.get_costs()))
 			else:
 				spell.visual_representation.set_payable_hint(false)
-

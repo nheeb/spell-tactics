@@ -64,9 +64,9 @@ func _get_all_file_paths(path: String) -> Array[String]:
 		file_name = dir.get_next()
 	return file_paths
 
-func _add(name: String, res: EntityType):
+func _add(_name: String, res: EntityType):
 	var item = preload("res://Logic/LevelEditor/UI/SelectionItem.tscn").instantiate()
-	item.display_name = name
+	item.display_name = _name
 	item.res = res
 	item.editor_ui = editor_ui
 	item.mode = _mode

@@ -2,10 +2,10 @@ class_name PAHoverTile extends PlayerAction
 
 var tile: Tile
 
-static var on_tile_hovered: Signal = UtilsOld.create_static_signal(PAHoverTile, "on_tile_hovered")
-static var on_drainable_tile_hovered: Signal = UtilsOld.create_static_signal(PAHoverTile, "on_drainable_tile_hovered")
+static var on_tile_hovered: Signal = Utils.create_static_signal(PAHoverTile, "on_tile_hovered")
+static var on_drainable_tile_hovered: Signal = Utils.create_static_signal(PAHoverTile, "on_drainable_tile_hovered")
 
-static var on_drainable_tile_unhovered: Signal = UtilsOld.create_static_signal(PAHoverTile, "on_drainable_tile_unhovered")
+static var on_drainable_tile_unhovered: Signal = Utils.create_static_signal(PAHoverTile, "on_drainable_tile_unhovered")
 
 func _init(_tile: Tile) -> void:
 	tile = _tile
@@ -34,4 +34,3 @@ func execute(combat: Combat) -> void:
 
 func on_fail(combat: Combat) -> void:
 	pass
-

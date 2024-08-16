@@ -1,5 +1,5 @@
 
-class_name Pencil extends Tool
+class_name TerrainPlace extends Tool
 
 var _active_set: Array[Tile] = []
 
