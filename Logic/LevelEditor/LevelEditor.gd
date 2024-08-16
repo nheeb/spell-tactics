@@ -11,15 +11,16 @@ var tool_lower = Lower.new()
 var tool_placer = Placer.new()
 var tool_erase = Erase.new()
 
-var ENT_PLAYER = preload("res://Entities/PlayerResource.tres")
+#var ENT_PLAYER = preload("res://Entities/PlayerResource.tres")
 
 # TODO save level on close
 
 var placement_active: EntityType = null
 var tool_active = null
-var ent_active: EntityType = ENT_PLAYER
+var ent_active: EntityType = null
 
-@onready var blocker_idx: int = MouseInput.mouse_block.register_blocker()
+@onready var tile_hover_blocker: Utils.Blocker = MouseInput.mouse_block.register_blocker()
+@onready var zoom_blocker: Utils.Blocker = GameCamera.zoom_block.register_blocker()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -62,7 +63,9 @@ func tile_clicked(tile):
 		tool_active._apply(world.level, tile, self)
 		
 func mouse_entered_editor_ui():
-	MouseInput.mouse_block.block(blocker_idx)
+	tile_hover_blocker.block()
+	zoom_blocker.block()
 	
 func mouse_exited_editor_ui():
-	MouseInput.mouse_block.unblock(blocker_idx)
+	tile_hover_blocker.unblock()
+	zoom_blocker.unblock()

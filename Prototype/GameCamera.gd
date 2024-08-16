@@ -1,5 +1,7 @@
 class_name GameCamera extends Node3D
 
+static var zoom_block: Utils.Block = Utils.Block.new()
+
 var velocity := Vector3.ZERO
 var rotation_input := 0.0
 var rotation_input_vertical := 0.0
@@ -28,13 +30,6 @@ var just_reach_target := false
 func _ready() -> void:
 	zoom_pivot.position.y = camera_zoom
 	
-
-# deprecated
-#func _unhandled_input(event: InputEvent) -> void:
-	#if event is InputEventMouseMotion:
-		#if event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
-			#rotation_input += event.relative.x * mouse_rotation_factor * .5
-			#rotation_input_vertical = - event.relative.y * mouse_rotation_factor
 
 var relative_motion := Vector2(0.0, 0.0)
 
@@ -71,9 +66,9 @@ func _physics_process(delta: float) -> void:
 	rotation_input_vertical = 0.0
 	
 	# zoom
-	if Input.is_action_just_released("zoom_camera_out"):
+	if Input.is_action_just_released("zoom_camera_out") and not zoom_block.is_blocked():
 		zoom_velocity += delta * zoom_factor
-	elif Input.is_action_just_released("zoom_camera_in"):
+	elif Input.is_action_just_released("zoom_camera_in") and not zoom_block.is_blocked():
 		zoom_velocity -= delta * zoom_factor
 	
 	zoom_velocity *= pow(zoom_damping, delta)

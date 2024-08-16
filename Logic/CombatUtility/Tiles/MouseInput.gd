@@ -1,24 +1,8 @@
 class_name MouseInput extends RayCast3D
 
-## Class where any parts of the game can register to block tile hovering/clicking.
-## For example for UI nodes that cover the 3D World. The UI nodes are responsible for
-## holding onto the blocker_idx.
-class Block:
-	var blockers: Array[bool] = []
-	func register_blocker() -> int: ## returns blocker_idx 
-		blockers.append(false)
-		return len(blockers) - 1
-		
-	func block(idx: int):
-		blockers[idx] = true
-		
-	func unblock(idx: int):
-		blockers[idx] = false
-		
-	func is_blocked() -> bool:
-		return blockers.any(func(b: bool): return b)
 
-static var mouse_block: Block = Block.new()
+
+static var mouse_block: Utils.Block = Utils.Block.new()
 
 # A reference to cards3d is needed here to see if the hover/click input is meant for this RayCast
 # or the one in Cards3D (cards3d has priority, since it is "on top" visually)

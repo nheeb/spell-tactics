@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7dxgf4vovuq1"]
+[gd_scene load_steps=9 format=3 uid="uid://b7dxgf4vovuq1"]
 
 [ext_resource type="Script" path="res://Logic/LevelEditor/LevelEditor.gd" id="1_bl8t1"]
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_85xti"]
@@ -6,15 +6,15 @@
 [ext_resource type="LabelSettings" uid="uid://cxgi1adxsmvqn" path="res://Logic/LevelEditor/UI/LevelEditorFontSmall.tres" id="5_73if2"]
 [ext_resource type="Script" path="res://Logic/LevelEditor/UI/SelectionUI.gd" id="5_ep6w4"]
 [ext_resource type="Script" path="res://UI/ScreenCombat/ViewportSizer.gd" id="6_jgjps"]
-[ext_resource type="PackedScene" uid="uid://cdfhkpehk0qn0" path="res://Logic/LevelEditor/UI/SelectionItem.tscn" id="7_xnq21"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2ukqi"]
 viewport_path = NodePath("Viewport3D")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5q5bw"]
 content_margin_left = 5.0
-content_margin_top = 8.0
+content_margin_top = 5.0
 content_margin_right = 5.0
+content_margin_bottom = 5.0
 
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
@@ -214,12 +214,12 @@ editor_ui = NodePath("../../..")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.99
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5q5bw")
 horizontal_scroll_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Container" type="GridContainer" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer"]
 layout_mode = 2
@@ -228,18 +228,6 @@ size_flags_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 16
 columns = 3
-
-[node name="SelectionItem" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer/Container" instance=ExtResource("7_xnq21")]
-layout_mode = 2
-
-[node name="SelectionItem2" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer/Container" instance=ExtResource("7_xnq21")]
-layout_mode = 2
-
-[node name="SelectionItem3" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer/Container" instance=ExtResource("7_xnq21")]
-layout_mode = 2
-
-[node name="SelectionItem4" parent="LevelEditorUI/RightBar/SelectionUi/ScrollContainer/Container" instance=ExtResource("7_xnq21")]
-layout_mode = 2
 
 [connection signal="combat_changed" from="Viewport3D/World" to="PopUpHandler" method="_on_world_combat_changed"]
 [connection signal="mouse_entered" from="LevelEditorUI/BottomBar" to="." method="mouse_entered_editor_ui"]
