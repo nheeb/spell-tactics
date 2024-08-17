@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dosu6sujnd7ma"]
+[gd_scene load_steps=2 format=3 uid="uid://b1d7jigspwx0p"]
 
-[ext_resource type="Script" path="res://Logic/LevelEditor/UI/EditorUI.gd" id="1_2x676"]
+[sub_resource type="GDScript" id="GDScript_u5b32"]
 
 [node name="EditorUi" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2x676")
+script = SubResource("GDScript_u5b32")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

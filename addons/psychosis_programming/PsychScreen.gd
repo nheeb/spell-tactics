@@ -1,5 +1,5 @@
-
-extends Control
+@tool
+class_name PsychScreen extends Control
 
 func _on_visibility_changed() -> void:
 	if visible:

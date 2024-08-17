@@ -1,24 +1,19 @@
 
 class_name Level extends Node3D
 
-## Different initialization functions should be implemented.
-## For example initializing regular n-grid.
-## Or loading a resource defining a map.
-## Ideally, this would even work in a tool script so in-editor as well1
 ## We're using (r,q)-axial coordinates, for a reference see
 ## https://www.redblobgames.com/grids/hexagons/#coordinates-axial
 
-
 ## 2D Array of tiles, indexed with (r,q)
 var tiles: Array[Array] = []  # Tile
-var n_rows: int
-var n_cols: int
+var n_rows: int  # r in (0, n_rows - 1)
+var n_cols: int  # q in (0, n_cols - 1)
 
 var graveyard: Array[Entity]
 var combat: Combat
 
-@onready var player: PlayerEntity
 
+@onready var player: PlayerEntity
 @onready var visual_effects: Node3D = $VisualEffects
 @onready var visual_entities: Node3D = $VisualEntities
 
@@ -41,6 +36,97 @@ func init_tiles_array(rows, cols):
 			tiles[i].append(null)
 	self.n_rows = rows
 	self.n_cols = cols
+	
+func expand_level_boundaries():
+	var new_rows = n_rows + 2
+	var new_cols = n_cols + 2
+	
+	# Create new larger tiles array
+	var new_tiles: Array[Array] = []
+	for i in range(new_rows):
+		new_tiles.append([])
+		for j in range(new_cols):
+			new_tiles[i].append(null)
+	
+	# Move existing tiles to new positions
+	for r in range(n_rows):
+		for q in range(n_cols):
+			if tiles[r][q] != null:
+				new_tiles[r+1][q+1] = tiles[r][q]
+				tiles[r][q].r = r+1
+				tiles[r][q].q = q+1
+	
+	# Create new tiles for expanded areas
+	for r in range(new_rows):
+		for q in range(new_cols):
+			@warning_ignore("integer_division")
+			if new_tiles[r][q] == null and Utility.rq_distance(r, q, new_rows/2, new_cols/2) <= new_rows/2:
+				@warning_ignore("integer_division")
+				var new_tile = Tile.create(r, q, new_rows/2, new_cols/2)
+				add_child(new_tile)
+				new_tile.owner = self
+				new_tiles[r][q] = new_tile
+	
+	# Update level properties
+	tiles = new_tiles
+	n_rows = new_rows
+	n_cols = new_cols
+	
+func shrink_level_boundaries() -> bool:
+	if n_rows <= 3 or n_cols <= 3:
+		#push_error("Cannot shrink further: grid too small")
+		return false
+	
+	var new_rows = n_rows - 2
+	var new_cols = n_cols - 2
+	
+	# Check if there are any entities on tiles to be deleted
+	for r in [0, n_rows - 1]:
+		for q in range(n_cols):
+			if tiles[r][q] != null and not tiles[r][q].entities.is_empty():
+				#push_error("Cannot shrink: entities present on border tiles")
+				return false
+	for r in range(1, n_rows - 1):
+		for q in [0, n_cols - 1]:
+			if tiles[r][q] != null and not tiles[r][q].entities.is_empty():
+				#push_error("Cannot shrink: entities present on border tiles")
+				return false
+	
+	# Create new smaller tiles array
+	var new_tiles: Array[Array] = []
+	for i in range(new_rows):
+		new_tiles.append([])
+		for j in range(new_cols):
+			new_tiles[i].append(null)
+	
+	# Move existing tiles to new positions
+	for r in range(1, n_rows - 1):
+		for q in range(1, n_cols - 1):
+			if tiles[r][q] != null:
+				new_tiles[r-1][q-1] = tiles[r][q]
+				tiles[r][q].r = r-1
+				tiles[r][q].q = q-1
+	
+	# Remove tiles outside new boundaries
+	for r in [0, n_rows - 1]:
+		for q in range(n_cols):
+			if tiles[r][q] != null:
+				tiles[r][q].queue_free()
+	for r in range(1, n_rows - 1):
+		for q in [0, n_cols - 1]:
+			if tiles[r][q] != null:
+				tiles[r][q].queue_free()
+	
+	# Update level properties
+	tiles = new_tiles
+	n_rows = new_rows
+	n_cols = new_cols
+	return true
+	
+func get_grid_size() -> int:
+	assert(n_rows == n_cols, "Grid size is only defined for n_rows == n_cols (basic grid)")
+	@warning_ignore("integer_division")
+	return (n_rows - 1) / 2
 
 func init_basic_grid(n: int):
 	# The origin tile will have coordinates (r=n, q=n).

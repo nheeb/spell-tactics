@@ -1,293 +1,550 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=462 format=3 uid="uid://ckq8v1s3aruw7"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=527 format=3]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/CombatState.gd" id="1_a77op"]
-[ext_resource type="Resource" uid="uid://cyfghwiu5p4y4" path="res://Spells/AllEnemyEvents/SpawnNewFighter.tres" id="1_wolby"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/ActiveState.gd" id="1_opmkl"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/LevelState.gd" id="1_worvi"]
 [ext_resource type="Script" path="res://Entities/EntityID.gd" id="2_2i3es"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Events/EnemyEventPlan.gd" id="2_kcnt0"]
-[ext_resource type="Resource" uid="uid://ovrqq0tqoc0w" path="res://Spells/AllEvents/FallWeather.tres" id="3_eh8fp"]
-[ext_resource type="Resource" uid="uid://b1uiotlalbmul" path="res://Entities/Environment/GrassTile.tres" id="3_vhrki"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventSchedule.gd" id="4_lakkw"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventState.gd" id="2_pdf0p"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/LogEntry.gd" id="3_kxbah"]
+[ext_resource type="Resource" path="res://Entities/Environment/GrassTile.tres" id="3_vhrki"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/EntityState.gd" id="4_qk5jy"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellState.gd" id="4_x7vib"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/TileState.gd" id="5_6hme5"]
-[ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Entities/Environment/DirtTile.tres" id="6_8em4m"]
-[ext_resource type="Resource" uid="uid://brvjvj8i7f7kw" path="res://Entities/Environment/Tree.tres" id="7_ay4xs"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellID.gd" id="5_bfv3t"]
+[ext_resource type="Resource" path="res://Entities/Environment/DirtTile.tres" id="6_8em4m"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/SporeFlight.tres" id="6_bch05"]
+[ext_resource type="Resource" path="res://Entities/Environment/Tree.tres" id="7_ay4xs"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/Berserker.tres" id="7_l5ewd"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="8_d2swj"]
-[ext_resource type="Resource" uid="uid://b7xqo2ltiqbwk" path="res://Entities/Environment/Bush.tres" id="9_b8i77"]
-[ext_resource type="Resource" uid="uid://ddr1tv8hf3bj3" path="res://Entities/Environment/Stump.tres" id="10_q3j68"]
-[ext_resource type="Resource" uid="uid://c6t18hbsmwiha" path="res://Entities/Environment/Rock.tres" id="11_7c360"]
-[ext_resource type="Resource" uid="uid://kq07x16lyno7" path="res://Entities/Enemies/GoblinArcher.tres" id="11_54udb"]
-[ext_resource type="Resource" uid="uid://nuucsrbi1dqp" path="res://Entities/Environment/MediumShrooms.tres" id="11_fn0u2"]
-[ext_resource type="Resource" uid="uid://b8ef7eh8cp7ub" path="res://Entities/Environment/Flower.tres" id="13_l3am2"]
-[ext_resource type="Resource" uid="uid://dxf83ay5rsin2" path="res://Entities/Enemies/Goblin.tres" id="14_jrk47"]
-[ext_resource type="Resource" uid="uid://bnqbor0d6tjit" path="res://Entities/Environment/SmallShrooms.tres" id="14_xioyu"]
-[ext_resource type="Resource" uid="uid://dq2qgws5vu0i2" path="res://Entities/Environment/TallGrass.tres" id="15_s3iof"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/AirMissile.tres" id="8_xq507"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/Haunting.tres" id="9_002n8"]
+[ext_resource type="Resource" path="res://Entities/Environment/Bush.tres" id="9_b8i77"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/SelfHeal.tres" id="10_1ofw7"]
+[ext_resource type="Resource" path="res://Entities/Environment/Stump.tres" id="10_q3j68"]
+[ext_resource type="Resource" path="res://Entities/Environment/Rock.tres" id="11_7c360"]
+[ext_resource type="Resource" path="res://Entities/Enemies/GoblinArcher.tres" id="11_54udb"]
+[ext_resource type="Resource" path="res://Entities/Environment/MediumShrooms.tres" id="11_fn0u2"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/SummonWitchTotem.tres" id="11_x0uqt"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/SummonBush.tres" id="12_blgwx"]
+[ext_resource type="Resource" path="res://Entities/Environment/Flower.tres" id="13_l3am2"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/Unload.tres" id="13_o1ya4"]
+[ext_resource type="Resource" path="res://Entities/Enemies/Goblin.tres" id="14_jrk47"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/HotSteam.tres" id="14_m0stx"]
+[ext_resource type="Resource" path="res://Entities/Environment/SmallShrooms.tres" id="14_xioyu"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/LightningStrike.tres" id="15_k5a6o"]
+[ext_resource type="Resource" path="res://Entities/Environment/TallGrass.tres" id="15_s3iof"]
 [ext_resource type="Script" path="res://Entities/PlayerTraits.gd" id="15_uvvh0"]
-[ext_resource type="Resource" uid="uid://d1wcrekyije7v" path="res://Entities/PlayerResource.tres" id="16_0ybmk"]
-[ext_resource type="Resource" uid="uid://bftmj7ayhlcs2" path="res://Entities/Environment/FlowSmall.tres" id="16_j2ocy"]
-[ext_resource type="Resource" uid="uid://bhq0pkvdokid6" path="res://Entities/Environment/Pebbles.tres" id="17_73e5m"]
-[ext_resource type="Resource" uid="uid://dh4ll7t2j71pq" path="res://Entities/Environment/FlowMedium.tres" id="19_25pqm"]
-[ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Entities/Enemies/GoblinBard.tres" id="19_amp3j"]
-[ext_resource type="Resource" uid="uid://iq34rfnf6t4w" path="res://Entities/Environment/WaterTile.tres" id="19_ncl4f"]
+[ext_resource type="Resource" path="res://Entities/PlayerResource.tres" id="16_0ybmk"]
+[ext_resource type="Resource" path="res://Entities/Environment/FlowSmall.tres" id="16_j2ocy"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/DeadlyDart.tres" id="16_k50ms"]
+[ext_resource type="Resource" path="res://Entities/Environment/Pebbles.tres" id="17_73e5m"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/Breath.tres" id="17_dp2k7"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/GrowingMycel.tres" id="18_pu2ir"]
+[ext_resource type="Resource" path="res://Entities/Environment/FlowMedium.tres" id="19_25pqm"]
+[ext_resource type="Resource" path="res://Entities/Enemies/GoblinBard.tres" id="19_amp3j"]
+[ext_resource type="Resource" path="res://Entities/Environment/WaterTile.tres" id="19_ncl4f"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/WaterBlast.tres" id="19_vutu3"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/TotalDecay.tres" id="20_lugvs"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/RockBlast.tres" id="21_gufss"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/Cyclone.tres" id="22_rddsw"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/MudArmor.tres" id="23_obivt"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/TrappingRoots.tres" id="24_ni7a2"]
+[ext_resource type="Resource" path="res://Spells/AllSpells/SpellMemory.tres" id="25_vpeqn"]
+[ext_resource type="Script" path="res://Spells/AllStatusEffects/StatusEffect.gd" id="32_moxhk"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/TimedEffect.gd" id="53_jcir5"]
 
-[sub_resource type="Resource" id="Resource_t7fuw"]
-script = ExtResource("2_kcnt0")
-event_type = ExtResource("1_wolby")
-params = {}
-event_created = false
-use_as_default = true
+[sub_resource type="Resource" id="Resource_au4dy"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
 
-[sub_resource type="Resource" id="Resource_ggb53"]
-script = ExtResource("4_lakkw")
-event_type = ExtResource("3_eh8fp")
-params = {}
-event_created = false
+[sub_resource type="Resource" id="Resource_pdv8v"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_h7w45"]
+script = ExtResource("5_bfv3t")
+id = 17
+
+[sub_resource type="Resource" id="Resource_b5d41"]
+script = ExtResource("4_x7vib")
+type = ExtResource("25_vpeqn")
+id = SubResource("Resource_h7w45")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_72odk"]
+script = ExtResource("5_bfv3t")
+id = 3
+
+[sub_resource type="Resource" id="Resource_7a1pa"]
+script = ExtResource("4_x7vib")
+type = ExtResource("7_l5ewd")
+id = SubResource("Resource_72odk")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_c58t7"]
+script = ExtResource("5_bfv3t")
+id = 16
+
+[sub_resource type="Resource" id="Resource_sr150"]
+script = ExtResource("4_x7vib")
+type = ExtResource("17_dp2k7")
+id = SubResource("Resource_c58t7")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_lc65n"]
+script = ExtResource("5_bfv3t")
+id = 2
+
+[sub_resource type="Resource" id="Resource_8n8i8"]
+script = ExtResource("4_x7vib")
+type = ExtResource("8_xq507")
+id = SubResource("Resource_lc65n")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_hkp4g"]
+script = ExtResource("5_bfv3t")
+id = 9
+
+[sub_resource type="Resource" id="Resource_a18sg"]
+script = ExtResource("4_x7vib")
+type = ExtResource("18_pu2ir")
+id = SubResource("Resource_hkp4g")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_hhecd"]
+script = ExtResource("5_bfv3t")
+id = 15
+
+[sub_resource type="Resource" id="Resource_lnqyn"]
+script = ExtResource("4_x7vib")
+type = ExtResource("20_lugvs")
+id = SubResource("Resource_hhecd")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_7rwa0"]
+script = ExtResource("5_bfv3t")
+id = 5
+
+[sub_resource type="Resource" id="Resource_xdbs1"]
+script = ExtResource("4_x7vib")
+type = ExtResource("12_blgwx")
+id = SubResource("Resource_7rwa0")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_j3ims"]
+script = ExtResource("5_bfv3t")
+id = 6
+
+[sub_resource type="Resource" id="Resource_q5ljd"]
+script = ExtResource("4_x7vib")
+type = ExtResource("6_bch05")
+id = SubResource("Resource_j3ims")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_igtgy"]
+script = ExtResource("5_bfv3t")
+id = 10
+
+[sub_resource type="Resource" id="Resource_wr6xt"]
+script = ExtResource("4_x7vib")
+type = ExtResource("16_k50ms")
+id = SubResource("Resource_igtgy")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_142n7"]
+script = ExtResource("5_bfv3t")
+id = 1
+
+[sub_resource type="Resource" id="Resource_uq5f7"]
+script = ExtResource("4_x7vib")
+type = ExtResource("23_obivt")
+id = SubResource("Resource_142n7")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_qw6j5"]
+script = ExtResource("5_bfv3t")
+id = 12
+
+[sub_resource type="Resource" id="Resource_7bxkd"]
+script = ExtResource("4_x7vib")
+type = ExtResource("14_m0stx")
+id = SubResource("Resource_qw6j5")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_bjoyq"]
+script = ExtResource("5_bfv3t")
+id = 11
+
+[sub_resource type="Resource" id="Resource_826tx"]
+script = ExtResource("4_x7vib")
+type = ExtResource("9_002n8")
+id = SubResource("Resource_bjoyq")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_kgpds"]
+script = ExtResource("5_bfv3t")
+id = 14
+
+[sub_resource type="Resource" id="Resource_wkx03"]
+script = ExtResource("4_x7vib")
+type = ExtResource("11_x0uqt")
+id = SubResource("Resource_kgpds")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_afp4g"]
+script = ExtResource("5_bfv3t")
+id = 20
+
+[sub_resource type="Resource" id="Resource_mle3s"]
+script = ExtResource("4_x7vib")
+type = ExtResource("15_k5a6o")
+id = SubResource("Resource_afp4g")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_oqjwg"]
+script = ExtResource("5_bfv3t")
+id = 19
+
+[sub_resource type="Resource" id="Resource_yqmrd"]
+script = ExtResource("4_x7vib")
+type = ExtResource("13_o1ya4")
+id = SubResource("Resource_oqjwg")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_2cf1t"]
+script = ExtResource("5_bfv3t")
+id = 8
+
+[sub_resource type="Resource" id="Resource_im01p"]
+script = ExtResource("4_x7vib")
+type = ExtResource("10_1ofw7")
+id = SubResource("Resource_2cf1t")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_prvy8"]
+script = ExtResource("5_bfv3t")
+id = 13
+
+[sub_resource type="Resource" id="Resource_6yjxl"]
+script = ExtResource("4_x7vib")
+type = ExtResource("21_gufss")
+id = SubResource("Resource_prvy8")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_1drnh"]
+script = ExtResource("5_bfv3t")
+id = 18
+
+[sub_resource type="Resource" id="Resource_2x7gg"]
+script = ExtResource("4_x7vib")
+type = ExtResource("19_vutu3")
+id = SubResource("Resource_1drnh")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_jlyn3"]
+script = ExtResource("5_bfv3t")
+id = 4
+
+[sub_resource type="Resource" id="Resource_0h1ne"]
+script = ExtResource("4_x7vib")
+type = ExtResource("24_ni7a2")
+id = SubResource("Resource_jlyn3")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_kpk62"]
+script = ExtResource("5_bfv3t")
+id = 7
+
+[sub_resource type="Resource" id="Resource_32181"]
+script = ExtResource("4_x7vib")
+type = ExtResource("22_rddsw")
+id = SubResource("Resource_kpk62")
+combat_persistant_properties = {}
+round_persistant_properties = {}
 
 [sub_resource type="Resource" id="Resource_25aem"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 29
 
-[sub_resource type="Resource" id="Resource_8e7bg"]
+[sub_resource type="Resource" id="Resource_c3rjv"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_25aem"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_vir08"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 0, 2])
 
 [sub_resource type="Resource" id="Resource_0wesg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 7
 
-[sub_resource type="Resource" id="Resource_0iyw3"]
+[sub_resource type="Resource" id="Resource_vir08"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0, 2])
+
+[sub_resource type="Resource" id="Resource_ma1om"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vir08"),
 "id": SubResource("Resource_0wesg"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_w3iag"]
+[sub_resource type="Resource" id="Resource_al7a3"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8e7bg"), SubResource("Resource_0iyw3")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_c3rjv"), SubResource("Resource_ma1om")])
 
 [sub_resource type="Resource" id="Resource_kb7tj"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 18
 
-[sub_resource type="Resource" id="Resource_xokwm"]
+[sub_resource type="Resource" id="Resource_5lrey"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_kb7tj"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_o0xi8"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 1])
 
 [sub_resource type="Resource" id="Resource_tq1la"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 2
 
-[sub_resource type="Resource" id="Resource_ju6bq"]
+[sub_resource type="Resource" id="Resource_o0xi8"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_r61yd"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_o0xi8"),
 "id": SubResource("Resource_tq1la"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_bxxyn"]
+[sub_resource type="Resource" id="Resource_1wqry"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xokwm"), SubResource("Resource_ju6bq")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5lrey"), SubResource("Resource_r61yd")])
 
 [sub_resource type="Resource" id="Resource_jnhih"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 2
 
-[sub_resource type="Resource" id="Resource_b5q8r"]
+[sub_resource type="Resource" id="Resource_20ud0"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_jnhih"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_1ltit"]
+[sub_resource type="Resource" id="Resource_cadc4"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_b5q8r")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_20ud0")])
 
 [sub_resource type="Resource" id="Resource_7yj30"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 41
 
-[sub_resource type="Resource" id="Resource_8b5dy"]
+[sub_resource type="Resource" id="Resource_ukqwk"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_7yj30"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_lqpe5"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 4])
 
 [sub_resource type="Resource" id="Resource_6mygu"]
 script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 4
 
-[sub_resource type="Resource" id="Resource_1f8r6"]
+[sub_resource type="Resource" id="Resource_lqpe5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 4])
+
+[sub_resource type="Resource" id="Resource_w8u8q"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_lqpe5"),
 "id": SubResource("Resource_6mygu"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_w0y7e"]
+[sub_resource type="Resource" id="Resource_ixsy1"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8b5dy"), SubResource("Resource_1f8r6")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ukqwk"), SubResource("Resource_w8u8q")])
 
 [sub_resource type="Resource" id="Resource_flbpx"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 4
 
-[sub_resource type="Resource" id="Resource_ye41p"]
+[sub_resource type="Resource" id="Resource_ff4ie"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_flbpx"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_v8c80"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([2])
 
 [sub_resource type="Resource" id="Resource_ryjh4"]
 script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 1
 
-[sub_resource type="Resource" id="Resource_uhusu"]
+[sub_resource type="Resource" id="Resource_v8c80"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2])
+
+[sub_resource type="Resource" id="Resource_xwlrt"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_v8c80"),
 "id": SubResource("Resource_ryjh4"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_aa7ey"]
+[sub_resource type="Resource" id="Resource_ycc64"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ye41p"), SubResource("Resource_uhusu")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ff4ie"), SubResource("Resource_xwlrt")])
 
 [sub_resource type="Resource" id="Resource_2i7ss"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 5
 
-[sub_resource type="Resource" id="Resource_5yjd8"]
+[sub_resource type="Resource" id="Resource_gaibo"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_2i7ss"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_jhx8i"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([2, 2, 2])
 
 [sub_resource type="Resource" id="Resource_dsqsf"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 1
 
-[sub_resource type="Resource" id="Resource_vylum"]
+[sub_resource type="Resource" id="Resource_jhx8i"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2, 2, 2])
+
+[sub_resource type="Resource" id="Resource_mwa8o"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_dsqsf"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_48hpo"]
+[sub_resource type="Resource" id="Resource_1luqr"]
 script = ExtResource("5_6hme5")
 r = 0
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5yjd8"), SubResource("Resource_vylum")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gaibo"), SubResource("Resource_mwa8o")])
 
 [sub_resource type="Resource" id="Resource_aaskx"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 28
 
-[sub_resource type="Resource" id="Resource_ws2wq"]
+[sub_resource type="Resource" id="Resource_8jlpg"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_aaskx"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -296,58 +553,61 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 2
 
-[sub_resource type="Resource" id="Resource_nx6xk"]
+[sub_resource type="Resource" id="Resource_nvlub"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_lqpe5"),
 "id": SubResource("Resource_egrib"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_uhx7n"]
+[sub_resource type="Resource" id="Resource_swmky"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ws2wq"), SubResource("Resource_nx6xk")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8jlpg"), SubResource("Resource_nvlub")])
 
 [sub_resource type="Resource" id="Resource_t32jh"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 56
 
-[sub_resource type="Resource" id="Resource_ean3q"]
+[sub_resource type="Resource" id="Resource_sv0wl"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_t32jh"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_dluhg"]
+[sub_resource type="Resource" id="Resource_fcjnb"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ean3q")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sv0wl")])
 
 [sub_resource type="Resource" id="Resource_may3j"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 57
 
-[sub_resource type="Resource" id="Resource_xr3r0"]
+[sub_resource type="Resource" id="Resource_ofucc"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_may3j"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -356,162 +616,170 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 1
 
-[sub_resource type="Resource" id="Resource_fui2g"]
+[sub_resource type="Resource" id="Resource_34fgh"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_lqpe5"),
 "id": SubResource("Resource_37sk6"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_hwmaw"]
+[sub_resource type="Resource" id="Resource_qexni"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xr3r0"), SubResource("Resource_fui2g")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ofucc"), SubResource("Resource_34fgh")])
 
 [sub_resource type="Resource" id="Resource_u8ptc"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 58
 
-[sub_resource type="Resource" id="Resource_1exjf"]
+[sub_resource type="Resource" id="Resource_k86p5"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_u8ptc"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_x3nhf"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 0])
 
 [sub_resource type="Resource" id="Resource_toi7o"]
 script = ExtResource("2_2i3es")
 type = ExtResource("9_b8i77")
 id = 3
 
-[sub_resource type="Resource" id="Resource_nxuht"]
+[sub_resource type="Resource" id="Resource_x3nhf"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0])
+
+[sub_resource type="Resource" id="Resource_1jsi8"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("9_b8i77")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_x3nhf"),
 "id": SubResource("Resource_toi7o"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_6xscg"]
+[sub_resource type="Resource" id="Resource_frtsk"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1exjf"), SubResource("Resource_nxuht")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_k86p5"), SubResource("Resource_1jsi8")])
 
 [sub_resource type="Resource" id="Resource_qwgqp"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 42
 
-[sub_resource type="Resource" id="Resource_nqrqg"]
+[sub_resource type="Resource" id="Resource_lwmvt"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_qwgqp"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_gwrkn"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 0, 2])
 
 [sub_resource type="Resource" id="Resource_nhsut"]
 script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 21
 
-[sub_resource type="Resource" id="Resource_i782r"]
+[sub_resource type="Resource" id="Resource_gwrkn"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0, 2])
+
+[sub_resource type="Resource" id="Resource_voqtq"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_gwrkn"),
 "id": SubResource("Resource_nhsut"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_xi5hr"]
+[sub_resource type="Resource" id="Resource_fedwf"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nqrqg"), SubResource("Resource_i782r")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lwmvt"), SubResource("Resource_voqtq")])
 
 [sub_resource type="Resource" id="Resource_f7vrg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 59
 
-[sub_resource type="Resource" id="Resource_f2rpp"]
+[sub_resource type="Resource" id="Resource_1tlay"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_f7vrg"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_a0j1o"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([2])
 
 [sub_resource type="Resource" id="Resource_qhjjx"]
 script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 1
 
-[sub_resource type="Resource" id="Resource_5yl00"]
+[sub_resource type="Resource" id="Resource_a0j1o"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2])
+
+[sub_resource type="Resource" id="Resource_13r3h"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_a0j1o"),
 "id": SubResource("Resource_qhjjx"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_wlg7y"]
+[sub_resource type="Resource" id="Resource_pfhnu"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f2rpp"), SubResource("Resource_5yl00")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1tlay"), SubResource("Resource_13r3h")])
 
 [sub_resource type="Resource" id="Resource_ln7nh"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 6
 
-[sub_resource type="Resource" id="Resource_1a357"]
+[sub_resource type="Resource" id="Resource_ja6lj"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_ln7nh"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -520,36 +788,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 2
 
-[sub_resource type="Resource" id="Resource_qxdbl"]
+[sub_resource type="Resource" id="Resource_ew0s2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_o87nd"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_y7v5f"]
+[sub_resource type="Resource" id="Resource_xdgin"]
 script = ExtResource("5_6hme5")
 r = 1
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1a357"), SubResource("Resource_qxdbl")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ja6lj"), SubResource("Resource_ew0s2")])
 
 [sub_resource type="Resource" id="Resource_3q8ae"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 27
 
-[sub_resource type="Resource" id="Resource_sfubq"]
+[sub_resource type="Resource" id="Resource_473db"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_3q8ae"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -558,93 +828,97 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 3
 
-[sub_resource type="Resource" id="Resource_wykck"]
+[sub_resource type="Resource" id="Resource_utxh1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_lqpe5"),
 "id": SubResource("Resource_nvrhd"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_a2grc"]
+[sub_resource type="Resource" id="Resource_jtiiw"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sfubq"), SubResource("Resource_wykck")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_473db"), SubResource("Resource_utxh1")])
 
 [sub_resource type="Resource" id="Resource_sugdk"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 90
 
-[sub_resource type="Resource" id="Resource_jwvhv"]
+[sub_resource type="Resource" id="Resource_7dl4f"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_sugdk"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_avhrl"]
+[sub_resource type="Resource" id="Resource_80rt2"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jwvhv")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_7dl4f")])
 
 [sub_resource type="Resource" id="Resource_l1458"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 55
 
-[sub_resource type="Resource" id="Resource_xxubb"]
+[sub_resource type="Resource" id="Resource_58k8o"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_l1458"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_qs8jc"]
+[sub_resource type="Resource" id="Resource_m1rvq"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xxubb")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_58k8o")])
 
 [sub_resource type="Resource" id="Resource_w5c4k"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 61
 
-[sub_resource type="Resource" id="Resource_6ullj"]
+[sub_resource type="Resource" id="Resource_yjqv4"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_w5c4k"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_ywjdp"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_4y7ft"]
 script = ExtResource("2_2i3es")
 type = ExtResource("14_jrk47")
 id = 1
 
-[sub_resource type="Resource" id="Resource_34rqs"]
+[sub_resource type="Resource" id="Resource_ywjdp"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_wo4jq"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_jrk47")
 entity_props = {
@@ -652,163 +926,171 @@ entity_props = {
 "agility": 1,
 "armor": 0,
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_ywjdp"),
 "forced_action_name": "",
 "forced_movement_name": "",
 "hp": 5,
 "id": SubResource("Resource_4y7ft"),
 "resistance": 0,
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
 "strength": 2,
 "team": 0
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_c4v8d"]
+[sub_resource type="Resource" id="Resource_hmkpo"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6ullj"), SubResource("Resource_34rqs")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_yjqv4"), SubResource("Resource_wo4jq")])
 
 [sub_resource type="Resource" id="Resource_tv4qm"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 43
 
-[sub_resource type="Resource" id="Resource_gt2ch"]
+[sub_resource type="Resource" id="Resource_0w4hu"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_tv4qm"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_baouo"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([1, 1])
 
 [sub_resource type="Resource" id="Resource_1idxw"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 1
 
-[sub_resource type="Resource" id="Resource_c1y4j"]
+[sub_resource type="Resource" id="Resource_baouo"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 1])
+
+[sub_resource type="Resource" id="Resource_cy18h"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_baouo"),
 "id": SubResource("Resource_1idxw"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_bq6ds"]
+[sub_resource type="Resource" id="Resource_2tbtj"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gt2ch"), SubResource("Resource_c1y4j")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0w4hu"), SubResource("Resource_cy18h")])
 
 [sub_resource type="Resource" id="Resource_r2qb0"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 44
 
-[sub_resource type="Resource" id="Resource_la3ls"]
+[sub_resource type="Resource" id="Resource_ra24q"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_r2qb0"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_a466y"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([5])
 
 [sub_resource type="Resource" id="Resource_ku5tm"]
 script = ExtResource("2_2i3es")
 type = ExtResource("13_l3am2")
 id = 1
 
-[sub_resource type="Resource" id="Resource_76vlc"]
+[sub_resource type="Resource" id="Resource_a466y"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([5])
+
+[sub_resource type="Resource" id="Resource_5xrbw"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("13_l3am2")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_a466y"),
 "id": SubResource("Resource_ku5tm"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_m6ryq"]
+[sub_resource type="Resource" id="Resource_ea1wt"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_la3ls"), SubResource("Resource_76vlc")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ra24q"), SubResource("Resource_5xrbw")])
 
 [sub_resource type="Resource" id="Resource_k5dr0"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 57
 
-[sub_resource type="Resource" id="Resource_3c6uy"]
+[sub_resource type="Resource" id="Resource_pqi0t"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_k5dr0"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_uuiip"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 4])
 
 [sub_resource type="Resource" id="Resource_lumk2"]
 script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 7
 
-[sub_resource type="Resource" id="Resource_bttck"]
+[sub_resource type="Resource" id="Resource_uuiip"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 4])
+
+[sub_resource type="Resource" id="Resource_l6r4q"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_uuiip"),
 "id": SubResource("Resource_lumk2"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_mqs6p"]
+[sub_resource type="Resource" id="Resource_1sn23"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3c6uy"), SubResource("Resource_bttck")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pqi0t"), SubResource("Resource_l6r4q")])
 
 [sub_resource type="Resource" id="Resource_eljp3"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 7
 
-[sub_resource type="Resource" id="Resource_2mys8"]
+[sub_resource type="Resource" id="Resource_7i1um"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_eljp3"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -817,36 +1099,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 6
 
-[sub_resource type="Resource" id="Resource_u2f30"]
+[sub_resource type="Resource" id="Resource_6oru0"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vir08"),
 "id": SubResource("Resource_j3w3r"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_a2ny5"]
+[sub_resource type="Resource" id="Resource_o2ykd"]
 script = ExtResource("5_6hme5")
 r = 2
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_2mys8"), SubResource("Resource_u2f30")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_7i1um"), SubResource("Resource_6oru0")])
 
 [sub_resource type="Resource" id="Resource_o0nhg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 25
 
-[sub_resource type="Resource" id="Resource_8anlo"]
+[sub_resource type="Resource" id="Resource_a7gtb"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_o0nhg"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -855,91 +1139,95 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 4
 
-[sub_resource type="Resource" id="Resource_38d2v"]
+[sub_resource type="Resource" id="Resource_ywhd1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vir08"),
 "id": SubResource("Resource_1enrw"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_oisrc"]
+[sub_resource type="Resource" id="Resource_n5ejo"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8anlo"), SubResource("Resource_38d2v")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_a7gtb"), SubResource("Resource_ywhd1")])
 
 [sub_resource type="Resource" id="Resource_xsa65"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 26
 
-[sub_resource type="Resource" id="Resource_igln0"]
+[sub_resource type="Resource" id="Resource_gev33"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_xsa65"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_jsre5"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([4])
 
 [sub_resource type="Resource" id="Resource_pi5kt"]
 script = ExtResource("2_2i3es")
 type = ExtResource("16_j2ocy")
 id = 1
 
-[sub_resource type="Resource" id="Resource_v6k70"]
+[sub_resource type="Resource" id="Resource_jsre5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
+[sub_resource type="Resource" id="Resource_prg5q"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("16_j2ocy")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jsre5"),
 "id": SubResource("Resource_pi5kt"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_envuu"]
+[sub_resource type="Resource" id="Resource_xry3y"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_igln0"), SubResource("Resource_v6k70")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gev33"), SubResource("Resource_prg5q")])
 
 [sub_resource type="Resource" id="Resource_2xhne"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 93
 
-[sub_resource type="Resource" id="Resource_qi4qw"]
+[sub_resource type="Resource" id="Resource_dd0a2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_2xhne"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_bgl1q"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_l8xvh"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_54udb")
 id = 1
 
-[sub_resource type="Resource" id="Resource_a8onq"]
+[sub_resource type="Resource" id="Resource_bgl1q"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_4avnb"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_54udb")
 entity_props = {
@@ -947,121 +1235,127 @@ entity_props = {
 "agility": 0,
 "armor": 0,
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_bgl1q"),
 "forced_action_name": "",
 "forced_movement_name": "",
 "hp": 4,
 "id": SubResource("Resource_l8xvh"),
 "resistance": 0,
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
 "strength": 1,
 "team": 0
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_tnlwm"]
+[sub_resource type="Resource" id="Resource_5sn5o"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qi4qw"), SubResource("Resource_a8onq")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_dd0a2"), SubResource("Resource_4avnb")])
 
 [sub_resource type="Resource" id="Resource_hw624"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 91
 
-[sub_resource type="Resource" id="Resource_knp2b"]
+[sub_resource type="Resource" id="Resource_mlj83"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_hw624"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_dhd5e"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([1, 3])
 
 [sub_resource type="Resource" id="Resource_e53m6"]
 script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 2
 
-[sub_resource type="Resource" id="Resource_kifla"]
+[sub_resource type="Resource" id="Resource_dhd5e"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 3])
+
+[sub_resource type="Resource" id="Resource_fnxv8"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_dhd5e"),
 "id": SubResource("Resource_e53m6"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_psb4j"]
+[sub_resource type="Resource" id="Resource_wltko"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_knp2b"), SubResource("Resource_kifla")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mlj83"), SubResource("Resource_fnxv8")])
 
 [sub_resource type="Resource" id="Resource_bklsd"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 82
 
-[sub_resource type="Resource" id="Resource_r5b7v"]
+[sub_resource type="Resource" id="Resource_kbxss"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_bklsd"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_m1ybh"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([4, 4])
 
 [sub_resource type="Resource" id="Resource_1k8qr"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_25pqm")
 id = 1
 
-[sub_resource type="Resource" id="Resource_sxvcs"]
+[sub_resource type="Resource" id="Resource_m1ybh"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4, 4])
+
+[sub_resource type="Resource" id="Resource_23f7j"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_25pqm")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_m1ybh"),
 "id": SubResource("Resource_1k8qr"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_o3luh"]
+[sub_resource type="Resource" id="Resource_n7at1"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_r5b7v"), SubResource("Resource_sxvcs")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_kbxss"), SubResource("Resource_23f7j")])
 
 [sub_resource type="Resource" id="Resource_4ai4x"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 45
 
-[sub_resource type="Resource" id="Resource_dpgrt"]
+[sub_resource type="Resource" id="Resource_ql8l2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_4ai4x"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1070,84 +1364,88 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 3
 
-[sub_resource type="Resource" id="Resource_j8rgt"]
+[sub_resource type="Resource" id="Resource_tsdrj"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vir08"),
 "id": SubResource("Resource_7aeij"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_rft41"]
+[sub_resource type="Resource" id="Resource_aspgg"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_dpgrt"), SubResource("Resource_j8rgt")])
-
-[sub_resource type="Resource" id="Resource_hfhpp"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([3, 4])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ql8l2"), SubResource("Resource_tsdrj")])
 
 [sub_resource type="Resource" id="Resource_oaucm"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 4
 
-[sub_resource type="Resource" id="Resource_gx43w"]
+[sub_resource type="Resource" id="Resource_hfhpp"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_56q3o"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_hfhpp"),
 "id": SubResource("Resource_oaucm"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_47i33"]
+[sub_resource type="Resource" id="Resource_d7w6n"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gx43w")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_56q3o")])
 
 [sub_resource type="Resource" id="Resource_4jp04"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 3
 
-[sub_resource type="Resource" id="Resource_jna7u"]
+[sub_resource type="Resource" id="Resource_cb72a"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_hfhpp"),
 "id": SubResource("Resource_4jp04"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_vxav7"]
+[sub_resource type="Resource" id="Resource_es6ap"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jna7u")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cb72a")])
 
 [sub_resource type="Resource" id="Resource_2iepg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 8
 
-[sub_resource type="Resource" id="Resource_7m3lh"]
+[sub_resource type="Resource" id="Resource_1rguv"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_2iepg"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1156,36 +1454,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 5
 
-[sub_resource type="Resource" id="Resource_3lmfb"]
+[sub_resource type="Resource" id="Resource_3qj8y"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vir08"),
 "id": SubResource("Resource_77kiq"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_fddxs"]
+[sub_resource type="Resource" id="Resource_3ka3i"]
 script = ExtResource("5_6hme5")
 r = 3
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_7m3lh"), SubResource("Resource_3lmfb")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1rguv"), SubResource("Resource_3qj8y")])
 
 [sub_resource type="Resource" id="Resource_7v3sp"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 24
 
-[sub_resource type="Resource" id="Resource_s8nqf"]
+[sub_resource type="Resource" id="Resource_0pi70"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_7v3sp"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1194,36 +1494,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 8
 
-[sub_resource type="Resource" id="Resource_jfib0"]
+[sub_resource type="Resource" id="Resource_u6jo3"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_7s7wq"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_idm5i"]
+[sub_resource type="Resource" id="Resource_l56ng"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_s8nqf"), SubResource("Resource_jfib0")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0pi70"), SubResource("Resource_u6jo3")])
 
 [sub_resource type="Resource" id="Resource_ce0aw"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 30
 
-[sub_resource type="Resource" id="Resource_bi6he"]
+[sub_resource type="Resource" id="Resource_fjeoo"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_ce0aw"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1232,58 +1534,61 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 1
 
-[sub_resource type="Resource" id="Resource_7pqwa"]
+[sub_resource type="Resource" id="Resource_r1bod"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_dhd5e"),
 "id": SubResource("Resource_g7tji"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_foqeg"]
+[sub_resource type="Resource" id="Resource_es1vg"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bi6he"), SubResource("Resource_7pqwa")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_fjeoo"), SubResource("Resource_r1bod")])
 
 [sub_resource type="Resource" id="Resource_pend8"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 94
 
-[sub_resource type="Resource" id="Resource_0ogkd"]
+[sub_resource type="Resource" id="Resource_2jxwq"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_pend8"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_xavio"]
+[sub_resource type="Resource" id="Resource_8wojx"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0ogkd")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_2jxwq")])
 
 [sub_resource type="Resource" id="Resource_skjpa"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 84
 
-[sub_resource type="Resource" id="Resource_gex65"]
+[sub_resource type="Resource" id="Resource_bf14l"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_skjpa"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1292,58 +1597,61 @@ script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 3
 
-[sub_resource type="Resource" id="Resource_47t08"]
+[sub_resource type="Resource" id="Resource_2s0dr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_a0j1o"),
 "id": SubResource("Resource_0gtdw"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_tk0md"]
+[sub_resource type="Resource" id="Resource_gm32v"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gex65"), SubResource("Resource_47t08")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bf14l"), SubResource("Resource_2s0dr")])
 
 [sub_resource type="Resource" id="Resource_kc6lw"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 83
 
-[sub_resource type="Resource" id="Resource_jpxmr"]
+[sub_resource type="Resource" id="Resource_bydle"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_kc6lw"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_eklc6"]
+[sub_resource type="Resource" id="Resource_lr8pf"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jpxmr")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bydle")])
 
 [sub_resource type="Resource" id="Resource_gvgte"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 62
 
-[sub_resource type="Resource" id="Resource_jakuf"]
+[sub_resource type="Resource" id="Resource_hc14n"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_gvgte"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1352,142 +1660,149 @@ script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 2
 
-[sub_resource type="Resource" id="Resource_ecfjq"]
+[sub_resource type="Resource" id="Resource_2ohew"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_a0j1o"),
 "id": SubResource("Resource_e2lkh"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_fp82m"]
+[sub_resource type="Resource" id="Resource_32doq"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jakuf"), SubResource("Resource_ecfjq")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hc14n"), SubResource("Resource_2ohew")])
 
 [sub_resource type="Resource" id="Resource_g6soj"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 46
 
-[sub_resource type="Resource" id="Resource_bxtf2"]
+[sub_resource type="Resource" id="Resource_nnhhe"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_g6soj"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_nf2or"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([1, 3])
 
 [sub_resource type="Resource" id="Resource_dgy1e"]
 script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 3
 
-[sub_resource type="Resource" id="Resource_1lh3h"]
+[sub_resource type="Resource" id="Resource_nf2or"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 3])
+
+[sub_resource type="Resource" id="Resource_vvb4j"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_nf2or"),
 "id": SubResource("Resource_dgy1e"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_hxnhx"]
+[sub_resource type="Resource" id="Resource_yptve"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bxtf2"), SubResource("Resource_1lh3h")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nnhhe"), SubResource("Resource_vvb4j")])
 
 [sub_resource type="Resource" id="Resource_uqdun"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 5
 
-[sub_resource type="Resource" id="Resource_iie5o"]
+[sub_resource type="Resource" id="Resource_aso3e"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_hfhpp"),
 "id": SubResource("Resource_uqdun"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_vfvnk"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([4])
 
 [sub_resource type="Resource" id="Resource_iqkc3"]
 script = ExtResource("2_2i3es")
 type = ExtResource("16_j2ocy")
 id = 1
 
-[sub_resource type="Resource" id="Resource_ldsac"]
+[sub_resource type="Resource" id="Resource_vfvnk"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
+[sub_resource type="Resource" id="Resource_7mdqi"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("16_j2ocy")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vfvnk"),
 "id": SubResource("Resource_iqkc3"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_m3ltq"]
+[sub_resource type="Resource" id="Resource_tgr66"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_iie5o"), SubResource("Resource_ldsac")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_aso3e"), SubResource("Resource_7mdqi")])
 
 [sub_resource type="Resource" id="Resource_a4sok"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 2
 
-[sub_resource type="Resource" id="Resource_fdr2p"]
+[sub_resource type="Resource" id="Resource_4skwa"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_hfhpp"),
 "id": SubResource("Resource_a4sok"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ov83r"]
+[sub_resource type="Resource" id="Resource_joyyw"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_fdr2p")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_4skwa")])
 
 [sub_resource type="Resource" id="Resource_tru5f"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 9
 
-[sub_resource type="Resource" id="Resource_tik7i"]
+[sub_resource type="Resource" id="Resource_2xj1i"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_tru5f"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1496,78 +1811,82 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 5
 
-[sub_resource type="Resource" id="Resource_eoiwm"]
+[sub_resource type="Resource" id="Resource_3vpnv"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_fhjde"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_l8dgq"]
+[sub_resource type="Resource" id="Resource_vntl5"]
 script = ExtResource("5_6hme5")
 r = 4
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tik7i"), SubResource("Resource_eoiwm")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_2xj1i"), SubResource("Resource_3vpnv")])
 
 [sub_resource type="Resource" id="Resource_frtvy"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 23
 
-[sub_resource type="Resource" id="Resource_kfl3g"]
+[sub_resource type="Resource" id="Resource_totxo"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_frtvy"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_tsnpt"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 0])
 
 [sub_resource type="Resource" id="Resource_7o2br"]
 script = ExtResource("2_2i3es")
 type = ExtResource("9_b8i77")
 id = 4
 
-[sub_resource type="Resource" id="Resource_s0sy8"]
+[sub_resource type="Resource" id="Resource_tsnpt"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0])
+
+[sub_resource type="Resource" id="Resource_dxuqj"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("9_b8i77")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_tsnpt"),
 "id": SubResource("Resource_7o2br"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_sgplm"]
+[sub_resource type="Resource" id="Resource_cj3sj"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_kfl3g"), SubResource("Resource_s0sy8")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_totxo"), SubResource("Resource_dxuqj")])
 
 [sub_resource type="Resource" id="Resource_ixb76"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 31
 
-[sub_resource type="Resource" id="Resource_wwioo"]
+[sub_resource type="Resource" id="Resource_elnxr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_ixb76"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1576,36 +1895,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 27
 
-[sub_resource type="Resource" id="Resource_0874t"]
+[sub_resource type="Resource" id="Resource_drsoi"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_gwrkn"),
 "id": SubResource("Resource_eoarx"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ruskf"]
+[sub_resource type="Resource" id="Resource_8nora"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wwioo"), SubResource("Resource_0874t")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_elnxr"), SubResource("Resource_drsoi")])
 
 [sub_resource type="Resource" id="Resource_f0vox"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 39
 
-[sub_resource type="Resource" id="Resource_ynasu"]
+[sub_resource type="Resource" id="Resource_feg0o"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_f0vox"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1614,36 +1935,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 3
 
-[sub_resource type="Resource" id="Resource_yamn3"]
+[sub_resource type="Resource" id="Resource_8c1ik"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_o0xi8"),
 "id": SubResource("Resource_7a77a"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_n18ed"]
+[sub_resource type="Resource" id="Resource_o0gcp"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ynasu"), SubResource("Resource_yamn3")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_feg0o"), SubResource("Resource_8c1ik")])
 
 [sub_resource type="Resource" id="Resource_7cgwk"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 79
 
-[sub_resource type="Resource" id="Resource_vdo7m"]
+[sub_resource type="Resource" id="Resource_ucm6y"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_7cgwk"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1652,80 +1975,84 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 12
 
-[sub_resource type="Resource" id="Resource_rntt7"]
+[sub_resource type="Resource" id="Resource_vmw6k"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_8ddat"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_iqmx6"]
+[sub_resource type="Resource" id="Resource_ij6ev"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vdo7m"), SubResource("Resource_rntt7")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ucm6y"), SubResource("Resource_vmw6k")])
 
 [sub_resource type="Resource" id="Resource_gby3q"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 80
 
-[sub_resource type="Resource" id="Resource_sel1i"]
+[sub_resource type="Resource" id="Resource_tjgea"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_gby3q"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ttrh1"]
+[sub_resource type="Resource" id="Resource_qrigm"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sel1i")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tjgea")])
 
 [sub_resource type="Resource" id="Resource_ym36i"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 81
 
-[sub_resource type="Resource" id="Resource_qtg25"]
+[sub_resource type="Resource" id="Resource_k2trd"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_ym36i"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_qvgqh"]
+[sub_resource type="Resource" id="Resource_k3mnp"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qtg25")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_k2trd")])
 
 [sub_resource type="Resource" id="Resource_8wmgq"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 67
 
-[sub_resource type="Resource" id="Resource_rl25o"]
+[sub_resource type="Resource" id="Resource_ywn62"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_8wmgq"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1734,102 +2061,107 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 9
 
-[sub_resource type="Resource" id="Resource_u4d6h"]
+[sub_resource type="Resource" id="Resource_pol1c"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_mbu80"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_x7dfn"]
+[sub_resource type="Resource" id="Resource_6m4xi"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rl25o"), SubResource("Resource_u4d6h")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ywn62"), SubResource("Resource_pol1c")])
 
 [sub_resource type="Resource" id="Resource_qm8mu"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 66
 
-[sub_resource type="Resource" id="Resource_jb23i"]
+[sub_resource type="Resource" id="Resource_kj10e"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_qm8mu"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_xsbtj"]
+[sub_resource type="Resource" id="Resource_hdeue"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jb23i")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_kj10e")])
 
 [sub_resource type="Resource" id="Resource_hokop"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 1
 
-[sub_resource type="Resource" id="Resource_3d5ck"]
+[sub_resource type="Resource" id="Resource_pvhm6"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_hfhpp"),
 "id": SubResource("Resource_hokop"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_thx3m"]
+[sub_resource type="Resource" id="Resource_vlgdd"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3d5ck")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pvhm6")])
 
 [sub_resource type="Resource" id="Resource_ogme0"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 53
 
-[sub_resource type="Resource" id="Resource_imx2o"]
+[sub_resource type="Resource" id="Resource_ulpol"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_ogme0"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ptiid"]
+[sub_resource type="Resource" id="Resource_yacvl"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_imx2o")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ulpol")])
 
 [sub_resource type="Resource" id="Resource_x7a3h"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 2
 
-[sub_resource type="Resource" id="Resource_k0gp1"]
+[sub_resource type="Resource" id="Resource_c23r2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_x7a3h"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1838,36 +2170,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 6
 
-[sub_resource type="Resource" id="Resource_2kexu"]
+[sub_resource type="Resource" id="Resource_0k6f1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_gwjex"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_370o5"]
+[sub_resource type="Resource" id="Resource_kxvbf"]
 script = ExtResource("5_6hme5")
 r = 5
 q = 10
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_k0gp1"), SubResource("Resource_2kexu")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_c23r2"), SubResource("Resource_0k6f1")])
 
 [sub_resource type="Resource" id="Resource_cq2rq"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 22
 
-[sub_resource type="Resource" id="Resource_vsbsp"]
+[sub_resource type="Resource" id="Resource_v1rmr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_cq2rq"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1876,49 +2210,51 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 6
 
-[sub_resource type="Resource" id="Resource_7wr08"]
+[sub_resource type="Resource" id="Resource_h2uxe"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_uuiip"),
 "id": SubResource("Resource_ur5mk"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_avpem"]
+[sub_resource type="Resource" id="Resource_djou7"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vsbsp"), SubResource("Resource_7wr08")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_v1rmr"), SubResource("Resource_h2uxe")])
 
 [sub_resource type="Resource" id="Resource_1q36g"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 32
 
-[sub_resource type="Resource" id="Resource_b6rru"]
+[sub_resource type="Resource" id="Resource_p3ere"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_1q36g"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_tfkxq"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_2mt7g"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_amp3j")
 id = 1
 
-[sub_resource type="Resource" id="Resource_1rqpo"]
+[sub_resource type="Resource" id="Resource_tfkxq"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_4mxe7"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_amp3j")
 entity_props = {
@@ -1926,37 +2262,39 @@ entity_props = {
 "agility": 2,
 "armor": 0,
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_tfkxq"),
 "forced_action_name": "",
 "forced_movement_name": "",
 "hp": 3,
 "id": SubResource("Resource_2mt7g"),
 "resistance": 0,
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
 "strength": 1,
 "team": 0
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_pacy2"]
+[sub_resource type="Resource" id="Resource_g7hcp"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_b6rru"), SubResource("Resource_1rqpo")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_p3ere"), SubResource("Resource_4mxe7")])
 
 [sub_resource type="Resource" id="Resource_uemo2"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 38
 
-[sub_resource type="Resource" id="Resource_pftn5"]
+[sub_resource type="Resource" id="Resource_djli7"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_uemo2"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -1965,102 +2303,107 @@ script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 5
 
-[sub_resource type="Resource" id="Resource_5mdhu"]
+[sub_resource type="Resource" id="Resource_j325q"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_a0j1o"),
 "id": SubResource("Resource_brhi3"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_nrq44"]
+[sub_resource type="Resource" id="Resource_vlcop"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pftn5"), SubResource("Resource_5mdhu")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_djli7"), SubResource("Resource_j325q")])
 
 [sub_resource type="Resource" id="Resource_b5a52"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 85
 
-[sub_resource type="Resource" id="Resource_e5if6"]
+[sub_resource type="Resource" id="Resource_a8jcu"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_b5a52"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_6aahc"]
+[sub_resource type="Resource" id="Resource_1kl2e"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_e5if6")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_a8jcu")])
 
 [sub_resource type="Resource" id="Resource_7l5rb"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 74
 
-[sub_resource type="Resource" id="Resource_wwxle"]
+[sub_resource type="Resource" id="Resource_fnpep"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_7l5rb"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_pif60"]
+[sub_resource type="Resource" id="Resource_vxkig"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wwxle")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_fnpep")])
 
 [sub_resource type="Resource" id="Resource_2473n"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 73
 
-[sub_resource type="Resource" id="Resource_1y1qj"]
+[sub_resource type="Resource" id="Resource_k54ab"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_2473n"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_m1nx7"]
+[sub_resource type="Resource" id="Resource_54jit"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1y1qj")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_k54ab")])
 
 [sub_resource type="Resource" id="Resource_26vah"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 68
 
-[sub_resource type="Resource" id="Resource_rdvnw"]
+[sub_resource type="Resource" id="Resource_mv5ir"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_26vah"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2069,78 +2412,82 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 3
 
-[sub_resource type="Resource" id="Resource_awvxl"]
+[sub_resource type="Resource" id="Resource_4spsq"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_dhd5e"),
 "id": SubResource("Resource_cnis3"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_hfkfe"]
+[sub_resource type="Resource" id="Resource_600w5"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rdvnw"), SubResource("Resource_awvxl")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mv5ir"), SubResource("Resource_4spsq")])
 
 [sub_resource type="Resource" id="Resource_lwjr2"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 49
 
-[sub_resource type="Resource" id="Resource_ftyep"]
+[sub_resource type="Resource" id="Resource_n7lyo"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_lwjr2"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_hj5xo"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 1])
 
 [sub_resource type="Resource" id="Resource_76224"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 2
 
-[sub_resource type="Resource" id="Resource_uat2h"]
+[sub_resource type="Resource" id="Resource_hj5xo"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_iud7e"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_hj5xo"),
 "id": SubResource("Resource_76224"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_odkm0"]
+[sub_resource type="Resource" id="Resource_kx166"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ftyep"), SubResource("Resource_uat2h")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_n7lyo"), SubResource("Resource_iud7e")])
 
 [sub_resource type="Resource" id="Resource_ohqbn"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 1
 
-[sub_resource type="Resource" id="Resource_hb3y1"]
+[sub_resource type="Resource" id="Resource_22xn8"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_ohqbn"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2149,36 +2496,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 2
 
-[sub_resource type="Resource" id="Resource_pvbt7"]
+[sub_resource type="Resource" id="Resource_wgwdg"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_uuiip"),
 "id": SubResource("Resource_difmj"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_k6ku0"]
+[sub_resource type="Resource" id="Resource_gu3ya"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hb3y1"), SubResource("Resource_pvbt7")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_22xn8"), SubResource("Resource_wgwdg")])
 
 [sub_resource type="Resource" id="Resource_s7t5o"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 52
 
-[sub_resource type="Resource" id="Resource_sdqcq"]
+[sub_resource type="Resource" id="Resource_dxh8r"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_s7t5o"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2187,78 +2536,82 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 2
 
-[sub_resource type="Resource" id="Resource_3e1y6"]
+[sub_resource type="Resource" id="Resource_qqj4q"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vir08"),
 "id": SubResource("Resource_6ex1c"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_vu88n"]
+[sub_resource type="Resource" id="Resource_gmo3o"]
 script = ExtResource("5_6hme5")
 r = 6
 q = 9
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sdqcq"), SubResource("Resource_3e1y6")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_dxh8r"), SubResource("Resource_qqj4q")])
 
 [sub_resource type="Resource" id="Resource_bytmc"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 21
 
-[sub_resource type="Resource" id="Resource_a51yw"]
+[sub_resource type="Resource" id="Resource_3cs4w"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_bytmc"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_kfff7"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 1])
 
 [sub_resource type="Resource" id="Resource_5ocxp"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 1
 
-[sub_resource type="Resource" id="Resource_0bdmc"]
+[sub_resource type="Resource" id="Resource_kfff7"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_8h5r1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_kfff7"),
 "id": SubResource("Resource_5ocxp"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_s0txv"]
+[sub_resource type="Resource" id="Resource_bpwuq"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_a51yw"), SubResource("Resource_0bdmc")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3cs4w"), SubResource("Resource_8h5r1")])
 
 [sub_resource type="Resource" id="Resource_0odk8"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 33
 
-[sub_resource type="Resource" id="Resource_rfrj2"]
+[sub_resource type="Resource" id="Resource_l2v6f"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_0odk8"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2267,36 +2620,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 1
 
-[sub_resource type="Resource" id="Resource_doimq"]
+[sub_resource type="Resource" id="Resource_tt5v5"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vir08"),
 "id": SubResource("Resource_1dgty"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_vjgkd"]
+[sub_resource type="Resource" id="Resource_35edp"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rfrj2"), SubResource("Resource_doimq")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_l2v6f"), SubResource("Resource_tt5v5")])
 
 [sub_resource type="Resource" id="Resource_clrpf"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 37
 
-[sub_resource type="Resource" id="Resource_hmhad"]
+[sub_resource type="Resource" id="Resource_xph53"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_clrpf"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2305,36 +2660,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("19_25pqm")
 id = 2
 
-[sub_resource type="Resource" id="Resource_00ebq"]
+[sub_resource type="Resource" id="Resource_4gi0g"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_25pqm")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_m1ybh"),
 "id": SubResource("Resource_8g8yh"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_athgs"]
+[sub_resource type="Resource" id="Resource_ws2gn"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hmhad"), SubResource("Resource_00ebq")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xph53"), SubResource("Resource_4gi0g")])
 
 [sub_resource type="Resource" id="Resource_2ye8h"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 75
 
-[sub_resource type="Resource" id="Resource_usbwo"]
+[sub_resource type="Resource" id="Resource_bacak"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_2ye8h"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2343,80 +2700,84 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 6
 
-[sub_resource type="Resource" id="Resource_eko71"]
+[sub_resource type="Resource" id="Resource_wbc1w"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_dhd5e"),
 "id": SubResource("Resource_fa2pd"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_shc1k"]
+[sub_resource type="Resource" id="Resource_klsgq"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_usbwo"), SubResource("Resource_eko71")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bacak"), SubResource("Resource_wbc1w")])
 
 [sub_resource type="Resource" id="Resource_fn11g"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 72
 
-[sub_resource type="Resource" id="Resource_xslql"]
+[sub_resource type="Resource" id="Resource_lypa6"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_fn11g"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_l3rd6"]
+[sub_resource type="Resource" id="Resource_3c0fu"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xslql")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lypa6")])
 
 [sub_resource type="Resource" id="Resource_6vmw6"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 69
 
-[sub_resource type="Resource" id="Resource_vdpf6"]
+[sub_resource type="Resource" id="Resource_k0f8l"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_6vmw6"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_cq03v"]
+[sub_resource type="Resource" id="Resource_tsww3"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vdpf6")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_k0f8l")])
 
 [sub_resource type="Resource" id="Resource_t22j2"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 41
 
-[sub_resource type="Resource" id="Resource_qenqv"]
+[sub_resource type="Resource" id="Resource_0slma"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_t22j2"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2425,58 +2786,61 @@ script = ExtResource("2_2i3es")
 type = ExtResource("9_b8i77")
 id = 1
 
-[sub_resource type="Resource" id="Resource_powos"]
+[sub_resource type="Resource" id="Resource_bx0kf"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("9_b8i77")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_x3nhf"),
 "id": SubResource("Resource_pgb0e"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_0v47h"]
+[sub_resource type="Resource" id="Resource_82apy"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qenqv"), SubResource("Resource_powos")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0slma"), SubResource("Resource_bx0kf")])
 
 [sub_resource type="Resource" id="Resource_35y1w"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 50
 
-[sub_resource type="Resource" id="Resource_l57x7"]
+[sub_resource type="Resource" id="Resource_lihr7"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_35y1w"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_oyjw3"]
+[sub_resource type="Resource" id="Resource_67ts3"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_l57x7")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lihr7")])
 
 [sub_resource type="Resource" id="Resource_8rsn7"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 51
 
-[sub_resource type="Resource" id="Resource_6e1km"]
+[sub_resource type="Resource" id="Resource_yb2dm"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_8rsn7"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2485,36 +2849,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 4
 
-[sub_resource type="Resource" id="Resource_i0tms"]
+[sub_resource type="Resource" id="Resource_ixe5e"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("7_ay4xs")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_gwrkn"),
 "id": SubResource("Resource_fkwcc"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_skitd"]
+[sub_resource type="Resource" id="Resource_4qsmw"]
 script = ExtResource("5_6hme5")
 r = 7
 q = 8
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6e1km"), SubResource("Resource_i0tms")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_yb2dm"), SubResource("Resource_ixe5e")])
 
 [sub_resource type="Resource" id="Resource_sf6sg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 20
 
-[sub_resource type="Resource" id="Resource_sq01c"]
+[sub_resource type="Resource" id="Resource_wfo2g"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_sf6sg"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2523,36 +2889,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 10
 
-[sub_resource type="Resource" id="Resource_gc3ti"]
+[sub_resource type="Resource" id="Resource_dtaih"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_yxrxq"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ybbw3"]
+[sub_resource type="Resource" id="Resource_3gyr4"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sq01c"), SubResource("Resource_gc3ti")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wfo2g"), SubResource("Resource_dtaih")])
 
 [sub_resource type="Resource" id="Resource_ncx8v"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 40
 
-[sub_resource type="Resource" id="Resource_s8a5w"]
+[sub_resource type="Resource" id="Resource_oihvg"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_ncx8v"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2561,62 +2929,65 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 5
 
-[sub_resource type="Resource" id="Resource_8s71o"]
+[sub_resource type="Resource" id="Resource_b365m"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_dhd5e"),
 "id": SubResource("Resource_7de58"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_0e48u"]
+[sub_resource type="Resource" id="Resource_qltmu"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_s8a5w"), SubResource("Resource_8s71o")])
-
-[sub_resource type="Resource" id="Resource_c8wdn"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([3, 4])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_oihvg"), SubResource("Resource_b365m")])
 
 [sub_resource type="Resource" id="Resource_b7ag6"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 1
 
-[sub_resource type="Resource" id="Resource_fnhjb"]
+[sub_resource type="Resource" id="Resource_c8wdn"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_ehwte"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_c8wdn"),
 "id": SubResource("Resource_b7ag6"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_lk7g1"]
+[sub_resource type="Resource" id="Resource_i505p"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_fnhjb")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ehwte")])
 
 [sub_resource type="Resource" id="Resource_pcm55"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 71
 
-[sub_resource type="Resource" id="Resource_x2rsm"]
+[sub_resource type="Resource" id="Resource_151rv"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_pcm55"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2625,87 +2996,86 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 1
 
-[sub_resource type="Resource" id="Resource_ipggd"]
+[sub_resource type="Resource" id="Resource_ai3c0"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_fn0u2")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_o0xi8"),
 "id": SubResource("Resource_2p27s"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_i4v1b"]
+[sub_resource type="Resource" id="Resource_g35vw"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_x2rsm"), SubResource("Resource_ipggd")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_151rv"), SubResource("Resource_ai3c0")])
 
 [sub_resource type="Resource" id="Resource_xvikx"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 70
 
-[sub_resource type="Resource" id="Resource_1ycdo"]
+[sub_resource type="Resource" id="Resource_opdw3"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_xvikx"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_6pchl"]
+[sub_resource type="Resource" id="Resource_7qns1"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1ycdo")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_opdw3")])
 
 [sub_resource type="Resource" id="Resource_jkxij"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 40
 
-[sub_resource type="Resource" id="Resource_yaw16"]
+[sub_resource type="Resource" id="Resource_lei12"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_jkxij"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_7yvtm"]
+[sub_resource type="Resource" id="Resource_i7vtg"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_yaw16")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lei12")])
 
 [sub_resource type="Resource" id="Resource_nor5m"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 42
 
-[sub_resource type="Resource" id="Resource_mslpw"]
+[sub_resource type="Resource" id="Resource_6vson"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_nor5m"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_ynb5v"]
-script = ExtResource("2_2i3es")
-type = ExtResource("16_0ybmk")
-id = 1
 
 [sub_resource type="Resource" id="Resource_rtejl"]
 script = ExtResource("15_uvvh0")
@@ -2713,39 +3083,46 @@ max_handsize = 5
 movement_range = 3
 max_drains = 3
 
-[sub_resource type="Resource" id="Resource_taeb0"]
+[sub_resource type="Resource" id="Resource_ynb5v"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_0ybmk")
+id = 1
+
+[sub_resource type="Resource" id="Resource_evd4g"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("16_0ybmk")
 entity_props = {
 "armor": 0,
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "hp": 5,
 "id": SubResource("Resource_ynb5v"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
 "traits": SubResource("Resource_rtejl")
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_u5d8d"]
+[sub_resource type="Resource" id="Resource_qvyv0"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mslpw"), SubResource("Resource_taeb0")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6vson"), SubResource("Resource_evd4g")])
 
 [sub_resource type="Resource" id="Resource_gdkwn"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 6
 
-[sub_resource type="Resource" id="Resource_0d72p"]
+[sub_resource type="Resource" id="Resource_h1jqr"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_gdkwn"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2754,82 +3131,86 @@ script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 4
 
-[sub_resource type="Resource" id="Resource_thm0c"]
+[sub_resource type="Resource" id="Resource_vr30a"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("14_xioyu")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_dhd5e"),
 "id": SubResource("Resource_7iq24"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_gte3s"]
+[sub_resource type="Resource" id="Resource_y3oqo"]
 script = ExtResource("5_6hme5")
 r = 8
 q = 7
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0d72p"), SubResource("Resource_thm0c")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_h1jqr"), SubResource("Resource_vr30a")])
 
 [sub_resource type="Resource" id="Resource_5x6n7"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 19
 
-[sub_resource type="Resource" id="Resource_okfca"]
+[sub_resource type="Resource" id="Resource_qcsgn"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_5x6n7"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_n50ds"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([5])
 
 [sub_resource type="Resource" id="Resource_eqlqb"]
 script = ExtResource("2_2i3es")
 type = ExtResource("13_l3am2")
 id = 1
 
-[sub_resource type="Resource" id="Resource_gklrk"]
+[sub_resource type="Resource" id="Resource_n50ds"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([5])
+
+[sub_resource type="Resource" id="Resource_cd31n"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("13_l3am2")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_n50ds"),
 "id": SubResource("Resource_eqlqb"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_78huo"]
+[sub_resource type="Resource" id="Resource_da8le"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_okfca"), SubResource("Resource_gklrk")])
-
-[sub_resource type="Resource" id="Resource_dok8u"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([3, 4])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qcsgn"), SubResource("Resource_cd31n")])
 
 [sub_resource type="Resource" id="Resource_mp706"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 1
 
-[sub_resource type="Resource" id="Resource_o1vl7"]
+[sub_resource type="Resource" id="Resource_dok8u"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_mjux1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_dok8u"),
 "id": SubResource("Resource_mp706"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2838,122 +3219,128 @@ script = ExtResource("2_2i3es")
 type = ExtResource("16_j2ocy")
 id = 3
 
-[sub_resource type="Resource" id="Resource_c8ee7"]
+[sub_resource type="Resource" id="Resource_8jhpu"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("16_j2ocy")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vfvnk"),
 "id": SubResource("Resource_xql1y"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_3bxem"]
+[sub_resource type="Resource" id="Resource_5dufv"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_o1vl7"), SubResource("Resource_c8ee7")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mjux1"), SubResource("Resource_8jhpu")])
 
 [sub_resource type="Resource" id="Resource_lw87u"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 2
 
-[sub_resource type="Resource" id="Resource_qk1yw"]
+[sub_resource type="Resource" id="Resource_tmre1"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("19_ncl4f")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_dok8u"),
 "id": SubResource("Resource_lw87u"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_kunub"]
+[sub_resource type="Resource" id="Resource_pe0hc"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qk1yw")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tmre1")])
 
 [sub_resource type="Resource" id="Resource_o5ttf"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 33
 
-[sub_resource type="Resource" id="Resource_wlxi7"]
+[sub_resource type="Resource" id="Resource_o768h"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_o5ttf"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
-
-[sub_resource type="Resource" id="Resource_36c7q"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([1, 2])
 
 [sub_resource type="Resource" id="Resource_kjv5c"]
 script = ExtResource("2_2i3es")
 type = ExtResource("10_q3j68")
 id = 2
 
-[sub_resource type="Resource" id="Resource_xsc8g"]
+[sub_resource type="Resource" id="Resource_36c7q"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 2])
+
+[sub_resource type="Resource" id="Resource_algf6"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("10_q3j68")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_36c7q"),
 "id": SubResource("Resource_kjv5c"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_3vmbb"]
+[sub_resource type="Resource" id="Resource_38gxh"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wlxi7"), SubResource("Resource_xsc8g")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_o768h"), SubResource("Resource_algf6")])
 
 [sub_resource type="Resource" id="Resource_t6f63"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 38
 
-[sub_resource type="Resource" id="Resource_rmhty"]
+[sub_resource type="Resource" id="Resource_no7d8"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_t6f63"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_bwdvw"]
+[sub_resource type="Resource" id="Resource_32sfp"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rmhty")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_no7d8")])
 
 [sub_resource type="Resource" id="Resource_x2umi"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 39
 
-[sub_resource type="Resource" id="Resource_ms5fg"]
+[sub_resource type="Resource" id="Resource_k8r30"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_x2umi"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -2962,80 +3349,84 @@ script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 4
 
-[sub_resource type="Resource" id="Resource_6thsn"]
+[sub_resource type="Resource" id="Resource_r5p7i"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("17_73e5m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_a0j1o"),
 "id": SubResource("Resource_a70yn"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_o84y2"]
+[sub_resource type="Resource" id="Resource_rv87u"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ms5fg"), SubResource("Resource_6thsn")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_k8r30"), SubResource("Resource_r5p7i")])
 
 [sub_resource type="Resource" id="Resource_03sds"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 5
 
-[sub_resource type="Resource" id="Resource_0henm"]
+[sub_resource type="Resource" id="Resource_m0ov3"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_03sds"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_x41wd"]
+[sub_resource type="Resource" id="Resource_26fls"]
 script = ExtResource("5_6hme5")
 r = 9
 q = 6
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0henm")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_m0ov3")])
 
 [sub_resource type="Resource" id="Resource_t6yuj"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 18
 
-[sub_resource type="Resource" id="Resource_0y3hj"]
+[sub_resource type="Resource" id="Resource_3h6gb"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_t6yuj"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_ifcgs"]
+[sub_resource type="Resource" id="Resource_ndft4"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 0
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0y3hj")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3h6gb")])
 
 [sub_resource type="Resource" id="Resource_2abkn"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 17
 
-[sub_resource type="Resource" id="Resource_b5u7v"]
+[sub_resource type="Resource" id="Resource_14a76"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_2abkn"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -3044,36 +3435,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 5
 
-[sub_resource type="Resource" id="Resource_cpbqn"]
+[sub_resource type="Resource" id="Resource_6vmw4"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_uuiip"),
 "id": SubResource("Resource_5rj2v"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_s1c6l"]
+[sub_resource type="Resource" id="Resource_ji0ki"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 1
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_b5u7v"), SubResource("Resource_cpbqn")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_14a76"), SubResource("Resource_6vmw4")])
 
 [sub_resource type="Resource" id="Resource_jd0fv"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 16
 
-[sub_resource type="Resource" id="Resource_lpdim"]
+[sub_resource type="Resource" id="Resource_qi5n2"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_jd0fv"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -3082,36 +3475,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 4
 
-[sub_resource type="Resource" id="Resource_mbaki"]
+[sub_resource type="Resource" id="Resource_xf04i"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("15_s3iof")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_uuiip"),
 "id": SubResource("Resource_xql0m"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_quwse"]
+[sub_resource type="Resource" id="Resource_7b83x"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 2
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lpdim"), SubResource("Resource_mbaki")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qi5n2"), SubResource("Resource_xf04i")])
 
 [sub_resource type="Resource" id="Resource_22pxl"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 15
 
-[sub_resource type="Resource" id="Resource_0dyvo"]
+[sub_resource type="Resource" id="Resource_tisrw"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_22pxl"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -3120,36 +3515,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("16_j2ocy")
 id = 2
 
-[sub_resource type="Resource" id="Resource_kep4n"]
+[sub_resource type="Resource" id="Resource_uitbt"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("16_j2ocy")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_vfvnk"),
 "id": SubResource("Resource_uq3uh"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_cqrfj"]
+[sub_resource type="Resource" id="Resource_btjxy"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 3
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0dyvo"), SubResource("Resource_kep4n")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tisrw"), SubResource("Resource_uitbt")])
 
 [sub_resource type="Resource" id="Resource_k1jkw"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
 id = 13
 
-[sub_resource type="Resource" id="Resource_47c4s"]
+[sub_resource type="Resource" id="Resource_8d33n"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("3_vhrki")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_k1jkw"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -3158,36 +3555,38 @@ script = ExtResource("2_2i3es")
 type = ExtResource("9_b8i77")
 id = 3
 
-[sub_resource type="Resource" id="Resource_51agj"]
+[sub_resource type="Resource" id="Resource_s42hm"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("9_b8i77")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_tsnpt"),
 "id": SubResource("Resource_umfaq"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_7tycq"]
+[sub_resource type="Resource" id="Resource_xh8pu"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 4
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_47c4s"), SubResource("Resource_51agj")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8d33n"), SubResource("Resource_s42hm")])
 
 [sub_resource type="Resource" id="Resource_foa5s"]
 script = ExtResource("2_2i3es")
 type = ExtResource("6_8em4m")
 id = 4
 
-[sub_resource type="Resource" id="Resource_5ifb2"]
+[sub_resource type="Resource" id="Resource_dn6bs"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("6_8em4m")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": null,
 "id": SubResource("Resource_foa5s"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
@@ -3196,44 +3595,48 @@ script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 11
 
-[sub_resource type="Resource" id="Resource_oknab"]
+[sub_resource type="Resource" id="Resource_t466o"]
 script = ExtResource("4_qk5jy")
 type = ExtResource("11_7c360")
 entity_props = {
 "custom_props": {},
+"drained_energy": null,
 "energy": SubResource("Resource_jhx8i"),
 "id": SubResource("Resource_t04lc"),
-"status_effects": Array[Resource("res://Spells/AllStatusEffects/StatusEffect.gd")]([])
+"status_effects": Array[ExtResource("32_moxhk")]([])
 }
 script_props = {}
 
-[sub_resource type="Resource" id="Resource_3gkxc"]
+[sub_resource type="Resource" id="Resource_kt452"]
 script = ExtResource("5_6hme5")
 r = 10
 q = 5
-entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5ifb2"), SubResource("Resource_oknab")])
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_dn6bs"), SubResource("Resource_t466o")])
 
-[sub_resource type="Resource" id="Resource_gjxad"]
+[sub_resource type="Resource" id="Resource_awcps"]
 script = ExtResource("1_worvi")
-tiles = Array[ExtResource("5_6hme5")]([SubResource("Resource_w3iag"), SubResource("Resource_bxxyn"), SubResource("Resource_1ltit"), SubResource("Resource_w0y7e"), SubResource("Resource_aa7ey"), SubResource("Resource_48hpo"), SubResource("Resource_uhx7n"), SubResource("Resource_dluhg"), SubResource("Resource_hwmaw"), SubResource("Resource_6xscg"), SubResource("Resource_xi5hr"), SubResource("Resource_wlg7y"), SubResource("Resource_y7v5f"), SubResource("Resource_a2grc"), SubResource("Resource_avhrl"), SubResource("Resource_qs8jc"), SubResource("Resource_c4v8d"), SubResource("Resource_bq6ds"), SubResource("Resource_m6ryq"), SubResource("Resource_mqs6p"), SubResource("Resource_a2ny5"), SubResource("Resource_oisrc"), SubResource("Resource_envuu"), SubResource("Resource_tnlwm"), SubResource("Resource_psb4j"), SubResource("Resource_o3luh"), SubResource("Resource_rft41"), SubResource("Resource_47i33"), SubResource("Resource_vxav7"), SubResource("Resource_fddxs"), SubResource("Resource_idm5i"), SubResource("Resource_foqeg"), SubResource("Resource_xavio"), SubResource("Resource_tk0md"), SubResource("Resource_eklc6"), SubResource("Resource_fp82m"), SubResource("Resource_hxnhx"), SubResource("Resource_m3ltq"), SubResource("Resource_ov83r"), SubResource("Resource_l8dgq"), SubResource("Resource_sgplm"), SubResource("Resource_ruskf"), SubResource("Resource_n18ed"), SubResource("Resource_iqmx6"), SubResource("Resource_ttrh1"), SubResource("Resource_qvgqh"), SubResource("Resource_x7dfn"), SubResource("Resource_xsbtj"), SubResource("Resource_thx3m"), SubResource("Resource_ptiid"), SubResource("Resource_370o5"), SubResource("Resource_avpem"), SubResource("Resource_pacy2"), SubResource("Resource_nrq44"), SubResource("Resource_6aahc"), SubResource("Resource_pif60"), SubResource("Resource_m1nx7"), SubResource("Resource_hfkfe"), SubResource("Resource_odkm0"), SubResource("Resource_k6ku0"), SubResource("Resource_vu88n"), SubResource("Resource_s0txv"), SubResource("Resource_vjgkd"), SubResource("Resource_athgs"), SubResource("Resource_shc1k"), SubResource("Resource_l3rd6"), SubResource("Resource_cq03v"), SubResource("Resource_0v47h"), SubResource("Resource_oyjw3"), SubResource("Resource_skitd"), SubResource("Resource_ybbw3"), SubResource("Resource_0e48u"), SubResource("Resource_lk7g1"), SubResource("Resource_i4v1b"), SubResource("Resource_6pchl"), SubResource("Resource_7yvtm"), SubResource("Resource_u5d8d"), SubResource("Resource_gte3s"), SubResource("Resource_78huo"), SubResource("Resource_3bxem"), SubResource("Resource_kunub"), SubResource("Resource_3vmbb"), SubResource("Resource_bwdvw"), SubResource("Resource_o84y2"), SubResource("Resource_x41wd"), SubResource("Resource_ifcgs"), SubResource("Resource_s1c6l"), SubResource("Resource_quwse"), SubResource("Resource_cqrfj"), SubResource("Resource_7tycq"), SubResource("Resource_3gkxc")])
+tiles = Array[ExtResource("5_6hme5")]([SubResource("Resource_al7a3"), SubResource("Resource_1wqry"), SubResource("Resource_cadc4"), SubResource("Resource_ixsy1"), SubResource("Resource_ycc64"), SubResource("Resource_1luqr"), SubResource("Resource_swmky"), SubResource("Resource_fcjnb"), SubResource("Resource_qexni"), SubResource("Resource_frtsk"), SubResource("Resource_fedwf"), SubResource("Resource_pfhnu"), SubResource("Resource_xdgin"), SubResource("Resource_jtiiw"), SubResource("Resource_80rt2"), SubResource("Resource_m1rvq"), SubResource("Resource_hmkpo"), SubResource("Resource_2tbtj"), SubResource("Resource_ea1wt"), SubResource("Resource_1sn23"), SubResource("Resource_o2ykd"), SubResource("Resource_n5ejo"), SubResource("Resource_xry3y"), SubResource("Resource_5sn5o"), SubResource("Resource_wltko"), SubResource("Resource_n7at1"), SubResource("Resource_aspgg"), SubResource("Resource_d7w6n"), SubResource("Resource_es6ap"), SubResource("Resource_3ka3i"), SubResource("Resource_l56ng"), SubResource("Resource_es1vg"), SubResource("Resource_8wojx"), SubResource("Resource_gm32v"), SubResource("Resource_lr8pf"), SubResource("Resource_32doq"), SubResource("Resource_yptve"), SubResource("Resource_tgr66"), SubResource("Resource_joyyw"), SubResource("Resource_vntl5"), SubResource("Resource_cj3sj"), SubResource("Resource_8nora"), SubResource("Resource_o0gcp"), SubResource("Resource_ij6ev"), SubResource("Resource_qrigm"), SubResource("Resource_k3mnp"), SubResource("Resource_6m4xi"), SubResource("Resource_hdeue"), SubResource("Resource_vlgdd"), SubResource("Resource_yacvl"), SubResource("Resource_kxvbf"), SubResource("Resource_djou7"), SubResource("Resource_g7hcp"), SubResource("Resource_vlcop"), SubResource("Resource_1kl2e"), SubResource("Resource_vxkig"), SubResource("Resource_54jit"), SubResource("Resource_600w5"), SubResource("Resource_kx166"), SubResource("Resource_gu3ya"), SubResource("Resource_gmo3o"), SubResource("Resource_bpwuq"), SubResource("Resource_35edp"), SubResource("Resource_ws2gn"), SubResource("Resource_klsgq"), SubResource("Resource_3c0fu"), SubResource("Resource_tsww3"), SubResource("Resource_82apy"), SubResource("Resource_67ts3"), SubResource("Resource_4qsmw"), SubResource("Resource_3gyr4"), SubResource("Resource_qltmu"), SubResource("Resource_i505p"), SubResource("Resource_g35vw"), SubResource("Resource_7qns1"), SubResource("Resource_i7vtg"), SubResource("Resource_qvyv0"), SubResource("Resource_y3oqo"), SubResource("Resource_da8le"), SubResource("Resource_5dufv"), SubResource("Resource_pe0hc"), SubResource("Resource_38gxh"), SubResource("Resource_32sfp"), SubResource("Resource_rv87u"), SubResource("Resource_26fls"), SubResource("Resource_ndft4"), SubResource("Resource_ji0ki"), SubResource("Resource_7b83x"), SubResource("Resource_btjxy"), SubResource("Resource_xh8pu"), SubResource("Resource_kt452")])
 graveyard = Array[ExtResource("4_qk5jy")]([])
 rows = 11
 columns = 11
 
+[sub_resource type="Resource" id="Resource_laa35"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
 [resource]
 script = ExtResource("1_a77op")
-level_state = SubResource("Resource_gjxad")
+level_state = SubResource("Resource_awcps")
 current_round = 1
 current_phase = 0
-deck_states = Array[Resource("res://Logic/CombatUtility/Castables/SpellState.gd")]([])
-hand_states = Array[Resource("res://Logic/CombatUtility/Castables/SpellState.gd")]([])
-discard_pile_states = Array[Resource("res://Logic/CombatUtility/Castables/SpellState.gd")]([])
-timed_effects = Array[Resource("res://Logic/CombatUtility/TimedEffect.gd")]([])
-combat_log = Array[Resource("res://Logic/CombatUtility/Utilities/LogEntry.gd")]([])
-active_states = Array[Resource("res://Logic/CombatUtility/Castables/ActiveState.gd")]([])
-all_events = Array[Resource("res://Logic/CombatUtility/Events/CombatEventState.gd")]([])
-event_timeline = {
-1: [SubResource("Resource_ggb53")]
-}
-enemy_event_queue = Array[ExtResource("2_kcnt0")]([SubResource("Resource_t7fuw")])
+player_energy = SubResource("Resource_laa35")
+deck_states = Array[ExtResource("4_x7vib")]([SubResource("Resource_b5d41"), SubResource("Resource_7a1pa"), SubResource("Resource_sr150"), SubResource("Resource_8n8i8"), SubResource("Resource_a18sg"), SubResource("Resource_lnqyn"), SubResource("Resource_xdbs1"), SubResource("Resource_q5ljd"), SubResource("Resource_wr6xt"), SubResource("Resource_uq5f7"), SubResource("Resource_7bxkd"), SubResource("Resource_826tx"), SubResource("Resource_wkx03"), SubResource("Resource_mle3s"), SubResource("Resource_yqmrd"), SubResource("Resource_im01p"), SubResource("Resource_6yjxl"), SubResource("Resource_2x7gg"), SubResource("Resource_0h1ne"), SubResource("Resource_32181")])
+hand_states = Array[ExtResource("4_x7vib")]([])
+discard_pile_states = Array[ExtResource("4_x7vib")]([])
+timed_effects = Array[ExtResource("53_jcir5")]([])
+combat_log = Array[ExtResource("3_kxbah")]([SubResource("Resource_au4dy"), SubResource("Resource_pdv8v")])
+active_states = Array[ExtResource("1_opmkl")]([])
+all_events = Array[ExtResource("2_pdf0p")]([])
+event_timeline = {}
+enemy_event_queue = Array[ExtResource("2_kcnt0")]([])
 enemy_meter = 0

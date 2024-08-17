@@ -20,6 +20,9 @@ signal combat_changed (combat : Combat)
 
 func _ready() -> void:
 	Game.world = self
+	# should be put somewhere else but 🤷‍♂️
+	Input.set_custom_mouse_cursor(load("res://Assets/Sprites/Cursor/wood_maple.png"),
+								  Input.CURSOR_POINTING_HAND)
 
 func load_combat_from_path(level_path: String) -> void:
 	var combat_state: CombatState = load(level_path) as CombatState
@@ -82,13 +85,15 @@ func load_combat_from_state(combat_state: CombatState, combat_active: bool = tru
 	if popup_handler != null:
 		popup_handler.start()
 
-#func _reset_combat():
-	#if combat == null:
-		#return
-	#remove_child(combat)
-	#remove_child(combat.level)
-	#ui_root.remove_child(combat_ui)
-	#popup_handler.reset()
+func _reset_combat():
+	if combat == null:
+		return
+	remove_child(combat)
+	remove_child(combat.level)
+	if ui_root != null:
+		ui_root.remove_child(combat_ui)
+	if popup_handler != null:
+		popup_handler.reset()
 #
 #func _exit_tree():
 	#call_deferred("_reset_combat")
