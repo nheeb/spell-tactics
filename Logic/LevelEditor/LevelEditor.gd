@@ -113,11 +113,10 @@ func mouse_exited_editor_ui():
 	tile_hover_blocker.unblock()
 	zoom_blocker.unblock()
 
-
 func _on_level_selection_item_selected(idx: int) -> void:
 	var new_lvl_path = $%LevelSelection.get_item_metadata(idx)
+	save_current_level()
 	load_level(new_lvl_path)
-
 
 func _on_level_size_value_changed(value: float) -> void:
 	value = int(value)
@@ -127,7 +126,7 @@ func _on_level_size_value_changed(value: float) -> void:
 		world.level.expand_level_boundaries()
 	elif value < current_size:
 		var res: bool = world.level.shrink_level_boundaries()
-		if not res:
+		if not res:  # couldn't shrink
 			# Reset the spin box value to the current grid size
 			$%LevelSize.set_value_no_signal(current_size)
 	

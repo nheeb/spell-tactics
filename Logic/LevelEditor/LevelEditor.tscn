@@ -15,7 +15,8 @@ viewport_path = NodePath("Viewport3D")
 script/source = "extends OptionButton
 
 func _ready() -> void:
-	self.get_popup().add_theme_font_size_override(\"font_size\", 24)
+	get_popup().add_theme_font_size_override(\"font_size\", 24)
+	get_popup().get_parent
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5q5bw"]
