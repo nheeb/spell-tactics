@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=2 format=3 uid="uid://dogyiyxl5nlgo"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyAction.gd" id="1_6hjxg"]
+
+[resource]
+script = ExtResource("1_6hjxg")
+pretty_name = ""
+color = Color(1, 1, 1, 1)
+target_type = 1
+target_range_looking = -1
+target_range_walking = -1
+target_consider_count = 2
+target_consider_method = 0
+default_scores = Array[Resource("res://Logic/CombatUtility/Entities/Enemies/EnemyActionCriteriaValue.gd")]([])
+cooldown = 0

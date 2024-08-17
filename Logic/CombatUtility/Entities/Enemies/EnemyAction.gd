@@ -19,8 +19,10 @@ enum TargetConsiderMethod {Best}
 @export var default_scores : Array[EnemyActionCriteriaValue]
 
 @export_group("Extras")
-@export var cooldown := 0
-@export var alternative_action : EnemyAction = null
+@export var cooldown := 0 # TODO implement this
+@export var alternative_action: EnemyAction = null
+@export var movement_action: EnemyAction = null
+@export var movement_mandatory := false
 
 ## Logic script
 var logic_script: Script
@@ -37,6 +39,9 @@ func _on_load() -> void:
 		internal_name = resource_path.split("/")[-1].split(".")[0]
 		var directory = "/".join(resource_path.split("/").slice(0, -1))
 		logic_script = load(directory + "/" + internal_name + ".gd")
+		if movement_action:
+			assert(movement_action.movement_action == null,
+					"Movement action has a movement action. This is cursed.")
 
 func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 	var combat := enemy.combat

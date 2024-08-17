@@ -3,7 +3,6 @@ class_name EntityLogic
 var entity: Entity
 var combat: Combat
 
-
 func _init(e: Entity, c: Combat) -> void:
 	entity = e
 	combat = c
@@ -11,7 +10,6 @@ func _init(e: Entity, c: Combat) -> void:
 	e.entered_graveyard.connect(on_graveyard)
 
 func on_graveyard():
-	# override me :)
 	pass
 
 ## Executed when the logic is created or loaded (Put visuals in here)

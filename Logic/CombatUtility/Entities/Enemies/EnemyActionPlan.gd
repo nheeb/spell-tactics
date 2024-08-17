@@ -4,6 +4,8 @@ class_name EnemyActionPlan extends Resource
 @export var action: EnemyAction
 @export var target_ref: UniversalReference
 
+var score_cache := -1.0
+
 #####################################################
 ## Constructor & Getters for real combat instances ##
 #####################################################
@@ -45,10 +47,17 @@ func execute(combat: Combat):
 func is_possible(combat: Combat) -> bool:
 	return get_action_logic(combat).is_possible(get_target(combat))
 
-## TODO Nitai Cache this value
 func get_evaluation_score(combat: Combat) -> float:
-	return get_action_logic(combat).evaluate(get_target(combat))\
+	if score_cache < 0.0:
+		score_cache = get_action_logic(combat).evaluate(get_target(combat))\
 				.get_total_score(get_enemy(combat).type.behaviour)
+	return score_cache
 
 func show_preview(combat: Combat, show: bool) -> void:
 	get_action_logic(combat).show_preview(get_target(combat), show)
+
+func get_alternative(combat: Combat) -> EnemyActionPlan:
+	return get_action_logic(combat).get_alternative_plan(get_target(combat))
+
+func get_string_action_target(combat: Combat) -> String:
+	return action.pretty_name + (" -> %10s" % str(get_target(combat)) if target_ref else "")

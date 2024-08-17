@@ -30,10 +30,15 @@ func get_total_score(behaviour: EnemyBehaviour) -> float:
 	for c in Criteria.values():
 		total_score +=  Utility.dict_safe_get(scores, c, 0.0) * \
 						Utility.dict_safe_get(behaviour_dict, c, 1.0)
-	return total_score
+	return max(0.0, total_score)
 
 static func from_cv_array(cvs: Array[EnemyActionCriteriaValue]) -> EnemyActionEval:
 	var scores := {}
 	for cv in cvs:
 		scores[cv.criteria] = cv.value
 	return EnemyActionEval.new(scores)
+
+func add(eval: EnemyActionEval) -> EnemyActionEval:
+	for k in eval.scores.keys():
+		scores[k] = Utility.dict_safe_get(scores, k, 0.0) + eval.scores[k]
+	return self

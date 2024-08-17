@@ -1,7 +1,5 @@
-
 class_name EntityType extends Resource
 
-@export_category("Entity")
 ## Lowercase unique entity identifier
 @export var internal_name: String
 ## whether a UI element should pop up with name / info on hover (might belong more in VisualEntity)
@@ -19,15 +17,18 @@ class_name EntityType extends Resource
 @export var prototype_scale := Vector2.ONE
 
 @export_category("Gameplay")
+## Which tags (categories) this entity belongs to, for example Mushroom
+@export var tags: Array[String] = []
 @export var is_terrain := false
+
+@export_group("Energy")
 @export var is_drainable := true
 ## The energy this entity gives (if it's drainable)
 @export var energy: EnergyStack = null
 
-
+@export_group("Collision")
 const NAV_OBSTACLE_LAYER = 1
 const ENEMY_LAYER = 2
-
 ## The obstacle layer for collisions.
 @export_flags_2d_physics var obstacle_layer: int = 0
 ## The default obstacle layer mask for grid search.
@@ -37,8 +38,6 @@ const ENEMY_LAYER = 2
 ## How good of a cover this is from projectiles (accuracy reduction)
 @export var cover_value: int = 0
 
-## Which tags (categories) this entity belongs to, for example Mushroom
-@export var tags: Array[String] = []
 
 # instantiate this EntityType
 # usually calls on create, the flag is only for deserialize to call that function after the properties have been set

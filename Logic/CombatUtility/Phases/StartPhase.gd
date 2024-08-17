@@ -6,7 +6,8 @@ func process_phase() -> bool:
 	combat.animation.wait(.5)
 	combat.cards.draw_to_hand_size()
 	
-	#combat.energy.reset_drains()
+	for enemy in combat.get_all_enemies():
+		enemy.plan_next_action()
 	
 	if Game.DEBUG_SPELL_TESTING:
 		combat.energy.gain(Game.testing_energy)

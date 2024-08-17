@@ -1,6 +1,7 @@
 class_name EnemyBehaviour extends Resource
 
 @export var name: String
+@export var decision_power := 2.0
 @export var criteria_preferences: Array[EnemyActionCriteriaValue]
 var criteria_dict: Dictionary = {}: 
 	get:

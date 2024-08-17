@@ -47,7 +47,9 @@ func cube_add(r1: int, q1: int, s1: int, r2: int, q2: int, s2: int) -> Vector3i:
 func axial_add():
 	pass
 
-func random_index_of_scores(scores: Array[float]) -> int:
+var random_index_of_scores_report: String
+func random_index_of_scores(scores: Array[float], create_report := false, \
+							names: Array[String] = [], title := "") -> int:
 	if scores.is_empty():
 		push_error("Random index: Empty list")
 		return -1
@@ -56,12 +58,27 @@ func random_index_of_scores(scores: Array[float]) -> int:
 		push_error("Random index: Only Zero entries")
 		return -1
 	var random_value := randf_range(0.0, total_size)
+	var chosen_index: int = -1
 	for i in range(scores.size()):
 		random_value -= scores[i]
 		if random_value < 0.0:
-			return i
-	push_error("Random index: Something went wrong")
-	return -1
+			chosen_index = i
+	if chosen_index == -1:
+		push_error("Random index: Something went wrong")
+	if create_report:
+		var report := "%s:\n" % title
+		var index_order := range(scores.size())
+		index_order.sort_custom(
+			func (a,b):
+				return scores[a] > scores[b]
+		)
+		for index in index_order:
+			report += "%s %5.2f %s\n" % [
+				"->" if index == chosen_index else "  ",
+				scores[index], names[index]
+			]
+		random_index_of_scores_report = report
+	return chosen_index
 
 ## the hit chance should be between 0 and 100
 func random_hit(hit_chance: float) -> bool:

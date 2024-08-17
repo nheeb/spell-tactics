@@ -15,8 +15,7 @@ func process_phase() -> bool:
 	for enemy in combat.enemies:
 		combat.animation.camera_reach(enemy.visual_entity)
 		combat.animation.camera_follow(enemy.visual_entity)
-		enemy.do_movement()
-		combat.animation.wait(.3)
+		combat.animation.wait(.2)
 		enemy.do_action()
 		combat.animation.camera_unfollow()
 		

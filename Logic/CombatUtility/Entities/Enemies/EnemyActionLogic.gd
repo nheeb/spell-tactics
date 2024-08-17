@@ -9,9 +9,14 @@ var enemy: EnemyEntity
 #########################
 
 func execute(target):
+	if has_movement():
+		get_movement_logic().execute(target)
 	_execute(target)
 
 func is_possible(target) -> bool:
+	if has_movement():
+		if action.movement_mandatory:
+			return _is_possible(target) and get_movement_logic().is_possible(target)
 	return _is_possible(target)
 
 func evaluate(target) -> EnemyActionEval:
@@ -19,15 +24,44 @@ func evaluate(target) -> EnemyActionEval:
 		var evaluation := _evaluate(target)
 		if evaluation == null:
 			evaluation = EnemyActionEval.from_cv_array(action.default_scores)
+		if has_movement():
+			evaluation = evaluation.add(get_movement_logic().evaluate(target))
 		return evaluation
 	else:
 		return EnemyActionEval.new()
 
 func estimated_destination(target) -> Tile:
-	return _estimated_destination(target)
+	var destinaion := _estimated_destination(target)
+	if destinaion != null:
+		return destinaion
+	return estimated_destination_after_movement(target)
 
 func show_preview(target, show: bool) -> void:
+	if has_movement():
+		get_movement_logic().show_preview(target, show)
 	_show_preview(target, show)
+
+func get_alternative_plan(target) -> EnemyActionPlan:
+	var plan := _get_alternative_plan(target)
+	if plan:
+		return plan
+	elif action.alternative_action:
+		return EnemyActionPlan.new(enemy, action.alternative_action, target)
+	return null
+
+func has_movement() -> bool:
+	return action.movement_action != null
+
+func get_movement_logic() -> EnemyActionLogic:
+	if action.movement_action:
+		return enemy.get_action_logic(action.movement_action)
+	return null
+
+func estimated_destination_after_movement(target) -> Tile:
+	if has_movement():
+		return get_movement_logic().estimated_destination(target)
+	else:
+		return enemy.current_tile
 
 ############################
 ## Methods for overriding ##
@@ -48,6 +82,9 @@ func _estimated_destination(target) -> Tile:
 func _show_preview(target, show: bool) -> void:
 	show_movement_arrow(target, show)
 	show_action_icon_over_enemy(show)
+
+func _get_alternative_plan(target) -> EnemyActionPlan:
+	return null
 
 ####################
 ## Helper Methods ##
