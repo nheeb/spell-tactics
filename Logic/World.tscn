@@ -16,6 +16,7 @@ environment = ExtResource("2_suwfn")
 transform = Transform3D(-0.756722, -0.538054, 0.371309, -0.0137619, 0.580964, 0.813813, -0.653592, 0.61072, -0.447032, 0, 0, 0)
 light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_mode = 1
 directional_shadow_blend_splits = true
 directional_shadow_fade_start = 0.6
 directional_shadow_max_distance = 50.0
@@ -32,6 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="Smoothing" type="Node3D" parent="GameCamera/AnglePivot/ZoomPivot"]
 script = ExtResource("3_mpog2")
+flags = 15
 
 [node name="Camera3D" type="Camera3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing"]
 unique_name_in_owner = true
