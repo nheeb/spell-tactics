@@ -21,7 +21,7 @@ signal combat_changed (combat : Combat)
 func _ready() -> void:
 	Game.world = self
 	# should be put somewhere else but 🤷‍♂️
-	Input.set_custom_mouse_cursor(load("res://Assets/Sprites/Cursor/wood_maple.png"),
+	Input.set_custom_mouse_cursor(load("res://Assets/Sprites/Cursor/wood_oak_24_highlight.png"),
 								  Input.CURSOR_POINTING_HAND)
 
 func load_combat_from_path(level_path: String) -> void:

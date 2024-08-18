@@ -635,6 +635,7 @@ shape = SubResource("SphereShape3D_xbhwi")
 
 [node name="Visual" type="Node3D" parent="."]
 transform = Transform3D(0.55357, 0, 0, 0, 0.55357, 0, 0, 0, 0.55357, 0, 0, 0)
+visible = false
 
 [node name="Rings" type="GPUParticles3D" parent="Visual"]
 cast_shadow = 0

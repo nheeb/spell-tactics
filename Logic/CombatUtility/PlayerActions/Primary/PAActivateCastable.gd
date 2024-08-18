@@ -18,6 +18,9 @@ func execute(combat: Combat) -> void:
 						.warp.bind(Events.cards3d_ray_collision_point)) \
 						.set_duration(.3)
 	else:
+		if combat.input.current_castable == null:
+			push_error("ActivateCastable executed without a current_castable")
+			return
 		combat.animation.callable(combat.input.current_castable.get_card().warp) \
 						.set_duration(.3)
 	combat.animation.wait(.4)
@@ -25,4 +28,3 @@ func execute(combat: Combat) -> void:
 
 func on_fail(combat: Combat) -> void:
 	pass
-

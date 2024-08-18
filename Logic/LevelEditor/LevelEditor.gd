@@ -1,7 +1,7 @@
 class_name EditorUI extends Control
 
 @onready var world: World = $"%World"
-@onready var selection_ui = $%SelectionUi
+@onready var selection_ui = $%Entities
 
 var all_levels_paths: Array[String] = []
 var current_level_path = "res://Levels/SpellTesting/spell_test.tres"

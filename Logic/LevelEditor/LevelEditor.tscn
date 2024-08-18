@@ -16,7 +16,6 @@ script/source = "extends OptionButton
 
 func _ready() -> void:
 	get_popup().add_theme_font_size_override(\"font_size\", 24)
-	get_popup().get_parent
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5q5bw"]
@@ -283,27 +282,24 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 24
 text = "Create New Level"
 
-[node name="RightBar" type="Panel" parent="."]
+[node name="RightBar" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.790104
 anchor_right = 1.0
 anchor_bottom = 0.867
+current_tab = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="SelectionUi" type="Control" parent="RightBar" node_paths=PackedStringArray("editor_ui")]
+[node name="Entities" type="Control" parent="RightBar" node_paths=PackedStringArray("editor_ui")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 mouse_filter = 2
 script = ExtResource("5_ep6w4")
 editor_ui = NodePath("../..")
+metadata/_tab_index = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="RightBar/SelectionUi"]
+[node name="ScrollContainer" type="ScrollContainer" parent="RightBar/Entities"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -314,7 +310,35 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_5q5bw")
 horizontal_scroll_mode = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Container" type="GridContainer" parent="RightBar/SelectionUi/ScrollContainer"]
+[node name="Container" type="GridContainer" parent="RightBar/Entities/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Layers" type="Control" parent="RightBar" node_paths=PackedStringArray("editor_ui")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("5_ep6w4")
+editor_ui = NodePath("../..")
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RightBar/Layers"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.99
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5q5bw")
+horizontal_scroll_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Container" type="GridContainer" parent="RightBar/Layers/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2

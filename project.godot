@@ -13,6 +13,7 @@ config_version=5
 config/name="SpellTactics"
 run/main_scene="res://Logic/Main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=144
 config/icon="res://Assets/Sprites/Icons/active-button/02_border.png"
 
 [autoload]
@@ -41,7 +42,7 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-mouse_cursor/custom_image="res://Assets/Sprites/Cursor/wood_oak.png"
+mouse_cursor/custom_image="res://Assets/Sprites/Cursor/wood_oak_24.png"
 
 [dotnet]
 
