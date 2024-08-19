@@ -4,6 +4,8 @@ var action: EnemyAction
 var combat: Combat
 var enemy: EnemyEntity
 
+var movement_done := false
+
 #########################
 ## Methods for calling ##
 #########################
@@ -11,7 +13,9 @@ var enemy: EnemyEntity
 func execute(target):
 	if has_movement():
 		get_movement_logic().execute(target)
+		movement_done = true
 	_execute(target)
+	movement_done = false
 
 func is_possible(target) -> bool:
 	if has_movement():
