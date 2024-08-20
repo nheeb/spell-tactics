@@ -1,6 +1,8 @@
 class_name GameCamera extends Node3D
 
 static var zoom_block: Utils.Block = Utils.Block.new()
+static var translate_block: Utils.Block = Utils.Block.new()
+
 
 var velocity := Vector3.ZERO
 var rotation_input := 0.0
@@ -38,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	delta *= VisualTime.visual_time_scale
 	
 	# x-z movement
-	if player_input_enabled:
+	if player_input_enabled and not translate_block.is_blocked():
 		velocity += delta * move_acceleration * (basis * Vector3.RIGHT) * (Input.get_action_strength("move_camera_right") - Input.get_action_strength("move_camera_left"))
 		velocity += delta * move_acceleration * (basis * Vector3.FORWARD) * (Input.get_action_strength("move_camera_forwards") - Input.get_action_strength("move_camera_backwards"))
 		
@@ -58,7 +60,8 @@ func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
 		
 	# rotation
-	rotation_input += delta * rotation_velocity * (Input.get_action_strength("rotate_camera_clockwise") - Input.get_action_strength("rotate_camera_anticlockwise"))
+	if player_input_enabled:
+		rotation_input += delta * rotation_velocity * (Input.get_action_strength("rotate_camera_clockwise") - Input.get_action_strength("rotate_camera_anticlockwise"))
 	rotate_y(deg_to_rad(rotation_input))
 	rotation_input = 0.0
 	
@@ -78,6 +81,6 @@ func _physics_process(delta: float) -> void:
 	zoom_pivot.position.y = camera_zoom
 	
 	# mouse wheel pan
-	if Input.is_action_pressed("mouse_pan"):
+	if player_input_enabled and Input.is_action_pressed("mouse_pan"):
 		rotation_input += relative_motion.x * mouse_rotation_factor * .5
 		rotation_input_vertical = - relative_motion.y * mouse_rotation_factor

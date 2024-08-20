@@ -23,7 +23,6 @@ const TOTEM = preload("res://Entities/Environment/WitchTotem.tres")
 ## Here should be the effect
 func casting_effect() -> void:
 	target = target as Tile
-	var totem := combat.level.entities().create_entity(target.location, TOTEM, false)
+	var totem := combat.level.entities.create_entity(target.location, TOTEM, false)
 	combat.animation.effect(VFX.HEX_RINGS, target, {"color": Color.DARK_VIOLET}).set_duration(1.5)
 	combat.animation.show(totem.visual_entity).set_flag_with()
-

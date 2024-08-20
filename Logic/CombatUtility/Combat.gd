@@ -66,7 +66,7 @@ func setup() -> void:
 	# Get player and enemy references
 	player = null
 	enemies = []
-	for entity in level.entities().get_all_entities():
+	for entity in level.entities.get_all_entities():
 		if entity is PlayerEntity:
 			if player != entity and player != null:
 				push_error("Two players in a level??")
@@ -78,7 +78,7 @@ func setup() -> void:
 		push_error("No Player entity was found. Creating a new one.")
 		@warning_ignore("integer_division")
 		var position = Vector2i(level.n_rows / 2 , level.n_cols / 2)
-		player = level.entities().create_entity(position, load("res://Entities/PlayerResource.tres"))
+		player = level.entities.create_entity(position, load("res://Entities/PlayerResource.tres"))
 		
 
 	# Connect input signals
@@ -89,12 +89,12 @@ func setup() -> void:
 	if current_phase == RoundPhase.CombatBegin:
 		# If it's a fresh combat make every id new
 		log.add("Creating new entity ids")
-		for e in level.entities().get_all_entities():
+		for e in level.entities.get_all_entities():
 			e.id = EntityID.new(e.type, level.add_type_count(e.type))
 			# set energy to the EntityType's energy in case it changed from level creation
 			e.sync_with_type()
 	else:
-		for e in level.entities().get_all_entities():
+		for e in level.entities.get_all_entities():
 			if e.id != null:
 				level.add_type_count(e.type)
 			else:

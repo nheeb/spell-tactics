@@ -1,9 +1,7 @@
-
 class_name Level extends Node3D
 
 ## We're using (r,q)-axial coordinates, for a reference see
 ## https://www.redblobgames.com/grids/hexagons/#coordinates-axial
-
 ## 2D Array of tiles, indexed with (r,q)
 var tiles: Array[Array] = []  # Tile
 var n_rows: int  # r in (0, n_rows - 1)
@@ -12,10 +10,11 @@ var n_cols: int  # q in (0, n_cols - 1)
 var graveyard: Array[Entity]
 var combat: Combat
 
-
 @onready var player: PlayerEntity
 @onready var visual_effects: Node3D = $VisualEffects
 @onready var visual_entities: Node3D = $VisualEntities
+
+@onready var entities: LevelEntities = LevelEntities.new(self)
 
 var entity_type_count := {}
 
@@ -27,6 +26,9 @@ func clear():
 	for row in tiles:
 		for tile in row:
 			if tile != null:
+				tile = tile as Tile
+				for ent in tile.entities:
+					ent.queue_free()
 				tile.queue_free()
 
 func init_tiles_array(rows, cols):
@@ -422,8 +424,7 @@ func highlight_entity_type(type: EntityType):
 func unhighlight_entity_type(type: EntityType):
 	_unhighlight_tile_set(find_all_tiles_with(type), Highlight.Type.Energy)
 
-func entities() -> LevelEntities:
-	return LevelEntities.new(self)
+
 
 func search(from: Vector2i, to: Vector2i, mask: int = Constants.INT64_MAX) -> LevelSearch:
 	return LevelSearch.new(self, from, to, mask)

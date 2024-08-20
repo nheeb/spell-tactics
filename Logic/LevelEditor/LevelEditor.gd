@@ -3,6 +3,9 @@ class_name EditorUI extends Control
 @onready var world: World = $"%World"
 @onready var selection_ui = $%Entities
 
+
+
+
 var all_levels_paths: Array[String] = []
 var current_level_path = "res://Levels/SpellTesting/spell_test.tres"
 
@@ -13,11 +16,14 @@ var tool_placer = Placer.new()
 var tool_erase = Erase.new()
 
 var placement_active: EntityType = null
-var tool_active = null
+var tool_active = null:
+	set(t):
+		tool_active = t
 var ent_active: EntityType = null
 
 @onready var tile_hover_blocker: Utils.Blocker = MouseInput.mouse_block.register_blocker()
 @onready var zoom_blocker: Utils.Blocker = GameCamera.zoom_block.register_blocker()
+@onready var translate_blocker: Utils.Blocker = GameCamera.translate_block.register_blocker()
 
 ## LevelEditor should load with a combat state
 func _ready() -> void:
@@ -74,8 +80,6 @@ func load_level(level_path: String):
 	world._reset_combat()
 	world.load_combat_from_state(combat_state, false)
 	current_level_path = level_path
-	
-	# TODO update dropdown? hmm
 	$%LevelSize.value = world.level.get_grid_size()
 	
 func save_current_level():

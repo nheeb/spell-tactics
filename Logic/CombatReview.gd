@@ -29,7 +29,7 @@ func initialize_with_combat(combat: Combat) -> void:
 	deck = []
 	deck.append_array(Utility.array_unique(combat.get_all_castables().map(func(s): return s.type)))
 	entities = []
-	entities.append_array(Utility.array_unique(combat.level.entities().get_all_entities().map(func(e): return e.type)))
+	entities.append_array(Utility.array_unique(combat.level.entities.get_all_entities().map(func(e): return e.type)))
 	game_version = Game.game_version_string
 	# TODO Level name
 	if Game.review_questions:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7dxgf4vovuq1"]
+[gd_scene load_steps=13 format=3 uid="uid://b7dxgf4vovuq1"]
 
 [ext_resource type="Script" path="res://Logic/LevelEditor/LevelEditor.gd" id="1_bl8t1"]
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_85xti"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Logic/LevelEditor/UI/SelectionUI.gd" id="5_ep6w4"]
 [ext_resource type="Script" path="res://UI/ScreenCombat/ViewportSizer.gd" id="6_jgjps"]
 [ext_resource type="Script" path="res://Logic/LevelEditor/UI/size_spin_box.gd" id="6_pcyv0"]
+[ext_resource type="Script" path="res://Logic/LevelEditor/Inspector.gd" id="8_kc5lm"]
+[ext_resource type="PackedScene" uid="uid://cabuyq7rmy1hx" path="res://Logic/LevelEditor/UI/InspectorRow.tscn" id="9_8bsjx"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2ukqi"]
 viewport_path = NodePath("Viewport3D")
@@ -100,10 +102,9 @@ target_viewport = NodePath("../Viewport3D")
 [node name="BottomBar" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.969444
-anchor_right = 1.0
+anchor_top = 0.865
+anchor_right = 0.790625
 anchor_bottom = 1.0
-offset_top = -112.0
 grow_horizontal = 2
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
@@ -115,7 +116,6 @@ anchor_left = 0.00416667
 anchor_top = 0.0275862
 anchor_right = 0.138021
 anchor_bottom = 0.951724
-grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/h_separation = 10
@@ -282,52 +282,57 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 24
 text = "Create New Level"
 
-[node name="RightBar" type="TabContainer" parent="."]
+[node name="RandomizeRotation" type="Label" parent="BottomBar"]
+layout_mode = 2
+anchor_left = -0.232292
+anchor_top = 0.365519
+anchor_right = -0.232292
+anchor_bottom = 0.365519
+offset_left = 728.0
+offset_top = 4.0
+offset_right = 930.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Randomize Rotation:"
+label_settings = ExtResource("5_73if2")
+metadata/_edit_use_anchors_ = true
+
+[node name="LevelSelection" type="CheckBox" parent="BottomBar"]
+layout_mode = 2
+anchor_left = -0.232292
+anchor_top = 0.365519
+anchor_right = -0.232292
+anchor_bottom = 0.365519
+offset_left = 940.0
+offset_top = 4.0
+offset_right = 964.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="RightUpperBar" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.790104
 anchor_right = 1.0
-anchor_bottom = 0.867
-current_tab = 0
+anchor_bottom = 0.668519
+current_tab = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Entities" type="Control" parent="RightBar" node_paths=PackedStringArray("editor_ui")]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("5_ep6w4")
-editor_ui = NodePath("../..")
-metadata/_tab_index = 0
-
-[node name="ScrollContainer" type="ScrollContainer" parent="RightBar/Entities"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.99
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_5q5bw")
-horizontal_scroll_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Container" type="GridContainer" parent="RightBar/Entities/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 12
-columns = 3
-
-[node name="Layers" type="Control" parent="RightBar" node_paths=PackedStringArray("editor_ui")]
+[node name="Terrain" type="Control" parent="RightUpperBar" node_paths=PackedStringArray("editor_ui")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("5_ep6w4")
 editor_ui = NodePath("../..")
-metadata/_tab_index = 1
+metadata/_tab_index = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="RightBar/Layers"]
+[node name="ScrollContainer" type="ScrollContainer" parent="RightUpperBar/Terrain"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -338,13 +343,94 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_5q5bw")
 horizontal_scroll_mode = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Container" type="GridContainer" parent="RightBar/Layers/ScrollContainer"]
+[node name="Container" type="GridContainer" parent="RightUpperBar/Terrain/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 12
 columns = 3
+
+[node name="Entities" type="Control" parent="RightUpperBar" node_paths=PackedStringArray("editor_ui")]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("5_ep6w4")
+editor_ui = NodePath("../..")
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RightUpperBar/Entities"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.99
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5q5bw")
+horizontal_scroll_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Container" type="GridContainer" parent="RightUpperBar/Entities/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Layers" type="Control" parent="RightUpperBar"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+metadata/_tab_index = 2
+
+[node name="RightLower" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.790104
+anchor_top = 0.673148
+anchor_right = 1.0
+anchor_bottom = 1.0
+current_tab = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Inspector" type="Control" parent="RightLower"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("8_kc5lm")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="RightLower/Inspector"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RightLower/Inspector/MarginContainer"]
+layout_mode = 2
+
+[node name="InspectorRowList" type="VBoxContainer" parent="RightLower/Inspector/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="EntityName" type="Label" parent="RightLower/Inspector/MarginContainer/ScrollContainer/InspectorRowList"]
+layout_mode = 2
+text = "Racoon"
+horizontal_alignment = 1
+
+[node name="InspectorRow" parent="RightLower/Inspector/MarginContainer/ScrollContainer/InspectorRowList" instance=ExtResource("9_8bsjx")]
+layout_mode = 2
+theme_override_constants/separation = 20
 
 [connection signal="combat_changed" from="Viewport3D/World" to="PopUpHandler" method="_on_world_combat_changed"]
 [connection signal="mouse_entered" from="BottomBar" to="." method="mouse_entered_editor_ui"]
@@ -356,5 +442,7 @@ columns = 3
 [connection signal="pressed" from="BottomBar/ToolsContainer/Lower" to="." method="_on_lower_pressed"]
 [connection signal="item_selected" from="BottomBar/LevelSettingsContainer/LevelSelection" to="." method="_on_level_selection_item_selected"]
 [connection signal="value_changed" from="BottomBar/LevelSettingsContainer/LevelSize" to="." method="_on_level_size_value_changed"]
-[connection signal="mouse_entered" from="RightBar" to="." method="mouse_entered_editor_ui"]
-[connection signal="mouse_exited" from="RightBar" to="." method="mouse_exited_editor_ui"]
+[connection signal="mouse_entered" from="RightUpperBar" to="." method="mouse_entered_editor_ui"]
+[connection signal="mouse_exited" from="RightUpperBar" to="." method="mouse_exited_editor_ui"]
+[connection signal="mouse_entered" from="RightLower" to="." method="mouse_entered_editor_ui"]
+[connection signal="mouse_exited" from="RightLower" to="." method="mouse_exited_editor_ui"]

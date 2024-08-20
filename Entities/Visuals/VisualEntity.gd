@@ -9,6 +9,11 @@ class_name VisualEntity extends Node3D
 var type: EntityType
 var entity: Entity
 
+@export_range(0, 360, 60) var visual_rotation: int:
+	set(v):
+		visual_rotation = v
+		rotation_degrees.x = v
+
 @onready var entity_name = str(entity.id) if entity != null else "null_entity"
 
 func _enter_tree() -> void:
