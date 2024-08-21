@@ -32,6 +32,9 @@ func _to_string() -> String:
 func get_reference_type() -> String:
 	return "Abstract UniversalReference"
 
+func equals(other: UniversalReference, combat: Combat = null) -> bool:
+	return resolve(combat) == other.resolve(combat)
+
 ##########################################
 ## Getters for the different References ##
 ##########################################
