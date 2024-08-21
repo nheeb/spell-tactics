@@ -14,6 +14,9 @@ var tool_raise = Raise.new()
 var tool_lower = Lower.new()
 var tool_placer = Placer.new()
 var tool_erase = Erase.new()
+var tool_select_entity = SelectEntityTool.new()
+
+
 
 var placement_active: EntityType = null
 var tool_active = null:
@@ -41,6 +44,9 @@ func _ready() -> void:
 		
 		if level_path == current_level_path:
 			$%LevelSelection.selected = idx
+			
+	# initialize tools
+	tool_select_entity.inspector = %Inspector
 
 
 func _notification(what: int) -> void:
@@ -100,6 +106,9 @@ func _on_lower_pressed():
 func _on_place_pressed():
 	tool_active = tool_placer
 	selection_ui.set_mode(SelectionUI.Mode.Entities)
+	
+func _on_select_pressed() -> void:
+	tool_active = tool_select_entity
 
 func _on_erase_pressed():
 	tool_active = tool_erase

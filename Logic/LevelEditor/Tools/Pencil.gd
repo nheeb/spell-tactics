@@ -22,7 +22,7 @@ func _drag(level: Level, tile: Tile, eitorUI: EditorUI):
 func _set_tile(level: Level, tile: Tile, placement_active: EntityType):
 	var current_terrain = level.entities.get_terrain(tile.location)
 	if current_terrain != null:
-		level.entities.remove_entity(tile.location, current_terrain)
+		level.entities.remove(tile.location, current_terrain)
 	if placement_active != null:
-		level.entities.create_entity(tile.location, placement_active)
+		level.entities.create(tile.location, placement_active)
 	

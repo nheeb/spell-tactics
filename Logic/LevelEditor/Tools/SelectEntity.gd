@@ -3,6 +3,8 @@ class_name SelectEntityTool extends Tool
 var selected_tile: Tile = null
 var entity_idx: int = 0
 
+var inspector: Inspector
+
 func _selected():
 	pass
 	
@@ -16,4 +18,12 @@ func _drag(_level: Level, tile: Tile, eitorUI: EditorUI):
 	pass
 
 func _set_tile(level: Level, tile: Tile, ent_active: EntityType):
-	level.entities.create_entity(tile.location, ent_active)
+	# for now just extract the exported properties of the first entity,
+	# or just even the name
+	# later we will want to cycle
+	if len(tile.entities) == 0:
+		print("no ents")
+		return
+	var entity: Entity = tile.entities[0]
+	assert(inspector != null, "Inspector path must be set to use this SelectEntityTool.")
+	inspector.inspect_entity(entity)

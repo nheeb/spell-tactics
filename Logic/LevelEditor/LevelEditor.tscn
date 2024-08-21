@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7dxgf4vovuq1"]
+[gd_scene load_steps=12 format=3 uid="uid://b7dxgf4vovuq1"]
 
 [ext_resource type="Script" path="res://Logic/LevelEditor/LevelEditor.gd" id="1_bl8t1"]
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_85xti"]
@@ -7,8 +7,7 @@
 [ext_resource type="Script" path="res://Logic/LevelEditor/UI/SelectionUI.gd" id="5_ep6w4"]
 [ext_resource type="Script" path="res://UI/ScreenCombat/ViewportSizer.gd" id="6_jgjps"]
 [ext_resource type="Script" path="res://Logic/LevelEditor/UI/size_spin_box.gd" id="6_pcyv0"]
-[ext_resource type="Script" path="res://Logic/LevelEditor/Inspector.gd" id="8_kc5lm"]
-[ext_resource type="PackedScene" uid="uid://cabuyq7rmy1hx" path="res://Logic/LevelEditor/UI/InspectorRow.tscn" id="9_8bsjx"]
+[ext_resource type="PackedScene" uid="uid://bmsob15ts7una" path="res://Logic/LevelEditor/Inspector/Inspector.tscn" id="8_w3lyf"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2ukqi"]
 viewport_path = NodePath("Viewport3D")
@@ -119,7 +118,7 @@ anchor_bottom = 0.951724
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/h_separation = 10
-columns = 3
+columns = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="Terrain" type="Label" parent="BottomBar/ToolsContainer"]
@@ -142,6 +141,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
+[node name="Empty2" type="Control" parent="BottomBar/ToolsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
 [node name="Fill" type="Button" parent="BottomBar/ToolsContainer"]
 visible = false
 layout_mode = 2
@@ -156,6 +160,14 @@ size_flags_horizontal = 3
 mouse_filter = 1
 text = "Entity"
 label_settings = ExtResource("5_73if2")
+
+[node name="Select" type="Button" parent="BottomBar/ToolsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 24
+text = "Select"
 
 [node name="Place" type="Button" parent="BottomBar/ToolsContainer"]
 layout_mode = 2
@@ -175,6 +187,7 @@ theme_override_font_sizes/font_size = 24
 text = "Erase"
 
 [node name="Elevation" type="Label" parent="BottomBar/ToolsContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -182,6 +195,7 @@ text = "Elevation"
 label_settings = ExtResource("5_73if2")
 
 [node name="Raise" type="Button" parent="BottomBar/ToolsContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -190,6 +204,7 @@ theme_override_font_sizes/font_size = 24
 text = "Raise"
 
 [node name="Lower" type="Button" parent="BottomBar/ToolsContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -228,6 +243,12 @@ script = SubResource("GDScript_wfmlb")
 
 [node name="Empty" type="Control" parent="BottomBar/LevelSettingsContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="Empty" type="Control" parent="BottomBar/LevelSettingsContainer/Empty"]
+layout_mode = 3
+anchors_preset = 0
 size_flags_horizontal = 3
 mouse_filter = 1
 
@@ -395,47 +416,15 @@ anchor_bottom = 1.0
 current_tab = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Inspector" type="Control" parent="RightLower"]
+[node name="Inspector" parent="RightLower" instance=ExtResource("8_w3lyf")]
 unique_name_in_owner = true
 layout_mode = 2
-mouse_filter = 2
-script = ExtResource("8_kc5lm")
-metadata/_tab_index = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="RightLower/Inspector"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="ScrollContainer" type="ScrollContainer" parent="RightLower/Inspector/MarginContainer"]
-layout_mode = 2
-
-[node name="InspectorRowList" type="VBoxContainer" parent="RightLower/Inspector/MarginContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="EntityName" type="Label" parent="RightLower/Inspector/MarginContainer/ScrollContainer/InspectorRowList"]
-layout_mode = 2
-text = "Racoon"
-horizontal_alignment = 1
-
-[node name="InspectorRow" parent="RightLower/Inspector/MarginContainer/ScrollContainer/InspectorRowList" instance=ExtResource("9_8bsjx")]
-layout_mode = 2
-theme_override_constants/separation = 20
 
 [connection signal="combat_changed" from="Viewport3D/World" to="PopUpHandler" method="_on_world_combat_changed"]
 [connection signal="mouse_entered" from="BottomBar" to="." method="mouse_entered_editor_ui"]
 [connection signal="mouse_exited" from="BottomBar" to="." method="mouse_exited_editor_ui"]
 [connection signal="pressed" from="BottomBar/ToolsContainer/TerrainPlace" to="." method="_on_terrain_place_pressed"]
+[connection signal="pressed" from="BottomBar/ToolsContainer/Select" to="." method="_on_select_pressed"]
 [connection signal="pressed" from="BottomBar/ToolsContainer/Place" to="." method="_on_place_pressed"]
 [connection signal="pressed" from="BottomBar/ToolsContainer/Erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="BottomBar/ToolsContainer/Raise" to="." method="_on_raise_pressed"]

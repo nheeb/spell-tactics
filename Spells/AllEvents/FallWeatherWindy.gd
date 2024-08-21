@@ -14,7 +14,7 @@ func _on_advance(round_number: int) -> void:
 		var tile := tree.current_tile
 		combat.level.move_entity_to_graveyard(tree)
 		
-		var leafless := combat.level.entities.create_entity(tile.location, LEAFLESS, false)
+		var leafless := combat.level.entities.create(tile.location, LEAFLESS, false)
 		combat.animation.effect(VFX.HEX_RINGS, tile, {"color": Color.YELLOW}).set_duration(1.5)
 		combat.animation.hide(tree.visual_entity).set_flag_with()
 		combat.animation.show(leafless.visual_entity).set_flag_with()
@@ -23,6 +23,6 @@ func _on_advance(round_number: int) -> void:
 		free_tiles.shuffle()
 		free_tiles = free_tiles.slice(0, 3)
 		for t in free_tiles:
-			var foliage := combat.level.entities.create_entity(t.location, FOLIAGE, false)
+			var foliage := combat.level.entities.create(t.location, FOLIAGE, false)
 			combat.animation.effect(VFX.HEX_RINGS, t, {"color": Color.GREEN}).set_duration(.7)
 			combat.animation.show(foliage.visual_entity).set_flag_with()

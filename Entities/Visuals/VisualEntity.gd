@@ -12,7 +12,7 @@ var entity: Entity
 @export_range(0, 360, 60) var visual_rotation: int:
 	set(v):
 		visual_rotation = v
-		rotation_degrees.x = v
+		rotation_degrees.y = v
 
 @onready var entity_name = str(entity.id) if entity != null else "null_entity"
 

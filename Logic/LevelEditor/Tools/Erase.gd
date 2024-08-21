@@ -22,5 +22,5 @@ func _set_tile(level: Level, tile: Tile, placement_active: EntityType):
 	var entities = level.tiles[tile.r][tile.q].entities
 	for ent in entities:
 		if not ent.type.is_terrain:
-			level.entities.remove_entity(tile.location, ent)
+			level.entities.remove(tile.location, ent)
 	

@@ -78,7 +78,7 @@ func setup() -> void:
 		push_error("No Player entity was found. Creating a new one.")
 		@warning_ignore("integer_division")
 		var position = Vector2i(level.n_rows / 2 , level.n_cols / 2)
-		player = level.entities.create_entity(position, load("res://Entities/PlayerResource.tres"))
+		player = level.entities.create(position, load("res://Entities/PlayerResource.tres"))
 		
 
 	# Connect input signals

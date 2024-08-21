@@ -8,7 +8,7 @@ func _on_activate() -> void:
 			if bool(tile.get_obstacle_layers() & GOBLIN.obstacle_mask) or tile == combat.player.current_tile:
 				continue
 			var location = tile.location
-			var goblin = combat.level.entities.create_entity(location, GOBLIN, false)
+			var goblin = combat.level.entities.create(location, GOBLIN, false)
 			combat.enemies.append(goblin)
 			combat.animation.camera_reach(goblin.visual_entity)
 			combat.animation.wait(.4)
