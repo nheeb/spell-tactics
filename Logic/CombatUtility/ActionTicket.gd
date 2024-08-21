@@ -11,6 +11,7 @@ var state := State.Created
 var stack_trace: Array
 
 signal _go
+signal removed
 
 func _init(_callable: Callable, _owner = null) -> void:
 	callable = _callable
@@ -58,4 +59,5 @@ func is_running() -> bool:
 
 func remove():
 	Utility.disconnect_all_connection(_go)
+	removed.emit()
 	free()

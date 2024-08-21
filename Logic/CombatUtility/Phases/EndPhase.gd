@@ -1,10 +1,12 @@
 extends AbstractPhase
 
-func process_phase() -> bool:
+func process_phase() -> void:
 	combat.round_ended.emit(combat.current_round)
 	
 	# Events
-	combat.events.process_events()
+	await combat.action_stack.process_ticket(
+		ActionTicket.new(combat.events.process_events)
+	)
 	
 	# All stat resets here
 	combat.energy.pay(combat.energy.player_energy)
@@ -20,6 +22,5 @@ func process_phase() -> bool:
 	combat.animation.property(combat.camera, "player_input_enabled", true)
 	
 	combat.current_round += 1
-	combat.animation.callable(combat.ui.timeline.jump_to_round.bind(combat.current_round))
-	
-	return false
+	combat.animation.callable(
+		combat.ui.timeline.jump_to_round.bind(combat.current_round))

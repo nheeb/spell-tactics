@@ -1,9 +1,10 @@
 extends AbstractPhase
 
-func process_phase() -> bool:
+func process_phase() -> void:
 	combat.animation.callback(combat.ui, "set_status", ["Enemies attacking..."])
 	combat.animation.property(combat.camera, "player_input_enabled", false)
-	# player can not idle from this phase on
+	# Player can not idle from this phase on
+	# Player camera input will be reenabled in the end phase
 	combat.animation.callback(combat.player.visual_entity, "stop_idling")
 	combat.ui.disable_actions()
 	for active in combat.actives:  # can't trigger any actives
@@ -13,15 +14,14 @@ func process_phase() -> bool:
 	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.agility > b.agility)
 	
 	for enemy in combat.enemies:
-		combat.animation.camera_reach(enemy.visual_entity)
-		combat.animation.camera_follow(enemy.visual_entity)
-		combat.animation.wait(.2)
-		enemy.do_action()
-		combat.animation.camera_unfollow()
-		
-		if combat.player.is_dead():
-			break
-	
-	# Player camera input will be reenabled in the end phase
-	
-	return false
+		combat.action_stack.push_back(
+			ActionTicket.new(do_enemy_action.bind(enemy))
+		)
+	await combat.action_stack.clear
+
+func do_enemy_action(enemy: EnemyEntity):
+	combat.animation.camera_reach(enemy.visual_entity)
+	combat.animation.camera_follow(enemy.visual_entity)
+	combat.animation.wait(.2)
+	enemy.do_action()
+	combat.animation.camera_unfollow()

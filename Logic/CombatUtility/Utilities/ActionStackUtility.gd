@@ -11,9 +11,17 @@ var consecutive_action_start := 0
 
 signal clear
 
+#####################################
+## Shortcut Methods for easy usage ##
+#####################################
+
 ## Getting the ticket of the currently advancing action
 func get_active_ticket() -> ActionTicket:
 	return _active_ticket
+
+func process_ticket(action_ticket: ActionTicket) -> Signal:
+	push_front(action_ticket)
+	return action_ticket.removed
 
 ####################################
 ## Methods for adding new Tickets ##

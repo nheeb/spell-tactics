@@ -4,7 +4,7 @@ enum RoundPhase {
 	CombatBegin = 0, # Unreachable
 	Start = 1,
 	# DEPRECATED Movement,
-	Spell = 2, # Player Input
+	Spell = 2, # Player Input Needed
 	# DEPRECATED Pass,
 	Enemy = 3,
 	End = 4,
@@ -146,9 +146,9 @@ func advance_current_phase():
 func get_current_phase_node() -> AbstractPhase:
 	return get_phase_node(current_phase)
 
-## Processes the current phase. Returns true if Player input is needed to advace to the next phase
-func process_current_phase() -> bool:
-	return get_current_phase_node()._process_phase()
+## Processes the current phase.
+func process_current_phase() -> void:
+	await get_current_phase_node()._process_phase()
 
 func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 	match phase:
@@ -167,8 +167,9 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 func advance_and_process_until_next_player_action_needed():
 	while true:
 		advance_current_phase()
-		print("Processing %s ..." % RoundPhase.keys()[current_phase])
-		if process_current_phase(): # If Player Input needed
+		log.add("Processing %s ..." % RoundPhase.keys()[current_phase])
+		await process_current_phase()
+		if get_current_phase_node().needs_user_input_to_proceed():
 			break
 
 func process_initial_phase() -> void:
