@@ -16,10 +16,6 @@ var entity: Entity
 
 @onready var entity_name = str(entity.id) if entity != null else "null_entity"
 
-func _enter_tree() -> void:
-	if has_node("DebugTile"):
-		$DebugTile.visible = false
-
 var ticket_handler := WaitTicketHandler.new()
 func get_wait_ticket_handler() -> WaitTicketHandler:
 	return ticket_handler
@@ -59,8 +55,8 @@ func on_death_visuals():
 	hide()
 	pass
 
-## For overriding and making the drain effect
 const GREY_OUT_MAT: Material = preload("res://Effects/GreyOut3D.material")
+## For overriding and making the drain effect
 func visual_drain(drained := true):
 	for child in Utility.get_recursive_mesh_instances(self):
 		if child is MeshInstance3D:

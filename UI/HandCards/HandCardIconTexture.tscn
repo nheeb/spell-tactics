@@ -38,6 +38,7 @@ offset_bottom = 1024.0
 color = Color(1, 1, 1, 0.145098)
 
 [node name="MainIcon" type="Sprite2D" parent="."]
+texture_filter = 4
 material = SubResource("ShaderMaterial_xckbr")
 position = Vector2(512, 512)
 texture = ExtResource("1_gny5x")
