@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxjvfou3tmu28"]
+
+[ext_resource type="Script" path="res://UI/Screens/ScreenDeckExplorer.gd" id="1_3lht8"]
+[ext_resource type="Texture2D" uid="uid://be6nb7ss5vxk2" path="res://Assets/Sprites/Icons/cancel.png" id="2_rppe5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fd7va"]
+
+[node name="ScreenDeckExplorer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3lht8")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 2
+
+[node name="Container" type="HFlowContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -116.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = 106.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fd7va")
+icon = ExtResource("2_rppe5")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

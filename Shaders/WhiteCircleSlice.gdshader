@@ -70,5 +70,5 @@ void fragment() {
 	float cursor = clamp_and_map_and_pow(cursor_dist,0.0, cursor_radius, 1.0, 0.0, 1.0);
 	float dist = (-x*x+ 1.0) * .2 * cursor;
 	ALPHA = float(distance(y, base_func) < dist);
-	
+
 }

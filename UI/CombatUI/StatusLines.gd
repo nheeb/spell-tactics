@@ -2,7 +2,7 @@ class_name StatusLines extends Control
 
 @export var color: Color
 
-const LABEL_SETTINGS = preload("res://UI/ErrorMessageLabelSettings.tres")
+const LABEL_SETTINGS = preload("res://UI/Theme/LabelSettings/ErrorMessageLabelSettings.tres")
 
 func clear():
 	hide()

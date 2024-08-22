@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=3 uid="uid://dibufukcm480e"]
+
+[ext_resource type="Script" path="res://UI/Menu/PauseSettings/PauseSettings.gd" id="1_xk68a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g41yr"]
+bg_color = Color(0.14902, 0.14902, 0.14902, 0.6)
+
+[node name="PauseSettingsLayer" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+script = ExtResource("1_xk68a")
+
+[node name="Background" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g41yr")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseTitle" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Paused"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Gap1" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="SettingRows" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SettingTitle" type="Label" parent="CenterContainer/VBoxContainer/SettingRows"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="RenderResolutionRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer/SettingRows"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/SettingRows/RenderResolutionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Render Resolution:"
+
+[node name="Gap" type="Control" parent="CenterContainer/VBoxContainer/SettingRows/RenderResolutionRow"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="RenderResOptions" type="OptionButton" parent="CenterContainer/VBoxContainer/SettingRows/RenderResolutionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "1920 x 1080"
+popup/item_0/id = 0
+popup/item_1/text = "2560 x 1440"
+popup/item_1/id = 1
+
+[node name="GameSpeedRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer/SettingRows"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/SettingRows/GameSpeedRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Animation Speed:"
+
+[node name="OptionButton" type="OptionButton" parent="CenterContainer/VBoxContainer/SettingRows/GameSpeedRow"]
+layout_mode = 2
+item_count = 5
+selected = 0
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "2"
+popup/item_1/id = 1
+popup/item_2/text = "4"
+popup/item_2/id = 2
+popup/item_3/text = "8"
+popup/item_3/id = 3
+popup/item_4/text = "ulTRA"
+popup/item_4/id = 4
+
+[node name="Gap2" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 1.72
+theme_override_font_sizes/font_size = 34
+text = "Resume"
+
+[node name="Gap3" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 306.0
+offset_top = 319.0
+offset_right = 629.0
+offset_bottom = 757.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseTitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Controls & Tips :)"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Gap1" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[connection signal="item_selected" from="CenterContainer/VBoxContainer/SettingRows/RenderResolutionRow/RenderResOptions" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

@@ -54,8 +54,6 @@ func load_combat_from_state(combat_state: CombatState, combat_active: bool = tru
 	if ui_root != null:
 		combat_ui = COMBAT_UI.instantiate()
 		ui_root.add_child(combat_ui)
-		var i = ui_root.get_node("DebugUI").get_index()
-		ui_root.move_child(combat_ui, ui_root.get_node("DebugUI").get_index())
 	# TODO nitai remove cursed code
 	
 	camera = get_node("GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D")
