@@ -37,14 +37,15 @@ func execute(combat: Combat) -> void:
 	]).subscribe(abort).dispose_with(signal_disposer)
 	progress_tween = VisualTime.new_tween().set_parallel(false)
 	progress_tween.tween_method(target_tile.highlight.set_drain_progress, 0.0, 1.0, 0.8)
-	Sx.from(progress_tween.finished).subscribe(quick_drain.bind(combat))\
-			.dispose_with(signal_disposer)
+	Sx.from(progress_tween.finished)\
+		.subscribe(quick_drain.bind(combat))\
+		.dispose_with(signal_disposer)
 
 func quick_drain(combat: Combat):
 	signal_disposer.dispose()
 	target_tile.highlight.set_drain_progress(0.0)
 	var targets : Array[Tile] = [target_tile]
-	combat.input.process_action(PAQuickCast.new(drain_active, targets))
+	combat.action_stack.process_player_action(PAQuickCast.new(drain_active, targets))
 
 func on_fail(combat: Combat) -> void:
 	pass

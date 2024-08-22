@@ -21,7 +21,7 @@ func execute(combat: Combat) -> void:
 		combat.animation.callable(combat.input.current_castable.get_card().warp) \
 						.set_duration(.3)
 	combat.animation.wait(.4)
-	combat.input.current_castable.try_cast()
+	combat.action_stack.process_callable(combat.input.current_castable.try_cast)
 
 func on_fail(combat: Combat) -> void:
 	pass

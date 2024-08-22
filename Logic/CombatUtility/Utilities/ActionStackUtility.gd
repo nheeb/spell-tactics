@@ -3,11 +3,12 @@ class_name ActionStackUtility extends CombatUtility
 const FRAME_ACTION_MAX_MSECS = 10
 
 var _stack : Array[ActionTicket]
-var _active_ticket: ActionTicket
+var active_ticket: ActionTicket
 var stack_is_filled := false
 var consecutive_action_frames := 0
 var consecutive_action_msecs := 0
 var consecutive_action_start := 0
+var block_start_time := 0
 
 signal clear
 
@@ -15,21 +16,30 @@ signal clear
 ## Shortcut Methods for easy / default usage ##
 ###############################################
 
-## Getting the ticket of the currently advancing action
+## Returns the ticket of the currently advancing action
 func get_active_ticket() -> ActionTicket:
-	return _active_ticket
+	return active_ticket
 
 ## Returns whether the stack is advancing a ticket right now
 func is_running() -> bool:
 	return get_active_ticket() != null
 
+## Adds the ticket to the stack.
+## Returns a signal which is emitted when the ticket is being removed
+## (either finished or aborted).
 func process_ticket(action_ticket: ActionTicket) -> Signal:
-	assert(not is_running(), \
-		"This method should never be triggered by a running ticket. \
-		Use push_front and ticket.wait() instead.")
-	push_front(action_ticket)
+	push_back(action_ticket)
 	return action_ticket.removed
 
+## Turns the Callable into a ActionTicket and adds the ticket to the stack.
+## Returns a signal which is emitted when the ticket is being removed
+## (either finished or aborted).
+func process_callable(callable: Callable) -> Signal:
+	return process_ticket(ActionTicket.new(callable))
+
+## Turns the PlayerAction into a ActionTicket and adds the ticket to the stack.
+## Returns a signal which is emitted when the ticket is being removed
+## (either finished or aborted).
 func process_player_action(pa: PlayerAction, forced := false) -> Signal:
 	return process_ticket(combat.input.player_action_ticket(pa, forced))
 
@@ -37,22 +47,34 @@ func process_player_action(pa: PlayerAction, forced := false) -> Signal:
 ## Methods for adding new Tickets ##
 ####################################
 
-func push_front(action_ticket: ActionTicket) -> void:
+func push_front(callable_or_ticket: Variant) -> void:
+	var action_ticket: ActionTicket = callable_or_ticket \
+		if callable_or_ticket is ActionTicket \
+		else ActionTicket.new(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.push_front(action_ticket)
 	mark_stack_as_filled()
 
-func push_back(action_ticket: ActionTicket) -> void:
+func push_back(callable_or_ticket: Variant) -> void:
+	var action_ticket: ActionTicket = callable_or_ticket \
+		if callable_or_ticket is ActionTicket \
+		else ActionTicket.new(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.push_back(action_ticket)
 	mark_stack_as_filled()
 
-func push_before_active(action_ticket: ActionTicket) -> void:
+func push_before_active(callable_or_ticket: Variant) -> void:
+	var action_ticket: ActionTicket = callable_or_ticket \
+		if callable_or_ticket is ActionTicket \
+		else ActionTicket.new(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.insert(_stack.find(get_active_ticket()), action_ticket)
 	mark_stack_as_filled()
 
-func push_behind_active(action_ticket: ActionTicket) -> void:
+func push_behind_active(callable_or_ticket: Variant) -> void:
+	var action_ticket: ActionTicket = callable_or_ticket \
+		if callable_or_ticket is ActionTicket \
+		else ActionTicket.new(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.insert(_stack.find(get_active_ticket()) + 1, action_ticket)
 	mark_stack_as_filled()
@@ -67,6 +89,7 @@ func validate_new_ticket(action_ticket: ActionTicket):
 			"ActionStack: Trying to add invalid action ticket")
 
 func mark_stack_as_clear():
+	block_start_time = 0
 	if stack_is_filled:
 		stack_is_filled = false
 		combat.animation.play_animation_queue()
@@ -81,6 +104,13 @@ func mark_stack_as_filled():
 	if not stack_is_filled:
 		stack_is_filled = true
 		stack_process()
+
+func mark_stack_as_blocked():
+	if block_start_time == 0:
+		block_start_time = Time.get_ticks_msec()
+	var block_time := Time.get_ticks_msec() - block_start_time
+	assert(block_time < 5000, \
+		"ActionStack: Stack has been blocked for 5 seconds. Something is wrong.")
 
 func reset_action_time():
 	consecutive_action_frames = 0
@@ -116,11 +146,12 @@ func stack_process() -> void:
 			"ActionStack: Tickets should never be running at this point")
 		if ticket.is_blocked():
 			note_action_time(action_time)
+			mark_stack_as_blocked()
 			return
 		if ticket.can_be_advanced():
-			_active_ticket = ticket
+			active_ticket = ticket
 			ticket.advance()
-			_active_ticket = null
+			active_ticket = null
 		if ticket.can_be_removed():
 			_stack.erase(ticket)
 			ticket.remove()

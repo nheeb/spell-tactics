@@ -45,14 +45,17 @@ func wait() -> Signal:
 	state = State.Waiting
 	return _go
 
-func abort():
+func abort() -> Signal:
 	state = State.Aborted
 	_remove_me = true
+	return removed
 
-func finish():
+## Returns a signal which emits when the ticket is removed
+func finish() -> Signal:
 	assert(is_running())
 	state = State.Finished
 	_remove_me = true
+	return removed
 
 func block():
 	assert(is_running())

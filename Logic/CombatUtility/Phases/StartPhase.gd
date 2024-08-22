@@ -7,12 +7,13 @@ func process_phase() -> void:
 	combat.cards.draw_to_hand_size()
 	
 	for enemy in combat.get_all_enemies():
-		enemy.plan_next_action()
+		combat.action_stack.push_back(enemy.plan_next_action)
+	await combat.action_stack.clear
 	
 	if Game.DEBUG_SPELL_TESTING:
 		combat.energy.gain(Game.testing_energy)
 	
-	auto_save()
+	await combat.action_stack.process_callable(auto_save)
 
 func auto_save():
 	if combat.current_round == 1:

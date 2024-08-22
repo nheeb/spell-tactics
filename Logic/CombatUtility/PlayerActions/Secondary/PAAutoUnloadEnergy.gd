@@ -14,7 +14,8 @@ func execute(combat: Combat) -> void:
 	actions.append_array(sockets.map(func(s): return PAUnloadSocket.new(s)))
 	actions.append(PABlockInput.new(false))
 	
-	combat.input.process_action(PAQueue.new(actions))
+	for action in actions:
+		combat.action_stack.process_player_action(action)
 
 func on_fail(combat: Combat) -> void:
 	pass

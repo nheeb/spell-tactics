@@ -14,8 +14,9 @@ func execute(combat: Combat) -> void:
 		combat.input.process_action(PADeselectCastable.new(), true)
 		#combat.input.deselect_castable()
 	combat.input.select_castable(castable)
+	combat.action_stack.active_ticket.finish()
 	await VisualTime.new_timer(.15).timeout
-	combat.input.process_action(PAAutoLoadEnergy.new())
+	combat.action_stack.process_player_action(PAAutoLoadEnergy.new())
 
 func on_fail(combat: Combat) -> void:
 	pass

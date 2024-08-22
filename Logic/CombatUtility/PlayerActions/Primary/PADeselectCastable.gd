@@ -12,7 +12,7 @@ func execute(combat: Combat) -> void:
 		Sx.from(unload.executed),
 		Sx.from(unload.failed)
 	]).subscribe(combat.input.deselect_castable, CONNECT_ONE_SHOT)
-	combat.input.process_action(unload, true)
+	combat.action_stack.process_player_action(unload, true)
 
 func on_fail(combat: Combat) -> void:
 	pass

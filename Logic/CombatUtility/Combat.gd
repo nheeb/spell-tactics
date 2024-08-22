@@ -165,6 +165,7 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 	return null
 
 func advance_and_process_until_next_player_action_needed():
+	action_stack.active_ticket.finish()
 	while true:
 		advance_current_phase()
 		log.add("Processing %s ..." % RoundPhase.keys()[current_phase])
