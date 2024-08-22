@@ -11,17 +11,27 @@ var consecutive_action_start := 0
 
 signal clear
 
-#####################################
-## Shortcut Methods for easy usage ##
-#####################################
+###############################################
+## Shortcut Methods for easy / default usage ##
+###############################################
 
 ## Getting the ticket of the currently advancing action
 func get_active_ticket() -> ActionTicket:
 	return _active_ticket
 
+## Returns whether the stack is advancing a ticket right now
+func is_running() -> bool:
+	return get_active_ticket() != null
+
 func process_ticket(action_ticket: ActionTicket) -> Signal:
+	assert(not is_running(), \
+		"This method should never be triggered by a running ticket. \
+		Use push_front and ticket.wait() instead.")
 	push_front(action_ticket)
 	return action_ticket.removed
+
+func process_player_action(pa: PlayerAction, forced := false) -> Signal:
+	return process_ticket(combat.input.player_action_ticket(pa, forced))
 
 ####################################
 ## Methods for adding new Tickets ##
@@ -48,7 +58,7 @@ func push_behind_active(action_ticket: ActionTicket) -> void:
 	mark_stack_as_filled()
 
 ######################
-## Internal methods ##
+## Internal Methods ##
 ######################
 
 func validate_new_ticket(action_ticket: ActionTicket):
@@ -56,12 +66,11 @@ func validate_new_ticket(action_ticket: ActionTicket):
 			 and not action_ticket in _stack, \
 			"ActionStack: Trying to add invalid action ticket")
 
-
 func mark_stack_as_clear():
 	if stack_is_filled:
 		stack_is_filled = false
 		combat.animation.play_animation_queue()
-	if consecutive_action_frames > 0:
+	if consecutive_action_frames > 1:
 		combat.log.add("Calculated for %s msecs in %s frames (%.2f s)" % \
 			[consecutive_action_msecs, consecutive_action_frames,
 			float(consecutive_action_start - Time.get_ticks_msec()) / 1000.0])
@@ -69,7 +78,9 @@ func mark_stack_as_clear():
 	clear.emit()
 
 func mark_stack_as_filled():
-	stack_is_filled = true
+	if not stack_is_filled:
+		stack_is_filled = true
+		stack_process()
 
 func reset_action_time():
 	consecutive_action_frames = 0
@@ -83,12 +94,14 @@ func note_action_time(action_time: int):
 	consecutive_action_msecs += action_time
 	assert(consecutive_action_frames < 120, "ActionStack: Something probably went wrong.")
 
-func _process(delta: float) -> void:
-	if _stack.is_empty():
+func stack_process() -> void:
+	assert(not is_running(), \
+		"This method should never be triggered by a running ticket.")
+	if not stack_is_filled:
 		mark_stack_as_clear()
 		return
 	var start_time := Time.get_ticks_msec()
-	while true:
+	for i in range(1000):
 		var current_time := Time.get_ticks_msec()
 		var action_time := current_time - start_time
 		if action_time > FRAME_ACTION_MAX_MSECS:
@@ -101,6 +114,9 @@ func _process(delta: float) -> void:
 		var ticket: ActionTicket = _stack.front() as ActionTicket
 		assert(not ticket.is_running(), \
 			"ActionStack: Tickets should never be running at this point")
+		if ticket.is_blocked():
+			note_action_time(action_time)
+			return
 		if ticket.can_be_advanced():
 			_active_ticket = ticket
 			ticket.advance()
@@ -108,3 +124,4 @@ func _process(delta: float) -> void:
 		if ticket.can_be_removed():
 			_stack.erase(ticket)
 			ticket.remove()
+	push_warning("ActionStack: Looped 1000 times this frame.")

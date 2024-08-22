@@ -36,7 +36,6 @@ func execute(combat: Combat) -> void:
 		)
 	]).subscribe(abort).dispose_with(signal_disposer)
 	progress_tween = VisualTime.new_tween().set_parallel(false)
-	#progress_tween.tween_interval(.35)
 	progress_tween.tween_method(target_tile.highlight.set_drain_progress, 0.0, 1.0, 0.8)
 	Sx.from(progress_tween.finished).subscribe(quick_drain.bind(combat))\
 			.dispose_with(signal_disposer)

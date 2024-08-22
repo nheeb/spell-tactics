@@ -6,19 +6,23 @@ signal action_failed(action: PlayerAction)
 var input_blocked := false
 
 ## Checks whether an action is valid and executes it.
+func player_action_ticket(action: PlayerAction, force_action := false) -> ActionTicket:
+	return ActionTicket.new(process_action.bind(action, force_action))
+
+## Checks whether an action is valid and executes it.
 func process_action(action: PlayerAction, force_action := false) -> void:
 	if not (is_taking_actions() or force_action):
 		return
 	var valid := action.is_valid(combat)
 	action.log_me(combat, valid)
 	if valid:
-		action.execute(combat)
+		await action.execute(combat)
 		combat.animation.play_animation_queue()
 		update_ui()
 		action.executed.emit()
 		action_executed.emit(action)
 	else:
-		action.on_fail(combat)
+		await action.on_fail(combat)
 		action.failed.emit()
 		action_failed.emit(action)
 

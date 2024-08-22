@@ -18,13 +18,13 @@ func get_action_pool() -> Array[EnemyAction]:
 	return actions
 
 func create_action_logic(action: EnemyAction) -> EnemyActionLogic:
-	var logic = action.logic_script.new() as EnemyActionLogic
-	assert(logic, "Enemy Action Logic wasn't created.")
-	logic.action = action
-	logic.combat = combat
-	logic.enemy = self
-	action_logic[action] = logic
-	return logic
+	var new_action_logic = action.logic_script.new() as EnemyActionLogic
+	assert(new_action_logic, "Enemy Action Logic wasn't created.")
+	new_action_logic.action = action
+	new_action_logic.combat = combat
+	new_action_logic.enemy = self
+	action_logic[action] = new_action_logic
+	return new_action_logic
 
 func get_action_logic(action: EnemyAction) -> EnemyActionLogic:
 	return Utility.dict_safe_get(action_logic, action, create_action_logic(action))

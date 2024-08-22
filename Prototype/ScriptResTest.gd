@@ -11,5 +11,11 @@ signal msst
 var aa : Array[AnimationObject]
 
 func _ready() -> void:
-	pass
+	print("0")
+	await pisse()
+	print("1")
 
+
+func pisse() -> void:
+	print("A")
+	print("B")

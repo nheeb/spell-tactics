@@ -1,7 +1,7 @@
 extends AbstractPhase
 
 ## Start phase -> Drawing hand cards
-func process_phase() -> bool:
+func process_phase() -> void:
 	combat.animation.callback(combat.ui, "set_status", ["Drawing hand cards..."])
 	combat.animation.wait(.5)
 	combat.cards.draw_to_hand_size()
@@ -13,8 +13,6 @@ func process_phase() -> bool:
 		combat.energy.gain(Game.testing_energy)
 	
 	auto_save()
-	
-	return false
 
 func auto_save():
 	if combat.current_round == 1:

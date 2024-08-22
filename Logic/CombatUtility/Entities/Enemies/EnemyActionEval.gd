@@ -33,10 +33,10 @@ func get_total_score(behaviour: EnemyBehaviour) -> float:
 	return max(0.0, total_score)
 
 static func from_cv_array(cvs: Array[EnemyActionCriteriaValue]) -> EnemyActionEval:
-	var scores := {}
+	var _scores := {}
 	for cv in cvs:
-		scores[cv.criteria] = cv.value
-	return EnemyActionEval.new(scores)
+		_scores[cv.criteria] = cv.value
+	return EnemyActionEval.new(_scores)
 
 func add(eval: EnemyActionEval) -> EnemyActionEval:
 	for k in eval.scores.keys():
