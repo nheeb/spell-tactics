@@ -4,7 +4,6 @@ static var translate_blocker: Utils.Blocker = GameCamera.translate_block.registe
 
 
 # TODO different property filters maybe.. can we deal with inheritance + properties? hmm
-
 static func get_exported_properties(node: Node) -> Array:
 	var exported_properties = []
 	var script = node.get_script()
@@ -46,14 +45,12 @@ static func get_property_origin_class(script: GDScript, property_name: String) -
 var entity: Entity
 
 func _on_value_focus_entered() -> void:
-	print("BLOCK")
 	translate_blocker.block()
 
 func _on_value_focus_exited() -> void:
-	print("UNBLOCK")
 	translate_blocker.unblock()
 
-func inspect_entity(ent: Entity):
+func inspect_entity(ent: Entity, idx: int = -1):
 	# inspect both logical and visual? 
 	# let's start with visual
 	entity = ent
@@ -67,14 +64,19 @@ func inspect_entity(ent: Entity):
 	for prop in props:
 		add_prop(prop)
 
-const PropName = preload("res://Logic/LevelEditor/UI/InspectorPropName.tscn")
+func inspect_different_entity():
+	pass
+
+
+const PropNameScene = preload("res://Logic/LevelEditor/UI/InspectorPropName.tscn")  # left column
+const PropValueSceneDefault = preload("res://Logic/LevelEditor/UI/InspectorPropName.tscn")  # right column
 
 func type_to_control(type: String):
 	match type:
 		"float":
-			return preload("res://Logic/LevelEditor/UI/InspectorPropValue.tscn")
+			return PropValueSceneDefault
 		_:
-			return preload("res://Logic/LevelEditor/UI/InspectorPropValue.tscn")
+			return PropValueSceneDefault
 
 func parse_value(value: Variant, type: String):
 	match type:
@@ -96,7 +98,7 @@ func prop_changed(value: String, prop_name: String, type: String):
 	print("%s set %s = %s" % [entity, prop_name, str(parse_value(value, type))])
 
 func add_prop(prop: Dictionary):
-	var name_control = PropName.instantiate()
+	var name_control = PropNameScene.instantiate()
 	var value_control = type_to_control(prop["type"]).instantiate()
 	value_control.focus_entered.connect(_on_value_focus_entered)
 	value_control.focus_exited.connect(_on_value_focus_exited)

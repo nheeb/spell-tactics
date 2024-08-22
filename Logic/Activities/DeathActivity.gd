@@ -1,2 +1,1 @@
 class_name DeathActivity extends Activity
-

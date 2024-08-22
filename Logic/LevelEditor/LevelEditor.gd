@@ -1,6 +1,6 @@
 class_name EditorUI extends Control
 
-@onready var world: World = $"%World"
+@export var world: World = null
 @onready var selection_ui = $%Entities
 
 
@@ -30,6 +30,12 @@ var ent_active: EntityType = null
 
 ## LevelEditor should load with a combat state
 func _ready() -> void:
+	if world == null:
+		if has_node("%World"):
+			world = get_node("%World")
+		else:
+			push_error("LevelEditor expecting either an exported World node or World accessible by get_node(\"%World\")")
+	
 	load_level(current_level_path)
 	Game.settings.changed_render_resolution.connect(on_changed_render_resolution)
 	Events.tile_clicked.connect(tile_clicked)

@@ -12,6 +12,3 @@ func mist():
 signal msst
 
 var aa : Array[AnimationObject]
-
-func _ready() -> void:
-	print(Utils.get_exported_properties(self))
