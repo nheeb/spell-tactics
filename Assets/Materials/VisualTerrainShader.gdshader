@@ -24,7 +24,7 @@ varying vec3 uv1_power_normal;
 
 void vertex() {
 	UV=UV*uv1_scale.xy+uv1_offset.xy;
-	
+
 	// world triplanar
 	vec3 normal = MODEL_NORMAL_MATRIX * NORMAL;
 	TANGENT = vec3(0.0,0.0,-1.0) * abs(normal.x);
