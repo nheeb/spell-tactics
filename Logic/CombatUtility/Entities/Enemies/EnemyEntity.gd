@@ -9,6 +9,30 @@ var movement_range: int = 2
 var action_logic := {} # EnemyAction -> EnemyActionLogic
 var action_plan: EnemyActionPlan
 
+##################################
+## Methods for the action stack ##
+##################################
+
+func plan_next_action():
+	action_plan = get_random_action_plan()
+
+func do_action():
+	if action_plan:
+		if not action_plan.is_possible(combat):
+			var alternative_plan = action_plan.get_alternative(combat)
+			action_plan = null
+			if alternative_plan:
+				if alternative_plan.is_possible(combat):
+					action_plan = alternative_plan
+	if not action_plan:
+		plan_next_action()
+	action_plan.execute(combat)
+	action_plan = null
+
+######################
+## Internal Methods ##
+######################
+
 func get_action_pool() -> Array[EnemyAction]:
 	var actions : Array[EnemyAction] = []
 	actions.append_array(type.actions)
@@ -29,9 +53,6 @@ func create_action_logic(action: EnemyAction) -> EnemyActionLogic:
 func get_action_logic(action: EnemyAction) -> EnemyActionLogic:
 	return Utility.dict_safe_get(action_logic, action, create_action_logic(action))
 
-func plan_next_action():
-	action_plan = get_random_action_plan()
-
 func get_random_action_plan() -> EnemyActionPlan:
 	var d_power : float = get_enemy_type().behaviour.decision_power
 	var plans: Array[EnemyActionPlan] = []
@@ -50,18 +71,9 @@ func get_random_action_plan() -> EnemyActionPlan:
 	combat.log.add(Utility.random_index_of_scores_report)
 	return plans[index]
 
-func do_action():
-	if action_plan:
-		if not action_plan.is_possible(combat):
-			var alternative_plan = action_plan.get_alternative(combat)
-			action_plan = null
-			if alternative_plan:
-				if alternative_plan.is_possible(combat):
-					action_plan = alternative_plan
-	if not action_plan:
-		plan_next_action()
-	action_plan.execute(combat)
-	action_plan = null
+######################
+## Entity Overrides ##
+######################
 
 func on_create() -> void:
 	super.on_create()

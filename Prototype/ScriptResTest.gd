@@ -11,11 +11,22 @@ signal msst
 var aa : Array[AnimationObject]
 
 func _ready() -> void:
-	print("0")
-	await pisse()
-	print("1")
+	for c in [misse, pisse, misse]:
+		var x = null
+		print("0")
+		x = await c.call()
+		print("1")
+		print(x)
+		print("")
 
 
-func pisse() -> void:
+func misse():
 	print("A")
+	await get_tree().create_timer(1).timeout
 	print("B")
+
+func pisse():
+	print("A")
+	await get_tree().create_timer(1).timeout
+	print("B")
+	return 200

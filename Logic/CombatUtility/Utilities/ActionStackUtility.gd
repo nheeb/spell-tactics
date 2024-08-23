@@ -79,6 +79,24 @@ func push_behind_active(callable_or_ticket: Variant) -> void:
 	_stack.insert(_stack.find(get_active_ticket()) + 1, action_ticket)
 	mark_stack_as_filled()
 
+func push_before_other(callable_or_ticket: Variant, other: ActionTicket) -> void:
+	assert(other in _stack)
+	var action_ticket: ActionTicket = callable_or_ticket \
+		if callable_or_ticket is ActionTicket \
+		else ActionTicket.new(callable_or_ticket)
+	validate_new_ticket(action_ticket)
+	_stack.insert(_stack.find(other), action_ticket)
+	mark_stack_as_filled()
+
+func push_behind_other(callable_or_ticket: Variant, other: ActionTicket) -> void:
+	assert(other in _stack)
+	var action_ticket: ActionTicket = callable_or_ticket \
+		if callable_or_ticket is ActionTicket \
+		else ActionTicket.new(callable_or_ticket)
+	validate_new_ticket(action_ticket)
+	_stack.insert(_stack.find(other) + 1, action_ticket)
+	mark_stack_as_filled()
+
 ######################
 ## Internal Methods ##
 ######################
@@ -154,5 +172,5 @@ func stack_process() -> void:
 			active_ticket = null
 		if ticket.can_be_removed():
 			_stack.erase(ticket)
-			ticket.remove()
+			ticket.remove(self)
 	push_warning("ActionStack: Looped 1000 times this frame.")
