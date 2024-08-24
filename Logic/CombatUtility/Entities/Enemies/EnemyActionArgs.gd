@@ -17,6 +17,14 @@ func _init(_action: EnemyAction = null, _args := [], _kwargs := {}) -> void:
 	args = _args
 	kwargs = _kwargs
 
+func get_arg(index: int, default = null) -> Variant:
+	default = Utility.array_safe_get(action.default_args, index, false, default)
+	return Utility.array_safe_get(args, index, false, default)
+
+func get_kwarg(key: Variant, default = null) -> Variant:
+	default = Utility.dict_safe_get(action.default_kwargs, key, default)
+	return Utility.dict_safe_get(kwargs, key, default)
+
 func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 	var combat := enemy.combat
 	var all_targets := enemy.get_action_logic(self).get_target_pool()

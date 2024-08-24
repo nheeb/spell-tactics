@@ -16,7 +16,14 @@ var action_plan: EnemyActionPlan
 func plan_next_action():
 	action_plan = get_random_action_plan()
 
+## ACTION
 func do_action():
+	while true:
+		if not action_plan:
+			await combat.action_stack.process_callable(plan_next_action)
+			continue
+		var possible =  
+		if not
 	if action_plan:
 		if not action_plan.is_possible(combat):
 			var alternative_plan = action_plan.get_alternative(combat)

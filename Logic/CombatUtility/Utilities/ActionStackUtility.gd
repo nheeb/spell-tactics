@@ -27,9 +27,14 @@ func is_running() -> bool:
 ## Adds the ticket to the stack.
 ## Returns a signal which is emitted when the ticket is being removed
 ## (either finished or aborted).
+## If called while the stack is running, it returns active_ticket.wait()
 func process_ticket(action_ticket: ActionTicket) -> Signal:
-	push_back(action_ticket)
-	return action_ticket.removed
+	if is_running():
+		push_before_active(action_ticket)
+		return active_ticket.wait()
+	else:
+		push_back(action_ticket)
+		return action_ticket.removed
 
 ## Turns the Callable into a ActionTicket and adds the ticket to the stack.
 ## Returns a signal which is emitted when the ticket is being removed
@@ -172,5 +177,5 @@ func stack_process() -> void:
 			active_ticket = null
 		if ticket.can_be_removed():
 			_stack.erase(ticket)
-			ticket.remove(self)
+			ticket.remove()
 	push_warning("ActionStack: Looped 1000 times this frame.")
