@@ -1,6 +1,6 @@
 class_name Inspector extends Control
 
-static var translate_blocker: Utils.Blocker = GameCamera.translate_block.register_blocker()
+static var translate_blocker: Block.Blocker = GameCamera.translate_block.register_blocker()
 
 
 # TODO different property filters maybe.. can we deal with inheritance + properties? hmm

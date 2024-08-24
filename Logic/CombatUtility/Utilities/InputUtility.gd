@@ -44,6 +44,9 @@ func update_ui():
 
 func tile_hovered(tile: Tile) -> void:
 	process_action(PAHoverTile.new(tile))
+	
+func tile_unhovered(tile: Tile):
+	process_action(PAUnhoverTile.new(tile))
 
 func tile_clicked(tile: Tile) -> void:
 	process_action(PASelectTile.new(tile))
@@ -74,6 +77,7 @@ func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
 	Events.tile_rightclicked.connect(tile_rightclicked)
 	Events.tile_hovered.connect(tile_hovered)
+	Events.tile_unhovered.connect(tile_unhovered)
 	Events.card_hovered.connect(card_hovered)
 	Events.card_selected.connect(card_selected)
 	Events.energy_orb_clicked.connect(energy_orb_clicked)

@@ -36,6 +36,8 @@ const HOVER_BALANCE_RANGE = .5
 const HOVER_BALANCE_Y_BONUS = 1.5
 const CHOSEN_LIFT = .5
 
+static var open_hand_block = Block.new("OpenHandBlock", false)
+
 var hand_state: HandState = HandState.Closed
 var all_cards : Array[Card3D] = []
 var hand_cards : Array[Card3D] = []
@@ -218,10 +220,10 @@ func check_hand_state():
 	
 	match hand_state:
 		HandState.Closed:
-			if mouse_pos_2d_normalized.y < OPEN_AT_NORM_MOUSE_POS:
+			if mouse_pos_2d_normalized.y < OPEN_AT_NORM_MOUSE_POS and not open_hand_block.is_blocked():
 				hand_state = HandState.Open
 		HandState.Open:
-			if mouse_pos_2d_normalized.y > CLOSE_AT_NORM_MOUSE_POS:
+			if mouse_pos_2d_normalized.y > CLOSE_AT_NORM_MOUSE_POS or open_hand_block.is_blocked():
 				hand_state = HandState.Closed
 			elif card_on_cursor:
 				if card_on_cursor in hand_cards:

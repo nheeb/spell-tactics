@@ -1,7 +1,7 @@
 class_name GameCamera extends Node3D
 
-static var zoom_block: Utils.Block = Utils.Block.new()
-static var translate_block: Utils.Block = Utils.Block.new()
+static var zoom_block: Block = Block.new()
+static var translate_block: Block = Block.new()
 
 
 var velocity := Vector3.ZERO

@@ -24,9 +24,9 @@ var tool_active = null:
 		tool_active = t
 var ent_active: EntityType = null
 
-@onready var tile_hover_blocker: Utils.Blocker = MouseInput.mouse_block.register_blocker()
-@onready var zoom_blocker: Utils.Blocker = GameCamera.zoom_block.register_blocker()
-@onready var translate_blocker: Utils.Blocker = GameCamera.translate_block.register_blocker()
+@onready var tile_hover_blocker: Block.Blocker = MouseInput.mouse_block.register_blocker()
+@onready var zoom_blocker: Block.Blocker = GameCamera.zoom_block.register_blocker()
+@onready var translate_blocker: Block.Blocker = GameCamera.translate_block.register_blocker()
 
 ## LevelEditor should load with a combat state
 func _ready() -> void:

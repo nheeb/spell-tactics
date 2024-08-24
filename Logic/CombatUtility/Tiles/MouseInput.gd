@@ -1,8 +1,6 @@
 class_name MouseInput extends RayCast3D
 
-
-
-static var mouse_block: Utils.Block = Utils.Block.new()
+static var mouse_block: Block = Block.new()
 
 # A reference to cards3d is needed here to see if the hover/click input is meant for this RayCast
 # or the one in Cards3D (cards3d has priority, since it is "on top" visually)

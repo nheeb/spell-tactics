@@ -259,30 +259,7 @@ static func create_static_signal(cls: Object, signal_name: StringName) -> Signal
 		cls.add_user_signal(signal_name)
 	return Signal(cls, signal_name)
 	
-## Class where any parts of the game can register to block tile hovering/clicking.
-## For example for UI nodes that cover the 3D World.
-class Block:
-	var blocker_states: Array[bool]  = []
-	func register_blocker() -> Blocker: 
-		blocker_states.append(false)
-		return Blocker.new(len(blocker_states) - 1, self)
-		
-	func is_blocked() -> bool:
-		return blocker_states.any(func(b: bool): return b)
-		
-class Blocker:
-	var _idx: int
-	var _block: Block
-	
-	func _init(idx: int, block_instance: Block) -> void:
-		_idx = idx
-		_block = block_instance
-		
-	func block():
-		_block.blocker_states[_idx] = true
-		
-	func unblock():
-		_block.blocker_states[_idx] = false
+
 
 #static func get_exported_properties(node: Node) -> Array:
 	#var exported_properties = []
