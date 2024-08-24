@@ -56,15 +56,14 @@ metadata/_edit_use_anchors_ = true
 [node name="Next" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.924479
-anchor_top = 0.0111111
-anchor_right = 0.99132
-anchor_bottom = 0.10216
-offset_right = 8.0
-offset_bottom = 8.0
+anchor_left = 0.901042
+anchor_top = 0.87963
+anchor_right = 0.9875
+anchor_bottom = 0.970679
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_bqwoa")
-text = "PASS"
+text = "End Turn"
+metadata/_edit_use_anchors_ = true
 
 [node name="Cast" type="Button" parent="."]
 visible = false
@@ -79,18 +78,6 @@ offset_bottom = 8.0
 theme_override_font_sizes/font_size = 36
 disabled = true
 text = "CAST"
-metadata/_edit_use_anchors_ = true
-
-[node name="EnergyPayment" type="LineEdit" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.763021
-anchor_top = 0.424074
-anchor_right = 0.996528
-anchor_bottom = 0.499692
-grow_horizontal = 2
-grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Status" type="Label" parent="."]
@@ -122,6 +109,7 @@ mouse_filter = 2
 ratio = 1.7778
 alignment_vertical = 2
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="CardViewportContainer" type="SubViewportContainer" parent="CardsAspectContainer"]
 layout_mode = 2
@@ -243,9 +231,9 @@ offset_bottom = 120.0
 [node name="EnemyArea" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.421354
+anchor_left = 0.755208
 anchor_top = 0.00555556
-anchor_right = 0.656021
+anchor_right = 0.989875
 anchor_bottom = 0.122815
 offset_right = 0.439972
 offset_bottom = 0.359985
@@ -303,6 +291,7 @@ anchor_bottom = 0.109
 metadata/_edit_use_anchors_ = true
 
 [node name="TimelineArea" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.443229
