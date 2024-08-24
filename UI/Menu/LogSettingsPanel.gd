@@ -14,7 +14,7 @@ func setup(_combat: Combat = null):
 	combat = _combat
 	combat.log.log_entry_registered.connect(add_log_entry)
 
-const LOG_ENTRY_UI = preload("res://UI/DebugUI/LogEntryUI.tscn")
+const LOG_ENTRY_UI = preload("res://UI/Menu/LogEntryUI.tscn")
 func setup_log():
 	%Title.text = "Combat Log"
 	for entry in combat.log.log_entries:
@@ -27,8 +27,8 @@ func add_log_entry(entry: LogEntry):
 		%Entries.move_child(entry_ui, 0)
 		entry_ui.setup(entry)
 
-const SETTINGS_ENTRY_UI = preload("res://UI/DebugUI/GlobalSettingUI.tscn")
-const SETTINGS_FOLDER_UI = preload("res://UI/DebugUI/GlobalSettingFolderUI.tscn")
+const SETTINGS_ENTRY_UI = preload("res://UI/Menu/GlobalSettingUI.tscn")
+const SETTINGS_FOLDER_UI = preload("res://UI/Menu/GlobalSettingFolderUI.tscn")
 func setup_settings():
 	%Title.text = "Global Settings"
 	for folder in DebugInfo.global_settings_folders.keys():
