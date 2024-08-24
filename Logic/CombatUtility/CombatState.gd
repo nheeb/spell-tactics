@@ -17,6 +17,8 @@ class_name CombatState extends Resource
 @export var enemy_event_queue: Array[EnemyEventPlan]
 @export var current_enemy_event: CombatEventReference
 @export var enemy_meter: int
+# Enemy Actions
+@export var global_enemy_actions: Array[EnemyActionArgs]
 
 const COMBAT = preload("res://Logic/CombatUtility/Combat.tscn")
 
@@ -51,6 +53,7 @@ func deserialize() -> Combat:
 	combat.events.enemy_event_queue = enemy_event_queue
 	combat.events.current_enemy_event = current_enemy_event
 	combat.events.enemy_meter = enemy_meter
+	combat.global_enemy_actions = global_enemy_actions
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
 	combat.log.add("Combat was deserialized.")

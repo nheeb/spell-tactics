@@ -1,7 +1,7 @@
 class_name EnemyEntityType extends HPEntityType
 
 @export var behaviour: EnemyBehaviour
-@export var actions: Array[EnemyAction]
+@export var actions: Array[EnemyActionArgs]
 
 @export_group("Traits")
 @export var agility: int = 0

@@ -1,5 +1,6 @@
 class_name EnemyActionLogic extends Object
 
+var args: EnemyActionArgs
 var action: EnemyAction
 var combat: Combat
 var enemy: EnemyEntity
@@ -67,6 +68,9 @@ func estimated_destination_after_movement(target) -> Tile:
 	else:
 		return enemy.current_tile
 
+func get_target_pool() -> Array:
+	return _get_target_pool()
+
 ############################
 ## Methods for overriding ##
 ############################
@@ -89,6 +93,29 @@ func _show_preview(target, show: bool) -> void:
 
 func _get_alternative_plan(target) -> EnemyActionPlan:
 	return null
+
+func _get_target_pool() -> Array:
+	var all_targets := []
+	match action.target_type:
+		EnemyAction.TargetType.None:
+			return []
+		EnemyAction.TargetType.Foes:
+			all_targets = combat.get_all_hp_entities()
+			all_targets = all_targets.filter(
+				func (t):
+					return t.team != enemy.team
+			)
+		EnemyAction.TargetType.Allies:
+			all_targets = combat.get_all_hp_entities()
+			all_targets = all_targets.filter(
+				func (t):
+					return t.team == enemy.team
+			)
+		EnemyAction.TargetType.Tiles:
+			all_targets = combat.level.get_all_tiles()
+		EnemyAction.TargetType.Entities:
+			all_targets = combat.level.get_all_entities()
+	return all_targets
 
 ####################
 ## Helper Methods ##

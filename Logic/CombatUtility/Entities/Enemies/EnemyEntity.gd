@@ -6,7 +6,7 @@ var accuracy: int = 0
 var resistance: int = 0
 var movement_range: int = 2
 
-var action_logic := {} # EnemyAction -> EnemyActionLogic
+var action_logic := {} # EnemyActionArgs -> EnemyActionLogic
 var action_plan: EnemyActionPlan
 
 ##################################
@@ -33,31 +33,34 @@ func do_action():
 ## Internal Methods ##
 ######################
 
-func get_action_pool() -> Array[EnemyAction]:
-	var actions : Array[EnemyAction] = []
+func get_action_pool() -> Array[EnemyActionArgs]:
+	var actions : Array[EnemyActionArgs] = []
 	actions.append_array(type.actions)
 	for se in status_effects:
 		actions.append_array(se.get_enemy_actions())
 	actions.append_array(combat.global_enemy_actions)
 	return actions
 
-func create_action_logic(action: EnemyAction) -> EnemyActionLogic:
+func create_action_logic(action_args: EnemyActionArgs) -> EnemyActionLogic:
+	var action: EnemyAction = action_args.action
 	var new_action_logic = action.logic_script.new() as EnemyActionLogic
 	assert(new_action_logic, "Enemy Action Logic wasn't created.")
+	new_action_logic.args = action_args
 	new_action_logic.action = action
 	new_action_logic.combat = combat
 	new_action_logic.enemy = self
-	action_logic[action] = new_action_logic
+	action_logic[action_args] = new_action_logic
 	return new_action_logic
 
-func get_action_logic(action: EnemyAction) -> EnemyActionLogic:
-	return Utility.dict_safe_get(action_logic, action, create_action_logic(action))
+func get_action_logic(action_args: EnemyActionArgs) -> EnemyActionLogic:
+	return Utility.dict_safe_get(action_logic, action_args, \
+		create_action_logic(action_args))
 
 func get_random_action_plan() -> EnemyActionPlan:
 	var d_power : float = get_enemy_type().behaviour.decision_power
 	var plans: Array[EnemyActionPlan] = []
-	for action in get_action_pool():
-		plans.append_array(action.get_possible_plans(self))
+	for action_args in get_action_pool():
+		plans.append_array(action_args.get_possible_plans(self))
 	var scores := plans.map(
 		func(plan: EnemyActionPlan):
 			return pow(plan.get_evaluation_score(combat), d_power)

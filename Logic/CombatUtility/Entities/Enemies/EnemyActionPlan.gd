@@ -1,8 +1,15 @@
 class_name EnemyActionPlan extends Resource
 
 @export var enemy_ref: EntityReference
-@export var action: EnemyAction
+@export var action_args: EnemyActionArgs
 @export var target_ref: UniversalReference
+
+var action: EnemyAction:
+	get:
+		if action_args:
+			return action_args.action
+		else:
+			return null
 
 var score_cache := -1.0
 
@@ -10,12 +17,12 @@ var score_cache := -1.0
 ## Constructor & Getters for real combat instances ##
 #####################################################
 
-func _init(_enemy = null, _action = null, _target = null) -> void:
+func _init(_enemy = null, _action_args = null, _target = null) -> void:
 	if _enemy is EntityReference:
 		enemy_ref = _enemy
 	elif _enemy is EnemyEntity:
 		enemy_ref = _enemy.get_reference()
-	action = _action as EnemyAction
+	action_args = _action_args as EnemyActionArgs
 	if _target is UniversalReference:
 		target_ref = _target
 	elif _target:
@@ -29,7 +36,7 @@ func get_enemy(combat: Combat) -> EnemyEntity:
 
 func get_action_logic(combat: Combat) -> EnemyActionLogic:
 	if get_enemy(combat) and action:
-		return get_enemy(combat).get_action_logic(action)
+		return get_enemy(combat).get_action_logic(action_args)
 	return null
 
 func get_target(combat: Combat) -> Variant:

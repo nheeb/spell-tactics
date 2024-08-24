@@ -52,7 +52,7 @@ var actives: Array[Active]
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
-var global_enemy_actions: Array[EnemyAction]
+var global_enemy_actions: Array[EnemyActionArgs]
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
@@ -192,7 +192,7 @@ func serialize() -> CombatState:
 	state.deck_states.append_array(deck.map(func(x: Spell): return x.serialize()))
 	state.hand_states.append_array(hand.map(func(x: Spell): return x.serialize()))
 	state.discard_pile_states.append_array(discard_pile.map(func(x: Spell): return x.serialize()))
-	# TODO Nitai serialize events
+	# TODO Nitai serialize events and enemy actions
 	#state.event_states.append_array(events.events.map(func(x: Spell): return x.serialize()))
 	#state.current_event = events.current_event
 	state.timed_effects = t_effects.effects
