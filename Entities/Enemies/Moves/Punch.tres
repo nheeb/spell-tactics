@@ -1,15 +1,20 @@
-[gd_resource type="Resource" script_class="EnemyAction" load_steps=2 format=3 uid="uid://dogyiyxl5nlgo"]
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=3 format=3 uid="uid://dogyiyxl5nlgo"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyAction.gd" id="1_6hjxg"]
+[ext_resource type="Texture2D" uid="uid://b21okkqe6d4n2" path="res://Assets/Sprites/Icons/axe.png" id="1_ufe7q"]
 
 [resource]
 script = ExtResource("1_6hjxg")
-pretty_name = ""
-color = Color(1, 1, 1, 1)
+pretty_name = "Punch"
+icon = ExtResource("1_ufe7q")
+color = Color(1, 0, 0, 1)
 target_type = 1
 target_range_looking = -1
 target_range_walking = -1
 target_consider_count = 2
 target_consider_method = 0
 default_scores = Array[Resource("res://Logic/CombatUtility/Entities/Enemies/EnemyActionCriteriaValue.gd")]([])
-cooldown = 0
+cooldown = 2
+movement_mandatory = false
+default_args = []
+default_kwargs = {}

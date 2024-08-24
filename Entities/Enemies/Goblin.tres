@@ -1,20 +1,32 @@
-[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=4 format=3 uid="uid://dxf83ay5rsin2"]
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=8 format=3 uid="uid://dxf83ay5rsin2"]
 
 [ext_resource type="Script" path="res://Entities/Enemies/CorpseLogic.gd" id="1_air4k"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyEntityType.gd" id="1_kdhbk"]
+[ext_resource type="Resource" uid="uid://dogyiyxl5nlgo" path="res://Entities/Enemies/Moves/Punch.tres" id="1_u7plf"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="2_brx3d"]
 [ext_resource type="PackedScene" uid="uid://2hog155pphl4" path="res://Entities/Visuals/Enemies/VisualGoblin.tscn" id="3_87dth"]
+
+[sub_resource type="Resource" id="Resource_iafls"]
+script = ExtResource("2_brx3d")
+action = ExtResource("1_u7plf")
+args = []
+kwargs = {}
+
+[sub_resource type="Resource" id="Resource_1h4ln"]
+script = ExtResource("2_brx3d")
+args = []
+kwargs = {}
 
 [resource]
 script = ExtResource("1_kdhbk")
-behaviour = 0
+actions = Array[ExtResource("2_brx3d")]([SubResource("Resource_iafls"), SubResource("Resource_1h4ln")])
 agility = 1
 strength = 2
 accuracy = 9
 resistance = 0
-actions = Array[String](["Insult", "SprintToPlayer", "Punch", "RandomAgression"])
-movements = Array[String](["MoveToPlayer", "StandNearPlayer"])
-passives = Array[String]([])
+movement_range = 2
 max_hp = 5
+team = 0
 internal_name = "goblin"
 can_be_hovered = true
 pretty_name = "Goblin"
@@ -22,10 +34,10 @@ fluff_text = ""
 visual_scene = ExtResource("3_87dth")
 entity_logic = ExtResource("1_air4k")
 prototype_scale = Vector2(1, 1)
+tags = Array[String]([])
 is_terrain = false
 is_drainable = false
 obstacle_layer = 2
 obstacle_mask = 3
 is_blocker = true
 cover_value = 0
-tags = Array[String]([])

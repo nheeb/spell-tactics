@@ -1,29 +1,30 @@
-[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=3 format=3 uid="uid://kq07x16lyno7"]
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=4 format=3 uid="uid://kq07x16lyno7"]
 
+[ext_resource type="Resource" uid="uid://dogyiyxl5nlgo" path="res://Entities/Enemies/Moves/Punch.tres" id="1_8fani"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyEntityType.gd" id="1_uc3fh"]
 [ext_resource type="Script" path="res://Entities/Enemies/CorpseLogic.gd" id="1_v3v1y"]
 
 [resource]
 script = ExtResource("1_uc3fh")
 behaviour = 1
+actions = Array[Resource("res://Logic/CombatUtility/Entities/Enemies/EnemyAction.gd")]([ExtResource("1_8fani")])
 agility = 0
 strength = 1
 accuracy = 9
 resistance = 0
-actions = Array[String](["Insult", "RandomAgression", "ArrowShot", "AimForPreciseShot"])
-movements = Array[String](["RandomMovement"])
-passives = Array[String]([])
+movement_range = 2
 max_hp = 4
+team = 0
 internal_name = "goblin_archer"
 can_be_hovered = true
 pretty_name = "Goblin Archer"
 fluff_text = ""
 entity_logic = ExtResource("1_v3v1y")
 prototype_scale = Vector2(1, 1)
+tags = Array[String]([])
 is_terrain = false
 is_drainable = false
 obstacle_layer = 2
 obstacle_mask = 3
 is_blocker = true
 cover_value = 0
-tags = Array[String]([])
