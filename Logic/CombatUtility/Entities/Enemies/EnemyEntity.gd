@@ -13,28 +13,35 @@ var action_plan: EnemyActionPlan
 ## Methods for the action stack ##
 ##################################
 
+## ACTION
 func plan_next_action():
-	action_plan = get_random_action_plan()
+	action_plan = await get_random_action_plan()
 
 ## ACTION
 func do_action():
 	while true:
+		# If no plan, make one
 		if not action_plan:
 			await combat.action_stack.process_callable(plan_next_action)
 			continue
-		var possible =  
-		if not
-	if action_plan:
-		if not action_plan.is_possible(combat):
-			var alternative_plan = action_plan.get_alternative(combat)
-			action_plan = null
-			if alternative_plan:
-				if alternative_plan.is_possible(combat):
-					action_plan = alternative_plan
-	if not action_plan:
-		plan_next_action()
-	action_plan.execute(combat)
-	action_plan = null
+		
+		# Check if possible
+		var possible = combat.action_stack.process_result(
+			action_plan.is_possible.bind(combat)
+		)
+		await combat.action_stack.active_ticket.wait()
+		
+		# Get alternative if not possible
+		if not possible.value:
+			action_plan = action_plan.get_alternative(combat)
+			continue
+		
+		# Execute
+		combat.action_stack.push_behind_active(
+			action_plan.execute.bind(combat)
+		)
+		action_plan = null
+		break
 
 ######################
 ## Internal Methods ##
@@ -67,10 +74,14 @@ func get_random_action_plan() -> EnemyActionPlan:
 	var d_power : float = get_enemy_type().behaviour.decision_power
 	var plans: Array[EnemyActionPlan] = []
 	for action_args in get_action_pool():
-		plans.append_array(action_args.get_possible_plans(self))
+		var plans_result := combat.action_stack.process_result(
+			action_args.get_possible_plans.bind(self)
+		)
+		await combat.action_stack.wait()
+		plans.append_array(plans_result.value)
 	var scores := plans.map(
 		func(plan: EnemyActionPlan):
-			return pow(plan.get_evaluation_score(combat), d_power)
+			return pow(plan.get_evaluation_score_cached(), d_power)
 	)
 	var names_for_log := plans.map(
 		func (plan: EnemyActionPlan):

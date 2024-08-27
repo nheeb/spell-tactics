@@ -16,6 +16,14 @@ signal clear
 ## Shortcut Methods for easy / default usage ##
 ###############################################
 
+## Puts the active ticket in wait mode and returns the coresponding ticket
+func wait() -> Signal:
+	if active_ticket:
+		return active_ticket.wait()
+	else:
+		push_error("Used wait without active ticket.")
+		return clear
+
 ## Returns the ticket of the currently advancing action
 func get_active_ticket() -> ActionTicket:
 	return active_ticket
@@ -47,6 +55,15 @@ func process_callable(callable: Callable) -> Signal:
 ## (either finished or aborted).
 func process_player_action(pa: PlayerAction, forced := false) -> Signal:
 	return process_ticket(combat.input.player_action_ticket(pa, forced))
+
+## Returns a result Object and adds the according ticket to the stack.
+func process_result(callable: Callable) -> ActionTicket.ActionTicketResult:
+	var action_ticket := ActionTicket.new(callable)
+	if is_running():
+		push_before_active(action_ticket)
+	else:
+		push_front(action_ticket)
+	return action_ticket.get_result()
 
 ####################################
 ## Methods for adding new Tickets ##

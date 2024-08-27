@@ -20,8 +20,8 @@ enum TargetConsiderMethod {Best}
 
 @export_group("Extras")
 @export var cooldown: int = 0 # TODO implement this
-@export var alternative_action: EnemyActionArgs = null
-@export var movement_action: EnemyActionArgs = null
+@export var alternative_action_args: EnemyActionArgs = null
+@export var movement_action_args: EnemyActionArgs = null
 @export var movement_mandatory: bool = false
 
 @export_group("Arguments")
@@ -31,20 +31,13 @@ enum TargetConsiderMethod {Best}
 ## Logic script
 var logic_script: Script
 
-#static func load_from_file(path: String) -> CastableType:
-	#var res = load(path)
-	#if res == null:
-		#push_error("Castable could not be loaded. Path is %s" % path)
-	#res._on_load()
-	#return res
-
 func _on_load() -> void:
 	if internal_name == "":
 		internal_name = resource_path.split("/")[-1].split(".")[0]
 		var directory = "/".join(resource_path.split("/").slice(0, -1))
 		logic_script = load(directory + "/" + internal_name + ".gd")
-		if movement_action:
-			assert(movement_action.movement_action == null,
+		if movement_action_args:
+			assert(movement_action_args.movement_action_args == null,
 					"Movement action has a movement action. This is cursed.")
 
 

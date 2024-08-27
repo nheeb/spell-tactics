@@ -25,6 +25,7 @@ func get_kwarg(key: Variant, default = null) -> Variant:
 	default = Utility.dict_safe_get(action.default_kwargs, key, default)
 	return Utility.dict_safe_get(kwargs, key, default)
 
+## RESULT
 func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 	var combat := enemy.combat
 	var all_targets := enemy.get_action_logic(self).get_target_pool()
@@ -46,17 +47,36 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 				if combat.level.get_shortest_distance(enemy_tile, target_tile) \
 					> action.target_range_walking:
 						continue
-		if enemy.get_action_logic(self).is_possible(target):
-			suitable_targets.append(target)
 	
 	# Making Plans
 	var plans : Array[EnemyActionPlan] = []
 	for suitable_target in suitable_targets:
 		plans.append(EnemyActionPlan.new(enemy, self, suitable_target))
+	
+	# Evaluate if possible
+	var possible_dict := {}
+	for plan in plans:
+		possible_dict[plan] = combat.action_stack.process_result(
+			plan.is_possible.bind(combat)
+		)
+	await combat.action_stack.wait()
+	plans.filter(
+		func (p):
+			return possible_dict[p].value
+	)
+	
+	# First score calculation
+	var score_dict := {}
+	for plan in plans:
+		score_dict[plan] = combat.action_stack.process_result(
+			plan.get_evaluation_score.bind(combat)
+		)
+	await combat.action_stack.wait()
+	
 	if action.target_consider_method == EnemyAction.TargetConsiderMethod.Best:
 		plans.sort_custom(
 			func (a, b):
-				return a.get_evaluation_score() > b.get_evaluation_score()
+				return score_dict[a].value > score_dict[b].value
 		)
 		plans = plans.slice(0, action.target_consider_count)
 	

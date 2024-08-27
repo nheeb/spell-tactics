@@ -5,68 +5,42 @@ var action: EnemyAction
 var combat: Combat
 var enemy: EnemyEntity
 
-var movement_done := false
-
 #########################
 ## Methods for calling ##
 #########################
 
 func execute(target):
-	if has_movement():
-		get_movement_logic().execute(target)
-		movement_done = true
-	_execute(target)
-	movement_done = false
+	await _execute(target)
 
-func is_possible(target) -> bool:
-	if has_movement():
-		if action.movement_mandatory:
-			return _is_possible(target) and get_movement_logic().is_possible(target)
-	return _is_possible(target)
+func is_possible(target, enemy_tile: Tile = enemy.current_tile) -> bool:
+	return _is_possible(target, enemy_tile)
 
-func evaluate(target) -> EnemyActionEval:
-	if is_possible(target):
-		var evaluation := _evaluate(target)
+func evaluate(target, enemy_tile: Tile = enemy.current_tile) -> EnemyActionEval:
+	if is_possible(target, enemy_tile):
+		var evaluation := _evaluate(target, enemy_tile)
 		if evaluation == null:
 			evaluation = EnemyActionEval.from_cv_array(action.default_scores)
-		if has_movement():
-			evaluation = evaluation.add(get_movement_logic().evaluate(target))
 		return evaluation
 	else:
 		return EnemyActionEval.new()
 
-func estimated_destination(target) -> Tile:
-	var destinaion := _estimated_destination(target)
+func estimated_destination(target, enemy_tile: Tile = enemy.current_tile) -> Tile:
+	var destinaion := _estimated_destination(target, enemy_tile)
 	if destinaion != null:
 		return destinaion
-	return estimated_destination_after_movement(target)
+	else:
+		return enemy_tile
 
 func show_preview(target, show: bool) -> void:
-	if has_movement():
-		get_movement_logic().show_preview(target, show)
 	_show_preview(target, show)
 
 func get_alternative_plan(target) -> EnemyActionPlan:
 	var plan := _get_alternative_plan(target)
 	if plan:
 		return plan
-	elif action.alternative_action:
-		return EnemyActionPlan.new(enemy, action.alternative_action, target)
+	elif action.alternative_action_args:
+		return EnemyActionPlan.new(enemy, action.alternative_action_args, target)
 	return null
-
-func has_movement() -> bool:
-	return action.movement_action != null
-
-func get_movement_logic() -> EnemyActionLogic:
-	if action.movement_action:
-		return enemy.get_action_logic(action.movement_action)
-	return null
-
-func estimated_destination_after_movement(target) -> Tile:
-	if has_movement():
-		return get_movement_logic().estimated_destination(target)
-	else:
-		return enemy.current_tile
 
 func get_target_pool() -> Array:
 	return _get_target_pool()
@@ -78,14 +52,14 @@ func get_target_pool() -> Array:
 func _execute(target):
 	pass
 
-func _is_possible(target) -> bool:
+func _is_possible(target, enemy_tile) -> bool:
 	return true
 
-func _evaluate(target) -> EnemyActionEval:
+func _evaluate(target, enemy_tile) -> EnemyActionEval:
 	return null
 
-func _estimated_destination(target) -> Tile:
-	return null
+func _estimated_destination(target, enemy_tile: Tile) -> Tile:
+	return enemy_tile
 
 func _show_preview(target, show: bool) -> void:
 	show_movement_arrow(target, show)
