@@ -1,0 +1,12 @@
+[gd_resource type="StyleBoxTexture" script_class="DoubleTexturedStylebox" load_steps=3 format=3 uid="uid://bg1fkyjls3ces"]
+
+[ext_resource type="Script" path="res://UI/Theme/CustomPanel/CustomShaderStylebox.gd" id="1_g00lm"]
+[ext_resource type="Texture2D" uid="uid://cmlifnshuetbn" path="res://Assets/Sprites/UI/schiefer_textur_deinterlaced.png" id="2_ps2di"]
+
+[resource]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("2_ps2di")
+script = ExtResource("1_g00lm")

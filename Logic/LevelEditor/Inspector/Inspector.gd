@@ -69,7 +69,7 @@ func inspect_different_entity():
 
 
 const PropNameScene = preload("res://Logic/LevelEditor/UI/InspectorPropName.tscn")  # left column
-const PropValueSceneDefault = preload("res://Logic/LevelEditor/UI/InspectorPropName.tscn")  # right column
+const PropValueSceneDefault = preload("res://Logic/LevelEditor/UI/InspectorPropValue.tscn")  # right column
 
 func type_to_control(type: String):
 	match type:
@@ -78,17 +78,20 @@ func type_to_control(type: String):
 		_:
 			return PropValueSceneDefault
 
-func parse_value(value: Variant, type: String):
+func parse_value(value: String, type: String):
+	var result: Variant = null
 	match type:
 		"float":
-			value = float(value)
+			result = float(value)
 		"String":
-			pass
+			result = value
 		"int":
-			value = int(value)
+			result = int(value)
 		_:
 			push_error("unknown type")
-	return value
+			return value
+
+	return result
 
 func prop_changed(value: String, prop_name: String, type: String):
 	assert(entity != null, "Must have an entity")

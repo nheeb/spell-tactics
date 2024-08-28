@@ -26,7 +26,7 @@ void sky() {
     float v = 0.5 - asin(EYEDIR.y) / PI; // Normalize latitude to [0, 1]
     vec3 sky = mix(sky_horizon_color.rgb, sky_top_color.rgb, clamp(1.0 - pow(1.0 - (1.0 - v_angle / (PI * 0.5)), 1.0 / sky_curve), 0.0, 1.0));
     sky *= sky_energy;
-    
+
     vec4 sky_cover_texture = texture(sky_cover, sky_scale * vec2(u, v));
     sky += (sky_cover_texture.rgb * sky_cover_modulate.rgb) * sky_cover_texture.a * sky_cover_modulate.a * sky_energy;
 

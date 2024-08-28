@@ -109,11 +109,11 @@ target_icon, target_range_start: int, target_range_end: int):
 	if %TargetIcon.texture == null:
 		%CardTargetIconsUI.hide()
 
-const PANEL_DEFAULT = preload("res://UI/Theme/HandCard2D_panel_default.tres")
-const PANEL_HOVER = preload("res://UI/Theme/HandCard2D_panel_hover.tres")
-const PANEL_DISABLED = preload("res://UI/Theme/HandCard2D_panel_disabled.tres")
-const PANEL_CHOSEN = preload("res://UI/Theme/HandCard2D_panel_chosen.tres")
-const PANEL_PAYABLE_HINT = preload("res://UI/Theme/HandCard2D_panel_payable_hint.tres")
+const PANEL_DEFAULT = preload("res://UI/Theme/Panels/HandCard2D_panel_default.tres")
+const PANEL_HOVER = preload("res://UI/Theme/Panels/HandCard2D_panel_hover.tres")
+const PANEL_DISABLED = preload("res://UI/Theme/Panels/HandCard2D_panel_disabled.tres")
+const PANEL_CHOSEN = preload("res://UI/Theme/Panels/HandCard2D_panel_chosen.tres")
+const PANEL_PAYABLE_HINT = preload("res://UI/Theme/Panels/HandCard2D_panel_payable_hint.tres")
 const PANEL_PRIORITY_ORDER = [PANEL_PAYABLE_HINT, PANEL_CHOSEN, PANEL_DISABLED, \
 							  PANEL_HOVER, PANEL_DEFAULT]
 

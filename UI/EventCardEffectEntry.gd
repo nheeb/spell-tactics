@@ -1,7 +1,7 @@
 extends PanelContainer
 
-const PANEL_DEFAULT = preload("res://UI/Theme/EventCardPanelEntryDefault.tres")
-const PANEL_HIGHLIGHT = preload("res://UI/Theme/EventCardPanelEntryHighlight.tres")
+const PANEL_DEFAULT = preload("res://UI/Theme/Panels/EventCardPanelEntryDefault.tres")
+const PANEL_HIGHLIGHT = preload("res://UI/Theme/Panels/EventCardPanelEntryHighlight.tres")
 
 func setup(title: String, effect: String) -> void:
 	%TitleLabel.text = title
