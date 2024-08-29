@@ -142,6 +142,7 @@ func advance_current_phase():
 	current_phase += 1
 	if current_phase >= RoundPhase.RoundRepeats:
 		current_phase = RoundPhase.Start
+	print("Current phase: %s" % current_phase)
 
 func get_current_phase_node() -> AbstractPhase:
 	return get_phase_node(current_phase)
@@ -165,7 +166,8 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 	return null
 
 func advance_and_process_until_next_player_action_needed():
-	action_stack.active_ticket.finish()
+	if action_stack.active_ticket:
+		action_stack.active_ticket.finish()
 	while true:
 		advance_current_phase()
 		log.add("Processing %s ..." % RoundPhase.keys()[current_phase])

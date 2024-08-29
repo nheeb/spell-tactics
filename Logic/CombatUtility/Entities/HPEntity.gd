@@ -60,4 +60,5 @@ func sync_with_type() -> void:
 	super()
 	combat.log.add("Syncing entity " + str(id))
 	hp = type.max_hp
+	team = type.team
 	combat.animation.update_hp(self)

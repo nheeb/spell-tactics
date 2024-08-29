@@ -1,4 +1,4 @@
-class_name ActionTicket extends Object
+class_name ActionTicket extends RefCounted
 
 enum State {Created, Running, Waiting, Finished, Aborted, Blocked}
 
@@ -61,7 +61,6 @@ func abort() -> Signal:
 
 ## Returns a signal which emits when the ticket is removed
 func finish() -> Signal:
-	assert(is_running())
 	state = State.Finished
 	_remove_me = true
 	return removed
@@ -96,7 +95,6 @@ func remove():
 	if _result != null:
 		has_result.emit(_result)
 	Utility.disconnect_all_connection(has_result)
-	free()
 
 func _to_string() -> String:
 	return "<AT:%s.%s>" % [object, method_name]

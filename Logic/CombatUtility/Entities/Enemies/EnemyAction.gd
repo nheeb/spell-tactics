@@ -37,7 +37,7 @@ func _on_load() -> void:
 		var directory = "/".join(resource_path.split("/").slice(0, -1))
 		logic_script = load(directory + "/" + internal_name + ".gd")
 		if movement_action_args:
-			assert(movement_action_args.movement_action_args == null,
+			assert(movement_action_args.action.movement_action_args == null,
 					"Movement action has a movement action. This is cursed.")
 
 

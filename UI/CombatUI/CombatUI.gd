@@ -38,7 +38,7 @@ func next_round(current_round: int):
 	pass
 
 func _on_next_pressed():
-	combat.input.process_action(PAPass.new())
+	combat.action_stack.process_player_action(PAPass.new())
 
 func deselect_card():
 	selected_spell = null

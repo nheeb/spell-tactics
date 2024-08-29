@@ -72,7 +72,7 @@ func get_action_pool() -> Array[EnemyActionArgs]:
 		#create_action_logic(action_args))
 
 func get_random_action_plan() -> EnemyActionPlan:
-	var d_power : float = get_enemy_type().behaviour.decision_power
+	var d_power : float = get_bahviour().decision_power
 	var plans: Array[EnemyActionPlan] = []
 	for action_args in get_action_pool():
 		var plans_result := combat.action_stack.process_result(
@@ -117,3 +117,9 @@ func get_name() -> String:
 
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 
+
+const DEFAULT_BEHAVIOUR = preload("res://Entities/Enemies/EnemyBehaviourDefault.tres")
+func get_bahviour() -> EnemyBehaviour:
+	if get_enemy_type().behaviour:
+		return get_enemy_type().behaviour
+	return DEFAULT_BEHAVIOUR

@@ -143,7 +143,7 @@ func mark_stack_as_clear():
 func mark_stack_as_filled():
 	if not stack_is_filled:
 		stack_is_filled = true
-		stack_process()
+		# stack_process() this is DANGER
 
 func mark_stack_as_blocked():
 	if block_start_time == 0:
@@ -196,3 +196,6 @@ func stack_process() -> void:
 			_stack.erase(ticket)
 			ticket.remove()
 	push_warning("ActionStack: Looped 1000 times this frame.")
+
+func _process(delta: float) -> void:
+	stack_process()

@@ -63,10 +63,10 @@ func setup() -> void:
 func _execute():
 	pass
 
-func _is_possible(enemy_tile) -> bool:
+func _is_possible(enemy_tile: Tile) -> bool:
 	return true
 
-func _evaluate(enemy_tile) -> EnemyActionEval:
+func _evaluate(enemy_tile: Tile) -> EnemyActionEval:
 	return null
 
 func _estimated_destination(enemy_tile: Tile) -> Tile:

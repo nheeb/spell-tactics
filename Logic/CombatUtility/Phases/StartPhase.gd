@@ -6,6 +6,7 @@ func process_phase() -> void:
 	combat.animation.wait(.5)
 	combat.cards.draw_to_hand_size()
 	
+	combat.log.add("Enemies plan their moves...",)
 	for enemy in combat.get_all_enemies():
 		combat.action_stack.push_back(enemy.plan_next_action)
 	await combat.action_stack.clear
@@ -13,6 +14,7 @@ func process_phase() -> void:
 	if Game.DEBUG_SPELL_TESTING:
 		combat.energy.gain(Game.testing_energy)
 	
+	combat.log.add("Saving game...",)
 	await combat.action_stack.process_callable(auto_save)
 
 func auto_save():

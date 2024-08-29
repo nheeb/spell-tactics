@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=462 format=3 uid="uid://ckq8v1s3aruw7"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=465 format=3 uid="uid://ckq8v1s3aruw7"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/CombatState.gd" id="1_a77op"]
 [ext_resource type="Resource" uid="uid://cyfghwiu5p4y4" path="res://Spells/AllEnemyEvents/SpawnNewFighter.tres" id="1_wolby"]
@@ -10,7 +10,9 @@
 [ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventSchedule.gd" id="4_lakkw"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/EntityState.gd" id="4_qk5jy"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/TileState.gd" id="5_6hme5"]
+[ext_resource type="Resource" uid="uid://dcpjaerkeyfjv" path="res://Entities/Enemies/Moves/MoveRandom.tres" id="5_24umr"]
 [ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Entities/Environment/DirtTile.tres" id="6_8em4m"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="6_c7ku8"]
 [ext_resource type="Resource" uid="uid://brvjvj8i7f7kw" path="res://Entities/Environment/Tree.tres" id="7_ay4xs"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="8_d2swj"]
 [ext_resource type="Resource" uid="uid://b7xqo2ltiqbwk" path="res://Entities/Environment/Bush.tres" id="9_b8i77"]
@@ -42,6 +44,12 @@ script = ExtResource("4_lakkw")
 event_type = ExtResource("3_eh8fp")
 params = {}
 event_created = false
+
+[sub_resource type="Resource" id="Resource_fdtjt"]
+script = ExtResource("6_c7ku8")
+action = ExtResource("5_24umr")
+args = []
+kwargs = {}
 
 [sub_resource type="Resource" id="Resource_25aem"]
 script = ExtResource("2_2i3es")
@@ -3237,3 +3245,4 @@ event_timeline = {
 }
 enemy_event_queue = Array[ExtResource("2_kcnt0")]([SubResource("Resource_t7fuw")])
 enemy_meter = 0
+global_enemy_actions = Array[ExtResource("6_c7ku8")]([SubResource("Resource_fdtjt")])

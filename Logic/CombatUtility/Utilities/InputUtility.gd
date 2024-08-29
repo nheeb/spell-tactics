@@ -39,7 +39,8 @@ func deselect_castable(castable: Castable = null):
 		current_castable = null
 
 func is_taking_actions() -> bool:
-	return not input_blocked and combat.current_phase == Combat.RoundPhase.Spell
+	var t := not input_blocked and combat.current_phase == Combat.RoundPhase.Spell
+	return t
 
 func update_ui():
 	combat.ui.update_payable_cards()

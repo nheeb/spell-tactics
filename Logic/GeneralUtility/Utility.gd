@@ -47,8 +47,8 @@ func axial_add():
 	pass
 
 var random_index_of_scores_report: String
-func random_index_of_scores(scores: Array[float], create_report := false, \
-							names: Array[String] = [], title := "") -> int:
+func random_index_of_scores(scores: Array, create_report := false, \
+							names: Array = [], title := "") -> int:
 	if scores.is_empty():
 		push_error("Random index: Empty list")
 		return -1
@@ -62,6 +62,7 @@ func random_index_of_scores(scores: Array[float], create_report := false, \
 		random_value -= scores[i]
 		if random_value < 0.0:
 			chosen_index = i
+			break
 	if chosen_index == -1:
 		push_error("Random index: Something went wrong")
 	if create_report:
