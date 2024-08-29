@@ -1,20 +1,10 @@
-extends EnemyMove
+extends EnemyActionLogic
 
-## Returns a score for the attractiveness to do the move.
-func get_score() -> float:
-	match enemy.type.behaviour:
-		EnemyEntityType.Behaviour.Fighter:
-			var dist_to_player = Utility.tile_distance(combat.player.current_tile, enemy.current_tile)
-			return 6.0 if dist_to_player <= 1 else 0.0
-	return 0.0
-
-## Executes the move
-func execute() -> void:
+func _execute(target):
 	var dmg : int = enemy.strength
 
-	var hit := combat.attack.enemy_punch(enemy, 0)
-	if hit:
+	if combat.attack.enemy_punch(enemy, 0):
 		combat.player.inflict_damage_with_visuals(dmg)
-		combat.animation.say(combat.player.visual_entity, "%s DAMAGE" % dmg, {"font_size": 42, "color": Color.RED})
-	else:
-		combat.animation.say(enemy.visual_entity, "Punch missed.")
+
+func _is_possible(target, enemy_tile) -> bool:
+	return combat.player.current_tile.is_next_to(enemy_tile)

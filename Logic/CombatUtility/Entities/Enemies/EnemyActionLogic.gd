@@ -4,38 +4,46 @@ var args: EnemyActionArgs
 var action: EnemyAction
 var combat: Combat
 var enemy: EnemyEntity
+var plan: EnemyActionPlan
+var target:
+	get:
+		if target:
+			return target
+		if combat and plan:
+			return plan.get_target(combat)
+		return null
 
 #########################
 ## Methods for calling ##
 #########################
 
-func execute(target):
-	await _execute(target)
+func execute():
+	await _execute()
 
-func is_possible(target, enemy_tile: Tile = enemy.current_tile) -> bool:
-	return _is_possible(target, enemy_tile)
+func is_possible(enemy_tile: Tile = enemy.current_tile) -> bool:
+	return _is_possible(enemy_tile)
 
-func evaluate(target, enemy_tile: Tile = enemy.current_tile) -> EnemyActionEval:
-	if is_possible(target, enemy_tile):
-		var evaluation := _evaluate(target, enemy_tile)
+func evaluate(enemy_tile: Tile = enemy.current_tile) -> EnemyActionEval:
+	if is_possible(enemy_tile):
+		var evaluation := _evaluate(enemy_tile)
 		if evaluation == null:
 			evaluation = EnemyActionEval.from_cv_array(action.default_scores)
 		return evaluation
 	else:
 		return EnemyActionEval.new()
 
-func estimated_destination(target, enemy_tile: Tile = enemy.current_tile) -> Tile:
-	var destinaion := _estimated_destination(target, enemy_tile)
+func estimated_destination(enemy_tile: Tile = enemy.current_tile) -> Tile:
+	var destinaion := _estimated_destination(enemy_tile)
 	if destinaion != null:
 		return destinaion
 	else:
 		return enemy_tile
 
-func show_preview(target, show: bool) -> void:
-	_show_preview(target, show)
+func show_preview(show: bool) -> void:
+	_show_preview(show)
 
-func get_alternative_plan(target) -> EnemyActionPlan:
-	var plan := _get_alternative_plan(target)
+func get_alternative_plan() -> EnemyActionPlan:
+	var plan := _get_alternative_plan()
 	if plan:
 		return plan
 	elif action.alternative_action_args:
@@ -45,34 +53,37 @@ func get_alternative_plan(target) -> EnemyActionPlan:
 func get_target_pool() -> Array:
 	return _get_target_pool()
 
+func setup() -> void:
+	_setup()
+
 ############################
 ## Methods for overriding ##
 ############################
 
-func _execute(target):
+func _execute():
 	pass
 
-func _is_possible(target, enemy_tile) -> bool:
+func _is_possible(enemy_tile) -> bool:
 	return true
 
-func _evaluate(target, enemy_tile) -> EnemyActionEval:
+func _evaluate(enemy_tile) -> EnemyActionEval:
 	return null
 
-func _estimated_destination(target, enemy_tile: Tile) -> Tile:
+func _estimated_destination(enemy_tile: Tile) -> Tile:
 	return enemy_tile
 
-func _show_preview(target, show: bool) -> void:
-	show_movement_arrow(target, show)
+func _show_preview(show: bool) -> void:
+	show_movement_arrow(show)
 	show_action_icon_over_enemy(show)
 
-func _get_alternative_plan(target) -> EnemyActionPlan:
+func _get_alternative_plan() -> EnemyActionPlan:
 	return null
 
 func _get_target_pool() -> Array:
 	var all_targets := []
 	match action.target_type:
 		EnemyAction.TargetType.None:
-			return []
+			return [null]
 		EnemyAction.TargetType.Foes:
 			all_targets = combat.get_all_hp_entities()
 			all_targets = all_targets.filter(
@@ -91,13 +102,16 @@ func _get_target_pool() -> Array:
 			all_targets = combat.level.get_all_entities()
 	return all_targets
 
+func _setup() -> void:
+	pass
+
 ####################
 ## Helper Methods ##
 ####################
 
-func show_movement_arrow(target, show: bool):
+func show_movement_arrow(show: bool):
 	var from: Tile = enemy.current_tile
-	var to: Tile = estimated_destination(target)
+	var to: Tile = estimated_destination()
 	if from != to:
 		pass
 		# TODO Nitai do this

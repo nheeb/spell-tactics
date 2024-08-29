@@ -55,20 +55,21 @@ func get_action_pool() -> Array[EnemyActionArgs]:
 	actions.append_array(combat.global_enemy_actions)
 	return actions
 
-func create_action_logic(action_args: EnemyActionArgs) -> EnemyActionLogic:
-	var action: EnemyAction = action_args.action
-	var new_action_logic = action.logic_script.new() as EnemyActionLogic
-	assert(new_action_logic, "Enemy Action Logic wasn't created.")
-	new_action_logic.args = action_args
-	new_action_logic.action = action
-	new_action_logic.combat = combat
-	new_action_logic.enemy = self
-	action_logic[action_args] = new_action_logic
-	return new_action_logic
-
-func get_action_logic(action_args: EnemyActionArgs) -> EnemyActionLogic:
-	return Utility.dict_safe_get(action_logic, action_args, \
-		create_action_logic(action_args))
+#func create_action_logic(action_args: EnemyActionArgs) -> EnemyActionLogic:
+	#var action: EnemyAction = action_args.action
+	#var new_action_logic = action.logic_script.new() as EnemyActionLogic
+	#assert(new_action_logic, "Enemy Action Logic wasn't created.")
+	#new_action_logic.args = action_args
+	#new_action_logic.action = action
+	#new_action_logic.combat = combat
+	#new_action_logic.enemy = self
+	#new_action_logic.setup()
+	#action_logic[action_args] = new_action_logic
+	#return new_action_logic
+#
+#func get_action_logic(action_args: EnemyActionArgs) -> EnemyActionLogic:
+	#return Utility.dict_safe_get(action_logic, action_args, \
+		#create_action_logic(action_args))
 
 func get_random_action_plan() -> EnemyActionPlan:
 	var d_power : float = get_enemy_type().behaviour.decision_power

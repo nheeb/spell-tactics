@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=3 format=3 uid="uid://dpva1xd10eiwv"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyAction.gd" id="1_1u11l"]
+[ext_resource type="Texture2D" uid="uid://ditt5pum2lahc" path="res://Assets/Sprites/Icons/plain-arrow.png" id="1_waeya"]
+
+[resource]
+script = ExtResource("1_1u11l")
+pretty_name = "Move near target"
+icon = ExtResource("1_waeya")
+color = Color(1, 1, 1, 1)
+target_type = 0
+target_range_looking = -1
+target_range_walking = -1
+target_consider_count = 2
+target_consider_method = 0
+default_scores = Array[Resource("res://Logic/CombatUtility/Entities/Enemies/EnemyActionCriteriaValue.gd")]([])
+cooldown = 0
+movement_mandatory = false
+default_args = []
+default_kwargs = {}

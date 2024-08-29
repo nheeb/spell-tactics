@@ -159,6 +159,9 @@ func _to_string() -> String:
 func distance_to(other_tile: Tile) -> int:
 	return Utility.tile_distance(self, other_tile)
 
+func is_next_to(other_tile: Tile) -> bool:
+	return distance_to(other_tile) == 1
+
 func direction_to(other_tile: Tile) -> Vector2i:
 	var line := level.get_line(self, other_tile)
 	if len(line) == 0:

@@ -25,12 +25,24 @@ func get_kwarg(key: Variant, default = null) -> Variant:
 	default = Utility.dict_safe_get(action.default_kwargs, key, default)
 	return Utility.dict_safe_get(kwargs, key, default)
 
+func get_temp_logic(enemy, combat) -> EnemyActionLogic:
+	if enemy and combat and action:
+		var new_action_logic = action.logic_script.new() as EnemyActionLogic
+		assert(new_action_logic, "Enemy Action Logic wasn't created.")
+		new_action_logic.args = self
+		new_action_logic.action = action
+		new_action_logic.combat = combat
+		new_action_logic.enemy = enemy
+		return new_action_logic
+	return null
+
 ## RESULT
 func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 	var combat := enemy.combat
-	var all_targets := enemy.get_action_logic(self).get_target_pool()
+	var temp_logic := get_temp_logic(enemy, combat)
+	var all_targets := temp_logic.get_target_pool()
 
-	# Testing if in Range and action is_possible(target)
+	# Testing if in Range
 	var suitable_targets := []
 	var enemy_tile = enemy.current_tile
 	for target in all_targets:
@@ -47,11 +59,12 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 				if combat.level.get_shortest_distance(enemy_tile, target_tile) \
 					> action.target_range_walking:
 						continue
+		suitable_targets.append(target)
 	
 	# Making Plans
 	var plans : Array[EnemyActionPlan] = []
 	for suitable_target in suitable_targets:
-		plans.append(EnemyActionPlan.new(enemy, self, suitable_target))
+		plans.append(EnemyActionPlan.new(enemy, self, suitable_target, combat))
 	
 	# Evaluate if possible
 	var possible_dict := {}

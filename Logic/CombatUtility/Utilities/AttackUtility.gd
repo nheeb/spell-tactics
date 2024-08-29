@@ -36,6 +36,8 @@ func enemy_punch(enemy: EnemyEntity, attack_bonus := 0) -> bool:
 	combat.animation.effect(VFX.HEX_RINGS, combat.player.current_tile, {"color": Color.RED}).set_flag_with()
 	
 	var hit := Utility.random_hit(chance)
+	if not hit:
+		combat.animation.say(enemy.visual_entity, "Punch missed.")
 	return hit
 
 func get_other_enemies(enemy: EnemyEntity) -> Array[EnemyEntity]:
