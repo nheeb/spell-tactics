@@ -12,6 +12,15 @@ var method_name: StringName:
 var owner: Object
 var state := State.Created
 var stack_trace: Array
+var stack_trace_string: String:
+	get:
+		var s := ""
+		for d in stack_trace:
+			if d is Dictionary:
+				for k in d.keys():
+					s += "%s: %s | " % [k, d[k]]
+				s += "\n"
+		return s 
 var _remove_me := false
 var _result: Variant
 

@@ -10,6 +10,7 @@ func process_phase() -> void:
 	for active in combat.actives:  # can't trigger any actives
 		active.unlocked = false
 	
+	
 	# Sort enemies by agility
 	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.agility > b.agility)
 	
@@ -23,5 +24,5 @@ func do_enemy_action(enemy: EnemyEntity):
 	combat.animation.camera_reach(enemy.visual_entity)
 	combat.animation.camera_follow(enemy.visual_entity)
 	combat.animation.wait(.2)
-	enemy.do_action()
+	await enemy.do_action()
 	combat.animation.camera_unfollow()
