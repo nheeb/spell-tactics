@@ -32,6 +32,6 @@ func execute(combat: Combat) -> void:
 			currently_hovering_drainable = null
 
 
-func on_fail(combat: Combat) -> void:
+func log_me(combat: Combat, valid: bool) -> void:
 	pass
 
