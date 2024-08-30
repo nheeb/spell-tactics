@@ -9,7 +9,7 @@ func process_phase() -> void:
 	)
 	
 	# All stat resets here
-	combat.energy.pay(combat.energy.player_energy)
+	# combat.energy.pay(combat.energy.player_energy)
 	
 	if combat.enemies.is_empty():
 		# TODO Game won

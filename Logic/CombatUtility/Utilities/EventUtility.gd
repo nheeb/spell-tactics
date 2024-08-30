@@ -2,6 +2,7 @@ class_name EventUtility extends CombatUtility
 
 ## { RoundNumber (int) -> ScheduledEvents (Array[CombatEventSchedule]) }
 var event_timeline: Dictionary
+
 var enemy_event_queue: Array[EnemyEventPlan]
 var all_events: Array[CombatEvent]
 
@@ -69,7 +70,10 @@ func process_events() -> void:
 func process_event_schedules():
 	var game_round := combat.current_round
 	if game_round in event_timeline.keys():
-		for schedule in event_timeline[game_round]:
+		var schedules = event_timeline[game_round]
+		if schedules is not Array:
+			schedules = [schedules]
+		for schedule in schedules:
 			schedule = schedule as CombatEventSchedule
 			assert(schedule)
 			add_event_and_activate(schedule.create_event(combat))

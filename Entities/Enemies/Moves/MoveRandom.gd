@@ -6,6 +6,7 @@ var movement: int:
 
 func get_random_tile_in_range(enemy_tile: Tile):
 	var tiles := enemy_tile.get_surrounding_tiles(movement)
+	tiles.shuffle()
 	for tile in tiles:
 		if tile.is_obstacle():
 			continue
