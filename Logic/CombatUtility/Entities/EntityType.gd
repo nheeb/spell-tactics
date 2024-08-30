@@ -47,14 +47,23 @@ func create_entity(combat: Combat, call_on_create := true) -> Entity:
 	entity_on_create(ent, call_on_create)
 	return ent
 
+
+const PROTOTYPE_VISUALS = "res://Entities/Visuals/VisualPrototype.tscn"
 func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	ent.combat = combat
 	# CARE, instantiate() might lead to lag, depending on the use we might want to instantiate later
 	# use billboard prototype visuals if no visual scene is set:
-	ent.visual_entity = self.visual_scene.instantiate()	if self.visual_scene != null else Game.PROTOTYPE_VISUALS.instantiate()
+	if self.visual_scene != null:
+		ent.visual_entity = self.visual_scene.instantiate()
+	else:
+		#push_warning("Using a prototype visual")
+		# need to use load here since Godot 4.3 for some reason..
+		ent.visual_entity = load(PROTOTYPE_VISUALS).instantiate()
+	
 	# hehehe - but these references are safe since entity and visual entity exists together
-	if "type" not in ent.visual_entity:
-		push_error("Error in initializing VisualEntity for type %s, maybe it's missing VisualEntity.gd assignment?" % internal_name)
+	if ent.visual_entity == null or "type" not in ent.visual_entity:
+		push_error("Error in initializing VisualEntity '%s', maybe it's missing VisualEntity.gd assignment?" % internal_name)
+		return
 	ent.visual_entity.type = self
 	ent.visual_entity.entity = ent
 	ent.type = self

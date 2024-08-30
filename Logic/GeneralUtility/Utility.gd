@@ -1,4 +1,4 @@
-extends Node
+class_name Utils extends Node
 
 func remove_y_value(pos: Vector3) -> Vector3:
 	pos.y = 0.0
@@ -271,3 +271,39 @@ func quadratic_bezier_3D(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vec
 func disconnect_all_connection(s: Signal):
 	for c in s.get_connections():
 		s.disconnect(c["callable"])
+	
+## Creates a signal without needing to bind it to an instance. This means the signal can be assigned to a static var and accessed globally. `cls` should be a global class identifier. 
+##
+## Taken from https://stackoverflow.com/questions/77026156/how-to-write-a-static-event-emitter-in-gdscript
+static func create_static_signal(cls: Object, signal_name: StringName) -> Signal:
+	if not cls.has_user_signal(signal_name):
+		cls.add_user_signal(signal_name)
+	return Signal(cls, signal_name)
+	
+
+
+#static func get_exported_properties(node: Node) -> Array:
+	#var exported_properties = []
+	#var script = node.get_script()
+	#
+	#if script:
+		#var properties = script.get_script_property_list()
+		#for property in properties:
+			#if "usage" in property and property["usage"] & PROPERTY_USAGE_STORAGE:
+				#var prop_info = {
+					#"name": property["name"],
+					#"type": type_string(property["type"]),
+					#"value": node.get(property["name"])
+				#}
+				#
+				## Check if it's a numeric range
+				#if property["hint"] == PROPERTY_HINT_RANGE:
+					#var range_info = property["hint_string"].split(",")
+					#if range_info.size() >= 3:
+						#prop_info["min"] = float(range_info[0])
+						#prop_info["max"] = float(range_info[1])
+						#prop_info["step"] = float(range_info[2])
+				#
+				#exported_properties.append(prop_info)
+	#
+	#return exported_properties

@@ -1,0 +1,3666 @@
+[gd_resource type="Resource" script_class="CombatState" load_steps=465 format=3 uid="uid://ckq8v1s3aruw7"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/CombatState.gd" id="1_a77op"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/ActiveState.gd" id="1_opmkl"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/LevelState.gd" id="1_worvi"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/EntityID.gd" id="2_2i3es"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Events/EnemyEventPlan.gd" id="2_kcnt0"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventState.gd" id="2_pdf0p"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/LogEntry.gd" id="3_kxbah"]
+[ext_resource type="Resource" uid="uid://b1uiotlalbmul" path="res://Entities/Environment/GrassTile.tres" id="3_vhrki"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/EntityState.gd" id="4_qk5jy"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellState.gd" id="4_x7vib"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/TileState.gd" id="5_6hme5"]
+[ext_resource type="Resource" uid="uid://dcpjaerkeyfjv" path="res://Entities/Enemies/Moves/MoveRandom.tres" id="5_24umr"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellID.gd" id="5_bfv3t"]
+[ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Entities/Environment/DirtTile.tres" id="6_8em4m"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="6_c7ku8"]
+[ext_resource type="Resource" uid="uid://cca31estceejt" path="res://Spells/AllSpells/SporeFlight.tres" id="6_bch05"]
+[ext_resource type="Resource" uid="uid://brvjvj8i7f7kw" path="res://Entities/Environment/Tree.tres" id="7_ay4xs"]
+[ext_resource type="Resource" uid="uid://c4yj8j5clqch8" path="res://Spells/AllSpells/Berserker.tres" id="7_l5ewd"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="8_d2swj"]
+[ext_resource type="Resource" uid="uid://bu7gx0wc5bbuh" path="res://Spells/AllSpells/AirMissile.tres" id="8_xq507"]
+[ext_resource type="Resource" uid="uid://d2k4vhkqurk7r" path="res://Spells/AllSpells/Haunting.tres" id="9_002n8"]
+[ext_resource type="Resource" uid="uid://b7xqo2ltiqbwk" path="res://Entities/Environment/Bush.tres" id="9_b8i77"]
+[ext_resource type="Resource" uid="uid://d3xtwb7dcaenq" path="res://Spells/AllSpells/SelfHeal.tres" id="10_1ofw7"]
+[ext_resource type="Resource" uid="uid://ddr1tv8hf3bj3" path="res://Entities/Environment/Stump.tres" id="10_q3j68"]
+[ext_resource type="Resource" uid="uid://c6t18hbsmwiha" path="res://Entities/Environment/Rock.tres" id="11_7c360"]
+[ext_resource type="Resource" uid="uid://kq07x16lyno7" path="res://Entities/Enemies/GoblinArcher.tres" id="11_54udb"]
+[ext_resource type="Resource" uid="uid://nuucsrbi1dqp" path="res://Entities/Environment/MediumShrooms.tres" id="11_fn0u2"]
+[ext_resource type="Resource" uid="uid://bhbal4070u1qk" path="res://Spells/AllSpells/SummonWitchTotem.tres" id="11_x0uqt"]
+[ext_resource type="Resource" uid="uid://bcpsexkc1asv1" path="res://Spells/AllSpells/SummonBush.tres" id="12_blgwx"]
+[ext_resource type="Resource" uid="uid://b8ef7eh8cp7ub" path="res://Entities/Environment/Flower.tres" id="13_l3am2"]
+[ext_resource type="Resource" uid="uid://rh55g614p7ig" path="res://Spells/AllSpells/Unload.tres" id="13_o1ya4"]
+[ext_resource type="Resource" uid="uid://dxf83ay5rsin2" path="res://Entities/Enemies/Goblin.tres" id="14_jrk47"]
+[ext_resource type="Resource" uid="uid://cf8mbclv7giqd" path="res://Spells/AllSpells/HotSteam.tres" id="14_m0stx"]
+[ext_resource type="Resource" uid="uid://bnqbor0d6tjit" path="res://Entities/Environment/SmallShrooms.tres" id="14_xioyu"]
+[ext_resource type="Resource" uid="uid://dqy48gh8w80m0" path="res://Spells/AllSpells/LightningStrike.tres" id="15_k5a6o"]
+[ext_resource type="Resource" uid="uid://dq2qgws5vu0i2" path="res://Entities/Environment/TallGrass.tres" id="15_s3iof"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/PlayerTraits.gd" id="15_uvvh0"]
+[ext_resource type="Resource" uid="uid://d1wcrekyije7v" path="res://Entities/Player/PlayerResource.tres" id="16_0ybmk"]
+[ext_resource type="Resource" uid="uid://bftmj7ayhlcs2" path="res://Entities/Environment/FlowSmall.tres" id="16_j2ocy"]
+[ext_resource type="Resource" uid="uid://coxs5uvjtigok" path="res://Spells/AllSpells/DeadlyDart.tres" id="16_k50ms"]
+[ext_resource type="Resource" uid="uid://bhq0pkvdokid6" path="res://Entities/Environment/Pebbles.tres" id="17_73e5m"]
+[ext_resource type="Resource" uid="uid://c2gimhhja8fi6" path="res://Spells/AllSpells/Breath.tres" id="17_dp2k7"]
+[ext_resource type="Resource" uid="uid://cjit0u77ak3lu" path="res://Spells/AllSpells/GrowingMycel.tres" id="18_pu2ir"]
+[ext_resource type="Resource" uid="uid://dh4ll7t2j71pq" path="res://Entities/Environment/FlowMedium.tres" id="19_25pqm"]
+[ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Entities/Enemies/GoblinBard.tres" id="19_amp3j"]
+[ext_resource type="Resource" uid="uid://iq34rfnf6t4w" path="res://Entities/Environment/WaterTile.tres" id="19_ncl4f"]
+[ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Spells/AllSpells/WaterBlast.tres" id="19_vutu3"]
+[ext_resource type="Resource" uid="uid://dcbq3ohb123xy" path="res://Spells/AllSpells/TotalDecay.tres" id="20_lugvs"]
+[ext_resource type="Resource" uid="uid://bmmnjqd2apbv0" path="res://Spells/AllSpells/RockBlast.tres" id="21_gufss"]
+[ext_resource type="Resource" uid="uid://cd42nwwenro" path="res://Spells/AllSpells/Cyclone.tres" id="22_rddsw"]
+[ext_resource type="Resource" uid="uid://blp6qpy1q8qhr" path="res://Spells/AllSpells/MudArmor.tres" id="23_obivt"]
+[ext_resource type="Resource" uid="uid://qhnw7yi6brvf" path="res://Spells/AllSpells/TrappingRoots.tres" id="24_ni7a2"]
+[ext_resource type="Resource" uid="uid://bg42mk7gnksus" path="res://Spells/AllSpells/SpellMemory.tres" id="25_vpeqn"]
+[ext_resource type="Script" path="res://Spells/AllStatusEffects/StatusEffect.gd" id="32_moxhk"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/TimedEffect.gd" id="53_jcir5"]
+
+[sub_resource type="Resource" id="Resource_au4dy"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_pdv8v"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_nxumc"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_q7xub"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_b6ecu"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_o3kr8"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_lrobg"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_sl74m"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_obth0"]
+script = ExtResource("3_kxbah")
+type = 0
+round_number = 0
+text = "Combat was deserialized."
+number = 0
+
+[sub_resource type="Resource" id="Resource_5uso2"]
+script = ExtResource("5_bfv3t")
+id = 17
+
+[sub_resource type="Resource" id="Resource_q5rkm"]
+script = ExtResource("4_x7vib")
+type = ExtResource("25_vpeqn")
+id = SubResource("Resource_5uso2")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_27men"]
+script = ExtResource("5_bfv3t")
+id = 8
+
+[sub_resource type="Resource" id="Resource_ssxd8"]
+script = ExtResource("4_x7vib")
+type = ExtResource("10_1ofw7")
+id = SubResource("Resource_27men")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_nob2k"]
+script = ExtResource("5_bfv3t")
+id = 15
+
+[sub_resource type="Resource" id="Resource_34b8a"]
+script = ExtResource("4_x7vib")
+type = ExtResource("20_lugvs")
+id = SubResource("Resource_nob2k")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_8cq8h"]
+script = ExtResource("5_bfv3t")
+id = 3
+
+[sub_resource type="Resource" id="Resource_gdjj2"]
+script = ExtResource("4_x7vib")
+type = ExtResource("7_l5ewd")
+id = SubResource("Resource_8cq8h")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_2n3x4"]
+script = ExtResource("5_bfv3t")
+id = 14
+
+[sub_resource type="Resource" id="Resource_lw5l3"]
+script = ExtResource("4_x7vib")
+type = ExtResource("11_x0uqt")
+id = SubResource("Resource_2n3x4")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_gofwe"]
+script = ExtResource("5_bfv3t")
+id = 9
+
+[sub_resource type="Resource" id="Resource_68pay"]
+script = ExtResource("4_x7vib")
+type = ExtResource("18_pu2ir")
+id = SubResource("Resource_gofwe")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_h6jml"]
+script = ExtResource("5_bfv3t")
+id = 18
+
+[sub_resource type="Resource" id="Resource_2fdnc"]
+script = ExtResource("4_x7vib")
+type = ExtResource("19_vutu3")
+id = SubResource("Resource_h6jml")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_ldog3"]
+script = ExtResource("5_bfv3t")
+id = 11
+
+[sub_resource type="Resource" id="Resource_xmxdg"]
+script = ExtResource("4_x7vib")
+type = ExtResource("9_002n8")
+id = SubResource("Resource_ldog3")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_6kn12"]
+script = ExtResource("5_bfv3t")
+id = 1
+
+[sub_resource type="Resource" id="Resource_wc1bs"]
+script = ExtResource("4_x7vib")
+type = ExtResource("23_obivt")
+id = SubResource("Resource_6kn12")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_05s2h"]
+script = ExtResource("5_bfv3t")
+id = 2
+
+[sub_resource type="Resource" id="Resource_ctrbb"]
+script = ExtResource("4_x7vib")
+type = ExtResource("8_xq507")
+id = SubResource("Resource_05s2h")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_w34uj"]
+script = ExtResource("5_bfv3t")
+id = 10
+
+[sub_resource type="Resource" id="Resource_k1w4h"]
+script = ExtResource("4_x7vib")
+type = ExtResource("16_k50ms")
+id = SubResource("Resource_w34uj")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_2lc3j"]
+script = ExtResource("5_bfv3t")
+id = 5
+
+[sub_resource type="Resource" id="Resource_qo0oo"]
+script = ExtResource("4_x7vib")
+type = ExtResource("12_blgwx")
+id = SubResource("Resource_2lc3j")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_frmk4"]
+script = ExtResource("5_bfv3t")
+id = 4
+
+[sub_resource type="Resource" id="Resource_83a8a"]
+script = ExtResource("4_x7vib")
+type = ExtResource("24_ni7a2")
+id = SubResource("Resource_frmk4")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_c3ec6"]
+script = ExtResource("5_bfv3t")
+id = 6
+
+[sub_resource type="Resource" id="Resource_gqtxb"]
+script = ExtResource("4_x7vib")
+type = ExtResource("6_bch05")
+id = SubResource("Resource_c3ec6")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_kpyel"]
+script = ExtResource("5_bfv3t")
+id = 7
+
+[sub_resource type="Resource" id="Resource_7owvk"]
+script = ExtResource("4_x7vib")
+type = ExtResource("22_rddsw")
+id = SubResource("Resource_kpyel")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_wqm8d"]
+script = ExtResource("5_bfv3t")
+id = 20
+
+[sub_resource type="Resource" id="Resource_xx27j"]
+script = ExtResource("4_x7vib")
+type = ExtResource("15_k5a6o")
+id = SubResource("Resource_wqm8d")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_7lvc0"]
+script = ExtResource("5_bfv3t")
+id = 12
+
+[sub_resource type="Resource" id="Resource_21ygs"]
+script = ExtResource("4_x7vib")
+type = ExtResource("14_m0stx")
+id = SubResource("Resource_7lvc0")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_acjhw"]
+script = ExtResource("5_bfv3t")
+id = 19
+
+[sub_resource type="Resource" id="Resource_teytv"]
+script = ExtResource("4_x7vib")
+type = ExtResource("13_o1ya4")
+id = SubResource("Resource_acjhw")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_h4x57"]
+script = ExtResource("5_bfv3t")
+id = 16
+
+[sub_resource type="Resource" id="Resource_xhwih"]
+script = ExtResource("4_x7vib")
+type = ExtResource("17_dp2k7")
+id = SubResource("Resource_h4x57")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_drrp6"]
+script = ExtResource("5_bfv3t")
+id = 13
+
+[sub_resource type="Resource" id="Resource_y1s6e"]
+script = ExtResource("4_x7vib")
+type = ExtResource("21_gufss")
+id = SubResource("Resource_drrp6")
+combat_persistant_properties = {}
+round_persistant_properties = {}
+
+[sub_resource type="Resource" id="Resource_fdtjt"]
+script = ExtResource("6_c7ku8")
+action = ExtResource("5_24umr")
+args = []
+kwargs = {}
+
+[sub_resource type="Resource" id="Resource_25aem"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 29
+
+[sub_resource type="Resource" id="Resource_cwp6n"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_25aem"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_0wesg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 7
+
+[sub_resource type="Resource" id="Resource_vir08"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0, 2])
+
+[sub_resource type="Resource" id="Resource_eka51"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_0wesg"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_swkv4"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cwp6n"), SubResource("Resource_eka51")])
+
+[sub_resource type="Resource" id="Resource_kb7tj"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 18
+
+[sub_resource type="Resource" id="Resource_f2kok"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_kb7tj"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_tq1la"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 2
+
+[sub_resource type="Resource" id="Resource_o0xi8"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_64sg2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_o0xi8"),
+"id": SubResource("Resource_tq1la"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_lalbb"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f2kok"), SubResource("Resource_64sg2")])
+
+[sub_resource type="Resource" id="Resource_jnhih"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 2
+
+[sub_resource type="Resource" id="Resource_6yve5"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_jnhih"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_ii8hy"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6yve5")])
+
+[sub_resource type="Resource" id="Resource_7yj30"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 41
+
+[sub_resource type="Resource" id="Resource_w22e2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_7yj30"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_6mygu"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 4
+
+[sub_resource type="Resource" id="Resource_lqpe5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 4])
+
+[sub_resource type="Resource" id="Resource_xdua0"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_lqpe5"),
+"id": SubResource("Resource_6mygu"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_3fr2h"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_w22e2"), SubResource("Resource_xdua0")])
+
+[sub_resource type="Resource" id="Resource_flbpx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 4
+
+[sub_resource type="Resource" id="Resource_sfhyb"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_flbpx"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_ryjh4"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 1
+
+[sub_resource type="Resource" id="Resource_v8c80"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2])
+
+[sub_resource type="Resource" id="Resource_cad16"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_v8c80"),
+"id": SubResource("Resource_ryjh4"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_rjphj"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sfhyb"), SubResource("Resource_cad16")])
+
+[sub_resource type="Resource" id="Resource_2i7ss"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 5
+
+[sub_resource type="Resource" id="Resource_e1a8e"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2i7ss"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_dsqsf"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 1
+
+[sub_resource type="Resource" id="Resource_jhx8i"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2, 2, 2])
+
+[sub_resource type="Resource" id="Resource_krflt"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_dsqsf"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_51q1h"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_e1a8e"), SubResource("Resource_krflt")])
+
+[sub_resource type="Resource" id="Resource_aaskx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 28
+
+[sub_resource type="Resource" id="Resource_041b5"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_aaskx"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_egrib"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 2
+
+[sub_resource type="Resource" id="Resource_4kpoa"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_lqpe5"),
+"id": SubResource("Resource_egrib"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_6qij2"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_041b5"), SubResource("Resource_4kpoa")])
+
+[sub_resource type="Resource" id="Resource_t32jh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 56
+
+[sub_resource type="Resource" id="Resource_c24j8"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_t32jh"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_b4gr8"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_c24j8")])
+
+[sub_resource type="Resource" id="Resource_may3j"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 57
+
+[sub_resource type="Resource" id="Resource_jvcnn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_may3j"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_37sk6"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 1
+
+[sub_resource type="Resource" id="Resource_5ywon"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_lqpe5"),
+"id": SubResource("Resource_37sk6"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_f5jb6"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jvcnn"), SubResource("Resource_5ywon")])
+
+[sub_resource type="Resource" id="Resource_u8ptc"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 58
+
+[sub_resource type="Resource" id="Resource_1msjt"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_u8ptc"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_toi7o"]
+script = ExtResource("2_2i3es")
+type = ExtResource("9_b8i77")
+id = 3
+
+[sub_resource type="Resource" id="Resource_x3nhf"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0])
+
+[sub_resource type="Resource" id="Resource_tw71r"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("9_b8i77")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_x3nhf"),
+"id": SubResource("Resource_toi7o"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_lu403"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1msjt"), SubResource("Resource_tw71r")])
+
+[sub_resource type="Resource" id="Resource_qwgqp"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 42
+
+[sub_resource type="Resource" id="Resource_oh8sm"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_qwgqp"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_nhsut"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 21
+
+[sub_resource type="Resource" id="Resource_gwrkn"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0, 2])
+
+[sub_resource type="Resource" id="Resource_y13p5"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_gwrkn"),
+"id": SubResource("Resource_nhsut"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_hol6j"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_oh8sm"), SubResource("Resource_y13p5")])
+
+[sub_resource type="Resource" id="Resource_f7vrg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 59
+
+[sub_resource type="Resource" id="Resource_nf8er"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_f7vrg"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_qhjjx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 1
+
+[sub_resource type="Resource" id="Resource_a0j1o"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2])
+
+[sub_resource type="Resource" id="Resource_hm6dq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_qhjjx"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_1lhp7"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nf8er"), SubResource("Resource_hm6dq")])
+
+[sub_resource type="Resource" id="Resource_ln7nh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 6
+
+[sub_resource type="Resource" id="Resource_speag"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ln7nh"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_o87nd"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 2
+
+[sub_resource type="Resource" id="Resource_rpmes"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_o87nd"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_8x5p4"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_speag"), SubResource("Resource_rpmes")])
+
+[sub_resource type="Resource" id="Resource_3q8ae"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 27
+
+[sub_resource type="Resource" id="Resource_0wn8h"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_3q8ae"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_nvrhd"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 3
+
+[sub_resource type="Resource" id="Resource_tjj63"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_lqpe5"),
+"id": SubResource("Resource_nvrhd"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_yudy1"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0wn8h"), SubResource("Resource_tjj63")])
+
+[sub_resource type="Resource" id="Resource_sugdk"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 90
+
+[sub_resource type="Resource" id="Resource_lcrb2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_sugdk"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_17jg2"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lcrb2")])
+
+[sub_resource type="Resource" id="Resource_l1458"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 55
+
+[sub_resource type="Resource" id="Resource_8xtfv"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_l1458"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_mgxu5"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8xtfv")])
+
+[sub_resource type="Resource" id="Resource_w5c4k"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 61
+
+[sub_resource type="Resource" id="Resource_pdp5y"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_w5c4k"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_4y7ft"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_jrk47")
+id = 1
+
+[sub_resource type="Resource" id="Resource_ywjdp"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_72s7k"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_jrk47")
+entity_props = {
+"accuracy": 9,
+"agility": 1,
+"armor": 0,
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_ywjdp"),
+"forced_action_name": "",
+"forced_movement_name": "",
+"hp": 5,
+"id": SubResource("Resource_4y7ft"),
+"resistance": 0,
+"status_effects": Array[ExtResource("32_moxhk")]([]),
+"strength": 2,
+"team": 0
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_jjmh2"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pdp5y"), SubResource("Resource_72s7k")])
+
+[sub_resource type="Resource" id="Resource_tv4qm"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 43
+
+[sub_resource type="Resource" id="Resource_768ub"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_tv4qm"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_1idxw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_baouo"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 1])
+
+[sub_resource type="Resource" id="Resource_s74va"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_baouo"),
+"id": SubResource("Resource_1idxw"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_olqnj"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_768ub"), SubResource("Resource_s74va")])
+
+[sub_resource type="Resource" id="Resource_r2qb0"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 44
+
+[sub_resource type="Resource" id="Resource_eh2p0"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_r2qb0"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_ku5tm"]
+script = ExtResource("2_2i3es")
+type = ExtResource("13_l3am2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_a466y"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([5])
+
+[sub_resource type="Resource" id="Resource_535wj"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("13_l3am2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a466y"),
+"id": SubResource("Resource_ku5tm"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_sx78o"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_eh2p0"), SubResource("Resource_535wj")])
+
+[sub_resource type="Resource" id="Resource_k5dr0"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 57
+
+[sub_resource type="Resource" id="Resource_ii8gx"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_k5dr0"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_lumk2"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 7
+
+[sub_resource type="Resource" id="Resource_uuiip"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 4])
+
+[sub_resource type="Resource" id="Resource_jl3yk"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_lumk2"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_4834n"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ii8gx"), SubResource("Resource_jl3yk")])
+
+[sub_resource type="Resource" id="Resource_eljp3"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 7
+
+[sub_resource type="Resource" id="Resource_wc4f3"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_eljp3"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_j3w3r"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 6
+
+[sub_resource type="Resource" id="Resource_riccs"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_j3w3r"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_lxaef"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wc4f3"), SubResource("Resource_riccs")])
+
+[sub_resource type="Resource" id="Resource_o0nhg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 25
+
+[sub_resource type="Resource" id="Resource_kn6wg"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_o0nhg"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_1enrw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 4
+
+[sub_resource type="Resource" id="Resource_g82oy"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_1enrw"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_8vgw3"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_kn6wg"), SubResource("Resource_g82oy")])
+
+[sub_resource type="Resource" id="Resource_xsa65"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 26
+
+[sub_resource type="Resource" id="Resource_momh2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_xsa65"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_pi5kt"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_j2ocy")
+id = 1
+
+[sub_resource type="Resource" id="Resource_jsre5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
+[sub_resource type="Resource" id="Resource_6x2p6"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_j2ocy")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jsre5"),
+"id": SubResource("Resource_pi5kt"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_xfsit"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_momh2"), SubResource("Resource_6x2p6")])
+
+[sub_resource type="Resource" id="Resource_2xhne"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 93
+
+[sub_resource type="Resource" id="Resource_xk8po"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2xhne"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_l8xvh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_54udb")
+id = 1
+
+[sub_resource type="Resource" id="Resource_bgl1q"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_4b7an"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_54udb")
+entity_props = {
+"accuracy": 9,
+"agility": 0,
+"armor": 0,
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_bgl1q"),
+"forced_action_name": "",
+"forced_movement_name": "",
+"hp": 4,
+"id": SubResource("Resource_l8xvh"),
+"resistance": 0,
+"status_effects": Array[ExtResource("32_moxhk")]([]),
+"strength": 1,
+"team": 0
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_tluvr"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xk8po"), SubResource("Resource_4b7an")])
+
+[sub_resource type="Resource" id="Resource_hw624"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 91
+
+[sub_resource type="Resource" id="Resource_exb8g"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_hw624"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_e53m6"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 2
+
+[sub_resource type="Resource" id="Resource_dhd5e"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 3])
+
+[sub_resource type="Resource" id="Resource_2fvd4"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_e53m6"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_ygwky"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_exb8g"), SubResource("Resource_2fvd4")])
+
+[sub_resource type="Resource" id="Resource_bklsd"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 82
+
+[sub_resource type="Resource" id="Resource_oecl6"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_bklsd"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_1k8qr"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_25pqm")
+id = 1
+
+[sub_resource type="Resource" id="Resource_m1ybh"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4, 4])
+
+[sub_resource type="Resource" id="Resource_8cswa"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_25pqm")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_m1ybh"),
+"id": SubResource("Resource_1k8qr"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_1q5ix"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_oecl6"), SubResource("Resource_8cswa")])
+
+[sub_resource type="Resource" id="Resource_4ai4x"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 45
+
+[sub_resource type="Resource" id="Resource_2gbew"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_4ai4x"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_7aeij"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 3
+
+[sub_resource type="Resource" id="Resource_y84hy"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_7aeij"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_3o7d2"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_2gbew"), SubResource("Resource_y84hy")])
+
+[sub_resource type="Resource" id="Resource_oaucm"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 4
+
+[sub_resource type="Resource" id="Resource_hfhpp"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_ae5qq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_oaucm"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_170na"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ae5qq")])
+
+[sub_resource type="Resource" id="Resource_4jp04"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 3
+
+[sub_resource type="Resource" id="Resource_4ewee"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_4jp04"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_3kv1w"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_4ewee")])
+
+[sub_resource type="Resource" id="Resource_2iepg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 8
+
+[sub_resource type="Resource" id="Resource_1fuca"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2iepg"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_77kiq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 5
+
+[sub_resource type="Resource" id="Resource_dlk2x"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_77kiq"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_7st8r"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1fuca"), SubResource("Resource_dlk2x")])
+
+[sub_resource type="Resource" id="Resource_7v3sp"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 24
+
+[sub_resource type="Resource" id="Resource_ocn1f"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_7v3sp"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_7s7wq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 8
+
+[sub_resource type="Resource" id="Resource_xkvk6"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_7s7wq"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_rawcm"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ocn1f"), SubResource("Resource_xkvk6")])
+
+[sub_resource type="Resource" id="Resource_ce0aw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 30
+
+[sub_resource type="Resource" id="Resource_p0f2r"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ce0aw"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_g7tji"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 1
+
+[sub_resource type="Resource" id="Resource_w414o"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_g7tji"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_e63q8"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_p0f2r"), SubResource("Resource_w414o")])
+
+[sub_resource type="Resource" id="Resource_pend8"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 94
+
+[sub_resource type="Resource" id="Resource_78nfe"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_pend8"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_cedkn"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_78nfe")])
+
+[sub_resource type="Resource" id="Resource_skjpa"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 84
+
+[sub_resource type="Resource" id="Resource_nd3xc"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_skjpa"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_0gtdw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 3
+
+[sub_resource type="Resource" id="Resource_v3d6l"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_0gtdw"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_w33oe"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nd3xc"), SubResource("Resource_v3d6l")])
+
+[sub_resource type="Resource" id="Resource_kc6lw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 83
+
+[sub_resource type="Resource" id="Resource_i60ee"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_kc6lw"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_6wryc"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_i60ee")])
+
+[sub_resource type="Resource" id="Resource_gvgte"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 62
+
+[sub_resource type="Resource" id="Resource_ohc4u"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_gvgte"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_e2lkh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 2
+
+[sub_resource type="Resource" id="Resource_4dt5v"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_e2lkh"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_lhntf"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ohc4u"), SubResource("Resource_4dt5v")])
+
+[sub_resource type="Resource" id="Resource_g6soj"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 46
+
+[sub_resource type="Resource" id="Resource_j5k64"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_g6soj"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_dgy1e"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 3
+
+[sub_resource type="Resource" id="Resource_nf2or"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 3])
+
+[sub_resource type="Resource" id="Resource_sqj58"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_nf2or"),
+"id": SubResource("Resource_dgy1e"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_txr33"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_j5k64"), SubResource("Resource_sqj58")])
+
+[sub_resource type="Resource" id="Resource_uqdun"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 5
+
+[sub_resource type="Resource" id="Resource_8nfhq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_uqdun"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_uucbs"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8nfhq")])
+
+[sub_resource type="Resource" id="Resource_a4sok"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 2
+
+[sub_resource type="Resource" id="Resource_mq1xc"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_a4sok"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_vy7jn"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mq1xc")])
+
+[sub_resource type="Resource" id="Resource_tru5f"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 9
+
+[sub_resource type="Resource" id="Resource_bnfil"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_tru5f"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_fhjde"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 5
+
+[sub_resource type="Resource" id="Resource_d5uuh"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_fhjde"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_f3orq"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_bnfil"), SubResource("Resource_d5uuh")])
+
+[sub_resource type="Resource" id="Resource_frtvy"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 23
+
+[sub_resource type="Resource" id="Resource_1cwrm"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_frtvy"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_7o2br"]
+script = ExtResource("2_2i3es")
+type = ExtResource("9_b8i77")
+id = 4
+
+[sub_resource type="Resource" id="Resource_tsnpt"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0])
+
+[sub_resource type="Resource" id="Resource_p6cq4"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("9_b8i77")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_tsnpt"),
+"id": SubResource("Resource_7o2br"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_uqe52"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1cwrm"), SubResource("Resource_p6cq4")])
+
+[sub_resource type="Resource" id="Resource_ixb76"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 31
+
+[sub_resource type="Resource" id="Resource_8e2ml"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ixb76"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_eoarx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 27
+
+[sub_resource type="Resource" id="Resource_dbspt"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_gwrkn"),
+"id": SubResource("Resource_eoarx"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_wm6o2"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_8e2ml"), SubResource("Resource_dbspt")])
+
+[sub_resource type="Resource" id="Resource_f0vox"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 39
+
+[sub_resource type="Resource" id="Resource_abkxl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_f0vox"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_7a77a"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 3
+
+[sub_resource type="Resource" id="Resource_dyrbu"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_o0xi8"),
+"id": SubResource("Resource_7a77a"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_nkmbs"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_abkxl"), SubResource("Resource_dyrbu")])
+
+[sub_resource type="Resource" id="Resource_7cgwk"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 79
+
+[sub_resource type="Resource" id="Resource_rbvcb"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_7cgwk"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_8ddat"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 12
+
+[sub_resource type="Resource" id="Resource_pqcqv"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_8ddat"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_pqgaq"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rbvcb"), SubResource("Resource_pqcqv")])
+
+[sub_resource type="Resource" id="Resource_gby3q"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 80
+
+[sub_resource type="Resource" id="Resource_i7jsn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_gby3q"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_p41hs"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_i7jsn")])
+
+[sub_resource type="Resource" id="Resource_ym36i"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 81
+
+[sub_resource type="Resource" id="Resource_seama"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ym36i"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_52rge"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_seama")])
+
+[sub_resource type="Resource" id="Resource_8wmgq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 67
+
+[sub_resource type="Resource" id="Resource_yq3g4"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_8wmgq"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_mbu80"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 9
+
+[sub_resource type="Resource" id="Resource_4samg"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_mbu80"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_hfy8v"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_yq3g4"), SubResource("Resource_4samg")])
+
+[sub_resource type="Resource" id="Resource_qm8mu"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 66
+
+[sub_resource type="Resource" id="Resource_hdshm"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_qm8mu"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_67w3n"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hdshm")])
+
+[sub_resource type="Resource" id="Resource_hokop"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 1
+
+[sub_resource type="Resource" id="Resource_qke82"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_hokop"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_04vgj"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qke82")])
+
+[sub_resource type="Resource" id="Resource_ogme0"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 53
+
+[sub_resource type="Resource" id="Resource_t3ov4"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ogme0"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_r285h"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_t3ov4")])
+
+[sub_resource type="Resource" id="Resource_x7a3h"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 2
+
+[sub_resource type="Resource" id="Resource_5660e"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_x7a3h"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_gwjex"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 6
+
+[sub_resource type="Resource" id="Resource_m4cgw"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_gwjex"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_5f5o6"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5660e"), SubResource("Resource_m4cgw")])
+
+[sub_resource type="Resource" id="Resource_cq2rq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 22
+
+[sub_resource type="Resource" id="Resource_wkltl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_cq2rq"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_ur5mk"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 6
+
+[sub_resource type="Resource" id="Resource_msitu"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_ur5mk"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_6kwa3"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wkltl"), SubResource("Resource_msitu")])
+
+[sub_resource type="Resource" id="Resource_1q36g"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 32
+
+[sub_resource type="Resource" id="Resource_i8ekt"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_1q36g"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_2mt7g"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_amp3j")
+id = 1
+
+[sub_resource type="Resource" id="Resource_tfkxq"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_ligd6"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_amp3j")
+entity_props = {
+"accuracy": 6,
+"agility": 2,
+"armor": 0,
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_tfkxq"),
+"forced_action_name": "",
+"forced_movement_name": "",
+"hp": 3,
+"id": SubResource("Resource_2mt7g"),
+"resistance": 0,
+"status_effects": Array[ExtResource("32_moxhk")]([]),
+"strength": 1,
+"team": 0
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_sxmnf"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_i8ekt"), SubResource("Resource_ligd6")])
+
+[sub_resource type="Resource" id="Resource_uemo2"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 38
+
+[sub_resource type="Resource" id="Resource_870tl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_uemo2"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_brhi3"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 5
+
+[sub_resource type="Resource" id="Resource_x7va2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_brhi3"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_mrvrb"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_870tl"), SubResource("Resource_x7va2")])
+
+[sub_resource type="Resource" id="Resource_b5a52"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 85
+
+[sub_resource type="Resource" id="Resource_3sb33"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_b5a52"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_jaa0p"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3sb33")])
+
+[sub_resource type="Resource" id="Resource_7l5rb"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 74
+
+[sub_resource type="Resource" id="Resource_jdi41"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_7l5rb"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_lv13n"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jdi41")])
+
+[sub_resource type="Resource" id="Resource_2473n"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 73
+
+[sub_resource type="Resource" id="Resource_vc2lb"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2473n"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_rferb"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vc2lb")])
+
+[sub_resource type="Resource" id="Resource_26vah"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 68
+
+[sub_resource type="Resource" id="Resource_arf32"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_26vah"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_cnis3"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 3
+
+[sub_resource type="Resource" id="Resource_3adle"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_cnis3"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_wwxjj"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_arf32"), SubResource("Resource_3adle")])
+
+[sub_resource type="Resource" id="Resource_lwjr2"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 49
+
+[sub_resource type="Resource" id="Resource_fec5e"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_lwjr2"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_76224"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 2
+
+[sub_resource type="Resource" id="Resource_hj5xo"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_cu5c7"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hj5xo"),
+"id": SubResource("Resource_76224"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_4j5cj"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_fec5e"), SubResource("Resource_cu5c7")])
+
+[sub_resource type="Resource" id="Resource_ohqbn"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 1
+
+[sub_resource type="Resource" id="Resource_o5tr2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ohqbn"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_difmj"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 2
+
+[sub_resource type="Resource" id="Resource_0wau1"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_difmj"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_se81q"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_o5tr2"), SubResource("Resource_0wau1")])
+
+[sub_resource type="Resource" id="Resource_s7t5o"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 52
+
+[sub_resource type="Resource" id="Resource_5frmi"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_s7t5o"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_6ex1c"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 2
+
+[sub_resource type="Resource" id="Resource_orpdq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_6ex1c"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_kwm1x"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5frmi"), SubResource("Resource_orpdq")])
+
+[sub_resource type="Resource" id="Resource_bytmc"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 21
+
+[sub_resource type="Resource" id="Resource_3wqf1"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_bytmc"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_5ocxp"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_kfff7"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_vqlqk"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_kfff7"),
+"id": SubResource("Resource_5ocxp"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_p48rk"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3wqf1"), SubResource("Resource_vqlqk")])
+
+[sub_resource type="Resource" id="Resource_0odk8"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 33
+
+[sub_resource type="Resource" id="Resource_mgs5c"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_0odk8"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_1dgty"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 1
+
+[sub_resource type="Resource" id="Resource_p6o3h"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_1dgty"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_kv6jk"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mgs5c"), SubResource("Resource_p6o3h")])
+
+[sub_resource type="Resource" id="Resource_clrpf"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 37
+
+[sub_resource type="Resource" id="Resource_q0d6l"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_clrpf"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_8g8yh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_25pqm")
+id = 2
+
+[sub_resource type="Resource" id="Resource_5eqpg"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_25pqm")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_m1ybh"),
+"id": SubResource("Resource_8g8yh"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_xpwe3"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_q0d6l"), SubResource("Resource_5eqpg")])
+
+[sub_resource type="Resource" id="Resource_2ye8h"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 75
+
+[sub_resource type="Resource" id="Resource_touue"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2ye8h"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_fa2pd"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 6
+
+[sub_resource type="Resource" id="Resource_7pc3f"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_fa2pd"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_pf0d1"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_touue"), SubResource("Resource_7pc3f")])
+
+[sub_resource type="Resource" id="Resource_fn11g"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 72
+
+[sub_resource type="Resource" id="Resource_jovmh"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_fn11g"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_ldngk"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_jovmh")])
+
+[sub_resource type="Resource" id="Resource_6vmw6"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 69
+
+[sub_resource type="Resource" id="Resource_v0m5u"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_6vmw6"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_u0cy0"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_v0m5u")])
+
+[sub_resource type="Resource" id="Resource_t22j2"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 41
+
+[sub_resource type="Resource" id="Resource_pixf3"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_t22j2"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_pgb0e"]
+script = ExtResource("2_2i3es")
+type = ExtResource("9_b8i77")
+id = 1
+
+[sub_resource type="Resource" id="Resource_ai0db"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("9_b8i77")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_x3nhf"),
+"id": SubResource("Resource_pgb0e"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_jpk3v"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pixf3"), SubResource("Resource_ai0db")])
+
+[sub_resource type="Resource" id="Resource_35y1w"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 50
+
+[sub_resource type="Resource" id="Resource_wgxbu"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_35y1w"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_1xfuo"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_wgxbu")])
+
+[sub_resource type="Resource" id="Resource_8rsn7"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 51
+
+[sub_resource type="Resource" id="Resource_w7vgy"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_8rsn7"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_fkwcc"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 4
+
+[sub_resource type="Resource" id="Resource_1vl40"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_gwrkn"),
+"id": SubResource("Resource_fkwcc"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_wj88t"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_w7vgy"), SubResource("Resource_1vl40")])
+
+[sub_resource type="Resource" id="Resource_sf6sg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 20
+
+[sub_resource type="Resource" id="Resource_1obk7"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_sf6sg"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_yxrxq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 10
+
+[sub_resource type="Resource" id="Resource_1kj2s"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_yxrxq"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_uwgc7"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1obk7"), SubResource("Resource_1kj2s")])
+
+[sub_resource type="Resource" id="Resource_ncx8v"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 40
+
+[sub_resource type="Resource" id="Resource_ukhyo"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ncx8v"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_7de58"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 5
+
+[sub_resource type="Resource" id="Resource_o76q0"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_7de58"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_136nv"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ukhyo"), SubResource("Resource_o76q0")])
+
+[sub_resource type="Resource" id="Resource_b7ag6"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 1
+
+[sub_resource type="Resource" id="Resource_c8wdn"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_b7p53"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_c8wdn"),
+"id": SubResource("Resource_b7ag6"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_74kdt"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_b7p53")])
+
+[sub_resource type="Resource" id="Resource_pcm55"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 71
+
+[sub_resource type="Resource" id="Resource_apb2o"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_pcm55"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_2p27s"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_w2jd2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_o0xi8"),
+"id": SubResource("Resource_2p27s"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_2v31c"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_apb2o"), SubResource("Resource_w2jd2")])
+
+[sub_resource type="Resource" id="Resource_xvikx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 70
+
+[sub_resource type="Resource" id="Resource_hh4er"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_xvikx"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_rcre0"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hh4er")])
+
+[sub_resource type="Resource" id="Resource_jkxij"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 40
+
+[sub_resource type="Resource" id="Resource_p4yva"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_jkxij"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_my6lw"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_p4yva")])
+
+[sub_resource type="Resource" id="Resource_nor5m"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 42
+
+[sub_resource type="Resource" id="Resource_5rr3i"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_nor5m"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_rtejl"]
+script = ExtResource("15_uvvh0")
+max_handsize = 5
+movement_range = 3
+max_drains = 3
+
+[sub_resource type="Resource" id="Resource_ynb5v"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_0ybmk")
+id = 1
+
+[sub_resource type="Resource" id="Resource_aco54"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_0ybmk")
+entity_props = {
+"armor": 0,
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"hp": 5,
+"id": SubResource("Resource_ynb5v"),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
+"traits": SubResource("Resource_rtejl")
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_770u3"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5rr3i"), SubResource("Resource_aco54")])
+
+[sub_resource type="Resource" id="Resource_gdkwn"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 6
+
+[sub_resource type="Resource" id="Resource_f5blh"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_gdkwn"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_7iq24"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 4
+
+[sub_resource type="Resource" id="Resource_56uk3"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_7iq24"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_acoew"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f5blh"), SubResource("Resource_56uk3")])
+
+[sub_resource type="Resource" id="Resource_5x6n7"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 19
+
+[sub_resource type="Resource" id="Resource_pncjo"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_5x6n7"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_eqlqb"]
+script = ExtResource("2_2i3es")
+type = ExtResource("13_l3am2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_n50ds"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([5])
+
+[sub_resource type="Resource" id="Resource_lsfe4"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("13_l3am2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_n50ds"),
+"id": SubResource("Resource_eqlqb"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_b26jh"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pncjo"), SubResource("Resource_lsfe4")])
+
+[sub_resource type="Resource" id="Resource_mp706"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 1
+
+[sub_resource type="Resource" id="Resource_dok8u"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_1j3nj"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dok8u"),
+"id": SubResource("Resource_mp706"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_xql1y"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_j2ocy")
+id = 3
+
+[sub_resource type="Resource" id="Resource_vfvnk"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
+[sub_resource type="Resource" id="Resource_d4j4w"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_j2ocy")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vfvnk"),
+"id": SubResource("Resource_xql1y"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_splkc"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1j3nj"), SubResource("Resource_d4j4w")])
+
+[sub_resource type="Resource" id="Resource_lw87u"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 2
+
+[sub_resource type="Resource" id="Resource_1ooq2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dok8u"),
+"id": SubResource("Resource_lw87u"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_xp3fl"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1ooq2")])
+
+[sub_resource type="Resource" id="Resource_o5ttf"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 33
+
+[sub_resource type="Resource" id="Resource_nopic"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_o5ttf"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_kjv5c"]
+script = ExtResource("2_2i3es")
+type = ExtResource("10_q3j68")
+id = 2
+
+[sub_resource type="Resource" id="Resource_36c7q"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 2])
+
+[sub_resource type="Resource" id="Resource_5bsyn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("10_q3j68")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_36c7q"),
+"id": SubResource("Resource_kjv5c"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_2xyuv"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nopic"), SubResource("Resource_5bsyn")])
+
+[sub_resource type="Resource" id="Resource_t6f63"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 38
+
+[sub_resource type="Resource" id="Resource_61ijg"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_t6f63"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_dew6q"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_61ijg")])
+
+[sub_resource type="Resource" id="Resource_x2umi"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 39
+
+[sub_resource type="Resource" id="Resource_5ccdt"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_x2umi"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_a70yn"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 4
+
+[sub_resource type="Resource" id="Resource_lsgqj"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_a70yn"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_13q31"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5ccdt"), SubResource("Resource_lsgqj")])
+
+[sub_resource type="Resource" id="Resource_03sds"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 5
+
+[sub_resource type="Resource" id="Resource_x3gcl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_03sds"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_2dvsn"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_x3gcl")])
+
+[sub_resource type="Resource" id="Resource_t6yuj"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 18
+
+[sub_resource type="Resource" id="Resource_rxvhn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_t6yuj"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_mfw3l"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rxvhn")])
+
+[sub_resource type="Resource" id="Resource_2abkn"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 17
+
+[sub_resource type="Resource" id="Resource_i0crq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2abkn"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_5rj2v"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 5
+
+[sub_resource type="Resource" id="Resource_811tu"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_5rj2v"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_4gj32"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_i0crq"), SubResource("Resource_811tu")])
+
+[sub_resource type="Resource" id="Resource_jd0fv"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 16
+
+[sub_resource type="Resource" id="Resource_n3fp3"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_jd0fv"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_xql0m"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 4
+
+[sub_resource type="Resource" id="Resource_obc7c"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_xql0m"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_8ydmm"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_n3fp3"), SubResource("Resource_obc7c")])
+
+[sub_resource type="Resource" id="Resource_22pxl"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 15
+
+[sub_resource type="Resource" id="Resource_cfswl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_22pxl"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_uq3uh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_j2ocy")
+id = 2
+
+[sub_resource type="Resource" id="Resource_hnigc"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_j2ocy")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vfvnk"),
+"id": SubResource("Resource_uq3uh"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_uydi7"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cfswl"), SubResource("Resource_hnigc")])
+
+[sub_resource type="Resource" id="Resource_k1jkw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 13
+
+[sub_resource type="Resource" id="Resource_d5dn6"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_k1jkw"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_umfaq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("9_b8i77")
+id = 3
+
+[sub_resource type="Resource" id="Resource_4uc6o"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("9_b8i77")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_tsnpt"),
+"id": SubResource("Resource_umfaq"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_f7nvq"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_d5dn6"), SubResource("Resource_4uc6o")])
+
+[sub_resource type="Resource" id="Resource_foa5s"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 4
+
+[sub_resource type="Resource" id="Resource_7n4q8"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_foa5s"),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+
+[sub_resource type="Resource" id="Resource_j3tcs"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_7n4q8")])
+
+[sub_resource type="Resource" id="Resource_c4575"]
+script = ExtResource("1_worvi")
+tiles = Array[ExtResource("5_6hme5")]([SubResource("Resource_swkv4"), SubResource("Resource_lalbb"), SubResource("Resource_ii8hy"), SubResource("Resource_3fr2h"), SubResource("Resource_rjphj"), SubResource("Resource_51q1h"), SubResource("Resource_6qij2"), SubResource("Resource_b4gr8"), SubResource("Resource_f5jb6"), SubResource("Resource_lu403"), SubResource("Resource_hol6j"), SubResource("Resource_1lhp7"), SubResource("Resource_8x5p4"), SubResource("Resource_yudy1"), SubResource("Resource_17jg2"), SubResource("Resource_mgxu5"), SubResource("Resource_jjmh2"), SubResource("Resource_olqnj"), SubResource("Resource_sx78o"), SubResource("Resource_4834n"), SubResource("Resource_lxaef"), SubResource("Resource_8vgw3"), SubResource("Resource_xfsit"), SubResource("Resource_tluvr"), SubResource("Resource_ygwky"), SubResource("Resource_1q5ix"), SubResource("Resource_3o7d2"), SubResource("Resource_170na"), SubResource("Resource_3kv1w"), SubResource("Resource_7st8r"), SubResource("Resource_rawcm"), SubResource("Resource_e63q8"), SubResource("Resource_cedkn"), SubResource("Resource_w33oe"), SubResource("Resource_6wryc"), SubResource("Resource_lhntf"), SubResource("Resource_txr33"), SubResource("Resource_uucbs"), SubResource("Resource_vy7jn"), SubResource("Resource_f3orq"), SubResource("Resource_uqe52"), SubResource("Resource_wm6o2"), SubResource("Resource_nkmbs"), SubResource("Resource_pqgaq"), SubResource("Resource_p41hs"), SubResource("Resource_52rge"), SubResource("Resource_hfy8v"), SubResource("Resource_67w3n"), SubResource("Resource_04vgj"), SubResource("Resource_r285h"), SubResource("Resource_5f5o6"), SubResource("Resource_6kwa3"), SubResource("Resource_sxmnf"), SubResource("Resource_mrvrb"), SubResource("Resource_jaa0p"), SubResource("Resource_lv13n"), SubResource("Resource_rferb"), SubResource("Resource_wwxjj"), SubResource("Resource_4j5cj"), SubResource("Resource_se81q"), SubResource("Resource_kwm1x"), SubResource("Resource_p48rk"), SubResource("Resource_kv6jk"), SubResource("Resource_xpwe3"), SubResource("Resource_pf0d1"), SubResource("Resource_ldngk"), SubResource("Resource_u0cy0"), SubResource("Resource_jpk3v"), SubResource("Resource_1xfuo"), SubResource("Resource_wj88t"), SubResource("Resource_uwgc7"), SubResource("Resource_136nv"), SubResource("Resource_74kdt"), SubResource("Resource_2v31c"), SubResource("Resource_rcre0"), SubResource("Resource_my6lw"), SubResource("Resource_770u3"), SubResource("Resource_acoew"), SubResource("Resource_b26jh"), SubResource("Resource_splkc"), SubResource("Resource_xp3fl"), SubResource("Resource_2xyuv"), SubResource("Resource_dew6q"), SubResource("Resource_13q31"), SubResource("Resource_2dvsn"), SubResource("Resource_mfw3l"), SubResource("Resource_4gj32"), SubResource("Resource_8ydmm"), SubResource("Resource_uydi7"), SubResource("Resource_f7nvq"), SubResource("Resource_j3tcs")])
+graveyard = Array[ExtResource("4_qk5jy")]([])
+rows = 11
+columns = 11
+
+[sub_resource type="Resource" id="Resource_w2yqg"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[resource]
+script = ExtResource("1_a77op")
+level_state = SubResource("Resource_c4575")
+current_round = 1
+current_phase = 0
+player_energy = SubResource("Resource_w2yqg")
+deck_states = Array[ExtResource("4_x7vib")]([SubResource("Resource_q5rkm"), SubResource("Resource_ssxd8"), SubResource("Resource_34b8a"), SubResource("Resource_gdjj2"), SubResource("Resource_lw5l3"), SubResource("Resource_68pay"), SubResource("Resource_2fdnc"), SubResource("Resource_xmxdg"), SubResource("Resource_wc1bs"), SubResource("Resource_ctrbb"), SubResource("Resource_k1w4h"), SubResource("Resource_qo0oo"), SubResource("Resource_83a8a"), SubResource("Resource_gqtxb"), SubResource("Resource_7owvk"), SubResource("Resource_xx27j"), SubResource("Resource_21ygs"), SubResource("Resource_teytv"), SubResource("Resource_xhwih"), SubResource("Resource_y1s6e")])
+hand_states = Array[ExtResource("4_x7vib")]([])
+discard_pile_states = Array[ExtResource("4_x7vib")]([])
+timed_effects = Array[ExtResource("53_jcir5")]([])
+combat_log = Array[ExtResource("3_kxbah")]([SubResource("Resource_au4dy"), SubResource("Resource_pdv8v"), SubResource("Resource_nxumc"), SubResource("Resource_q7xub"), SubResource("Resource_b6ecu"), SubResource("Resource_o3kr8"), SubResource("Resource_lrobg"), SubResource("Resource_sl74m"), SubResource("Resource_obth0")])
+active_states = Array[ExtResource("1_opmkl")]([])
+all_events = Array[ExtResource("2_pdf0p")]([])
+event_timeline = {}
+enemy_event_queue = Array[ExtResource("2_kcnt0")]([])
+enemy_meter = 0
+global_enemy_actions = Array[ExtResource("6_c7ku8")]([SubResource("Resource_fdtjt")])

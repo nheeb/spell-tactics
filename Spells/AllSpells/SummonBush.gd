@@ -23,9 +23,8 @@ const FORT_BUSH = preload("res://Entities/Environment/BushFortified.tres")
 ## Here should be the effect
 func casting_effect() -> void:
 	target = target as Tile
-	var bush := combat.level.entities().create_entity(target.location, FORT_BUSH, false)
+	var bush := combat.level.entities.create(target.location, FORT_BUSH, false)
 	combat.animation.effect(VFX.HEX_RINGS, target, {"color": Color.YELLOW}).set_duration(1.5)
 	combat.animation.show(bush.visual_entity).set_flag_with()
 	
 	
-

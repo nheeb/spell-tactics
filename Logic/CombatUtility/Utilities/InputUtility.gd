@@ -47,6 +47,9 @@ func update_ui():
 
 func tile_hovered(tile: Tile) -> void:
 	process_action(PAHoverTile.new(tile))
+	
+func tile_unhovered(tile: Tile):
+	process_action(PAUnhoverTile.new(tile))
 
 func tile_clicked(tile: Tile) -> void:
 	process_action(PASelectTile.new(tile))
@@ -77,6 +80,7 @@ func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
 	Events.tile_rightclicked.connect(tile_rightclicked)
 	Events.tile_hovered.connect(tile_hovered)
+	Events.tile_unhovered.connect(tile_unhovered)
 	Events.card_hovered.connect(card_hovered)
 	Events.card_selected.connect(card_selected)
 	Events.energy_orb_clicked.connect(energy_orb_clicked)
@@ -85,6 +89,6 @@ func connect_with_event_signals() -> void:
 	Events.pinned_card_rightclicked.connect(pinned_card_rightclicked)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("focus_on_player"):
+	if Input.is_action_just_pressed("focus_on_player") and combat.player != null:
 		combat.animation.camera_reach(combat.player.visual_entity)
 		combat.animation.play_animation_queue()

@@ -5,12 +5,12 @@ signal got_unlocked
 signal got_updated
 
 var type: ActiveType
-var id: ActiveID
+var id: ActiveID = null
 
 var logic: ActiveLogic
 
 ## set by the UI. Every Active should have an ActiveButton :)
-var button: ActiveButton
+var button: ActiveButtonWithUses
 
 func _init(_type: ActiveType, _combat : Combat = null) -> void:
 	type = _type

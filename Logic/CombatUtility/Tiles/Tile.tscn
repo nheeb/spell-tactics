@@ -304,7 +304,7 @@ mesh = SubResource("QuadMesh_m1xtl")
 surface_material_override/0 = ExtResource("6_bryv2")
 
 [node name="HoverTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.3
 one_shot = true
 
 [connection signal="timeout" from="HoverTimer" to="." method="_on_hover_timer_timeout"]

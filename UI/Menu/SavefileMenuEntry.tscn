@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvncydl2y0lon"]
+
+[ext_resource type="StyleBox" uid="uid://mu0weav5yf6m" path="res://UI/Theme/EventCardPanelEntryDefault.tres" id="1_3ylyd"]
+[ext_resource type="Texture2D" uid="uid://bbtvx4klef6lq" path="res://Assets/Sprites/PrototypeBillboard/witch_totem.png" id="2_lhqgw"]
+[ext_resource type="Script" path="res://UI/Menu/SavefileMenuEntry.gd" id="2_wiof0"]
+[ext_resource type="FontFile" uid="uid://cb4uhvpr8gbry" path="res://Assets/Fonts/Teachers/Teachers-Bold.ttf" id="3_ftwtx"]
+[ext_resource type="FontFile" uid="uid://d2paqurb1iqxc" path="res://Assets/Fonts/Teachers/Teachers-Regular.ttf" id="4_0g3hy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y5iij"]
+font = ExtResource("3_ftwtx")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ebuu"]
+font = ExtResource("4_0g3hy")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="SavefileMenuEntry" type="PanelContainer"]
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_3ylyd")
+script = ExtResource("2_wiof0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer"]
+layout_mode = 2
+ratio = 1.7142
+
+[node name="Screenshot" type="TextureRect" parent="HBoxContainer/AspectRatioContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 150)
+layout_mode = 2
+texture = ExtResource("2_lhqgw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelTitle" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save Title"
+label_settings = SubResource("LabelSettings_y5iij")
+
+[node name="LabelStats" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save Stats"
+label_settings = SubResource("LabelSettings_6ebuu")
+
+[node name="LabelTimestamp" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save Date
+"
+label_settings = SubResource("LabelSettings_6ebuu")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

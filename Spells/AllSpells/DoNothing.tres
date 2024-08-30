@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://bddxc6d1tivsv"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://bddxc6d1tivsv"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_c844k"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_fhftr"]
 [ext_resource type="Texture2D" uid="uid://d3h6s74nk3x4p" path="res://Assets/Sprites/Icons/think.png" id="2_lef1m"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/Keyword.gd" id="3_ibics"]
 
 [sub_resource type="Resource" id="Resource_ufdj6"]
 script = ExtResource("1_fhftr")
@@ -11,7 +12,7 @@ stack = Array[int]([6])
 [resource]
 script = ExtResource("1_c844k")
 costs = SubResource("Resource_ufdj6")
-keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+keywords = Array[ExtResource("3_ibics")]([])
 pretty_name = "Do Nothing"
 effect_text = "Does nothing."
 fluff_text = "When nothing is done,

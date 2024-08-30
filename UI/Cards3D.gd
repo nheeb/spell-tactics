@@ -13,8 +13,8 @@ enum HandState {
 
 static var OPEN_Y := -1.23 # Height of open hand cards
 static var CLOSED_Y := -2.15 # Height of closed hand cards
-static var OPEN_AT_NORM_MOUSE_POS = .4 # Open hand when mouse at normalized y pos
-static var CLOSE_AT_NORM_MOUSE_POS = .6 # Close hand when mouse at normalized y pos
+static var OPEN_AT_NORM_MOUSE_POS = .25 # Open hand when mouse at normalized y pos
+static var CLOSE_AT_NORM_MOUSE_POS = .55 # Close hand when mouse at normalized y pos
 const BASE_ROTATION = Vector3(0.0, - PI / 2, 0.0)
 const RADIAL_TURN = 1.0 # Rotate cards like in a real hand
 const RADIAL_ORIGIN_Y = -5.0 # 
@@ -35,6 +35,8 @@ const HOVER_BALANCE_RAD = PI / 12
 const HOVER_BALANCE_RANGE = .5
 const HOVER_BALANCE_Y_BONUS = 1.5
 const CHOSEN_LIFT = .5
+
+static var open_hand_block = Block.new("OpenHandBlock", false)
 
 var hand_state: HandState = HandState.Closed
 var all_cards : Array[Card3D] = []
@@ -218,10 +220,10 @@ func check_hand_state():
 	
 	match hand_state:
 		HandState.Closed:
-			if mouse_pos_2d_normalized.y < OPEN_AT_NORM_MOUSE_POS:
+			if mouse_pos_2d_normalized.y < OPEN_AT_NORM_MOUSE_POS and not open_hand_block.is_blocked():
 				hand_state = HandState.Open
 		HandState.Open:
-			if mouse_pos_2d_normalized.y > CLOSE_AT_NORM_MOUSE_POS:
+			if mouse_pos_2d_normalized.y > CLOSE_AT_NORM_MOUSE_POS or open_hand_block.is_blocked():
 				hand_state = HandState.Closed
 			elif card_on_cursor:
 				if card_on_cursor in hand_cards:

@@ -8,8 +8,8 @@ class_name LevelState extends Resource
 @export var columns: int
 
 const LEVEL = preload("res://Logic/CombatUtility/Tiles/Level.tscn")
-const PLAYER_TYPE = preload("res://Entities/PlayerResource.tres")
-#const player_type = preload("res://Entities/PlayerResource.tres")
+const PLAYER_TYPE = preload("res://Entities/Player/PlayerResource.tres")
+
 func deserialize(combat: Combat) -> Level:
 	var level := LEVEL.instantiate()
 	level.combat = combat

@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://mdk6ql82hwrt"]
+
+[ext_resource type="Script" path="res://UI/Menu/SaveLoadMenu.gd" id="1_mblr7"]
+[ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/HandCard2D_panel_default.tres" id="2_4sh0h"]
+[ext_resource type="LabelSettings" uid="uid://bbcw8bd7m6puj" path="res://UI/Theme/LabelSettings/EventCardTitleLableSettings.tres" id="3_i56hl"]
+[ext_resource type="PackedScene" uid="uid://cvncydl2y0lon" path="res://UI/Menu/SavefileMenuEntry.tscn" id="4_4ds5w"]
+[ext_resource type="FontFile" uid="uid://d2paqurb1iqxc" path="res://Assets/Fonts/Teachers/Teachers-Regular.ttf" id="5_6qet8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yp4xp"]
+content_margin_left = 15.0
+content_margin_top = 20.0
+content_margin_right = 10.0
+content_margin_bottom = 20.0
+bg_color = Color(0.956863, 0.827451, 0.74902, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="SaveLoadMenu" type="Control"]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mblr7")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_4sh0h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Saving & Loading"
+label_settings = ExtResource("3_i56hl")
+
+[node name="SaveFiles" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_yp4xp")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/SaveFiles"]
+layout_mode = 2
+vertical_scroll_mode = 2
+
+[node name="SaveEntries" type="VBoxContainer" parent="PanelContainer/VBoxContainer/SaveFiles/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SavefileMenuEntry" parent="PanelContainer/VBoxContainer/SaveFiles/ScrollContainer/SaveEntries" instance=ExtResource("4_4ds5w")]
+layout_mode = 2
+
+[node name="SaveName" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SavenameEdit" type="TextEdit" parent="PanelContainer/VBoxContainer/SaveName"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_6qet8")
+theme_override_font_sizes/font_size = 48
+placeholder_text = "Name your Savefile"
+
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 2
+
+[node name="ButtonSave" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "  Save  "
+
+[node name="ButtonLoad" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "  Load  "
+
+[node name="ButtonClose" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "  Close  "
+
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/SaveName/SavenameEdit" to="." method="_on_savename_edit_text_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/ButtonSave" to="." method="_on_button_save_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/ButtonLoad" to="." method="_on_button_load_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/ButtonClose" to="." method="_on_button_close_pressed"]

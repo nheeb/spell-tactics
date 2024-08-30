@@ -8,6 +8,10 @@ const ENT_ENTRY = preload("res://UI/PopUp/PopUpEntityEntry.tscn")
 func show_tile(tile: Tile):
 	%TileLabel.text = "Tile (%s, %s)" % [tile.r, tile.q]
 	
+	if len(tile.entities) > 3:
+		push_warning("PopUp show_tile() only supports up to 3 Entities.")
+		return
+	
 	var i = 0
 	# tile has an array of entities, show one entry for each of these
 	for ent in tile.entities:

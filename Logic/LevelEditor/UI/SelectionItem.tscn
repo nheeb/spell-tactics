@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdfhkpehk0qn0"]
+
+[ext_resource type="Script" path="res://Logic/LevelEditor/UI/SelectionItem.gd" id="1_gmd8j"]
+[ext_resource type="Texture2D" uid="uid://c1fri6h5fndvk" path="res://Assets/Sprites/PrototypeBillboard/tree.png" id="2_rb4kc"]
+
+[node name="SelectionItem" type="AspectRatioContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_gmd8j")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.144531, 0.144531, 0.144531, 1)
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 20
+text = "dfdfdfddddddd"
+autowrap_mode = 1
+clip_text = true
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+visible = false
+modulate = Color(1, 1, 1, 0.839216)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rb4kc")
+expand_mode = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -25,7 +25,8 @@ func deserialize(combat: Combat = null, tile : Tile = null) -> Entity:
 				entity.logic.set(prop_name, script_props[prop_name])
 	
 	type.entity_on_create(entity, true)
-
-	entity.visual_entity.visible = not entity.is_dead()
+	
+	if entity.visual_entity != null:
+		entity.visual_entity.visible = not entity.is_dead()
 	
 	return entity

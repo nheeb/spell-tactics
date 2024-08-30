@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://d2k4vhkqurk7r"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://d2k4vhkqurk7r"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_mw187"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_wm1qt"]
 [ext_resource type="Texture2D" uid="uid://dm2lcihvdafjc" path="res://Assets/Sprites/Icons/ghost.png" id="2_ersji"]
 [ext_resource type="Resource" uid="uid://dd7w5kynnqy2o" path="res://Spells/AllKeywords/KeepOnHand.tres" id="2_mwy2q"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/Keyword.gd" id="3_o7863"]
 
 [sub_resource type="Resource" id="Resource_yiuyf"]
 script = ExtResource("1_mw187")
@@ -12,7 +13,7 @@ stack = Array[int]([1, 1])
 [resource]
 script = ExtResource("1_wm1qt")
 costs = SubResource("Resource_yiuyf")
-keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([ExtResource("2_mwy2q")])
+keywords = Array[ExtResource("3_o7863")]([ExtResource("2_mwy2q")])
 pretty_name = "Haunting"
 effect_text = "Reduce an enemy's accuracy. Deal 3 damage if you drained a corpse this turn."
 fluff_text = ""

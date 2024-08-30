@@ -15,7 +15,7 @@ func _init(entity: Entity = null) -> void:
 
 ## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
-	for e in combat.level.entities().get_all_entities():
+	for e in combat.level.entities.get_all_entities():
 		if e.id.equals(id):
 			if ent == e:
 				push_error("EntityReference already connected to that object")

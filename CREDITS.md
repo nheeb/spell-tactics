@@ -11,6 +11,8 @@ https://fontesk.com/rogue-font/
 ### Textures / Materials
 - Water Color Sky Texture - Image by Supichaya Sookprasert from Pixabay
   - https://pixabay.com/illustrations/watercolor-texture-background-paint-5062356/
+- Wood Cursor, CC **Non-Commercial** by SYNTHCRO
+  - http://www.rw-designer.com/user/33565
 
 ### Models
 - High quality grass - nevayashka

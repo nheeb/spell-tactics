@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs6vnuiljtmct"]
+[gd_scene load_steps=9 format=3 uid="uid://cs6vnuiljtmct"]
 
 [ext_resource type="Script" path="res://Logic/World.gd" id="1_i0b03"]
 [ext_resource type="Script" path="res://Prototype/GameCamera.gd" id="2_1cart"]
 [ext_resource type="Environment" uid="uid://bo53exqy8qxwh" path="res://Logic/world_environment.tres" id="2_suwfn"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing.gd" id="3_mpog2"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/MouseInput.gd" id="4_xdvdf"]
+[ext_resource type="FontFile" uid="uid://hxpop83lvr07" path="res://Assets/Fonts/Gothica-Book.ttf" id="6_dab3l"]
+
+[sub_resource type="GDScript" id="GDScript_e62g1"]
+script/source = "extends Control
+
+func _init() -> void:
+	queue_free()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_c30lh"]
+font = ExtResource("6_dab3l")
+font_size = 64
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_i0b03")
@@ -16,10 +28,9 @@ environment = ExtResource("2_suwfn")
 transform = Transform3D(-0.756722, -0.538054, 0.371309, -0.0137619, 0.580964, 0.813813, -0.653592, 0.61072, -0.447032, 0, 0, 0)
 light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_mode = 1
 directional_shadow_blend_splits = true
 directional_shadow_fade_start = 0.6
-directional_shadow_max_distance = 50.0
-directional_shadow_pancake_size = 10.0
 
 [node name="GameCamera" type="Node3D" parent="."]
 script = ExtResource("2_1cart")
@@ -35,7 +46,7 @@ script = ExtResource("3_mpog2")
 
 [node name="Camera3D" type="Camera3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="MouseRaycast" type="RayCast3D" parent="GameCamera/AnglePivot/ZoomPivot/Smoothing/Camera3D"]
 unique_name_in_owner = true
@@ -44,3 +55,28 @@ enabled = false
 target_position = Vector3(0, -25, 0)
 collide_with_areas = true
 script = ExtResource("4_xdvdf")
+
+[node name="Fun" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = SubResource("GDScript_e62g1")
+
+[node name="Label" type="Label" parent="Fun"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "😊 Spell Tactics is a Good Game 😊
+🦝"
+label_settings = SubResource("LabelSettings_c30lh")
+horizontal_alignment = 1

@@ -1,5 +1,8 @@
 extends Node3D
 
+@export_range(0, 1, 0.1) var flack: int = 1
+
+@export var hello: String = "world"
 
 var test = ["ast", "mast", "past"]
 
@@ -9,24 +12,3 @@ func mist():
 signal msst
 
 var aa : Array[AnimationObject]
-
-func _ready() -> void:
-	for c in [misse, pisse, misse]:
-		var x = null
-		print("0")
-		x = await c.call()
-		print("1")
-		print(x)
-		print("")
-
-
-func misse():
-	print("A")
-	await get_tree().create_timer(1).timeout
-	print("B")
-
-func pisse():
-	print("A")
-	await get_tree().create_timer(1).timeout
-	print("B")
-	return 200

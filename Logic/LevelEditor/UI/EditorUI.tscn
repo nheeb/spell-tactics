@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1d7jigspwx0p"]
+
+[sub_resource type="GDScript" id="GDScript_u5b32"]
+
+[node name="EditorUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_u5b32")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Terrain" type="Label" parent="VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "Terrain"
+
+[node name="Pencil" type="Button" parent="VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "Pencil"
+
+[node name="Fill" type="Button" parent="VBoxContainer/HFlowContainer"]
+visible = false
+layout_mode = 2
+text = "Fill"
+
+[node name="Entity" type="Label" parent="VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "Entity"
+
+[node name="Place" type="Button" parent="VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "Place"
+
+[node name="Erase" type="Button" parent="VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "Erase"
+
+[node name="Elevation" type="Label" parent="VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "Elevation"
+
+[node name="Raise" type="Button" parent="VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "Raise"
+
+[node name="Lower" type="Button" parent="VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "Lower"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/Pencil" to="." method="_on_pencil_pressed"]
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/Place" to="." method="_on_place_pressed"]
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/Erase" to="." method="_on_erase_pressed"]
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/Raise" to="." method="_on_raise_pressed"]
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/Lower" to="." method="_on_lower_pressed"]

@@ -7,9 +7,10 @@ func is_valid(combat: Combat) -> bool:
 	return combat.current_phase == Combat.RoundPhase.Spell
 
 func execute(combat: Combat) -> void:
-	print("A")
 	await combat.action_stack.active_ticket.finish()
-	print("B")
+	if combat.input.current_castable:
+		combat.input.process_action(PADeselectCastable.new())
+		await Game.get_tree().process_frame
 	combat.action_stack.process_callable(
 		combat.advance_and_process_until_next_player_action_needed
 	)

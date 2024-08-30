@@ -6,7 +6,7 @@ var _level: Level
 func _init(level: Level):
 	_level = level
 	
-func create_entity(location: Vector2i, entity_type: EntityType, create_with_active_visuals := true) -> Entity:
+func create(location: Vector2i, entity_type: EntityType, create_with_active_visuals := true) -> Entity:
 	var tile = _level.get_tile(location)
 	if tile.has_entity(entity_type):
 		pass
@@ -35,11 +35,12 @@ func create_entity(location: Vector2i, entity_type: EntityType, create_with_acti
 func fill_entity(entity_type: EntityType):
 	for tile in _level.get_all_tiles():
 		var coord = Vector2i(tile.r, tile.q)
-		create_entity(coord, entity_type)
+		create(coord, entity_type)
 	
-func remove_entity(location: Vector2i, entity: Entity):
-		if not Engine.is_editor_hint():
-			push_error("Level remove_entity: This method maybe shouldn't be executed in the running game.")
+func remove(location: Vector2i, entity: Entity):
+		# commented out with the LevelEditor change from tool to scene - Nils
+		#if not Engine.is_editor_hint():
+			#push_error("Level remove_entity: This method maybe shouldn't be executed in the running game.")
 		
 		var tile = _level.get_tile(location)
 		var pos = tile.entities.find(entity)

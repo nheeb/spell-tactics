@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://my2hntkv5ww5"]
+
+[ext_resource type="Script" path="res://UI/Menu/GlobalSettingFolderUI.gd" id="1_b53b3"]
+[ext_resource type="LabelSettings" uid="uid://u1u1p65esevc" path="res://UI/Theme/LabelSettings/DefaultLabelSettingsMediumOutline.tres" id="2_gc1fu"]
+
+[node name="GlobalSettingFolderUI" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("1_b53b3")
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = ExtResource("2_gc1fu")
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

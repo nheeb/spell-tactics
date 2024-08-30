@@ -27,14 +27,11 @@ func _ready() -> void:
 	else:
 		push_warning("no active set on initializing ActiveButton")
 
-
 func restart_bubbles():
 	while not bubbles.is_empty():
 		var bubble_to_delete = bubbles.pop_back()
 		bubble_to_delete.free()
-	
-	#await get_tree().process_frame
-	
+
 	var bubble: ActiveUseBubble
 	for i in range(MAX_USES):
 		bubble = ACTIVE_USE_BUBBLE.instantiate()
@@ -43,7 +40,6 @@ func restart_bubbles():
 		add_child(bubble)
 		bubble.position = get_node("Position" + str(i+1)).position
 		bubbles.append(bubble)
-
 
 
 func init_active(new_active: Active): 
@@ -90,24 +86,10 @@ func _on_active_uses_updated():
 		bubbles[i].enabled = false
 		
 
-
-func _on_mouse_entered() -> void:
-	# TODO doesn't seem to have the desired effect! (still showing tile hover effect)
-	# TODO RayCast.register_new_blocker() -> blocker.block/unblock()
-	if Game.world != null:  
-		print("disable")
-		Game.world.get_node("%MouseRaycast").disabled = true
-
-
-func _on_mouse_exited() -> void:
-	if Game.world != null:  
-		print("disable")
-		Game.world.get_node("%MouseRaycast").disabled = true
-
+## TODO Idea: RayCast.register_new_blocker() -> blocker.block/unblock()
 
 func _on_active_button_mouse_entered() -> void:
 	if Game.world != null:  
-		print("disable")
 		Game.world.get_node("%MouseRaycast").disabled = true
 
 

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://cca31estceejt"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://cca31estceejt"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_c2j37"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_hms4h"]
 [ext_resource type="Texture2D" uid="uid://c3b5o0vkjxtko" path="res://Assets/Sprites/Icons/spore-flight.png" id="2_gpts7"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/Keyword.gd" id="3_pg7hl"]
 
 [sub_resource type="Resource" id="Resource_fjmuh"]
 script = ExtResource("1_c2j37")
@@ -11,7 +12,7 @@ stack = Array[int]([1, 4, 6])
 [resource]
 script = ExtResource("1_hms4h")
 costs = SubResource("Resource_fjmuh")
-keywords = Array[Resource("res://Logic/CombatUtility/Castables/Keyword.gd")]([])
+keywords = Array[ExtResource("3_pg7hl")]([])
 pretty_name = "Spore Flight"
 effect_text = "Poison all enemies next to target shroom."
 fluff_text = ""

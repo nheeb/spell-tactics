@@ -58,31 +58,31 @@ void vertex() {
 void fragment() {
 	vec3 pos = card_warp_origin;
 	float warp_dist = distance(warp_pos, pos);
-	
+
 	float _glow_time_scale = glow_time_scale;
 	float _glow_uv_scale = glow_uv_scale;
-	
+
 	ALPHA = 0.0;
 	ALPHA = ALPHA + texture(card_texture, uv_project(UV, title_uv_aa, title_uv_bb, vec2(0), vec2(.5, .25) )).a;
 	ALPHA = ALPHA + texture(card_texture, uv_project(UV, icon_uv_aa, icon_uv_bb, vec2(0.5, 0), vec2(1) )).a;
 	vec4 icon_color = texture(card_texture, uv_project(UV, icon_uv_aa, icon_uv_bb, vec2(0.5, 0), vec2(1) )).rgba;
 	ALPHA = ALPHA + texture(card_texture, uv_project(UV, text_uv_aa, text_uv_bb, vec2(0, .25), vec2(.5, 1) )).a;
-	
+
 	float error_value = vec2_between(UV, error_uv_aa, error_uv_bb);
-	
+
 	float glow_noise = texture(glow_noise_texture, UV * _glow_uv_scale + vec2(TIME * _glow_time_scale + random_seed * 100.0)).r;
 	float highlight_noise = pow(texture(glow_noise_texture, UV * _glow_uv_scale * .4 + vec2(TIME * _glow_time_scale * .4 + random_seed * 100.0)).r, 9.0);
-	
+
 	ALBEDO = mix(albedo.rgb, glow.rgb, brightness);
 	ALBEDO = mix(ALBEDO.rgb, glow2.rgb, glow_noise * .35 * glow_process);
 	ALBEDO = mix(ALBEDO.rgb, glow2.rgb, highlight_noise * .7 * glow_process);
-	
+
 	EMISSION = ALBEDO * (1.0 + glow_process * (glow_noise + highlight_noise)) * glow_power;
-	
+
 	// ERROR STUFF
 	//ALBEDO = mix(ALBEDO, error.rgb, error_value);
 	//EMISSION = mix(EMISSION, error.rgb * (2.2 + 1.2 * sin(TIME * 5.0)), error_value);
-	
+
 	float _warp_progress = warp_progress;
 	//float _warp_progress = .5 * (1.0 +sin(TIME* 1.0));
 	float zero_dist = _warp_progress * 1.5;
@@ -148,5 +148,7 @@ transparency = 1
 albedo_texture = ExtResource("1_eyb0m")
 roughness_texture = ExtResource("3_nddtx")
 normal_enabled = true
+normal_scale = 0.05
 normal_texture = ExtResource("2_vgsgm")
-uv1_scale = Vector3(2, 2, 2)
+uv1_scale = Vector3(3.8, 3.8, 3.8)
+uv1_offset = Vector3(0.74, 0.295, 0)

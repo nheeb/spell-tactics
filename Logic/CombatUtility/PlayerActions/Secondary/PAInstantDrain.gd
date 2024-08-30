@@ -49,4 +49,3 @@ func quick_drain(combat: Combat):
 
 func on_fail(combat: Combat) -> void:
 	pass
-

@@ -81,7 +81,10 @@ func is_drainable():
 
 ## This will be executed after an entity has been created from a type.
 func on_create() -> void:
-	visual_entity.visible = false
+	if visual_entity != null:
+		visual_entity.visible = false
+	else:
+		push_warning("visual_entity for entity_type %s is null in on_create()" % type.internal_name)
 	for status_effect in status_effects:
 		status_effect.setup(self)
 
