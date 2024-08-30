@@ -113,7 +113,7 @@ func sync_with_type() -> void:
 	resistance = type.resistance
 
 func get_name() -> String:
-	return "%s_%s" % [type.pretty_name, id.to_string()]
+	return "%s" % id.to_string()
 
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 

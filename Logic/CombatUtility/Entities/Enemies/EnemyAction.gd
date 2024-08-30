@@ -39,5 +39,3 @@ func _on_load() -> void:
 		if movement_action_args:
 			assert(movement_action_args.action.movement_action_args == null,
 					"Movement action has a movement action. This is cursed.")
-
-

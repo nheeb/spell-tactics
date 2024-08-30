@@ -2,7 +2,6 @@ class_name PAUnhoverTile extends PlayerAction
 
 var tile: Tile
 
-
 func _init(_tile: Tile) -> void:
 	tile = _tile
 	action_string = "Unhover Tile <%s>" % tile
@@ -15,7 +14,6 @@ func execute(combat: Combat) -> void:
 		PAHoverTile.open_cards_shelf_blocker.unblock()
 		PAHoverTile.on_drainable_tile_unhovered.emit(PAHoverTile.currently_hovering_drainable)
 		PAHoverTile.currently_hovering_drainable = null
-		
 
-func on_fail(combat: Combat) -> void:
+func log_me(combat: Combat, valid: bool) -> void:
 	pass

@@ -73,9 +73,9 @@ func random_index_of_scores(scores: Array, create_report := false, \
 				return scores[a] > scores[b]
 		)
 		for index in index_order:
-			report += "%s %5.2f %s\n" % [
+			report += "%s %4.1f%% %s\n" % [
 				"->" if index == chosen_index else "  ",
-				scores[index], names[index]
+				100.0 * scores[index] / total_size , names[index]
 			]
 		random_index_of_scores_report = report
 	return chosen_index

@@ -34,6 +34,5 @@ func execute(combat: Combat) -> void:
 			on_drainable_tile_unhovered.emit(currently_hovering_drainable)
 			currently_hovering_drainable = null
 
-
 func log_me(combat: Combat, valid: bool) -> void:
 	pass

@@ -22,9 +22,10 @@ func execute(combat: Combat) -> void:
 				break
 	actions.append(PABlockInput.new(false))
 	
+	await combat.action_stack.active_ticket.finish()
+	
 	for action in actions:
-		combat.action_stack.process_player_action(action)
+		combat.action_stack.process_player_action(action, true)
 
 func on_fail(combat: Combat) -> void:
 	pass
-

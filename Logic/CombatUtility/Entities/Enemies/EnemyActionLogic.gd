@@ -43,9 +43,9 @@ func show_preview(show: bool) -> void:
 	_show_preview(show)
 
 func get_alternative_plan() -> EnemyActionPlan:
-	var plan := _get_alternative_plan()
-	if plan:
-		return plan
+	var _plan := _get_alternative_plan()
+	if _plan:
+		return _plan
 	elif action.alternative_action_args:
 		return EnemyActionPlan.new(enemy, action.alternative_action_args, target)
 	return null

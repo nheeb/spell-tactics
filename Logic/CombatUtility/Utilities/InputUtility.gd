@@ -46,35 +46,35 @@ func update_ui():
 	combat.ui.update_payable_cards()
 
 func tile_hovered(tile: Tile) -> void:
-	process_action(PAHoverTile.new(tile))
+	combat.action_stack.process_player_action(PAHoverTile.new(tile))
 	
 func tile_unhovered(tile: Tile):
-	process_action(PAUnhoverTile.new(tile))
+	combat.action_stack.process_player_action(PAUnhoverTile.new(tile))
 
 func tile_clicked(tile: Tile) -> void:
-	process_action(PASelectTile.new(tile))
-	process_action(PAInstantDrain.new(tile))
+	combat.action_stack.process_player_action(PASelectTile.new(tile))
+	combat.action_stack.process_player_action(PAInstantDrain.new(tile))
 
 func tile_rightclicked(tile: Tile) -> void:
-	process_action(PADeselectTile.new(tile))
+	combat.action_stack.process_player_action(PADeselectTile.new(tile))
 
 func card_hovered(card: HandCard3D) -> void:
 	pass # TODO Nitai Connect this to some PA
 
 func card_selected(card: HandCard3D) -> void:
-	process_action(PASelectCastable.new(card.get_castable()))
+	combat.action_stack.process_player_action(PASelectCastable.new(card.get_castable()))
 
 func energy_orb_clicked(orb : EnergyOrb):
-	process_action(PALoadEnergy.new(orb))
+	combat.action_stack.process_player_action(PALoadEnergy.new(orb))
 
 func energy_socket_clicked(socket : HandCardEnergySocket):
-	process_action(PAUnloadSocket.new(socket))
+	combat.action_stack.process_player_action(PAUnloadSocket.new(socket))
 
 func pinned_card_clicked(card: Card3D):
-	process_action(PAActivateCastable.new(true))
+	combat.action_stack.process_player_action(PAActivateCastable.new(true))
 
 func pinned_card_rightclicked(card: Card3D):
-	process_action(PADeselectCastable.new())
+	combat.action_stack.process_player_action(PADeselectCastable.new())
 
 func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
