@@ -1,11 +1,10 @@
-
 class_name Tile extends Node3D
 
 var entities: Array[Entity] = []
 var hovering := false:
 	set(h):
 		if not h and hovering:
-			Events.tile_unhovered_long.emit(self)
+			_hover_long(false)
 		hovering = h
 
 var r: int
@@ -134,9 +133,16 @@ func serialize() -> TileState:
 
 func _on_hover_timer_timeout() -> void:
 	hovering = true
-	Events.tile_hovered_long.emit(self)
-	#print("Hovered tile %d, %d" % [r, q])
+	_hover_long(true)
+	level.combat.animation.play_animation_queue()
 
+func _hover_long(h: bool) -> void:
+	if h:
+		Events.tile_hovered_long.emit(self)
+	else:
+		Events.tile_unhovered_long.emit(self)
+	for e in entities:
+		e.on_hover_long(h)
 
 ## Returns the combined obstacle layers of this tile's entities
 func get_obstacle_layers() -> int:

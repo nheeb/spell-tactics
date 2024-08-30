@@ -111,10 +111,33 @@ func _setup() -> void:
 
 func show_movement_arrow(show: bool):
 	var from: Tile = enemy.current_tile
-	var to: Tile = estimated_destination()
+	var to: Tile
+	if plan:
+		var dest := combat.action_stack.process_result(
+			plan.get_estimated_destination.bind(combat, from)
+		)
+		await dest.resolved
+		to = dest.value
+	else:
+		to = estimated_destination(from)
+		
 	if from != to:
-		pass
-		# TODO Nitai do this
+		if show:
+			var path: Array[Vector3] = [enemy.visual_entity.global_position]
+			path.append_array(combat.level.get_shortest_path(from, to).map(
+				func (t):
+					return t.global_position
+			))
+			combat.animation.callable(
+				combat.level.immediate_arrows().render_path.bind(path)
+			)
+		else:
+			combat.animation.callable(combat.level.immediate_arrows().clear)
 
 func show_action_icon_over_enemy(show: bool):
-	pass # TODO Nitai do this as well
+	if action.icon:
+		if show:
+			combat.animation.add_staying_effect(VFX.ICON_VISUALS, enemy.visual_entity, "action_icon", \
+				{"icon": action.icon, "color": action.color, "quad": true})
+		else:
+			combat.animation.remove_staying_effect(enemy.visual_entity, "action_icon")

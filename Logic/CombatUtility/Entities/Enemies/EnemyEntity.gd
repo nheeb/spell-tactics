@@ -123,3 +123,7 @@ func get_bahviour() -> EnemyBehaviour:
 	if get_enemy_type().behaviour:
 		return get_enemy_type().behaviour
 	return DEFAULT_BEHAVIOUR
+
+func on_hover_long(h: bool) -> void:
+	if action_plan:
+		action_plan.show_preview(combat, h)

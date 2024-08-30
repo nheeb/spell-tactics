@@ -15,12 +15,14 @@ func get_random_tile_in_range(enemy_tile: Tile):
 	return enemy_tile
 
 func set_destination_if_invalid(enemy_tile: Tile) -> Tile:
-	var destination : Tile = plan.get_detail(0) as Tile
+	var destination : Tile = plan.get_detail_and_resolve(combat, 0) as Tile
 	if destination:
 		if combat.level.get_shortest_distance(enemy_tile, destination) <= movement:
 			return destination
 	plan.create_detail(0, get_random_tile_in_range(enemy_tile))
-	destination = plan.get_detail(0) as Tile
+	destination = plan.get_detail_and_resolve(combat, 0) as Tile
+	if not destination:
+		destination = enemy_tile
 	return destination
 
 func _setup():

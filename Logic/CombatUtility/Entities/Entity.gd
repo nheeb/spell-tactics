@@ -155,3 +155,6 @@ func get_tags() -> Array[String]:
 ## This takes all relevant information from the type in CombatBegin Phase.
 func sync_with_type() -> void:
 	energy = type.energy
+
+func on_hover_long(h: bool) -> void:
+	pass

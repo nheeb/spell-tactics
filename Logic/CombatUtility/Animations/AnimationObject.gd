@@ -63,7 +63,7 @@ func _play(level: Level) -> void:
 		#print("ERROR")
 	
 	DebugInfo.current_animations.append(self)
-	
+
 	animation_done_internally.connect(internal_animation_done)
 	await VisualTime.visual_process
 	if delay > 0.0:

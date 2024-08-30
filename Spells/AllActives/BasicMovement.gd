@@ -53,16 +53,17 @@ func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
 	#return true
 
 ## Set special preview visuals when a target is hovered / selected
-func _set_preview_visuals(tile: Tile, clicked: bool = false) -> void:
-	var path = combat.level.get_shortest_path(combat.player.current_tile, tile)
-	var length = len(path)
-	# check if hovered tile is in movement range, in that case show the movement arrow and
-	# highlight the spells, that could be casted from there
-	if length > 0 and length <= combat.player.traits.movement_range and not combat.animation.is_playing():
-		var positions : Array[Vector3] = [combat.player.current_tile.global_position]
-		for t in path:
-			positions.append(t.global_position)
+func _set_preview_visuals(show: bool, tile: Tile, clicked: bool = false) -> void:
+	if show:
+		var path = combat.level.get_shortest_path(combat.player.current_tile, tile)
+		var length = len(path)
+		# check if hovered tile is in movement range, in that case show the movement arrow and
+		# highlight the spells, that could be casted from there
+		if length > 0 and length <= combat.player.traits.movement_range and not combat.animation.is_playing():
+			var positions : Array[Vector3] = [combat.player.current_tile.global_position]
+			for t in path:
+				positions.append(t.global_position)
 
-		combat.level.immediate_arrows().render_path(positions)
-		#highlight_payable_spells(tile)
-
+			combat.animation.callable(combat.level.immediate_arrows().render_path.bind(positions))
+	else:
+		combat.animation.callable(combat.level.immediate_arrows().clear)

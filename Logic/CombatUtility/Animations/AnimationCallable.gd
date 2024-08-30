@@ -1,6 +1,13 @@
 class_name AnimationCallable extends AnimationObject
 
 var callable: Callable
+var object: Object:
+	get:
+		return callable.get_object()
+var method: StringName:
+	get:
+		return callable.get_method()
+
 
 func _init(_callable: Callable):
 	callable = _callable

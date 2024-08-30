@@ -29,9 +29,11 @@ signal removed
 signal has_result(result: Variant)
 
 class ActionTicketResult extends Object:
+	signal resolved
 	var value: Variant = null
 	func set_value(v: Variant):
 		value = v
+		resolved.emit()
 	func _init(s: Signal) -> void:
 		s.connect(set_value, CONNECT_ONE_SHOT)
 

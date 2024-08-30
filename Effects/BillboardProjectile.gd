@@ -21,4 +21,3 @@ func effect_start() -> void:
 	
 	effect_done.emit()
 	queue_free()
-
