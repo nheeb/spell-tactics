@@ -95,7 +95,7 @@ func on_game_unpaused():
 	show()
 
 func _on_active_button_pressed(i: int) -> void:
-	combat.input.process_action(PASelectCastable.new(actives[i]))
+	combat.action_stack.process_player_action(PASelectCastable.new(actives[i]))
 	
 func _on_active_unlocked(i: int) -> void:
 	var active_button = $Actives.get_node("ActiveButton%d" % i)
