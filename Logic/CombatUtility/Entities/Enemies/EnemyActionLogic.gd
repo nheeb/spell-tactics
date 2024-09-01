@@ -12,6 +12,20 @@ var target:
 		if combat and plan:
 			return plan.get_target(combat)
 		return null
+var target_tile: Tile:
+	get:
+		if target is Tile:
+			return target
+		elif target is Entity:
+			return target.current_tile
+		else:
+			return null
+var target_entity: Entity:
+	get:
+		if target is Entity:
+			return target
+		else:
+			return null
 
 #########################
 ## Methods for calling ##

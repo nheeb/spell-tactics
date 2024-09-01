@@ -43,3 +43,13 @@ func enemy_punch(enemy: EnemyEntity, attack_bonus := 0) -> bool:
 func get_other_enemies(enemy: EnemyEntity) -> Array[EnemyEntity]:
 	var enemies := combat.get_all_enemies()
 	return enemies.filter(func(e): return e != enemy)
+
+func summon_enemy(enemy_type: EnemyEntityType, tile: Tile, color := Color.RED) -> AnimationSubQueue:
+	var anims : Array[AnimationObject] = []
+	var e = combat.level.entities.create(tile.location, enemy_type, false)
+	combat.enemies.append(e)
+	anims.append(combat.animation.camera_reach(e.visual_entity))
+	anims.append(combat.animation.wait(.3))
+	anims.append(combat.animation.show(e.visual_entity))
+	anims.append(combat.animation.effect(VFX.HEX_RINGS, e.visual_entity, {"color": color}))
+	return combat.animation.reappend_as_subqueue(anims)
