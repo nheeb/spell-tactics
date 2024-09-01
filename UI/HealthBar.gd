@@ -59,6 +59,7 @@ func update_hp(hp_new, max_hp_new, shield_new):
 	self.max_hp = max_hp_new
 	self.shield = shield_new
 	
+	scale.x = Utility.clamp_map(self.max_hp, 1.0, 14.0, 1.0, 1.6)
 	#update_container_offsets()
 
 

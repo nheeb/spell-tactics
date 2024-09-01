@@ -24,6 +24,7 @@ no_depth_test = true
 shading_mode = 0
 albedo_texture = ExtResource("2_qkfub")
 billboard_mode = 1
+billboard_keep_scale = true
 fixed_size = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_glbrl"]
@@ -49,7 +50,7 @@ highlight_progress = SubResource("Curve_obtwm")
 hp_progress = SubResource("Curve_ctv0e")
 
 [node name="HealthbarQuad" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.27998, 0, 0, 0, 1.27998, 0, 0, 0, 1.27998, 0, 0, 0)
+transform = Transform3D(1.3, 0, 0, 0, 1.12, 0, 0, 0, 1.28, 0, 0, 0)
 mesh = SubResource("QuadMesh_ur3u6")
 surface_material_override/0 = SubResource("StandardMaterial3D_wlnt3")
 
