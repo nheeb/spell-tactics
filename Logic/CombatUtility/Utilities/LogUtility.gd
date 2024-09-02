@@ -5,6 +5,12 @@ var log_entries: Array[LogEntry] = []
 signal log_entry_registered(entry: LogEntry)
 signal cast(castable: Castable)
 
+signal logged_damage(entry: LogEntry)
+
+var signals := {
+	LogEntry.Type.Damage: logged_damage
+}
+
 func register_entry(entry: LogEntry) -> void:
 	log_entries.append(entry)
 	log_entry_registered.emit(entry)
@@ -13,7 +19,7 @@ func entries_filtered_by_type(type: LogEntry.Type):
 	return log_entries.filter(func(x): return x.type == type)
 
 func add(text: String, print_this := false):
-	var info = LogEntry.new()
+	var info = LogEntry.new(combat)
 	info.type = LogEntry.Type.Info
 	info.text = text
 	if combat:
@@ -23,7 +29,7 @@ func add(text: String, print_this := false):
 		print("Combat Log Info: %s" % text)
 
 func register_incident(text: String, print_this := false):
-	var incident = LogEntry.new()
+	var incident = LogEntry.new(combat)
 	incident.type = LogEntry.Type.Incident
 	incident.text = text
 	if combat:
@@ -33,7 +39,7 @@ func register_incident(text: String, print_this := false):
 		print("Combat Log Incident: %s" % text)
 
 func register_cast(castable: Castable):
-	var entry := LogEntry.new()
+	var entry := LogEntry.new(combat)
 	entry.type = LogEntry.Type.Cast
 	entry.uni_ref = castable.get_reference_castable()
 	if combat:
@@ -49,7 +55,7 @@ func get_last_incident(text: String) -> LogEntry:
 	return null
 
 func create_and_register_entry(text: String, type: int) -> LogEntry:
-	var entry = LogEntry.new()
+	var entry = LogEntry.new(combat)
 	entry.type = type
 	entry.text = text
 	if combat:

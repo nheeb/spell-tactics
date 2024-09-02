@@ -124,6 +124,7 @@ func push_behind_other(callable_or_ticket: Variant, other: ActionTicket) -> void
 ######################
 
 func validate_new_ticket(action_ticket: ActionTicket):
+	action_ticket.origin_ticket = get_active_ticket()
 	assert(action_ticket.state == ActionTicket.State.Created \
 			 and not action_ticket in _stack, \
 			"ActionStack: Trying to add invalid action ticket")

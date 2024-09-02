@@ -23,6 +23,9 @@ var stack_trace_string: String:
 		return s 
 var _remove_me := false
 var _result: Variant
+var was_removed := false
+var origin_ticket : ActionTicket
+var log_entries : Array[LogEntry]
 
 signal _go
 signal removed
@@ -106,6 +109,8 @@ func remove():
 	if _result != null:
 		has_result.emit(_result)
 	Utility.disconnect_all_connection(has_result)
+	origin_ticket = null
+	was_removed = true
 
 func _to_string() -> String:
 	return "<AT:%s.%s>" % [object, method_name]
