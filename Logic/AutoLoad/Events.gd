@@ -5,7 +5,7 @@ extends Node
 signal tile_hovered_long(tile)
 signal tile_unhovered_long(tile)
 
-signal tile_hovered(tile)
+#signal tile_hovered(tile)
 signal tile_unhovered(tile)
 
 signal tile_clicked(tile)

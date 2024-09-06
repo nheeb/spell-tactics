@@ -23,6 +23,8 @@ func deserialize(combat: Combat = null, tile : Tile = null) -> Entity:
 		for prop_name in script_props.keys():
 			if Entity.serialize_this_prop(prop_name):
 				entity.logic.set(prop_name, script_props[prop_name])
+				
+	# TODO serialize visual entity props in the same way
 	
 	type.entity_on_create(entity, true)
 	

@@ -69,7 +69,7 @@ func inspect_different_entity():
 
 
 const PropNameScene = preload("res://Logic/LevelEditor/UI/InspectorPropName.tscn")  # left column
-const PropValueSceneDefault = preload("res://Logic/LevelEditor/UI/InspectorPropName.tscn")  # right column
+const PropValueSceneDefault = preload("res://Logic/LevelEditor/UI/InspectorPropValue.tscn")  # right column
 
 func type_to_control(type: String):
 	match type:

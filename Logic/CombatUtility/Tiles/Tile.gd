@@ -9,7 +9,11 @@ var hovering := false:
 
 var r: int
 var q: int
-var location: Vector2i
+var location: Vector2i: 
+	set(l):
+		push_error("setting location is forbidden.")
+	get():
+		return Vector2i(r, q)
 
 @onready var level: Level = get_parent() as Level
 @onready var highlight: Highlight = $Highlight
@@ -24,7 +28,6 @@ static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	tile.get_node("DebugLabel").text = "(%s, %s)" % [r_tile, q_tile]
 	tile.r = r_tile
 	tile.q = q_tile
-	tile.location = Vector2i(r_tile, q_tile)
 	tile.name = "Tile_%02d_%02d" % [r_tile, q_tile]
 	return tile
 	
