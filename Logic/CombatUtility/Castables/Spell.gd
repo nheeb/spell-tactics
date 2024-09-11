@@ -5,12 +5,6 @@ var id: SpellID
 var logic: SpellLogic
 var visual_representation: HandCard2D
 var card: HandCard3D
-var event_logic: EventSpellLogic:
-	get:
-		if not type.is_event_spell:
-			pass
-			#push_error("Trying to get an EventSpellLogic from a non event spell")
-		return logic as EventSpellLogic
 
 func _init(_type: SpellType, _combat : Combat = null) -> void:
 	type = _type

@@ -10,7 +10,10 @@ func pay(payment: EnergyStack, explode_in_ui := false) -> AnimationObject:
 
 func explode_energy_orbs(payment: EnergyStack, explode_in_ui: bool) -> AnimationObject:
 	var anims := []
-	for body in [combat.player.visual_entity.orbital_movement_body, combat.ui.cards3d.energy_ui.omb]:
+	var bodies := [combat.player.visual_entity.orbital_movement_body]
+	if explode_in_ui:
+		bodies.append(combat.ui.cards3d.energy_ui.omb)
+	for body in bodies:
 		var orbs : Array = body.get_children().filter(func(c): return c is EnergyOrb)
 		for payment_type in payment.stack:
 			var target_orb = null
@@ -20,13 +23,7 @@ func explode_energy_orbs(payment: EnergyStack, explode_in_ui: bool) -> Animation
 					break
 			if is_instance_valid(target_orb):
 				anims.append(combat.animation.callback(target_orb, "death"))
-				# wait why was death called both with animation and without?
-				# commenting the second one:
-				#target_orb.death()
 				orbs.erase(target_orb)
-	if explode_in_ui:
-		pass
-		# TODO nitai explode in ui
 	return combat.animation.reappend_as_subqueue(anims).set_flag_with()
 
 func is_payable(payment: EnergyStack) -> bool:
