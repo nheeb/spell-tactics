@@ -13,7 +13,7 @@ class_name CombatState extends Resource
 @export var active_states: Array[ActiveState]
 # Events
 @export var all_events: Array[CombatEventState]
-@export var event_timeline: Dictionary
+@export var event_schedules: Array[CombatEventSchedule]
 @export var enemy_event_queue: Array[EnemyEventPlan]
 @export var current_enemy_event: CombatEventReference
 @export var enemy_meter: int
@@ -49,7 +49,7 @@ func deserialize() -> Combat:
 	combat.events.all_events.append_array(all_events.map(
 		func (e): return e.deserialize(combat)
 	))
-	combat.events.event_timeline = event_timeline
+	combat.events.event_schedules = event_schedules
 	combat.events.enemy_event_queue = enemy_event_queue
 	combat.events.current_enemy_event = current_enemy_event
 	combat.events.enemy_meter = enemy_meter

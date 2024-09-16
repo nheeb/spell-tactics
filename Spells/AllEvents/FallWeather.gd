@@ -16,4 +16,3 @@ func start_new_weather():
 	var new_event = weather_type.create_event(combat)
 	event.persistant_properties["current_weather"] = new_event
 	combat.events.add_event_and_activate(new_event, true)
-

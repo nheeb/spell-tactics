@@ -5,7 +5,6 @@ var movement: int:
 		return args.get_arg(0, enemy.movement_range)
 
 func get_path(enemy_tile: Tile) -> Array[Tile]:
-	var target_tile: Tile = target if target is Tile else target.current_tile
 	var path := combat.level.get_shortest_path(enemy_tile, target_tile)
 	if not path.is_empty():
 		path.pop_back()

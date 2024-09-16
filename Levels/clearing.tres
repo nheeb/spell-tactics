@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=538 format=3 uid="uid://ckq8v1s3aruw7"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=540 format=3 uid="uid://ckq8v1s3aruw7"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/CombatState.gd" id="1_a77op"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/ActiveState.gd" id="1_opmkl"]
@@ -56,6 +56,7 @@
 [ext_resource type="Resource" uid="uid://cyfghwiu5p4y4" path="res://Spells/AllEnemyEvents/SpawnNewFighter.tres" id="27_t610h"]
 [ext_resource type="Resource" uid="uid://ovrqq0tqoc0w" path="res://Spells/AllEvents/FallWeather.tres" id="28_3y7ft"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventSchedule.gd" id="29_e34ni"]
+[ext_resource type="Resource" uid="uid://cnfua6ghwn1f0" path="res://Spells/AllEvents/DrainGain.tres" id="30_jhqrf"]
 [ext_resource type="Script" path="res://Spells/AllStatusEffects/StatusEffect.gd" id="32_moxhk"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/TimedEffect.gd" id="53_jcir5"]
 
@@ -63,6 +64,7 @@
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -70,6 +72,7 @@ number = 0
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -77,6 +80,7 @@ number = 0
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -84,6 +88,7 @@ number = 0
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -91,6 +96,7 @@ number = 0
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -98,6 +104,7 @@ number = 0
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -105,6 +112,7 @@ number = 0
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -112,6 +120,7 @@ number = 0
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -119,6 +128,7 @@ number = 0
 script = ExtResource("3_kxbah")
 type = 0
 round_number = 0
+round_phase = 0
 text = "Combat was deserialized."
 number = 0
 
@@ -349,11 +359,19 @@ params = {}
 event_created = false
 use_as_default = true
 
-[sub_resource type="Resource" id="Resource_k4r51"]
+[sub_resource type="Resource" id="Resource_foj6f"]
 script = ExtResource("29_e34ni")
 event_type = ExtResource("28_3y7ft")
 params = {}
 event_created = false
+scheduled_round = 0
+
+[sub_resource type="Resource" id="Resource_v8xbv"]
+script = ExtResource("29_e34ni")
+event_type = ExtResource("30_jhqrf")
+params = {}
+event_created = false
+scheduled_round = 0
 
 [sub_resource type="Resource" id="Resource_fdtjt"]
 script = ExtResource("6_c7ku8")
@@ -3676,9 +3694,7 @@ timed_effects = Array[ExtResource("53_jcir5")]([])
 combat_log = Array[ExtResource("3_kxbah")]([SubResource("Resource_au4dy"), SubResource("Resource_pdv8v"), SubResource("Resource_nxumc"), SubResource("Resource_q7xub"), SubResource("Resource_b6ecu"), SubResource("Resource_o3kr8"), SubResource("Resource_lrobg"), SubResource("Resource_sl74m"), SubResource("Resource_obth0")])
 active_states = Array[ExtResource("1_opmkl")]([])
 all_events = Array[ExtResource("2_pdf0p")]([])
-event_timeline = {
-1: [SubResource("Resource_k4r51")]
-}
+event_schedules = Array[ExtResource("29_e34ni")]([SubResource("Resource_foj6f"), SubResource("Resource_v8xbv")])
 enemy_event_queue = Array[ExtResource("2_kcnt0")]([SubResource("Resource_1ma5g")])
 enemy_meter = 0
 global_enemy_actions = Array[ExtResource("6_c7ku8")]([SubResource("Resource_fdtjt")])

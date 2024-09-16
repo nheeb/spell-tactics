@@ -89,9 +89,12 @@ func create_icon():
 	icon = combat.ui.event_icons.create_icon(self)
 
 func remove_icon():
-	assert(icon)
-	icon.queue_free()
-	icon = null
+	combat.animation.callable(
+		func ():
+			assert(icon)
+			icon.queue_free()
+			icon = null
+	)
 
 ## Changes visible attributes of the icon as AQ animation.
 func update_ui_icon(visible := true, texture : Texture = type.get_icon(),\
@@ -123,4 +126,4 @@ func get_reference() -> CombatEventReference:
 	return CombatEventReference.new(self)
 
 func get_effect_text() -> String:
-	return type.effect_text
+	return type.effect_text + persistant_properties.get("extra_text", "")

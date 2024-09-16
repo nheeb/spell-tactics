@@ -1,36 +1,83 @@
 class_name EventUtility extends CombatUtility
 
-## { RoundNumber (int) -> ScheduledEvents (Array[CombatEventSchedule]) }
-var event_timeline: Dictionary
+## This method will be called every end step. This is where all the activation
+## and advancing happens.
+func process_events() -> void:
+	process_enemy_events()
+	process_event_schedules()
+	process_active_events()
 
-var enemy_event_queue: Array[EnemyEventPlan]
+############################
+## Handling Combat Events ##
+############################
+
+## The planned events (change that by editing it in the CombatState directly)
+## { RoundNumber (int) -> ScheduledEvents (Array[CombatEventSchedule]) }
+#var event_timeline: Dictionary
+var event_schedules: Array[CombatEventSchedule]
+## All the CombatEvent instances (not the schedules)
 var all_events: Array[CombatEvent]
 
-func add_event_schedule(event_schedule: CombatEventSchedule, round_number: int):
-	for schedule_list in event_timeline.values():
-		schedule_list.erase(event_schedule)
-	if event_timeline.has(round_number):
-		var schedules := event_timeline[round_number] as Array
-		assert(schedules)
-		schedules.append(event_schedule)
-		schedules.sort_custom(
-			func (a, b):
-				if not a.event_type: return true
-				if not b.event_type: return false
-				return a.event_type.order < b.event_type.order
-		)
-	else:
-		event_timeline[round_number] = [event_schedule]
+func add_event_schedule(event_schedule: CombatEventSchedule):
+	assert(event_schedule not in event_schedules)
+	event_schedules.append(event_schedule)
 
 func add_event_schedule_for_this_round(es: CombatEventSchedule, delay := 0):
-	add_event_schedule(es, combat.current_round + delay)
+	es.scheduled_round = combat.current_round + delay
+	add_event_schedule(es)
 
-func get_event_schedule_round_number(event_schedule: CombatEventSchedule) -> int:
-	for round_number in event_timeline.keys():
-		if event_schedule in event_timeline[round_number]:
-			return round_number
-	push_error("EventSchedule not in timeline")
-	return 0
+func get_active_events() -> Array[CombatEvent]:
+	return all_events.filter(func (e): return e.active)
+
+func add_event(event: CombatEvent):
+	assert(not (event in all_events), "Added event that was already in the list")
+	all_events.append(event)
+
+func add_event_and_activate(event: CombatEvent, advance_when_activate := false):
+	add_event(event)
+	event.activate()
+	if advance_when_activate:
+		event.advance()
+
+func get_unused_schedules_for_round(r: int) -> Array[CombatEventSchedule]:
+	var schedules: Array[CombatEventSchedule] = event_schedules.filter(
+		func (ces: CombatEventSchedule) -> bool:
+			return ces.event_type and (not ces.event_created) \
+				and ces.scheduled_round <= r
+	)
+	schedules.sort_custom(
+		func (a, b):
+			return a.event_type.order < b.event_type.order
+	)
+	return schedules
+
+func process_event_schedules():
+	var game_round := combat.current_round
+	for schedule in get_unused_schedules_for_round(game_round):
+		add_event_and_activate(schedule.create_event(combat))
+
+func process_active_events():
+	for event in get_active_events():
+		event.advance()
+
+###########################
+## Handling Enemy Events ##
+###########################
+
+## The planned enemy events (also edit this in the CombatState)
+var enemy_event_queue: Array[EnemyEventPlan]
+# TODO Nitai serialize this
+var enemy_meter := 0
+var enemy_meter_max := 0
+var current_enemy_event: CombatEventReference
+
+func process_enemy_events():
+	if not current_enemy_event:
+		discover_next_enemy_event()
+	add_to_enemy_meter()
+	try_to_activate_enemy_event()
+	if not current_enemy_event:
+		discover_next_enemy_event()
 
 func get_next_enemy_event_plan() -> EnemyEventPlan:
 	var plan := Utility.array_safe_get(enemy_event_queue.filter(
@@ -46,54 +93,6 @@ func get_next_enemy_event_plan() -> EnemyEventPlan:
 		enemy_event_queue.append(new_plan)
 		return new_plan
 	return null
-
-func get_active_events() -> Array[CombatEvent]:
-	return all_events.filter(func (e): return e.active)
-
-func add_event(event: CombatEvent):
-	assert(not (event in all_events), "Added event that was already in the list")
-	all_events.append(event)
-
-func add_event_and_activate(event: CombatEvent, advance_when_activate := false):
-	add_event(event)
-	event.activate()
-	if advance_when_activate:
-		event.advance()
-
-## This method will be called every end step. This is where all the activation
-## and advancing happens.
-func process_events() -> void:
-	process_enemy_events()
-	process_event_schedules()
-	process_active_events()
-
-func process_event_schedules():
-	var game_round := combat.current_round
-	if game_round in event_timeline.keys():
-		var schedules = event_timeline[game_round]
-		if schedules is not Array:
-			schedules = [schedules]
-		for schedule in schedules:
-			schedule = schedule as CombatEventSchedule
-			assert(schedule)
-			add_event_and_activate(schedule.create_event(combat))
-
-func process_active_events():
-	for event in get_active_events():
-		event.advance()
-
-# TODO Nitai serialize this
-var enemy_meter := 0
-var enemy_meter_max := 0
-var current_enemy_event: CombatEventReference
-
-func process_enemy_events():
-	if not current_enemy_event:
-		discover_next_enemy_event()
-	add_to_enemy_meter()
-	try_to_activate_enemy_event()
-	if not current_enemy_event:
-		discover_next_enemy_event()
 
 func discover_next_enemy_event():
 	if current_enemy_event:

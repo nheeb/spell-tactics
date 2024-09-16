@@ -209,7 +209,6 @@ func scale_screen_pos(screen_pos: Vector2) -> Vector2:
 	var scaled: Vector2 = screen_pos * size_scale
 	return scaled
 
-
 func get_mouse_pos_absolute() -> Vector2:
 	return get_viewport().get_mouse_position()
 

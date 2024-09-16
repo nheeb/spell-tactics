@@ -29,6 +29,7 @@ enum Result {
 @onready var t_effects: TimedEffectsUtility = %TimedEffectsUtility
 @onready var attack: AttackUtility = %AttackUtility
 @onready var action_stack: ActionStackUtility = %ActionStackUtility
+@onready var castables: CastableUtility = %CastableUtility
 
 # TODO Nitai move those to the log utility
 signal round_ended

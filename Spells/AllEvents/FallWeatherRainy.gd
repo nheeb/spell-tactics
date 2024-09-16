@@ -17,5 +17,5 @@ func te_on_cast(castable: Castable):
 		give_extra_harmony()
 
 func give_extra_harmony():
-	combat.energy.gain(EnergyStack.string_to_energy("H")).set_flag_with()
+	combat.energy.gain(EnergyStack.string_to_energy("H"), combat.player).set_flag_with()
 	combat.animation.say(combat.player.visual_entity, "+1 Harmony").set_flag_with()

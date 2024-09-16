@@ -15,8 +15,7 @@ func get_icon_name() -> String:
 
 func _init(_length := 2) -> void:
 	length = _length
-	
-	
+
 func berserker_effect(dmg: int, _target: EnemyEntity):
 	return dmg + 1
 
@@ -62,4 +61,3 @@ func on_remove() -> void:
 	assert(found_idx != -1)
 	melee.logic.modifiers.remove_at(found_idx)
 	combat.animation.remove_staying_effect(entity.visual_entity, "berserker_icons")
-
