@@ -27,6 +27,7 @@ ActivityManager="*res://Logic/Activities/ActivityManager.gd"
 Adventure="*res://Logic/Adventure/Adventure.gd"
 VFX="*res://Logic/AutoLoad/VFX.tscn"
 Sx="*res://addons/signal_extensions/sx_autoload.gd"
+Audio="*res://Logic/AutoLoad/Audio.tscn"
 
 [debug]
 
@@ -70,6 +71,10 @@ folder_colors={
 "res://Spells/": "teal",
 "res://UI/": "yellow"
 }
+
+[filesystem]
+
+import/blender/enabled=false
 
 [input]
 
