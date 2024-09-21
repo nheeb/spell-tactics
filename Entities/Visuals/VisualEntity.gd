@@ -58,6 +58,7 @@ func on_death_visuals():
 const GREY_OUT_MAT: Material = preload("res://Effects/GreyOut3D.material")
 ## For overriding and making the drain effect
 func visual_drain(drained := true):
+	Audio.play("absorb")
 	for child in Utility.get_recursive_mesh_instances(self):
 		if child is MeshInstance3D:
 			child = child as MeshInstance3D
