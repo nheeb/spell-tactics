@@ -4,6 +4,7 @@ class_name CastableUtility extends CombatUtility
 
 ## Returns an Active with given String in its pretty or internal name.
 ## Case is being ignored.
+@warning_ignore("shadowed_variable_base_class")
 func get_active_from_name(name: String) -> Active:
 	var actives := combat.actives.filter(
 		func (a: Active):

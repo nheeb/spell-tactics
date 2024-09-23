@@ -64,6 +64,8 @@ func process_active_events():
 ## Handling Enemy Events ##
 ###########################
 
+const ENEMY_METER_GAIN_DEFAULT = 1
+
 ## The planned enemy events (also edit this in the CombatState)
 var enemy_event_queue: Array[EnemyEventPlan]
 # TODO Nitai serialize this
@@ -125,7 +127,7 @@ func set_enemy_meter(value: int) -> AnimationCallback:
 func set_enemy_meter_max(value: int) -> AnimationObject:
 	return combat.animation.callback(combat.ui, "set_enemy_meter_max", [value])
 
-func add_to_enemy_meter(value := 1) -> AnimationCallback:
+func add_to_enemy_meter(value := ENEMY_METER_GAIN_DEFAULT) -> AnimationCallback:
 	if not current_enemy_event:
 		discover_next_enemy_event()
 	return set_enemy_meter(enemy_meter + value)

@@ -10,6 +10,7 @@ var actives: Array[Active]
 @onready var event_icons: CombatEventIcons = %CombatEventIcons
 @onready var event_info: CombatEventInfo = %CombatEventInfo
 @onready var enemy_event_info: CombatEventInfo = %EnemyEventInfo
+@onready var enemy_event_icon: EnemyEventIcon = %EnemyEventIcon
 
 var ticket_handler := WaitTicketHandler.new()
 func get_wait_ticket_handler(): return ticket_handler
