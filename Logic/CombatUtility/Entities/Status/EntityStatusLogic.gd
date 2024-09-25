@@ -26,7 +26,7 @@ func _setup_visually() -> void:
 	pass
 
 ## How does the effect change, when the entity would get another instance of the same effect
-func _extend(other_status: StatusEffect) -> void:
+func _extend(other_status: EntityStatus) -> void:
 	pass
 
 ## Effects on being removed (clean up timed effects)

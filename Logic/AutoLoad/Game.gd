@@ -20,7 +20,9 @@ const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false
 const DEBUG_DECK_PURGE = false
-const DEBUG_INFO = true
+var DEBUG_INFO: bool:
+	get:
+		return DebugInfo.ACTIVE
 var DEBUG_SPELL_TESTING := false # Not meant to be changed.
 # Play the scene SpellTest.tscn to start spell testing
 var testing_deck: Array[SpellType]

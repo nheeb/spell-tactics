@@ -4,6 +4,9 @@ var current_animations: Array[AnimationObject]
 
 const SHOW_ENEMY_PROJECTILE_INFO = true
 
+## If this is true most debug information should be visible
+const ACTIVE = true
+
 #####################
 ## Global Settings ##
 #####################

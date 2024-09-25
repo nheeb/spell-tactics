@@ -75,7 +75,8 @@ func _play(level: Level) -> void:
 		VisualTime.new_timer(max_duration).timeout.connect(internal_animation_done)
 	play(level)
 
-## Override this to set what the animation does. Always emit animation_done_internally at the end
+## Override this to set what the animation does.
+## Always emit animation_done_internally at the end
 func play(level: Level) -> void:
 	pass
 
