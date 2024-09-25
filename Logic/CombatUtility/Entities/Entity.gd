@@ -19,7 +19,7 @@ var combat: Combat
 var energy: EnergyStack
 
 var custom_props := {}
-var status_effects : Array[StatusEffect] = []
+var status_effects: Array[StatusEffect] = []
 
 signal entering_graveyard # Before the graveyard
 signal entered_graveyard # After the graveyard
@@ -106,7 +106,8 @@ func go_to_graveyard() -> AnimationObject:
 
 func apply_status_effect(effect: StatusEffect) -> void:
 	var existing_effect := get_status_effect(effect.get_status_name())
-	combat.animation.say(visual_entity, effect.get_status_name()).set_duration(0.0)
+	if Game.DEBUG_INFO:
+		combat.animation.say(visual_entity, effect.get_status_name()).set_duration(0.0)
 	if existing_effect:
 		existing_effect.extend(effect)
 	else:

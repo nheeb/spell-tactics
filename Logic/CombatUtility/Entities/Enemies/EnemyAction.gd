@@ -22,14 +22,13 @@ enum TargetConsiderMethod {Best}
 @export var cooldown: int = 0 # TODO implement this
 @export var alternative_action_args: EnemyActionArgs = null
 @export var movement_action_args: EnemyActionArgs = null
-@export var movement_mandatory: bool = false
 
 @export_group("Arguments")
 @export var default_args: Array = []
 @export var default_kwargs: Dictionary = {}
 
 ## Logic script
-var logic_script: Script
+var logic_script: GDScript
 
 func _on_load() -> void:
 	if internal_name == "":

@@ -20,6 +20,7 @@ const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false
 const DEBUG_DECK_PURGE = false
+const DEBUG_INFO = true
 var DEBUG_SPELL_TESTING := false # Not meant to be changed.
 # Play the scene SpellTest.tscn to start spell testing
 var testing_deck: Array[SpellType]
@@ -31,16 +32,16 @@ var tree: SceneTree:
 
 var combats: Array[Combat] # For debuging
 
-func get_prototype_events(combat: Combat) -> Array[Spell]:
-	var prototype_events: Array[Spell] = []
-	
-	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/LeafDrop.tres"), combat))
-	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/StumpShroom.tres"), combat))
-	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEnemyEvents/SpawnGoblinFighter.tres"), combat))
-	
-	for spell in prototype_events:
-		spell.id = SpellID.new(add_to_spell_count())
-	return prototype_events
+#func get_prototype_events(combat: Combat) -> Array[Spell]:
+	#var prototype_events: Array[Spell] = []
+	#
+	#prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/LeafDrop.tres"), combat))
+	#prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/StumpShroom.tres"), combat))
+	#prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEnemyEvents/SpawnGoblinFighter.tres"), combat))
+	#
+	#for spell in prototype_events:
+		#spell.id = SpellID.new(add_to_spell_count())
+	#return prototype_events
 
 var spell_count: int = 0
 ## Prototype Function for creating ids for spells. This will later be done by the Overworld

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Entities/Enemies/CorpseLogic.gd" id="1_air4k"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyEntityType.gd" id="1_kdhbk"]
-[ext_resource type="Resource" uid="uid://dogyiyxl5nlgo" path="res://Entities/Enemies/Moves/Punch.tres" id="1_u7plf"]
+[ext_resource type="Resource" uid="uid://dogyiyxl5nlgo" path="res://Entities/Enemies/Moves/Melee/Punch.tres" id="1_u7plf"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="2_brx3d"]
 [ext_resource type="PackedScene" uid="uid://2hog155pphl4" path="res://Entities/Visuals/Enemies/VisualGoblin.tscn" id="3_87dth"]
-[ext_resource type="Resource" uid="uid://dpva1xd10eiwv" path="res://Entities/Enemies/Moves/MoveNearTarget.tres" id="3_l54jj"]
+[ext_resource type="Resource" uid="uid://dpva1xd10eiwv" path="res://Entities/Enemies/Moves/Movement/MoveNearTarget.tres" id="3_l54jj"]
 
 [sub_resource type="Resource" id="Resource_6kdtt"]
 script = ExtResource("2_brx3d")
