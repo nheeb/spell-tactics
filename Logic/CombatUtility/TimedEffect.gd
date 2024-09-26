@@ -13,6 +13,7 @@ class_name TimedEffect extends Resource
 ## For naming custom timed effects to access them later
 @export var id : String
 
+## Whether the effect is connected with combat. (Only relevant for deserializing)
 var effect_connected := false
 var signal_obj: Object
 var call_obj: Object
@@ -34,9 +35,11 @@ enum Flags {
 @export var flags: int = 0
 
 @export var triggers_left := 0
+## If delay is > 0 the next trigger will be ignores and delay will be reduced by 1.
 @export var delay := 0
-
+## Counts the triggers
 @export var trigger_counter := 0
+## Dead effects will be excluded by the TEUtility
 @export var dead := false
 
 func _init(_signal_ref: UniversalReference = null, _signal_name: String = "", \
@@ -127,7 +130,8 @@ func set_priority(prio: int) -> TimedEffect:
 	priority = prio
 	return self
 
-## Those params will be the first params (those params -> signal_params -> timed_effect_reference)
+## Those params will be the first params. [br]
+## (those params -> signal_params <optional> -> timed_effect_reference <optional>)
 func set_params(params: Array) -> TimedEffect:
 	call_params = params
 	return self
@@ -154,6 +158,7 @@ func _validate() -> bool:
 
 	return not dead
 
+## ACTION
 func _trigger(signal_params := []):
 	if delay > 0:
 		delay -= 1
@@ -171,8 +176,11 @@ func _trigger(signal_params := []):
 			args.append_array([self])
 		if connected_method.is_valid():
 			connected_method.callv(args)
+		else:
+			push_error("Timed Effect triggered with invalid method.")
 	if dead and (Utility.has_int_flag(flags, Flags.ReplaceCallOnDeath) or Utility.has_int_flag(flags, Flags.ExtraCallOnDeath)):
-		connected_death_method.callv(death_params)
+		if connected_death_method.is_valid():
+			connected_death_method.callv(death_params)
 
 func _set_signal(sig: Signal) -> TimedEffect:
 	assert(not effect_connected)
@@ -209,7 +217,8 @@ func set_id(_id: String) -> TimedEffect:
 func get_id() -> String:
 	return id
 
-## This should be the last thing executed on a Timed Effect. No more changes after it was connected
+## This should be the last thing executed on a Timed Effect.
+## No more changes after it was connected.
 func register(combat: Combat) -> void:
 	combat.t_effects.add_effect(self)
 
