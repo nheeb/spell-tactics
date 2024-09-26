@@ -10,7 +10,9 @@ pretty_name = "Blinded"
 icon = ExtResource("2_iqpb1")
 color = Color(1, 1, 1, 1)
 text = "This enemy has a high chance of missing his next attack."
-default_data = {}
+default_data = {
+"acc_malus": 3
+}
 has_lifetime = true
 lifetime_default = 1
 lifetime_extend_method = 0

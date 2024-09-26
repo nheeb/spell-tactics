@@ -51,7 +51,7 @@ func get_status_name() -> String:
 func setup_logic() -> void:
 	if type.has_lifetime:
 		TimedEffect.new_end_phase_trigger_from_callable(reduce_lifetime) \
-			.set_owner(self).set_id("_lt").set_priority(-100).register(combat)
+			.set_id("_lt").set_priority(-100).register(combat)
 	logic._setup_logic()
 
 ## Visual changes when status effect enters the game

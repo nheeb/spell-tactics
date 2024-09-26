@@ -43,3 +43,6 @@ func _get_enemy_actions() -> Array[EnemyActionArgs]:
 
 func self_remove() -> void:
 	entity.remove_status(status.get_status_name())
+
+func get_reference() -> PropertyReference:
+	return PropertyReference.new(status.get_reference(), "logic")

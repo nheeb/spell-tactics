@@ -10,7 +10,9 @@ pretty_name = "Slowed"
 icon = ExtResource("2_xokyl")
 color = Color(0.152344, 1, 0.880798, 1)
 text = "This entity can only move 1 tile."
-default_data = {}
+default_data = {
+"slowed_movement": 1
+}
 has_lifetime = true
 lifetime_default = 1
 lifetime_extend_method = 0

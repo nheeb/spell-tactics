@@ -153,7 +153,8 @@ func _validate() -> bool:
 			if call_obj is Entity:
 				if call_obj.is_dead():
 					dead = true
-			elif call_obj is EntityLogic or call_obj is StatusEffect:
+			elif call_obj is EntityLogic or \
+				call_obj is EntityStatusLogic:
 				if call_obj.entity.is_dead():
 					dead = true
 

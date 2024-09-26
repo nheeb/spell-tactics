@@ -1,17 +1,11 @@
 class_name SimpleMelee extends ActiveLogic
 
-## Usable references:
-## spell - Corresponding spell
-##   (with round_persistant_properties & combat_persistant_properties)
-## combat - The current combat for which the spell was created
-## target - The target Entity/Tile (if Spell is targetable)
-
-## This is for overriding if there are conditions for targets
-#func is_current_cast_valid() -> bool:
-	#return true
-	
-
-var modifiers: Array[CallableReference] = []  # (dmg, target_enemy) -> dmg
+var modifiers: Array[CallableReference]:  # (dmg, target_enemy) -> dmg
+	get:
+		var default: Array[CallableReference] = []
+		return active.round_persistant_properties.get_or_add("modifiers", default)
+	set(x):
+		active.round_persistant_properties["modifiers"] = x
 
 ## Here should be the effect
 func casting_effect() -> void:
@@ -31,4 +25,3 @@ func casting_effect() -> void:
 	enemy.inflict_damage(damage)
 	combat.animation.update_hp(enemy)
 	combat.animation.say(combat.player.current_tile, "ATTACK!", {"color": Color.CORAL, "font": "bold"})
-

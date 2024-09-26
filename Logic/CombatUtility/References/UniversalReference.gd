@@ -70,3 +70,11 @@ func get_tile(combat: Combat) -> Tile:
 func get_node(combat: Combat) -> Node:
 	assert(resolve(combat) is Node)
 	return resolve(combat) as Node
+
+func get_callable(combat: Combat) -> Callable:
+	assert(resolve(combat) is Callable)
+	return resolve(combat) as Callable
+
+func get_status(combat: Combat) -> EntityStatus:
+	assert(resolve(combat) is EntityStatus)
+	return resolve(combat) as EntityStatus

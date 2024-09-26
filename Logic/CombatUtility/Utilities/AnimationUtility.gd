@@ -36,7 +36,10 @@ func callable(_callable: Callable) -> AnimationCallable:
 	add_animation_object(a)
 	return a
 
-func effect(_effect_scene: PackedScene, target: Node3D,_setup_properties := {}) -> AnimationEffect:
+func effect(_effect_scene: PackedScene, target: Object,_setup_properties := {}) -> AnimationEffect:
+	if target is Entity:
+		target = target.visual_entity
+	assert(target is Node3D)
 	var a = AnimationEffect.new(_effect_scene, target, _setup_properties)
 	add_animation_object(a)
 	return a
@@ -54,7 +57,7 @@ func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSign
 	add_animation_object(a)
 	return a
 
-func say(target: Node3D, text: String, params := {}) -> AnimationEffect:
+func say(target: Object, text: String, params := {}) -> AnimationEffect:
 	params["text"] = text
 	return effect(SAY_EFFECT, target, params)
 	## Quick Paste: combat.animation.say(target, "", {"color": Color., "font_size": 64})
