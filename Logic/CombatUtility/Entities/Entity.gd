@@ -19,7 +19,9 @@ var combat: Combat
 var energy: EnergyStack
 
 var custom_props := {}
+## DEPRECATED old status effects
 var status_effects: Array[StatusEffect] = []
+var status_array: Array[EntityStatus] = []
 
 signal entering_graveyard # Before the graveyard
 signal entered_graveyard # After the graveyard
@@ -104,46 +106,25 @@ func die() -> AnimationObject:
 func go_to_graveyard() -> AnimationObject:
 	return die()
 
-func apply_status_effect(effect: StatusEffect) -> void:
-	var existing_effect := get_status_effect(effect.get_status_name())
-	if Game.DEBUG_INFO:
-		combat.animation.say(visual_entity, effect.get_status_name()).set_duration(0.0)
-	if existing_effect:
-		existing_effect.extend(effect)
-	else:
-		status_effects.append(effect)
-		effect.setup(self)
 
-func get_status_effect(status_name: String) -> StatusEffect:
-	for effect in status_effects:
-		if effect.get_status_name() == status_name:
-			return effect
-	return null
+# Those two method were never used. Not sure why I wrote those...
+#func call_on_status_effect(status_name: String, method: String, params := []) -> void:
+	#var effect := get_status_effect(status_name)
+	#if effect:
+		#if effect.has_method(method):
+			#effect.callv(method, params)
+		#else:
+			#push_error("Status effect %s has no method %s" % [status_effects, method])
+			#
+#func call_logic(method: String, params := []):
+	#if logic == null:
+		#push_error("%s does not have logic." % self)
+		#return
+	#if not logic.has_method(method):
+		#push_error("%s logic does not have method '%s'." % [self, method])
+		#return
+	#logic.callv(method, params)
 
-func remove_status_effect(status_name: String) -> void:
-	var effect := get_status_effect(status_name)
-	if effect:
-		effect.on_remove()
-		status_effects.erase(effect)
-
-
-func call_on_status_effect(status_name: String, method: String, params := []) -> void:
-	var effect := get_status_effect(status_name)
-	if effect:
-		if effect.has_method(method):
-			effect.callv(method, params)
-		else:
-			push_error("Status effect %s has no method %s" % [status_effects, method])
-			
-func call_logic(method: String, params := []):
-	if logic == null:
-		push_error("%s does not have logic." % self)
-		return
-	if not logic.has_method(method):
-		push_error("%s logic does not have method '%s'." % [self, method])
-		return
-	logic.callv(method, params)
-	
 func _to_string() -> String:
 	if id != null:
 		return type.internal_name + '_' + str(id.id)
@@ -159,3 +140,59 @@ func sync_with_type() -> void:
 
 func on_hover_long(h: bool) -> void:
 	pass
+
+
+##########################################
+## DEPRECATED Methods for StatusEffects ##
+##########################################
+
+func apply_status_effect(effect: StatusEffect) -> void:
+	push_error("Using DEPRECATED StatusEffect")
+	var existing_effect := get_status_effect(effect.get_status_name())
+	if Game.DEBUG_INFO:
+		combat.animation.say(visual_entity, effect.get_status_name()).set_duration(0.0)
+	if existing_effect:
+		existing_effect.extend(effect)
+	else:
+		status_effects.append(effect)
+		effect.setup(self)
+
+func get_status_effect(status_name: String) -> StatusEffect:
+	push_error("Using DEPRECATED StatusEffect")
+	for effect in status_effects:
+		if effect.get_status_name() == status_name:
+			return effect
+	return null
+
+func remove_status_effect(status_name: String) -> void:
+	push_error("Using DEPRECATED StatusEffect")
+	var effect := get_status_effect(status_name)
+	if effect:
+		effect.on_remove()
+		status_effects.erase(effect)
+
+###############################
+## Methods for EntityEffects ##
+###############################
+
+func apply_status(status: EntityStatus) -> void:
+	var existing_status := get_status(status.get_status_name())
+	if DebugInfo.ACTIVE:
+		combat.animation.say(visual_entity, status.get_status_name()).set_duration(0.0)
+	if existing_status:
+		existing_status.extend(status)
+	else:
+		status_array.append(status)
+		status.setup(self)
+
+func get_status(status_name: String) -> EntityStatus:
+	for status in status_array:
+		if status.get_status_name() == status_name:
+			return status
+	return null
+
+func remove_status(status_name: String) -> void:
+	var status := get_status_effect(status_name)
+	if status:
+		status.on_remove()
+		status_array.erase(status)
