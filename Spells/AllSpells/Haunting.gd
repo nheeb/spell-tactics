@@ -35,4 +35,3 @@ func casting_effect() -> void:
 				enemy.inflict_damage_with_visuals(damage)
 				combat.animation.say(enemy.visual_entity, "%s Damage" % acc_loss, \
 					 {"color": Color.RED}).set_flag_extend().set_duration(1.0)
-

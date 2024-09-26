@@ -51,7 +51,7 @@ func get_status_name() -> String:
 func setup_logic() -> void:
 	if type.has_lifetime:
 		TimedEffect.new_end_phase_trigger_from_callable(reduce_lifetime) \
-			.set_owner(self).set_id("lifetime").register(combat)
+			.set_owner(self).set_id("_lt").set_priority(-100).register(combat)
 	logic._setup_logic()
 
 ## Visual changes when status effect enters the game
@@ -80,6 +80,9 @@ func extend(other_status: EntityStatus) -> void:
 
 ## Effects on being removed (clean up timed effects)
 func on_remove() -> void:
+	if type.has_lifetime:
+		for te in combat.t_effects.get_effects(self, "_lt"):
+			te.kill()
 	if type.make_floating_icon:
 		var id := "%s_icons" % get_status_name()
 		combat.animation.remove_staying_effect(entity.visual_entity, id)
@@ -92,8 +95,6 @@ func get_enemy_actions() -> Array[EnemyActionArgs]:
 	return actions
 
 func remove() -> void:
-	for te in combat.t_effects.get_effects(self, "lifetime"):
-		te.kill()
 	logic.self_remove()
 
 func reduce_lifetime() -> void:

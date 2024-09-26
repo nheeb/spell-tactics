@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityStatusType" load_steps=4 format=3 uid="uid://dxxtff00we3w2"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="1_l3kmx"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Status/EntityStatusType.gd" id="2_jku8u"]
+[ext_resource type="Texture2D" uid="uid://dshcuivwafa1p" path="res://Assets/Sprites/Icons/drop.png" id="2_rbvpp"]
+
+[resource]
+script = ExtResource("2_jku8u")
+pretty_name = "Wet"
+icon = ExtResource("2_rbvpp")
+color = Color(0.117325, 0.705754, 0.910156, 1)
+text = "This entity is wet."
+default_data = {}
+has_lifetime = true
+lifetime_default = 3
+lifetime_extend_method = 0
+make_floating_icon = true
+enemy_actions = Array[ExtResource("1_l3kmx")]([])

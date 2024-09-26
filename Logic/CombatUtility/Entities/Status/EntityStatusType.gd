@@ -44,3 +44,6 @@ func create_logic() -> EntityStatusLogic:
 	if logic_script:
 		return logic_script.new()
 	return EntityStatusLogic.new()
+
+func create_status(_data := {}) -> EntityStatus:
+	return EntityStatus.new(self, _data)

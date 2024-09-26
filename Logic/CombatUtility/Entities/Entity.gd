@@ -106,7 +106,6 @@ func die() -> AnimationObject:
 func go_to_graveyard() -> AnimationObject:
 	return die()
 
-
 # Those two method were never used. Not sure why I wrote those...
 #func call_on_status_effect(status_name: String, method: String, params := []) -> void:
 	#var effect := get_status_effect(status_name)
@@ -141,7 +140,6 @@ func sync_with_type() -> void:
 func on_hover_long(h: bool) -> void:
 	pass
 
-
 ##########################################
 ## DEPRECATED Methods for StatusEffects ##
 ##########################################
@@ -175,24 +173,33 @@ func remove_status_effect(status_name: String) -> void:
 ## Methods for EntityEffects ##
 ###############################
 
+## Add a status to the status_array. If a status with the same name / type is
+## already in there, it gets extended instead.
 func apply_status(status: EntityStatus) -> void:
 	var existing_status := get_status(status.get_status_name())
 	if DebugInfo.ACTIVE:
-		combat.animation.say(visual_entity, status.get_status_name()).set_duration(0.0)
+		combat.animation.say(visual_entity, status.type.pretty_name).set_duration(0.0)
 	if existing_status:
 		existing_status.extend(status)
 	else:
 		status_array.append(status)
 		status.setup(self)
 
-func get_status(status_name: String) -> EntityStatus:
+## Returns the status that fits given name or type.
+func get_status(status_name_or_type: Variant) -> EntityStatus:
+	var status_name: String
+	if status_name_or_type is EntityStatusType:
+		status_name = status_name_or_type.internal_name
+	else:
+		status_name = str(status_name_or_type)
 	for status in status_array:
 		if status.get_status_name() == status_name:
 			return status
 	return null
 
-func remove_status(status_name: String) -> void:
-	var status := get_status_effect(status_name)
+## Removes a status from the entity. To be clean use EntityStaus.remove() instead.
+func remove_status(status_name_or_type: Variant) -> void:
+	var status := get_status_effect(status_name_or_type)
 	if status:
 		status.on_remove()
 		status_array.erase(status)

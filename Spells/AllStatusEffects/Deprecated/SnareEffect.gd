@@ -33,4 +33,3 @@ func extend(other_status: StatusEffect) -> void:
 ## For overwriting: Effects on being removed
 func on_remove() -> void:
 	combat.animation.remove_staying_effect(entity.visual_entity, "snare_icons")
-

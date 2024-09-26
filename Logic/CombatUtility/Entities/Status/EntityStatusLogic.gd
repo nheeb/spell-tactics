@@ -42,4 +42,4 @@ func _get_enemy_actions() -> Array[EnemyActionArgs]:
 ####################
 
 func self_remove() -> void:
-	entity.remove_status_effect(status.get_status_name())
+	entity.remove_status(status.get_status_name())

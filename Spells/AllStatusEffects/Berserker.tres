@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityStatusType" load_steps=4 format=3 uid="uid://bttwri4xys5eo"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="1_w031f"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Status/EntityStatusType.gd" id="2_1enxd"]
+[ext_resource type="Texture2D" uid="uid://mf5yk8rulxlh" path="res://Assets/Sprites/Icons/crossed-axes.png" id="2_ommin"]
+
+[resource]
+script = ExtResource("2_1enxd")
+pretty_name = "Berserker"
+icon = ExtResource("2_ommin")
+color = Color(1, 0.632813, 0, 1)
+text = "The next melee attack of this entity deals doubled damage."
+default_data = {}
+has_lifetime = false
+lifetime_default = 1
+lifetime_extend_method = 0
+make_floating_icon = true
+enemy_actions = Array[ExtResource("1_w031f")]([])

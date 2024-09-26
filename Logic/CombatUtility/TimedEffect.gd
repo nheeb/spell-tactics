@@ -126,6 +126,7 @@ func set_delay(_delay: int) -> TimedEffect:
 	delay = _delay
 	return self
 
+## Prio determines the order of execution on the same signal. High Prio first.
 func set_priority(prio: int) -> TimedEffect:
 	priority = prio
 	return self
