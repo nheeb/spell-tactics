@@ -11,8 +11,10 @@ func process_phase() -> void:
 
 func _process_phase() -> void:
 	process_start.emit()
+	await combat.action_stack.wait()
 	await process_phase()
 	process_end.emit()
+	await combat.action_stack.wait()
 
 ## Returns true if Player input is needed to advance to the next phase
 func needs_user_input_to_proceed() -> bool:

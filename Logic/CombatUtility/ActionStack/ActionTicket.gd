@@ -7,7 +7,7 @@ enum State {
 	Waiting, # Was running at some point. Now it's waiting to continue.
 	Finished, # Finished with doing what it wants.
 	Aborted, # Interupted at some point and not meant to be resumed.
-	Blocked, # I forgot what that was for... :/
+	Blocked, # Apparently you can block the stack but I forgot what that was for...
 }
 
 ## The one and only callable
@@ -47,7 +47,7 @@ signal has_result(result: Variant)
 
 ## If a ticket should return something it happens via this object.
 ## Use get_result()
-class ActionTicketResult extends Object:
+class ActionTicketResult extends RefCounted:
 	signal resolved
 	var value: Variant = null
 	func set_value(v: Variant):

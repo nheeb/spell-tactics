@@ -1,12 +1,5 @@
 class_name SimpleMelee extends ActiveLogic
 
-var modifiers: Array[CallableReference]:  # (dmg, target_enemy) -> dmg
-	get:
-		var default: Array[CallableReference] = []
-		return active.round_persistant_properties.get_or_add("modifiers", default)
-	set(x):
-		active.round_persistant_properties["modifiers"] = x
-
 ## Here should be the effect
 func casting_effect() -> void:
 	assert(target is Tile, "Melee expecting Tile as target")
@@ -15,12 +8,15 @@ func casting_effect() -> void:
 	assert(len(enemies) >= 1, "Melee expects min 1 enemy on tile")
 	var enemy: EnemyEntity = enemies[0]
 	var damage := 1
-	for modifier in modifiers:
-		var callable: Callable = modifier.resolve(combat)
-		print(callable.get_method())
-		print(callable)
-		damage = callable.call(damage, enemy)
-		print(callable.get_method())
+	
+	var flavor := ActionFlavor.new() \
+		.add_action(ActionFlavor.Action.Damage) \
+		.add_action(ActionFlavor.Action.Melee) \
+		.set_owner(combat.player) \
+		.add_target(enemy)
+	var actual_damage_result := combat.action_stack.start_discussion(damage, flavor)
+	await combat.action_stack.wait()
+	damage = actual_damage_result.value
 
 	enemy.inflict_damage(damage)
 	combat.animation.update_hp(enemy)

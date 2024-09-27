@@ -60,10 +60,8 @@ func signal_triggered(sig_param0 = null, sig_param1 = null, sig_param2 = null, \
 	for te in signal_effects.duplicate():
 		te = te as TimedEffect
 		if te._validate():
-			# Triggering TE as action
-			await combat.action_stack.process_callable(
-				te._trigger.bind(sig_params)
-			)
+			# Pushung TE as action. NOT TRIGGERING THEM. Use wait() to do so.
+			combat.action_stack.push_before_active(te._trigger.bind(sig_params))
 		else:
 			signal_effects.erase(te)
 

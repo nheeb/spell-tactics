@@ -66,6 +66,11 @@ func process_result(callable: Callable) -> ActionTicket.ActionTicketResult:
 		push_front(action_ticket)
 	return action_ticket.get_result()
 
+func start_discussion(base_value, flavor = null) -> ActionTicket.ActionTicketResult:
+	if flavor and flavor is ActionFlavor:
+		load_flavor(flavor)
+	return process_result(_start_discussion.bind(base_value))
+
 ## For easy adding flavors to actions: 
 ## (Only) The next action added to the stack will get this flavor.
 func load_flavor(flavor: ActionFlavor):
@@ -213,3 +218,25 @@ func stack_process() -> void:
 
 func _process(delta: float) -> void:
 	stack_process()
+
+#################
+## Discussions ##
+#################
+
+signal discussion_started(discussion: Discussion)
+
+## RESULT Should only be touched by the method start_discussion
+func _start_discussion(base_value):
+	var discussion := Discussion.new(base_value)
+	discussion_started.emit(discussion)
+	await wait()
+	return discussion.value
+
+## This method will be the target of TimedEffects created with ...
+func enter_discussion(target_flavor: ActionFlavor, call_ref: CallableReference,\
+					discussion: Discussion):
+	assert(active_ticket)
+	assert(active_ticket.flavor)
+	if target_flavor.fits_into(active_ticket.get_flavor(true), combat):
+		var callable := call_ref.get_callable(combat)
+		callable.call(discussion)

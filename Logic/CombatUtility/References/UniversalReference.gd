@@ -35,6 +35,14 @@ func get_reference_type() -> String:
 func equals(other: UniversalReference, combat: Combat = null) -> bool:
 	return resolve(combat) == other.resolve(combat)
 
+static func from(object: Object) -> UniversalReference:
+	if object is UniversalReference:
+		return object
+	if object.has_method("get_reference"):
+		return object.get_reference()
+	push_error("Object has no reference.")
+	return null
+
 ##########################################
 ## Getters for the different References ##
 ##########################################

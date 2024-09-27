@@ -26,7 +26,7 @@ var connected_death_method: Callable
 enum Flags {
 	LimitedTriggers = 1,
 	DontDisconnectWhenInGraveyard = 2,
-	AppendSignalParamsToCall = 4,
+	AppendSignalParamsToCall = 4, # custom params -> signal_params <optional> -> timed_effect_reference <optional>
 	AppendSelfReferenceToCall = 8,
 	ExtraCallOnDeath = 16,
 	ReplaceCallOnDeath = 32,
@@ -132,6 +132,7 @@ func set_priority(prio: int) -> TimedEffect:
 	return self
 
 ## Those params will be the first params. [br]
+## They have to be serializable! [br]
 ## (those params -> signal_params <optional> -> timed_effect_reference <optional>)
 func set_params(params: Array) -> TimedEffect:
 	call_params = params
@@ -227,6 +228,10 @@ func register(combat: Combat) -> void:
 func kill() -> void:
 	dead = true
 
+########################################
+## Shortcut methods for easy creation ##
+########################################
+
 static func new_end_phase_trigger_from_callable(callable: Callable) -> TimedEffect:
 	var end_phase_ref = CombatNodeReference.new("Phases/EndPhase")
 	return TimedEffect.new(end_phase_ref, "process_start")._set_callable(callable)
@@ -234,3 +239,13 @@ static func new_end_phase_trigger_from_callable(callable: Callable) -> TimedEffe
 ## Only works of the owners of the signal and callable have "get_reference()"
 static func new_from_signal_and_callable(sig: Signal, callable: Callable) -> TimedEffect:
 	return TimedEffect.new()._set_signal(sig)._set_callable(callable)
+
+## The callable enters all discussions that fit the flavor.
+## The callable must have Discussion as only parameter.
+static func new_discussion_entry(flavor: ActionFlavor, callable: Callable) \
+		-> TimedEffect:
+	var action_stack_ref = CombatNodeReference.new("Utility/ActionStackUtility")
+	return TimedEffect.new(action_stack_ref, "discussion_started", \
+		action_stack_ref, "enter_discussion") \
+		.set_params([flavor, CallableReference.from_callable(callable)]) \
+		.set_flag(Flags.AppendSignalParamsToCall).set_owner(callable.get_object())
