@@ -29,7 +29,7 @@ func _setup_visually() -> void:
 func _extend(other_status: EntityStatus) -> void:
 	pass
 
-## Effects on being removed (clean up timed effects)
+## Effects on being removed (timed effects are removed by default)
 func _on_remove() -> void:
 	pass
 

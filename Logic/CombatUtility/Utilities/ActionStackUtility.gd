@@ -9,6 +9,7 @@ var consecutive_action_frames := 0
 var consecutive_action_msecs := 0
 var consecutive_action_start := 0
 var block_start_time := 0
+var loaded_flavor: ActionFlavor
 
 signal clear
 
@@ -64,6 +65,13 @@ func process_result(callable: Callable) -> ActionTicket.ActionTicketResult:
 	else:
 		push_front(action_ticket)
 	return action_ticket.get_result()
+
+## For easy adding flavors to actions: 
+## (Only) The next action added to the stack will get this flavor.
+func load_flavor(flavor: ActionFlavor):
+	if loaded_flavor != null:
+		push_error("There already is a loaded flavor. That should not be.")
+	loaded_flavor = flavor
 
 ####################################
 ## Methods for adding new Tickets ##
@@ -125,6 +133,11 @@ func push_behind_other(callable_or_ticket: Variant, other: ActionTicket) -> void
 
 func validate_new_ticket(action_ticket: ActionTicket):
 	action_ticket.origin_ticket = get_active_ticket()
+	if loaded_flavor:
+		if action_ticket.flavor:
+			push_error("Ticket already has a flavor. It will be overwritten by the loaded one.")
+		action_ticket.flavor = loaded_flavor
+		loaded_flavor = null
 	assert(action_ticket.state == ActionTicket.State.Created \
 			 and not action_ticket in _stack, \
 			"ActionStack: Trying to add invalid action ticket")

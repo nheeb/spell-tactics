@@ -80,9 +80,17 @@ func extend(other_status: EntityStatus) -> void:
 
 ## Effects on being removed (clean up timed effects)
 func on_remove() -> void:
-	if type.has_lifetime:
+	# Kill TimedEffects automatically if activated
+	if type.kill_te_on_remove:
+		for te in combat.t_effects.get_effects(self):
+			te.kill()
+		for te in combat.t_effects.get_effects(logic):
+			te.kill()
+	# Otherwise just the lifetime
+	elif type.has_lifetime:
 		for te in combat.t_effects.get_effects(self, "_lt"):
 			te.kill()
+	# Remove floating icons
 	if type.make_floating_icon:
 		var id := "%s_icons" % get_status_name()
 		combat.animation.remove_staying_effect(entity.visual_entity, id)

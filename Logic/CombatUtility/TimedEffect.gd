@@ -194,7 +194,7 @@ func _set_signal(sig: Signal) -> TimedEffect:
 
 func _set_callable(callable: Callable) -> TimedEffect:
 	assert(not effect_connected)
-	assert(callable.is_valid() and callable.is_standard())
+	assert(callable.is_valid() and callable.is_standard(), "Only serializable callables.")
 	assert(callable.get_object().has_method("get_reference"))
 	call_ref = callable.get_object().get_reference()
 	call_method = callable.get_method()

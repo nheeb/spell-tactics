@@ -1,7 +1,16 @@
 class_name ActionTicket extends RefCounted
+## These are the objects in our ActionStack. Each ticket contains a callable.
 
-enum State {Created, Running, Waiting, Finished, Aborted, Blocked}
+enum State {
+	Created, # Just created. Not touched.
+	Running, # Currently running as active ticket.
+	Waiting, # Was running at some point. Now it's waiting to continue.
+	Finished, # Finished with doing what it wants.
+	Aborted, # Interupted at some point and not meant to be resumed.
+	Blocked, # I forgot what that was for... :/
+}
 
+## The one and only callable
 var callable: Callable
 var object: Object:
 	get:
@@ -9,8 +18,11 @@ var object: Object:
 var method_name: StringName:
 	get:
 		return callable.get_method()
-var owner: Object
+## Object describing the action. Used to hook something onto that action.
+## To be clean use action_stack.load_flavor() to set and get_flavor() to get.
+var flavor: ActionFlavor
 var state := State.Created
+## Stack trace of the ticket creation for debugging.
 var stack_trace: Array
 var stack_trace_string: String:
 	get:
@@ -18,19 +30,23 @@ var stack_trace_string: String:
 		for d in stack_trace:
 			if d is Dictionary:
 				for k in d.keys():
-					s += "%s: %s | " % [k, d[k]]
+					s += "%s:%s|" % [k, d[k]]
 				s += "\n"
 		return s 
 var _remove_me := false
 var _result: Variant
 var was_removed := false
+## Other Ticket that caused the creation of this ticket.
 var origin_ticket : ActionTicket
+## TBD not implemented yet. Entries that are created during the ticket. Do we need that?
 var log_entries : Array[LogEntry]
 
 signal _go
 signal removed
 signal has_result(result: Variant)
 
+## If a ticket should return something it happens via this object.
+## Use get_result()
 class ActionTicketResult extends Object:
 	signal resolved
 	var value: Variant = null
@@ -40,9 +56,9 @@ class ActionTicketResult extends Object:
 	func _init(s: Signal) -> void:
 		s.connect(set_value, CONNECT_ONE_SHOT)
 
-func _init(_callable: Callable, _owner = null) -> void:
+func _init(_callable: Callable, _flavor = null) -> void:
 	callable = _callable
-	owner = _owner
+	flavor = _flavor
 	stack_trace = get_stack()
 
 func advance():
@@ -103,14 +119,22 @@ func get_result() -> ActionTicketResult:
 	return ActionTicketResult.new(has_result)
 
 func remove():
-	Utility.disconnect_all_connection(_go)
+	Utility.disconnect_all_connections(_go)
 	removed.emit()
-	Utility.disconnect_all_connection(removed)
+	Utility.disconnect_all_connections(removed)
 	if _result != null:
 		has_result.emit(_result)
-	Utility.disconnect_all_connection(has_result)
+	Utility.disconnect_all_connections(has_result)
 	origin_ticket = null
 	was_removed = true
 
 func _to_string() -> String:
 	return "<AT:%s.%s>" % [object, method_name]
+
+## If deep = true it returns the origin's flavor of the ticket itself has none.
+func get_flavor(deep := false) -> ActionFlavor:
+	if flavor:
+		return flavor
+	if origin_ticket and deep:
+		return origin_ticket.get_flavor()
+	return null

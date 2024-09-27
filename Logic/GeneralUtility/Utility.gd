@@ -267,7 +267,7 @@ func quadratic_bezier_3D(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vec
 	var r = q0.lerp(q1, t)
 	return r
 
-func disconnect_all_connection(s: Signal):
+func disconnect_all_connections(s: Signal):
 	for c in s.get_connections():
 		s.disconnect(c["callable"])
 	

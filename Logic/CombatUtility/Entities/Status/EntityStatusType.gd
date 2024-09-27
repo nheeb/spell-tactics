@@ -27,7 +27,8 @@ var internal_name: String
 @export var make_floating_icon: bool = true
 
 @export_group("Extras")
-
+## Kills all TimedEffects (from status & logic) automatically when being removed.
+@export var kill_te_on_remove := true
 @export var enemy_actions: Array[EnemyActionArgs]
 
 ## Logic script
