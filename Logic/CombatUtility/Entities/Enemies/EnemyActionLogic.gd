@@ -1,8 +1,7 @@
-class_name EnemyActionLogic extends Object
+class_name EnemyActionLogic extends CombatLogic
 
 var args: EnemyActionArgs
 var action: EnemyAction
-var combat: Combat
 var enemy: EnemyEntity
 var plan: EnemyActionPlan
 var target:

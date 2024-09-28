@@ -1,6 +1,5 @@
-class_name CombatEventLogic extends Object
+class_name CombatEventLogic extends CombatLogic
 
-var combat: Combat
 var event: CombatEvent
 
 func setup(_combat: Combat, _event: CombatEvent):

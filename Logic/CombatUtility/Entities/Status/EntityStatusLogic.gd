@@ -1,6 +1,5 @@
-class_name EntityStatusLogic extends RefCounted
+class_name EntityStatusLogic extends CombatLogic
 
-var combat: Combat
 var entity: Entity
 var status: EntityStatus
 var type: EntityStatusType:

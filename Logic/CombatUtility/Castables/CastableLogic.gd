@@ -1,6 +1,5 @@
-class_name CastableLogic extends Object
+class_name CastableLogic extends CombatLogic
 
-var combat: Combat
 var target # Tile
 var targets: Array[Tile]
 var target_entities: Array[Entity]:
@@ -88,7 +87,4 @@ func _are_targets_castable(_targets: Array[Tile]) -> bool:
 	return true
 
 func _set_preview_visuals(show: bool, _target: Tile, clicked: bool = false) -> void:
-	pass
-
-func _on_combat_game_change() -> void:
 	pass
