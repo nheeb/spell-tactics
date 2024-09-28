@@ -136,16 +136,18 @@ func push_behind_other(callable_or_ticket: Variant, other: ActionTicket) -> void
 ## Internal Methods ##
 ######################
 
+## Mainly setting the origin_ticket and loaded flavor here
 func validate_new_ticket(action_ticket: ActionTicket):
+	assert(action_ticket.state == ActionTicket.State.Created \
+			and not action_ticket in _stack, \
+			"ActionStack: Trying to add invalid action ticket")
 	action_ticket.origin_ticket = get_active_ticket()
 	if loaded_flavor:
 		if action_ticket.flavor:
 			push_error("Ticket already has a flavor. It will be overwritten by the loaded one.")
 		action_ticket.flavor = loaded_flavor
 		loaded_flavor = null
-	assert(action_ticket.state == ActionTicket.State.Created \
-			 and not action_ticket in _stack, \
-			"ActionStack: Trying to add invalid action ticket")
+	
 
 func mark_stack_as_clear():
 	block_start_time = 0
@@ -164,6 +166,7 @@ func mark_stack_as_filled():
 		stack_is_filled = true
 		# stack_process() this is DANGER
 
+## Still no idea why this feature exists...
 func mark_stack_as_blocked():
 	if block_start_time == 0:
 		block_start_time = Time.get_ticks_msec()
@@ -232,11 +235,38 @@ func _start_discussion(base_value):
 	await wait()
 	return discussion.value
 
-## This method will be the target of TimedEffects created with ...
-func enter_discussion(target_flavor: ActionFlavor, call_ref: CallableReference,\
+## TE
+## This method will be the target of TimedEffects created with
+## TimedEffect.new_discussion_entry(flavor, callable)
+func _enter_discussion(target_flavor: ActionFlavor, call_ref: CallableReference,\
 					discussion: Discussion):
 	assert(active_ticket)
 	assert(active_ticket.flavor)
 	if target_flavor.fits_into(active_ticket.get_flavor(true), combat):
 		var callable := call_ref.get_callable(combat)
 		callable.call(discussion)
+
+################################
+## Global Combat State Change ##
+################################
+
+## Sometimes we want to cache values everytime the combat changes.
+## Especially when getting those values require big calculations or using Results.
+
+var loaded_combat_change := false
+var combat_was_changed := false
+signal combat_state_changed
+
+func _trigger_combat_state_changed():
+	combat_state_changed.emit()
+	await wait()
+	combat_was_changed = false
+
+func mark_combat_changed():
+	pass
+
+func force_combat_state_change_update():
+	pass
+
+func load_combat_state_change():
+	pass

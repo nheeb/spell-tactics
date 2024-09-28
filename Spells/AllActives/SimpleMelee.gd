@@ -1,5 +1,10 @@
 class_name SimpleMelee extends ActiveLogic
 
+var damage: int
+
+func _update_current_state():
+	pass
+
 ## Here should be the effect
 func casting_effect() -> void:
 	assert(target is Tile, "Melee expecting Tile as target")
@@ -7,7 +12,6 @@ func casting_effect() -> void:
 	var enemies = target.get_enemies()
 	assert(len(enemies) >= 1, "Melee expects min 1 enemy on tile")
 	var enemy: EnemyEntity = enemies[0]
-	var damage := 1
 	
 	var flavor := ActionFlavor.new() \
 		.add_action(ActionFlavor.Action.Damage) \

@@ -19,4 +19,3 @@ func execute(combat: Combat) -> void:
 
 func on_fail(combat: Combat) -> void:
 	pass
-

@@ -39,3 +39,7 @@ func casting_effect() -> void:
 ## Set special preview visuals when a target is hovered / selected
 #func _set_preview_visuals(show: bool, _target: Tile, active: bool) -> void:
 	#pass
+
+## Use this to calculate values that depend on the current game state
+#func _update_current_state() -> void:
+	#pass

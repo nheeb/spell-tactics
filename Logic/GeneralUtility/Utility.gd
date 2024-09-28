@@ -270,7 +270,28 @@ func quadratic_bezier_3D(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vec
 func disconnect_all_connections(s: Signal):
 	for c in s.get_connections():
 		s.disconnect(c["callable"])
-	
+
+## Returns the first substring between left and right
+func string_beween(s: String, left: String, right: String) -> String:
+	if left not in s or right not in s: return ""
+	return s.split(left)[1].split(right)[0]
+
+## Returns the method names of methods actually written / typed in the script.
+## So no methods from the base class except overwritten ones.
+func script_get_actual_method_names(script: Script) -> Array[String]:
+	var a: Array[String] = []
+	a.append_array(Array(script.source_code.split("\n")).filter(
+		func (x: String): return x.strip_edges().begins_with("func ")
+	).map(
+		func (x: String): return string_beween(x.strip_edges(), "func ", "(")
+	).filter(
+		func (x: String): return not x.is_empty()
+	))
+	return a
+
+func script_has_actual_method(script: Script, method: String) -> bool:
+	return method in script_get_actual_method_names(script)
+
 ## Creates a signal without needing to bind it to an instance. This means the signal can be assigned to a static var and accessed globally. `cls` should be a global class identifier. 
 ##
 ## Taken from https://stackoverflow.com/questions/77026156/how-to-write-a-static-event-emitter-in-gdscript

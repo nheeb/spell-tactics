@@ -3,6 +3,19 @@ class_name CastableLogic extends Object
 var combat: Combat
 var target # Tile
 var targets: Array[Tile]
+var target_entities: Array[Entity]:
+	get:
+		if target is Tile:
+			return target.entities
+		return []
+var target_enemies: Array[EnemyEntity]:
+	get:
+		if target is Tile:
+			return target.get_enemies()
+		return []
+var target_enemy: EnemyEntity:
+	get:
+		return Utility.array_safe_get(target_enemies, 0)
 
 func is_selectable() -> bool:
 	return _is_selectable()
@@ -13,13 +26,13 @@ func is_castable() -> bool:
 var cast_success := true
 
 func try_cast() -> void:
-	update_targets()
+	update_selected_target_references()
 	cast_success = true
 	before_cast()
-	casting_effect()
+	await casting_effect()
 	after_cast()
 
-func update_targets():
+func update_selected_target_references():
 	targets = get_castable().targets
 	if not targets.is_empty():
 		target = targets[0]
@@ -75,4 +88,7 @@ func _are_targets_castable(_targets: Array[Tile]) -> bool:
 	return true
 
 func _set_preview_visuals(show: bool, _target: Tile, clicked: bool = false) -> void:
+	pass
+
+func _on_combat_game_change() -> void:
 	pass

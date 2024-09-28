@@ -11,6 +11,8 @@ func _init(_type: SpellType, _combat : Combat = null) -> void:
 	combat = _combat
 	if combat != null:
 		logic = type.logic.new(self)
+		TimedEffect.new_combat_state_change(logic._on_combat_game_change)\
+			.force_freshness().register(combat)
 
 func get_copy_for_combat(_combat: Combat) -> Spell:
 	var spell := Spell.new(type, _combat)
