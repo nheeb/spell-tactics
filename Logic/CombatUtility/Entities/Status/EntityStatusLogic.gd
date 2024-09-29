@@ -9,7 +9,8 @@ var data: Dictionary:
 	get:
 		return status.data
 	set (x):
-		push_error("Do not set this. Just change the elements instead.")
+		status.data = x
+		push_warning("Do not set this. Just change the elements instead.")
 
 ############################
 ## Methods for overriding ##

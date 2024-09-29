@@ -26,9 +26,11 @@ func connect_effect(te: TimedEffect) -> void:
 func get_effects(effect_owner: Object, id := "") -> Array[TimedEffect]:
 	var _effects : Array[TimedEffect] = []
 	for te in effects:
-		if id == "":
-			if te.get_owner() == effect_owner and (id == "" or id == te.get_id()):
-				_effects.append(te)
+		if te == null:
+			push_warning("How did a null value get into the t_effects?")
+			continue
+		if te.get_owner() == effect_owner and (id == "" or id == te.get_id()):
+			_effects.append(te)
 	return _effects
 
 ## To be clean use TimedEffect.register(combat) instead

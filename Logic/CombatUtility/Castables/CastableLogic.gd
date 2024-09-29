@@ -1,6 +1,9 @@
 class_name CastableLogic extends CombatLogic
 
 var target # Tile
+var target_tile: Tile:
+	get:
+		return target as Tile
 var targets: Array[Tile]
 var target_entities: Array[Entity]:
 	get:

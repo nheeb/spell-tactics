@@ -40,6 +40,7 @@ var _remove_me := false:
 			_removing_stack_strace = get_stack()
 var _removing_stack_strace
 var _result: Variant
+var is_result := false
 var was_removed := false
 ## Other Ticket that caused the creation of this ticket.
 var origin_ticket : ActionTicket
@@ -124,6 +125,7 @@ func is_blocked() -> bool:
 	return state == State.Blocked
 
 func get_result() -> ActionTicketResult:
+	is_result = true
 	return ActionTicketResult.new(has_result)
 
 func remove():
@@ -137,7 +139,15 @@ func remove():
 	was_removed = true
 
 func _to_string() -> String:
-	return "<AT:%s.%s>" % [object, method_name]
+	@warning_ignore("shadowed_global_identifier")
+	var char := "A"
+	if flavor:
+		char = "F"
+	if is_result:
+		char = "R"
+	if flavor and is_result:
+		char = "D"
+	return "%s: %s.%s" % [char, object.get_script().get_global_name(), method_name]
 
 ## If deep = true it returns the origin's flavor of the ticket itself has none.
 func get_flavor(deep := false) -> ActionFlavor:

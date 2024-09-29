@@ -38,9 +38,9 @@ func setup(_entity: Entity):
 	logic.status = self
 	# Execute Setup
 	if not is_logic_setup_done:
-		logic._setup_logic()
+		setup_logic()
 		is_logic_setup_done = true
-	logic._setup_visually()
+	setup_visually()
 
 func get_status_name() -> String:
 	return type.internal_name

@@ -4,9 +4,10 @@ extends EntityStatusLogic
 ## This will only be called when the status effect is applied, not when it is loaded
 func _setup_logic() -> void:
 	TimedEffect.new_end_phase_trigger_from_callable(poison_damage).register(combat)
-	data["planed_damage"] = range(data.get("_lifetime", 0)).map(
+	data["planned_damage"] = range(data.get("_lifetime", 0)).map(
 		func (x): return data.get("damage", 0)
 	)
+	pass
 
 ## How does the status change, when another instance of the same effect get applied
 func _extend(other_status: EntityStatus) -> void:

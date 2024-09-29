@@ -15,7 +15,7 @@ func process_phase() -> void:
 	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.agility > b.agility)
 	
 	for enemy in combat.enemies:
-		combat.action_stack.push_back(
+		combat.action_stack.push_before_active(
 			ActionTicket.new(do_enemy_action.bind(enemy))
 		)
 	await combat.action_stack.wait()

@@ -1,9 +1,6 @@
 class_name SimpleMelee extends ActiveLogic
 
-var damage: int
-
-func _update_current_state():
-	pass
+const BASE_DMG = 1
 
 ## Here should be the effect
 func casting_effect() -> void:
@@ -18,10 +15,8 @@ func casting_effect() -> void:
 		.add_action(ActionFlavor.Action.Melee) \
 		.set_owner(combat.player) \
 		.add_target(enemy)
-	var actual_damage_result := combat.action_stack.start_discussion(damage, flavor)
-	await combat.action_stack.wait()
-	damage = actual_damage_result.value
+	var damage: int = await combat.action_stack.get_discussion_result(BASE_DMG, flavor)
 
-	enemy.inflict_damage(damage)
-	combat.animation.update_hp(enemy)
-	combat.animation.say(combat.player.current_tile, "ATTACK!", {"color": Color.CORAL, "font": "bold"})
+	enemy.inflict_damage_with_visuals(damage)
+	combat.animation.say(combat.player.current_tile, "ATTACK!", \
+		{"color": Color.CORAL, "font": "bold"})

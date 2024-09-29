@@ -3,6 +3,12 @@ class_name ActionStackUtility extends CombatUtility
 const FRAME_ACTION_MAX_MSECS = 10
 
 var _stack : Array[ActionTicket]
+var stack_string: PackedStringArray:
+	get:
+		return PackedStringArray(Array(_stack).map(
+			func (at: ActionTicket):
+				return at._to_string()
+		))
 var active_ticket: ActionTicket
 var stack_is_filled := false
 var consecutive_action_frames := 0
@@ -57,6 +63,15 @@ func process_callable(callable: Callable) -> Signal:
 func process_player_action(pa: PlayerAction, forced := false) -> Signal:
 	return process_ticket(combat.input.player_action_ticket(pa, forced))
 
+## Returns the result of a callable as action stack coroutine.
+## Use it with await:
+## var x = await combat.action_stack.get_result(uwu) 
+func get_result(callable: Callable) -> Variant:
+	assert(active_ticket, "This can only be used during an active ticket.")
+	var result := process_result(callable)
+	await wait()
+	return result.result
+
 ## Returns a result Object and adds the according ticket to the stack.
 func process_result(callable: Callable) -> ActionTicket.ActionTicketResult:
 	var action_ticket := ActionTicket.new(callable)
@@ -73,9 +88,18 @@ func start_discussion(base_value, flavor) -> ActionTicket.ActionTicketResult:
 		preset_flavor(flavor)
 	return process_result(_start_discussion.bind(base_value))
 
+## Returns the result of a value discussion (see start_discussion())
+func get_discussion_result(base_value, flavor) -> Variant:
+	assert(active_ticket, "This can only be used during an active ticket.")
+	var result := start_discussion(base_value, flavor)
+	await wait()
+	return result.result
+
 ## For easy adding flavors to actions: 
 ## (Only) The next action added to the stack will get this flavor.
 func preset_flavor(flavor: ActionFlavor):
+	if flavor == null:
+		push_warning("Pre setting null as flavor.")
 	if _preset_flavor != null:
 		push_error("There already is a loaded flavor. That should not be.")
 	_preset_flavor = flavor
@@ -248,7 +272,7 @@ func _start_discussion(base_value):
 func _enter_discussion(target_flavor: ActionFlavor, call_ref: CallableReference,\
 					discussion: Discussion):
 	assert(active_ticket)
-	assert(active_ticket.flavor)
+	assert(active_ticket.get_flavor(true))
 	if target_flavor.fits_into(active_ticket.get_flavor(true), combat):
 		var callable := call_ref.get_callable(combat)
 		callable.call(discussion)
