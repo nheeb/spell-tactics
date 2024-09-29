@@ -1,4 +1,3 @@
-
 ## Resource representing the state that should be saved for an Entity for (de-)serialization
 class_name EntityState extends Resource
 
@@ -11,7 +10,7 @@ class_name EntityState extends Resource
 
 ## the current tile will be set from outside, as the Tile deserialize will call this.
 func deserialize(combat: Combat = null, tile : Tile = null) -> Entity:
-	var entity = type.create_entity(combat, false)
+	var entity: Entity = type.create_entity(combat, false) as Entity
 	
 	tile.add_entity(entity)
 	

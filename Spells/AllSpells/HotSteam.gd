@@ -32,4 +32,4 @@ func casting_effect() -> void:
 		for enemy in tile.get_enemies():
 			enemy = enemy as EnemyEntity
 			enemy.inflict_damage_with_visuals(1)
-			enemy.apply_status_effect(WetEffect.new())
+			enemy.apply_status(Preloaded.STATUS_WET)

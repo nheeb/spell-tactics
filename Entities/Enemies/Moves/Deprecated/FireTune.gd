@@ -18,6 +18,7 @@ func execute() -> void:
 	combat.animation.camera_reach(target.visual_entity)
 	combat.animation.effect(VFX.BILLBOARD_PROJECTILE, enemy.visual_entity, \
 		 {"texture_name": "notes", "target": target.visual_entity}).set_flag_extend()
-	target.apply_status_effect(RageEffect.new())
+	#target.apply_status_effect(RageEffect.new())
+	target.apply_status(Preloaded.STATUS_RAGE)
 	combat.animation.effect(VFX.HEX_RINGS, target.visual_entity, {"color": Color.HOT_PINK}).set_flag_extend()
 	

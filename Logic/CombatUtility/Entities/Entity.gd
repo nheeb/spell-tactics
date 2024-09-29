@@ -1,4 +1,4 @@
-class_name Entity
+class_name Entity extends RefCounted
 ## Base Class for every Object on the Tile-Grid-Level like the player, enemies or environment.
 
 
@@ -21,6 +21,7 @@ var energy: EnergyStack
 var custom_props := {}
 ## DEPRECATED old status effects
 var status_effects: Array[StatusEffect] = []
+## list of EntityStatus
 var status_array: Array[EntityStatus] = []
 
 signal entering_graveyard # Before the graveyard
@@ -38,7 +39,6 @@ static func serialize_this_prop(name: String) -> bool:
 	return true
 
 func serialize() -> EntityState:
-	#print("-- Serializing %s --" % type.internal_name)
 	var state: EntityState = EntityState.new()
 	state.type = type
 	
@@ -140,9 +140,9 @@ func sync_with_type() -> void:
 func on_hover_long(h: bool) -> void:
 	pass
 
-##########################################
-## DEPRECATED Methods for StatusEffects ##
-##########################################
+#####################################################
+## DEPRECATED Methods for StatusEffects DEPRECATED ##
+#####################################################
 
 func apply_status_effect(effect: StatusEffect) -> void:
 	push_error("Using DEPRECATED StatusEffect")
@@ -175,7 +175,14 @@ func remove_status_effect(status_name: String) -> void:
 
 ## Add a status to the status_array. If a status with the same name / type is
 ## already in there, it gets extended instead.
-func apply_status(status: EntityStatus) -> void:
+func apply_status(status_or_type: Variant, additional_data := {}) -> void:
+	var status: EntityStatus
+	if status_or_type is EntityStatus:
+		status = status_or_type
+		status.data.merge(additional_data, true)
+	else:
+		assert(status_or_type is EntityStatusType)
+		status = EntityStatus.new(status_or_type, additional_data)
 	var existing_status := get_status(status.get_status_name())
 	if DebugInfo.ACTIVE:
 		combat.animation.say(visual_entity, status.type.pretty_name).set_duration(0.0)

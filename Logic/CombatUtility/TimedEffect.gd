@@ -89,7 +89,7 @@ func register(combat: Combat) -> void:
 		return
 	if solo:
 		var others := combat.t_effects.get_effects(get_owner(), get_id())
-		if others.any(func (te: TimedEffect): return te.solo):
+		if others.any(func (te: TimedEffect): return te.solo and not te.dead):
 			return
 		for te in others:
 			te.kill()

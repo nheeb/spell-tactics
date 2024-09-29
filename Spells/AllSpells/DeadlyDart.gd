@@ -27,4 +27,5 @@ func casting_effect() -> void:
 		if enemy.get_status_effect("poison"):
 			enemy.inflict_damage_with_visuals(99)
 		else:
-			enemy.apply_status_effect(PoisonEffect.new(3))
+			#enemy.apply_status_effect(PoisonEffect.new(3))
+			enemy.apply_status(Preloaded.STATUS_POISON)
