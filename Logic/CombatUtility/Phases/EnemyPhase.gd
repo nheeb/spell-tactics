@@ -18,7 +18,7 @@ func process_phase() -> void:
 		combat.action_stack.push_back(
 			ActionTicket.new(do_enemy_action.bind(enemy))
 		)
-	await combat.action_stack.clear
+	await combat.action_stack.wait()
 
 func do_enemy_action(enemy: EnemyEntity):
 	combat.animation.camera_reach(enemy.visual_entity)

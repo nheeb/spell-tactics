@@ -24,7 +24,7 @@ func casting_effect() -> void:
 	for enemy in target.get_enemies():
 		enemy = enemy as EnemyEntity
 		combat.animation.effect(VFX.BILLBOARD_PROJECTILE, combat.player.visual_entity, {"texture_name": spell.type.internal_name, "target": enemy.visual_entity})
-		if enemy.get_status_effect("poison"):
+		if enemy.get_status("Poison"):
 			enemy.inflict_damage_with_visuals(99)
 		else:
 			#enemy.apply_status_effect(PoisonEffect.new(3))

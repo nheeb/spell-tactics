@@ -15,6 +15,7 @@ func _init(_origin_reference: UniversalReference = null, _method_name: String = 
 ## Is called by resolve(combat)
 func connect_reference(combat: Combat) -> void:
 	var origin_node = origin_reference.resolve(combat)
+	assert(origin_node)
 	obj = origin_node.callv(method_name, params)
 
 ## Is being called by resolve and should never be called from outside.

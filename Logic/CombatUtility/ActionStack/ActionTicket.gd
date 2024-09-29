@@ -21,7 +21,7 @@ var method_name: StringName:
 ## Object describing the action. Used to hook something onto that action.
 ## To be clean use action_stack.load_flavor() to set and get_flavor() to get.
 var flavor: ActionFlavor
-var state := State.Created
+var state : State = State.Created
 ## Stack trace of the ticket creation for debugging.
 var stack_trace: Array
 var stack_trace_string: String:
@@ -33,7 +33,12 @@ var stack_trace_string: String:
 					s += "%s:%s|" % [k, d[k]]
 				s += "\n"
 		return s 
-var _remove_me := false
+var _remove_me := false:
+	set(x):
+		_remove_me = x
+		if x and DebugInfo.ACTIVE:
+			_removing_stack_strace = get_stack()
+var _removing_stack_strace
 var _result: Variant
 var was_removed := false
 ## Other Ticket that caused the creation of this ticket.

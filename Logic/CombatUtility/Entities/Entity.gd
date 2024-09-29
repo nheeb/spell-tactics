@@ -200,13 +200,13 @@ func get_status(status_name_or_type: Variant) -> EntityStatus:
 	else:
 		status_name = str(status_name_or_type)
 	for status in status_array:
-		if status.get_status_name() == status_name:
+		if status.get_status_name().to_lower() == status_name.to_lower():
 			return status
 	return null
 
 ## Removes a status from the entity. To be clean use EntityStaus.remove() instead.
 func remove_status(status_name_or_type: Variant) -> void:
-	var status := get_status_effect(status_name_or_type)
+	var status := get_status(status_name_or_type)
 	if status:
 		status.on_remove()
 		status_array.erase(status)

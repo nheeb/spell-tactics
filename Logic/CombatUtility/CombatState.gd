@@ -56,6 +56,7 @@ func deserialize() -> Combat:
 	combat.global_enemy_actions = global_enemy_actions
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
+	combat.deserialized.emit()
 	combat.log.add("Combat was deserialized.")
 	return combat
 

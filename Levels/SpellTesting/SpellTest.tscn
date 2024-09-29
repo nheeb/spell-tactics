@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b1eod0pbyip4b"]
 
 [ext_resource type="Script" path="res://Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
-[ext_resource type="Script" path="res://Logic/LevelEditor/GridLevelEditor.gd" id="1_wcyqb"]
+[ext_resource type="Script" path="res://Logic/LevelEditor/LevelEditor.gd" id="1_wcyqb"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="2_rjkex"]
 [ext_resource type="Resource" uid="uid://c38oh270u86ke" path="res://Spells/AllSpells/Teleport.tres" id="3_fvp7d"]
 [ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Spells/AllSpells/WaterBlast.tres" id="4_6sho4"]
@@ -25,5 +25,3 @@ test_spell_5 = ExtResource("6_5ajo0")
 
 [node name="Editor" type="Node" parent="."]
 script = ExtResource("1_wcyqb")
-level_name = "spell_test"
-grid_size = 4
