@@ -40,6 +40,7 @@ var was_removed := false
 var origin_ticket : ActionTicket
 ## TBD not implemented yet. Entries that are created during the ticket. Do we need that?
 var log_entries : Array[LogEntry]
+var changes_combat := false
 
 signal _go
 signal removed
@@ -50,6 +51,8 @@ signal has_result(result: Variant)
 class ActionTicketResult extends RefCounted:
 	signal resolved
 	var value: Variant = null
+	var result: Variant: 
+		get: return value
 	func set_value(v: Variant):
 		value = v
 		resolved.emit()

@@ -74,9 +74,9 @@ static func new_discussion_entry(flavor: ActionFlavor, callable: Callable) \
 		.set_params([flavor, CallableReference.from_callable(callable)]) \
 		.set_flag(Flags.AppendSignalParamsToCall).set_owner(callable.get_object())
 
-static func new_combat_state_change(callable: Callable) -> TimedEffect:
+static func new_combat_change(callable: Callable) -> TimedEffect:
 	var action_stack_ref = CombatNodeReference.new("Utility/ActionStackUtility")
-	return TimedEffect.new(action_stack_ref, "combat_state_changed")._set_callable(callable)
+	return TimedEffect.new(action_stack_ref, "combat_changed")._set_callable(callable)
 
 #######################
 ## Methods for usage ##
@@ -172,7 +172,8 @@ func replace_last_callable(callable: Callable, params := []) -> TimedEffect:
 func kill() -> void:
 	dead = true
 
-## Kaufland Freshboy, Freshboy Kaufland, skrr skrr swag
+## Kaufland Freshboy, Freshboy Kaufland, Obst und Gemüse so fresh & so drippy
+## TE gets broken if the callable isn't (over)written in the object's direct script.
 func force_freshness() -> TimedEffect:
 	assert(call_obj, "TE must be created with _set_callable() for this.")
 	assert(call_method, "TE must be created with _set_callable() for this.")
@@ -238,6 +239,9 @@ func set_death_callback(replace: bool, ref: UniversalReference, method: String, 
 	return self
 
 func _validate() -> bool:
+	if broken:
+		push_warning("Don't break registered TimedEffects. Kill them instead.")
+		return false
 	if not effect_connected:
 		push_error("Not connected TimedEffect tries to validate")
 		return false

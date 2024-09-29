@@ -9,7 +9,7 @@ var consecutive_action_frames := 0
 var consecutive_action_msecs := 0
 var consecutive_action_start := 0
 var block_start_time := 0
-var loaded_flavor: ActionFlavor
+var _preset_flavor: ActionFlavor
 
 signal clear
 
@@ -66,17 +66,19 @@ func process_result(callable: Callable) -> ActionTicket.ActionTicketResult:
 		push_front(action_ticket)
 	return action_ticket.get_result()
 
-func start_discussion(base_value, flavor = null) -> ActionTicket.ActionTicketResult:
+## With discussions you can easily have some TimedEffects decide whether they want
+## to influence the calculation of a value. Flavor decides if they get activated.
+func start_discussion(base_value, flavor) -> ActionTicket.ActionTicketResult:
 	if flavor and flavor is ActionFlavor:
-		load_flavor(flavor)
+		preset_flavor(flavor)
 	return process_result(_start_discussion.bind(base_value))
 
 ## For easy adding flavors to actions: 
 ## (Only) The next action added to the stack will get this flavor.
-func load_flavor(flavor: ActionFlavor):
-	if loaded_flavor != null:
+func preset_flavor(flavor: ActionFlavor):
+	if _preset_flavor != null:
 		push_error("There already is a loaded flavor. That should not be.")
-	loaded_flavor = flavor
+	_preset_flavor = flavor
 
 ####################################
 ## Methods for adding new Tickets ##
@@ -142,11 +144,14 @@ func validate_new_ticket(action_ticket: ActionTicket):
 			and not action_ticket in _stack, \
 			"ActionStack: Trying to add invalid action ticket")
 	action_ticket.origin_ticket = get_active_ticket()
-	if loaded_flavor:
+	if _preset_flavor:
 		if action_ticket.flavor:
 			push_error("Ticket already has a flavor. It will be overwritten by the loaded one.")
-		action_ticket.flavor = loaded_flavor
-		loaded_flavor = null
+		action_ticket.flavor = _preset_flavor
+		_preset_flavor = null
+	if _preset_combat_change:
+		action_ticket.changes_combat = true
+		_preset_combat_change = false
 	
 
 func mark_stack_as_clear():
@@ -215,6 +220,8 @@ func stack_process() -> void:
 			ticket.advance()
 			active_ticket = null
 		if ticket.can_be_removed():
+			if ticket.changes_combat:
+				push_behind_other(_trigger_combat_changed, ticket)
 			_stack.erase(ticket)
 			ticket.remove()
 	push_warning("ActionStack: Looped 1000 times this frame.")
@@ -253,20 +260,23 @@ func _enter_discussion(target_flavor: ActionFlavor, call_ref: CallableReference,
 ## Sometimes we want to cache values everytime the combat changes.
 ## Especially when getting those values require big calculations or using Results.
 
-var loaded_combat_change := false
-var combat_was_changed := false
-signal combat_state_changed
+var _preset_combat_change := false
+signal combat_changed
 
-func _trigger_combat_state_changed():
-	combat_state_changed.emit()
+## ACTION
+func _trigger_combat_changed():
+	combat_changed.emit()
 	await wait()
-	combat_was_changed = false
+	pass
 
 func mark_combat_changed():
-	pass
+	if active_ticket:
+		active_ticket.changes_combat = true
+	else:
+		force_combat_change_update()
 
-func force_combat_state_change_update():
-	pass
+func force_combat_change_update() -> Signal:
+	return process_callable(_trigger_combat_changed)
 
-func load_combat_state_change():
-	pass
+func preset_combat_change():
+	_preset_combat_change = true
