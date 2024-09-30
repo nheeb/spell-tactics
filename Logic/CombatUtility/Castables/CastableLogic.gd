@@ -68,6 +68,7 @@ func get_castable() -> Castable:
 ## For overriding in each Castable ##
 #####################################
 
+## ACTION
 func casting_effect():
 	pass
 
@@ -89,5 +90,6 @@ func _are_targets_full(_targets: Array[Tile]) -> bool:
 func _are_targets_castable(_targets: Array[Tile]) -> bool:
 	return true
 
-func _set_preview_visuals(show: bool, _target: Tile, clicked: bool = false) -> void:
+## SUBACTION
+func _set_preview_visuals(show: bool, _target: Tile = null, clicked: bool = false) -> void:
 	pass

@@ -15,7 +15,7 @@ func execute(combat: Combat) -> void:
 	actions.append(PABlockInput.new(false))
 	
 	for action in actions:
-		combat.action_stack.process_player_action(action)
+		await combat.action_stack.process_player_action(action, true)
 
 func on_fail(combat: Combat) -> void:
 	pass

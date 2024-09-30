@@ -9,6 +9,7 @@ var input_blocked := false
 func player_action_ticket(action: PlayerAction, force_action := false) -> ActionTicket:
 	return ActionTicket.new(process_action.bind(action, force_action))
 
+## ACTION
 ## Checks whether an action is valid and executes it.
 func process_action(action: PlayerAction, force_action := false) -> void:
 	if not (is_taking_actions() or force_action):
@@ -17,7 +18,8 @@ func process_action(action: PlayerAction, force_action := false) -> void:
 	action.log_me(combat, valid)
 	if valid:
 		await action.execute(combat)
-		combat.animation.play_animation_queue()
+		# deacted anim queue because action stack takes care of that
+		# combat.animation.play_animation_queue()
 		update_ui()
 		action.executed.emit()
 		action_executed.emit(action)

@@ -45,6 +45,8 @@ func transition_to_fill(fill: int):
 func _ready() -> void:
 	await get_tree().process_frame
 	set_fill(0)
+	%InactiveMesh.visible = false
+	%ActiveMesh.visible = false
 
 func _on_area_2d_mouse_entered() -> void:
 	if current_event:

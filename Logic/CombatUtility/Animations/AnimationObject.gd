@@ -58,6 +58,11 @@ func set_duration(d: float) -> AnimationObject:
 	set_max_duration(d)
 	return self
 
+var _add_ticket_to_parameter := false
+func add_ticket_to_parameter() -> AnimationCallable:
+	_add_ticket_to_parameter = true
+	return self
+
 func _play(level: Level) -> void:
 	#if animation_done_internally.is_connected(internal_animation_done):
 		#print("ERROR")

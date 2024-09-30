@@ -147,6 +147,9 @@ func _to_string() -> String:
 		char = "R"
 	if flavor and is_result:
 		char = "D"
+	if callable.get_bound_arguments():
+		if callable.get_bound_arguments()[0] is PlayerAction:
+			return callable.get_bound_arguments()[0]._to_string()
 	return "%s: %s.%s" % [char, object.get_script().get_global_name(), method_name]
 
 ## If deep = true it returns the origin's flavor of the ticket itself has none.

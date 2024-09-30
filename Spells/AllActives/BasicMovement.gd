@@ -1,6 +1,11 @@
 extends ActiveLogic
 
-## Here should be the effect
+var movement_range: int = 3
+
+func _on_combat_change():
+	var flavor := ActionFlavor.new().add_action(ActionFlavor.Action.Movement).set_owner(combat.player)
+	movement_range = await combat.action_stack.get_discussion_result(3, flavor)
+
 func casting_effect() -> void:
 	combat.log.add("Move Player to (%d, %d)" % [target.r, target.q])
 	var path := combat.level.get_shortest_path(combat.player.current_tile, target)
@@ -22,16 +27,16 @@ func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
 		return false
 	var path = combat.level.get_shortest_path(combat.player.current_tile, _target)
 	var length = len(path)
-	return length > 0 and length <= combat.player.traits.movement_range
+	return length > 0 and length <= movement_range
 
 ## Set special preview visuals when a target is hovered / selected
-func _set_preview_visuals(show: bool, tile: Tile, clicked: bool = false) -> void:
+func _set_preview_visuals(show: bool, _target: Tile = null, clicked: bool = false) -> void:
 	if show:
-		var path = combat.level.get_shortest_path(combat.player.current_tile, tile)
+		var path = combat.level.get_shortest_path(combat.player.current_tile, _target)
 		var length = len(path)
 		# check if hovered tile is in movement range, in that case show the movement arrow and
 		# highlight the spells, that could be casted from there
-		if length > 0 and length <= combat.player.traits.movement_range and not combat.animation.is_playing():
+		if length > 0 and length <= movement_range and not combat.animation.is_playing():
 			var positions : Array[Vector3] = [combat.player.current_tile.global_position]
 			for t in path:
 				positions.append(t.global_position)

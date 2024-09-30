@@ -37,4 +37,3 @@ func execute_animtaion(combat: Combat, ticket: WaitTicket) -> void:
 
 func on_fail(combat: Combat) -> void:
 	pass
-

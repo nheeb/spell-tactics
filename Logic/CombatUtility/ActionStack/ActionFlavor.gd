@@ -8,6 +8,7 @@ enum Action {
 	Cast,
 	PA,
 	Melee,
+	Movement,
 }
 
 ## Ideally the source of the action

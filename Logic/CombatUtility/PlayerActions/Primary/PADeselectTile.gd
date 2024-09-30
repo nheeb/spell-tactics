@@ -17,5 +17,4 @@ func execute(combat: Combat) -> void:
 
 func on_fail(combat: Combat) -> void:
 	if combat.input.current_castable:
-		combat.action_stack.process_player_action(PADeselectCastable.new())
-
+		await combat.action_stack.process_player_action(PADeselectCastable.new())

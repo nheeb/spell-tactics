@@ -11,11 +11,6 @@ var method: StringName:
 func _init(_callable: Callable):
 	callable = _callable
 
-var _add_ticket_to_parameter := false
-func add_ticket_to_parameter() -> AnimationCallable:
-	_add_ticket_to_parameter = true
-	return self
-
 func play(level: Level) -> void:
 	var reference := callable.get_object()
 	if is_instance_valid(reference):

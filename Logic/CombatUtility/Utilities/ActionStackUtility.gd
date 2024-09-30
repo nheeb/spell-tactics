@@ -43,12 +43,14 @@ func is_running() -> bool:
 ## Returns a signal which is emitted when the ticket is being removed
 ## (either finished or aborted).
 ## If called while the stack is running, it returns active_ticket.wait()
-func process_ticket(action_ticket: ActionTicket) -> Signal:
+func process_ticket(action_ticket: ActionTicket, warn_if_not_running := true) -> Signal:
 	if is_running():
 		push_before_active(action_ticket)
 		return active_ticket.wait()
 	else:
 		push_back(action_ticket)
+		if warn_if_not_running:
+			push_warning("Used process_ticket with no active ticket. Something might be wrong.")
 		return action_ticket.removed
 
 ## Turns the Callable into a ActionTicket and adds the ticket to the stack.
@@ -61,7 +63,7 @@ func process_callable(callable: Callable) -> Signal:
 ## Returns a signal which is emitted when the ticket is being removed
 ## (either finished or aborted).
 func process_player_action(pa: PlayerAction, forced := false) -> Signal:
-	return process_ticket(combat.input.player_action_ticket(pa, forced))
+	return process_ticket(combat.input.player_action_ticket(pa, forced), false)
 
 ## Returns the result of a callable as action stack coroutine.
 ## Use it with await:
