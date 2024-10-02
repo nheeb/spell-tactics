@@ -22,17 +22,6 @@ var method_name: StringName:
 ## To be clean use action_stack.load_flavor() to set and get_flavor() to get.
 var flavor: ActionFlavor
 var state : State = State.Created
-## Stack trace of the ticket creation for debugging.
-var stack_trace: Array
-var stack_trace_string: String:
-	get:
-		var s := ""
-		for d in stack_trace:
-			if d is Dictionary:
-				for k in d.keys():
-					s += "%s:%s|" % [k, d[k]]
-				s += "\n"
-		return s 
 var _remove_me := false:
 	set(x):
 		_remove_me = x
@@ -47,6 +36,20 @@ var origin_ticket : ActionTicket
 ## TBD not implemented yet. Entries that are created during the ticket. Do we need that?
 var log_entries : Array[LogEntry]
 var changes_combat := false
+
+var stack_trace: Array[Dictionary]
+var stack_trace_lines: PackedStringArray
+var print_stack_trace_lines: bool:
+	set(x):
+		for line in stack_trace_lines:
+			print(line)
+func _build_stack_trace() -> void:
+	if not DebugInfo.ACTIVE:
+		return
+	stack_trace = get_stack()
+	stack_trace_lines = Utility.get_stack_trace_lines(stack_trace, [
+		"_build_stack_trace", "_init", "ActionStackUtility"
+	])
 
 signal _go
 signal removed
@@ -68,7 +71,7 @@ class ActionTicketResult extends RefCounted:
 func _init(_callable: Callable, _flavor = null) -> void:
 	callable = _callable
 	flavor = _flavor
-	stack_trace = get_stack()
+	_build_stack_trace()
 
 func advance():
 	match state:

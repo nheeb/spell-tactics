@@ -5,6 +5,7 @@ var wait_time : float
 ## Time to wait
 func _init(time) -> void:
 	wait_time = time
+	_build_stack_trace()
 
 func play(level: Level):
 	await VisualTime.new_timer(wait_time).timeout

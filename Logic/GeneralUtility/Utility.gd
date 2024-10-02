@@ -292,6 +292,29 @@ func script_get_actual_method_names(script: Script) -> Array[String]:
 func script_has_actual_method(script: Script, method: String) -> bool:
 	return method in script_get_actual_method_names(script)
 
+## Turns a stack trace object into readable lines.
+## stack_trace is an Array with dicts having function, line and source
+func get_stack_trace_lines(stack_trace: Array[Dictionary], exclude_front_elements: Array[String], \
+		add_script_line := true) -> PackedStringArray:
+			var result := PackedStringArray([])
+			for stack_element in stack_trace:
+				var source: String = stack_element["source"].split("/")[-1]
+				var line: int = stack_element["line"]
+				var function: String = stack_element["function"]
+				var string := "%18s [%d] -> %s:" % [source, line, function]
+				if result.is_empty():
+					if exclude_front_elements.any(func(x): return x in string):
+						continue
+				result.append(string)
+				if add_script_line:
+					var script: GDScript = load(stack_element["source"])
+					var script_lines := script.source_code.split("\n")
+					var script_line := script_lines[line-1].strip_edges()
+					result.append("\t" + script_line)
+				result.append("")
+			return result
+
+
 ## Creates a signal without needing to bind it to an instance. This means the signal can be assigned to a static var and accessed globally. `cls` should be a global class identifier. 
 ##
 ## Taken from https://stackoverflow.com/questions/77026156/how-to-write-a-static-event-emitter-in-gdscript
@@ -299,7 +322,9 @@ static func create_static_signal(cls: Object, signal_name: StringName) -> Signal
 	if not cls.has_user_signal(signal_name):
 		cls.add_user_signal(signal_name)
 	return Signal(cls, signal_name)
-	
+
+
+
 
 
 #static func get_exported_properties(node: Node) -> Array:

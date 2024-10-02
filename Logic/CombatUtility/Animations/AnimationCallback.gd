@@ -10,8 +10,7 @@ func _init(_reference: Object, _command: String, _parameters := []):
 	reference = _reference
 	command = _command
 	parameters = _parameters
-	if OS.is_debug_build():
-		stacktrace = get_stack()
+	_build_stack_trace()
 
 func play(level: Level) -> void:
 	if is_instance_valid(reference):

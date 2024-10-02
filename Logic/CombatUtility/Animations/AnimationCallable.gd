@@ -10,6 +10,7 @@ var method: StringName:
 
 func _init(_callable: Callable):
 	callable = _callable
+	_build_stack_trace()
 
 func play(level: Level) -> void:
 	var reference := callable.get_object()

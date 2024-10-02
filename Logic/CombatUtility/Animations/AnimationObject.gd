@@ -94,3 +94,17 @@ func internal_animation_done() -> void:
 
 func _to_string() -> String:
 	return "Anim: Abstract Animation Object"
+
+var stack_trace: Array[Dictionary]
+var stack_trace_lines: PackedStringArray
+var print_stack_trace_lines: bool:
+	set(x):
+		for line in stack_trace_lines:
+			print(line)
+func _build_stack_trace() -> void:
+	if not DebugInfo.ACTIVE:
+		return
+	stack_trace = get_stack()
+	stack_trace_lines = Utility.get_stack_trace_lines(stack_trace, [
+		"_build_stack_trace", "_init", "AnimationUtility"
+	])

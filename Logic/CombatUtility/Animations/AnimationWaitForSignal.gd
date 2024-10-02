@@ -7,6 +7,7 @@ var signal_name : String
 func _init(_obj: Object, _signal_name: String) -> void:
 	obj = _obj
 	signal_name = _signal_name
+	_build_stack_trace()
 
 func play(level: Level):
 	if obj:

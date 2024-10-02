@@ -8,6 +8,7 @@ func _init(_reference: Object, _property: String, _value):
 	reference = _reference
 	property = _property
 	value = _value
+	_build_stack_trace()
 
 func play(level: Level) -> void:
 	if is_instance_valid(reference):
@@ -16,4 +17,3 @@ func play(level: Level) -> void:
 
 func _to_string() -> String:
 	return "Anim: Setting %s.%s = %s" % [reference, property, value]
-
