@@ -118,16 +118,16 @@ func try_to_activate_enemy_event():
 
 func connect_enemy_meter_to_event(event: EnemyEvent) -> AnimationObject:
 	enemy_meter_max = event.enemy_event_type().enemy_meter_costs
-	return combat.animation.callback(combat.ui, "set_enemy_meter_event", [event])
+	return combat.animation.call_method(combat.ui, "set_enemy_meter_event", [event])
 
-func set_enemy_meter(value: int) -> AnimationCallback:
+func set_enemy_meter(value: int) -> AnimationCallable:
 	enemy_meter = clamp(value, 0, enemy_meter_max)
-	return combat.animation.callback(combat.ui, "set_enemy_meter", [enemy_meter])
+	return combat.animation.call_method(combat.ui, "set_enemy_meter", [enemy_meter])
 
 func set_enemy_meter_max(value: int) -> AnimationObject:
-	return combat.animation.callback(combat.ui, "set_enemy_meter_max", [value])
+	return combat.animation.call_method(combat.ui, "set_enemy_meter_max", [value])
 
-func add_to_enemy_meter(value := ENEMY_METER_GAIN_DEFAULT) -> AnimationCallback:
+func add_to_enemy_meter(value := ENEMY_METER_GAIN_DEFAULT) -> AnimationCallable:
 	if not current_enemy_event:
 		discover_next_enemy_event()
 	return set_enemy_meter(enemy_meter + value)
@@ -135,5 +135,5 @@ func add_to_enemy_meter(value := ENEMY_METER_GAIN_DEFAULT) -> AnimationCallback:
 func is_enemy_meter_full() -> bool:
 	return enemy_meter == enemy_meter_max
 
-func reset_enemy_meter() -> AnimationCallback:
+func reset_enemy_meter() -> AnimationCallable:
 	return set_enemy_meter(0)

@@ -15,11 +15,11 @@ func casting_effect() -> void:
 		actual_path.append(combat.player.current_tile)
 	
 	if len(actual_path) > 0:
-		combat.animation.callback(combat.player.visual_entity, "start_walking")
+		combat.animation.call_method(combat.player.visual_entity, "start_walking")
 	for tile in actual_path:
-		combat.animation.callback(combat.player.visual_entity, "animation_move_to", [tile])
+		combat.animation.call_method(combat.player.visual_entity, "animation_move_to", [tile])
 	if len(actual_path) > 0:
-		combat.animation.callback(combat.player.visual_entity, "go_idle")
+		combat.animation.call_method(combat.player.visual_entity, "go_idle")
 
 ## Can a target tile be selected
 func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:

@@ -6,6 +6,7 @@ var parameters: Array
 var stacktrace: Array[Dictionary]
 
 func _init(_reference: Object, _command: String, _parameters := []):
+	push_warning("Using Deprecated Class AnimationCallback. Use AnimationCallable instead.")
 	reference = _reference
 	command = _command
 	parameters = _parameters

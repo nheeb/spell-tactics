@@ -22,7 +22,7 @@ func on_create():
 		died.connect(on_death)  
 
 func on_death():
-	combat.animation.callback(visual_entity, "on_death_visuals")
+	combat.animation.call_method(visual_entity, "on_death_visuals")
 	if logic:
 		if logic.has_method("on_death"):
 			logic.on_death()
@@ -44,7 +44,7 @@ func inflict_damage_with_visuals(damage: int, with_text := false) -> AnimationOb
 	
 	var animations = []
 	animations.append(combat.animation.update_hp(self))
-	animations.append(combat.animation.callback(visual_entity, "on_hurt_visuals"))
+	animations.append(combat.animation.call_method(visual_entity, "on_hurt_visuals"))
 	if with_text:
 		animations.append(combat.animation.say(self.visual_entity, "%s Damage" % damage,\
 		 		{"color": Color.RED, "font_size": 64}).set_duration(.5).set_flag_with())

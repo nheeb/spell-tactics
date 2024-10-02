@@ -11,10 +11,15 @@ var currently_playing_queues: Array[AnimationQueue]
 ## Wrapper Functions (only use those) ##
 ########################################
 
-func callback(ref: Object, method: String, parameters: Array = []) -> AnimationCallback:
-	var a = AnimationCallback.new(ref, method, parameters)
-	add_animation_object(a)
-	return a
+func call_method(ref: Object, method: String, parameters: Array = []) -> AnimationCallable:
+	var _callable = ref.get(method) as Callable
+	if _callable:
+		if parameters:
+			return callable(_callable.bindv(parameters))
+		else:
+			return callable(_callable)
+	push_error("Animation Call Method: Object has no such method")
+	return callable(func(): pass)
 
 func wait(time: float) -> AnimationWait:
 	var a = AnimationWait.new(time)
@@ -49,8 +54,8 @@ func add_staying_effect(_effect_scene: PackedScene, target: VisualEntity, id: St
 	add_animation_object(a)
 	return a
 
-func remove_staying_effect(target: VisualEntity, id: String) -> AnimationCallback:
-	return callback(target, "remove_visual_effect", [id])
+func remove_staying_effect(target: VisualEntity, id: String) -> AnimationCallable:
+	return call_method(target, "remove_visual_effect", [id])
 
 func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSignal:
 	var a = AnimationWaitForSignal.new(_obj, _signal_name)
@@ -80,7 +85,7 @@ func camera_reach(target: Node3D) -> AnimationObject:
 
 func update_hp(ent: HPEntity) -> AnimationObject:
 	if ent.visual_entity.has_node("HealthBar3D"):
-		return callback(ent.visual_entity.get_node("HealthBar3D"), "update_hp", [ent.hp, ent.type.max_hp, ent.armor]).set_flag_with()
+		return call_method(ent.visual_entity.get_node("HealthBar3D"), "update_hp", [ent.hp, ent.type.max_hp, ent.armor]).set_flag_with()
 	elif ent.visual_entity.has_node("HPLabel"):
 		if ent.armor:
 			return property(ent.visual_entity.get_node("HPLabel"), "text", "%s [+%s] / %s" % [ent.hp, ent.armor, ent.type.max_hp])

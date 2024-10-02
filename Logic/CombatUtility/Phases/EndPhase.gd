@@ -14,9 +14,9 @@ func process_phase() -> void:
 	if combat.enemies.is_empty():
 		# TODO Game won
 		combat.log.add("Game Won!")
-		combat.animation.callback(combat.ui, "show_victory", ["You won!"])
+		combat.animation.call_method(combat.ui, "show_victory", ["You won!"])
 	
-	combat.animation.callback(combat.ui, "set_status", ["Round ending ..."])
+	combat.animation.call_method(combat.ui, "set_status", ["Round ending ..."])
 	
 	combat.animation.camera_reach(combat.player.visual_entity)
 	combat.animation.property(combat.camera, "player_input_enabled", true)

@@ -1,9 +1,9 @@
 class_name SpellPhase extends AbstractPhase
 
 func process_phase() -> void:
-	combat.animation.callback(combat.player.visual_entity, "start_idling") # was in movement phase before
+	combat.animation.call_method(combat.player.visual_entity, "start_idling") # was in movement phase before
 
-	combat.animation.callback(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
+	combat.animation.call_method(combat.ui, "set_status", ["Drain tiles and Cast your spells!"])
 	
 	# unlock all actives that are available once per round
 	for active in combat.actives:
