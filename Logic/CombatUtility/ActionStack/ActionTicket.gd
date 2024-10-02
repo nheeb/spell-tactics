@@ -38,18 +38,17 @@ var log_entries : Array[LogEntry]
 var changes_combat := false
 
 var stack_trace: Array[Dictionary]
-var stack_trace_lines: PackedStringArray
 var print_stack_trace_lines: bool:
 	set(x):
-		for line in stack_trace_lines:
-			print(line)
+		print("--- Stack for %s ---" % self._to_string())
+		for line in Utility.get_stack_trace_lines(stack_trace, [
+			"_build_stack_trace", "_init", "ActionStackUtility"
+		]): print(line)
 func _build_stack_trace() -> void:
 	if not DebugInfo.ACTIVE:
 		return
 	stack_trace = get_stack()
-	stack_trace_lines = Utility.get_stack_trace_lines(stack_trace, [
-		"_build_stack_trace", "_init", "ActionStackUtility"
-	])
+
 
 signal _go
 signal removed
