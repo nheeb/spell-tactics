@@ -88,4 +88,3 @@ class TileGridSearchEntry extends Object:
 		coord = _coord
 		g_score = _g_score
 		f_score = _f_score
-

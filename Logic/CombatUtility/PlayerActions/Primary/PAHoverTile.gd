@@ -18,6 +18,7 @@ func is_valid(combat: Combat) -> bool:
 
 static var currently_hovering_drainable: Tile
 func execute(combat: Combat) -> void:
+	combat.level.append_to_hover_memory(tile)
 	var castable: Castable = combat.input.current_castable
 	if castable:
 		await castable.get_logic()._set_preview_visuals(true, tile)

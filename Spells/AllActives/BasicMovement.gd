@@ -8,7 +8,7 @@ func _on_combat_change():
 
 func casting_effect() -> void:
 	combat.log.add("Move Player to (%d, %d)" % [target.r, target.q])
-	var path := combat.level.get_shortest_path(combat.player.current_tile, target)
+	var path := combat.level.get_shortest_path_with_memory(combat.player.current_tile, target)
 	var actual_path = []
 	for tile in path:
 		combat.movement.move_entity(combat.player, tile)
@@ -32,7 +32,9 @@ func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
 ## Set special preview visuals when a target is hovered / selected
 func _set_preview_visuals(show: bool, _target: Tile = null, clicked: bool = false) -> void:
 	if show:
-		var path = combat.level.get_shortest_path(combat.player.current_tile, _target)
+		if not _is_target_suitable(_target):
+			return
+		var path = combat.level.get_shortest_path_with_memory(combat.player.current_tile, _target)
 		var length = len(path)
 		# check if hovered tile is in movement range, in that case show the movement arrow and
 		# highlight the spells, that could be casted from there
