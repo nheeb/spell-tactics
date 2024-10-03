@@ -20,4 +20,3 @@ func on_graveyard(): # Happens when the entity enters the graveyard
 
 func on_death(): # Happens when hp entity dies (before its being moved to the graveyard)
 	pass
-

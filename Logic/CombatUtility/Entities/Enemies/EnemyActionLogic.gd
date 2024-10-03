@@ -1,8 +1,12 @@
-class_name EnemyActionLogic extends Object
+class_name EnemyActionLogic extends RefCounted
 
+## This should NOT extend CombatLogic. Having a reference for this logic makes no
+## sense due to it's short lifetime. Every ActionPlan (action intent) of an enemy
+## creates a new Logic.
+
+var combat: Combat
 var args: EnemyActionArgs
 var action: EnemyAction
-var combat: Combat
 var enemy: EnemyEntity
 var plan: EnemyActionPlan
 var target:

@@ -30,4 +30,4 @@ func execute() -> void:
 		for entity in tile.entities:
 			if entity.is_drainable():
 				entity.drain()
-			combat.animation.callback(entity.visual_entity, "visual_drain").set_flag_with()
+			combat.animation.call_method(entity.visual_entity, "visual_drain").set_flag_with()

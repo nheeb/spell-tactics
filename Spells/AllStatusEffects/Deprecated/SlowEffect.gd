@@ -32,4 +32,3 @@ func extend(other_status: StatusEffect) -> void:
 func on_remove() -> void:
 	combat.animation.remove_staying_effect(entity.visual_entity, "%s_icons" % get_status_name())
 	combat.player.traits.movement_range = last_movement_range
-

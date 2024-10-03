@@ -28,7 +28,7 @@ void fragment() {
 	float zero_noise = clamp_and_map(texture(noise, UV + t).r, 0.0, 1.0, -1.0, 1.0);
 	break_area = float(break_area + zero_noise * .65 > .5);
 	COLOR.a *= break_area;
-	
+
 	int color_section = int(dir_color / section_size);
 	COLOR.rgb = mix(color_empty, color_filled, float(sections - fill <= color_section)).rgb;
 }

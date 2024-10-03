@@ -66,7 +66,7 @@ func load_combat_from_state(combat_state: CombatState, combat_active: bool = tru
 	if combat_active:
 		combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 		combat.setup()
-
+		# Put first phases in action stack
 		combat.process_initial_phase()
 		
 	# Play initial animations

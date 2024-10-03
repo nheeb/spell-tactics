@@ -10,6 +10,7 @@ func _init(_effect_scene: PackedScene, _target: VisualEntity, _id: String, _setu
 	target = _target
 	setup_properties = _setup_properties
 	id = _id
+	_build_stack_trace()
 
 func set_property(prop_name: String, value) -> AnimationStayingEffect:
 	setup_properties[prop_name] = value

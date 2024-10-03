@@ -28,5 +28,5 @@ func casting_effect() -> void:
 		enemies.append_array(tile.get_enemies())
 	for e in enemies:
 		combat.animation.say(e.visual_entity,"Poisoned",{"color": Color.VIOLET}).set_duration(.2)
-		e.apply_status_effect(PoisonEffect.new(3))
-
+		#e.apply_status_effect(PoisonEffect.new(3))
+		e.apply_status(Preloaded.STATUS_POISON)

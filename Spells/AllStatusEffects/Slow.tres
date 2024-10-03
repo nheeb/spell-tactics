@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EntityStatusType" load_steps=4 format=3 uid="uid://cgj26nlqop3pl"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="1_gujsw"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Status/EntityStatusType.gd" id="2_ayd27"]
+[ext_resource type="Texture2D" uid="uid://biy2afvcroxow" path="res://Assets/Sprites/Icons/snowflake.png" id="2_xokyl"]
+
+[resource]
+script = ExtResource("2_ayd27")
+pretty_name = "Slowed"
+icon = ExtResource("2_xokyl")
+color = Color(0.152344, 1, 0.880798, 1)
+text = "This entity can only move 1 tile."
+default_data = {
+"slowed_movement": 1
+}
+has_lifetime = true
+lifetime_default = 1
+lifetime_extend_method = 0
+make_floating_icon = true
+kill_te_on_remove = true
+enemy_actions = Array[ExtResource("1_gujsw")]([])

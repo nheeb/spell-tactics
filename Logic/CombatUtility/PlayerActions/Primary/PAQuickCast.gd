@@ -19,7 +19,7 @@ func is_valid(combat: Combat) -> bool:
 	return castable.is_selectable() and castable.is_castable()
 
 func execute(combat: Combat) -> void:
-	castable.try_cast()
+	await combat.action_stack.process_callable(castable.try_cast)
 	castable.reset_targets()
 
 func on_fail(combat: Combat) -> void:

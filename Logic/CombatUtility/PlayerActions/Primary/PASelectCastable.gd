@@ -11,8 +11,7 @@ func is_valid(combat: Combat) -> bool:
 
 func execute(combat: Combat) -> void:
 	if combat.input.current_castable:
-		combat.input.process_action(PADeselectCastable.new(), true)
-		#combat.input.deselect_castable()
+		await combat.input.process_action(PADeselectCastable.new(), true)
 	combat.input.select_castable(castable)
 	combat.action_stack.active_ticket.finish()
 	await VisualTime.new_timer(.15).timeout

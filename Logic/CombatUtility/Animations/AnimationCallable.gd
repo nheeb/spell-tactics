@@ -8,14 +8,9 @@ var method: StringName:
 	get:
 		return callable.get_method()
 
-
 func _init(_callable: Callable):
 	callable = _callable
-
-var _add_ticket_to_parameter := false
-func add_ticket_to_parameter() -> AnimationCallable:
-	_add_ticket_to_parameter = true
-	return self
+	_build_stack_trace()
 
 func play(level: Level) -> void:
 	var reference := callable.get_object()
@@ -26,7 +21,6 @@ func play(level: Level) -> void:
 			var bound_args = callable.get_bound_arguments()
 			bound_args.append(ticket)
 			var obj = callable.get_object()
-			var method = callable.get_method()
 			Callable(obj, method).callv(bound_args)
 		elif reference.has_method("get_wait_ticket_handler"):
 			var handler := reference.get_wait_ticket_handler() as WaitTicketHandler

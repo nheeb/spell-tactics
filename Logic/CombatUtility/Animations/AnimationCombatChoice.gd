@@ -5,6 +5,7 @@ var combat_choice: CombatChoiceActivity
 ## Time to wait
 func _init(_combat_choice) -> void:
 	combat_choice = _combat_choice
+	_build_stack_trace()
 
 func play(level: Level):
 	ActivityManager.push(combat_choice)

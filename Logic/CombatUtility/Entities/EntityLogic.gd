@@ -1,7 +1,6 @@
-class_name EntityLogic
+class_name EntityLogic extends CombatLogic
 
 var entity: Entity
-var combat: Combat
 
 func _init(e: Entity, c: Combat) -> void:
 	entity = e

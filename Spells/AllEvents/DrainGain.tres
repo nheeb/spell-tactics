@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CombatEventType" load_steps=3 format=3 uid="uid://cnfua6ghwn1f0"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventType.gd" id="1_otpqt"]
+[ext_resource type="Texture2D" uid="uid://b3fbv628r1fhi" path="res://Assets/Sprites/Icons/energy-gain.png" id="1_sjgks"]
+
+[resource]
+script = ExtResource("1_otpqt")
+pretty_name = "Magic Attunement"
+effect_text = "Get progressively more drain actions per round."
+fluff_text = ""
+order = 5
+icons = Array[Texture]([ExtResource("1_sjgks")])
+hidden_icon = false
+show_info_on_advancing = true
+show_info_on_activation = false
+max_duration = 0
+default_params = {}

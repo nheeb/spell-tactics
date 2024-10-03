@@ -35,6 +35,14 @@ func get_reference_type() -> String:
 func equals(other: UniversalReference, combat: Combat = null) -> bool:
 	return resolve(combat) == other.resolve(combat)
 
+static func from(object: Object) -> UniversalReference:
+	if object is UniversalReference:
+		return object
+	if object.has_method("get_reference"):
+		return object.get_reference()
+	push_error("Object has no reference.")
+	return null
+
 ##########################################
 ## Getters for the different References ##
 ##########################################
@@ -70,3 +78,11 @@ func get_tile(combat: Combat) -> Tile:
 func get_node(combat: Combat) -> Node:
 	assert(resolve(combat) is Node)
 	return resolve(combat) as Node
+
+func get_callable(combat: Combat) -> Callable:
+	assert(resolve(combat) is Callable)
+	return resolve(combat) as Callable
+
+func get_status(combat: Combat) -> EntityStatus:
+	assert(resolve(combat) is EntityStatus)
+	return resolve(combat) as EntityStatus

@@ -32,5 +32,3 @@ func after_cast():
 ### Most important function for overwriting. Here should be the effect
 #func casting_effect() -> void:
 	#pass
-
-

@@ -7,6 +7,7 @@ var signal_name: String
 func _init(ref: Object, s: String) -> void:
 	reference = ref
 	signal_name = s
+	_build_stack_trace()
 
 func play(level: Level):
 	if is_instance_valid(reference):

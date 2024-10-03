@@ -16,7 +16,7 @@ func execute() -> void:
 	if hit:
 		combat.player.inflict_damage_with_visuals(dmg)
 		combat.animation.say(combat.player.visual_entity, "%s DAMAGE" % dmg, {"font_size": 42, "color": Color.RED})
-		combat.player.apply_status_effect(SlowEffect.new())
+		#combat.player.apply_status_effect(SlowEffect.new())
+		combat.player.apply_status(Preloaded.STATUS_SLOW)
 	else:
 		combat.animation.say(enemy.visual_entity, "Shot missed.")
-

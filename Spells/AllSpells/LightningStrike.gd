@@ -24,9 +24,8 @@ func casting_effect() -> void:
 	target = target as Tile
 	for enemy in target.get_enemies():
 		enemy = enemy as EnemyEntity
-		if enemy.get_status_effect("wet"):
+		if enemy.get_status("Wet"):
 			enemy.inflict_damage_with_visuals(2*base_damage)
 		else:
 			enemy.inflict_damage_with_visuals(1*base_damage)
 		
-

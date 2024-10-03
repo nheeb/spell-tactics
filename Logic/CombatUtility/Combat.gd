@@ -29,10 +29,12 @@ enum Result {
 @onready var t_effects: TimedEffectsUtility = %TimedEffectsUtility
 @onready var attack: AttackUtility = %AttackUtility
 @onready var action_stack: ActionStackUtility = %ActionStackUtility
+@onready var castables: CastableUtility = %CastableUtility
 
 # TODO Nitai move those to the log utility
 signal round_ended
 signal spell_casted_successfully(spell: SpellReference)
+signal deserialized
 
 var result: Result = Result.Unfinished
 var current_round: int = 1
@@ -149,7 +151,7 @@ func advance_current_phase():
 func get_current_phase_node() -> AbstractPhase:
 	return get_phase_node(current_phase)
 
-## Processes the current phase.
+## ACTION Processes the current phase.
 func process_current_phase() -> void:
 	await get_current_phase_node()._process_phase()
 
@@ -167,25 +169,24 @@ func get_phase_node(phase: RoundPhase) -> AbstractPhase:
 			push_error("Processes unreachble phase RoundRepeats")
 	return null
 
+## ACTION
 func advance_and_process_until_next_player_action_needed():
-	if action_stack.active_ticket:
-		action_stack.active_ticket.finish()
 	while true:
 		advance_current_phase()
 		log.add("Processing %s ..." % RoundPhase.keys()[current_phase])
-		await process_current_phase()
+		await action_stack.process_callable(process_current_phase)
 		if get_current_phase_node().needs_user_input_to_proceed():
 			break
 
 func process_initial_phase() -> void:
 	match current_phase:
 		RoundPhase.CombatBegin:
-			advance_and_process_until_next_player_action_needed()
+			action_stack.push_back(advance_and_process_until_next_player_action_needed)
 		RoundPhase.Spell:
-			process_current_phase()
+			action_stack.push_back(process_current_phase)
 		_:
 			push_error("Savefiles should not be in phase %s" % current_phase)
-			advance_and_process_until_next_player_action_needed()
+			action_stack.push_back(advance_and_process_until_next_player_action_needed)
 
 func serialize() -> CombatState:
 	var state := CombatState.new()

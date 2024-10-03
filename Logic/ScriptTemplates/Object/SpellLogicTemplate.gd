@@ -41,5 +41,5 @@ func casting_effect() -> void:
 	#return true
 
 ## Set special preview visuals when a target is hovered / selected
-#func _set_preview_visuals(show: bool, _target: Tile, active: bool) -> void:
+#func _set_preview_visuals(show: bool, _target: Tile = null, active: bool) -> void:
 	#pass

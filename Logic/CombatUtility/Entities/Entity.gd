@@ -1,4 +1,4 @@
-class_name Entity
+class_name Entity extends RefCounted
 ## Base Class for every Object on the Tile-Grid-Level like the player, enemies or environment.
 
 
@@ -19,7 +19,10 @@ var combat: Combat
 var energy: EnergyStack
 
 var custom_props := {}
-var status_effects : Array[StatusEffect] = []
+## DEPRECATED old status effects
+var status_effects: Array[StatusEffect] = []
+## list of EntityStatus
+var status_array: Array[EntityStatus] = []
 
 signal entering_graveyard # Before the graveyard
 signal entered_graveyard # After the graveyard
@@ -36,7 +39,6 @@ static func should_serialize_this_prop(name: String) -> bool:
 	return true
 
 func serialize() -> EntityState:
-	#print("-- Serializing %s --" % type.internal_name)
 	var state: EntityState = EntityState.new()
 	state.type = type
 	
@@ -71,7 +73,7 @@ func drain() -> AnimationObject:
 	assert(is_drainable(), "Tried draining entity which is not drainable.")
 	drained_energy = energy
 	energy = EnergyStack.new([])
-	return combat.animation.callback(visual_entity, "visual_drain").set_max_duration(.5)
+	return combat.animation.call_method(visual_entity, "visual_drain").set_max_duration(.5)
 
 var drained_energy: EnergyStack
 ## Returns an EnergyStack only if the entity was drained previously.
@@ -110,45 +112,24 @@ func die() -> AnimationObject:
 func go_to_graveyard() -> AnimationObject:
 	return die()
 
-func apply_status_effect(effect: StatusEffect) -> void:
-	var existing_effect := get_status_effect(effect.get_status_name())
-	combat.animation.say(visual_entity, effect.get_status_name()).set_duration(0.0)
-	if existing_effect:
-		existing_effect.extend(effect)
-	else:
-		status_effects.append(effect)
-		effect.setup(self)
+# Those two method were never used. Not sure why I wrote those...
+#func call_on_status_effect(status_name: String, method: String, params := []) -> void:
+	#var effect := get_status_effect(status_name)
+	#if effect:
+		#if effect.has_method(method):
+			#effect.callv(method, params)
+		#else:
+			#push_error("Status effect %s has no method %s" % [status_effects, method])
+			#
+#func call_logic(method: String, params := []):
+	#if logic == null:
+		#push_error("%s does not have logic." % self)
+		#return
+	#if not logic.has_method(method):
+		#push_error("%s logic does not have method '%s'." % [self, method])
+		#return
+	#logic.callv(method, params)
 
-func get_status_effect(status_name: String) -> StatusEffect:
-	for effect in status_effects:
-		if effect.get_status_name() == status_name:
-			return effect
-	return null
-
-func remove_status_effect(status_name: String) -> void:
-	var effect := get_status_effect(status_name)
-	if effect:
-		effect.on_remove()
-		status_effects.erase(effect)
-
-
-func call_on_status_effect(status_name: String, method: String, params := []) -> void:
-	var effect := get_status_effect(status_name)
-	if effect:
-		if effect.has_method(method):
-			effect.callv(method, params)
-		else:
-			push_error("Status effect %s has no method %s" % [status_effects, method])
-			
-func call_logic(method: String, params := []):
-	if logic == null:
-		push_error("%s does not have logic." % self)
-		return
-	if not logic.has_method(method):
-		push_error("%s logic does not have method '%s'." % [self, method])
-		return
-	logic.callv(method, params)
-	
 func _to_string() -> String:
 	if id != null:
 		return type.internal_name + '_' + str(id.id)
@@ -164,3 +145,74 @@ func sync_with_type() -> void:
 
 func on_hover_long(h: bool) -> void:
 	pass
+
+#####################################################
+## DEPRECATED Methods for StatusEffects DEPRECATED ##
+#####################################################
+
+func apply_status_effect(effect: StatusEffect) -> void:
+	push_error("Using DEPRECATED StatusEffect")
+	var existing_effect := get_status_effect(effect.get_status_name())
+	if Game.DEBUG_INFO:
+		combat.animation.say(visual_entity, effect.get_status_name()).set_duration(0.0)
+	if existing_effect:
+		existing_effect.extend(effect)
+	else:
+		status_effects.append(effect)
+		effect.setup(self)
+
+func get_status_effect(status_name: String) -> StatusEffect:
+	push_error("Using DEPRECATED StatusEffect")
+	for effect in status_effects:
+		if effect.get_status_name() == status_name:
+			return effect
+	return null
+
+func remove_status_effect(status_name: String) -> void:
+	push_error("Using DEPRECATED StatusEffect")
+	var effect := get_status_effect(status_name)
+	if effect:
+		effect.on_remove()
+		status_effects.erase(effect)
+
+###############################
+## Methods for EntityEffects ##
+###############################
+
+## Add a status to the status_array. If a status with the same name / type is
+## already in there, it gets extended instead.
+func apply_status(status_or_type: Variant, additional_data := {}) -> void:
+	var status: EntityStatus
+	if status_or_type is EntityStatus:
+		status = status_or_type
+		status.data.merge(additional_data, true)
+	else:
+		assert(status_or_type is EntityStatusType)
+		status = EntityStatus.new(status_or_type, additional_data)
+	var existing_status := get_status(status.get_status_name())
+	if DebugInfo.ACTIVE:
+		combat.animation.say(visual_entity, status.type.pretty_name).set_duration(0.0)
+	if existing_status:
+		existing_status.extend(status)
+	else:
+		status_array.append(status)
+		status.setup(self)
+
+## Returns the status that fits given name or type.
+func get_status(status_name_or_type: Variant) -> EntityStatus:
+	var status_name: String
+	if status_name_or_type is EntityStatusType:
+		status_name = status_name_or_type.internal_name
+	else:
+		status_name = str(status_name_or_type)
+	for status in status_array:
+		if status.get_status_name().to_lower() == status_name.to_lower():
+			return status
+	return null
+
+## Removes a status from the entity. To be clean use EntityStaus.remove() instead.
+func remove_status(status_name_or_type: Variant) -> void:
+	var status := get_status(status_name_or_type)
+	if status:
+		status.on_remove()
+		status_array.erase(status)

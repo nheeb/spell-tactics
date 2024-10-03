@@ -23,16 +23,13 @@ func execute(combat: Combat) -> void:
 	if DESELECT_ON_FULL_TARGETS:
 		var full := combat.input.current_castable.are_targets_full()
 		if full:
-			combat.input.process_action(PADeselectTile.new(
+			await combat.input.process_action(PADeselectTile.new(
 				combat.input.current_castable.targets[0]
 			))
 	combat.input.current_castable.add_target(tile)
 	combat.action_stack.active_ticket.finish()
-	await VisualTime.new_timer(.35).timeout
-	# DANGER it should be ok to use process_player_action
-	# since the ticket is finished
+	await VisualTime.new_timer(.05).timeout
 	combat.action_stack.process_player_action(PAActivateCastable.new(false))
 
 func on_fail(combat: Combat) -> void:
 	pass
-

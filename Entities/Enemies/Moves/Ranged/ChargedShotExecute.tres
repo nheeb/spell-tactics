@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=4 format=3 uid="uid://cgxmqs8k12vgk"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_iiilt"]
+[ext_resource type="Texture2D" uid="uid://bphhr8u3lcxnd" path="res://Assets/Sprites/Icons/fragmented-meteor.png" id="2_jclbl"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyAction.gd" id="2_ypbm6"]
+
+[resource]
+script = ExtResource("2_ypbm6")
+pretty_name = "Deadly Shot"
+icon = ExtResource("2_jclbl")
+color = Color(1, 1, 1, 1)
+target_type = 1
+target_range_looking = -1
+target_range_walking = -1
+target_consider_count = 2
+target_consider_method = 0
+default_scores = Array[ExtResource("1_iiilt")]([])
+cooldown = 0
+default_args = []
+default_kwargs = {}

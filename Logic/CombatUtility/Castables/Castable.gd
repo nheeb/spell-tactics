@@ -16,8 +16,9 @@ func is_selectable() -> bool:
 func is_castable() -> bool:
 	return are_targets_castable()
 
+## ACTION
 func try_cast() -> void:
-	get_logic().try_cast()
+	await get_logic().try_cast()
 	combat.log.register_cast(self)
 
 var selected := false

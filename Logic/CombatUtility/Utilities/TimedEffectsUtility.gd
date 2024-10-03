@@ -26,9 +26,11 @@ func connect_effect(te: TimedEffect) -> void:
 func get_effects(effect_owner: Object, id := "") -> Array[TimedEffect]:
 	var _effects : Array[TimedEffect] = []
 	for te in effects:
-		if id == "":
-			if te.get_owner() == effect_owner and (id == "" or id == te.get_id()):
-				_effects.append(te)
+		if te == null:
+			push_warning("How did a null value get into the t_effects?")
+			continue
+		if te.get_owner() == effect_owner and (id == "" or id == te.get_id()):
+			_effects.append(te)
 	return _effects
 
 ## To be clean use TimedEffect.register(combat) instead
@@ -41,6 +43,8 @@ func signal_triggered(sig_param0 = null, sig_param1 = null, sig_param2 = null, \
 					 sig_param3 = null, sig_param4 = null, sig_param5 = null):
 	var sig: Signal
 	var sig_params := []
+	# Since Godot is omega cringe we need to search for the signal manually
+	# because binded args come after the signal args.
 	for param in [sig_param0, sig_param1, sig_param2, sig_param3, sig_param4, sig_param5]:
 		if param != null:
 			if param is Signal:
@@ -51,15 +55,18 @@ func signal_triggered(sig_param0 = null, sig_param1 = null, sig_param2 = null, \
 				sig_params.append(param)
 
 	if sig not in connected_effects.keys():
+		push_error("TE Signal triggered but it's not connected to an effect.")
 		return
 
 	var signal_effects : Array = connected_effects[sig]
 	for te in signal_effects.duplicate():
 		te = te as TimedEffect
 		if te._validate():
-			te._trigger(sig_params)
+			# Pushung TE as action. NOT TRIGGERING THEM. Use wait() to do so.
+			combat.action_stack.push_before_active(te._trigger.bind(sig_params))
 		else:
 			signal_effects.erase(te)
 
 	if signal_effects.is_empty():
 		connected_effects.erase(sig)
+		sig.disconnect(signal_triggered.bind(sig))

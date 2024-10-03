@@ -455,3 +455,55 @@ func immediate_arrows() -> ImmediateArrows:
 		_im_arr = VFX.IMMEDIATE_ARROWS.instantiate()
 		add_child(_im_arr)
 	return _im_arr
+
+## This saves the hover order if the last X Tiles that were hovered.
+## We use it to make inputing the movement clean.
+var _hover_memory: Array[Tile] = []
+const HOVER_MEMORY_SIZE = 4
+## This is used in PAHoverTile to keep track of the last hovers.
+func append_to_hover_memory(t: Tile) -> void:
+	_hover_memory.push_back(t)
+	if _hover_memory.size() > HOVER_MEMORY_SIZE:
+		_hover_memory.pop_front()
+
+## Returns the shortest path between two tile while favoring tiles that were recently hovered.
+func get_shortest_path_with_memory(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX) -> Array[Tile]:
+	return _process_shortest_path_with_memory(tile1, [tile2], _hover_memory.duplicate(), [], mask)
+
+func _process_shortest_path_with_memory(origin: Tile, targets: Array[Tile], \
+	memory: Array[Tile], path: Array[Tile], mask: int = Constants.INT64_MAX) -> Array[Tile]:
+		targets = targets as Array[Tile]
+		memory = memory as Array[Tile]
+		path = path as Array[Tile]
+		var origin_array: Array[Tile] = [origin]
+		# Get first path calculated
+		if path.is_empty():
+			path = _get_chained_path(origin_array + targets, mask)
+		# Return if we processed all of memory
+		if memory.is_empty():
+			return path
+		# Process next memory tile
+		var memory_tile: Tile = memory.pop_back()
+		# Add to targets if it's already in the path
+		if memory_tile in path:
+			if memory_tile not in targets:
+				targets.push_front(memory_tile)
+		# Only when it is not a target already
+		if memory_tile not in targets:
+			# Calculate the new version
+			var memory_tile_array: Array[Tile] = [memory_tile]
+			var new_path = _get_chained_path(origin_array + memory_tile_array + targets, mask)
+			# If new version isn't bigger, change the path and add memory tile
+			if new_path.size() == path.size():
+				path = new_path
+				targets.push_front(memory_tile)
+		return _process_shortest_path_with_memory(origin, targets, memory, path, mask)
+
+func _get_chained_path(journey: Array[Tile], mask: int = Constants.INT64_MAX) -> Array[Tile]:
+	var path: Array[Tile] = []
+	for i in range(journey.size() - 1):
+		var step := get_shortest_path(journey[i], journey[i+1], mask)
+		if step.is_empty():
+			return []
+		path.append_array(step)
+	return path
