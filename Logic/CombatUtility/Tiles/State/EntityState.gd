@@ -7,6 +7,8 @@ class_name EntityState extends Resource
 @export var entity_props: Dictionary
 ## props belonging to the logic script this entity might have (optional)
 @export var script_props: Dictionary
+## props belonging to the VisualEntity script this entity might have (optional)
+@export var visual_ent_props: Dictionary
 
 
 ## the current tile will be set from outside, as the Tile deserialize will call this.
@@ -16,15 +18,18 @@ func deserialize(combat: Combat = null, tile : Tile = null) -> Entity:
 	tile.add_entity(entity)
 	
 	for prop_name in entity_props.keys():
-		if Entity.serialize_this_prop(prop_name):
+		if Entity.should_serialize_this_prop(prop_name):
 			entity.set(prop_name, entity_props[prop_name])
-	
+
 	if entity.logic != null:
 		for prop_name in script_props.keys():
-			if Entity.serialize_this_prop(prop_name):
+			if Entity.should_serialize_this_prop(prop_name):
 				entity.logic.set(prop_name, script_props[prop_name])
-				
-	# TODO serialize visual entity props in the same way
+
+	if entity.visual_entity != null:
+		for prop_name in visual_ent_props.keys():
+			if Entity.should_serialize_this_prop(prop_name):
+				entity.visual_entity.set(prop_name, visual_ent_props[prop_name])
 	
 	type.entity_on_create(entity, true)
 	
