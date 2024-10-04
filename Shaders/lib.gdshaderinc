@@ -1,9 +1,9 @@
 vec2 rotateVector(vec2 _v, float angle) {
 	float sine = sin(angle);
     float cosine = cos(angle);
-	
+
 	vec2 v;
-	
+
     v.x = _v.x * cosine - _v.y * sine;
     v.y = _v.x * sine + _v.y * cosine;
 

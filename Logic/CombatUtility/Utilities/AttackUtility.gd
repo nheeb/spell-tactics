@@ -1,5 +1,7 @@
 class_name AttackUtility extends CombatUtility
 
+# everything in here should be an ACTION imo
+
 func enemy_shoot_projectile(enemy: EnemyEntity, projectile_bonus := 0, texture_name := "arrow") -> bool:
 	combat.animation.wait(.5)
 	var line := combat.level.get_line(enemy.current_tile, combat.player.current_tile)
@@ -44,6 +46,7 @@ func get_other_enemies(enemy: EnemyEntity) -> Array[EnemyEntity]:
 	var enemies := combat.get_all_enemies()
 	return enemies.filter(func(e): return e != enemy)
 
+## ACTION
 func summon_enemy(enemy_type: EnemyEntityType, tile: Tile, color := Color.RED) -> AnimationSubQueue:
 	var anims : Array[AnimationObject] = []
 	var e = combat.level.entities.create(tile.location, enemy_type, false)

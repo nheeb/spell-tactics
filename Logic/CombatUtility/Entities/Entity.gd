@@ -1,14 +1,18 @@
 class_name Entity extends RefCounted
-## Base Class for every Object on the Tile-Grid-Level like the player, enemies or environment.
 
+## Base Class for every Object on the Tile-Grid-Level like the player, 
+## enemies or environment.
 
 ## The EntityType (Resource) this Entity is an instance of.
 var type: EntityType
+
 ## ID for serializing references to the entity.
 var id: EntityID
+
 ## The visual representation of this Entity optional (can be null).
 ## This Node is only part of the scene tree if this Entity has been added to a tile.
 var visual_entity: VisualEntity
+
 ## Optional EntityLogic.
 var logic: EntityLogic
 

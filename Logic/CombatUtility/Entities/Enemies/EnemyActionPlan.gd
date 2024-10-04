@@ -109,12 +109,12 @@ func execute(combat: Combat):
 ## RESULT
 func is_possible(combat: Combat, include_movement := true) -> bool:
 	var start_from := get_enemy(combat).current_tile
-	if has_movement():
+	if has_movement() and include_movement:
 		var movement_plan := get_movement()
 		var after_movement := combat.action_stack.process_result(
 			movement_plan.get_estimated_destination.bind(combat, start_from)
 		)
-		await combat.action_stack.active_ticket.wait()
+		await combat.action_stack.wait()
 		start_from = after_movement.value
 	return get_logic(combat).is_possible(start_from)
 

@@ -2,6 +2,10 @@ class_name EntityStatus extends Resource
 
 @export var type: EntityStatusType
 @export var data := {}
+## Internal data keys (Use the setter and getter instead)
+## _lifetime -> Lifetime
+## _targets -> EnemyAction - Fixed Targets
+
 @export var is_logic_setup_done := false
 
 var logic: EntityStatusLogic
@@ -19,6 +23,14 @@ var lifetime: int:
 			push_error("Illegal access of lifetime on status")
 			return 0
 		return data["_lifetime"]
+var targets: Array:
+	set(x):
+		data["_targets"] = x
+	get:
+		if not data.has("_targets"):
+			push_error("Illegal access of lifetime on status")
+			return []
+		return data["_targets"]
 
 func _init(_type: EntityStatusType = null, _data := {}) -> void:
 	type = _type
@@ -98,8 +110,11 @@ func on_remove() -> void:
 
 ## Special actions an enemy with the status could do
 func get_enemy_actions() -> Array[EnemyActionArgs]:
-	var actions := type.enemy_actions.duplicate()
+	var actions : Array[EnemyActionArgs] = type.enemy_actions.duplicate()
 	actions.append_array(logic._get_enemy_actions())
+	if targets:
+		for action in actions:
+			action.fixed_targets = targets
 	return actions
 
 func remove() -> void:

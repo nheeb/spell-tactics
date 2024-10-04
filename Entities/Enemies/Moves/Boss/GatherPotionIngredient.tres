@@ -16,6 +16,7 @@ script = ExtResource("4_2r81e")
 action = ExtResource("3_8ra58")
 args = []
 kwargs = {}
+fixed_targets = []
 
 [resource]
 script = ExtResource("2_n5t4i")
@@ -30,6 +31,5 @@ target_consider_method = 0
 default_scores = Array[ExtResource("1_rv7cs")]([SubResource("Resource_5vemu")])
 cooldown = 2
 movement_action_args = SubResource("Resource_cg3rl")
-movement_mandatory = false
 default_args = []
 default_kwargs = {}

@@ -11,6 +11,7 @@ class_name EnemyActionArgs extends Resource
 @export_group("Arguments")
 @export var args := []
 @export var kwargs := {}
+@export var fixed_targets := []
 
 func _init(_action: EnemyAction = null, _args := [], _kwargs := {}) -> void:
 	action = _action
@@ -63,8 +64,14 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 	
 	# Making Plans
 	var plans : Array[EnemyActionPlan] = []
-	for suitable_target in suitable_targets:
-		plans.append(EnemyActionPlan.new(enemy, self, suitable_target, combat))
+	# Only take fixed ones if there are any
+	if fixed_targets:
+		for fixed_target in fixed_targets:
+			plans.append(EnemyActionPlan.new(enemy, self, fixed_target, combat))
+	# suitable targets otherwise
+	else:
+		for suitable_target in suitable_targets:
+			plans.append(EnemyActionPlan.new(enemy, self, suitable_target, combat))
 	
 	# Evaluate if possible
 	var possible_dict := {}
@@ -73,7 +80,7 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 			plan.is_possible.bind(combat)
 		)
 	await combat.action_stack.wait()
-	plans.filter(
+	plans = plans.filter(
 		func (p):
 			return possible_dict[p].value
 	)
