@@ -47,8 +47,7 @@ func is_taking_actions() -> bool:
 func update_ui():
 	combat.ui.update_payable_cards()
 
-func tile_hovered(tile: Tile) -> void:
-	combat.action_stack.process_player_action(PAHoverTile.new(tile))
+	
 	
 func tile_unhovered(tile: Tile):
 	combat.action_stack.process_player_action(PAUnhoverTile.new(tile))
@@ -81,7 +80,8 @@ func pinned_card_rightclicked(card: Card3D):
 func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
 	Events.tile_rightclicked.connect(tile_rightclicked)
-	Events.tile_hovered.connect(tile_hovered)
+	#Events.tile_hovered.connect(tile_hovered)
+	PAHoverTile.on_tile_hovered.connect(func(tile): combat.action_stack.process_player_action(PAHoverTile.new(tile)))
 	Events.tile_unhovered.connect(tile_unhovered)
 	Events.card_hovered.connect(card_hovered)
 	Events.card_selected.connect(card_selected)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvbev031on54j"]
 
-[ext_resource type="Script" path="res://Entities/Visuals/VisualEntity.gd" id="1_40fn7"]
+[ext_resource type="Script" path="res://Entities/Visuals/VisualPebbles.gd" id="1_ocfcx"]
 [ext_resource type="ArrayMesh" uid="uid://cuv36dccfma2f" path="res://Assets/Models/pebbles_1.obj" id="2_vx5bd"]
 [ext_resource type="ArrayMesh" uid="uid://u4n5v528ouru" path="res://Assets/Models/pebbles_2.obj" id="3_5a7mq"]
 [ext_resource type="ArrayMesh" uid="uid://dww6phcrexil4" path="res://Assets/Models/pebbles_3.obj" id="4_efkm4"]
@@ -8,7 +8,7 @@
 [ext_resource type="Material" uid="uid://cfo7keb80hehg" path="res://Assets/Materials/Pebble.tres" id="6_nh47r"]
 
 [node name="VisualPebbles" type="Node3D"]
-script = ExtResource("1_40fn7")
+script = ExtResource("1_ocfcx")
 
 [node name="Pebbles1" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0767403, 0, -0.0740115, 0, 0.106615, 0, 0.0740115, 0, 0.0767403, -0.384301, 3.06574e-08, 0.289296)

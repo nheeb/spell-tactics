@@ -34,7 +34,7 @@ signal entered_graveyard # After the graveyard
 ## Given the name, should this property be serialized?
 const godot_internal_props = ["RefCounted", "script"]
 const entity_internal_props = ["current_tile", "visual_entity", "logic", "type", "combat", "actions", "movements", "entity"]
-static func serialize_this_prop(name: String) -> bool:
+static func should_serialize_this_prop(name: String) -> bool:
 	if name.ends_with(".gd"):
 		# script type, ignore this
 		return false
@@ -46,17 +46,23 @@ func serialize() -> EntityState:
 	var state: EntityState = EntityState.new()
 	state.type = type
 	
+	for prop in get_property_list():
+		if not Entity.should_serialize_this_prop(prop.name):
+			continue
+		state.entity_props[prop.name] = get(prop.name)
+
 	if logic != null:
 		for prop in logic.get_property_list():
 			# TODO maybe we'll need another exclusion method for the script props
-			if not Entity.serialize_this_prop(prop.name):
+			if not Entity.should_serialize_this_prop(prop.name):
 				continue
 			state.script_props[prop.name] = get(prop.name)
-	
-	for prop in get_property_list():
-		if not Entity.serialize_this_prop(prop.name):
-			continue
-		state.entity_props[prop.name] = get(prop.name)
+
+	if visual_entity != null:
+		for prop in Inspector.get_exported_properties(visual_entity):
+			if not Entity.should_serialize_this_prop(prop["name"]):
+				continue
+			state.visual_ent_props[prop["name"]] = prop["value"]
 
 	#print(state.entity_props)
 	return state

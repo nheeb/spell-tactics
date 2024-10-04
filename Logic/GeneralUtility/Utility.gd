@@ -155,9 +155,6 @@ class DeckUtils:
 		
 		return spells
 		
-	static func create_spell_list():
-		# TODO
-		pass
 	
 	static func deck_for_spell_testing(combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []

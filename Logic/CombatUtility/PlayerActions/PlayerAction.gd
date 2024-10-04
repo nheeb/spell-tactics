@@ -1,4 +1,4 @@
-class_name PlayerAction extends Object
+class_name PlayerAction extends RefCounted
 
 signal executed
 signal failed
