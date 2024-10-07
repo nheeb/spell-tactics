@@ -35,6 +35,10 @@ func get_reference_type() -> String:
 func equals(other: UniversalReference, combat: Combat = null) -> bool:
 	return resolve(combat) == other.resolve(combat)
 
+##################################################
+## Static Methods for (de)referencing variables ##
+##################################################
+
 static func from(object: Object) -> UniversalReference:
 	if object is UniversalReference:
 		return object
@@ -42,6 +46,31 @@ static func from(object: Object) -> UniversalReference:
 		return object.get_reference()
 	push_error("Object has no reference.")
 	return null
+
+static func dereference_array(array: Array, combat: Combat) -> Array:
+	var deref := []
+	for x in array:
+		deref.append(dereference(x, combat))
+	return deref
+
+static func dereference_dict(dict: Dictionary, combat: Combat) -> Dictionary:
+	var deref := {}
+	for k in dict.keys():
+		var v = dict[k]
+		var key = dereference(k, combat)
+		var value = dereference(v, combat)
+		deref[key] = value
+	return deref
+
+static func dereference(x: Variant, combat: Combat) -> Variant:
+	if x is UniversalReference:
+		return x.resolve(combat)
+	elif x is Array:
+		return dereference_array(x, combat)
+	elif x is Dictionary:
+		return dereference_dict(x, combat)
+	else:
+		return x
 
 ##########################################
 ## Getters for the different References ##

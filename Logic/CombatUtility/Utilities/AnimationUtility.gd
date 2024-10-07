@@ -70,13 +70,17 @@ func say(target: Object, text: String, params := {}) -> AnimationEffect:
 func camera_set_player_input(enabled: bool) -> AnimationProperty:
 	return property(combat.camera, "player_input_enabled", enabled)
 
-func camera_follow(target: Node3D) -> AnimationProperty:
+func camera_follow(target) -> AnimationProperty:
+	if target is Entity:
+		target = target.visual_entity
 	return property(combat.camera, "follow_target", target)
 
 func camera_unfollow() -> AnimationProperty:
 	return property(combat.camera, "follow_target", null)
 
-func camera_reach(target: Node3D) -> AnimationObject:
+func camera_reach(target) -> AnimationObject:
+	if target is Entity:
+		target = target.visual_entity
 	var animations : Array[AnimationObject] = []
 	animations.append(property(combat.camera, "follow_target", target))
 	animations.append(property(combat.camera, "just_reach_target", true).set_flag(AnimationObject.Flags.PlayWithStep))

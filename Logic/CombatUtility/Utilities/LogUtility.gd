@@ -7,10 +7,6 @@ signal cast(castable: Castable)
 
 signal logged_damage(entry: LogEntry)
 
-var signals := {
-	LogEntry.Type.Damage: logged_damage
-}
-
 func register_entry(entry: LogEntry) -> void:
 	log_entries.append(entry)
 	log_entry_registered.emit(entry)
@@ -62,11 +58,3 @@ func create_and_register_entry(text: String, type: int) -> LogEntry:
 		entry.round_number = combat.current_round
 	register_entry(entry)
 	return entry
-
-## DEPRECATED
-func get_current_round() -> int:
-	var filtered = log_entries.filter(func (x): return x.type != LogEntry.Type.EventPrognose)
-	if filtered.is_empty():
-		return 1
-	else:
-		return filtered[-1].round_number

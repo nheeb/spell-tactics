@@ -19,9 +19,9 @@ func _ready() -> void:
 func build_timeline_from_log(log_util: LogUtility):
 	current_round = log_util.get_current_round()
 	append_empty_event_icons()
-	for entry in log_util.log_entries:
-		if entry.type == LogEntry.Type.Event or entry.type == LogEntry.Type.EventPrognose:
-			event_icons[entry.round_number - 1].set_log_entry(entry)
+	#for entry in log_util.log_entries:
+		#if entry.type == LogEntry.Type.Event or entry.type == LogEntry.Type.EventPrognose:
+			#event_icons[entry.round_number - 1].set_log_entry(entry)
 	refresh_visuals()
 
 func refresh_round_label():
@@ -100,4 +100,3 @@ func process_log_entry_queue() -> void:
 	for entry in log_entry_queue:
 		event_icons[entry.round_number - 1].set_log_entry(entry)
 	log_entry_queue.clear()
-

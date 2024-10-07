@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyAction" load_steps=5 format=3 uid="uid://bwuf4tmcob7ue"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_ppexe"]
-[ext_resource type="Texture2D" uid="uid://crlvw7csf2s85" path="res://Assets/Sprites/Icons/brain.png" id="2_udcwm"]
+[ext_resource type="Texture2D" uid="uid://dbue6jexqj78x" path="res://Assets/Sprites/Icons/chat-bubble.png" id="2_rot88"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyAction.gd" id="3_7xqyt"]
 
 [sub_resource type="Resource" id="Resource_o4mme"]
@@ -12,7 +12,7 @@ value = 1.0
 [resource]
 script = ExtResource("3_7xqyt")
 pretty_name = "Heavy Insult"
-icon = ExtResource("2_udcwm")
+icon = ExtResource("2_rot88")
 color = Color(1, 1, 1, 1)
 target_type = 0
 target_range_looking = -1

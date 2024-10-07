@@ -1,12 +1,5 @@
 extends EnemyActionLogic
 
-# args: EnemyActionArgs
-# action: EnemyAction
-# combat: Combat
-# enemy: EnemyEntity
-# plan: EnemyActionPlan
-# target
-
 const STATUS_SHOT_CHARGED = preload(
 	"res://Spells/AllStatusEffects/EnemyMoves/ShotCharged.tres"
 )

@@ -4,12 +4,10 @@ enum Type {
 	Info, # Just text as info for debugging
 	Incident,
 	TurnTransition,
-	Event,
+	CombatEvent,
 	EnemyEvent,
 	Enemy,
-	EventPrognose, # TODO Delete this
 	Cast,
-	Damage,
 }
 
 @export var type: Type
@@ -25,11 +23,11 @@ func _init(combat: Combat = null) -> void:
 		if combat.action_stack.active_ticket:
 			combat.action_stack.active_ticket.log_entries.append(self)
 
-func get_action_ticket(combat: Combat) -> ActionTicket:
-	return combat.action_stack._stack.filter(
-		func (ticket: ActionTicket):
-			return self in ticket.log_entries
-	).front()
+#func get_action_ticket(combat: Combat) -> ActionTicket:
+	#return combat.action_stack._stack.filter(
+		#func (ticket: ActionTicket):
+			#return self in ticket.log_entries
+	#).front()
 
 static func entry_to_string(entry: LogEntry) -> String:
 	var type_text : String = Type.keys()[Type.values().find(entry.type)]

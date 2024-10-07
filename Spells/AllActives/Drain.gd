@@ -13,4 +13,3 @@ func casting_effect() -> void:
 
 func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
 	return _target.is_drainable()
-
