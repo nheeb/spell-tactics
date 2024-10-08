@@ -24,6 +24,8 @@ enum Tag {
 ## All values are Arrays
 @export var data: Dictionary
 
+# TBD maybe add negative tags ?
+
 ## If finalized, all the references have been resolved and cached.
 ## The flavor shouldn't be edited further.
 var finalized := false
@@ -31,23 +33,35 @@ var _owner: Object
 var _targets: Array
 var _data: Dictionary
 
+## Set the owner or actor of the flavor. In most cases the entity that causes the action.
 func set_owner(_owner) -> ActionFlavor:
 	owner = UniversalReference.from(_owner)
 	return self
 
+## Add a tag to describe the action / subaction
 func add_tag(tag: Tag) -> ActionFlavor:
 	tags.append(tag)
 	return self
 
+## Add a target which gets affected by the action
 func add_target(target) -> ActionFlavor:
 	targets.append(UniversalReference.from(target))
 	return self
 
+## Add any important details
 func add_data(key, x) -> ActionFlavor:
+	if x is Dictionary:
+		push_warning("Adding a dict as flavor data might be dangerous.")
+	key = UniversalReference.reference_or_value(key)
 	var array: Array = data.get_or_add(key, [])
-	array.append(x)
+	if x is Array:
+		for element in x:
+			array.append(UniversalReference.reference_or_value(element))
+	else:
+		array.append(UniversalReference.reference_or_value(x))
 	return self
 
+## Execute this at the end of a flavor creation. This will created cached references.
 func finalize(combat: Combat) -> ActionFlavor:
 	# Only finalize when not finalized
 	if finalized:
@@ -83,5 +97,14 @@ func can_fit(fitting_flavor: ActionFlavor, combat: Combat) -> bool:
 		return true
 	return fitting_flavor.fits_into(self, combat)
 
-func integrate(other_flavor: ActionFlavor) -> ActionFlavor:
+func extend_with(other_flavor: ActionFlavor, overwrite_data := false) -> ActionFlavor:
+	if owner == null or overwrite_data:
+		set_owner(owner)
+	for tag in other_flavor.tags:
+		add_tag(tag)
+	if overwrite_data:
+		data.merge(other_flavor.data, true)
+	else:
+		for key in other_flavor.data.keys():
+			add_data(key, other_flavor.data[key])
 	return self

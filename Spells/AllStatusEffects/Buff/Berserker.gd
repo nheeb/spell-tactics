@@ -2,8 +2,8 @@ extends EntityStatusLogic
 
 func _setup_logic() -> void:
 	var flavor := ActionFlavor.new() \
-		.add_action(ActionFlavor.Action.Damage) \
-		.add_action(ActionFlavor.Action.Melee) \
+		.add_tag(ActionFlavor.Tag.Damage) \
+		.add_tag(ActionFlavor.Tag.Melee) \
 		.set_owner(entity)
 	TimedEffect.new_discussion_entry(flavor, berserker_effect).register(combat)
 

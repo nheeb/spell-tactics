@@ -2,21 +2,16 @@ class_name LogEntry extends Resource
 
 enum Type {
 	Info, # Just text as info for debugging
-	Incident,
+	ActionFinished,
+	ActionAborted,
 	TurnTransition,
-	CombatEvent,
-	EnemyEvent,
-	Enemy,
-	Cast,
 }
 
 @export var type: Type
 @export var round_number: int
 @export var round_phase: int # TODO implement this
 @export var text: String
-@export var spell: SpellReference
-@export var uni_ref: UniversalReference
-@export var number: int
+@export var flavor: ActionFlavor
 
 func _init(combat: Combat = null) -> void:
 	if combat:

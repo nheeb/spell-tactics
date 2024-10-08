@@ -11,8 +11,8 @@ func casting_effect() -> void:
 	var enemy: EnemyEntity = enemies[0]
 	
 	var flavor := ActionFlavor.new() \
-		.add_action(ActionFlavor.Action.Damage) \
-		.add_action(ActionFlavor.Action.Melee) \
+		.add_tag(ActionFlavor.Tag.Damage) \
+		.add_tag(ActionFlavor.Tag.Melee) \
 		.set_owner(combat.player) \
 		.add_target(enemy)
 	var damage: int = await combat.action_stack.get_discussion_result(BASE_DMG, flavor)

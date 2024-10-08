@@ -47,6 +47,13 @@ static func from(object: Object) -> UniversalReference:
 	push_error("Object has no reference.")
 	return null
 
+static func reference_or_value(x: Variant) -> Variant:
+	if x is Object:
+		var r = from(x)
+		if r:
+			return r
+	return x
+
 static func dereference_array(array: Array, combat: Combat) -> Array:
 	var deref := []
 	for x in array:
