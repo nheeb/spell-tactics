@@ -19,7 +19,7 @@ func is_castable() -> bool:
 ## ACTION
 func try_cast() -> void:
 	await get_logic().try_cast()
-	combat.log.register_cast(self)
+	#combat.log.register_cast(self)
 
 var selected := false
 func select():

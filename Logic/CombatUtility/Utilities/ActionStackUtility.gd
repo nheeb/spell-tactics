@@ -111,51 +111,47 @@ func preset_flavor(flavor: ActionFlavor):
 ####################################
 
 func push_front(callable_or_ticket: Variant) -> void:
-	var action_ticket: ActionTicket = callable_or_ticket \
-		if callable_or_ticket is ActionTicket \
-		else ActionTicket.new(callable_or_ticket)
+	var action_ticket := ActionTicket.from(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.push_front(action_ticket)
 	mark_stack_as_filled()
 
 func push_back(callable_or_ticket: Variant) -> void:
-	var action_ticket: ActionTicket = callable_or_ticket \
-		if callable_or_ticket is ActionTicket \
-		else ActionTicket.new(callable_or_ticket)
+	var action_ticket := ActionTicket.from(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.push_back(action_ticket)
 	mark_stack_as_filled()
 
 func push_before_active(callable_or_ticket: Variant) -> void:
-	var action_ticket: ActionTicket = callable_or_ticket \
-		if callable_or_ticket is ActionTicket \
-		else ActionTicket.new(callable_or_ticket)
+	if get_active_ticket() == null:
+		push_warning("Used push_before_active without active ticket.")
+		push_front(callable_or_ticket)
+		return
+	var action_ticket := ActionTicket.from(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.insert(_stack.find(get_active_ticket()), action_ticket)
 	mark_stack_as_filled()
 
 func push_behind_active(callable_or_ticket: Variant) -> void:
-	var action_ticket: ActionTicket = callable_or_ticket \
-		if callable_or_ticket is ActionTicket \
-		else ActionTicket.new(callable_or_ticket)
+	if get_active_ticket() == null:
+		push_warning("Used push_behind_active without active ticket.")
+		push_back(callable_or_ticket)
+		return
+	var action_ticket := ActionTicket.from(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.insert(_stack.find(get_active_ticket()) + 1, action_ticket)
 	mark_stack_as_filled()
 
 func push_before_other(callable_or_ticket: Variant, other: ActionTicket) -> void:
 	assert(other in _stack)
-	var action_ticket: ActionTicket = callable_or_ticket \
-		if callable_or_ticket is ActionTicket \
-		else ActionTicket.new(callable_or_ticket)
+	var action_ticket := ActionTicket.from(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.insert(_stack.find(other), action_ticket)
 	mark_stack_as_filled()
 
 func push_behind_other(callable_or_ticket: Variant, other: ActionTicket) -> void:
 	assert(other in _stack)
-	var action_ticket: ActionTicket = callable_or_ticket \
-		if callable_or_ticket is ActionTicket \
-		else ActionTicket.new(callable_or_ticket)
+	var action_ticket := ActionTicket.from(callable_or_ticket)
 	validate_new_ticket(action_ticket)
 	_stack.insert(_stack.find(other) + 1, action_ticket)
 	mark_stack_as_filled()
@@ -179,7 +175,6 @@ func validate_new_ticket(action_ticket: ActionTicket):
 	if _preset_combat_change:
 		action_ticket.changes_combat = true
 		_preset_combat_change = false
-	
 
 func mark_stack_as_clear():
 	block_start_time = 0
@@ -196,7 +191,7 @@ func mark_stack_as_clear():
 func mark_stack_as_filled():
 	if not stack_is_filled:
 		stack_is_filled = true
-		# stack_process() this is DANGER
+		# stack_process() -> dont do it this is DANGER
 
 ## Still no idea why this feature exists...
 func mark_stack_as_blocked():
@@ -239,6 +234,7 @@ func stack_process() -> void:
 		assert(not ticket.is_running(), \
 			"ActionStack: Tickets should never be running at this point")
 		if ticket.is_blocked():
+			push_warning("A ticket is blocked. What happened?")
 			note_action_time(action_time)
 			mark_stack_as_blocked()
 			return
@@ -249,11 +245,16 @@ func stack_process() -> void:
 			else:
 				ticket.advance()
 			active_ticket = null
-		if ticket.can_be_removed():
+		elif ticket.can_be_removed():
+			combat.log.register_entry(ticket.create_log_entry())
 			if ticket.changes_combat:
 				push_behind_other(_trigger_combat_changed, ticket)
+			if ticket.can_announce_flavor():
+				push_warning("Soon to be removed ticket has unannounced flavor.")
 			_stack.erase(ticket)
 			ticket.remove()
+		else:
+			push_error("Ticket can neither be advanced or removed.")
 	push_warning("ActionStack: Looped 1000 times this frame.")
 
 func _process(delta: float) -> void:
@@ -267,6 +268,9 @@ signal flavor_announced(flavor: ActionFlavor)
 
 func set_active_flavor(flavor: ActionFlavor):
 	assert(active_ticket, "An active ticket is needed to set the flavor.")
+	if active_ticket.flavor:
+		push_warning("Setting flavor for active ticket which already has one.\
+		Is this intended?")
 	active_ticket.flavor = flavor
 	_announce_flavor()
 

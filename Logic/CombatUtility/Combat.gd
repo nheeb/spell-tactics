@@ -147,6 +147,7 @@ func advance_current_phase():
 	current_phase += 1
 	if current_phase >= RoundPhase.RoundRepeats:
 		current_phase = RoundPhase.Start
+	log.register_entry(LogEntry.new("", LogEntry.Type.TurnTransition))
 
 func get_current_phase_node() -> AbstractPhase:
 	return get_phase_node(current_phase)

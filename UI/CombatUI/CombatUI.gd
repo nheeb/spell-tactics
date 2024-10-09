@@ -33,7 +33,7 @@ func setup(_combat: Combat):
 
 	# Build timeline
 	# TODO Delete Timeline Code
-	%Timeline.build_timeline_from_log(combat.log)
+	# %Timeline.build_timeline_from_log(combat.log)
 
 func next_round(current_round: int):
 	pass

@@ -38,8 +38,6 @@ var is_result := false
 var was_removed := false
 ## Other Ticket that caused the creation of this ticket.
 var origin_ticket : ActionTicket
-## TBD not implemented yet. Entries that are created during the ticket. Do we need that?
-var log_entries : Array[LogEntry]
 var changes_combat := false
 
 var stack_trace: Array[Dictionary]
@@ -47,7 +45,7 @@ var print_stack_trace_lines: bool:
 	set(x):
 		print("--- Stack for %s ---" % self._to_string())
 		for line in Utility.get_stack_trace_lines(stack_trace, [
-			"_build_stack_trace", "_init", "ActionStackUtility"
+			"_build_stack_trace", "_init", "ActionStackUtility", "ActionTicket"
 		]): print(line)
 func _build_stack_trace() -> void:
 	if not DebugInfo.ACTIVE:
@@ -75,6 +73,11 @@ func _init(_callable: Callable, _flavor = null) -> void:
 	callable = _callable
 	flavor = _flavor
 	_build_stack_trace()
+
+static func from(callable_or_ticket) -> ActionTicket:
+	assert(callable_or_ticket is Callable or callable_or_ticket is ActionTicket)
+	return callable_or_ticket if callable_or_ticket is ActionTicket else \
+		ActionTicket.new(callable_or_ticket)
 
 func advance():
 	match state:
@@ -151,7 +154,7 @@ func _to_string() -> String:
 	@warning_ignore("shadowed_global_identifier")
 	var char := "A"
 	if flavor:
-		char = "F"
+		char = "AF"
 	if is_result:
 		char = "R"
 	if flavor and is_result:
@@ -168,3 +171,16 @@ func get_flavor(deep := false) -> ActionFlavor:
 	if origin_ticket and deep:
 		return origin_ticket.get_flavor(deep)
 	return null
+
+func create_log_entry() -> LogEntry:
+	var entry := LogEntry.new()
+	match state:
+		State.Finished:
+			entry.type = LogEntry.Type.ActionFinished
+		State.Aborted:
+			entry.type = LogEntry.Type.ActionAborted
+		_:
+			entry.type = LogEntry.Type.Action
+	entry.text = _to_string()
+	entry.flavor = flavor
+	return entry

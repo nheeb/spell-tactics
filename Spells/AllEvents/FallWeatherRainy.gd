@@ -2,9 +2,10 @@ extends CombatEventLogic
 
 func _on_activate() -> void:
 	# TODO Nitai make enemies wet
-	TimedEffect.new_from_signal_and_callable(combat.log.cast, te_on_cast)\
-		.set_owner(self).set_id("te").give_signal_params_as_parameter()\
-		.register(combat)
+	push_warning("Rain must be remade!")
+	#TimedEffect.new_from_signal_and_callable(combat.log.cast, te_on_cast)\
+		#.set_owner(self).set_id("te").give_signal_params_as_parameter()\
+		#.register(combat)
 
 func _on_finish() -> void:
 	# TODO what if game has already ended? (I got a null pointer here, don't know if my null check breaks something - Nils)

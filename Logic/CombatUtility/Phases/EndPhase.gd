@@ -22,5 +22,5 @@ func process_phase() -> void:
 	combat.animation.property(combat.camera, "player_input_enabled", true)
 	
 	combat.current_round += 1
-	combat.animation.callable(
-		combat.ui.timeline.jump_to_round.bind(combat.current_round))
+	#combat.animation.callable(
+		#combat.ui.timeline.jump_to_round.bind(combat.current_round))
