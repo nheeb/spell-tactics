@@ -18,9 +18,14 @@ var object: Object:
 var method_name: StringName:
 	get:
 		return callable.get_method()
+
 ## Object describing the action. Used to hook something onto that action.
 ## To be clean use action_stack.load_flavor() to set and get_flavor() to get.
-var flavor: ActionFlavor
+var flavor: ActionFlavor:
+	set(x):
+		flavor = x
+		_has_flavor_to_announce = flavor != null
+var _has_flavor_to_announce := false
 var state : State = State.Created
 var _remove_me := false:
 	set(x):
@@ -48,7 +53,6 @@ func _build_stack_trace() -> void:
 	if not DebugInfo.ACTIVE:
 		return
 	stack_trace = get_stack()
-
 
 signal _go
 signal removed
@@ -120,6 +124,9 @@ func can_be_removed() -> bool:
 func can_be_advanced() -> bool:
 	return state == State.Created or state == State.Waiting
 
+func can_announce_flavor() -> bool:
+	return _has_flavor_to_announce
+
 func is_running() -> bool:
 	return state == State.Running
 
@@ -159,5 +166,5 @@ func get_flavor(deep := false) -> ActionFlavor:
 	if flavor:
 		return flavor
 	if origin_ticket and deep:
-		return origin_ticket.get_flavor()
+		return origin_ticket.get_flavor(deep)
 	return null

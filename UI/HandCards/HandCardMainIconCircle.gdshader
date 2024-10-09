@@ -11,7 +11,7 @@ void vertex() {
 }
 
 void fragment() {
-	
+
 	float middle_dist = distance(UV, vec2(.5));
 	float edge = mix(0.0, .75, distort_progress);
 	float rotation = distort_progress * (.3 + 1.6 * smoothstep(0.0, .5, middle_dist));

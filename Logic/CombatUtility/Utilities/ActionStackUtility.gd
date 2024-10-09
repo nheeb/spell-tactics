@@ -172,7 +172,8 @@ func validate_new_ticket(action_ticket: ActionTicket):
 	action_ticket.origin_ticket = get_active_ticket()
 	if _preset_flavor:
 		if action_ticket.flavor:
-			push_error("Ticket already has a flavor. It will be overwritten by the loaded one.")
+			push_error("Ticket already has a flavor. \
+				It will be overwritten by the loaded one.")
 		action_ticket.flavor = _preset_flavor
 		_preset_flavor = null
 	if _preset_combat_change:
@@ -243,7 +244,10 @@ func stack_process() -> void:
 			return
 		if ticket.can_be_advanced():
 			active_ticket = ticket
-			ticket.advance()
+			if ticket.can_announce_flavor():
+				_announce_flavor()
+			else:
+				ticket.advance()
 			active_ticket = null
 		if ticket.can_be_removed():
 			if ticket.changes_combat:
@@ -254,6 +258,23 @@ func stack_process() -> void:
 
 func _process(delta: float) -> void:
 	stack_process()
+
+#########################
+## Flavor Announcement ##
+#########################
+
+signal flavor_announced(flavor: ActionFlavor)
+
+func set_active_flavor(flavor: ActionFlavor):
+	assert(active_ticket, "An active ticket is needed to set the flavor.")
+	active_ticket.flavor = flavor
+	_announce_flavor()
+
+func _announce_flavor():
+	assert(active_ticket)
+	assert(active_ticket.flavor)
+	flavor_announced.emit(active_ticket.flavor)
+	active_ticket._has_flavor_to_announce = false
 
 #################
 ## Discussions ##
