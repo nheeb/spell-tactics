@@ -34,8 +34,8 @@ var _targets: Array
 var _data: Dictionary
 
 ## Set the owner or actor of the flavor. In most cases the entity that causes the action.
-func set_owner(_owner) -> ActionFlavor:
-	owner = UniversalReference.from(_owner)
+func set_owner(own) -> ActionFlavor:
+	owner = UniversalReference.from(own)
 	return self
 
 ## Add a tag to describe the action / subaction

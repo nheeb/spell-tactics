@@ -241,7 +241,7 @@ func stack_process() -> void:
 		if ticket.can_be_advanced():
 			active_ticket = ticket
 			if ticket.can_announce_flavor():
-				_announce_flavor()
+				_announce_active_flavor()
 			else:
 				ticket.advance()
 			active_ticket = null
@@ -266,15 +266,20 @@ func _process(delta: float) -> void:
 
 signal flavor_announced(flavor: ActionFlavor)
 
-func set_active_flavor(flavor: ActionFlavor):
+func set_active_flavor(flavor: ActionFlavor) -> Signal:
 	assert(active_ticket, "An active ticket is needed to set the flavor.")
 	if active_ticket.flavor:
 		push_warning("Setting flavor for active ticket which already has one.\
 		Is this intended?")
 	active_ticket.flavor = flavor
-	_announce_flavor()
+	_announce_active_flavor()
+	return wait()
 
-func _announce_flavor():
+func announce_flavor(flavor: ActionFlavor) -> Signal:
+	preset_flavor(flavor)
+	return process_callable(func(): pass)
+
+func _announce_active_flavor():
 	assert(active_ticket)
 	assert(active_ticket.flavor)
 	flavor_announced.emit(active_ticket.flavor)

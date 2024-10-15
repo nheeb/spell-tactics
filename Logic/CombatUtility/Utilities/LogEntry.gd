@@ -20,7 +20,9 @@ func _init(_text := "", _type: Type = Type.Info) -> void:
 
 static func entry_to_string(entry: LogEntry) -> String:
 	var type_text : String = Type.keys()[Type.values().find(entry.type)]
-	return "%s.%s [%s] %s" % [type_text, entry.text]
+	return "%s.%s [%s] %s" % [
+		entry.round_number, entry.round_phase, type_text, entry.text
+	]
 
 func _to_string() -> String:
 	return entry_to_string(self)

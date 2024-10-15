@@ -6,6 +6,7 @@ signal animation_queues_empty
 
 var animation_queue: Array[AnimationObject]
 var currently_playing_queues: Array[AnimationQueue]
+var currently_queued_queues: Array[AnimationQueue]
 
 ########################################
 ## Wrapper Functions (only use those) ##
@@ -139,7 +140,6 @@ func get_flat_animation_array(anims) -> Array[AnimationObject]:
 	else:
 		push_error("No array or animobj given to flatten")
 	return anim_array
-	
 
 #######################################
 ## Logic Functions (don't use those) ##
@@ -149,19 +149,32 @@ func add_animation_object(a: AnimationObject) -> void:
 	animation_queue.append(a)
 
 func play_animation_queue(start_immediately := false) -> void:
-	if not start_immediately:
-		while is_playing():
-			await animation_queues_empty
-	var aq := AnimationQueue.new(animation_queue.duplicate())
+	if animation_queue:
+		var aq := AnimationQueue.new(animation_queue.duplicate())
+		animation_queue.clear()
+		if start_immediately:
+			process_single_queue(aq)
+		else:
+			currently_queued_queues.append(aq)
+			_animation_queue_process()
+
+func process_single_queue(aq: AnimationQueue):
 	currently_playing_queues.append(aq)
-	animation_queue.clear()
 	aq.play(combat)
 	await aq.queue_finished
 	currently_playing_queues.erase(aq)
-	if not is_playing():
-		animation_queues_empty.emit()
-		VisualTime.visual_time_scale = 1.0
-		VisualTime.current_speed_idx = 0
+	if not is_playing() and currently_queued_queues.is_empty() and animation_queue.is_empty():
+			animation_queues_empty.emit()
+			VisualTime.visual_time_scale = 1.0
+			VisualTime.current_speed_idx = 0
 
 func is_playing() -> bool:
 	return not currently_playing_queues.is_empty()
+
+func _process(delta: float) -> void:
+	_animation_queue_process()
+
+func _animation_queue_process():
+	if not is_playing():
+		if currently_queued_queues:
+			process_single_queue(currently_queued_queues.pop_front())

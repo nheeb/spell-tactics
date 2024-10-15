@@ -91,6 +91,8 @@ func get_random_action_plan() -> EnemyActionPlan:
 	var title_for_log := get_name() + " chooses an action:"
 	var index := Utility.random_index_of_scores(scores, true, names_for_log, title_for_log)
 	combat.log.add(Utility.random_index_of_scores_report)
+	if index == -1:
+		push_error("No enemy action was chosen.")
 	return plans[index]
 
 ######################

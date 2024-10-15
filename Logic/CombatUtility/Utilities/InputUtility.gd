@@ -5,9 +5,13 @@ signal action_failed(action: PlayerAction)
 
 var input_blocked := false
 
-## Checks whether an action is valid and executes it.
+## Creates the action ticket for a player action. It does not add it to the stack.
 func player_action_ticket(action: PlayerAction, force_action := false) -> ActionTicket:
-	return ActionTicket.new(process_action.bind(action, force_action))
+	return ActionTicket.new(
+		process_action.bind(action, force_action),
+		ActionTicket.Type.PlayerAction,
+		ActionFlavor.new().add_tag(ActionFlavor.Tag.PlayerAction)
+	)
 
 ## ACTION
 ## Checks whether an action is valid and executes it.
@@ -18,8 +22,6 @@ func process_action(action: PlayerAction, force_action := false) -> void:
 	action.log_me(combat, valid)
 	if valid:
 		await action.execute(combat)
-		# deacted anim queue because action stack takes care of that
-		# combat.animation.play_animation_queue()
 		update_ui()
 		action.executed.emit()
 		action_executed.emit(action)
@@ -93,4 +95,4 @@ func connect_with_event_signals() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("focus_on_player") and combat.player != null:
 		combat.animation.camera_reach(combat.player.visual_entity)
-		combat.animation.play_animation_queue()
+		combat.animation.play_animation_queue(true)

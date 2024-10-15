@@ -10,6 +10,15 @@ enum State {
 	Blocked, # Apparently you can block the stack but I forgot what that was for...
 }
 
+enum Type {
+	Action, # Regular action
+	PlayerAction, # Has a player action
+	TimedEffect, # Action from TimedEffect
+	Result, # Carries a return value
+	Discussion, # Result using it's flavor to discuss a value with TimedEffects
+	FlavorAnnouncement # Does nothing. Just announcing a flavor,
+}
+
 ## The one and only callable
 var callable: Callable
 var object: Object:
@@ -18,7 +27,7 @@ var object: Object:
 var method_name: StringName:
 	get:
 		return callable.get_method()
-
+var type: Type
 ## Object describing the action. Used to hook something onto that action.
 ## To be clean use action_stack.load_flavor() to set and get_flavor() to get.
 var flavor: ActionFlavor:
@@ -69,8 +78,9 @@ class ActionTicketResult extends RefCounted:
 	func _init(s: Signal) -> void:
 		s.connect(set_value, CONNECT_ONE_SHOT)
 
-func _init(_callable: Callable, _flavor = null) -> void:
+func _init(_callable: Callable, _type := Type.Action, _flavor: ActionFlavor = null) -> void:
 	callable = _callable
+	type = _type
 	flavor = _flavor
 	_build_stack_trace()
 

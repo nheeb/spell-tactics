@@ -12,6 +12,7 @@ var visual_time_scale := 1.0:
 
 
 signal visual_process(delta: float)
+signal process(delta: float)
 
 var timers : Array[VisualTimer] = []
 var tweens : Array[Tween] = []
@@ -92,5 +93,6 @@ func _process(delta: float) -> void:
 	var fixed_delta := delta * visual_time_scale
 	visual_global_time += fixed_delta
 	visual_process.emit(fixed_delta)
+	process.emit(fixed_delta)
 	for timer in timers:
 		timer.process(fixed_delta)
