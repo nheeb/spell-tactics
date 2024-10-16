@@ -22,4 +22,3 @@ func execute() -> void:
 		combat.animation.say(combat.player.visual_entity, "%s DAMAGE" % dmg, {"font_size": 42, "color": Color.RED})
 	else:
 		combat.animation.say(enemy.visual_entity, "Shot missed.")
-

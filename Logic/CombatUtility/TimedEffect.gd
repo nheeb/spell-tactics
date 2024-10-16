@@ -306,12 +306,12 @@ func _trigger(signal_params := []):
 		if Utility.has_int_flag(flags, Flags.AppendSelfReferenceToCall):
 			args.append_array([self])
 		if connected_method.is_valid():
-			connected_method.callv(args)
+			await connected_method.callv(args)
 		else:
 			push_error("Timed Effect triggered with invalid method.")
 	if dead and (Utility.has_int_flag(flags, Flags.ReplaceCallOnDeath) or Utility.has_int_flag(flags, Flags.ExtraCallOnDeath)):
 		if connected_death_method.is_valid():
-			connected_death_method.callv(death_params)
+			await connected_death_method.callv(death_params)
 
 func _set_signal(sig: Signal) -> TimedEffect:
 	assert(not effect_connected)

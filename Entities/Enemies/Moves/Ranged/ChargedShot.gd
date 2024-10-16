@@ -8,6 +8,3 @@ func _execute():
 	enemy.apply_status(STATUS_SHOT_CHARGED, 
 		{"_targets": [target_entity.get_reference()]}
 	)
-
-func _is_possible(enemy_tile: Tile) -> bool:
-	return true

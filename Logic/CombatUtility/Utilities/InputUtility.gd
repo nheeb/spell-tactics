@@ -10,7 +10,7 @@ func player_action_ticket(action: PlayerAction, force_action := false) -> Action
 	return ActionTicket.new(
 		process_action.bind(action, force_action),
 		ActionTicket.Type.PlayerAction,
-		ActionFlavor.new().add_tag(ActionFlavor.Tag.PlayerAction)
+		ActionFlavor.new().add_tag(ActionFlavor.Tag.PlayerAction).finalize(combat)
 	)
 
 ## ACTION

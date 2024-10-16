@@ -1,7 +1,7 @@
 extends EnemyActionLogic
 
 func _execute():
-	combat.animation.wait(.5)
+	combat.animation.say(enemy, "Here is my heavy shot!")
 	var line := combat.level.get_line(enemy.current_tile, combat.player.current_tile)
 	if DebugInfo.SHOW_ENEMY_PROJECTILE_INFO:
 		combat.animation.wait(1.0)
@@ -15,8 +15,6 @@ func _execute():
 			if cover >= 2:
 				blocking_entity = ent
 				break
-
-	combat.animation.say(enemy, "Here is my heavy shot!")
 	combat.animation.effect(VFX.HEX_RINGS, target_tile, \
 		 {"color": Color.RED}).set_flag_with()
 	if blocking_entity:

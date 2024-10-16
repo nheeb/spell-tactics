@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=6 format=3 uid="uid://shswrcu1hkq5"]
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=8 format=3 uid="uid://shswrcu1hkq5"]
 
 [ext_resource type="Script" path="res://Entities/Enemies/CorpseLogic.gd" id="1_a441d"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyEntityType.gd" id="1_c53sr"]
 [ext_resource type="Resource" uid="uid://bwuf4tmcob7ue" path="res://Entities/Enemies/Moves/Other/HeavyInsult.tres" id="1_vhv2d"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="2_52hhv"]
+[ext_resource type="Resource" uid="uid://cxy23jj218176" path="res://Entities/Enemies/Moves/Support/IceTune.tres" id="3_pandh"]
 
 [sub_resource type="Resource" id="Resource_fo4rk"]
 script = ExtResource("2_52hhv")
@@ -12,9 +13,16 @@ args = []
 kwargs = {}
 fixed_targets = []
 
+[sub_resource type="Resource" id="Resource_agytg"]
+script = ExtResource("2_52hhv")
+action = ExtResource("3_pandh")
+args = []
+kwargs = {}
+fixed_targets = []
+
 [resource]
 script = ExtResource("1_c53sr")
-actions = Array[ExtResource("2_52hhv")]([SubResource("Resource_fo4rk")])
+actions = Array[ExtResource("2_52hhv")]([SubResource("Resource_fo4rk"), SubResource("Resource_agytg")])
 agility = 2
 strength = 1
 accuracy = 8

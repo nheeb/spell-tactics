@@ -177,5 +177,5 @@ func get_alternative(combat: Combat) -> EnemyActionPlan:
 	return get_logic(combat).get_alternative_plan()
 
 func get_string_action_target(combat: Combat) -> String:
-	return action.pretty_name + (" -> %10s" % str(get_target(combat)) if target_ref else "") \
-			+ "<%.1f>" % score_cache
+	return action.pretty_name + ("-> %10s " % str(get_target(combat)) if target_ref else "") \
+			+ "<%.1f> " % score_cache
