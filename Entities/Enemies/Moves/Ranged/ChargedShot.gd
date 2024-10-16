@@ -5,6 +5,7 @@ const STATUS_SHOT_CHARGED = preload(
 )
 
 func _execute():
-	enemy.apply_status(STATUS_SHOT_CHARGED, 
+	enemy.apply_status(
+		STATUS_SHOT_CHARGED, 
 		{"_targets": [target_entity.get_reference()]}
 	)

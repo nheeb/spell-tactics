@@ -69,7 +69,7 @@ func signal_triggered(sig_param0 = null, sig_param1 = null, sig_param2 = null, \
 			var te_wants_trigger := true
 			if te.has_flag(TimedEffect.Flags.FlavorMatchMandatory):
 				if not te.needed_flavor.fits_into(
-					combat.action_stack.active_ticket.get_flavor()
+					combat.action_stack.active_ticket.get_flavor(), combat
 				):
 					te_wants_trigger = false
 			if te_wants_trigger:

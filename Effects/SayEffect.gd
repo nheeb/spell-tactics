@@ -11,9 +11,9 @@ const FONTS = {
 }
 
 var text := ""
-var duration := 1.0
-var start_height := 2.0
-var end_height := 3.0
+var duration := 1.2
+var start_height := 2.6
+var end_height := 3.2
 var color := Color.WHITE
 var outline_size := 0
 var font_size := 64

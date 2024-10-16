@@ -181,11 +181,11 @@ func mark_stack_as_clear():
 	if stack_is_filled:
 		stack_is_filled = false
 		combat.animation.play_animation_queue()
-	if consecutive_action_frames > 1:
+	if consecutive_action_frames > 4:
 		combat.log.add("Calculated for %s msecs in %s frames (%.2f s)" % \
 			[consecutive_action_msecs, consecutive_action_frames,
 			float(consecutive_action_start - Time.get_ticks_msec()) / 1000.0])
-		reset_action_time()
+	reset_action_time()
 	clear.emit()
 
 func mark_stack_as_filled():
@@ -211,7 +211,7 @@ func note_action_time(action_time: int):
 		consecutive_action_start = Time.get_ticks_msec() - action_time
 	consecutive_action_frames += 1
 	consecutive_action_msecs += action_time
-	assert(consecutive_action_frames < 120, "ActionStack: Something probably went wrong.")
+	assert(consecutive_action_frames < 500, "ActionStack: Something probably went wrong.")
 
 func stack_process() -> void:
 	assert(not is_running(), \

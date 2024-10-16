@@ -42,8 +42,8 @@ func on_remove() -> void:
 func self_remove() -> void:
 	entity.remove_status_effect(get_status_name())
 
-func get_enemy_actions() -> Array[EnemyActionArgs]:
-	return []
+#func get_enemy_actions() -> Array[EnemyActionArgs]:
+	#return []
 
 func get_reference() -> StatusEffectReference:
 	return StatusEffectReference.new(entity.get_reference(), get_status_name())

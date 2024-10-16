@@ -8,6 +8,7 @@ var internal_name: String = ""
 @export_group("Target")
 enum TargetType {None, Foes, Allies, Tiles, Entities}
 @export var target_type : TargetType = TargetType.None
+@export var can_self_target := false
 @export var target_range_looking := -1
 @export var target_range_walking := -1
 @export_subgroup("Target Considering")

@@ -1,4 +1,4 @@
-extends AbstractPhase
+class_name EnemyPhase extends AbstractPhase
 
 func process_phase() -> void:
 	combat.animation.call_method(combat.ui, "set_status", ["Enemies attacking..."])
@@ -16,6 +16,9 @@ func process_phase() -> void:
 	
 	for enemy in combat.enemies:
 		combat.action_stack.preset_combat_change()
+		combat.action_stack.preset_flavor(
+			ActionFlavor.new().set_owner(enemy).add_tag(ActionFlavor.Tag.EnemyAction)
+		)
 		combat.action_stack.push_before_active(
 			ActionTicket.new(do_enemy_action.bind(enemy))
 		)

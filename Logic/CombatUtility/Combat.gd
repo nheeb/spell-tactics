@@ -18,6 +18,11 @@ enum Result {
 	Draw
 }
 
+@onready var start_phase: StartPhase = %StartPhase
+@onready var spell_phase: SpellPhase = %SpellPhase
+@onready var enemy_phase: EnemyPhase = %EnemyPhase
+@onready var end_phase: EndPhase = %EndPhase
+
 @onready var animation: AnimationUtility = %AnimationUtility
 @onready var cards: CardUtility = %CardUtility
 @onready var energy: EnergyUtility = %EnergyUtility

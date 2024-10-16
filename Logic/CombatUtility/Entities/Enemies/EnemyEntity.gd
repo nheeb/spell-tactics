@@ -50,7 +50,7 @@ func do_action():
 func get_action_pool() -> Array[EnemyActionArgs]:
 	var actions : Array[EnemyActionArgs] = []
 	actions.append_array(type.actions)
-	for se in status_effects:
+	for se in status_array:
 		actions.append_array(se.get_enemy_actions())
 	actions.append_array(combat.global_enemy_actions)
 	return actions
