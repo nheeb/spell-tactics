@@ -13,8 +13,8 @@ func _execute():
 func _is_possible(enemy_tile: Tile) -> bool:
 	return true
 
-#func _evaluate(enemy_tile: Tile) -> EnemyActionEval:
-	#return null
+#func _evaluate(enemy_tile: Tile, eval: EnemyActionEval) -> EnemyActionEval:
+	#return eval
 
 #func _estimated_destination(enemy_tile: Tile) -> Tile:
 	#return enemy_tile

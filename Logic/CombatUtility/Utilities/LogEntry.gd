@@ -2,36 +2,27 @@ class_name LogEntry extends Resource
 
 enum Type {
 	Info, # Just text as info for debugging
-	Incident,
-	TurnTransition,
-	Event,
-	EnemyEvent,
-	Enemy,
-	EventPrognose, # TODO Delete this
-	Cast,
-	Damage,
+	Action, # When an action is not finished (don't know if we'll log that ever)
+	ActionFinished, # When an action gets finished
+	ActionAborted, # When an action gets aborted
+	TurnTransition, # When the game enters a new phase
 }
 
 @export var type: Type
 @export var round_number: int
-@export var round_phase: int # TODO implement this
+@export var round_phase: int
 @export var text: String
-@export var spell: SpellReference
-@export var uni_ref: UniversalReference
-@export var number: int
+@export var flavor: ActionFlavor
 
-func _init(combat: Combat = null) -> void:
-	if combat:
-		if combat.action_stack.active_ticket:
-			combat.action_stack.active_ticket.log_entries.append(self)
-
-func get_action_ticket(combat: Combat) -> ActionTicket:
-	return combat.action_stack._stack.filter(
-		func (ticket: ActionTicket):
-			return self in ticket.log_entries
-	).front()
+func _init(_text := "", _type: Type = Type.Info) -> void:
+	text = _text
+	type = _type
 
 static func entry_to_string(entry: LogEntry) -> String:
 	var type_text : String = Type.keys()[Type.values().find(entry.type)]
-	return "[%s]: %s %s" % [type_text, entry.text, \
-									str(entry.number) if entry.number else ""]
+	return "%s.%s [%s] %s" % [
+		entry.round_number, entry.round_phase, type_text, entry.text
+	]
+
+func _to_string() -> String:
+	return entry_to_string(self)

@@ -43,10 +43,8 @@ func is_possible(enemy_tile: Tile = enemy.current_tile) -> bool:
 
 func evaluate(enemy_tile: Tile = enemy.current_tile) -> EnemyActionEval:
 	if is_possible(enemy_tile):
-		var evaluation := _evaluate(enemy_tile)
-		if evaluation == null:
-			evaluation = EnemyActionEval.from_cv_array(action.default_scores)
-		return evaluation
+		var evaluation := EnemyActionEval.from_cv_array(action.default_scores)
+		return _evaluate(enemy_tile, evaluation)
 	else:
 		return EnemyActionEval.new()
 
@@ -84,8 +82,8 @@ func _execute():
 func _is_possible(enemy_tile: Tile) -> bool:
 	return true
 
-func _evaluate(enemy_tile: Tile) -> EnemyActionEval:
-	return null
+func _evaluate(enemy_tile: Tile, eval: EnemyActionEval) -> EnemyActionEval:
+	return eval
 
 func _estimated_destination(enemy_tile: Tile) -> Tile:
 	return enemy_tile

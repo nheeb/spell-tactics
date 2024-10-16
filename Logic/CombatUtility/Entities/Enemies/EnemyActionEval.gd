@@ -12,7 +12,8 @@ enum Criteria {
 	Objective,
 	Forced,
 	Disrespect,
-	Bonus
+	Bonus,
+	Sustain,
 }
 
 var scores: Dictionary = {} # Criteria -> Score (float)
@@ -29,7 +30,7 @@ func get_total_score(behaviour: EnemyBehaviour) -> float:
 	var total_score := 0.0
 	for c in Criteria.values():
 		total_score +=  Utility.dict_safe_get(scores, c, 0.0) * \
-						Utility.dict_safe_get(behaviour_dict, c, 1.0)
+						Utility.dict_safe_get(behaviour_dict, c, 0.0)
 	return max(0.0, total_score)
 
 static func from_cv_array(cvs: Array[EnemyActionCriteriaValue]) -> EnemyActionEval:
@@ -41,4 +42,9 @@ static func from_cv_array(cvs: Array[EnemyActionCriteriaValue]) -> EnemyActionEv
 func add(eval: EnemyActionEval) -> EnemyActionEval:
 	for k in eval.scores.keys():
 		scores[k] = Utility.dict_safe_get(scores, k, 0.0) + eval.scores[k]
+	return self
+
+func multiply(factor: float) -> EnemyActionEval:
+	for k in scores.keys():
+		scores[k] = scores[k] * factor
 	return self

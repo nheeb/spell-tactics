@@ -16,7 +16,8 @@ func is_valid(combat: Combat) -> bool:
 	return false
 
 func execute(combat: Combat) -> void:
-	combat.animation.callable(execute_animtaion.bind(combat)).add_ticket_to_parameter().set_max_duration(.35)
+	combat.animation.callable(execute_animtaion.bind(combat)) \
+		.add_ticket_to_parameter().set_max_duration(.35)
 
 func execute_animtaion(combat: Combat, ticket: WaitTicket) -> void:
 	var socket := combat.input.current_castable.get_card() \
@@ -33,6 +34,7 @@ func execute_animtaion(combat: Combat, ticket: WaitTicket) -> void:
 	await orb.movement.bezier_finished
 	socket.load_energy(energy_type)
 	orb.delete()
+	await VisualTime.visual_process
 	ticket.resolve()
 
 func on_fail(combat: Combat) -> void:

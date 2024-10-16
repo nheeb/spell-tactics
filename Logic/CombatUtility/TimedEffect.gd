@@ -36,10 +36,14 @@ enum Flags {
 	AppendSelfReferenceToCall = 8,
 	ExtraCallOnDeath = 16,
 	ReplaceCallOnDeath = 32,
+	## see trigger_after_active_ticket()
+	TriggerAfterActiveTicket = 64,
+	## see needs_flavor()
+	FlavorMatchMandatory = 128
 }
 
 @export var flags: int = 0
-
+@export var needed_flavor: ActionFlavor
 @export var triggers_left := 0
 ## If delay is > 0 the next trigger will be ignores and delay will be reduced by 1.
 @export var delay := 0
@@ -52,6 +56,7 @@ enum Flags {
 ## Shortcut methods for easy creation ##
 ########################################
 
+## Creates a TE that triggers at each EndPhase.
 ## If start is true the TE triggers at the start of the end phase (before Events)
 ## otherwise it triggers at the end.
 static func new_end_phase_trigger_from_callable(callable: Callable, start := true) -> TimedEffect:
@@ -59,9 +64,18 @@ static func new_end_phase_trigger_from_callable(callable: Callable, start := tru
 	var process := "process_start" if start else "process_end"
 	return TimedEffect.new(end_phase_ref, process)._set_callable(callable)
 
+## Creates a simple TE from a signal and a callable.
 ## Only works of the owners of the signal and callable have "get_reference()"
 static func new_from_signal_and_callable(sig: Signal, callable: Callable) -> TimedEffect:
 	return TimedEffect.new()._set_signal(sig)._set_callable(callable)
+
+## Creates a TE that triggers, when a fitting flavor is announced by the ActionStack.
+## Use trigger_after_active_ticket() to react to the finish of the corresponding ticket.
+static func new_flavor_reaction(flavor: ActionFlavor, callable: Callable) \
+		-> TimedEffect:
+	var action_stack_ref = CombatNodeReference.new("Utility/ActionStackUtility")
+	return TimedEffect.new(action_stack_ref, "flavor_announced")\
+		._set_callable(callable).needs_flavor(flavor)
 
 ## The callable enters all discussions that fit the flavor.
 ## The callable must have Discussion as only parameter.
@@ -168,6 +182,18 @@ func replace_last_callable(callable: Callable, params := []) -> TimedEffect:
 	var _method = callable.get_method()
 	return set_death_callback(true, _ref, _method, params)
 
+## Adds the Timed Effect after the active ticket instead of inserting it before.
+## This means the action stack knows it should finish the current ticket
+## (the ticket responsible for emitting the signal) before doing the TE
+func trigger_after_active_ticket(after := true) -> TimedEffect:
+	return set_flag(Flags.TriggerAfterActiveTicket, after)
+
+## This makes sure the TE only triggers when the active ticket
+## (the ticket responsible for emitting the signal) has a fitting flavor.
+func needs_flavor(target_flavor: ActionFlavor) -> TimedEffect:
+	needed_flavor = target_flavor
+	return set_flag(Flags.FlavorMatchMandatory, needed_flavor != null)
+
 ## Deactivates a running TimedEffect. It does not trigger or allow a last callable.
 func kill() -> void:
 	dead = true
@@ -229,6 +255,9 @@ func set_flag(flag: int, value := true) -> TimedEffect:
 		flags = Utility.remove_int_flag(flags, flag)
 	return self
 
+func has_flag(flag: int) -> bool:
+	return Utility.has_int_flag(flags, flag)
+
 func set_death_callback(replace: bool, ref: UniversalReference, method: String, params := []) -> TimedEffect:
 	assert(not effect_connected)
 	death_ref = ref
@@ -277,12 +306,12 @@ func _trigger(signal_params := []):
 		if Utility.has_int_flag(flags, Flags.AppendSelfReferenceToCall):
 			args.append_array([self])
 		if connected_method.is_valid():
-			connected_method.callv(args)
+			await connected_method.callv(args)
 		else:
 			push_error("Timed Effect triggered with invalid method.")
 	if dead and (Utility.has_int_flag(flags, Flags.ReplaceCallOnDeath) or Utility.has_int_flag(flags, Flags.ExtraCallOnDeath)):
 		if connected_death_method.is_valid():
-			connected_death_method.callv(death_params)
+			await connected_death_method.callv(death_params)
 
 func _set_signal(sig: Signal) -> TimedEffect:
 	assert(not effect_connected)

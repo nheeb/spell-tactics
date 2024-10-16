@@ -10,6 +10,15 @@ enum State {
 	Blocked, # Apparently you can block the stack but I forgot what that was for...
 }
 
+enum Type {
+	Action, # Regular action
+	PlayerAction, # Has a player action
+	TimedEffect, # Action from TimedEffect
+	Result, # Carries a return value
+	Discussion, # Result using it's flavor to discuss a value with TimedEffects
+	FlavorAnnouncement # Does nothing. Just announcing a flavor,
+}
+
 ## The one and only callable
 var callable: Callable
 var object: Object:
@@ -18,9 +27,14 @@ var object: Object:
 var method_name: StringName:
 	get:
 		return callable.get_method()
+var type: Type
 ## Object describing the action. Used to hook something onto that action.
 ## To be clean use action_stack.load_flavor() to set and get_flavor() to get.
-var flavor: ActionFlavor
+var flavor: ActionFlavor:
+	set(x):
+		flavor = x
+		_has_flavor_to_announce = flavor != null
+var _has_flavor_to_announce := false
 var state : State = State.Created
 var _remove_me := false:
 	set(x):
@@ -33,8 +47,6 @@ var is_result := false
 var was_removed := false
 ## Other Ticket that caused the creation of this ticket.
 var origin_ticket : ActionTicket
-## TBD not implemented yet. Entries that are created during the ticket. Do we need that?
-var log_entries : Array[LogEntry]
 var changes_combat := false
 
 var stack_trace: Array[Dictionary]
@@ -42,13 +54,12 @@ var print_stack_trace_lines: bool:
 	set(x):
 		print("--- Stack for %s ---" % self._to_string())
 		for line in Utility.get_stack_trace_lines(stack_trace, [
-			"_build_stack_trace", "_init", "ActionStackUtility"
+			"_build_stack_trace", "_init", "ActionStackUtility", "ActionTicket"
 		]): print(line)
 func _build_stack_trace() -> void:
 	if not DebugInfo.ACTIVE:
 		return
 	stack_trace = get_stack()
-
 
 signal _go
 signal removed
@@ -67,10 +78,16 @@ class ActionTicketResult extends RefCounted:
 	func _init(s: Signal) -> void:
 		s.connect(set_value, CONNECT_ONE_SHOT)
 
-func _init(_callable: Callable, _flavor = null) -> void:
+func _init(_callable: Callable, _type := Type.Action, _flavor: ActionFlavor = null) -> void:
 	callable = _callable
+	type = _type
 	flavor = _flavor
 	_build_stack_trace()
+
+static func from(callable_or_ticket) -> ActionTicket:
+	assert(callable_or_ticket is Callable or callable_or_ticket is ActionTicket)
+	return callable_or_ticket if callable_or_ticket is ActionTicket else \
+		ActionTicket.new(callable_or_ticket)
 
 func advance():
 	match state:
@@ -120,6 +137,9 @@ func can_be_removed() -> bool:
 func can_be_advanced() -> bool:
 	return state == State.Created or state == State.Waiting
 
+func can_announce_flavor() -> bool:
+	return _has_flavor_to_announce
+
 func is_running() -> bool:
 	return state == State.Running
 
@@ -144,7 +164,7 @@ func _to_string() -> String:
 	@warning_ignore("shadowed_global_identifier")
 	var char := "A"
 	if flavor:
-		char = "F"
+		char = "AF"
 	if is_result:
 		char = "R"
 	if flavor and is_result:
@@ -159,5 +179,18 @@ func get_flavor(deep := false) -> ActionFlavor:
 	if flavor:
 		return flavor
 	if origin_ticket and deep:
-		return origin_ticket.get_flavor()
+		return origin_ticket.get_flavor(deep)
 	return null
+
+func create_log_entry() -> LogEntry:
+	var entry := LogEntry.new()
+	match state:
+		State.Finished:
+			entry.type = LogEntry.Type.ActionFinished
+		State.Aborted:
+			entry.type = LogEntry.Type.ActionAborted
+		_:
+			entry.type = LogEntry.Type.Action
+	entry.text = _to_string()
+	entry.flavor = flavor
+	return entry

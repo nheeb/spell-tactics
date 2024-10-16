@@ -17,7 +17,7 @@ var action_plan: EnemyActionPlan
 func plan_next_action():
 	action_plan = await get_random_action_plan()
 
-## ACTION
+## SUBACTION
 func do_action():
 	while true:
 		# If no plan, make one
@@ -29,7 +29,7 @@ func do_action():
 		var possible = combat.action_stack.process_result(
 			action_plan.is_possible.bind(combat)
 		)
-		await combat.action_stack.active_ticket.wait()
+		await combat.action_stack.wait()
 		
 		# Get alternative if not possible
 		if not possible.value:
@@ -37,7 +37,7 @@ func do_action():
 			continue
 		
 		# Execute
-		combat.action_stack.push_behind_active(
+		await combat.action_stack.process_callable(
 			action_plan.execute.bind(combat)
 		)
 		action_plan = null
@@ -91,6 +91,8 @@ func get_random_action_plan() -> EnemyActionPlan:
 	var title_for_log := get_name() + " chooses an action:"
 	var index := Utility.random_index_of_scores(scores, true, names_for_log, title_for_log)
 	combat.log.add(Utility.random_index_of_scores_report)
+	if index == -1:
+		push_error("No enemy action was chosen.")
 	return plans[index]
 
 ######################

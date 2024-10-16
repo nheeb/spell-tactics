@@ -1,4 +1,4 @@
-class_name AnimationObject extends Object
+class_name AnimationObject extends RefCounted
 
 ## This is the abstract Animation Object
 

@@ -58,12 +58,29 @@ func signal_triggered(sig_param0 = null, sig_param1 = null, sig_param2 = null, \
 		push_error("TE Signal triggered but it's not connected to an effect.")
 		return
 
+	# Get all TE connected to that signal
 	var signal_effects : Array = connected_effects[sig]
 	for te in signal_effects.duplicate():
 		te = te as TimedEffect
+		# Test if TE is still active and connected with all its references
+		# Otherwise it gets deleted
 		if te._validate():
-			# Pushung TE as action. NOT TRIGGERING THEM. Use wait() to do so.
-			combat.action_stack.push_before_active(te._trigger.bind(sig_params))
+			# Test if all the TE 's conditions are met. (Just optional flavor right now)
+			var te_wants_trigger := true
+			if te.has_flag(TimedEffect.Flags.FlavorMatchMandatory):
+				if not te.needed_flavor.fits_into(
+					combat.action_stack.active_ticket.get_flavor()
+				):
+					te_wants_trigger = false
+			if te_wants_trigger:
+				# Trigger the TE
+				var te_callable : Callable = te._trigger.bind(sig_params)
+				if te.has_flag(TimedEffect.Flags.TriggerAfterActiveTicket):
+					combat.action_stack.push_behind_active(te_callable)
+				else:
+					# Pushing TE as action before the active.
+					# This is NOT TRIGGERING THEM DIRECTLY. Use wait() to do so.
+					combat.action_stack.push_before_active(te_callable)
 		else:
 			signal_effects.erase(te)
 

@@ -28,7 +28,7 @@ var targets: Array:
 		data["_targets"] = x
 	get:
 		if not data.has("_targets"):
-			push_error("Illegal access of lifetime on status")
+			push_error("Illegal access of fixed targets on status")
 			return []
 		return data["_targets"]
 
@@ -120,9 +120,10 @@ func get_enemy_actions() -> Array[EnemyActionArgs]:
 func remove() -> void:
 	logic.self_remove()
 
+## TE
 func reduce_lifetime() -> void:
 	lifetime = lifetime - 1
-	if lifetime <= 0:
+	if lifetime < 0:
 		remove()
 
 func get_reference() -> EntityStatusReference:

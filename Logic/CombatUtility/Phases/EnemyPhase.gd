@@ -15,11 +15,13 @@ func process_phase() -> void:
 	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.agility > b.agility)
 	
 	for enemy in combat.enemies:
+		combat.action_stack.preset_combat_change()
 		combat.action_stack.push_before_active(
 			ActionTicket.new(do_enemy_action.bind(enemy))
 		)
-	await combat.action_stack.wait()
+		await combat.action_stack.wait()
 
+## ACTION
 func do_enemy_action(enemy: EnemyEntity):
 	combat.animation.camera_reach(enemy.visual_entity)
 	combat.animation.camera_follow(enemy.visual_entity)

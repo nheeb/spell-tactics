@@ -1,5 +1,7 @@
 class_name TimelineEventIcon extends Node2D
 
+## DEPRECATED
+
 const BASE_SIZE_PIXEL = 256
 
 @onready var timeline: TimelineUI = get_parent().get_parent().get_parent()
@@ -14,17 +16,18 @@ var alpha := 1.0:
 		%SubLabel.label_settings.font_color.a = alpha
 
 func set_log_entry(_log_entry: LogEntry, combat: Combat = null):
-	log_entry = _log_entry
-	assert(log_entry.spell)
-	assert(log_entry.type == LogEntry.Type.Event or \
-		   log_entry.type == LogEntry.Type.EventPrognose)
-	set_event_type(log_entry.spell.get_spell(combat).type)
-	set_sub_label(str(log_entry.number))
-	if log_entry.type == LogEntry.Type.EventPrognose:
-		%TextureRect.modulate = Color.GRAY
-	else:
-		%TextureRect.modulate = type.color
-	%TextureRect.modulate.a = alpha
+	return
+	#log_entry = _log_entry
+	#assert(log_entry.spell)
+	#assert(log_entry.type == LogEntry.Type.Event or \
+		   #log_entry.type == LogEntry.Type.EventPrognose)
+	#set_event_type(log_entry.spell.get_spell(combat).type)
+	#set_sub_label(str(log_entry.number))
+	#if log_entry.type == LogEntry.Type.EventPrognose:
+		#%TextureRect.modulate = Color.GRAY
+	#else:
+		#%TextureRect.modulate = type.color
+	#%TextureRect.modulate.a = alpha
 
 func set_event_type(_type: SpellType):
 	type = _type
@@ -54,4 +57,3 @@ func _on_area_2d_mouse_exited() -> void:
 			number = -1
 		if timeline.combat_ui.cards3d.is_event_currently_shown(type, number):
 			timeline.combat_ui.cards3d.hide_event()
-

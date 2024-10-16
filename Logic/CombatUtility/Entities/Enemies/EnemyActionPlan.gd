@@ -135,7 +135,7 @@ func get_evaluation_score(combat: Combat) -> float:
 			score_cache += movement_score.value
 			start_from = movement_destination.value
 		var eval := get_logic(combat).evaluate(start_from)
-		score_cache += eval.get_total_score(get_enemy(combat).type.behaviour)
+		score_cache += eval.get_total_score(get_enemy(combat).get_bahviour())
 	return score_cache
 
 func get_evaluation_score_cached() -> float:
@@ -177,5 +177,5 @@ func get_alternative(combat: Combat) -> EnemyActionPlan:
 	return get_logic(combat).get_alternative_plan()
 
 func get_string_action_target(combat: Combat) -> String:
-	return action.pretty_name + (" -> %10s" % str(get_target(combat)) if target_ref else "") \
-			+ "<%.1f>" % score_cache
+	return action.pretty_name + ("-> %10s " % str(get_target(combat)) if target_ref else "") \
+			+ "<%.1f> " % score_cache

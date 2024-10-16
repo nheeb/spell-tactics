@@ -30,6 +30,7 @@ func execute(combat: Combat) -> void:
 						.set_duration(.3)
 	combat.animation.wait(.4)
 	await combat.input.current_castable.get_logic()._set_preview_visuals(false)
+	combat.action_stack.preset_combat_change()
 	await combat.action_stack.process_callable(combat.input.current_castable.try_cast)
 
 func on_fail(combat: Combat) -> void:
