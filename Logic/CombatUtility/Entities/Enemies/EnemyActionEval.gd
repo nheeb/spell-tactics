@@ -43,3 +43,8 @@ func add(eval: EnemyActionEval) -> EnemyActionEval:
 	for k in eval.scores.keys():
 		scores[k] = Utility.dict_safe_get(scores, k, 0.0) + eval.scores[k]
 	return self
+
+func multiply(factor: float) -> EnemyActionEval:
+	for k in scores.keys():
+		scores[k] = scores[k] * factor
+	return self
