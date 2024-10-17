@@ -1,8 +1,6 @@
 class_name ActiveButtonWithUses extends Control
 
 const MAX_USES: int = 3
-## how much to move when having 2 instead of 3 active use bubbles
-const TWO_BUBBLES_OFFSET: Vector2 = Vector2(8.0, -8.0)
 const ACTIVE_USE_BUBBLE = preload("res://UI/CombatUI/Actives/ActiveUseBubble.tscn")
 
 @onready var button: TextureButton = $ActiveButton
@@ -24,6 +22,9 @@ func _ready() -> void:
 	if active != null:
 		active.got_updated.connect(_on_active_uses_updated)
 		init_active(active)
+	elif get_tree().current_scene == self:
+		# load debug active
+		active = Active.new(ActiveType.load_from_file("res://Spells/AllActives/TestActive.tres"), null)
 	else:
 		push_warning("no active set on initializing ActiveButton")
 
@@ -61,8 +62,8 @@ func init_active(new_active: Active):
 			var bubble1 = bubbles[0]
 			bubble3.queue_free()
 
-			bubble2.position += Vector2(-TWO_BUBBLES_OFFSET.x, TWO_BUBBLES_OFFSET.y)
-			bubble1.position += TWO_BUBBLES_OFFSET
+			bubble1.position = $TwoBubblesPosition1.position
+			bubble2.position = $TwoBubblesPosition2.position
 		3:
 			pass # do nothing
 		_: 
@@ -96,3 +97,8 @@ func _on_active_button_mouse_entered() -> void:
 func _on_active_button_mouse_exited() -> void:
 	if Game.world != null: 
 		Game.world.get_node("%MouseRaycast").disabled = false
+
+
+func _on_active_button_toggled(toggled_on: bool) -> void:
+	var uses_left = active.get_limitation_uses_left()
+	bubbles[uses_left - 1].highlighted = toggled_on

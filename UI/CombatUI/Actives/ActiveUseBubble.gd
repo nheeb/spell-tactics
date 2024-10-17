@@ -1,10 +1,17 @@
 class_name ActiveUseBubble extends Control
 
 @export var enabled_color: Color = Color("63dad0")
+@export var highlight_color: Color = Color("c9fffd")
 @export var disabled_color: Color = Color("444444")
 
 @onready var circle = %Circle
-
+var highlighted: bool = false:
+	set(now_highlighted):
+		if now_highlighted and enabled:
+			circle.color = highlight_color
+		if not now_highlighted:
+			circle.color = enabled_color if enabled else disabled_color
+		highlighted = now_highlighted
 var enabled: bool = true:
 	set(now_enabled):
 		if enabled and not now_enabled:
@@ -15,4 +22,3 @@ var enabled: bool = true:
 			circle.color = enabled_color
 			
 		enabled = now_enabled
-

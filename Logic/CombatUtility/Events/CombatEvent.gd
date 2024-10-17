@@ -91,7 +91,7 @@ func create_icon():
 func remove_icon():
 	combat.animation.callable(
 		func ():
-			assert(icon)
+			assert(icon)  # nils: assertion failed for me when skipping turn twice self.type == DrainGain.tres
 			icon.queue_free()
 			icon = null
 	)
