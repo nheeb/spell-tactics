@@ -42,7 +42,10 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 	var combat := enemy.combat
 	var temp_logic := get_temp_logic(enemy, combat)
 	var all_targets := temp_logic.get_target_pool()
-
+	# Testing if self target
+	if enemy in all_targets:
+		if not action.can_self_target:
+			all_targets.erase(enemy)
 	# Testing if in Range
 	var suitable_targets := []
 	var enemy_tile = enemy.current_tile

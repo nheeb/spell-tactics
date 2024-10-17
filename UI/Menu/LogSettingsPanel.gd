@@ -22,10 +22,11 @@ func setup_log():
 
 func add_log_entry(entry: LogEntry):
 	if current_mode == Mode.LOG:
-		var entry_ui = LOG_ENTRY_UI.instantiate()
-		%Entries.add_child(entry_ui)
-		%Entries.move_child(entry_ui, 0)
-		entry_ui.setup(entry)
+		if entry.type != LogEntry.Type.ActionFinished:
+			var entry_ui = LOG_ENTRY_UI.instantiate()
+			%Entries.add_child(entry_ui)
+			%Entries.move_child(entry_ui, 0)
+			entry_ui.setup(entry)
 
 const SETTINGS_ENTRY_UI = preload("res://UI/Menu/GlobalSettingUI.tscn")
 const SETTINGS_FOLDER_UI = preload("res://UI/Menu/GlobalSettingFolderUI.tscn")

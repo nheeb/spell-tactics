@@ -22,7 +22,7 @@ func call_method(ref: Object, method: String, parameters: Array = []) -> Animati
 	push_error("Animation Call Method: Object has no such method")
 	return callable(func(): pass)
 
-func wait(time: float) -> AnimationWait:
+func wait(time: float = 0.0) -> AnimationWait:
 	var a = AnimationWait.new(time)
 	add_animation_object(a)
 	return a

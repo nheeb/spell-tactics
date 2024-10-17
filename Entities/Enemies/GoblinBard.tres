@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=8 format=3 uid="uid://shswrcu1hkq5"]
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=14 format=3 uid="uid://shswrcu1hkq5"]
 
 [ext_resource type="Script" path="res://Entities/Enemies/CorpseLogic.gd" id="1_a441d"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyEntityType.gd" id="1_c53sr"]
 [ext_resource type="Resource" uid="uid://bwuf4tmcob7ue" path="res://Entities/Enemies/Moves/Other/HeavyInsult.tres" id="1_vhv2d"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="2_52hhv"]
 [ext_resource type="Resource" uid="uid://cxy23jj218176" path="res://Entities/Enemies/Moves/Support/IceTune.tres" id="3_pandh"]
+[ext_resource type="Resource" uid="uid://cl35attbteitm" path="res://Entities/Enemies/Moves/Support/DrainTune.tres" id="4_7l2bx"]
+[ext_resource type="Resource" uid="uid://dakjn22p87jge" path="res://Entities/Enemies/Moves/Support/RageTune.tres" id="5_4l0ie"]
+[ext_resource type="Resource" uid="uid://bdwlt6833b7xr" path="res://Entities/Enemies/Moves/Support/EarthTune.tres" id="6_trshj"]
 
 [sub_resource type="Resource" id="Resource_fo4rk"]
 script = ExtResource("2_52hhv")
@@ -20,9 +23,30 @@ args = []
 kwargs = {}
 fixed_targets = []
 
+[sub_resource type="Resource" id="Resource_28vkg"]
+script = ExtResource("2_52hhv")
+action = ExtResource("4_7l2bx")
+args = []
+kwargs = {}
+fixed_targets = []
+
+[sub_resource type="Resource" id="Resource_qucq8"]
+script = ExtResource("2_52hhv")
+action = ExtResource("5_4l0ie")
+args = []
+kwargs = {}
+fixed_targets = []
+
+[sub_resource type="Resource" id="Resource_cnmr0"]
+script = ExtResource("2_52hhv")
+action = ExtResource("6_trshj")
+args = []
+kwargs = {}
+fixed_targets = []
+
 [resource]
 script = ExtResource("1_c53sr")
-actions = Array[ExtResource("2_52hhv")]([SubResource("Resource_fo4rk"), SubResource("Resource_agytg")])
+actions = Array[ExtResource("2_52hhv")]([SubResource("Resource_fo4rk"), SubResource("Resource_agytg"), SubResource("Resource_28vkg"), SubResource("Resource_qucq8"), SubResource("Resource_cnmr0")])
 agility = 2
 strength = 1
 accuracy = 8

@@ -24,7 +24,10 @@ var energy: EnergyStack
 
 var custom_props := {}
 ## DEPRECATED old status effects
-var status_effects: Array[StatusEffect] = []
+var status_effects: Array[StatusEffect] = []:
+	get:
+		push_error("Using deprecated status effects")
+		return status_effects
 ## list of EntityStatus
 var status_array: Array[EntityStatus] = []
 
@@ -97,8 +100,8 @@ func on_create() -> void:
 		visual_entity.visible = false
 	else:
 		push_warning("visual_entity for entity_type %s is null in on_create()" % type.internal_name)
-	for status_effect in status_effects:
-		status_effect.setup(self)
+	#for status_effect in status_effects:
+		#status_effect.setup(self)
 
 func get_reference() -> EntityReference:
 	return EntityReference.new(self)

@@ -1,4 +1,4 @@
-extends AbstractPhase
+class_name StartPhase extends AbstractPhase
 
 ## Start phase -> Drawing hand cards
 func process_phase() -> void:
