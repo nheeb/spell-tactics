@@ -23,7 +23,7 @@ func _on_advance(round_number: int) -> void:
 		combat.animation.say(combat.player.visual_entity, "+1 Drain Usage")
 		gain_pattern.erase(round_number)
 	if gain_pattern.is_empty():
-		event.finish_and_remove_icon()
+		event.finish()
 	else:
 		event.persistant_properties["extra_text"] = \
 			"\nRounds until drain usage is increased: %s" % \

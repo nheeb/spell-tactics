@@ -40,6 +40,8 @@ func equals(other: UniversalReference, combat: Combat = null) -> bool:
 ##################################################
 
 static func from(object: Object) -> UniversalReference:
+	if object == null:
+		return null
 	if object is UniversalReference:
 		return object
 	if object.has_method("get_reference"):
@@ -49,9 +51,9 @@ static func from(object: Object) -> UniversalReference:
 
 static func reference_or_value(x: Variant) -> Variant:
 	if x is Object:
-		var r = from(x)
-		if r:
-			return r
+		if x.has_method("get_reference"):
+			assert(x is not UniversalReference, "Reference with get_ref??")
+			return x.get_reference()
 	return x
 
 static func dereference_array(array: Array, combat: Combat) -> Array:

@@ -39,6 +39,16 @@ func get_temp_logic(enemy, combat) -> EnemyActionLogic:
 
 ## RESULT
 func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
+	var cooldown: int = get_kwarg("cooldown", action.cooldown) as int
+	if cooldown > 0:
+		var previous_log_entries := enemy.combat.log.filtered_entries(
+			ActionFlavor.new().set_owner(enemy)
+				.add_tag(ActionFlavor.Tag.EnemyActionSpecific)
+				.add_data("action", action),
+			enemy.combat.current_round - cooldown
+		)
+		if previous_log_entries:
+			return []
 	var combat := enemy.combat
 	var temp_logic := get_temp_logic(enemy, combat)
 	var all_targets := temp_logic.get_target_pool()

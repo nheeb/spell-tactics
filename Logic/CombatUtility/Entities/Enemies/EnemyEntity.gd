@@ -37,6 +37,14 @@ func do_action():
 			continue
 		
 		# Execute
+		combat.action_stack.preset_flavor(
+			ActionFlavor.new().set_owner(self)
+				.add_tag(ActionFlavor.Tag.EnemyActionSpecific)
+				.add_target(action_plan.target_ref)
+				.add_data("action", action_plan.action)
+				.add_data("action_name", action_plan.action.internal_name)
+				.finalize(combat)
+		)
 		await combat.action_stack.process_callable(
 			action_plan.execute.bind(combat)
 		)
@@ -91,8 +99,7 @@ func get_random_action_plan() -> EnemyActionPlan:
 	var title_for_log := get_name() + " chooses an action:"
 	var index := Utility.random_index_of_scores(scores, true, names_for_log, title_for_log)
 	combat.log.add(Utility.random_index_of_scores_report)
-	if index == -1:
-		push_error("No enemy action was chosen.")
+	assert(index != -1, "No enemy action was chosen. There should always be a backup action")
 	return plans[index]
 
 ######################

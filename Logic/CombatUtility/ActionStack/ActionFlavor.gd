@@ -9,7 +9,8 @@ enum Tag {
 	PlayerAction,
 	Melee,
 	Movement,
-	EnemyAction,
+	EnemyActionGeneric,
+	EnemyActionSpecific,
 	EnemyEvent,
 	CombatEvent
 }

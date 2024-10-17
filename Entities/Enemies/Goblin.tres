@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=9 format=3 uid="uid://dxf83ay5rsin2"]
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=11 format=3 uid="uid://dxf83ay5rsin2"]
 
 [ext_resource type="Script" path="res://Entities/Enemies/CorpseLogic.gd" id="1_air4k"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyEntityType.gd" id="1_kdhbk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="2_brx3d"]
 [ext_resource type="PackedScene" uid="uid://2hog155pphl4" path="res://Entities/Visuals/Enemies/VisualGoblin.tscn" id="3_87dth"]
 [ext_resource type="Resource" uid="uid://dpva1xd10eiwv" path="res://Entities/Enemies/Moves/Movement/MoveNearTarget.tres" id="3_l54jj"]
+[ext_resource type="Resource" uid="uid://bwuf4tmcob7ue" path="res://Entities/Enemies/Moves/Other/HeavyInsult.tres" id="4_o813s"]
 
 [sub_resource type="Resource" id="Resource_6kdtt"]
 script = ExtResource("2_brx3d")
@@ -21,9 +22,16 @@ args = []
 kwargs = {}
 fixed_targets = []
 
+[sub_resource type="Resource" id="Resource_etifb"]
+script = ExtResource("2_brx3d")
+action = ExtResource("4_o813s")
+args = []
+kwargs = {}
+fixed_targets = []
+
 [resource]
 script = ExtResource("1_kdhbk")
-actions = Array[ExtResource("2_brx3d")]([SubResource("Resource_6kdtt"), SubResource("Resource_swso0")])
+actions = Array[ExtResource("2_brx3d")]([SubResource("Resource_6kdtt"), SubResource("Resource_swso0"), SubResource("Resource_etifb")])
 agility = 1
 strength = 2
 accuracy = 9

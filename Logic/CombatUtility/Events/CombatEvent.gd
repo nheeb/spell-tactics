@@ -13,6 +13,7 @@ var params := {}
 var active: bool = false
 ## Finished events cannot be reactivated. (Create new events instead)
 var finished: bool = false
+var icons_removed: bool = false
 
 ## Number of rounds the event was advanced.
 var rounds: int
@@ -89,12 +90,14 @@ func create_icon():
 	icon = combat.ui.event_icons.create_icon(self)
 
 func remove_icon():
-	combat.animation.callable(
-		func ():
-			assert(icon)
-			icon.queue_free()
-			icon = null
-	)
+	if not icons_removed:
+		icons_removed = true
+		combat.animation.callable(
+			func ():
+				assert(icon)
+				icon.queue_free()
+				icon = null
+		)
 
 ## Changes visible attributes of the icon as AQ animation.
 func update_ui_icon(visible := true, texture : Texture = type.get_icon(),\

@@ -14,9 +14,9 @@ value = 2.0
 [sub_resource type="Resource" id="Resource_xpo2k"]
 script = ExtResource("4_qrwnp")
 action = ExtResource("3_8ee16")
-args = []
-kwargs = {}
-fixed_targets = []
+args = null
+kwargs = null
+fixed_targets = null
 
 [resource]
 script = ExtResource("2_aqlqs")
@@ -24,6 +24,7 @@ pretty_name = "Charging Deadly Shot"
 icon = ExtResource("2_so4pd")
 color = Color(1, 1, 1, 1)
 target_type = 1
+can_self_target = false
 target_range_looking = -1
 target_range_walking = -1
 target_consider_count = 2

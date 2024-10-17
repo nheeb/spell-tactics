@@ -181,10 +181,12 @@ func mark_stack_as_clear():
 	if stack_is_filled:
 		stack_is_filled = false
 		combat.animation.play_animation_queue()
-	if consecutive_action_frames > 4:
+	if consecutive_action_frames > 3:
+		var current_time := Time.get_ticks_msec()
+		var real_duration := Time.get_ticks_msec() - consecutive_action_start
 		combat.log.add("Calculated for %s msecs in %s frames (%.2f s)" % \
 			[consecutive_action_msecs, consecutive_action_frames,
-			float(consecutive_action_start - Time.get_ticks_msec()) / 1000.0])
+			float(real_duration) / 1000.0])
 	reset_action_time()
 	clear.emit()
 

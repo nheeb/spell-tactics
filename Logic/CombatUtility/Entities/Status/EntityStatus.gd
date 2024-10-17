@@ -20,7 +20,6 @@ var lifetime: int:
 		data["_lifetime"] = x
 	get:
 		if not data.has("_lifetime"):
-			push_error("Illegal access of lifetime on status")
 			return 0
 		return data["_lifetime"]
 var targets: Array:
@@ -28,7 +27,6 @@ var targets: Array:
 		data["_targets"] = x
 	get:
 		if not data.has("_targets"):
-			push_error("Illegal access of fixed targets on status")
 			return []
 		return data["_targets"]
 

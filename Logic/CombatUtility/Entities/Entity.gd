@@ -24,10 +24,7 @@ var energy: EnergyStack
 
 var custom_props := {}
 ## DEPRECATED old status effects
-var status_effects: Array[StatusEffect] = []:
-	get:
-		push_error("Using deprecated status effects")
-		return status_effects
+var status_effects: Array[StatusEffect] = []
 ## list of EntityStatus
 var status_array: Array[EntityStatus] = []
 

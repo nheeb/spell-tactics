@@ -10,14 +10,14 @@ func process_phase() -> void:
 	for active in combat.actives:  # can't trigger any actives
 		active.unlocked = false
 	
-	
 	# Sort enemies by agility
 	combat.enemies.sort_custom(func(a: EnemyEntity, b: EnemyEntity): return a.agility > b.agility)
 	
 	for enemy in combat.enemies:
 		combat.action_stack.preset_combat_change()
 		combat.action_stack.preset_flavor(
-			ActionFlavor.new().set_owner(enemy).add_tag(ActionFlavor.Tag.EnemyAction)
+			ActionFlavor.new().set_owner(enemy) \
+				.add_tag(ActionFlavor.Tag.EnemyActionGeneric)
 		)
 		combat.action_stack.push_before_active(
 			ActionTicket.new(do_enemy_action.bind(enemy))
