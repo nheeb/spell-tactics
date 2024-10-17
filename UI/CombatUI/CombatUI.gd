@@ -130,3 +130,11 @@ func set_enemy_meter_max(value: int, event : EnemyEvent = null) -> void:
 
 func set_enemy_meter_event(event: EnemyEvent) -> void:
 	%EnemyEventIcon.set_event(event)
+
+
+func _on_tile_hover_blocker_mouse_entered() -> void:
+	pass # Replace with function body.
+
+
+func _on_tile_hover_blocker_mouse_exited() -> void:
+	pass # Replace with function body.

@@ -5,7 +5,7 @@ const MAX_USES: int = 3
 const TWO_BUBBLES_OFFSET: Vector2 = Vector2(8.0, -8.0)
 const ACTIVE_USE_BUBBLE = preload("res://UI/CombatUI/Actives/ActiveUseBubble.tscn")
 
-@onready var button = $ActiveButton
+@onready var button: TextureButton = $ActiveButton
 @onready var bubbles: Array[ActiveUseBubble] = [$ActiveUseBubble1, $ActiveUseBubble2, $ActiveUseBubble3]
 @onready var positions: Array[Marker2D] = [$Position1, $Position2, $Position3]
 
