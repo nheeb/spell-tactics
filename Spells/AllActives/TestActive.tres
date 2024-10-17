@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ActiveType" load_steps=3 format=3 uid="uid://djcyfgka16bkb"]
+
+[ext_resource type="Texture2D" uid="uid://bklbix8qk6xl0" path="res://Assets/Sprites/Icons/racoon-walk.png" id="1_mbefl"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/ActiveType.gd" id="2_yygmo"]
+
+[resource]
+script = ExtResource("2_yygmo")
+limitation = 0
+max_uses_per_round = 2
+pretty_name = "Movement"
+effect_text = "Move up to 3 tiles."
+fluff_text = ""
+icon = ExtResource("1_mbefl")
+color = Color(1, 1, 1, 1)
+target = 3
+target_range = -1
+target_min_range = -1
+target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 2
+target_selected_highlight = 8
+topic = 0
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""

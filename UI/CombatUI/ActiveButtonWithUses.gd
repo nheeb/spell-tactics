@@ -1,15 +1,15 @@
 class_name ActiveButtonWithUses extends Control
 
 const MAX_USES: int = 3
-## how much to move when having 2 instead of 3 active use bubbles
-const TWO_BUBBLES_OFFSET: Vector2 = Vector2(8.0, -8.0)
 const ACTIVE_USE_BUBBLE = preload("res://UI/CombatUI/Actives/ActiveUseBubble.tscn")
 
-@onready var button = $ActiveButton
+@onready var button: TextureButton = $ActiveButton
 @onready var bubbles: Array[ActiveUseBubble] = [$ActiveUseBubble1, $ActiveUseBubble2, $ActiveUseBubble3]
 @onready var positions: Array[Marker2D] = [$Position1, $Position2, $Position3]
 
-var combat
+@export var grey_out_modulate: Color = Color("909090")
+
+var combat: Combat
 
 var active: Active = null:
 	set(new_active):
@@ -24,6 +24,9 @@ func _ready() -> void:
 	if active != null:
 		active.got_updated.connect(_on_active_uses_updated)
 		init_active(active)
+	elif get_tree().current_scene == self:
+		# load debug active
+		active = Active.new(ActiveType.load_from_file("res://Spells/AllActives/TestActive.tres"), null)
 	else:
 		push_warning("no active set on initializing ActiveButton")
 
@@ -61,13 +64,24 @@ func init_active(new_active: Active):
 			var bubble1 = bubbles[0]
 			bubble3.queue_free()
 
-			bubble2.position += Vector2(-TWO_BUBBLES_OFFSET.x, TWO_BUBBLES_OFFSET.y)
-			bubble1.position += TWO_BUBBLES_OFFSET
+			bubble1.position = $TwoBubblesPosition1.position
+			bubble2.position = $TwoBubblesPosition2.position
 		3:
 			pass # do nothing
 		_: 
 			push_error("Active %s  max_uses = %d. weird, huh?" % [new_active.type.pretty_name, max_uses])
+
+
+func grey_out():
+	%ActiveButton.modulate = grey_out_modulate
+	%ActiveButton.material.set_shader_parameter("grey_out_progress", 1.0)
 	
+	
+func undo_grey_out():
+	%ActiveButton.modulate = Color.WHITE
+	%ActiveButton.material.set_shader_parameter("grey_out_progress", 0.0)
+	
+
 func _on_active_uses_updated():
 	var uses_left: int = active.get_limitation_uses_left()
 	var max_uses: int = active.get_limitation_max_uses() # TODO read max_uses and double-check the following logic
@@ -85,6 +99,11 @@ func _on_active_uses_updated():
 	for i in range(uses_left, max_uses):
 		bubbles[i].enabled = false
 		
+	if uses_left == 0:
+		grey_out()
+	else:
+		undo_grey_out()
+		
 
 ## TODO Idea: RayCast.register_new_blocker() -> blocker.block/unblock()
 
@@ -96,3 +115,8 @@ func _on_active_button_mouse_entered() -> void:
 func _on_active_button_mouse_exited() -> void:
 	if Game.world != null: 
 		Game.world.get_node("%MouseRaycast").disabled = false
+
+
+func _on_active_button_toggled(toggled_on: bool) -> void:
+	var uses_left = active.get_limitation_uses_left()
+	bubbles[uses_left - 1].highlighted = toggled_on
