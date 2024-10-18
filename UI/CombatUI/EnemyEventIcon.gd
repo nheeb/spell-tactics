@@ -31,7 +31,11 @@ func set_max_fill(max_fill: int):
 
 signal transition_done
 func transition_to_fill(fill: int):
+	if current_fill == fill:
+		transition_done.emit()
+		return
 	var tween := VisualTime.new_tween()
+
 	while current_fill != fill:
 		if fill < current_fill:
 			set_fill(0, tween)
@@ -39,6 +43,7 @@ func transition_to_fill(fill: int):
 			set_fill(current_fill + 1, tween)
 		tween.tween_property(pivot, "scale", 1.3 * base_scale, .2)
 		tween.tween_property(pivot, "scale", base_scale, .4)
+
 	await tween.finished
 	transition_done.emit()
 
