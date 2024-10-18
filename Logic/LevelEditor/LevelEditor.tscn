@@ -283,11 +283,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="Empty3" type="Control" parent="BottomBar/LevelSettingsContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-
 [node name="Elevation" type="Label" parent="BottomBar/LevelSettingsContainer"]
 visible = false
 layout_mode = 2
@@ -304,7 +299,21 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 24
 text = "Create New Level"
 
-[node name="RandomizeRotation" type="Label" parent="BottomBar"]
+[node name="SaveButton" type="Button" parent="BottomBar/LevelSettingsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Save"
+
+[node name="SavedLabel" type="Label" parent="BottomBar/LevelSettingsContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 1
+text = "Saved!"
+
+[node name="RandomizeRotationLabel" type="Label" parent="BottomBar"]
 layout_mode = 2
 anchor_left = -0.232292
 anchor_top = 0.365519
@@ -320,7 +329,7 @@ text = "Randomize Rotation:"
 label_settings = ExtResource("5_73if2")
 metadata/_edit_use_anchors_ = true
 
-[node name="LevelSelection" type="CheckBox" parent="BottomBar"]
+[node name="RandomizeRotation" type="CheckBox" parent="BottomBar"]
 layout_mode = 2
 anchor_left = -0.232292
 anchor_top = 0.365519
@@ -432,6 +441,7 @@ layout_mode = 2
 [connection signal="pressed" from="BottomBar/ToolsContainer/Lower" to="." method="_on_lower_pressed"]
 [connection signal="item_selected" from="BottomBar/LevelSettingsContainer/LevelSelection" to="." method="_on_level_selection_item_selected"]
 [connection signal="value_changed" from="BottomBar/LevelSettingsContainer/LevelSize" to="." method="_on_level_size_value_changed"]
+[connection signal="pressed" from="BottomBar/LevelSettingsContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="mouse_entered" from="RightUpperBar" to="." method="mouse_entered_editor_ui"]
 [connection signal="mouse_exited" from="RightUpperBar" to="." method="mouse_exited_editor_ui"]
 [connection signal="mouse_entered" from="RightLower" to="." method="mouse_entered_editor_ui"]
