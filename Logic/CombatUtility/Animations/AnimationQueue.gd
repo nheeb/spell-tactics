@@ -3,6 +3,8 @@ class_name AnimationQueue extends Object
 var animation_objects: Array[AnimationObject]
 var animation_steps: Array[AnimationStep]
 
+var current_step: AnimationStep
+
 var currently_playing := false
 var step_ready := true
 
@@ -45,5 +47,5 @@ func play_next_step(combat: Combat) -> void:
 		currently_playing = false
 		queue_finished.emit()
 	else:
-		var step : AnimationStep = animation_steps.pop_front()
-		step.play(combat.level)
+		current_step = animation_steps.pop_front()
+		current_step.play(combat.level)
