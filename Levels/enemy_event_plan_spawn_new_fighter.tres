@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyEventPlan" load_steps=3 format=3 uid="uid://c5b13jca15dvy"]
+
+[ext_resource type="Resource" uid="uid://cyfghwiu5p4y4" path="res://Spells/AllEnemyEvents/SpawnNewFighter.tres" id="1_7o4p6"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Events/EnemyEventPlan.gd" id="2_hnj42"]
+
+[resource]
+script = ExtResource("2_hnj42")
+event_type = ExtResource("1_7o4p6")
+params = {}
+event_created = false
+use_as_default = true
