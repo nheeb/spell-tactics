@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=535 format=3 uid="uid://ckq8v1s3aruw7"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=502 format=3 uid="uid://ckq8v1s3aruw7"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/CombatState.gd" id="1_a77op"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/ActiveState.gd" id="1_opmkl"]
@@ -7,51 +7,30 @@
 [ext_resource type="Script" path="res://Logic/CombatUtility/Events/EnemyEventPlan.gd" id="2_kcnt0"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventState.gd" id="2_pdf0p"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Utilities/LogEntry.gd" id="3_kxbah"]
-[ext_resource type="Resource" path="res://Entities/Environment/GrassTile.tres" id="3_vhrki"]
+[ext_resource type="Resource" uid="uid://b1uiotlalbmul" path="res://Entities/Environment/GrassTile.tres" id="3_vhrki"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/EntityState.gd" id="4_qk5jy"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellState.gd" id="4_x7vib"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/State/TileState.gd" id="5_6hme5"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellID.gd" id="5_bfv3t"]
-[ext_resource type="Resource" path="res://Entities/Environment/DirtTile.tres" id="6_8em4m"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/SporeFlight.tres" id="6_bch05"]
+[ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Entities/Environment/DirtTile.tres" id="6_8em4m"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="6_c7ku8"]
-[ext_resource type="Resource" path="res://Entities/Environment/Tree.tres" id="7_ay4xs"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/Berserker.tres" id="7_l5ewd"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/SummonBush.tres" id="7_mjrmt"]
+[ext_resource type="Resource" uid="uid://brvjvj8i7f7kw" path="res://Entities/Environment/Tree.tres" id="7_ay4xs"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="8_d2swj"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/AirMissile.tres" id="8_xq507"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/Haunting.tres" id="9_002n8"]
-[ext_resource type="Resource" path="res://Entities/Environment/Bush.tres" id="9_b8i77"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/SelfHeal.tres" id="10_1ofw7"]
-[ext_resource type="Resource" path="res://Entities/Environment/Stump.tres" id="10_q3j68"]
-[ext_resource type="Resource" path="res://Entities/Environment/Rock.tres" id="11_7c360"]
-[ext_resource type="Resource" path="res://Entities/Enemies/GoblinArcher.tres" id="11_54udb"]
-[ext_resource type="Resource" path="res://Entities/Environment/MediumShrooms.tres" id="11_fn0u2"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/SummonWitchTotem.tres" id="11_x0uqt"]
-[ext_resource type="Resource" path="res://Entities/Environment/Flower.tres" id="13_l3am2"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/Unload.tres" id="13_o1ya4"]
-[ext_resource type="Resource" path="res://Entities/Enemies/Goblin.tres" id="14_jrk47"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/HotSteam.tres" id="14_m0stx"]
-[ext_resource type="Resource" path="res://Entities/Environment/SmallShrooms.tres" id="14_xioyu"]
-[ext_resource type="Resource" path="res://Spells/AllSpells/LightningStrike.tres" id="15_k5a6o"]
-[ext_resource type="Resource" path="res://Entities/Environment/TallGrass.tres" id="15_s3iof"]
+[ext_resource type="Resource" uid="uid://b7xqo2ltiqbwk" path="res://Entities/Environment/Bush.tres" id="9_b8i77"]
+[ext_resource type="Resource" uid="uid://ddr1tv8hf3bj3" path="res://Entities/Environment/Stump.tres" id="10_q3j68"]
+[ext_resource type="Resource" uid="uid://c6t18hbsmwiha" path="res://Entities/Environment/Rock.tres" id="11_7c360"]
+[ext_resource type="Resource" uid="uid://kq07x16lyno7" path="res://Entities/Enemies/GoblinArcher.tres" id="11_54udb"]
+[ext_resource type="Resource" uid="uid://nuucsrbi1dqp" path="res://Entities/Environment/MediumShrooms.tres" id="11_fn0u2"]
+[ext_resource type="Resource" uid="uid://b8ef7eh8cp7ub" path="res://Entities/Environment/Flower.tres" id="13_l3am2"]
+[ext_resource type="Resource" uid="uid://dxf83ay5rsin2" path="res://Entities/Enemies/Goblin.tres" id="14_jrk47"]
+[ext_resource type="Resource" uid="uid://bnqbor0d6tjit" path="res://Entities/Environment/SmallShrooms.tres" id="14_xioyu"]
+[ext_resource type="Resource" uid="uid://dq2qgws5vu0i2" path="res://Entities/Environment/TallGrass.tres" id="15_s3iof"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/PlayerTraits.gd" id="15_uvvh0"]
 [ext_resource type="Resource" uid="uid://d1wcrekyije7v" path="res://Entities/Player/PlayerResource.tres" id="16_0ybmk"]
 [ext_resource type="Resource" uid="uid://bftmj7ayhlcs2" path="res://Entities/Environment/FlowSmall.tres" id="16_j2ocy"]
-[ext_resource type="Resource" uid="uid://coxs5uvjtigok" path="res://Spells/AllSpells/DeadlyDart.tres" id="16_k50ms"]
 [ext_resource type="Resource" uid="uid://bhq0pkvdokid6" path="res://Entities/Environment/Pebbles.tres" id="17_73e5m"]
-[ext_resource type="Resource" uid="uid://c2gimhhja8fi6" path="res://Spells/AllSpells/Breath.tres" id="17_dp2k7"]
-[ext_resource type="Resource" uid="uid://cjit0u77ak3lu" path="res://Spells/AllSpells/GrowingMycel.tres" id="18_pu2ir"]
 [ext_resource type="Resource" uid="uid://dh4ll7t2j71pq" path="res://Entities/Environment/FlowMedium.tres" id="19_25pqm"]
 [ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Entities/Enemies/GoblinBard.tres" id="19_amp3j"]
 [ext_resource type="Resource" uid="uid://iq34rfnf6t4w" path="res://Entities/Environment/WaterTile.tres" id="19_ncl4f"]
-[ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Spells/AllSpells/WaterBlast.tres" id="19_vutu3"]
-[ext_resource type="Resource" uid="uid://dcbq3ohb123xy" path="res://Spells/AllSpells/TotalDecay.tres" id="20_lugvs"]
-[ext_resource type="Resource" uid="uid://bmmnjqd2apbv0" path="res://Spells/AllSpells/RockBlast.tres" id="21_gufss"]
-[ext_resource type="Resource" uid="uid://cd42nwwenro" path="res://Spells/AllSpells/Cyclone.tres" id="22_rddsw"]
-[ext_resource type="Resource" uid="uid://blp6qpy1q8qhr" path="res://Spells/AllSpells/MudArmor.tres" id="23_obivt"]
-[ext_resource type="Resource" uid="uid://qhnw7yi6brvf" path="res://Spells/AllSpells/TrappingRoots.tres" id="24_ni7a2"]
-[ext_resource type="Resource" uid="uid://bg42mk7gnksus" path="res://Spells/AllSpells/SpellMemory.tres" id="25_vpeqn"]
 [ext_resource type="Resource" uid="uid://c5b13jca15dvy" path="res://Levels/enemy_event_plan_spawn_new_fighter.tres" id="26_gdvax"]
 [ext_resource type="Resource" uid="uid://diqf4kucf4hs8" path="res://Levels/combat_event_schedule_weather.tres" id="28_o6fso"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Events/CombatEventSchedule.gd" id="29_e34ni"]
@@ -312,50 +291,6 @@ round_number = 1
 round_phase = 0
 text = "A: ._on_combat_connect"
 
-[sub_resource type="Resource" id="Resource_k1xht"]
-script = ExtResource("5_bfv3t")
-id = 9
-
-[sub_resource type="Resource" id="Resource_1m3cx"]
-script = ExtResource("4_x7vib")
-type = ExtResource("18_pu2ir")
-id = SubResource("Resource_k1xht")
-combat_persistant_properties = {}
-round_persistant_properties = {}
-
-[sub_resource type="Resource" id="Resource_t63q7"]
-script = ExtResource("5_bfv3t")
-id = 5
-
-[sub_resource type="Resource" id="Resource_qxw1j"]
-script = ExtResource("4_x7vib")
-type = ExtResource("7_mjrmt")
-id = SubResource("Resource_t63q7")
-combat_persistant_properties = {}
-round_persistant_properties = {}
-
-[sub_resource type="Resource" id="Resource_w4url"]
-script = ExtResource("5_bfv3t")
-id = 14
-
-[sub_resource type="Resource" id="Resource_8sgkg"]
-script = ExtResource("4_x7vib")
-type = ExtResource("11_x0uqt")
-id = SubResource("Resource_w4url")
-combat_persistant_properties = {}
-round_persistant_properties = {}
-
-[sub_resource type="Resource" id="Resource_x1xe5"]
-script = ExtResource("5_bfv3t")
-id = 6
-
-[sub_resource type="Resource" id="Resource_fi0s4"]
-script = ExtResource("4_x7vib")
-type = ExtResource("6_bch05")
-id = SubResource("Resource_x1xe5")
-combat_persistant_properties = {}
-round_persistant_properties = {}
-
 [sub_resource type="Resource" id="Resource_25aem"]
 script = ExtResource("2_2i3es")
 type = ExtResource("3_vhrki")
@@ -377,14 +312,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_vir08"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0, 2])
+
 [sub_resource type="Resource" id="Resource_0wesg"]
 script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 7
-
-[sub_resource type="Resource" id="Resource_vir08"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 0, 2])
 
 [sub_resource type="Resource" id="Resource_g28mu"]
 script = ExtResource("4_qk5jy")
@@ -429,14 +364,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_o0xi8"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
 [sub_resource type="Resource" id="Resource_tq1la"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 2
-
-[sub_resource type="Resource" id="Resource_o0xi8"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 1])
 
 [sub_resource type="Resource" id="Resource_ssfim"]
 script = ExtResource("4_qk5jy")
@@ -508,14 +443,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_lqpe5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 4])
+
 [sub_resource type="Resource" id="Resource_6mygu"]
 script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 4
-
-[sub_resource type="Resource" id="Resource_lqpe5"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 4])
 
 [sub_resource type="Resource" id="Resource_rj4f5"]
 script = ExtResource("4_qk5jy")
@@ -560,14 +495,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_v8c80"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2])
+
 [sub_resource type="Resource" id="Resource_ryjh4"]
 script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 1
-
-[sub_resource type="Resource" id="Resource_v8c80"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([2])
 
 [sub_resource type="Resource" id="Resource_mjgmn"]
 script = ExtResource("4_qk5jy")
@@ -613,14 +548,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_jhx8i"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2, 2, 2])
+
 [sub_resource type="Resource" id="Resource_dsqsf"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_7c360")
 id = 1
-
-[sub_resource type="Resource" id="Resource_jhx8i"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([2, 2, 2])
 
 [sub_resource type="Resource" id="Resource_wio3a"]
 script = ExtResource("4_qk5jy")
@@ -788,14 +723,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_x3nhf"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0])
+
 [sub_resource type="Resource" id="Resource_toi7o"]
 script = ExtResource("2_2i3es")
 type = ExtResource("9_b8i77")
 id = 3
-
-[sub_resource type="Resource" id="Resource_x3nhf"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 0])
 
 [sub_resource type="Resource" id="Resource_miuxj"]
 script = ExtResource("4_qk5jy")
@@ -840,14 +775,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_gwrkn"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0, 2])
+
 [sub_resource type="Resource" id="Resource_nhsut"]
 script = ExtResource("2_2i3es")
 type = ExtResource("7_ay4xs")
 id = 21
-
-[sub_resource type="Resource" id="Resource_gwrkn"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 0, 2])
 
 [sub_resource type="Resource" id="Resource_yoqyj"]
 script = ExtResource("4_qk5jy")
@@ -892,14 +827,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_a0j1o"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2])
+
 [sub_resource type="Resource" id="Resource_qhjjx"]
 script = ExtResource("2_2i3es")
 type = ExtResource("17_73e5m")
 id = 1
-
-[sub_resource type="Resource" id="Resource_a0j1o"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([2])
 
 [sub_resource type="Resource" id="Resource_xhyjl"]
 script = ExtResource("4_qk5jy")
@@ -1095,14 +1030,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_ywjdp"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
 [sub_resource type="Resource" id="Resource_4y7ft"]
 script = ExtResource("2_2i3es")
 type = ExtResource("14_jrk47")
 id = 1
-
-[sub_resource type="Resource" id="Resource_ywjdp"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_2bvwu"]
 script = ExtResource("4_qk5jy")
@@ -1157,14 +1092,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_baouo"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 1])
+
 [sub_resource type="Resource" id="Resource_1idxw"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 1
-
-[sub_resource type="Resource" id="Resource_baouo"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([1, 1])
 
 [sub_resource type="Resource" id="Resource_nkf1v"]
 script = ExtResource("4_qk5jy")
@@ -1209,14 +1144,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_a466y"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([5])
+
 [sub_resource type="Resource" id="Resource_ku5tm"]
 script = ExtResource("2_2i3es")
 type = ExtResource("13_l3am2")
 id = 1
-
-[sub_resource type="Resource" id="Resource_a466y"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([5])
 
 [sub_resource type="Resource" id="Resource_osy30"]
 script = ExtResource("4_qk5jy")
@@ -1261,14 +1196,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_uuiip"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 4])
+
 [sub_resource type="Resource" id="Resource_lumk2"]
 script = ExtResource("2_2i3es")
 type = ExtResource("15_s3iof")
 id = 7
-
-[sub_resource type="Resource" id="Resource_uuiip"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 4])
 
 [sub_resource type="Resource" id="Resource_6b374"]
 script = ExtResource("4_qk5jy")
@@ -1409,14 +1344,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_jsre5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
 [sub_resource type="Resource" id="Resource_pi5kt"]
 script = ExtResource("2_2i3es")
 type = ExtResource("16_j2ocy")
 id = 1
-
-[sub_resource type="Resource" id="Resource_jsre5"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([4])
 
 [sub_resource type="Resource" id="Resource_nq4ts"]
 script = ExtResource("4_qk5jy")
@@ -1461,14 +1396,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_bgl1q"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
 [sub_resource type="Resource" id="Resource_l8xvh"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_54udb")
 id = 1
-
-[sub_resource type="Resource" id="Resource_bgl1q"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_jwfjs"]
 script = ExtResource("4_qk5jy")
@@ -1523,14 +1458,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_dhd5e"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 3])
+
 [sub_resource type="Resource" id="Resource_e53m6"]
 script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 2
-
-[sub_resource type="Resource" id="Resource_dhd5e"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([1, 3])
 
 [sub_resource type="Resource" id="Resource_s3xl0"]
 script = ExtResource("4_qk5jy")
@@ -1575,14 +1510,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_m1ybh"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4, 4])
+
 [sub_resource type="Resource" id="Resource_1k8qr"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_25pqm")
 id = 1
-
-[sub_resource type="Resource" id="Resource_m1ybh"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([4, 4])
 
 [sub_resource type="Resource" id="Resource_3jlri"]
 script = ExtResource("4_qk5jy")
@@ -1654,14 +1589,14 @@ r = 3
 q = 7
 entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_2jogx"), SubResource("Resource_rvnah")])
 
+[sub_resource type="Resource" id="Resource_hfhpp"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
 [sub_resource type="Resource" id="Resource_oaucm"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 4
-
-[sub_resource type="Resource" id="Resource_hfhpp"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([3, 4])
 
 [sub_resource type="Resource" id="Resource_gur7t"]
 script = ExtResource("4_qk5jy")
@@ -2029,14 +1964,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_nf2or"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 3])
+
 [sub_resource type="Resource" id="Resource_dgy1e"]
 script = ExtResource("2_2i3es")
 type = ExtResource("14_xioyu")
 id = 3
-
-[sub_resource type="Resource" id="Resource_nf2or"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([1, 3])
 
 [sub_resource type="Resource" id="Resource_gno87"]
 script = ExtResource("4_qk5jy")
@@ -2183,14 +2118,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_tsnpt"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0])
+
 [sub_resource type="Resource" id="Resource_7o2br"]
 script = ExtResource("2_2i3es")
 type = ExtResource("9_b8i77")
 id = 4
-
-[sub_resource type="Resource" id="Resource_tsnpt"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 0])
 
 [sub_resource type="Resource" id="Resource_72jvs"]
 script = ExtResource("4_qk5jy")
@@ -2658,14 +2593,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_tfkxq"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
 [sub_resource type="Resource" id="Resource_2mt7g"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_amp3j")
 id = 1
-
-[sub_resource type="Resource" id="Resource_tfkxq"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_ruok6"]
 script = ExtResource("4_qk5jy")
@@ -2898,14 +2833,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_hj5xo"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
 [sub_resource type="Resource" id="Resource_76224"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 2
-
-[sub_resource type="Resource" id="Resource_hj5xo"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 1])
 
 [sub_resource type="Resource" id="Resource_xdotx"]
 script = ExtResource("4_qk5jy")
@@ -3046,14 +2981,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_kfff7"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
 [sub_resource type="Resource" id="Resource_5ocxp"]
 script = ExtResource("2_2i3es")
 type = ExtResource("11_fn0u2")
 id = 1
-
-[sub_resource type="Resource" id="Resource_kfff7"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([0, 1])
 
 [sub_resource type="Resource" id="Resource_ki7ih"]
 script = ExtResource("4_qk5jy")
@@ -3494,14 +3429,14 @@ r = 8
 q = 1
 entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hrcpb"), SubResource("Resource_niqyn")])
 
+[sub_resource type="Resource" id="Resource_c8wdn"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
 [sub_resource type="Resource" id="Resource_b7ag6"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 1
-
-[sub_resource type="Resource" id="Resource_c8wdn"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([3, 4])
 
 [sub_resource type="Resource" id="Resource_rxb71"]
 script = ExtResource("4_qk5jy")
@@ -3648,16 +3583,16 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_ynb5v"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_0ybmk")
+id = 1
+
 [sub_resource type="Resource" id="Resource_rtejl"]
 script = ExtResource("15_uvvh0")
 max_handsize = 5
 movement_range = 3
 max_drains = 3
-
-[sub_resource type="Resource" id="Resource_ynb5v"]
-script = ExtResource("2_2i3es")
-type = ExtResource("16_0ybmk")
-id = 1
 
 [sub_resource type="Resource" id="Resource_15qpt"]
 script = ExtResource("4_qk5jy")
@@ -3755,14 +3690,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_n50ds"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([5])
+
 [sub_resource type="Resource" id="Resource_eqlqb"]
 script = ExtResource("2_2i3es")
 type = ExtResource("13_l3am2")
 id = 1
-
-[sub_resource type="Resource" id="Resource_n50ds"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([5])
 
 [sub_resource type="Resource" id="Resource_7jppt"]
 script = ExtResource("4_qk5jy")
@@ -3786,14 +3721,14 @@ r = 9
 q = 0
 entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tjqpr"), SubResource("Resource_7jppt")])
 
+[sub_resource type="Resource" id="Resource_dok8u"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
 [sub_resource type="Resource" id="Resource_mp706"]
 script = ExtResource("2_2i3es")
 type = ExtResource("19_ncl4f")
 id = 1
-
-[sub_resource type="Resource" id="Resource_dok8u"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([3, 4])
 
 [sub_resource type="Resource" id="Resource_f2f6r"]
 script = ExtResource("4_qk5jy")
@@ -3811,14 +3746,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_vfvnk"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
 [sub_resource type="Resource" id="Resource_xql1y"]
 script = ExtResource("2_2i3es")
 type = ExtResource("16_j2ocy")
 id = 3
-
-[sub_resource type="Resource" id="Resource_vfvnk"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([4])
 
 [sub_resource type="Resource" id="Resource_uewi7"]
 script = ExtResource("4_qk5jy")
@@ -3890,14 +3825,14 @@ visual_ent_props = {
 "visual_rotation": 0
 }
 
+[sub_resource type="Resource" id="Resource_36c7q"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 2])
+
 [sub_resource type="Resource" id="Resource_kjv5c"]
 script = ExtResource("2_2i3es")
 type = ExtResource("10_q3j68")
 id = 2
-
-[sub_resource type="Resource" id="Resource_36c7q"]
-script = ExtResource("8_d2swj")
-stack = Array[int]([1, 2])
 
 [sub_resource type="Resource" id="Resource_ko446"]
 script = ExtResource("4_qk5jy")
@@ -4287,7 +4222,7 @@ level_state = SubResource("Resource_e8v3f")
 current_round = 1
 current_phase = 0
 player_energy = SubResource("Resource_5dxda")
-deck_states = Array[ExtResource("4_x7vib")]([SubResource("Resource_1m3cx"), SubResource("Resource_qxw1j"), SubResource("Resource_8sgkg"), SubResource("Resource_fi0s4"), SubResource("Resource_ugp6y"), SubResource("Resource_g5ggn"), SubResource("Resource_hancc"), SubResource("Resource_yt5u7"), SubResource("Resource_txsa4"), SubResource("Resource_5sefp"), SubResource("Resource_puhpf"), SubResource("Resource_l3a2c"), SubResource("Resource_aucr0"), SubResource("Resource_uoew1"), SubResource("Resource_wxstm"), SubResource("Resource_8brgr"), SubResource("Resource_p24ja"), SubResource("Resource_03oxy"), SubResource("Resource_k6axt"), SubResource("Resource_mqfjw")])
+deck_states = Array[ExtResource("4_x7vib")]([])
 hand_states = Array[ExtResource("4_x7vib")]([])
 discard_pile_states = Array[ExtResource("4_x7vib")]([])
 timed_effects = Array[ExtResource("53_jcir5")]([])

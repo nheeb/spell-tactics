@@ -1,6 +1,8 @@
 
 class_name CombatState extends Resource
 
+# TODO Add ## docstrings to the CombatState properties
+
 @export var level_state: LevelState
 @export var current_round: int = 1
 @export var current_phase: Combat.RoundPhase = Combat.RoundPhase.CombatBegin
