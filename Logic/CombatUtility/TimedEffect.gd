@@ -1,5 +1,8 @@
 class_name TimedEffect extends Resource
 
+## A TimedEffect is basically a signal to method connection with extra features.
+## The most important feature is that this is serializable.
+
 @export var signal_ref: UniversalReference
 @export var signal_name: String
 @export var call_ref: UniversalReference

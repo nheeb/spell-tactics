@@ -1,23 +1,32 @@
-
 class_name CombatState extends Resource
 
 # TODO Add ## docstrings to the CombatState properties
 
+## Level data: How many tiles exist and which entities are on them
 @export var level_state: LevelState
 @export var current_round: int = 1
 @export var current_phase: Combat.RoundPhase = Combat.RoundPhase.CombatBegin
+## The energy posessed by the player
 @export var player_energy: EnergyStack
+## All spells in player's deck (not hand or discarded)
 @export var deck_states: Array[SpellState]
+## All spells in player's hand
 @export var hand_states: Array[SpellState]
+## All spells discarded (those will be reshuffled into a new deck once the deck is empty)
 @export var discard_pile_states: Array[SpellState]
+## Timed Effects ( = combat persistant signal method connections )
 @export var timed_effects: Array[TimedEffect]
 @export var combat_log: Array[LogEntry]
+## All actives
 @export var active_states: Array[ActiveState]
-# Events
+## All Events that are currently active
 @export var all_events: Array[CombatEventState]
+## All events that are scheduled to happen at some point
 @export var event_schedules: Array[CombatEventSchedule]
+## Planned Enemy events
 @export var enemy_event_queue: Array[EnemyEventPlan]
 @export var current_enemy_event: CombatEventReference
+## Progress of the enemy meter
 @export var enemy_meter: int
 # Enemy Actions
 @export var global_enemy_actions: Array[EnemyActionArgs]
