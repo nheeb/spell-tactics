@@ -6,6 +6,7 @@ const ACTIVE_USE_BUBBLE = preload("res://UI/CombatUI/Actives/ActiveUseBubble.tsc
 @onready var button: TextureButton = $ActiveButton
 @onready var bubbles: Array[ActiveUseBubble] = [$ActiveUseBubble1, $ActiveUseBubble2, $ActiveUseBubble3]
 @onready var positions: Array[Marker2D] = [$Position1, $Position2, $Position3]
+@onready var hotkey_label: Label = %HotkeyLabel
 
 @export var grey_out_modulate: Color = Color("909090")
 
@@ -47,6 +48,7 @@ func restart_bubbles():
 
 func init_active(new_active: Active): 
 	button.icon.texture = new_active.type.icon
+	hotkey_label.text = new_active.type.hotkey_label
 
 	var max_uses = new_active.get_limitation_max_uses()
 	assert(len(bubbles) == MAX_USES, "Expecting original bubbles array")

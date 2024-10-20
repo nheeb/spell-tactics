@@ -77,7 +77,7 @@ func get_type() -> CastableType:
 	return type
 
 func on_energy_load():
-	update_current_state()
+	combat.animation.callable(update_current_state)
 
 func update_current_state():
 	super.update_current_state()

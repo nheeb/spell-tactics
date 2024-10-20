@@ -92,7 +92,21 @@ func connect_with_event_signals() -> void:
 	Events.pinned_card_clicked.connect(pinned_card_clicked)
 	Events.pinned_card_rightclicked.connect(pinned_card_rightclicked)
 
+func deselect_current_and_select_castable(castable: Castable):
+	pass
+
+
+func process_active_hotkeys():
+	if Input.is_action_just_pressed("movement_active"): # can only right-click move if no castable is selected
+		if current_castable == null:
+			combat.action_stack.process_player_action(PASelectCastable.new(combat.actives[0]))
+	if Input.is_action_just_pressed("drain_active"):
+		combat.action_stack.process_player_action(PASelectCastable.new(combat.actives[1]))
+	if Input.is_action_just_pressed("melee_active"):
+		combat.action_stack.process_player_action(PASelectCastable.new(combat.actives[2]))
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("focus_on_player") and combat.player != null:
 		combat.animation.camera_reach(combat.player.visual_entity)
 		combat.animation.play_animation_queue(true)
+	process_active_hotkeys()

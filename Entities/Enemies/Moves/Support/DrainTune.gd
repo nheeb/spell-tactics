@@ -36,6 +36,8 @@ func _execute():
 		for entity in tile.entities:
 			if entity.is_drainable():
 				entity.drain().set_flag_extend()
+			elif entity.type.is_terrain:
+				combat.animation.callable(entity.visual_entity.visual_drain).set_flag_with()
 
 func _is_possible(enemy_tile: Tile) -> bool:
 	return get_top_energy_tiles(combat.player.current_tile, 1).size() >= 2
