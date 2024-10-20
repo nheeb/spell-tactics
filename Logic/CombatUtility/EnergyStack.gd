@@ -1,7 +1,7 @@
 class_name EnergyStack extends Resource
 
 enum EnergyType {
-	Life = 0,
+	Empty = 0,
 	Decay = 1,
 	Matter = 2,
 	Harmony = 3,
@@ -74,7 +74,7 @@ func apply_payment(payment: EnergyStack) -> void:
 
 const ENERGY_TO_LETTER = {
 	EnergyType.Any: "X",
-	EnergyType.Life: "L",
+	EnergyType.Empty: "E",
 	EnergyType.Decay: "D",
 	EnergyType.Matter: "M",
 	EnergyType.Harmony: "H",
@@ -84,7 +84,7 @@ const ENERGY_TO_LETTER = {
 
 const LETTER_TO_ENERGY = {
 	"X": EnergyType.Any,
-	"L": EnergyType.Life,
+	"E": EnergyType.Empty,
 	"D": EnergyType.Decay,
 	"M": EnergyType.Matter,
 	"H": EnergyType.Harmony,

@@ -27,7 +27,7 @@ func type_to_color(_type) -> Color:
 			return any_color
 		EnergyStack.EnergyType.Matter:
 			return matter_color
-		EnergyStack.EnergyType.Life:
+		EnergyStack.EnergyType.Empty:
 			return life_color
 		EnergyStack.EnergyType.Harmony:
 			return harmony_color
@@ -47,7 +47,7 @@ func type_to_icon(_type) -> Texture:
 			return energy_icons[0]
 		EnergyStack.EnergyType.Matter:
 			return energy_icons[1]
-		EnergyStack.EnergyType.Life:
+		EnergyStack.EnergyType.Empty:
 			return energy_icons[2]
 		EnergyStack.EnergyType.Harmony:
 			return energy_icons[3]
