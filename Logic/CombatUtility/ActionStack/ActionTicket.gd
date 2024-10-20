@@ -16,7 +16,7 @@ enum Type {
 	TimedEffect, # Action from TimedEffect
 	Result, # Carries a return value
 	Discussion, # Result using it's flavor to discuss a value with TimedEffects
-	FlavorAnnouncement # Does nothing. Just announcing a flavor,
+	FlavorAnnouncement # Does nothing. Just announcing a flavor
 }
 
 ## The one and only callable

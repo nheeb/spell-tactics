@@ -1,11 +1,9 @@
 class_name Combat extends Node
 
 enum RoundPhase {
-	CombatBegin = 0, # Unreachable
+	CombatBegin = 0, # Unreachable (only when a new combat is being loaded)
 	Start = 1,
-	# DEPRECATED Movement,
 	Spell = 2, # Player Input Needed
-	# DEPRECATED Pass,
 	Enemy = 3,
 	End = 4,
 	RoundRepeats = 5, # Unreachable

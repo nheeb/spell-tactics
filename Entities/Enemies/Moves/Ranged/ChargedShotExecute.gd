@@ -1,5 +1,9 @@
 extends EnemyActionLogic
 
+const STATUS_SHOT_CHARGED = preload(
+	"res://Spells/AllStatusEffects/EnemyMoves/ShotCharged.tres"
+)
+
 func _execute():
 	combat.animation.say(enemy, "Here is my heavy shot!")
 	var line := combat.level.get_line(enemy.current_tile, combat.player.current_tile)
@@ -21,11 +25,12 @@ func _execute():
 		combat.animation.effect(VFX.HEX_RINGS, blocking_entity.current_tile, \
 			 {"color": Color.YELLOW}).set_flag_with()
 	combat.animation.wait(.3)
-	combat.animation.camera_reach(blocking_entity if blocking_entity else target)
+	var target_node_3d = blocking_entity.visual_entity if blocking_entity else target_entity.visual_entity
+	combat.animation.camera_reach(target_node_3d)
 	combat.animation.effect(VFX.BILLBOARD_PROJECTILE, enemy.visual_entity, \
 		 {
 			"texture_name": "arrow", 
-			"target": blocking_entity if blocking_entity else target
+			"target": target_node_3d
 		}).set_flag_extend()
 	if blocking_entity:
 		blocking_entity.die()
@@ -33,3 +38,4 @@ func _execute():
 		if target is not HPEntity:
 			push_error("Wrong target for this enemy action")
 		target.inflict_damage_with_visuals(args.get_arg(0, enemy.strength * 3))
+	enemy.remove_status(Preloaded.STATUS_SHOT_CHARGED)
