@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://54o66pm8gt41"]
+[gd_scene load_steps=14 format=3 uid="uid://54o66pm8gt41"]
 
 [ext_resource type="Script" path="res://UI/CombatUI/ActiveButtonWithUses.gd" id="1_bp58t"]
 [ext_resource type="Shader" path="res://Shaders/UI/GreyOut2D.gdshader" id="2_b6tcy"]
@@ -9,11 +9,26 @@
 [ext_resource type="Texture2D" uid="uid://huibk6r0e0bi" path="res://Assets/Sprites/KenneyParticles/circle_05_cropped.png" id="6_j43rt"]
 [ext_resource type="Texture2D" uid="uid://b21okkqe6d4n2" path="res://Assets/Sprites/Icons/axe.png" id="7_sdsmr"]
 [ext_resource type="PackedScene" uid="uid://cb7taeyq4heur" path="res://UI/CombatUI/Actives/ActiveUseBubble.tscn" id="8_178h3"]
+[ext_resource type="FontFile" uid="uid://bgmbqeubb34cp" path="res://Assets/Fonts/rogue.ttf" id="10_nc7tr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_at7uw"]
 resource_local_to_scene = true
 shader = ExtResource("2_b6tcy")
 shader_parameter/grey_out_progress = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fl46h"]
+bg_color = Color(0.136719, 0.136719, 0.136719, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ouu5c"]
+bg_color = Color(0.335938, 0.335938, 0.335938, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [node name="ActiveButtonWithUses" type="Control"]
 layout_mode = 3
@@ -103,6 +118,37 @@ position = Vector2(52, 13)
 
 [node name="TwoBubblesPosition2" type="Marker2D" parent="."]
 position = Vector2(72, 13)
+
+[node name="ColorRect" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4375
+anchor_top = 0.839286
+anchor_right = 0.6875
+anchor_bottom = 1.13393
+theme_override_styles/panel = SubResource("StyleBoxFlat_fl46h")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ouu5c")
+
+[node name="HotkeyLabel" type="Label" parent="ColorRect/MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("10_nc7tr")
+theme_override_font_sizes/font_size = 22
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="ActiveButton" to="." method="_on_active_button_mouse_entered"]
 [connection signal="mouse_exited" from="ActiveButton" to="." method="_on_active_button_mouse_exited"]

@@ -23,3 +23,6 @@ func needs_user_input_to_proceed() -> bool:
 
 func get_reference() -> CombatNodeReference:
 	return CombatNodeReference.new(combat.get_path_to(self))
+
+func _to_string() -> String:
+	return "testAbstractPhase"

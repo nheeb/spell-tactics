@@ -26,7 +26,7 @@ func select():
 	selected = true
 	reset_targets()
 	get_logic()._on_select_deselect(true)
-	update_current_state()
+	combat.animation.callable(update_current_state)
 
 func deselect():
 	selected = false
@@ -59,12 +59,12 @@ func reset_targets() -> void:
 func add_target(target: Tile) -> void:
 	targets.append(target)
 	target.set_highlight(get_type().target_selected_highlight, true)
-	update_current_state()
+	combat.animation.callable(update_current_state)
 
 func remove_target(target: Tile) -> void:
 	targets.erase(target)
 	target.set_highlight(get_type().target_selected_highlight, false)
-	update_current_state()
+	combat.animation.callable(update_current_state)
 
 func are_targets_full() -> bool:
 	if get_type().target == CastableType.Target.None or \
