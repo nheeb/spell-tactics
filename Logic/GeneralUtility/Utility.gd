@@ -137,15 +137,13 @@ class DeckUtils:
 		spells.append_array(load_spell_n_times("DeadlyDart", 1, combat))
 		
 		spells.append_array(load_spell_n_times("Haunting", 1, combat))
-		spells.append_array(load_spell_n_times("HotSteam", 1, combat))
 		spells.append_array(load_spell_n_times("RockBlast", 1, combat))
 		spells.append_array(load_spell_n_times("SummonWitchTotem", 1, combat))
-		spells.append_array(load_spell_n_times("TotalDecay", 1, combat))
+		spells.append_array(load_spell_n_times("Teleport", 1, combat))
 		
 		spells.append_array(load_spell_n_times("Breath", 1, combat))
 		spells.append_array(load_spell_n_times("SpellMemory", 1, combat))
 		spells.append_array(load_spell_n_times("WaterBlast", 1, combat))
-		spells.append_array(load_spell_n_times("Unload", 1, combat))
 		spells.append_array(load_spell_n_times("LightningStrike", 1, combat))
 		
 		for spell in spells:

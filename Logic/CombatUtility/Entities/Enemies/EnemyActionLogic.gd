@@ -69,8 +69,9 @@ func get_alternative_plan() -> EnemyActionPlan:
 func get_target_pool() -> Array:
 	return _get_target_pool()
 
+## SUBACTION
 func setup() -> void:
-	_setup()
+	await _setup()
 
 ############################
 ## Methods for overriding ##
@@ -118,6 +119,7 @@ func _get_target_pool() -> Array:
 			all_targets = combat.level.get_all_entities()
 	return all_targets
 
+## SUBACTION
 func _setup() -> void:
 	pass
 

@@ -1,8 +1,12 @@
 extends EnemyActionLogic
 
-var movement: int:
-	get:
-		return args.get_arg(0, enemy.movement_range)
+var movement: int
+func refresh_movement():
+	movement = await combat.action_stack.get_discussion_result(
+		args.get_arg(0, enemy.movement_range),
+		ActionFlavor.new().set_owner(enemy) \
+			.add_tag(ActionFlavor.Tag.Movement).finalize(combat)
+	)
 
 func get_random_tile_in_range(enemy_tile: Tile):
 	var tiles := enemy_tile.get_surrounding_tiles(movement)
@@ -26,6 +30,7 @@ func set_destination_if_invalid(enemy_tile: Tile) -> Tile:
 	return destination
 
 func _setup():
+	await refresh_movement()
 	set_destination_if_invalid(enemy.current_tile)
 
 func _execute():
@@ -40,4 +45,5 @@ func _estimated_destination(enemy_tile: Tile) -> Tile:
 	return set_destination_if_invalid(enemy_tile)
 
 func _is_possible(enemy_tile: Tile) -> bool:
+	await refresh_movement()
 	return true

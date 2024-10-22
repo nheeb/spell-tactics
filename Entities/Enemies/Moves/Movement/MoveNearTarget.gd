@@ -1,8 +1,13 @@
 extends EnemyActionLogic
 
-var movement: int:
-	get:
-		return args.get_arg(0, enemy.movement_range)
+var movement: int
+
+func _setup():
+	movement = await combat.action_stack.get_discussion_result(
+		args.get_arg(0, enemy.movement_range),
+		ActionFlavor.new().set_owner(enemy) \
+			.add_tag(ActionFlavor.Tag.Movement).finalize(combat)
+	)
 
 func get_path(enemy_tile: Tile) -> Array[Tile]:
 	var path := combat.level.get_shortest_path(enemy_tile, target_tile)

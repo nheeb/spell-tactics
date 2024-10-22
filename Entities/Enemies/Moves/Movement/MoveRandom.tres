@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyAction" load_steps=5 format=3 uid="uid://dcpjaerkeyfjv"]
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=6 format=3 uid="uid://dcpjaerkeyfjv"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyAction.gd" id="1_8rtgk"]
 [ext_resource type="Texture2D" uid="uid://d4lqcpt47hbmt" path="res://Assets/Sprites/Icons/plain-arrow-right.png" id="1_oejpr"]
@@ -7,7 +7,12 @@
 [sub_resource type="Resource" id="Resource_lfok4"]
 script = ExtResource("1_v3i72")
 criteria = 2
-value = 0.1
+value = 0.4
+
+[sub_resource type="Resource" id="Resource_8ec0o"]
+script = ExtResource("1_v3i72")
+criteria = 1
+value = 0.4
 
 [resource]
 script = ExtResource("1_8rtgk")
@@ -20,7 +25,7 @@ target_range_looking = -1
 target_range_walking = -1
 target_consider_count = 2
 target_consider_method = 0
-default_scores = Array[ExtResource("1_v3i72")]([SubResource("Resource_lfok4")])
+default_scores = Array[ExtResource("1_v3i72")]([SubResource("Resource_lfok4"), SubResource("Resource_8ec0o")])
 cooldown = 0
 default_args = []
 default_kwargs = {}
