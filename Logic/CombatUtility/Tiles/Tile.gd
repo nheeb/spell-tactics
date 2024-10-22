@@ -1,11 +1,7 @@
 class_name Tile extends Node3D
 
 var entities: Array[Entity] = []
-var hovering := false:
-	set(h):
-		if not h and hovering:
-			_hover_long(false)
-		hovering = h
+var hovering := false
 
 var r: int
 var q: int
@@ -16,6 +12,9 @@ var location: Vector2i:
 		return Vector2i(r, q)
 
 @onready var level: Level = get_parent() as Level
+var combat: Combat:
+	get:
+		return level.combat
 @onready var highlight: Highlight = $Highlight
 
 const TILE = preload("res://Logic/CombatUtility/Tiles/Tile.tscn")
@@ -136,16 +135,16 @@ func serialize() -> TileState:
 
 func _on_hover_timer_timeout() -> void:
 	hovering = true
-	_hover_long(true)
-	level.combat.animation.play_animation_queue()
+	combat.action_stack.process_player_action(PAHoverTileLong.new(self, true))
 
+## SUBACTION
 func _hover_long(h: bool) -> void:
 	if h:
 		Events.tile_hovered_long.emit(self)
 	else:
 		Events.tile_unhovered_long.emit(self)
 	for e in entities:
-		e.on_hover_long(h)
+		await e.on_hover_long(h)
 
 ## Returns the combined obstacle layers of this tile's entities
 func get_obstacle_layers() -> int:

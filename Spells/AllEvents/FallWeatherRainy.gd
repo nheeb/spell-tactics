@@ -2,7 +2,7 @@ extends CombatEventLogic
 
 func _on_activate() -> void:
 	# TODO Nitai make enemies wet
-	push_warning("Rain must be remade!")
+	push_warning("CombatEvent Rain must be remade!")
 	#TimedEffect.new_from_signal_and_callable(combat.log.cast, te_on_cast)\
 		#.set_owner(self).set_id("te").give_signal_params_as_parameter()\
 		#.register(combat)

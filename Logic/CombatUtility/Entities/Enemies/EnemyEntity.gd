@@ -117,6 +117,7 @@ func get_bahviour() -> EnemyBehaviour:
 		return get_enemy_type().behaviour
 	return DEFAULT_BEHAVIOUR
 
+## SUBACTION
 func on_hover_long(h: bool) -> void:
 	if action_plan:
-		action_plan.show_preview(combat, h)
+		await action_plan.show_preview(combat, h)

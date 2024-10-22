@@ -147,6 +147,7 @@ func get_tags() -> Array[String]:
 func sync_with_type() -> void:
 	energy = type.energy
 
+## SUBACTION
 func on_hover_long(h: bool) -> void:
 	pass
 

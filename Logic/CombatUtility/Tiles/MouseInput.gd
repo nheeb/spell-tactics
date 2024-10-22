@@ -25,7 +25,9 @@ func hover_tile(tile: Tile):
 func unhover_tile(tile: Tile):
 	tile.set_highlight(Highlight.Type.Hover, false)
 	tile.set_highlight(Highlight.Type.HoverTarget, false)
-	tile.hovering = false
+	if tile.hovering:
+		tile.hovering = false
+		combat.action_stack.process_player_action(PAHoverTileLong.new(tile, false))
 	tile.get_node("HoverTimer").stop()
 	Events.tile_unhovered.emit(tile)
 

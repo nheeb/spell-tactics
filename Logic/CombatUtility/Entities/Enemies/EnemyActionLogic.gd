@@ -35,28 +35,33 @@ var target_entity: Entity:
 ## Methods for calling ##
 #########################
 
+## SUBACTION
 func execute():
 	await _execute()
 
+## SUBRESULT
 func is_possible(enemy_tile: Tile = enemy.current_tile) -> bool:
-	return _is_possible(enemy_tile)
+	return await _is_possible(enemy_tile)
 
+## SUBRESULT
 func evaluate(enemy_tile: Tile = enemy.current_tile) -> EnemyActionEval:
-	if is_possible(enemy_tile):
+	if await is_possible(enemy_tile):
 		var evaluation := EnemyActionEval.from_cv_array(action.default_scores)
-		return _evaluate(enemy_tile, evaluation)
+		return await _evaluate(enemy_tile, evaluation)
 	else:
 		return EnemyActionEval.new()
 
+## SUBRESULT
 func estimated_destination(enemy_tile: Tile = enemy.current_tile) -> Tile:
-	var destinaion := _estimated_destination(enemy_tile)
+	var destinaion := await _estimated_destination(enemy_tile)
 	if destinaion != null:
 		return destinaion
 	else:
 		return enemy_tile
 
+## ACTION ANIMATOR
 func show_preview(show: bool) -> void:
-	_show_preview(show)
+	await _show_preview(show)
 
 func get_alternative_plan() -> EnemyActionPlan:
 	var _plan := _get_alternative_plan()
@@ -77,21 +82,26 @@ func setup() -> void:
 ## Methods for overriding ##
 ############################
 
+## SUBACTION
 func _execute():
 	pass
 
+## SUBRESULT
 func _is_possible(enemy_tile: Tile) -> bool:
 	return true
 
+## SUBRESULT
 func _evaluate(enemy_tile: Tile, eval: EnemyActionEval) -> EnemyActionEval:
 	return eval
 
+## SUBRESULT
 func _estimated_destination(enemy_tile: Tile) -> Tile:
 	return enemy_tile
 
+## SUBACTION ANIMATOR
 func _show_preview(show: bool) -> void:
-	show_movement_arrow(show)
-	show_action_icon_over_enemy(show)
+	await show_movement_arrow(show)
+	await show_action_icon_over_enemy(show)
 
 func _get_alternative_plan() -> EnemyActionPlan:
 	return null
@@ -127,17 +137,16 @@ func _setup() -> void:
 ## Helper Methods ##
 ####################
 
+## SUBACTION ANIMATOR
 func show_movement_arrow(show: bool):
 	var from: Tile = enemy.current_tile
 	var to: Tile
 	if plan:
-		var dest := combat.action_stack.process_result(
+		to = await combat.action_stack.get_result(
 			plan.get_estimated_destination.bind(combat, from)
 		)
-		await dest.resolved
-		to = dest.value
 	else:
-		to = estimated_destination(from)
+		to = await estimated_destination(from)
 		
 	if from != to:
 		if show:
@@ -152,10 +161,11 @@ func show_movement_arrow(show: bool):
 		else:
 			combat.animation.callable(combat.level.immediate_arrows().clear)
 
+## ANIMATOR
 func show_action_icon_over_enemy(show: bool):
 	if action.icon:
 		if show:
 			combat.animation.add_staying_effect(VFX.ICON_VISUALS, enemy.visual_entity, "action_icon", \
-				{"icon": action.icon, "color": action.color, "quad": true})
+				{"icon": action.icon, "color": action.color, "quad": true}).set_flag_with()
 		else:
 			combat.animation.remove_staying_effect(enemy.visual_entity, "action_icon")

@@ -117,7 +117,7 @@ func is_possible(combat: Combat, include_movement := true) -> bool:
 		)
 		await combat.action_stack.wait()
 		start_from = after_movement.value
-	return get_logic().is_possible(start_from)
+	return await get_logic().is_possible(start_from)
 
 ## RESULT
 func get_evaluation_score(combat: Combat) -> float:
@@ -137,7 +137,7 @@ func get_evaluation_score(combat: Combat) -> float:
 			await combat.action_stack.wait()
 			score_cache += movement_score.value
 			start_from = movement_destination.value
-		var eval := get_logic().evaluate(start_from)
+		var eval := await get_logic().evaluate(start_from)
 		score_cache += eval.get_total_score(get_enemy(combat).get_bahviour())
 	return score_cache
 
@@ -158,10 +158,11 @@ func get_estimated_destination(combat: Combat, start_from: Tile = null) -> Tile:
 		)
 		await combat.action_stack.active_ticket.wait()
 		start_from = after_movement.value
-	return get_logic().estimated_destination(start_from)
+	return await get_logic().estimated_destination(start_from)
 
+## SUBACTION
 func show_preview(combat: Combat, show: bool) -> void:
-	get_logic().show_preview(show)
+	await get_logic().show_preview(show)
 
 func has_movement() -> bool:
 	return action.movement_action_args != null
