@@ -3,9 +3,9 @@ class_name CombatLogic extends RefCounted
 # TODO make it work for logics created dynamically during the game.
 
 var combat: Combat:
-	set(x):
-		combat = x
-		if combat:
+	set(_combat):
+		if _combat:
+			combat = _combat
 			combat.action_stack.push_front(_on_combat_connect)
 
 ## ACTION
