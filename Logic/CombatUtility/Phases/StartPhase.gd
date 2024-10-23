@@ -4,7 +4,7 @@ class_name StartPhase extends AbstractPhase
 func process_phase() -> void:
 	combat.animation.call_method(combat.ui, "set_status", ["Drawing hand cards..."])
 	combat.animation.wait(.5)
-	combat.cards.draw_to_hand_size()
+	combat.cards.draw()
 	
 	combat.log.add("Enemies plan their moves...",)
 	for enemy in combat.get_all_enemies():

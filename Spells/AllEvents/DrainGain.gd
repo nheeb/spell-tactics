@@ -7,7 +7,7 @@ var drain: Active = null:
 		return drain
 
 # actually [1, 3, 6] but ActivesUI can't handle it atm
-const DEFAULT_GAIN_PATTERN = [1, 3]
+const DEFAULT_GAIN_PATTERN = [2, 5]
 
 ## Contains the rounds where drain usage is increased
 var gain_pattern: Array
