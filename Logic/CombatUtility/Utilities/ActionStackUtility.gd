@@ -285,9 +285,9 @@ signal flavor_announced(flavor: ActionFlavor)
 
 func set_active_flavor(flavor: ActionFlavor) -> Signal:
 	assert(active_ticket, "An active ticket is needed to set the flavor.")
-	if active_ticket.flavor:
-		push_warning("Setting flavor for active ticket which already has one.\
-		Is this intended?")
+	#if active_ticket.flavor:
+		#push_warning("Setting flavor for active ticket which already has one.\
+		#Is this intended?")
 	active_ticket.flavor = flavor
 	_announce_active_flavor()
 	return wait()

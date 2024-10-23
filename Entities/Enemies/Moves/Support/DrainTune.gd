@@ -17,6 +17,18 @@ func get_top_energy_tiles(origin: Tile, _range := 1, count := -1) -> Array[Tile]
 
 func _execute():
 	var target_tiles := get_top_energy_tiles(combat.player.current_tile, 1, 2)
+	var all_entities := []
+	for tile in target_tiles:
+		all_entities.append_array(tile.entities)
+	
+	await combat.action_stack.set_active_flavor(
+		ActionFlavor.new().set_owner(enemy)
+			.add_tag(ActionFlavor.Tag.Drain)
+			.add_target_array(target_tiles)
+			.add_target_array(all_entities)
+			.finalize(combat)
+	)
+	
 	combat.animation.say(enemy.visual_entity, "\"No energy for you!\"") \
 		.set_duration(.6)
 	combat.animation.camera_reach(combat.player) \

@@ -27,14 +27,25 @@ var object: Object:
 var method_name: StringName:
 	get:
 		return callable.get_method()
+
+## Type of the action ticket
 var type: Type
+
 ## Object describing the action. Used to hook something onto that action.
 ## To be clean use action_stack.load_flavor() to set and get_flavor() to get.
 var flavor: ActionFlavor:
 	set(x):
 		flavor = x
+		_flavors.push_front(flavor)
 		_has_flavor_to_announce = flavor != null
+	get:
+		if _flavors:
+			return _flavors.front()
+		return null
+var _flavors: Array[ActionFlavor]
 var _has_flavor_to_announce := false
+
+## Current state
 var state : State = State.Created
 var _remove_me := false:
 	set(x):

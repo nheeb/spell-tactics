@@ -29,4 +29,3 @@ func casting_effect() -> void:
 		enemy.inflict_damage_with_visuals(1)
 		
 	combat.cards.draw()
-

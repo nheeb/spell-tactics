@@ -1,11 +1,15 @@
 extends CombatEventLogic
 
 func _on_activate() -> void:
-	# TODO Nitai make enemies wet
-	push_warning("CombatEvent Rain must be remade!")
-	#TimedEffect.new_from_signal_and_callable(combat.log.cast, te_on_cast)\
-		#.set_owner(self).set_id("te").give_signal_params_as_parameter()\
-		#.register(combat)
+	for enemy in combat.enemies:
+		enemy.apply_status(Preloaded.STATUS_WET)
+	combat.player.apply_status(Preloaded.STATUS_WET)
+	TimedEffect.new_flavor_reaction(
+		ActionFlavor.new().set_owner(combat.player)\
+			.add_tag(ActionFlavor.Tag.Drain)
+			.finalize(combat),
+		give_extra_harmony
+	).register(combat)
 
 func _on_finish() -> void:
 	# TODO what if game has already ended? (I got a null pointer here, don't know if my null check breaks something - Nils)
@@ -21,4 +25,4 @@ func te_on_cast(castable: Castable):
 
 func give_extra_harmony():
 	combat.energy.gain(EnergyStack.string_to_energy("H"), combat.player).set_flag_with()
-	combat.animation.say(combat.player.visual_entity, "+1 Rain Harmony").set_flag_with()
+	combat.animation.say(combat.player.visual_entity, "+1 Harmony from rain").set_flag_with()

@@ -7,14 +7,15 @@
 
 [sub_resource type="Resource" id="Resource_f4asu"]
 script = ExtResource("1_soxba")
-stack = Array[int]([1, 6])
+stack = Array[int]([1, 1, 1])
 
 [resource]
 script = ExtResource("1_l2jrd")
 costs = SubResource("Resource_f4asu")
 keywords = Array[ExtResource("3_phl0k")]([])
 pretty_name = "Total decay"
-effect_text = "Does 1 damage to an enemy.  You can use any amount of additional Decay Energy to increase the damage by that amount. "
+effect_text = "Deals 3 damage to an enemy. 
+Deals 3 additional damage if you still have Decay energy left."
 fluff_text = ""
 icon = ExtResource("2_hsywt")
 color = Color(0.758639, 0.368164, 0.8125, 1)

@@ -31,4 +31,6 @@ func casting_effect() -> void:
 	
 	for enemy in enemies:
 		enemy.inflict_damage_with_visuals(hand_size)
-
+	
+	for i in range(3):
+		combat.cards.draw()

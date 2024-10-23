@@ -44,7 +44,8 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 		var previous_log_entries := enemy.combat.log.filtered_entries(
 			ActionFlavor.new().set_owner(enemy)
 				.add_tag(ActionFlavor.Tag.EnemyActionSpecific)
-				.add_data("action", action),
+				.add_data("action", action)
+				.finalize(enemy.combat),
 			enemy.combat.current_round - cooldown
 		)
 		if previous_log_entries:
