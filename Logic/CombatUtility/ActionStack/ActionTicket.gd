@@ -35,12 +35,15 @@ var type: Type
 ## To be clean use action_stack.load_flavor() to set and get_flavor() to get.
 var flavor: ActionFlavor:
 	set(x):
-		flavor = x
-		_flavors.push_front(flavor)
-		_has_flavor_to_announce = flavor != null
+		if x:
+			flavor = x
+			_flavors.push_front(flavor)
+			_has_flavor_to_announce = flavor != null
 	get:
 		if _flavors:
 			return _flavors.front()
+		elif flavor:
+			return flavor
 		return null
 var _flavors: Array[ActionFlavor]
 var _has_flavor_to_announce := false
