@@ -111,7 +111,7 @@ func get_name() -> String:
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 
 
-const DEFAULT_BEHAVIOUR = preload("res://Entities/Enemies/EnemyBehaviourDefault.tres")
+const DEFAULT_BEHAVIOUR = preload("res://Entities/Enemies/Behaviours/EnemyBehaviourDefault.tres")
 func get_bahviour() -> EnemyBehaviour:
 	if get_enemy_type().behaviour:
 		return get_enemy_type().behaviour

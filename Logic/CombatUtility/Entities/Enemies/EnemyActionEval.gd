@@ -14,6 +14,7 @@ enum Criteria {
 	Disrespect,
 	Bonus,
 	Sustain,
+	EnemyMeter,
 }
 
 var scores: Dictionary = {} # Criteria -> Score (float)

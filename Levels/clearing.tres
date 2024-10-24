@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=502 format=3 uid="uid://ckq8v1s3aruw7"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=472 format=3 uid="uid://ckq8v1s3aruw7"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/CombatState.gd" id="1_a77op"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/ActiveState.gd" id="1_opmkl"]
@@ -14,14 +14,17 @@
 [ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Entities/Environment/DirtTile.tres" id="6_8em4m"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="6_c7ku8"]
 [ext_resource type="Resource" uid="uid://brvjvj8i7f7kw" path="res://Entities/Environment/Tree.tres" id="7_ay4xs"]
+[ext_resource type="Resource" uid="uid://cyfghwiu5p4y4" path="res://Spells/AllEnemyEvents/SpawnNewEnemy.tres" id="7_juk21"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="8_d2swj"]
 [ext_resource type="Resource" uid="uid://b7xqo2ltiqbwk" path="res://Entities/Environment/Bush.tres" id="9_b8i77"]
 [ext_resource type="Resource" uid="uid://ddr1tv8hf3bj3" path="res://Entities/Environment/Stump.tres" id="10_q3j68"]
 [ext_resource type="Resource" uid="uid://c6t18hbsmwiha" path="res://Entities/Environment/Rock.tres" id="11_7c360"]
-[ext_resource type="Resource" uid="uid://kq07x16lyno7" path="res://Entities/Enemies/GoblinArcher.tres" id="11_54udb"]
+[ext_resource type="Resource" uid="uid://kq07x16lyno7" path="res://Entities/Enemies/Types/GoblinArcher.tres" id="11_54udb"]
 [ext_resource type="Resource" uid="uid://nuucsrbi1dqp" path="res://Entities/Environment/MediumShrooms.tres" id="11_fn0u2"]
+[ext_resource type="Resource" uid="uid://bwuf4tmcob7ue" path="res://Entities/Enemies/Moves/Other/HeavyInsult.tres" id="13_7pg6x"]
 [ext_resource type="Resource" uid="uid://b8ef7eh8cp7ub" path="res://Entities/Environment/Flower.tres" id="13_l3am2"]
-[ext_resource type="Resource" uid="uid://dxf83ay5rsin2" path="res://Entities/Enemies/Goblin.tres" id="14_jrk47"]
+[ext_resource type="Resource" uid="uid://b38c7gip0ynr" path="res://Entities/Enemies/Moves/Support/CallHelp.tres" id="14_83ejw"]
+[ext_resource type="Resource" uid="uid://dxf83ay5rsin2" path="res://Entities/Enemies/Types/Goblin.tres" id="14_jrk47"]
 [ext_resource type="Resource" uid="uid://bnqbor0d6tjit" path="res://Entities/Environment/SmallShrooms.tres" id="14_xioyu"]
 [ext_resource type="Resource" uid="uid://dq2qgws5vu0i2" path="res://Entities/Environment/TallGrass.tres" id="15_s3iof"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/PlayerTraits.gd" id="15_uvvh0"]
@@ -29,7 +32,7 @@
 [ext_resource type="Resource" uid="uid://bftmj7ayhlcs2" path="res://Entities/Environment/FlowSmall.tres" id="16_j2ocy"]
 [ext_resource type="Resource" uid="uid://bhq0pkvdokid6" path="res://Entities/Environment/Pebbles.tres" id="17_73e5m"]
 [ext_resource type="Resource" uid="uid://dh4ll7t2j71pq" path="res://Entities/Environment/FlowMedium.tres" id="19_25pqm"]
-[ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Entities/Enemies/GoblinBard.tres" id="19_amp3j"]
+[ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Entities/Enemies/Types/GoblinBard.tres" id="19_amp3j"]
 [ext_resource type="Resource" uid="uid://iq34rfnf6t4w" path="res://Entities/Environment/WaterTile.tres" id="19_ncl4f"]
 [ext_resource type="Resource" uid="uid://c5b13jca15dvy" path="res://Levels/enemy_event_plan_spawn_new_fighter.tres" id="26_gdvax"]
 [ext_resource type="Resource" uid="uid://diqf4kucf4hs8" path="res://Levels/combat_event_schedule_weather.tres" id="28_o6fso"]
@@ -39,257 +42,29 @@
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Status/EntityStatus.gd" id="35_eu3yc"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/TimedEffect.gd" id="53_jcir5"]
 
-[sub_resource type="Resource" id="Resource_au4dy"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
+[sub_resource type="Resource" id="Resource_bid23"]
+script = ExtResource("2_kcnt0")
+event_type = ExtResource("7_juk21")
+params = {
+"enemy_type": ExtResource("11_54udb")
+}
+override_meter_costs = 5
+event_created = false
+use_as_default = true
 
-[sub_resource type="Resource" id="Resource_pdv8v"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
+[sub_resource type="Resource" id="Resource_eacys"]
+script = ExtResource("6_c7ku8")
+action = ExtResource("13_7pg6x")
+args = []
+kwargs = {}
+fixed_targets = []
 
-[sub_resource type="Resource" id="Resource_nxumc"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_q7xub"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_b6ecu"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_o3kr8"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_lrobg"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_sl74m"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_obth0"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_wtji5"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_ox0np"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_6rxmq"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_alcg3"]
-script = ExtResource("3_kxbah")
-type = 0
-round_number = 0
-round_phase = 0
-text = "Combat was deserialized."
-
-[sub_resource type="Resource" id="Resource_dgvt6"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_i0bjw"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_3ws5m"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_06a81"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_4grue"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_bp1i5"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_do7uv"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_w7vvh"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_jex60"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_pawpb"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_u8ckh"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_foyhm"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_e0bt6"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_qxsn3"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_o1vab"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_eo8ms"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_lgan3"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_8xeqq"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_0qjr3"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_e81g2"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_dmpj3"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_3ayf0"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
-
-[sub_resource type="Resource" id="Resource_s1fwo"]
-script = ExtResource("3_kxbah")
-type = 2
-round_number = 1
-round_phase = 0
-text = "A: ._on_combat_connect"
+[sub_resource type="Resource" id="Resource_foolh"]
+script = ExtResource("6_c7ku8")
+action = ExtResource("14_83ejw")
+args = []
+kwargs = {}
+fixed_targets = []
 
 [sub_resource type="Resource" id="Resource_25aem"]
 script = ExtResource("2_2i3es")
@@ -4226,10 +4001,10 @@ deck_states = Array[ExtResource("4_x7vib")]([])
 hand_states = Array[ExtResource("4_x7vib")]([])
 discard_pile_states = Array[ExtResource("4_x7vib")]([])
 timed_effects = Array[ExtResource("53_jcir5")]([])
-combat_log = Array[ExtResource("3_kxbah")]([SubResource("Resource_au4dy"), SubResource("Resource_pdv8v"), SubResource("Resource_nxumc"), SubResource("Resource_q7xub"), SubResource("Resource_b6ecu"), SubResource("Resource_o3kr8"), SubResource("Resource_lrobg"), SubResource("Resource_sl74m"), SubResource("Resource_obth0"), SubResource("Resource_wtji5"), SubResource("Resource_ox0np"), SubResource("Resource_6rxmq"), SubResource("Resource_alcg3"), SubResource("Resource_dgvt6"), SubResource("Resource_i0bjw"), SubResource("Resource_3ws5m"), SubResource("Resource_06a81"), SubResource("Resource_4grue"), SubResource("Resource_bp1i5"), SubResource("Resource_do7uv"), SubResource("Resource_w7vvh"), SubResource("Resource_jex60"), SubResource("Resource_pawpb"), SubResource("Resource_u8ckh"), SubResource("Resource_foyhm"), SubResource("Resource_e0bt6"), SubResource("Resource_qxsn3"), SubResource("Resource_o1vab"), SubResource("Resource_eo8ms"), SubResource("Resource_lgan3"), SubResource("Resource_8xeqq"), SubResource("Resource_0qjr3"), SubResource("Resource_e81g2"), SubResource("Resource_dmpj3"), SubResource("Resource_3ayf0"), SubResource("Resource_s1fwo")])
+combat_log = Array[ExtResource("3_kxbah")]([])
 active_states = Array[ExtResource("1_opmkl")]([])
 all_events = Array[ExtResource("2_pdf0p")]([])
 event_schedules = Array[ExtResource("29_e34ni")]([ExtResource("28_o6fso"), ExtResource("29_ouf0n")])
-enemy_event_queue = Array[ExtResource("2_kcnt0")]([ExtResource("26_gdvax")])
+enemy_event_queue = Array[ExtResource("2_kcnt0")]([ExtResource("26_gdvax"), SubResource("Resource_bid23")])
 enemy_meter = 0
-global_enemy_actions = Array[ExtResource("6_c7ku8")]([])
+global_enemy_actions = Array[ExtResource("6_c7ku8")]([SubResource("Resource_eacys"), SubResource("Resource_foolh")])

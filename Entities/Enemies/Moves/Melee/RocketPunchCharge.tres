@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_yhnhs"]
 script = ExtResource("1_ak7j4")
 criteria = 6
-value = 10.0
+value = 2.0
 
 [sub_resource type="Resource" id="Resource_4j28v"]
 script = ExtResource("4_ugxeb")
@@ -25,12 +25,12 @@ icon = ExtResource("2_sg0sy")
 color = Color(1, 1, 1, 1)
 target_type = 1
 can_self_target = false
-target_range_looking = -1
+target_range_looking = 3
 target_range_walking = -1
 target_consider_count = 2
 target_consider_method = 0
 default_scores = Array[ExtResource("1_ak7j4")]([SubResource("Resource_yhnhs")])
-cooldown = 2
+cooldown = 3
 movement_action_args = SubResource("Resource_4j28v")
 default_args = []
 default_kwargs = {}
