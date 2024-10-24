@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=8 format=3 uid="uid://bi6yoibph34kq"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_ak7j4"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyAction.gd" id="2_p1qck"]
+[ext_resource type="Texture2D" uid="uid://b7ov46i1xo5yf" path="res://Assets/Sprites/Icons/mailed-fist.png" id="2_sg0sy"]
+[ext_resource type="Resource" uid="uid://dpva1xd10eiwv" path="res://Entities/Enemies/Moves/Movement/MoveNearTarget.tres" id="3_ug4sh"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="4_ugxeb"]
+
+[sub_resource type="Resource" id="Resource_yhnhs"]
+script = ExtResource("1_ak7j4")
+criteria = 6
+value = 10.0
+
+[sub_resource type="Resource" id="Resource_4j28v"]
+script = ExtResource("4_ugxeb")
+action = ExtResource("3_ug4sh")
+args = []
+kwargs = {}
+fixed_targets = []
+
+[resource]
+script = ExtResource("2_p1qck")
+pretty_name = "Rocket Punch"
+icon = ExtResource("2_sg0sy")
+color = Color(1, 1, 1, 1)
+target_type = 1
+can_self_target = false
+target_range_looking = -1
+target_range_walking = -1
+target_consider_count = 2
+target_consider_method = 0
+default_scores = Array[ExtResource("1_ak7j4")]([SubResource("Resource_yhnhs")])
+cooldown = 2
+movement_action_args = SubResource("Resource_4j28v")
+default_args = []
+default_kwargs = {}
