@@ -5,22 +5,23 @@
 [ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="1_gny5x"]
 [ext_resource type="PackedScene" uid="uid://ddgi1ht0f4leb" path="res://UI/HandCards/HandCardSideIcon.tscn" id="2_1yjm5"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xn4iu"]
-frequency = 0.0129
-fractal_lacunarity = 3.215
-fractal_gain = 0.4
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1lb16"]
+frequency = 0.0621
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s5a5o"]
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_wer57"]
+width = 128
+height = 128
+depth = 24
 seamless = true
-normalize = false
-noise = SubResource("FastNoiseLite_xn4iu")
+seamless_blend_skirt = 0.305
+noise = SubResource("FastNoiseLite_1lb16")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xckbr"]
 resource_local_to_scene = true
 shader = ExtResource("1_6xsoc")
-shader_parameter/distort_progress = 0.0
+shader_parameter/distort_progress = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/distort_noise = SubResource("NoiseTexture2D_s5a5o")
+shader_parameter/distort_noise = SubResource("NoiseTexture3D_wer57")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wkypa"]
 radius = 256.0
