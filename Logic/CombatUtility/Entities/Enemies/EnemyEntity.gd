@@ -15,7 +15,14 @@ var action_plan: EnemyActionPlan
 
 ## ACTION
 func plan_next_action():
-	action_plan = await get_random_action_plan()
+	if not action_plan:
+		action_plan = await get_random_action_plan()
+	else:
+		if action_plan.action_args.try_to_avoid:
+			var new_action_plan: EnemyActionPlan = await get_random_action_plan()
+			if not new_action_plan.action_args.try_to_avoid:
+				action_plan = new_action_plan
+	
 
 ## SUBACTION
 func do_action():
@@ -63,6 +70,7 @@ func get_action_pool() -> Array[EnemyActionArgs]:
 	actions.append_array(combat.global_enemy_actions)
 	return actions
 
+## RESULT
 func get_random_action_plan() -> EnemyActionPlan:
 	var d_power : float = get_bahviour().decision_power
 	var plans: Array[EnemyActionPlan] = []
@@ -90,7 +98,11 @@ func get_random_action_plan() -> EnemyActionPlan:
 ## Entity Overrides ##
 ######################
 
-func on_create() -> void:
+## TE
+func on_combat_change():
+	await combat.action_stack.process_callable(plan_next_action)
+
+func on_create():
 	super.on_create()
 	type = type as EnemyEntityType
 
@@ -98,7 +110,7 @@ func on_death():
 	super.on_death()
 	combat.enemies.erase(self)
 
-func sync_with_type() -> void:
+func sync_with_type():
 	super()
 	agility = type.agility
 	strength = type.strength

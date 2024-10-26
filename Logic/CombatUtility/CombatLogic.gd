@@ -11,7 +11,7 @@ var combat: Combat:
 ## ACTION
 func _on_combat_connect() -> void:
 	TimedEffect.new_combat_change(_on_combat_change)\
-		.force_freshness().set_id("_cs").set_solo().register(combat)
+		.force_freshness().set_id("_cc").set_solo().register(combat)
 
 ## TE
 func _on_combat_change() -> void:

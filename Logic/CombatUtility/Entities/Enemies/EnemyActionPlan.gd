@@ -139,6 +139,9 @@ func get_evaluation_score(combat: Combat) -> float:
 			start_from = movement_destination.value
 		var eval := await get_logic().evaluate(start_from)
 		score_cache += eval.get_total_score(get_enemy(combat).get_bahviour())
+		score_cache *= action_args.score_factor
+		if action_args.try_to_avoid:
+			score_cache *= action_args.avoid_score_factor
 	return score_cache
 
 func get_evaluation_score_cached() -> float:

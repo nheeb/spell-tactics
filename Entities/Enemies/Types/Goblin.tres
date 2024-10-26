@@ -11,6 +11,9 @@
 [sub_resource type="Resource" id="Resource_6kdtt"]
 script = ExtResource("2_brx3d")
 action = ExtResource("1_u7plf")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
 args = []
 kwargs = {}
 fixed_targets = []
@@ -18,6 +21,9 @@ fixed_targets = []
 [sub_resource type="Resource" id="Resource_swso0"]
 script = ExtResource("2_brx3d")
 action = ExtResource("3_l54jj")
+score_factor = 1.0
+try_to_avoid = true
+avoid_score_factor = 0.01
 args = []
 kwargs = {}
 fixed_targets = []
@@ -25,6 +31,9 @@ fixed_targets = []
 [sub_resource type="Resource" id="Resource_f6w7x"]
 script = ExtResource("2_brx3d")
 action = ExtResource("5_wpy73")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
 args = []
 kwargs = {}
 fixed_targets = []

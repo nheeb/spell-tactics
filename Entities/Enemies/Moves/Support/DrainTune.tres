@@ -14,6 +14,9 @@ value = 2.0
 [sub_resource type="Resource" id="Resource_4rasb"]
 script = ExtResource("4_doan8")
 action = ExtResource("3_ao7fl")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
 args = []
 kwargs = {}
 fixed_targets = []

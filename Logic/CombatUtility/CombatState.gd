@@ -36,6 +36,9 @@ const COMBAT = preload("res://Logic/CombatUtility/Combat.tscn")
 func deserialize() -> Combat:
 	var combat : Combat = COMBAT.instantiate() as Combat
 	combat._ready()
+	for c in combat.get_children():
+		for cc in c.get_children():
+			cc.set("combat", combat)
 	combat.log.add("Deserializing Combat...")
 	combat.current_round = current_round
 	combat.current_phase = current_phase

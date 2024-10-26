@@ -19,7 +19,7 @@ void fragment() {
 	float change_x = texture(distort_noise, vec3(UV.x * .05, UV.y * .03, t * .3)).r;
 	float change_y = texture(distort_noise, vec3(UV.x * .05, UV.y * .03, .5 + t * .3)).r;
 	rotated_uv += distort_progress * .17 * (vec2(.5) - vec2(change_x, change_y));
-	
+
 	float distort_value = texture(distort_noise, vec3(rotated_uv, t)).r;
 	float uv_noise = .5 * smoothstep(edge - .4, edge, texture(distort_noise, vec3(UV, t)).r);//pow(texture(distort_noise, vec3(UV,TIME * .07)).r, 3.0);
 	vec4 tex = texture(TEXTURE, rotated_uv);

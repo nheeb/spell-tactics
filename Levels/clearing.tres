@@ -55,6 +55,9 @@ use_as_default = true
 [sub_resource type="Resource" id="Resource_eacys"]
 script = ExtResource("6_c7ku8")
 action = ExtResource("13_7pg6x")
+score_factor = 1.0
+try_to_avoid = true
+avoid_score_factor = 0.01
 args = []
 kwargs = {}
 fixed_targets = []
@@ -62,6 +65,9 @@ fixed_targets = []
 [sub_resource type="Resource" id="Resource_foolh"]
 script = ExtResource("6_c7ku8")
 action = ExtResource("14_83ejw")
+score_factor = 1.0
+try_to_avoid = true
+avoid_score_factor = 0.01
 args = []
 kwargs = {}
 fixed_targets = []

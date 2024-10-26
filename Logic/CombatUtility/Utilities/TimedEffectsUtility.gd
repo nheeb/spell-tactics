@@ -17,8 +17,16 @@ func connect_effect(te: TimedEffect) -> void:
 		var array_of_effects = connected_effects[te.connected_signal] as Array
 		assert(array_of_effects is Array)
 		array_of_effects.append(te)
-		array_of_effects.sort_custom(func(a,b) : \
-			return a.priority > b.priority if a.priority != b.priority else a.call_method <= b.call_method)
+		if array_of_effects.any(
+			func (t: TimedEffect):
+				return t.priority != 0
+		):
+			array_of_effects.sort_custom(
+				func(a,b) : \
+					return a.priority > b.priority \
+						if a.priority != b.priority \
+						else a.call_method <= b.call_method
+			)
 	else:
 		connected_effects[te.connected_signal] = [te]
 		te.connected_signal.connect(signal_triggered.bind(te.connected_signal))
