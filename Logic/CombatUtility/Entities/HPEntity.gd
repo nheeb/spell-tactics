@@ -27,7 +27,6 @@ func on_death():
 		if logic.has_method("on_death"):
 			logic.on_death()
 	combat.level.move_entity_to_graveyard(self)
-	
 
 func inflict_damage(damage: int):
 	if damage <= 0:
@@ -55,6 +54,9 @@ func inflict_heal_with_visuals(heal: int) -> AnimationObject:
 	type = type as HPEntityType
 	hp = min(type.max_hp, hp + heal)
 	return combat.animation.update_hp(self)
+
+func is_wounded() -> bool:
+	return hp < type.max_hp 
 
 func sync_with_type() -> void:
 	super()
