@@ -7,21 +7,21 @@
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
 script = ExtResource("1_766p2")
-stack = Array[int]([4, 6])
+stack = Array[int]([6, 6])
 
 [resource]
 script = ExtResource("2_xyors")
 costs = SubResource("Resource_gkkbv")
 keywords = Array[ExtResource("3_i3guq")]([])
 pretty_name = "Air Missile"
-effect_text = "A short range burst of air deals 2 damage to enemy in range 3."
+effect_text = "A short range burst of air deals 2 damage to enemy in range 2."
 fluff_text = "Fun
 
 "
 icon = ExtResource("2_31ckx")
 color = Color(1, 1, 1, 1)
 target = 1
-target_range = 3
+target_range = 2
 target_min_range = -1
 target_tag = ""
 target_count_min = 1
