@@ -1,5 +1,7 @@
 class_name CardUtility extends CombatUtility
 
+const START_HAND_SIZE = 3
+
 func shuffle_deck():
 	combat.deck.shuffle()
 
@@ -28,7 +30,8 @@ func draw() -> AnimationObject:
 	return combat.animation.call_method(combat.ui.cards3d, "add_card", [spell])
 
 func draw_to_hand_size():
-	while combat.hand.size() < combat.player.traits.max_handsize and can_draw():
+	# TODO make some start hand
+	while combat.hand.size() < START_HAND_SIZE and can_draw():
 		draw()
 
 func can_draw():

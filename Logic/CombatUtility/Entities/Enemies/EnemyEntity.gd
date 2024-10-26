@@ -18,11 +18,13 @@ func plan_next_action():
 	if not action_plan:
 		action_plan = await get_random_action_plan()
 	else:
-		if action_plan.action_args.try_to_avoid:
+		var possible: bool = await combat.action_stack.get_result(
+			action_plan.is_possible.bind(combat)
+		)
+		if (not possible) or action_plan.action_args.try_to_avoid:
 			var new_action_plan: EnemyActionPlan = await get_random_action_plan()
 			if not new_action_plan.action_args.try_to_avoid:
 				action_plan = new_action_plan
-	
 
 ## SUBACTION
 func do_action():

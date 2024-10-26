@@ -1,9 +1,8 @@
 class_name MovementUtility extends CombatUtility
 
-func move_entity(entity: Entity, target: Tile) -> AnimationObject:
+func move_entity(entity: Entity, target: Tile, make_animation := true) -> AnimationObject:
 	entity.move(target)
-	if not entity is PlayerEntity: 
-		# TODO Clean up this dirty if -> Rather override animation move to
+	if make_animation:
 		return combat.animation.call_method(entity.visual_entity, "animation_move_to", [target])
 	return null
 
