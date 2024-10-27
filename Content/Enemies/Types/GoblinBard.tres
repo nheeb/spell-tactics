@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=12 format=3 uid="uid://shswrcu1hkq5"]
+
+[ext_resource type="Script" path="res://Content/Enemies/Types/CorpseLogic.gd" id="1_a441d"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyEntityType.gd" id="1_c53sr"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="2_52hhv"]
+[ext_resource type="Resource" uid="uid://cxy23jj218176" path="res://Content/Enemies/Moves/Support/IceTune.tres" id="3_pandh"]
+[ext_resource type="Resource" uid="uid://cl35attbteitm" path="res://Content/Enemies/Moves/Support/DrainTune.tres" id="4_7l2bx"]
+[ext_resource type="Resource" uid="uid://dakjn22p87jge" path="res://Content/Enemies/Moves/Support/RageTune.tres" id="5_4l0ie"]
+[ext_resource type="Resource" uid="uid://bdwlt6833b7xr" path="res://Content/Enemies/Moves/Support/EarthTune.tres" id="6_trshj"]
+
+[sub_resource type="Resource" id="Resource_agytg"]
+script = ExtResource("2_52hhv")
+action = ExtResource("3_pandh")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[sub_resource type="Resource" id="Resource_28vkg"]
+script = ExtResource("2_52hhv")
+action = ExtResource("4_7l2bx")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[sub_resource type="Resource" id="Resource_qucq8"]
+script = ExtResource("2_52hhv")
+action = ExtResource("5_4l0ie")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[sub_resource type="Resource" id="Resource_cnmr0"]
+script = ExtResource("2_52hhv")
+action = ExtResource("6_trshj")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[resource]
+script = ExtResource("1_c53sr")
+actions = Array[ExtResource("2_52hhv")]([SubResource("Resource_agytg"), SubResource("Resource_28vkg"), SubResource("Resource_qucq8"), SubResource("Resource_cnmr0")])
+agility = 2
+strength = 1
+accuracy = 8
+resistance = 0
+movement_range = 2
+max_hp = 3
+team = 0
+internal_name = "goblin_bard"
+can_be_hovered = true
+pretty_name = "Goblin Bard"
+fluff_text = ""
+entity_logic = ExtResource("1_a441d")
+prototype_scale = Vector2(0.9, 1)
+tags = Array[String]([])
+is_terrain = false
+is_drainable = false
+obstacle_layer = 2
+obstacle_mask = 3
+is_blocker = true
+cover_value = 0

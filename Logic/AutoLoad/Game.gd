@@ -68,3 +68,66 @@ func get_icon_from_name(icon_name) -> Texture:
 	if icon_name == "" or icon_name == null:
 		return null
 	return load("res://Assets/Sprites/Icons/%s.png" % icon_name)
+	
+
+class DeckUtils:
+	static func create_spell(spell_type: SpellType, combat: Combat) -> Spell:
+		return Spell.new(spell_type, combat)
+	
+	static func load_spell(name: String, combat: Combat) -> Spell:
+		return Spell.new(SpellType.load_from_file("res://Content/Spells/%s.tres" % name), combat)
+	
+	static func load_spell_n_times(name: String, n: int, combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		for i in range(n):
+			spells.append(load_spell(name, combat))
+		return spells
+		
+	static func create_test_deck_serialized() -> Array[SpellState]:
+		var spell_states: Array[SpellState] = []
+		for i in create_test_deck(null):
+			spell_states.append(i.serialize())
+		return spell_states
+
+	static func create_test_deck(combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
+		spells.append_array(load_spell_n_times("AirMissile", 1, combat))
+		spells.append_array(load_spell_n_times("Berserker", 1, combat))
+		#spells.append_array(load_spell_n_times("TrappingRoots", 1, combat))
+		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
+		
+		spells.append_array(load_spell_n_times("SporeFlight", 1, combat))
+		spells.append_array(load_spell_n_times("Cyclone", 1, combat))
+		spells.append_array(load_spell_n_times("SelfHeal", 1, combat))
+		spells.append_array(load_spell_n_times("GrowingMycel", 1, combat))
+		spells.append_array(load_spell_n_times("DeadlyDart", 1, combat))
+		
+		spells.append_array(load_spell_n_times("RockBlast", 1, combat))
+		spells.append_array(load_spell_n_times("SummonWitchTotem", 1, combat))
+		spells.append_array(load_spell_n_times("Teleport", 1, combat))
+		spells.append_array(load_spell_n_times("Breath", 1, combat))
+		spells.append_array(load_spell_n_times("SpellMemory", 1, combat))
+		
+		spells.append_array(load_spell_n_times("WaterBlast", 1, combat))
+		spells.append_array(load_spell_n_times("LightningStrike", 1, combat))
+		spells.append_array(load_spell_n_times("PoisonPunch", 1, combat))
+		spells.append_array(load_spell_n_times("Lifesteal", 1, combat))
+		
+		
+		for spell in spells:
+			spell.id = SpellID.new(Game.add_to_spell_count())
+		
+		spells.shuffle()
+		
+		return spells
+		
+	
+	static func deck_for_spell_testing(combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		for spell_type in Game.testing_deck:
+			spell_type._on_load()
+			spells.append(create_spell(spell_type, combat))
+		for spell in spells:
+			spell.id = SpellID.new(Game.add_to_spell_count())
+		return spells

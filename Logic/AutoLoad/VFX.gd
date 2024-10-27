@@ -1,16 +1,16 @@
 extends Node
 
-const HEX_RINGS = preload("res://Effects/HexRings.tscn")
-const HEX_COLOR = preload("res://Effects/HexColor.tscn")
-const ICON_VISUALS = preload("res://Effects/IconVisuals.tscn")
-const ICON_BURST = preload("res://Effects/IconBurst.tscn")
-const ICON_CYCLE = preload("res://Effects/CirclingIcons.tscn")
-const BILLBOARD_EFFECT = preload("res://Effects/BillboardEffect.tscn")
-const BILLBOARD_PROJECTILE = preload("res://Effects/BillboardProjectile.tscn")
-const LINE = preload("res://Effects/LineEffect.tscn")
-const IMMEDIATE_ARROWS = preload("res://Effects/ImmediateArrows.tscn")
-const ENERGY_ORB = preload("res://Effects/EnergyOrb.tscn") 
-const ENERGY_ORB_ATTRACTOR = preload("res://Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
+const HEX_RINGS = preload("res://VFX/Effects/HexRings.tscn")
+const HEX_COLOR = preload("res://VFX/Effects/HexColor.tscn")
+const ICON_VISUALS = preload("res://VFX/Effects/IconVisuals.tscn")
+const ICON_BURST = preload("res://VFX/Effects/IconBurst.tscn")
+const ICON_CYCLE = preload("res://VFX/Effects/CirclingIcons.tscn")
+const BILLBOARD_EFFECT = preload("res://VFX/Effects/BillboardEffect.tscn")
+const BILLBOARD_PROJECTILE = preload("res://VFX/Effects/BillboardProjectile.tscn")
+const LINE = preload("res://VFX/Effects/LineEffect.tscn")
+const IMMEDIATE_ARROWS = preload("res://VFX/Effects/ImmediateArrows.tscn")
+const ENERGY_ORB = preload("res://VFX/Effects/EnergyOrbs/EnergyOrb.tscn") 
+const ENERGY_ORB_ATTRACTOR = preload("res://VFX/Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
 
 const DRAIN_DURATION: float = 0.8
 

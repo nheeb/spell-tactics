@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bofpr865y23h8"]
+
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/BaseMaterials/TileGroundMaterial.tres" id="1_61762"]
+[ext_resource type="Script" path="res://VFX/Entities/VisualPrototype.gd" id="2_r6y1o"]
+[ext_resource type="PackedScene" uid="uid://cno3vyggwl5f0" path="res://VFX/Entities/PrototypeBillboard.tscn" id="3_5kcc0"]
+[ext_resource type="PackedScene" uid="uid://dqbvijkk2njrj" path="res://UI/HealthBar3D.tscn" id="4_ak76o"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_048ek"]
+material = ExtResource("1_61762")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.2
+radial_segments = 6
+rings = 1
+
+[node name="VisualPrototype" type="Node3D"]
+script = ExtResource("2_r6y1o")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+billboard = 1
+text = "Prototype"
+
+[node name="DebugTile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+visible = false
+
+[node name="Hexagon" type="MeshInstance3D" parent="DebugTile"]
+mesh = SubResource("CylinderMesh_048ek")
+
+[node name="PrototypeBillboard" parent="." instance=ExtResource("3_5kcc0")]
+visible = false
+
+[node name="HealthBar3D" parent="." instance=ExtResource("4_ak76o")]
+visible = false

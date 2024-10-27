@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-#include "res://Shaders/lib.gdshaderinc"
+#include "res://VFX/Materials/lib.gdshaderinc"
 uniform float distort_progress: hint_range(0.0, 1.0);
 uniform sampler3D distort_noise: repeat_enable;
 

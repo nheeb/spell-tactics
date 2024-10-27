@@ -1,6 +1,6 @@
 class_name AnimationUtility extends CombatUtility
 
-const SAY_EFFECT = preload("res://Effects/SayEffect.tscn")
+const SAY_EFFECT = preload("res://VFX/Effects/SayEffect.tscn")
 
 signal animation_queues_empty
 

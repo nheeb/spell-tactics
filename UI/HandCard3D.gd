@@ -113,7 +113,7 @@ func set_pinned(s: bool):
 			c.set_hoverarble(s)
 
 
-const HOVER_MAT = preload("res://Effects/HandCardHover.tres")
+const HOVER_MAT = preload("res://VFX/Materials/HandCardHover.tres")
 func hover():
 	%CardModel.material_overlay = HOVER_MAT
 	

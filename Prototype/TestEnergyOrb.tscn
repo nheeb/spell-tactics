@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://c4scji1tcoeyr"]
 
 [ext_resource type="Script" path="res://Prototype/TestEnergyOrb.gd" id="1_anlwg"]
-[ext_resource type="PackedScene" uid="uid://cd3p0i6kbwcd4" path="res://Entities/Visuals/VisualRock.tscn" id="2_tv5ok"]
-[ext_resource type="PackedScene" uid="uid://bns7gujnghjmt" path="res://Effects/EnergyOrbs/EnergyOrbAttractor.tscn" id="3_50xjb"]
-[ext_resource type="PackedScene" uid="uid://dkl8yhcu2dmjh" path="res://Entities/Visuals/VisualPlayer.tscn" id="4_i1qsp"]
+[ext_resource type="PackedScene" uid="uid://cd3p0i6kbwcd4" path="res://VFX/Entities/VisualRock.tscn" id="2_tv5ok"]
+[ext_resource type="PackedScene" uid="uid://bns7gujnghjmt" path="res://VFX/Effects/EnergyOrbs/EnergyOrbAttractor.tscn" id="3_50xjb"]
+[ext_resource type="PackedScene" uid="uid://dkl8yhcu2dmjh" path="res://VFX/Entities/VisualPlayer.tscn" id="4_i1qsp"]
 [ext_resource type="PackedScene" uid="uid://dox42qum5t0vk" path="res://Logic/GeneralUtility/OrbitalMovementBody.tscn" id="5_meear"]
 
 [node name="TestEnergyOrb" type="Node3D"]

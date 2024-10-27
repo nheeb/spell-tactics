@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjxju4g0xo1ta"]
+
+[ext_resource type="Script" path="res://VFX/Entities/Enemies/VisualEnemy.gd" id="1_pnamv"]
+[ext_resource type="PackedScene" uid="uid://dqbvijkk2njrj" path="res://UI/HealthBar3D.tscn" id="2_f3nkv"]
+
+[node name="VisualEnemy" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0175314, -0.0349554, 0.020296)
+script = ExtResource("1_pnamv")
+
+[node name="HealthBar3D" parent="." instance=ExtResource("2_f3nkv")]

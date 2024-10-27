@@ -21,8 +21,8 @@ func _ready() -> void:
 	set_speed(0)
 	
 
-const ON_MATERIAL = preload("res://Shaders/UI/SpeedTickOn.tres")
-const OFF_MATERIAL = preload("res://Shaders/UI/SpeedTickOff.tres")
+const ON_MATERIAL = preload("res://UI/Shaders/SpeedTickOn.tres")
+const OFF_MATERIAL = preload("res://UI/Shaders/SpeedTickOff.tres")
 func set_speed(_speed_idx: int):
 	#print("Set speed to ", _speed_idx)
 	self.speed_idx = _speed_idx

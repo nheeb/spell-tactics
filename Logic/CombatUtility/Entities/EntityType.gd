@@ -48,7 +48,7 @@ func create_entity(combat: Combat, call_on_create := true) -> Entity:
 	return ent
 
 
-const PROTOTYPE_VISUALS = "res://Entities/Visuals/VisualPrototype.tscn"
+const PROTOTYPE_VISUALS = "res://VFX/Entities/VisualPrototype.tscn"
 func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	ent.combat = combat
 	# CARE, instantiate() might lead to lag, depending on the use we might want to instantiate later

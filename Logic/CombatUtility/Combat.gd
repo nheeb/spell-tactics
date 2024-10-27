@@ -107,10 +107,9 @@ func setup() -> void:
 				push_error("Entity without ID in savegame")
 
 	actives = [
-		Active.new(ActiveType.load_from_file("res://Spells/AllActives/BasicMovement.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Spells/AllActives/Drain.tres"), self),
-		#Active.new(ActiveType.load_from_file("res://Spells/AllActives/ThrowSpell.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Spells/AllActives/SimpleMelee.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Content/Actives/BasicMovement.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Content/Actives/Drain.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Content/Actives/SimpleMelee.tres"), self),
 	]
 	for i in range(actives.size()): actives[i].id = ActiveID.new(i)
 

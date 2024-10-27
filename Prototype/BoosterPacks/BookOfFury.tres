@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BoosterPack" load_steps=7 format=3 uid="uid://bc1mtvf2xx3t6"]
+
+[ext_resource type="Script" path="res://Logic/Adventure/BoosterPackEntry.gd" id="1_re6rd"]
+[ext_resource type="Resource" uid="uid://c4yj8j5clqch8" path="res://Content/Spells/Berserker.tres" id="2_nhlxf"]
+[ext_resource type="Resource" uid="uid://rh55g614p7ig" path="res://Content/Spells/Unload.tres" id="3_ibu8w"]
+[ext_resource type="Script" path="res://Logic/Adventure/BoosterPack.gd" id="4_mctrv"]
+
+[sub_resource type="Resource" id="Resource_t7c8p"]
+script = ExtResource("1_re6rd")
+spell_type = ExtResource("2_nhlxf")
+pickup_chance = 1.0
+
+[sub_resource type="Resource" id="Resource_7yeu1"]
+script = ExtResource("1_re6rd")
+spell_type = ExtResource("3_ibu8w")
+pickup_chance = 1.0
+
+[resource]
+script = ExtResource("4_mctrv")
+name = "Book of fury"
+entries = Array[ExtResource("1_re6rd")]([SubResource("Resource_t7c8p"), SubResource("Resource_7yeu1")])

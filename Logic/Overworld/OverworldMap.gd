@@ -41,3 +41,6 @@ func generate_prototype_layout():
 
 func get_random_level():
 	return ['res://Levels/Area1/rivers.tres', 'res://Levels/Area1/clearing.tres'].pick_random()
+
+
+# DEPRECATED AF

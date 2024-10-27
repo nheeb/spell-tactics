@@ -1,10 +1,10 @@
 extends Node
 
-const STATUS_BERSERKER = preload("res://Spells/AllStatusEffects/Buff/Berserker.tres")
-const STATUS_POISON_MELEE = preload("res://Spells/AllStatusEffects/Buff/PoisonMelee.tres")
-const STATUS_BLIND = preload("res://Spells/AllStatusEffects/Debuff/Blind.tres")
-const STATUS_POISON = preload("res://Spells/AllStatusEffects/Damage/Poison.tres")
-const STATUS_RAGE = preload("res://Spells/AllStatusEffects/Buff/Rage.tres")
-const STATUS_SLOW = preload("res://Spells/AllStatusEffects/Debuff/Slow.tres")
-const STATUS_SNARE = preload("res://Spells/AllStatusEffects/Debuff/Snare.tres")
-const STATUS_WET = preload("res://Spells/AllStatusEffects/Other/Wet.tres")
+const STATUS_BERSERKER = preload("res://Content/Status/Buff/Berserker.tres")
+const STATUS_POISON_MELEE = preload("res://Content/Status/Buff/PoisonMelee.tres")
+const STATUS_BLIND = preload("res://Content/Status/Debuff/Blind.tres")
+const STATUS_POISON = preload("res://Content/Status/Damage/Poison.tres")
+const STATUS_RAGE = preload("res://Content/Status/Buff/Rage.tres")
+const STATUS_SLOW = preload("res://Content/Status/Debuff/Slow.tres")
+const STATUS_SNARE = preload("res://Content/Status/Debuff/Snare.tres")
+const STATUS_WET = preload("res://Content/Status/Other/Wet.tres")

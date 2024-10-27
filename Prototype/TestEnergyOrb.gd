@@ -4,12 +4,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("show_log"):
 		test_spawn()
 
-const ORB = preload("res://Effects/EnergyOrb.tscn")
 func test_spawn():
 	for attractor in [$VisualRock/EnergyOrbAttractor, \
 			$VisualRock/EnergyOrbAttractor2, $VisualRock/EnergyOrbAttractor3]:
 		await VisualTime.new_timer(1).timeout
-		var orb : EnergyOrb = ORB.instantiate() as EnergyOrb
+		var orb : EnergyOrb = VFX.ENERGY_ORB.instantiate() as EnergyOrb
 		add_child(orb)
 		orb._ready()
 		orb.spawn($VisualPlayer/OrbitalMovementBody, attractor)

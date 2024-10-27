@@ -1,0 +1,61 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://df3jh0bo0ta8h"]
+
+[ext_resource type="Texture2D" uid="uid://dlw1evvllny4u" path="res://Assets/BaseMaterials/Textures/watercolor_sky_seamless_color_corrected.png" id="1_kmgsa"]
+
+[sub_resource type="Shader" id="Shader_scn34"]
+code = "shader_type sky;
+render_mode use_debanding;
+
+uniform vec4 sky_top_color : source_color = vec4(0.385, 0.454, 0.55, 1.0);
+uniform vec4 sky_horizon_color : source_color = vec4(0.646, 0.656, 0.67, 1.0);
+uniform float sky_curve : hint_range(0, 1) = 0.15;
+uniform float sky_energy = 1.0;
+uniform sampler2D sky_cover : filter_linear, source_color, hint_default_black;
+uniform vec4 sky_cover_modulate : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 ground_bottom_color : source_color = vec4(0.2, 0.169, 0.133, 1.0);
+uniform vec4 ground_horizon_color : source_color = vec4(0.646, 0.656, 0.67, 1.0);
+uniform float ground_curve : hint_range(0, 1) = 0.02;
+uniform float ground_energy = 1.0;
+uniform sampler2D ground_cover : filter_linear, source_color, hint_default_black;
+uniform vec4 ground_cover_modulate : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+
+uniform float sky_scale = 0.5;
+void sky() {
+    float v_angle = acos(clamp(EYEDIR.y, -1.0, 1.0));
+    float u = atan(EYEDIR.z, EYEDIR.x) / (2.0 * PI) + 0.5; // Normalize longitude to [0, 1]
+    float v = 0.5 - asin(EYEDIR.y) / PI; // Normalize latitude to [0, 1]
+    vec3 sky = mix(sky_horizon_color.rgb, sky_top_color.rgb, clamp(1.0 - pow(1.0 - (1.0 - v_angle / (PI * 0.5)), 1.0 / sky_curve), 0.0, 1.0));
+    sky *= sky_energy;
+    
+    vec4 sky_cover_texture = texture(sky_cover, sky_scale * vec2(u, v));
+    sky += (sky_cover_texture.rgb * sky_cover_modulate.rgb) * sky_cover_texture.a * sky_cover_modulate.a * sky_energy;
+
+    // Softening the texture near the poles
+    float pole_blend = smoothstep(0.95, 1.0, abs(EYEDIR.y)); // Increases near the poles
+    //sky = mix(sky.rgb, vec3(0.5, 0.5, 0.5), sky_top_color.rgb); // Blend with mid-grey or sky color
+
+    vec4 ground_cover_texture = texture(ground_cover, vec2(u, v));
+    vec3 ground_cover_color = (ground_cover_texture.rgb * ground_cover_modulate.rgb) * ground_cover_texture.a * ground_cover_modulate.a * ground_energy;
+
+    vec3 ground = mix(sky_cover_texture.rgb, ground_bottom_color.rgb, clamp(1.0 - pow(1.0 - (v_angle - (PI * 0.5)) / (PI * 0.5), 2.4 / 1.0), 0.0, 1.0));
+    ground *= ground_energy;
+    ground += ground_cover_color;
+
+    COLOR = mix(ground, sky, smoothstep(-.80, -.15, EYEDIR.y));
+}
+"
+
+[resource]
+shader = SubResource("Shader_scn34")
+shader_parameter/sky_top_color = Color(0.3956, 0.64328, 0.86, 1)
+shader_parameter/sky_horizon_color = Color(0.173034, 0.257203, 0.332031, 1)
+shader_parameter/sky_curve = 0.443
+shader_parameter/sky_energy = 1.0
+shader_parameter/sky_cover_modulate = Color(0.664063, 0.664063, 0.664063, 1)
+shader_parameter/ground_bottom_color = Color(0.16918, 0.226867, 0.277344, 1)
+shader_parameter/ground_horizon_color = Color(0.144787, 0.331607, 0.429688, 1)
+shader_parameter/ground_curve = 0.791
+shader_parameter/ground_energy = 1.0
+shader_parameter/ground_cover_modulate = Color(1, 1, 1, 1)
+shader_parameter/sky_scale = 4.0
+shader_parameter/sky_cover = ExtResource("1_kmgsa")

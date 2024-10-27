@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://32ohlrc54cx6"]
+
+[ext_resource type="Script" path="res://VFX/Entities/VisualTerrain.gd" id="1_leuro"]
+[ext_resource type="Material" uid="uid://3j7oo2w5euu0" path="res://Assets/BaseMaterials/VisualGrass.tres" id="2_epnkt"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_f16xf"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.0
+radial_segments = 6
+rings = 1
+
+[node name="VisualTestTerrain" type="Node3D"]
+script = ExtResource("1_leuro")
+
+[node name="Hexagon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("2_epnkt")
+instance_shader_parameters/drain_progress = 0.0
+mesh = SubResource("CylinderMesh_f16xf")
+
+[node name="Node3D" type="Node3D" parent="."]

@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-#include "res://Shaders/lib.gdshaderinc"
+#include "res://VFX/Materials/lib.gdshaderinc"
 
 uniform sampler2D noise: repeat_enable;
 uniform int sections = 5;

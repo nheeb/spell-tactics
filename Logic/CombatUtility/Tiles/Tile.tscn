@@ -1,13 +1,13 @@
 [gd_scene load_steps=21 format=3 uid="uid://dgrhssy80ss18"]
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/Tile.gd" id="1_scmar"]
-[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/Materials/TileGroundMaterial.tres" id="2_c24a5"]
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/BaseMaterials/TileGroundMaterial.tres" id="2_c24a5"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Tiles/TileHighlight.gd" id="3_ho6t1"]
-[ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/Materials/TileHighlightMaterial.tres" id="4_eqav3"]
-[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://Shaders/HoverHighlight.tres" id="5_ihgi2"]
-[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://Shaders/MovementTarget.tres" id="6_alyjn"]
-[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://Shaders/SpellTargetHighlight.tres" id="6_bryv2"]
-[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://Shaders/SpellTargetHighlightStatic.tres" id="7_p4ipm"]
+[ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/BaseMaterials/TileHighlightMaterial.tres" id="4_eqav3"]
+[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://VFX/Materials/HoverHighlight.tres" id="5_ihgi2"]
+[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://VFX/Materials/MovementTarget.tres" id="6_alyjn"]
+[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://VFX/Materials/SpellTargetHighlight.tres" id="6_bryv2"]
+[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://VFX/Materials/SpellTargetHighlightStatic.tres" id="7_p4ipm"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wyt28"]
 material = ExtResource("2_c24a5")

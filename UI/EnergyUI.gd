@@ -3,7 +3,6 @@ class_name EnergyUI extends Node3D
 @onready var omb := $OrbitalMovementBody
 @onready var attractor := $EnergyOrbAttractor
 
-const ENERGY_ORB = preload("res://Effects/EnergyOrb.tscn")
 const ORB_DELAY : float = .35
 const ORB_SCALE : float = 2.0
 func spawn_energy_orbs(stack: EnergyStack):
