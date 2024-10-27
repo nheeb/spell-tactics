@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://rh55g614p7ig"]
 
-[ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_5k7na"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_5k7na"]
 [ext_resource type="Texture2D" uid="uid://d2nv0e6ua6agd" path="res://Assets/Sprites/Icons/card-discard.png" id="2_wilbh"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/Keyword.gd" id="3_e3cdh"]
-[ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="4_ew654"]
+[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_e3cdh"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_ew654"]
 
 [sub_resource type="Resource" id="Resource_3rffs"]
 script = ExtResource("1_5k7na")

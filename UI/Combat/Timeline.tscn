@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=3 uid="uid://cn2mfqtdouxdu"]
+
+[ext_resource type="Script" path="res://UI/Combat/Timeline.gd" id="1_cyn56"]
+[ext_resource type="Texture2D" uid="uid://x2d0b22yi88n" path="res://Assets/Sprites/UI/timeline_background.png" id="1_p3f3l"]
+[ext_resource type="PackedScene" uid="uid://seo7pqhgiwim" path="res://UI/Combat/TimelineEventIcon.tscn" id="2_earmn"]
+[ext_resource type="Shader" path="res://UI/Combat/TimelineBackground.gdshader" id="3_cokil"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fj78c"]
+shader = ExtResource("3_cokil")
+shader_parameter/height = 1.0
+shader_parameter/width = 1.0
+shader_parameter/albedo = Color(0.172549, 0.152941, 0.109804, 0.533333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40adw"]
+bg_color = Color(0.333333, 0.333333, 0.333333, 0.741176)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="Timeline" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_cyn56")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TextureRect" type="Sprite2D" parent="Node2D"]
+visible = false
+modulate = Color(0.741176, 0.741176, 0.741176, 0.819608)
+texture = ExtResource("1_p3f3l")
+
+[node name="Background" type="Panel" parent="Node2D/TextureRect"]
+material = SubResource("ShaderMaterial_fj78c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -226.0
+offset_right = -250.0
+offset_bottom = -185.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_40adw")
+
+[node name="IconTransforms" type="Node2D" parent="Node2D"]
+unique_name_in_owner = true
+visible = false
+
+[node name="Icon7" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(250, -86)
+scale = Vector2(0.213, 0.213)
+
+[node name="Icon6" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(188, -47)
+scale = Vector2(0.348, 0.348)
+
+[node name="Icon5" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(106, -18)
+scale = Vector2(0.482815, 0.482815)
+
+[node name="Icon4" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(2, 6)
+scale = Vector2(0.618518, 0.618518)
+
+[node name="Icon3" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(-102, -14)
+scale = Vector2(0.482815, 0.482815)
+
+[node name="Icon2" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(-187, -52)
+scale = Vector2(0.348, 0.348)
+
+[node name="Icon1" parent="Node2D/IconTransforms" instance=ExtResource("2_earmn")]
+position = Vector2(-247, -95)
+scale = Vector2(0.213, 0.213)
+
+[node name="EventIcons" type="Node2D" parent="Node2D"]
+unique_name_in_owner = true
+visible = false
+
+[node name="RoundText" type="Node2D" parent="Node2D"]
+position = Vector2(-121, -141)
+
+[node name="RoundLabel" type="Label" parent="Node2D/RoundText"]
+unique_name_in_owner = true
+offset_right = 256.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 64
+text = "Round X"

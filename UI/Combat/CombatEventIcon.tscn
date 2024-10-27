@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcdmd2tsdad2e"]
+
+[ext_resource type="Script" path="res://UI/Combat/CombatEventIcon.gd" id="1_5h70p"]
+[ext_resource type="Texture2D" uid="uid://0a7x8pa1gdib" path="res://Assets/Sprites/UI/circle-dotted.png" id="2_366dd"]
+[ext_resource type="Texture2D" uid="uid://d24jmw2v2wnj3" path="res://Assets/Sprites/Icons/circle.png" id="3_hj7dg"]
+[ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/Theme/LabelSettings/DefaultLabelSettings.tres" id="3_mndqp"]
+[ext_resource type="Texture2D" uid="uid://fwpgjubsutfa" path="res://Assets/Sprites/Icons/lightning-storm.png" id="3_q24b8"]
+
+[sub_resource type="Animation" id="Animation_kllrb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/HighlightPivot/Highlight:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_68r44"]
+resource_name = "spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/HighlightPivot/Highlight:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cuchd"]
+_data = {
+"RESET": SubResource("Animation_kllrb"),
+"spin": SubResource("Animation_68r44")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2vi2"]
+size = Vector2(77, 59)
+
+[node name="CombatEventIcon" type="Control"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_5h70p")
+metadata/_edit_use_anchors_ = true
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(30.545, 28.795)
+scale = Vector2(0.09, 0.09)
+
+[node name="HighlightPivot" type="Node2D" parent="Pivot"]
+scale = Vector2(0.7, 0.7)
+
+[node name="Highlight" type="Sprite2D" parent="Pivot/HighlightPivot"]
+unique_name_in_owner = true
+texture = ExtResource("2_366dd")
+
+[node name="IconSprite" type="Sprite2D" parent="Pivot"]
+unique_name_in_owner = true
+scale = Vector2(1.11111, 1.11111)
+texture = ExtResource("3_q24b8")
+
+[node name="Background" type="Sprite2D" parent="Pivot/IconSprite"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.627451)
+show_behind_parent = true
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_hj7dg")
+
+[node name="HighlightPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_cuchd")
+}
+speed_scale = 0.111
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 51.0
+offset_top = 21.0
+offset_right = 139.0
+offset_bottom = 65.0
+text = "X"
+label_settings = ExtResource("3_mndqp")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(34.5, 30.5)
+shape = SubResource("RectangleShape2D_s2vi2")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

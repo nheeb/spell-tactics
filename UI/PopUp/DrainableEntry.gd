@@ -4,7 +4,7 @@ class_name DrainableEntry extends PanelContainer
 var connected_tile: Tile = null
 
 
-const ENERGY_ICON = preload("res://UI/EnergyIcon.tscn")
+const ENERGY_ICON = preload("res://UI/PopUp/EnergyIcon.tscn")
 func show_energy(energy: EnergyStack):
 	#if connected_tile.r == 6 and connected_tile.q == 6:
 		#print("prev: ", len($GridContainer.get_children()))

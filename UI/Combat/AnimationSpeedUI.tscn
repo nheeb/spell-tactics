@@ -1,0 +1,160 @@
+[gd_scene load_steps=9 format=3 uid="uid://cm4ux8unrhhbi"]
+
+[ext_resource type="Material" uid="uid://binwveeum2h4m" path="res://UI/Shaders/SpeedTickOff.tres" id="1_lyv7e"]
+[ext_resource type="Script" path="res://UI/Combat/AnimationSpeedUI.gd" id="1_vbjac"]
+[ext_resource type="Material" uid="uid://bdikekkfgipvi" path="res://UI/Shaders/SpeedTickOn.tres" id="2_1ymhs"]
+[ext_resource type="Texture2D" uid="uid://clymo2j3fsfy0" path="res://Assets/Sprites/UI/play_icon_gimped.png" id="3_smi85"]
+
+[sub_resource type="Animation" id="Animation_aa51j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_heu7u"]
+resource_name = "fade_in"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8487x"]
+resource_name = "fade_out"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kuukm"]
+_data = {
+"RESET": SubResource("Animation_aa51j"),
+"fade_in": SubResource("Animation_heu7u"),
+"fade_out": SubResource("Animation_8487x")
+}
+
+[node name="AnimationSpeedUI" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_vbjac")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kuukm")
+}
+
+[node name="FadeOutTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="SpeedTick0" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+material = ExtResource("2_1ymhs")
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("3_smi85")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="SpeedTick1" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+material = ExtResource("1_lyv7e")
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("3_smi85")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="SpeedTick2" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+material = ExtResource("1_lyv7e")
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("3_smi85")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[connection signal="timeout" from="FadeOutTimer" to="." method="_on_fade_out_timer_timeout"]

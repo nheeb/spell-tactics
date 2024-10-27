@@ -6,7 +6,7 @@ class_name PopUpHandler extends Control
 
 @onready var popup
 
-const POPUP = preload ("res://UI/PopUp.tscn")
+const POPUP = preload("res://UI/PopUp/PopUp.tscn")
 const DRAINABLE_ENTRY = preload ("res://UI/PopUp/DrainableEntry.tscn")
 var current_tile: Tile
 var screen_pos: Vector2 # target from unprojecting the camera

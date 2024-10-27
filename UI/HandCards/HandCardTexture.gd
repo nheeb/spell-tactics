@@ -14,4 +14,3 @@ func set_castable(castable: Castable):
 
 func set_error(text: String = ""):
 	%ErrorLabel.text = text
-

@@ -1,7 +1,7 @@
 class_name World extends Node3D
 
-const COMBAT = preload("res://Logic/CombatUtility/Combat.tscn")
-const COMBAT_UI = preload("res://UI/CombatUI/CombatUI.tscn")
+const COMBAT = preload("res://Logic/Combat/Combat.tscn")
+const COMBAT_UI = preload("res://UI/Combat/CombatUI.tscn")
 
 var level : Level
 var camera : Camera3D
