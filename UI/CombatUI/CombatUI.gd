@@ -121,7 +121,6 @@ func show_game_over(text: String) -> void:
 	ActivityManager.substitute(DeathActivity.new())
 
 func set_enemy_meter(value: int) -> void:
-	print("set enemy meter ", value)
 	ticket_handler.get_ticket().resolve_on(%EnemyEventIcon.transition_done)
 	%EnemyEventIcon.transition_to_fill(value)
 

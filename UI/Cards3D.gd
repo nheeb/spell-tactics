@@ -76,6 +76,12 @@ func _ready() -> void:
 	DebugInfo.global_settings_add("OPEN_AT_NORM_MOUSE_POS", 0.0, 1.0)
 	DebugInfo.global_settings_add("CLOSE_AT_NORM_MOUSE_POS", 0.0, 1.0)
 	
+	if get_tree().current_scene == self:
+		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
+		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
+		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
+		%EnergyUI.spawn_energy_orbs(EnergyStack.new([EnergyStack.EnergyType.Harmony, EnergyStack.EnergyType.Matter]))
+	
 	# Set cam mode
 	camera.projection = Camera3D.PROJECTION_PERSPECTIVE if CAM_MODE_PERSPECTIVE \
 			 else Camera3D.PROJECTION_ORTHOGONAL
@@ -87,6 +93,8 @@ func _ready() -> void:
 	
 	# Move cards z
 	cards.global_position.z = Z_BASE
+	
+	
 
 func setup(_combat : Combat):
 	combat = _combat
