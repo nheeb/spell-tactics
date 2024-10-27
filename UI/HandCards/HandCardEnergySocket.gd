@@ -34,14 +34,17 @@ func set_type(_type: EnergyStack.EnergyType):
 	mi.material_override.emission_energy_multiplier = 1
 	socket.get_surface_override_material(2).albedo_color = energy_color.lerp(Color.DARK_GRAY, .4)
 
-var is_soon_loaded := false
 var is_loaded := false
 var loaded_energy: EnergyStack.EnergyType
 var loaded_color: Color
 func load_energy(_type: EnergyStack.EnergyType):
-	is_soon_loaded = false
 	is_loaded = true
 	loaded_energy = _type
+	loaded_color = VFX.type_to_color(_type)
+	card.get_spell().on_energy_load()
+
+## ANIMATION
+func load_animation(_type: EnergyStack.EnergyType):
 	loaded_color = VFX.type_to_color(_type)
 	%Light.light_color = loaded_color
 	%Light.show()
@@ -49,7 +52,6 @@ func load_energy(_type: EnergyStack.EnergyType):
 	mi.material_override.emission = loaded_color
 	mi.material_override.emission_energy_multiplier = 2
 	%AnimationPlayer.play("load")
-	card.get_spell().on_energy_load()
 
 func pre_load_particles(_type: EnergyStack.EnergyType, seconds_to_load: float):
 	%GlowParticles.draw_pass_1.material.albedo_color = VFX.type_to_color(_type).lightened(.15) * 2.0
@@ -57,11 +59,17 @@ func pre_load_particles(_type: EnergyStack.EnergyType, seconds_to_load: float):
 
 func unload_energy() -> EnergyStack.EnergyType:
 	is_loaded = false
+	var e = loaded_energy
+	loaded_energy = EnergyStack.EnergyType.Empty
+	card.get_spell().on_energy_load()
+	return e
+
+## ANIMATION 
+func unload_animation():
 	%Light.hide()
 	mi.material_override.albedo_color = energy_color.lerp(Color.DARK_GRAY, .1)
 	mi.material_override.emission = energy_color
 	mi.material_override.emission_energy_multiplier = 1
-	return loaded_energy
 
 var hoverable := false
 func set_hoverarble(h: bool):
@@ -81,6 +89,3 @@ func _process(delta: float) -> void:
 		if hovered:
 			if Input.is_action_just_pressed("select"):
 				Events.energy_socket_clicked.emit(self)
-
-func mark_to_be_loaded_soon():
-	is_soon_loaded = true
