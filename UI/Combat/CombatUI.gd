@@ -39,7 +39,10 @@ func next_round(current_round: int):
 	pass
 
 func _on_next_pressed():
+	$Next.disabled = true  # not in animation q to have it be instant
 	combat.action_stack.process_player_action(PAPass.new())
+	await combat.round_ended
+	combat.animation.property($Next, "disabled", false)
 
 func deselect_card():
 	selected_spell = null

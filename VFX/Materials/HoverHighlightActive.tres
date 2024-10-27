@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://1gqrknigw3j8"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cflryfsltxrpy"]
 
 [sub_resource type="Shader" id="Shader_oh2fb"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
@@ -25,17 +25,18 @@ float sdHexagon( in vec2 p, in float r )
 void fragment() {
 	float d = sdHexagon(2.50 * (vec2(UV.x - 0.5, UV.y - 0.5)), 1.0);
 	ALBEDO = albedo.rgb;
-	float time_offset = 0.0;
+	float time_offset = range * sin(TIME * time_scale);
 	float outer_edge = 1.0 - smoothstep(time_offset-smooth_edge, time_offset+smooth_edge, d);
 	float inner_edge = smoothstep(time_offset - width - smooth_edge, time_offset - width + smooth_edge, d);
-	ALPHA = outer_edge * inner_edge * alpha + (0.16 * float(d < .02));
+	ALPHA = outer_edge * inner_edge * alpha;
 }
 "
 
 [resource]
-render_priority = -1
+resource_local_to_scene = true
+render_priority = 0
 shader = SubResource("Shader_oh2fb")
-shader_parameter/albedo = Color(0.3016, 0.52, 0.52, 0.741176)
+shader_parameter/albedo = Color(0.3024, 0.84, 0.84, 1)
 shader_parameter/time_scale = 4.0
 shader_parameter/range = 0.04
 shader_parameter/smooth_edge = 0.04

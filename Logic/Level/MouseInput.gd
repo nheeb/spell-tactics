@@ -42,6 +42,10 @@ func _process(delta: float) -> void:
 	var end := ray_origin + ray_direction * camera.far
 	self.target_position = to_local(end)
 	
+	# TODO to really polish this tile hovering it would be nice to send a raycast every frame.
+	#  makes it feel snappier. Though the RayCast3D node sends every physics frame.
+	#  So this change would entail sending the raycast from code instead.
+	
 	# if something has been hit and hasn't been hit in Cards3D as well
 	if is_colliding() and (cards3d == null or not cards3d.raycast_hit) and not disabled:
 		var collider = get_collider()

@@ -19,7 +19,7 @@ shader_parameter/sections = 5
 shader_parameter/fill = 2
 shader_parameter/rotation_offset = -2.585
 shader_parameter/color_empty = Color(0.184314, 0.184314, 0.184314, 1)
-shader_parameter/color_filled = Color(0.945098, 0, 0.109804, 1)
+shader_parameter/color_filled = Color(0.65, 0.169, 0.169, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_huur4")
 
 [sub_resource type="QuadMesh" id="QuadMesh_bvq8v"]
@@ -284,7 +284,7 @@ texture = ExtResource("1_xf600")
 [node name="ActiveMesh" type="MeshInstance2D" parent="Node2D/Pivot"]
 unique_name_in_owner = true
 visible = false
-modulate = Color(1, 0, 0, 1)
+modulate = Color(0.65098, 0.168627, 0.168627, 1)
 rotation = 3.14159
 mesh = SubResource("QuadMesh_bvq8v")
 texture = ExtResource("4_08k60")
