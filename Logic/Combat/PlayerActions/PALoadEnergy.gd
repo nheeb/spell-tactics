@@ -16,10 +16,10 @@ func is_valid(combat: Combat) -> bool:
 	return false
 
 func execute(combat: Combat) -> void:
-	combat.animation.callable(execute_animtaion.bind(combat)) \
+	combat.animation.callable(execute_animation.bind(combat)) \
 		.add_ticket_to_parameter().set_max_duration(.35)
 
-func execute_animtaion(combat: Combat, ticket: WaitTicket) -> void:
+func execute_animation(combat: Combat, ticket: WaitTicket) -> void:
 	var socket := combat.input.current_castable.get_card() \
 			.get_empty_energy_socket(energy_type)
 	orb.add_to_render_prio(100)
