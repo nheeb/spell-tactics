@@ -1,6 +1,13 @@
 extends ActiveLogic
 
 func casting_effect() -> void:
+	await combat.action_stack.set_active_flavor(
+		ActionFlavor.new().set_owner(combat.player)
+			.add_tag(ActionFlavor.Tag.Drain)
+			.add_target(target_tile)
+			.add_target_array(target_entities)
+			.finalize(combat)
+	)
 	for entity in target.entities:
 		entity = entity as Entity
 		var energy_stack : EnergyStack = null

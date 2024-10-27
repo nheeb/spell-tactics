@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/SpellType.gd" id="1_1y3km"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="1_luomv"]
-[ext_resource type="Texture2D" uid="uid://mf5yk8rulxlh" path="res://Assets/Sprites/Icons/crossed-axes.png" id="2_n63sh"]
+[ext_resource type="Texture2D" uid="uid://b6dfkoojmw45j" path="res://Assets/Sprites/Icons/axe-plus.png" id="2_5lm22"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Castables/Keyword.gd" id="3_jhst1"]
 
 [sub_resource type="Resource" id="Resource_fenta"]
@@ -14,10 +14,9 @@ script = ExtResource("1_1y3km")
 costs = SubResource("Resource_fenta")
 keywords = Array[ExtResource("3_jhst1")]([])
 pretty_name = "Berserker"
-effect_text = "For this and the next turn, the melee attack does +1 damage."
-fluff_text = "should be \"Your next melee attack deals +1 damage.\"
-That's much clearer :)"
-icon = ExtResource("2_n63sh")
+effect_text = "Your next melee attack does +2 damage."
+fluff_text = ""
+icon = ExtResource("2_5lm22")
 color = Color(0.792157, 0.521569, 0.258824, 1)
 target = 0
 target_range = -1
@@ -27,7 +26,7 @@ target_count_min = 1
 target_count_max = 1
 target_possible_highlight = 7
 target_selected_highlight = 8
-topic = 13
-topic_secondary = 0
+topic = 1
+topic_secondary = 13
 topic_icons = Array[int]([])
 topic_caption = ""

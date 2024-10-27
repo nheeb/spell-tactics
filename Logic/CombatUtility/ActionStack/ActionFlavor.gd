@@ -12,7 +12,8 @@ enum Tag {
 	EnemyActionGeneric,
 	EnemyActionSpecific,
 	EnemyEvent,
-	CombatEvent
+	CombatEvent,
+	Drain
 }
 
 ## Ideally the source of the action
@@ -47,6 +48,12 @@ func add_tag(tag: Tag) -> ActionFlavor:
 ## Add a target which gets affected by the action
 func add_target(target) -> ActionFlavor:
 	targets.append(UniversalReference.from(target))
+	return self
+
+## Add multiple targets at once
+func add_target_array(target_array: Array) -> ActionFlavor:
+	for target in target_array:
+		add_target(target)
 	return self
 
 ## Add any important details

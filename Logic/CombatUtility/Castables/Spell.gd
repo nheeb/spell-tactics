@@ -54,7 +54,7 @@ func is_energy_loaded_fully() -> bool:
 	return not get_card().has_empty_energy_sockets()
 
 func is_castable() -> bool:
-	return super.is_castable() and is_energy_loaded_fully()
+	return logic.is_castable() and super.is_castable() and is_energy_loaded_fully()
 
 func select():
 	super.select()

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_qf8ih")
-max_hp = 8
+max_hp = 7
 team = 2
 internal_name = "player"
 can_be_hovered = true
@@ -13,10 +13,10 @@ pretty_name = "Player"
 fluff_text = ""
 visual_scene = ExtResource("2_8hn7q")
 prototype_scale = Vector2(1, 1)
+tags = Array[String]([])
 is_terrain = false
 is_drainable = false
 obstacle_layer = 0
 obstacle_mask = 3
 is_blocker = true
 cover_value = 0
-tags = Array[String]([])

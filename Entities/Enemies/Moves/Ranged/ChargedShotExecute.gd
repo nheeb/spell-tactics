@@ -38,4 +38,4 @@ func _execute():
 		if target is not HPEntity:
 			push_error("Wrong target for this enemy action")
 		target.inflict_damage_with_visuals(args.get_arg(0, enemy.strength * 3))
-	enemy.remove_status(Preloaded.STATUS_SHOT_CHARGED)
+	enemy.remove_status(STATUS_SHOT_CHARGED)

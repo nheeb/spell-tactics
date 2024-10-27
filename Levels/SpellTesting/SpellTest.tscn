@@ -3,21 +3,21 @@
 [ext_resource type="Script" path="res://Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/EnergyStack.gd" id="2_rjkex"]
 [ext_resource type="Resource" uid="uid://c38oh270u86ke" path="res://Spells/AllSpells/Teleport.tres" id="3_fvp7d"]
-[ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Spells/AllSpells/WaterBlast.tres" id="4_6sho4"]
+[ext_resource type="Resource" uid="uid://bjrjvk0evvvyt" path="res://Spells/AllSpells/PoisonPunch.tres" id="4_fxv7j"]
 [ext_resource type="Resource" uid="uid://coxs5uvjtigok" path="res://Spells/AllSpells/DeadlyDart.tres" id="5_f8kvd"]
 [ext_resource type="Resource" uid="uid://c4yj8j5clqch8" path="res://Spells/AllSpells/Berserker.tres" id="6_5ajo0"]
-[ext_resource type="Resource" uid="uid://bmmnjqd2apbv0" path="res://Spells/AllSpells/RockBlast.tres" id="7_ygnqq"]
+[ext_resource type="Resource" uid="uid://c2gimhhja8fi6" path="res://Spells/AllSpells/Breath.tres" id="6_7ocbv"]
 
 [sub_resource type="Resource" id="Resource_vfkqf"]
 script = ExtResource("2_rjkex")
-stack = Array[int]([0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+stack = Array[int]([1, 1, 2, 2, 3, 3, 4, 4, 5])
 
 [node name="SpellTest" type="Node3D"]
 transform = Transform3D(0.519788, 0, 0, 0, 0.519788, 0, 0, 0, 0.519788, 0, 0, 0)
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
 test_spell_1 = ExtResource("3_fvp7d")
-test_spell_2 = ExtResource("4_6sho4")
+test_spell_2 = ExtResource("4_fxv7j")
 test_spell_3 = ExtResource("5_f8kvd")
-test_spell_4 = ExtResource("7_ygnqq")
+test_spell_4 = ExtResource("6_7ocbv")
 test_spell_5 = ExtResource("6_5ajo0")

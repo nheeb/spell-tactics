@@ -7,19 +7,19 @@
 
 [sub_resource type="Resource" id="Resource_3rffs"]
 script = ExtResource("1_dd2sq")
-stack = Array[int]([2, 2, 2, 6, 6])
+stack = Array[int]([2, 6, 6])
 
 [resource]
 script = ExtResource("2_2k0dp")
 costs = SubResource("Resource_3rffs")
 keywords = Array[ExtResource("3_yud41")]([])
 pretty_name = "Unload"
-effect_text = "Deal 1 damage to a target for each spell in your hand. Discard your hand."
+effect_text = "Deal 1 damage to a target for each spell in your hand. Discard your hand. Draw 3 cards."
 fluff_text = ""
 icon = ExtResource("2_ij4te")
 color = Color(1, 0.398438, 0.398438, 1)
 target = 1
-target_range = 3
+target_range = 4
 target_min_range = -1
 target_tag = ""
 target_count_min = 1

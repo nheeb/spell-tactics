@@ -139,6 +139,9 @@ func setup() -> void:
 	#energy.show_energy_in_ui()
 	if player.current_tile != null:
 		animation.camera_reach(player.current_tile)
+	
+	if current_phase == RoundPhase.CombatBegin:
+		cards.draw_to_hand_size()
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui

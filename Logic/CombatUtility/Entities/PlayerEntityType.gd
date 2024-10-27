@@ -1,6 +1,4 @@
-
 class_name PlayerEntityType extends HPEntityType
-
 
 ## Overriding base entity method to return more specific type
 func create_entity(combat: Combat, call_on_create := true) -> PlayerEntity:

@@ -12,7 +12,7 @@ func casting_effect() -> void:
 	var path := combat.level.get_shortest_path_with_memory(combat.player.current_tile, target)
 	var actual_path = []
 	for tile in path:
-		combat.movement.move_entity(combat.player, tile)
+		combat.movement.move_entity(combat.player, tile, false)
 		actual_path.append(combat.player.current_tile)
 	
 	if len(actual_path) > 0:

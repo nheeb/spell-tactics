@@ -6,8 +6,12 @@ func enemy_event_logic() -> EnemyEventLogic:
 func enemy_event_type() -> EnemyEventType:
 	return type as EnemyEventType
 
+var override_meter_costs := 0
 func get_enemy_meter_costs() -> int:
-	return enemy_event_type().enemy_meter_costs
+	if override_meter_costs > 0:
+		return override_meter_costs
+	else:
+		return enemy_event_type().enemy_meter_costs
 
 func discover():
 	combat.animation.callable(combat.ui.enemy_event_icon.spawn)

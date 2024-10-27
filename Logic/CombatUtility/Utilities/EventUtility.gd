@@ -117,7 +117,7 @@ func try_to_activate_enemy_event():
 			reset_enemy_meter()
 
 func connect_enemy_meter_to_event(event: EnemyEvent) -> AnimationObject:
-	enemy_meter_max = event.enemy_event_type().enemy_meter_costs
+	enemy_meter_max = event.get_enemy_meter_costs()
 	return combat.animation.call_method(combat.ui, "set_enemy_meter_event", [event])
 
 func set_enemy_meter(value: int) -> AnimationCallable:

@@ -1,6 +1,7 @@
 class_name EnemyActionArgs extends Resource
 
-## Wraps an enemy action together with optional custom arguments.
+## Wraps an enemy action together with optional custom arguments defining
+## how the action should be used by the enemy.
 
 @export var action: EnemyAction:
 	set(a):
@@ -8,9 +9,16 @@ class_name EnemyActionArgs extends Resource
 		if a:
 			a._on_load()
 
+@export var score_factor := 1.0
+
+@export_group("Avoid")
+@export var try_to_avoid := false
+@export var avoid_score_factor := 0.01
+
 @export_group("Arguments")
 @export var args := []
 @export var kwargs := {}
+## References to targets this action should have
 @export var fixed_targets := []
 
 func _init(_action: EnemyAction = null, _args := [], _kwargs := {}) -> void:
@@ -39,23 +47,29 @@ func get_temp_logic(enemy, combat) -> EnemyActionLogic:
 
 ## RESULT
 func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
+	var combat := enemy.combat
+	# Test if same action was done before and is on cooldown
 	var cooldown: int = get_kwarg("cooldown", action.cooldown) as int
 	if cooldown > 0:
-		var previous_log_entries := enemy.combat.log.filtered_entries(
+		var previous_log_entries := combat.log.filtered_entries(
 			ActionFlavor.new().set_owner(enemy)
 				.add_tag(ActionFlavor.Tag.EnemyActionSpecific)
-				.add_data("action", action),
-			enemy.combat.current_round - cooldown
+				.add_data("action", action)
+				.finalize(combat),
+			combat.current_round - cooldown
 		)
 		if previous_log_entries:
 			return []
-	var combat := enemy.combat
+
+	# Getting all the suitable targets
 	var temp_logic := get_temp_logic(enemy, combat)
 	var all_targets := temp_logic.get_target_pool()
+	
 	# Testing if self target
 	if enemy in all_targets:
 		if not action.can_self_target:
 			all_targets.erase(enemy)
+
 	# Testing if in Range
 	var suitable_targets := []
 	var enemy_tile = enemy.current_tile
@@ -106,6 +120,7 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 		)
 	await combat.action_stack.wait()
 	
+	# Reduce the targets and only consider the important ones
 	if action.target_consider_method == EnemyAction.TargetConsiderMethod.Best:
 		plans.sort_custom(
 			func (a, b):

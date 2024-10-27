@@ -14,6 +14,8 @@ var stack_is_filled := false
 var consecutive_action_frames := 0
 var consecutive_action_msecs := 0
 var consecutive_action_start := 0
+var consecutive_action_total := 0
+var consecutive_action_process_runs := 0
 var block_start_time := 0
 var _preset_flavor: ActionFlavor
 
@@ -184,9 +186,16 @@ func mark_stack_as_clear():
 	if consecutive_action_frames > 3:
 		var current_time := Time.get_ticks_msec()
 		var real_duration := Time.get_ticks_msec() - consecutive_action_start
-		combat.log.add("Calculated for %s msecs in %s frames (%.2f s)" % \
-			[consecutive_action_msecs, consecutive_action_frames,
-			float(real_duration) / 1000.0])
+		combat.log.add(
+			"Calculated %s actions in %s msecs using %s frames and %s runs (total %.2f s)" % \
+			[
+				consecutive_action_total,
+				consecutive_action_msecs,
+				consecutive_action_frames,
+				consecutive_action_process_runs,
+				float(real_duration) / 1000.0
+			]
+		)
 	reset_action_time()
 	clear.emit()
 
@@ -207,12 +216,16 @@ func reset_action_time():
 	consecutive_action_frames = 0
 	consecutive_action_msecs = 0
 	consecutive_action_start = 0
+	consecutive_action_total = 0
+	consecutive_action_process_runs = 0
 
-func note_action_time(action_time: int):
+func note_action_time(action_time: int, action_process_runs: int, action_total: int):
 	if consecutive_action_frames == 0:
 		consecutive_action_start = Time.get_ticks_msec() - action_time
 	consecutive_action_frames += 1
 	consecutive_action_msecs += action_time
+	consecutive_action_process_runs += action_process_runs
+	consecutive_action_total += action_total
 	assert(consecutive_action_frames < 500, "ActionStack: Something probably went wrong.")
 
 func stack_process() -> void:
@@ -222,14 +235,15 @@ func stack_process() -> void:
 		mark_stack_as_clear()
 		return
 	var start_time := Time.get_ticks_msec()
+	var action_total := 0
 	for i in range(1000):
 		var current_time := Time.get_ticks_msec()
 		var action_time := current_time - start_time
 		if action_time > FRAME_ACTION_MAX_MSECS:
-			note_action_time(action_time)
+			note_action_time(action_time, i + 1, action_total)
 			return
 		if _stack.is_empty():
-			note_action_time(action_time)
+			note_action_time(action_time, i + 1, action_total)
 			mark_stack_as_clear()
 			return
 		var ticket: ActionTicket = _stack.front() as ActionTicket
@@ -237,7 +251,7 @@ func stack_process() -> void:
 			"ActionStack: Tickets should never be running at this point")
 		if ticket.is_blocked():
 			push_warning("A ticket is blocked. What happened?")
-			note_action_time(action_time)
+			note_action_time(action_time, i + 1, action_total)
 			mark_stack_as_blocked()
 			return
 		if ticket.can_be_advanced():
@@ -255,6 +269,7 @@ func stack_process() -> void:
 				push_warning("Soon to be removed ticket has unannounced flavor.")
 			_stack.erase(ticket)
 			ticket.remove()
+			action_total += 1
 		else:
 			push_error("Ticket can neither be advanced or removed.")
 	push_warning("ActionStack: Looped 1000 times this frame.")
@@ -270,9 +285,9 @@ signal flavor_announced(flavor: ActionFlavor)
 
 func set_active_flavor(flavor: ActionFlavor) -> Signal:
 	assert(active_ticket, "An active ticket is needed to set the flavor.")
-	if active_ticket.flavor:
-		push_warning("Setting flavor for active ticket which already has one.\
-		Is this intended?")
+	#if active_ticket.flavor:
+		#push_warning("Setting flavor for active ticket which already has one.\
+		#Is this intended?")
 	active_ticket.flavor = flavor
 	_announce_active_flavor()
 	return wait()

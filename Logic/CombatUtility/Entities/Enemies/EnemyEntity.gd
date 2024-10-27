@@ -15,7 +15,16 @@ var action_plan: EnemyActionPlan
 
 ## ACTION
 func plan_next_action():
-	action_plan = await get_random_action_plan()
+	if not action_plan:
+		action_plan = await get_random_action_plan()
+	else:
+		var possible: bool = await combat.action_stack.get_result(
+			action_plan.is_possible.bind(combat)
+		)
+		if (not possible) or action_plan.action_args.try_to_avoid:
+			var new_action_plan: EnemyActionPlan = await get_random_action_plan()
+			if not new_action_plan.action_args.try_to_avoid:
+				action_plan = new_action_plan
 
 ## SUBACTION
 func do_action():
@@ -63,22 +72,7 @@ func get_action_pool() -> Array[EnemyActionArgs]:
 	actions.append_array(combat.global_enemy_actions)
 	return actions
 
-#func create_action_logic(action_args: EnemyActionArgs) -> EnemyActionLogic:
-	#var action: EnemyAction = action_args.action
-	#var new_action_logic = action.logic_script.new() as EnemyActionLogic
-	#assert(new_action_logic, "Enemy Action Logic wasn't created.")
-	#new_action_logic.args = action_args
-	#new_action_logic.action = action
-	#new_action_logic.combat = combat
-	#new_action_logic.enemy = self
-	#new_action_logic.setup()
-	#action_logic[action_args] = new_action_logic
-	#return new_action_logic
-#
-#func get_action_logic(action_args: EnemyActionArgs) -> EnemyActionLogic:
-	#return Utility.dict_safe_get(action_logic, action_args, \
-		#create_action_logic(action_args))
-
+## RESULT
 func get_random_action_plan() -> EnemyActionPlan:
 	var d_power : float = get_bahviour().decision_power
 	var plans: Array[EnemyActionPlan] = []
@@ -106,7 +100,11 @@ func get_random_action_plan() -> EnemyActionPlan:
 ## Entity Overrides ##
 ######################
 
-func on_create() -> void:
+## TE
+func on_combat_change():
+	await combat.action_stack.process_callable(plan_next_action)
+
+func on_create():
 	super.on_create()
 	type = type as EnemyEntityType
 
@@ -114,7 +112,7 @@ func on_death():
 	super.on_death()
 	combat.enemies.erase(self)
 
-func sync_with_type() -> void:
+func sync_with_type():
 	super()
 	agility = type.agility
 	strength = type.strength
@@ -127,12 +125,13 @@ func get_name() -> String:
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 
 
-const DEFAULT_BEHAVIOUR = preload("res://Entities/Enemies/EnemyBehaviourDefault.tres")
+const DEFAULT_BEHAVIOUR = preload("res://Entities/Enemies/Behaviours/EnemyBehaviourDefault.tres")
 func get_bahviour() -> EnemyBehaviour:
 	if get_enemy_type().behaviour:
 		return get_enemy_type().behaviour
 	return DEFAULT_BEHAVIOUR
 
+## SUBACTION
 func on_hover_long(h: bool) -> void:
 	if action_plan:
-		action_plan.show_preview(combat, h)
+		await action_plan.show_preview(combat, h)

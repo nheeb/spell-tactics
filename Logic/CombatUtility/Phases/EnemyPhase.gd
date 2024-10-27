@@ -18,6 +18,7 @@ func process_phase() -> void:
 		combat.action_stack.preset_flavor(
 			ActionFlavor.new().set_owner(enemy) \
 				.add_tag(ActionFlavor.Tag.EnemyActionGeneric)
+				.finalize(combat)
 		)
 		combat.action_stack.push_before_active(
 			ActionTicket.new(do_enemy_action.bind(enemy))

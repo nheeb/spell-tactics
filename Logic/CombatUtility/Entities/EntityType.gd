@@ -56,7 +56,7 @@ func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	if self.visual_scene != null:
 		ent.visual_entity = self.visual_scene.instantiate()
 	else:
-		#push_warning("Using a prototype visual")
+		# push_warning("Using a prototype visual")
 		# need to use load here since Godot 4.3 for some reason..
 		ent.visual_entity = load(PROTOTYPE_VISUALS).instantiate()
 	
@@ -68,9 +68,12 @@ func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	ent.visual_entity.entity = ent
 	ent.type = self
 
+	# Creating entity logic
 	if self.entity_logic != null:
 		ent.logic = self.entity_logic.new(ent, combat)
 
+	# Setting the energy
+	# TBD should this be moved somewhere else?
 	ent.energy = ent.type.energy
 	if ent.energy == null:  # give empty stack if it was left blank
 		ent.energy = EnergyStack.new()

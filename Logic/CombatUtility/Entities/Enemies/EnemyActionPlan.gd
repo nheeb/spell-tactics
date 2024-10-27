@@ -31,8 +31,8 @@ func _init(_enemy = null, _action_args = null, _target = null, combat: Combat = 
 	elif _target:
 		if _target.has_method("get_reference"):
 			target_ref = _target.get_reference()
-	if combat:
-		create_action_logic(combat)
+	#if combat:
+		#create_action_logic(combat)
 
 func get_enemy(combat: Combat) -> EnemyEntity:
 	if enemy_ref:
@@ -44,9 +44,7 @@ func get_target(combat: Combat) -> Variant:
 		return target_ref.resolve(combat)
 	return null
 
-func get_logic(combat: Combat) -> EnemyActionLogic:
-	if not _logic:
-		create_action_logic(combat)
+func get_logic() -> EnemyActionLogic:
 	if _logic:
 		return _logic
 	return null
@@ -79,6 +77,7 @@ func create_detail(key: Variant, value: Variant) -> void:
 ## Methods for usage ##
 #######################
 
+## ACTION
 func create_action_logic(combat: Combat) -> void:
 	if get_enemy(combat) and action:
 		var new_action_logic = action.logic_script.new() as EnemyActionLogic
@@ -89,7 +88,7 @@ func create_action_logic(combat: Combat) -> void:
 		new_action_logic.enemy = get_enemy(combat)
 		new_action_logic.target = get_target(combat)
 		new_action_logic.plan = self
-		new_action_logic.setup()
+		await new_action_logic.setup()
 		_logic = new_action_logic
 
 ## ACTION
@@ -101,13 +100,15 @@ func execute(combat: Combat):
 	)
 	await combat.action_stack.active_ticket.wait()
 	if possible_right_now.value:
-		await get_logic(combat).execute()
+		await get_logic().execute()
 	else:
 		fizzled = true
 	executed = true
 
 ## RESULT
 func is_possible(combat: Combat, include_movement := true) -> bool:
+	if not get_logic():
+		await combat.action_stack.process_callable(create_action_logic.bind(combat))
 	var start_from := get_enemy(combat).current_tile
 	if has_movement() and include_movement:
 		var movement_plan := get_movement()
@@ -116,10 +117,12 @@ func is_possible(combat: Combat, include_movement := true) -> bool:
 		)
 		await combat.action_stack.wait()
 		start_from = after_movement.value
-	return get_logic(combat).is_possible(start_from)
+	return await get_logic().is_possible(start_from)
 
 ## RESULT
 func get_evaluation_score(combat: Combat) -> float:
+	if not get_logic():
+		await combat.action_stack.process_callable(create_action_logic.bind(combat))
 	if score_cache < 0.0:
 		score_cache = 0.0
 		var start_from: Tile = get_enemy(combat).current_tile
@@ -134,8 +137,11 @@ func get_evaluation_score(combat: Combat) -> float:
 			await combat.action_stack.wait()
 			score_cache += movement_score.value
 			start_from = movement_destination.value
-		var eval := get_logic(combat).evaluate(start_from)
+		var eval := await get_logic().evaluate(start_from)
 		score_cache += eval.get_total_score(get_enemy(combat).get_bahviour())
+		score_cache *= action_args.score_factor
+		if action_args.try_to_avoid:
+			score_cache *= action_args.avoid_score_factor
 	return score_cache
 
 func get_evaluation_score_cached() -> float:
@@ -144,6 +150,8 @@ func get_evaluation_score_cached() -> float:
 
 ## RESULT
 func get_estimated_destination(combat: Combat, start_from: Tile = null) -> Tile:
+	if not get_logic():
+		await combat.action_stack.process_callable(create_action_logic.bind(combat))
 	if start_from == null:
 		start_from = get_enemy(combat).current_tile
 	if has_movement():
@@ -153,10 +161,11 @@ func get_estimated_destination(combat: Combat, start_from: Tile = null) -> Tile:
 		)
 		await combat.action_stack.active_ticket.wait()
 		start_from = after_movement.value
-	return get_logic(combat).estimated_destination(start_from)
+	return await get_logic().estimated_destination(start_from)
 
+## SUBACTION
 func show_preview(combat: Combat, show: bool) -> void:
-	get_logic(combat).show_preview(show)
+	await get_logic().show_preview(show)
 
 func has_movement() -> bool:
 	return action.movement_action_args != null
@@ -174,7 +183,7 @@ func get_movement() -> EnemyActionPlan:
 		return null
 
 func get_alternative(combat: Combat) -> EnemyActionPlan:
-	return get_logic(combat).get_alternative_plan()
+	return get_logic().get_alternative_plan()
 
 func get_string_action_target(combat: Combat) -> String:
 	return action.pretty_name + ("-> %10s " % str(get_target(combat)) if target_ref else "") \

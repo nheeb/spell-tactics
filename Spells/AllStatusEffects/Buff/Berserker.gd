@@ -10,4 +10,4 @@ func _setup_logic() -> void:
 
 func berserker_effect(discussion: Discussion):
 	combat.action_stack.push_behind_active(self_remove)
-	discussion.value *= 2
+	discussion.value += status.data.get("damage_bonus", 2)

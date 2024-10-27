@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_jf1pl"]
 script = ExtResource("1_str82")
-stack = Array[int]([1])
+stack = Array[int]([6])
 
 [resource]
 script = ExtResource("1_dgvjx")
@@ -15,14 +15,13 @@ costs = SubResource("Resource_jf1pl")
 keywords = Array[ExtResource("3_vbius")]([])
 pretty_name = "Growing Mycelium"
 effect_text = "Spawn a shroom. Draw a Spell.
-(Min range: 3)
 "
 fluff_text = ""
 icon = ExtResource("2_37jli")
 color = Color(0.462745, 0.666667, 0.45098, 1)
 target = 3
 target_range = -1
-target_min_range = 3
+target_min_range = -1
 target_tag = ""
 target_count_min = 1
 target_count_max = 1

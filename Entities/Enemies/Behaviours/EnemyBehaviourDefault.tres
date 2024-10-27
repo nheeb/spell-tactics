@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="EnemyBehaviour" load_steps=17 format=3 uid="uid://csuye2jebxpih"]
+
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_m4nxb"]
+[ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyBehaviour.gd" id="2_87h0k"]
+
+[sub_resource type="Resource" id="Resource_tk1ia"]
+script = ExtResource("1_m4nxb")
+criteria = 9
+value = 50.0
+
+[sub_resource type="Resource" id="Resource_p3doa"]
+script = ExtResource("1_m4nxb")
+criteria = 8
+value = 10.0
+
+[sub_resource type="Resource" id="Resource_3bmmy"]
+script = ExtResource("1_m4nxb")
+criteria = 7
+value = 3.0
+
+[sub_resource type="Resource" id="Resource_36frv"]
+script = ExtResource("1_m4nxb")
+criteria = 5
+value = 1.5
+
+[sub_resource type="Resource" id="Resource_0q37b"]
+script = ExtResource("1_m4nxb")
+criteria = 4
+value = 1.5
+
+[sub_resource type="Resource" id="Resource_l5h1t"]
+script = ExtResource("1_m4nxb")
+criteria = 0
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_f2p0a"]
+script = ExtResource("1_m4nxb")
+criteria = 12
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_l7bl1"]
+script = ExtResource("1_m4nxb")
+criteria = 11
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_e2s7x"]
+script = ExtResource("1_m4nxb")
+criteria = 6
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_wmldt"]
+script = ExtResource("1_m4nxb")
+criteria = 3
+value = 0.6
+
+[sub_resource type="Resource" id="Resource_gs7y1"]
+script = ExtResource("1_m4nxb")
+criteria = 1
+value = 0.4
+
+[sub_resource type="Resource" id="Resource_td2b8"]
+script = ExtResource("1_m4nxb")
+criteria = 2
+value = 0.4
+
+[sub_resource type="Resource" id="Resource_nb48u"]
+script = ExtResource("1_m4nxb")
+criteria = 10
+value = 0.3
+
+[sub_resource type="Resource" id="Resource_xve00"]
+script = ExtResource("1_m4nxb")
+criteria = 13
+value = 0.5
+
+[resource]
+script = ExtResource("2_87h0k")
+name = "DefaultBehaviour"
+decision_power = 2.0
+criteria_preferences = Array[ExtResource("1_m4nxb")]([SubResource("Resource_tk1ia"), SubResource("Resource_p3doa"), SubResource("Resource_3bmmy"), SubResource("Resource_36frv"), SubResource("Resource_0q37b"), SubResource("Resource_l5h1t"), SubResource("Resource_f2p0a"), SubResource("Resource_l7bl1"), SubResource("Resource_e2s7x"), SubResource("Resource_wmldt"), SubResource("Resource_gs7y1"), SubResource("Resource_td2b8"), SubResource("Resource_nb48u"), SubResource("Resource_xve00")])

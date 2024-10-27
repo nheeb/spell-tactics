@@ -17,8 +17,9 @@ func on_fail(combat: Combat) -> void:
 	pass
 
 func log_me(combat: Combat, valid: bool) -> void:
-	combat.log.add("New Action: %s [%s]" % [action_string,
-							"VALID" if valid else "INVALID"])
+	return
+	#combat.log.add("New Action: %s [%s]" % [action_string,
+							#"VALID" if valid else "INVALID"])
 
 func _to_string() -> String:
 	return "PA:%s" % action_string

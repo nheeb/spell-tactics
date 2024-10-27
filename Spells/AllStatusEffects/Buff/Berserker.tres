@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Enemies/EnemyActionArgs.gd" id="1_w031f"]
 [ext_resource type="Script" path="res://Logic/CombatUtility/Entities/Status/EntityStatusType.gd" id="2_1enxd"]
-[ext_resource type="Texture2D" uid="uid://mf5yk8rulxlh" path="res://Assets/Sprites/Icons/crossed-axes.png" id="2_ommin"]
+[ext_resource type="Texture2D" uid="uid://b6dfkoojmw45j" path="res://Assets/Sprites/Icons/axe-plus.png" id="2_8mq37"]
 
 [resource]
 script = ExtResource("2_1enxd")
 pretty_name = "Berserker"
-icon = ExtResource("2_ommin")
+icon = ExtResource("2_8mq37")
 color = Color(1, 0.632813, 0, 1)
-text = "The next melee attack of this entity deals doubled damage."
+text = "The next melee attack of this entity deals +2 damage."
 default_data = {}
 has_lifetime = false
 lifetime_default = 1

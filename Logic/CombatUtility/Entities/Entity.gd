@@ -42,6 +42,7 @@ static func should_serialize_this_prop(name: String) -> bool:
 		return false
 	return true
 
+## Write the entity into an EntityState (Resource)
 func serialize() -> EntityState:
 	var state: EntityState = EntityState.new()
 	state.type = type
@@ -66,7 +67,7 @@ func serialize() -> EntityState:
 
 	#print(state.entity_props)
 	return state
-	
+
 func move(target: Tile):
 	current_tile.remove_entity(self)
 	target.add_entity(self)
@@ -93,12 +94,16 @@ func is_drainable():
 
 ## This will be executed after an entity has been created from a type.
 func on_create() -> void:
+	TimedEffect.new_combat_change(on_combat_change) \
+		.set_id("_cc").set_solo().register(combat)
 	if visual_entity != null:
 		visual_entity.visible = false
 	else:
 		push_warning("visual_entity for entity_type %s is null in on_create()" % type.internal_name)
-	#for status_effect in status_effects:
-		#status_effect.setup(self)
+
+## TE
+func on_combat_change():
+	pass
 
 func get_reference() -> EntityReference:
 	return EntityReference.new(self)
@@ -111,28 +116,6 @@ func is_dead() -> bool:
 func die() -> AnimationObject:
 	combat.level.move_entity_to_graveyard(self)
 	return combat.animation.hide(visual_entity)
-
-## Wrapper function for the method die(). Not sure why we have this...
-func go_to_graveyard() -> AnimationObject:
-	return die()
-
-# Those two method were never used. Not sure why I wrote those...
-#func call_on_status_effect(status_name: String, method: String, params := []) -> void:
-	#var effect := get_status_effect(status_name)
-	#if effect:
-		#if effect.has_method(method):
-			#effect.callv(method, params)
-		#else:
-			#push_error("Status effect %s has no method %s" % [status_effects, method])
-			#
-#func call_logic(method: String, params := []):
-	#if logic == null:
-		#push_error("%s does not have logic." % self)
-		#return
-	#if not logic.has_method(method):
-		#push_error("%s logic does not have method '%s'." % [self, method])
-		#return
-	#logic.callv(method, params)
 
 func _to_string() -> String:
 	if id != null:
@@ -147,6 +130,7 @@ func get_tags() -> Array[String]:
 func sync_with_type() -> void:
 	energy = type.energy
 
+## SUBACTION
 func on_hover_long(h: bool) -> void:
 	pass
 
@@ -179,9 +163,9 @@ func remove_status_effect(status_name: String) -> void:
 		effect.on_remove()
 		status_effects.erase(effect)
 
-###############################
-## Methods for EntityEffects ##
-###############################
+##############################
+## Methods for EntityStatus ##
+##############################
 
 ## Add a status to the status_array. If a status with the same name / type is
 ## already in there, it gets extended instead.

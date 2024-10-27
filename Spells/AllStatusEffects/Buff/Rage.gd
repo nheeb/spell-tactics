@@ -2,7 +2,9 @@ extends EntityStatusLogic
 
 func _setup_logic() -> void:
 	TimedEffect.new_flavor_reaction(
-		ActionFlavor.new().set_owner(entity).add_tag(ActionFlavor.Tag.EnemyActionGeneric),
+		ActionFlavor.new().set_owner(entity)
+			.add_tag(ActionFlavor.Tag.EnemyActionGeneric)
+			.finalize(combat),
 		rage_effect
 	).trigger_after_active_ticket().register(combat)
 
