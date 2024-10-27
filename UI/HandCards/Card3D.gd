@@ -39,4 +39,3 @@ func set_distort(d : bool):
 	VisualTime.new_tween().tween_property( \
 						card_texture.icon_texture.main_icon.material, \
 						"shader_parameter/distort_progress", 1.0 if d else 0.0, .45)
-

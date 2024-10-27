@@ -13,7 +13,9 @@ enum Tag {
 	EnemyActionSpecific,
 	EnemyEvent,
 	CombatEvent,
-	Drain
+	Drain,
+	Spell,
+	Active
 }
 
 ## Ideally the source of the action

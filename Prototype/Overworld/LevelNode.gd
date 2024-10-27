@@ -12,19 +12,19 @@ enum NodeType {
 
 var _visual: Node3D
 
-func _ready():
-	var visual: Node3D
-	if data.type == NodeType.Event:
-		pass
-		#visual = preload("res://Logic/Overworld/Visuals/EventNodeVisual.tscn").instantiate()
-	elif data.type == NodeType.Boss:
-		#visual = preload("res://Logic/Overworld/Visuals/BossNodeVisual.tscn").instantiate()
-		pass
-	else:
-		#visual = preload("res://Logic/Overworld/Visuals/GenericNodeVisual.tscn").instantiate()
-		pass
-	_visual = visual
-	add_child(visual)
+#func _ready():
+	#var visual: Node3D
+	#if data.type == NodeType.Event:
+		#pass
+		##visual = preload("res://Logic/Overworld/Visuals/EventNodeVisual.tscn").instantiate()
+	#elif data.type == NodeType.Boss:
+		##visual = preload("res://Logic/Overworld/Visuals/BossNodeVisual.tscn").instantiate()
+		#pass
+	#else:
+		##visual = preload("res://Logic/Overworld/Visuals/GenericNodeVisual.tscn").instantiate()
+		#pass
+	#_visual = visual
+	#add_child(visual)
 
 func highlight_selectable(flag: bool):
 	for child in _visual.get_children():

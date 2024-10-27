@@ -1,7 +1,7 @@
 extends CombatEventLogic
 
-const LEAFLESS = preload("res://Entities/Environment/LeaflessTree.tres")
-const FOLIAGE = preload("res://Entities/Environment/Foliage.tres")
+const LEAFLESS = preload("res://Content/Entities/LeaflessTree.tres")
+const FOLIAGE = preload("res://Content/Entities/Foliage.tres")
 
 func _on_advance(round_number: int) -> void:
 	var all_trees : Array[Entity] = combat.level.entities.get_all_active_entities().filter(

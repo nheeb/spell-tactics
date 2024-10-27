@@ -20,7 +20,7 @@ func process_phase() -> void:
 				.add_tag(ActionFlavor.Tag.EnemyActionGeneric)
 				.finalize(combat)
 		)
-		combat.action_stack.push_before_active(
+		combat.action_stack.process_ticket(
 			ActionTicket.new(do_enemy_action.bind(enemy))
 		)
 		await combat.action_stack.wait()

@@ -3,7 +3,7 @@ extends EntityLogic
 func on_summon():
 	TimedEffect.new_flavor_reaction(
 		ActionFlavor.new()
-			.add_tag(ActionFlavor.Tag.Cast)
+			.add_tag(ActionFlavor.Tag.Spell)
 			.finalize(combat),
 		give_energy
 	).register(combat)

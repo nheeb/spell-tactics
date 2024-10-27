@@ -31,11 +31,13 @@ func execute(combat: Combat) -> void:
 	combat.animation.wait(.4)
 	await combat.input.current_castable.get_logic()._set_preview_visuals(false)
 	combat.action_stack.preset_combat_change()
+	var flavor := ActionFlavor.new().set_owner(combat.player).add_tag(ActionFlavor.Tag.Cast)
+	if combat.input.current_castable is Spell:
+		flavor.add_tag(ActionFlavor.Tag.Spell)
+	else:
+		flavor.add_tag(ActionFlavor.Tag.Active)
 	combat.action_stack.preset_flavor(
-		ActionFlavor.new()
-			.set_owner(combat.player)
-			.add_tag(ActionFlavor.Tag.Cast)
-			.finalize(combat)
+		flavor.finalize(combat)
 	)
 	await combat.action_stack.process_callable(combat.input.current_castable.try_cast)
 
