@@ -31,6 +31,8 @@ class_name CombatState extends Resource
 # Enemy Actions
 @export var global_enemy_actions: Array[EnemyActionArgs]
 
+@export var meta: SaveFileMeta = null
+
 const COMBAT = preload("res://Logic/Combat/Combat.tscn")
 
 func deserialize() -> Combat:
@@ -81,3 +83,15 @@ func save_to_disk(path: String) -> void:
 
 static func load_from_disk(path: String) -> CombatState:
 	return ResourceLoader.load(path) as CombatState
+	
+func generate_meta(save_name: String = "Unnamed Savefile", screenshot : ImageTexture = null) -> void:
+	meta = SaveFileMeta.new()
+	meta.title = save_name
+	meta.timestamp = Time.get_datetime_string_from_system()
+
+	if screenshot:
+		meta.screenshot = screenshot
+	else:
+		meta.screenshot = Utility.take_screenshot(3)
+	meta.filename = "Savefile-" + meta.timestamp.replace(":", "-").replace("T", "-")\
+			 + "-" + meta.title.replace(" ", "")

@@ -30,12 +30,12 @@ func auto_save():
 		push_error("No Overworld found for auto-saving")
 		return
 	
-	var state = overworld.serialize(combat.serialize())
+	var combat_state := combat.serialize()
 	var thread = Thread.new()
 	thread.start(func():
-		await VisualTime.new_timer(1).timeout
-		state.generate_meta("Auto Save - Round %s" % combat.current_round)
-		SaveFile.save_to_disk(state, Game.SAVE_DIR + state.meta.filename + ".tres")
+		await VisualTime.new_timer(.5).timeout
+		combat_state.generate_meta("Auto Save - Round %s" % combat.current_round)
+		SaveFile.save_to_disk(combat_state, Game.SAVE_DIR + combat_state.meta.filename + ".tres")
 		)
 	thread.wait_to_finish()
 	
