@@ -44,17 +44,20 @@ func activate() -> void:
 func advance() -> void:
 	rounds += 1
 	highlight_icon(true)
+	if type.max_duration > 0:
+		if rounds >= type.max_duration:
+			highlight_icon(false)
+			combat.animation.wait(.6)
+			finish_and_remove_icon()
+			return
 	if type.show_info_on_advancing:
 		show_info(true)
-		combat.animation.wait(1)
+		combat.animation.wait(.6)
 	logic.on_advance(rounds)
 	if type.show_info_on_advancing:
 		show_info(false)
 	highlight_icon(false)
-	if type.max_duration > 0:
-		if rounds >= type.max_duration:
-			finish()
-	if finished:
+	if finished and not icons_removed:
 		remove_icon()
 
 ## Sets active to false. The event won't be advanced further and can't be
