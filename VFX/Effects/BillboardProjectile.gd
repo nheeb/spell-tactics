@@ -2,7 +2,7 @@ extends OneshotVisualEffect
 
 var texture_name := ""
 var target : Node3D
-var speed := 6.0
+var speed := 10.0
 var height := 1.0
 
 ## Quick Paste: combat.animation.effect(VFX.BILLBOARD_PROJECTILE, origin, {"texture_name": , "target": })

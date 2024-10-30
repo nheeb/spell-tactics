@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_6m3hu"]
 [ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="2_du0s6"]
+[ext_resource type="Texture2D" uid="uid://b6dfkoojmw45j" path="res://Assets/Sprites/Icons/axe-plus.png" id="2_sabji"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="3_a1eja"]
 
 [sub_resource type="Resource" id="Resource_fenta"]
 script = ExtResource("1_6m3hu")
 stack = Array[int]([4, 6])
-
-[sub_resource type="Resource" id="Resource_mcmxd"]
-metadata/__load_path__ = "res://Assets/Sprites/Icons/axe-plus.png"
 
 [resource]
 script = ExtResource("3_a1eja")
@@ -18,7 +16,7 @@ keywords = Array[ExtResource("2_du0s6")]([])
 pretty_name = "Berserker"
 effect_text = "Your next melee attack does +2 damage."
 fluff_text = ""
-icon = SubResource("Resource_mcmxd")
+icon = ExtResource("2_sabji")
 color = Color(0.792157, 0.521569, 0.258824, 1)
 target = 0
 target_range = -1

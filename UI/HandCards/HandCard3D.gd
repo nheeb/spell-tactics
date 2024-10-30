@@ -79,7 +79,7 @@ func get_empty_energy_socket(type : EnergyStack.EnergyType) -> HandCardEnergySoc
 	for c in socket_children:
 		c = c as HandCardEnergySocket
 		if c:
-			if c.visible and (not c.is_loaded) and (not c.is_soon_loaded):
+			if c.visible and (not c.is_loaded):
 				if type == EnergyStack.EnergyType.Any:
 					return c
 				elif c.type == EnergyStack.EnergyType.Any:

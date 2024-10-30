@@ -1,12 +1,13 @@
-[gd_scene load_steps=60 format=3 uid="uid://cprvtoo5si7sx"]
+[gd_scene load_steps=61 format=3 uid="uid://cprvtoo5si7sx"]
 
 [ext_resource type="Script" path="res://VFX/Effects/EnergyOrbs/EnergyOrb.gd" id="1_2ps41"]
 [ext_resource type="Shader" uid="uid://4bqma1qx5xgw" path="res://VFX/Materials/OrbBackground.tres" id="2_2q3is"]
 [ext_resource type="Texture2D" uid="uid://ckh1exvhdroly" path="res://Assets/Sprites/EnergyIconMasks/matter.png" id="2_b67sw"]
 [ext_resource type="PackedScene" uid="uid://djujpfvecfgl2" path="res://Logic/Utility/OrbitalMovement.tscn" id="4_o3qko"]
+[ext_resource type="FontFile" uid="uid://pfhnjg6a8hhb" path="res://Assets/Fonts/spell-tactics-energy.ttf" id="6_1xp6h"]
 [ext_resource type="Texture2D" uid="uid://chouwpgskph5q" path="res://Assets/Sprites/KenneyParticles/circle_01.png" id="6_55dga"]
 [ext_resource type="Texture2D" uid="uid://d4h25l5od8pa1" path="res://Assets/Sprites/KenneyParticles/scorch_01.png" id="7_vwprw"]
-[ext_resource type="Texture2D" uid="uid://nnoppo8bk6ck" path="res://Assets/Sprites/KenneyParticles/spark_02.png" id="8_nu0fg"]
+[ext_resource type="Texture2D" uid="uid://bk562s5smwwfe" path="res://Assets/Sprites/KenneyParticles/spark_02_big_low.png" id="8_nb4y4"]
 [ext_resource type="Texture2D" uid="uid://b40xhjxikn2lv" path="res://Assets/Sprites/KenneyParticles/spark_04.png" id="9_53r0n"]
 [ext_resource type="Texture2D" uid="uid://twvr103kl43t" path="res://Assets/Sprites/KenneyParticles/star_04.png" id="10_c4be7"]
 
@@ -345,7 +346,7 @@ _data = {
 radius = 0.177107
 
 [sub_resource type="Curve" id="Curve_vhk1f"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.477273, 0.762195), -0.24158, -0.24158, 0, 0, Vector2(0.556818, 0.762195), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.010989), 0.0, 0.0, 0, 0, Vector2(0.472222, 0.868132), -0.24158, -0.24158, 0, 0, Vector2(0.546296, 0.868132), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_o27ji"]
@@ -383,7 +384,7 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_kmx12")
 
 [sub_resource type="Curve" id="Curve_rfpnj"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.534091, 0.416297), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.0462963, 0), 0.0, 0.0, 0, 0, Vector2(0.509259, 0.791209), -0.114853, -0.114853, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_k7ejj"]
@@ -400,8 +401,8 @@ curve = SubResource("Curve_hqjiu")
 angle_min = 1.0
 angle_max = 360.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.7
-scale_max = 0.8
+scale_min = 0.55
+scale_max = 0.7
 scale_curve = SubResource("CurveTexture_so652")
 alpha_curve = SubResource("CurveTexture_k7ejj")
 
@@ -430,7 +431,7 @@ transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.626, 1.786, 1.75, 1)
-albedo_texture = ExtResource("8_nu0fg")
+albedo_texture = ExtResource("8_nb4y4")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -636,10 +637,23 @@ shape = SubResource("SphereShape3D_xbhwi")
 [node name="Visual" type="Node3D" parent="."]
 transform = Transform3D(0.55357, 0, 0, 0, 0.55357, 0, 0, 0, 0.55357, 0, 0, 0)
 
+[node name="Label3D" type="Label3D" parent="Visual"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+offset = Vector2(0, 8)
+billboard = 1
+double_sided = false
+alpha_cut = 2
+render_priority = 8
+text = "h"
+font = ExtResource("6_1xp6h")
+font_size = 96
+outline_size = 0
+
 [node name="Rings" type="GPUParticles3D" parent="Visual"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 cast_shadow = 0
 amount = 4
-lifetime = 3.0
+lifetime = 2.0
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_vdxn8")
@@ -654,7 +668,9 @@ process_material = SubResource("ParticleProcessMaterial_8obyo")
 draw_pass_1 = SubResource("QuadMesh_rocvn")
 
 [node name="Energy" type="GPUParticles3D" parent="Visual"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 cast_shadow = 0
+amount = 3
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_8obyo")
@@ -678,6 +694,7 @@ draw_pass_1 = SubResource("QuadMesh_hwspv")
 
 [node name="Icon" type="MeshInstance3D" parent="Visual"]
 transform = Transform3D(0.526425, 0, 0, 0, 0.526425, 0, 0, 0, 0.526425, 0, 0, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_0l4xb")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_vybco")

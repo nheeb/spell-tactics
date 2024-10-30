@@ -119,6 +119,8 @@ func update_possible_targets() -> void:
 
 ## This updates all ui / highlights / possible targets.
 func update_current_state() -> void:
+	if not get_card():
+		return
 	update_possible_targets()
 	var highlight_possible := get_type().target_possible_highlight
 	for tile in combat.level.get_all_tiles():

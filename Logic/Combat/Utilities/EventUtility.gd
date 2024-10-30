@@ -27,7 +27,12 @@ func add_event_schedule_for_this_round(es: CombatEventSchedule, delay := 0):
 	add_event_schedule(es)
 
 func get_active_events() -> Array[CombatEvent]:
-	return all_events.filter(func (e): return e.active)
+	var active_events := all_events.filter(func (e): return e.active)
+	active_events.sort_custom(
+		func(a: CombatEvent, b: CombatEvent):
+			return a.type.order < b.type.order
+	)
+	return active_events
 
 func add_event(event: CombatEvent):
 	assert(not (event in all_events), "Added event that was already in the list")

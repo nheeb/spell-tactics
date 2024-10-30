@@ -81,6 +81,8 @@ func on_energy_load():
 
 func update_current_state():
 	super.update_current_state()
+	if not get_card():
+		return
 	update_energy_ui()
 
 func update_energy_ui():
