@@ -75,6 +75,18 @@ class Orbit:
 		if not om in movements:
 			return Vector3.ZERO
 		var point := get_nearest_point(om.global_position) - body.global_position
+		# FIXME E 0:11:05:0482   OrbitalMovementBody.gd:78 @ get_orbital_move(): The axis Vector3 (-0.253956, 0.643611, 0.722749) must be normalized.
+#  <C++ Error>    Condition "!p_axis.is_normalized()" is true.
+#  <C++ Source>   core/math/basis.cpp:852 @ set_axis_angle()
+#  <Stack Trace>  OrbitalMovementBody.gd:78 @ get_orbital_move() "-> 89"
+#                 OrbitalMovementBody.gd:118 @ <anonymous lambda>()
+#                 OrbitalMovementBody.gd:117 @ get_orbital_move()
+#                 OrbitalMovement.gd:100 @ _get_move()
+#                 OrbitalMovement.gd:55 @ get_move()
+#                 OrbitalMovement.gd:250 @ movement_process()
+#                 EnergyOrb.gd:46 @ _process()
+		# this occurs for the following line
+		# when having the game running for a longer time (numerical issue?)
 		var rotated := point.rotated(tilted_up_vector, rounds_per_second * delta * TAU)
 		return rotated - point
 	func get_bound_move(om: OrbitalMovement, delta: float) -> Vector3:

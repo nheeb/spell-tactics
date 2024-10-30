@@ -19,4 +19,6 @@ https://fontesk.com/rogue-font/
   - https://free3d.com/3d-model/high-quality-grass-78178.html
 - Tree Stump - quentinus76
   - https://free3d.com/3d-model/souche-151824.html
+- bow-and-arrow
+  - https://sketchfab.com/3d-models/bow-and-arrow-1ce33880149543f9ae7b5848e6e52d66#download
 ### Sound
