@@ -1,10 +1,10 @@
 class_name OrbitalMovementBody extends Node3D
 
 static var BASE_RADUIS := .7
-static var ROUNDS_PER_SECOND := .25
+static var ROUNDS_PER_SECOND := .2
 static var TILT_ROUNDS_PER_SECOND := .15
 static var TILT_ANGLE := PI / 12.0
-static var CORRECTION_RPS := .5
+static var CORRECTION_RPS := .7
 static var BOUND_LERP := .05
 
 var orbits: Array[Orbit] = []
@@ -18,6 +18,7 @@ class Orbit:
 	var rounds_per_second : float = OrbitalMovementBody.ROUNDS_PER_SECOND
 	var tilt_angle : float = OrbitalMovementBody.TILT_ANGLE
 	var tilt_rounds_per_second := OrbitalMovementBody.TILT_ROUNDS_PER_SECOND
+	var correction_rps := OrbitalMovementBody.CORRECTION_RPS
 	var base_up_vector := Vector3.UP
 	var tilt_direction : Vector3
 	var tilted_up_vector : Vector3
@@ -32,13 +33,14 @@ class Orbit:
 			base_up_vector = body.get_global_y_direction()
 		rounds_per_second *= body.speed_scale
 		tilt_rounds_per_second *= body.speed_scale
+		correction_rps *= body.speed_scale
 		radius *= body.radius_scale
 		var tilt_rotation_axis := base_up_vector.cross(tilt_direction).normalized()
-		tilted_up_vector = base_up_vector.rotated(tilt_rotation_axis, tilt_angle)
+		tilted_up_vector = base_up_vector.rotated(tilt_rotation_axis, tilt_angle).normalized()
 	func movement_process(delta: float) -> void:
 		# Rotate Tilt
 		tilted_up_vector = tilted_up_vector.rotated(base_up_vector, \
-							TAU * delta * tilt_rounds_per_second)
+							TAU * delta * tilt_rounds_per_second).normalized()
 		# Calculate Angle Dist
 		reorder_movements_and_calculate_angle_dist()
 	func reorder_movements_and_calculate_angle_dist():
@@ -70,6 +72,7 @@ class Orbit:
 	func get_nearest_point(pos: Vector3) -> Vector3:
 		var dir := body.global_position.direction_to(pos)
 		var projected_dir := dir - dir.project(tilted_up_vector)
+		projected_dir = projected_dir.normalized()
 		return body.global_position + projected_dir * radius
 	func get_orbital_move(om: OrbitalMovement, delta: float) -> Vector3:
 		if not om in movements:
@@ -87,6 +90,7 @@ class Orbit:
 #                 EnergyOrb.gd:46 @ _process()
 		# this occurs for the following line
 		# when having the game running for a longer time (numerical issue?)
+		# INFO This could be fixed now. I normalize the tilted_up_vector now
 		var rotated := point.rotated(tilted_up_vector, rounds_per_second * delta * TAU)
 		return rotated - point
 	func get_bound_move(om: OrbitalMovement, delta: float) -> Vector3:
@@ -106,8 +110,7 @@ class Orbit:
 			var v : float = dist_a / (dist_a + dist_b)
 			turn = Utility.clamp_map(v, 0, 1, -1, 1)
 		var point := get_nearest_point(om.global_position) - body.global_position
-		var correction := point.rotated(tilted_up_vector, \
-							OrbitalMovementBody.CORRECTION_RPS * turn * delta)
+		var correction := point.rotated(tilted_up_vector, correction_rps * turn * delta * TAU)
 		return correction - point
 
 func attach_movement(om: OrbitalMovement) -> void:

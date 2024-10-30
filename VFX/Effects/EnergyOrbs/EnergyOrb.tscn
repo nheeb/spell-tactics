@@ -353,7 +353,9 @@ point_count = 4
 curve = SubResource("Curve_vhk1f")
 
 [sub_resource type="Curve" id="Curve_lg4n2"]
-_data = [Vector2(0, 0.79102), 0.0, -0.259423, 0, 1, Vector2(1, 0.531596), -0.259423, 0.0, 1, 0]
+min_value = 0.5
+max_value = 0.8
+_data = [Vector2(0.0138889, 0.684615), 0.0, -0.00809191, 0, 0, Vector2(0.99537, 0.579121), -0.246492, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_bb5sa"]
@@ -443,7 +445,7 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_eu3f0")
 
 [sub_resource type="Curve" id="Curve_nebea"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505682, 0.589246), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49537, 0.769231), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_ly0n4"]
@@ -464,7 +466,7 @@ angle_max = 360.0
 gravity = Vector3(0, 0, 0)
 radial_accel_max = 0.1
 scale_min = 0.4
-scale_max = 0.6
+scale_max = 0.8
 scale_curve = SubResource("CurveTexture_jgthm")
 alpha_curve = SubResource("CurveTexture_ly0n4")
 
@@ -509,8 +511,8 @@ spread = 180.0
 gravity = Vector3(0, 0, 0)
 radial_accel_min = 0.1
 radial_accel_max = 0.15
-scale_min = 0.12
-scale_max = 0.15
+scale_min = 0.17
+scale_max = 0.2
 scale_curve = SubResource("CurveTexture_fc60o")
 alpha_curve = SubResource("CurveTexture_0ui6t")
 
@@ -650,7 +652,7 @@ font_size = 96
 outline_size = 0
 
 [node name="Rings" type="GPUParticles3D" parent="Visual"]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+transform = Transform3D(1.13, 0, 0, 0, 1.13, 0, 0, 0, 1.13, 0, 0, 0)
 cast_shadow = 0
 amount = 4
 lifetime = 2.0
@@ -670,7 +672,7 @@ draw_pass_1 = SubResource("QuadMesh_rocvn")
 [node name="Energy" type="GPUParticles3D" parent="Visual"]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 cast_shadow = 0
-amount = 3
+amount = 4
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_8obyo")
@@ -686,7 +688,6 @@ draw_pass_1 = SubResource("QuadMesh_pa47w")
 
 [node name="Particles" type="GPUParticles3D" parent="Visual"]
 cast_shadow = 0
-amount = 10
 visibility_aabb = AABB(-1.17894, -1.19363, -1.18363, 2.42038, 2.39935, 2.33977)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_blg16")
