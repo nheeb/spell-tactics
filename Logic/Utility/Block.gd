@@ -1,4 +1,5 @@
 ## Class where any parts of the game can register to block tile hovering/clicking.
+## Or any other event that could be blocked from different parts.
 ## For example for UI nodes that cover the 3D World.
 class_name Block
 var name: String
