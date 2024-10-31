@@ -85,7 +85,7 @@ func remove_visual_effect(id: String) -> void:
 
 const ENERGY_ORB_ATTRACTOR = preload("res://VFX/Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
 const ENERGY_ORB = preload("res://VFX/Effects/EnergyOrbs/EnergyOrb.tscn")
-const ORB_DELAY : float = .7
+const ORB_DELAY : float = .4
 func spawn_energy_orbs(stack: EnergyStack, omb: OrbitalMovementBody):
 	# Look for attractors
 	var attractors : Array = get_children().filter( \

@@ -36,15 +36,16 @@ func gain(energy: EnergyStack, entity: Entity = null) -> AnimationObject:
 
 func spawn_orbs(energy: EnergyStack, entity: Entity) -> AnimationObject:
 	var anims: Array[AnimationObject] = []
+	anims.append(combat.animation.wait(.1))
 	if entity and entity.visual_entity:
 		anims.append(
 			combat.animation.call_method(entity.visual_entity, "spawn_energy_orbs",\
 				[energy, combat.player.visual_entity.orbital_movement_body])\
-				.set_max_duration(.5).set_flag_with()
+				.set_max_duration(.4).set_flag_with()
 		)
 	anims.append(
 		combat.animation.call_method(combat.ui.cards3d.energy_ui, "spawn_energy_orbs",\
-			[energy]).set_max_duration(.5).set_flag_with()
+			[energy]).set_max_duration(.4).set_flag_with()
 	)
 	return combat.animation.reappend_as_subqueue(anims)
 

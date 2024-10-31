@@ -12,7 +12,6 @@ var visual_time_scale := 1.0:
 
 
 signal visual_process(delta: float)
-signal process(delta: float)
 
 var timers : Array[VisualTimer] = []
 var tweens : Array[Tween] = []
@@ -37,7 +36,45 @@ class VisualTimer extends Object:
 			time_left -= delta
 		if time_left <= 0.0:
 			timeout.emit()
-	
+
+class VisualProgress extends RefCounted:
+	var _progress := 0.0
+	var _target := 0.0
+	var _active := false
+	var _speed := 1.0
+	var base_speed := 1.0
+	signal progress_change(progress: float)
+	func _init(start := 0.0, speed := 1.0) -> void:
+		_progress = start
+		base_speed = speed
+		VisualTime.visual_process.connect(_process)
+	func connect_to(callable: Callable, first_emit := true):
+		progress_change.connect(callable)
+		if first_emit:
+			set_progress(_progress)
+	func set_progress(progress: float):
+		_progress = progress
+		progress_change.emit(_progress)
+	func reach(target: float, duration := 0.0):
+		if target != _progress:
+			_target = target
+			_active = true
+			if duration > 0.0:
+				_speed = abs(_target - _progress) / duration
+			else:
+				_speed = base_speed
+	func _process(delta: float):
+		if _active:
+			if _progress == _target:
+				_active = false
+			else:
+				delta = delta * VisualTime.visual_time_scale
+				var s: float = sign(_target - _progress)
+				var new_progress := _progress + s * delta * _speed
+				if s != sign(_target - new_progress):
+					new_progress = _target
+				set_progress(new_progress)
+
 func new_timer(duration: float, stopwatch := false) -> VisualTimer:
 	var new_timerx = VisualTimer.new(duration, stopwatch)
 	timers.append(new_timerx)
@@ -59,6 +96,10 @@ func destroy_tween(tween: Tween) -> void:
 	tweens.erase(tween)
 	#tween.free()
 
+func new_progress(start := 0.0, speed := 1.0) -> VisualProgress:
+	var progress := VisualProgress.new(start, speed)
+	return progress
+
 func connect_animation_player(ap: AnimationPlayer) -> void:
 	if ap == null:
 		return
@@ -77,7 +118,7 @@ var current_speed_idx: int = 0:
 		if c != current_speed_idx:
 			changed_speed.emit(c)
 		current_speed_idx = c
-		
+
 func _process(delta: float) -> void:
 	var animation_speed = 1.0
 	if Input.is_action_just_pressed("cycle_animation_speed"):
@@ -93,6 +134,5 @@ func _process(delta: float) -> void:
 	var fixed_delta := delta * visual_time_scale
 	visual_global_time += fixed_delta
 	visual_process.emit(fixed_delta)
-	process.emit(fixed_delta)
 	for timer in timers:
 		timer.process(fixed_delta)

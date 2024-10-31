@@ -18,14 +18,13 @@ func execute(combat: Combat) -> void:
 		for orb in available_orbs:
 			if orb.type == energy:
 				actions.append(PALoadEnergy.new(orb))
-				available_orbs.erase(orb)
 				break
 	actions.append(PABlockInput.new(false))
 	
-	await combat.action_stack.active_ticket.finish()
+	await combat.action_stack.wait()
 	
 	for action in actions:
-		combat.action_stack.process_player_action(action, true)
+		await combat.action_stack.process_player_action(action, true)
 
 func on_fail(combat: Combat) -> void:
 	pass

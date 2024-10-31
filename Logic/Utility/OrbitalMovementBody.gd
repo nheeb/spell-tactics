@@ -98,7 +98,7 @@ class Orbit:
 			return Vector3.ZERO
 		var point := get_nearest_point(om.global_position)
 		var lerped = lerp(om.global_position, point, \
-						1.0 - pow(OrbitalMovementBody.BOUND_LERP, delta))
+						1.0 - pow(OrbitalMovementBody.BOUND_LERP, delta * body.speed_scale))
 		return lerped - om.global_position
 	func get_correction_move(om: OrbitalMovement, delta: float) -> Vector3:
 		if not om in movements:

@@ -38,7 +38,8 @@ func setup_active_movements():
 
 func setup(_attractor, _orbit_body):
 	attractor = _attractor
-	attach_to_orbital_body(_orbit_body)
+	if _orbit_body:
+		attach_to_orbital_body(_orbit_body)
 	setup_active_movements()
 
 class Movement:
@@ -176,7 +177,7 @@ func base_jump():
 	else:
 		jump(Vector3.UP * BASE_JUMP_FORCE)
 
-const BEZIER_JUMP_LERP_DURATION = .35
+const BEZIER_JUMP_LERP_DURATION = .3
 func bezier_jump(x0, x1, x2, duration: float = .65):
 	if x0 is Node3D:
 		active_movements[MovementType.Bezier].node0 = x0

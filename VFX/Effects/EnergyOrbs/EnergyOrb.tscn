@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cprvtoo5si7sx"]
+[gd_scene load_steps=62 format=3 uid="uid://cprvtoo5si7sx"]
 
 [ext_resource type="Script" path="res://VFX/Effects/EnergyOrbs/EnergyOrb.gd" id="1_2ps41"]
 [ext_resource type="Shader" uid="uid://4bqma1qx5xgw" path="res://VFX/Materials/OrbBackground.tres" id="2_2q3is"]
@@ -334,12 +334,66 @@ tracks/3/keys = {
 "values": [0.0, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_vqmq5"]
+resource_name = "spawn_in_ui_split"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OrbitalMovement:behaviour_fixed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OrbitalMovement:behaviour_fixed_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OrbitalMovement:behaviour_physics")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OrbitalMovement:behaviour_orbit")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuin4"]
 _data = {
 "RESET": SubResource("Animation_d0mwv"),
 "death": SubResource("Animation_xptq4"),
 "spawn": SubResource("Animation_j7sqj"),
-"spawn_in_ui": SubResource("Animation_v73xb")
+"spawn_in_ui": SubResource("Animation_v73xb"),
+"spawn_in_ui_split": SubResource("Animation_vqmq5")
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xbhwi"]
@@ -639,16 +693,26 @@ shape = SubResource("SphereShape3D_xbhwi")
 [node name="Visual" type="Node3D" parent="."]
 transform = Transform3D(0.55357, 0, 0, 0, 0.55357, 0, 0, 0, 0.55357, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Visual"]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
-offset = Vector2(0, 8)
+[node name="LabelNumber" type="Label3D" parent="Visual"]
+offset = Vector2(-40, 8)
+billboard = 1
+double_sided = false
+alpha_cut = 2
+render_priority = 8
+text = "3"
+font = ExtResource("6_1xp6h")
+font_size = 96
+outline_size = 0
+
+[node name="LabelSymbol" type="Label3D" parent="Visual"]
+offset = Vector2(36, 8)
 billboard = 1
 double_sided = false
 alpha_cut = 2
 render_priority = 8
 text = "h"
 font = ExtResource("6_1xp6h")
-font_size = 96
+font_size = 116
 outline_size = 0
 
 [node name="Rings" type="GPUParticles3D" parent="Visual"]
@@ -656,6 +720,7 @@ transform = Transform3D(1.13, 0, 0, 0, 1.13, 0, 0, 0, 1.13, 0, 0, 0)
 cast_shadow = 0
 amount = 4
 lifetime = 2.0
+preprocess = 1.0
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_vdxn8")
@@ -664,6 +729,7 @@ draw_pass_1 = SubResource("QuadMesh_fnroj")
 [node name="Core" type="GPUParticles3D" parent="Visual"]
 cast_shadow = 0
 amount = 4
+preprocess = 1.0
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_8obyo")
@@ -673,6 +739,7 @@ draw_pass_1 = SubResource("QuadMesh_rocvn")
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 cast_shadow = 0
 amount = 4
+preprocess = 1.0
 visibility_aabb = AABB(-1.00001, -1.00001, -1.00001, 2.00002, 2.00002, 2.00002)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_8obyo")
@@ -681,6 +748,7 @@ draw_pass_1 = SubResource("QuadMesh_crb73")
 [node name="Sparks" type="GPUParticles3D" parent="Visual"]
 cast_shadow = 0
 amount = 4
+preprocess = 1.0
 visibility_aabb = AABB(-1.18586, -1.0932, -1.17149, 2.33288, 2.30955, 2.3185)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_6hhrv")
@@ -688,6 +756,7 @@ draw_pass_1 = SubResource("QuadMesh_pa47w")
 
 [node name="Particles" type="GPUParticles3D" parent="Visual"]
 cast_shadow = 0
+preprocess = 1.0
 visibility_aabb = AABB(-1.17894, -1.19363, -1.18363, 2.42038, 2.39935, 2.33977)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_blg16")

@@ -118,16 +118,20 @@ func update_possible_targets() -> void:
 	possible_targets = get_possible_targets()
 
 ## This updates all ui / highlights / possible targets.
-func update_current_state() -> void:
+func update_current_state(reset := false) -> void:
+	var highlight_possible := get_type().target_possible_highlight
+	if reset:
+		for tile in combat.level.get_all_tiles():
+			tile.set_highlight(highlight_possible, false)
+		combat.ui.error_lines.clear()
+		return
 	if not get_card():
 		return
 	update_possible_targets()
-	var highlight_possible := get_type().target_possible_highlight
 	for tile in combat.level.get_all_tiles():
 		tile.set_highlight(highlight_possible, false)
 	for tile in possible_targets:
 		tile.set_highlight(highlight_possible, true)
-	
 	combat.ui.error_lines.clear()
 	if is_instance_valid(get_card()):
 		get_card().set_glow(is_castable())

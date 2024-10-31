@@ -82,6 +82,16 @@ const ENERGY_TO_LETTER = {
 	EnergyType.Spectral: "S",
 }
 
+const ENERGY_TO_SYMBOL = {
+	EnergyType.Any: "a",
+	EnergyType.Empty: "?",
+	EnergyType.Decay: "d",
+	EnergyType.Matter: "m",
+	EnergyType.Harmony: "h",
+	EnergyType.Flow: "f",
+	EnergyType.Spectral: "s",
+}
+
 const LETTER_TO_ENERGY = {
 	"X": EnergyType.Any,
 	"E": EnergyType.Empty,

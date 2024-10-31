@@ -79,8 +79,10 @@ func get_type() -> CastableType:
 func on_energy_load():
 	combat.animation.callable(update_current_state)
 
-func update_current_state():
-	super.update_current_state()
+func update_current_state(reset := false):
+	super.update_current_state(reset)
+	if reset:
+		return
 	if not get_card():
 		return
 	update_energy_ui()

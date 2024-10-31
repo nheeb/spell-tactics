@@ -1,10 +1,5 @@
-#
 class_name EnergyOrb extends Node3D
 
-# see https://github.com/godotengine/godot/issues/4236
-#var vfx_singleton = load("res://VFX/Effects/VFX.tscn").instantiate();
-
-#@export_enum("Any", "Matter", "Life", "Harmony", "Flow", "Decay", "Spectral") var type : int = 0:
 @export var type : EnergyStack.EnergyType = EnergyStack.EnergyType.Any:
 	set(_type):
 		type = _type
@@ -15,9 +10,19 @@ class_name EnergyOrb extends Node3D
 							VFX.type_to_icon(_type))
 		$Visual/Icon.material_override.set("shader_parameter/texture_albedo", \
 							VFX.type_to_icon(_type))
+		$Visual/LabelSymbol.text = EnergyStack.ENERGY_TO_SYMBOL[_type]
+		$Visual/LabelSymbol.offset.x = 0
+		$Visual/LabelNumber.visible = false
+@export var energy_count := 1:
+	set(count):
+		energy_count = count
+		if energy_count_progress:
+			energy_count_progress.reach(energy_count)
+var energy_count_progress: VisualTime.VisualProgress
+
 @export var orbital_movement_active: bool = true
 var in_ui := false
-
+var base_scale := 1.0
 @onready var movement : OrbitalMovement = $OrbitalMovement
 
 func spawn(orbit_body, attractor = null):
@@ -31,6 +36,16 @@ func spawn_in_ui(orbit_body, attractor = null):
 	%MouseArea.monitorable = true
 	%MouseArea.monitoring = true
 	%MouseArea.collision_layer = 1
+	$OmniLight3D.visible = false
+	energy_count_progress = VisualTime.new_progress(1.0, 1.5)
+	energy_count_progress.connect_to(_energy_count_progress)
+
+func spawn_in_ui_split():
+	movement.setup(null, null)
+	$AnimationPlayer.play("spawn_in_ui_split")
+	in_ui = true
+	%MouseArea.monitorable = false
+	%MouseArea.monitoring = false
 	$OmniLight3D.visible = false
 
 func _ready() -> void:
@@ -72,7 +87,6 @@ func delete():
 func set_render_priority(render_prio: int):  # used in ui to draw orbs behind cards
 	$Orb.material_override.render_priority = render_prio
 
-
 func set_particles_color(color: Color):
 	var color_base = color * 1.2
 	var color_glow = color * 1.6
@@ -95,3 +109,33 @@ func add_to_render_prio(x: int):
 	$Visual/Sparks.draw_pass_1.material.render_priority += x
 	$Visual/Particles.draw_pass_1.material.render_priority += x
 	$Visual/Icon.material_override.render_priority += x
+	$Visual/LabelNumber.render_priority += x
+	$Visual/LabelSymbol.render_priority += x
+
+const SYMBOL_OFFSET = 36
+func _energy_count_progress(progress: float):
+	progress = int(progress) + ease(fmod(progress, 1.0), -2.0)
+	var size := Utility.clamp_map(progress, 1.0, 6.0, .9, 1.55)
+	var label_number := int(progress + .5)
+	var label_text := "" if label_number <= 1 else str(label_number)
+	var symbol_offset := Utility.clamp_map(progress, 1.0, 1.8, 0.0, 1.0) * SYMBOL_OFFSET
+	var label_size := Utility.clamp_map(
+		abs(progress - int(progress) - .5), .0, .4, .1, 1.0
+	)
+	scale = Vector3.ONE * size * base_scale
+	$Visual/LabelNumber.text = label_text
+	$Visual/LabelNumber.visible = label_text != null
+	$Visual/LabelNumber.scale = Vector3.ONE * label_size
+	$Visual/LabelSymbol.offset.x = symbol_offset
+
+func create_single_orb() -> EnergyOrb:
+	assert(in_ui)
+	var split: EnergyOrb = VFX.ENERGY_ORB.instantiate()
+	split._ready()
+	split.type = type
+	split.spawn_in_ui_split()
+	get_parent().add_child(split)
+	split.base_scale = self.base_scale
+	split.global_position = self.global_position
+	split._energy_count_progress(1.0)
+	return split
