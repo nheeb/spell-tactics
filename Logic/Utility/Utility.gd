@@ -86,7 +86,6 @@ func random_hit(hit_chance: float) -> bool:
 	#assert(hit_chance >= 0.0 and hit_chance <= 100.0)
 	return randf() <= (hit_chance * 0.01)
 
-## could maybe be put in Utils singleton
 func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
 	return (abs(q1 - q2) 
 			+ abs(q1 + r1 - q2 - r2)
