@@ -136,7 +136,8 @@ func set_path(path: Array[Vector3]) -> void:
 		arrow.start = path[i-1] + Vector3.UP * BASE_LIFT
 		arrow.end = path[i] + Vector3.UP * BASE_LIFT
 		arrow_list.append(arrow)
-	arrow_list[-1].head = ArrowEnd.Arrow
+	if not arrow_list.is_empty():
+		arrow_list[-1].head = ArrowEnd.Arrow
 
 func get_triangles() -> Array[Vector3]:
 	var triangles : Array[Vector3] = []
