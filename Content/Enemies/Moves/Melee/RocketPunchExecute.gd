@@ -10,8 +10,9 @@ func _execute():
 	var obstacle_tile
 	var previous_tile
 	
+	combat.animation.wait(1)
 	for tile in tiles_in_the_way:
-		combat.animation.effect(VFX.HEX_COLOR, tile)
+		combat.animation.effect(VFX.HEX_COLOR, tile).set_flag_with()
 		if tile.is_obstacle():
 			tile.get_obstacle_layers()
 			obstacle_tile = tile
