@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjpf7sjg6gjsk"]
+
+[ext_resource type="Script" path="res://VFX/Entities/VisualTornado.gd" id="1_838kx"]
+
+[node name="VisualTornado" type="Node3D"]
+script = ExtResource("1_838kx")
+rings = 10
+balls = 6
+radius = 0.2
+radius_increment = 0.05
+ring_divider = 7
+radius_increment_large = 0.2
+size = 0.1
+size_per_ring = 0.015
+ring_height_distance = 0.275
+rotation_speed = 3.0
+ring_horizontal_displacement_range = 0.3
+ball_size_variation = 0.1
+ball_size_animation_range = 0.2
+color_darkest = Color(0.325441, 0.325441, 0.325441, 1)
+color_lightest = Color(0.517184, 0.517184, 0.517184, 1)
