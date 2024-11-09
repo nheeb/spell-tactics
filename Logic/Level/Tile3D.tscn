@@ -1,17 +1,17 @@
 [gd_scene load_steps=22 format=3 uid="uid://dgrhssy80ss18"]
 
-[ext_resource type="Script" path="res://Logic/Level/Tile.gd" id="1_scmar"]
-[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/BaseMaterials/TileGroundMaterial.tres" id="2_c24a5"]
-[ext_resource type="Script" path="res://Logic/Level/TileHighlight.gd" id="3_ho6t1"]
-[ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/BaseMaterials/TileHighlightMaterial.tres" id="4_eqav3"]
-[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://VFX/Materials/HoverHighlight.tres" id="5_ihgi2"]
-[ext_resource type="Material" uid="uid://cflryfsltxrpy" path="res://VFX/Materials/HoverHighlightActive.tres" id="5_pdjhx"]
-[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://VFX/Materials/MovementTarget.tres" id="6_alyjn"]
-[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://VFX/Materials/SpellTargetHighlight.tres" id="6_bryv2"]
-[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://VFX/Materials/SpellTargetHighlightStatic.tres" id="7_p4ipm"]
+[ext_resource type="Script" path="res://Logic/Level/Tile3D.gd" id="1_mcw8s"]
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/BaseMaterials/TileGroundMaterial.tres" id="2_ee63n"]
+[ext_resource type="Script" path="res://Logic/Level/TileHighlight.gd" id="3_w11xv"]
+[ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/BaseMaterials/TileHighlightMaterial.tres" id="4_wo0k0"]
+[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://VFX/Materials/HoverHighlight.tres" id="5_o8u5u"]
+[ext_resource type="Material" uid="uid://cflryfsltxrpy" path="res://VFX/Materials/HoverHighlightActive.tres" id="6_noi3a"]
+[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://VFX/Materials/MovementTarget.tres" id="7_q3dld"]
+[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://VFX/Materials/SpellTargetHighlightStatic.tres" id="8_ph2oi"]
+[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://VFX/Materials/SpellTargetHighlight.tres" id="9_tj686"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wyt28"]
-material = ExtResource("2_c24a5")
+material = ExtResource("2_ee63n")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 1.0
@@ -19,7 +19,7 @@ radial_segments = 6
 rings = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_ltq8m"]
-material = ExtResource("4_eqav3")
+material = ExtResource("4_wo0k0")
 
 [sub_resource type="QuadMesh" id="QuadMesh_m1xtl"]
 
@@ -157,8 +157,8 @@ shader_parameter/smooth_edge = 0.13
 shader_parameter/width = -0.075
 shader_parameter/alpha = 0.465
 
-[node name="Tile" type="Node3D"]
-script = ExtResource("1_scmar")
+[node name="Tile3D" type="Node3D"]
+script = ExtResource("1_mcw8s")
 
 [node name="Hexagon" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -185,7 +185,7 @@ polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866,
 
 [node name="Highlight" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.117866, 0)
-script = ExtResource("3_ho6t1")
+script = ExtResource("3_w11xv")
 
 [node name="Edges" type="Node3D" parent="Highlight"]
 visible = false
@@ -232,7 +232,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("5_ihgi2")
+surface_material_override/0 = ExtResource("5_o8u5u")
 
 [node name="HoverHexQuad2" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -240,7 +240,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("5_pdjhx")
+surface_material_override/0 = ExtResource("6_noi3a")
 
 [node name="MovementTarget" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
@@ -248,7 +248,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("6_alyjn")
+surface_material_override/0 = ExtResource("7_q3dld")
 
 [node name="PlayerFocus" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
@@ -256,7 +256,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("6_alyjn")
+surface_material_override/0 = ExtResource("7_q3dld")
 
 [node name="CombatHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -264,7 +264,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("7_p4ipm")
+surface_material_override/0 = ExtResource("8_ph2oi")
 
 [node name="PossibleTargetQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -303,14 +303,14 @@ transform = Transform3D(1.70261, 0.983, 4.29683e-08, 0, -8.59366e-08, 1.966, 0.9
 visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
-surface_material_override/0 = ExtResource("6_bryv2")
+surface_material_override/0 = ExtResource("9_tj686")
 
 [node name="DrainProgressHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.78401, 1.03, 4.50226e-08, 0, -9.00455e-08, 2.06, 1.03, -1.78401, -7.79817e-08, 0, 0.146, 0)
 visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
-surface_material_override/0 = ExtResource("6_bryv2")
+surface_material_override/0 = ExtResource("9_tj686")
 
 [node name="HoverTimer" type="Timer" parent="."]
 wait_time = 0.3

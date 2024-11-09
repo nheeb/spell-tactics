@@ -18,7 +18,6 @@ var combat: Combat
 
 var entity_type_count := {}
 
-var TileScene = preload("res://Logic/Level/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
 
@@ -73,7 +72,7 @@ func expand_level_boundaries():
 	tiles = new_tiles
 	n_rows = new_rows
 	n_cols = new_cols
-	
+
 func shrink_level_boundaries() -> bool:
 	if n_rows <= 3 or n_cols <= 3:
 		#push_error("Cannot shrink further: grid too small")

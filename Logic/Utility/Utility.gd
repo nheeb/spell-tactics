@@ -86,21 +86,11 @@ func random_hit(hit_chance: float) -> bool:
 	#assert(hit_chance >= 0.0 and hit_chance <= 100.0)
 	return randf() <= (hit_chance * 0.01)
 
+## Hex distance using rq coordinates
 func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
 	return (abs(q1 - q2) 
 			+ abs(q1 + r1 - q2 - r2)
 			+ abs(r1 - r2)) / 2
-			
-func tile_distance(t1: Tile, t2: Tile) -> int:
-	if t1 and t2:
-		return rq_distance(t1.r, t1.q, t2.r, t2.q)
-	return 0
-	
-func entity_distance(e1: Entity, e2: Entity) -> int:
-	assert(is_instance_valid(e1.current_tile) and is_instance_valid(e2.current_tile), 
-		   "distance: entity has no tile")
-	return tile_distance(e1.current_tile, e2.current_tile)
-
 
 func array_unique(array: Array) -> Array:
 	var unique: Array = []
@@ -248,18 +238,13 @@ func get_stack_trace_lines(stack_trace: Array[Dictionary], exclude_front_element
 				result.append("")
 			return result
 
-
-## Creates a signal without needing to bind it to an instance. This means the signal can be assigned to a static var and accessed globally. `cls` should be a global class identifier. 
-##
+## Creates a signal without needing to bind it to an instance. This means the signal can be
+## assigned to a static var and accessed globally. `cls` should be a global class identifier. 
 ## Taken from https://stackoverflow.com/questions/77026156/how-to-write-a-static-event-emitter-in-gdscript
 static func create_static_signal(cls: Object, signal_name: StringName) -> Signal:
 	if not cls.has_user_signal(signal_name):
 		cls.add_user_signal(signal_name)
 	return Signal(cls, signal_name)
-
-
-
-
 
 #static func get_exported_properties(node: Node) -> Array:
 	#var exported_properties = []

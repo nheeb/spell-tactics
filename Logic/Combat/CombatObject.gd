@@ -1,10 +1,21 @@
 class_name CombatObject extends RefCounted
-
 ## Every combat-connected, referencable & serializable element is a CombatObject
-## -> Tiles, Entities, Castables, Events
+## -> Tiles, Entities, Castables, Events, EntityStatus
 
 var combat: Combat
-var id: CombatID
+var id: int
+
+var node3d: Node3D
+var position: Vector3:
+	set(x):
+		node3d.position = x
+	get:
+		return node3d.position
+var global_position: Vector3:
+	set(x):
+		node3d.global_position = x
+	get:
+		return node3d.global_position
 
 func get_reference() -> UniversalReference:
 	return null

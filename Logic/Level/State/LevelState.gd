@@ -1,4 +1,3 @@
-
 class_name LevelState extends Resource
 
 @export var tiles: Array[TileState]
@@ -17,7 +16,7 @@ func deserialize(combat: Combat) -> Level:
 	
 	var tile: Tile
 	for tile_data in tiles:
-		tile = tile_data.deserialize(combat, rows, columns)
+		tile = tile_data.deserialize(combat)
 		level.add_child(tile)
 		level.update_visual_entities(tile)
 		level.tiles[tile_data.r][tile_data.q] = tile
