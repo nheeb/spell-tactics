@@ -1,14 +1,19 @@
-class_name Castable extends Object
-
-var combat: Combat
+class_name Castable extends CombatObject
 
 var targets: Array[Tile]
+var possible_targets : Array[Tile]
 
-var combat_persistant_properties := {}
-var round_persistant_properties := {}
+var selected := false
+
+func get_reference() -> CastableReference:
+	return CastableReference.new(self)
 
 func get_effect_text() -> String:
 	return "<Effect Text not implemented>"
+
+#########################
+## Selecting & Casting ##
+#########################
 
 func is_selectable() -> bool:
 	return false
@@ -21,7 +26,6 @@ func try_cast() -> void:
 	await get_logic().try_cast()
 	#combat.log.register_cast(self)
 
-var selected := false
 func select():
 	selected = true
 	reset_targets()
@@ -46,7 +50,10 @@ func get_logic() -> CastableLogic:
 func get_type() -> CastableType:
 	return null
 
-var possible_targets : Array[Tile]
+#############
+## Targets ##
+#############
+
 func is_target_possible(target: Tile) -> bool:
 	return target in possible_targets
 
@@ -117,6 +124,10 @@ func get_possible_targets() -> Array[Tile]:
 func update_possible_targets() -> void:
 	possible_targets = get_possible_targets()
 
+####################
+## Visual Updates ##
+####################
+
 ## This updates all ui / highlights / possible targets.
 func update_current_state(reset := false) -> void:
 	var highlight_possible := get_type().target_possible_highlight
@@ -145,6 +156,3 @@ func update_target_ui():
 			combat.ui.error_lines.add("No suitable targets")
 		else:
 			combat.ui.error_lines.add("Select target tile(s)")
-
-func get_reference_castable() -> CastableReference:
-	return CastableReference.new(self)

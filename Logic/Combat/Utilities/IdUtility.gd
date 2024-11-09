@@ -1,4 +1,4 @@
-extends CombatUtility
+class_name IdUtility extends CombatUtility
 
 ## All CombatObjects with IDs are referenced here
 ## {ID (int) -> CombatObject}

@@ -1,7 +1,5 @@
-class_name CombatEvent extends Object
+class_name CombatEvent extends CombatObject
 
-var combat: Combat
-var id: CombatEventID
 var type: CombatEventType
 var logic: CombatEventLogic
 

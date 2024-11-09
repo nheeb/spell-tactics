@@ -33,6 +33,7 @@ enum Result {
 @onready var attack: AttackUtility = %AttackUtility
 @onready var action_stack: ActionStackUtility = %ActionStackUtility
 @onready var castables: CastableUtility = %CastableUtility
+@onready var ids: IdUtility = %IdUtility
 
 # TODO Nitai move those to the log utility
 signal round_ended

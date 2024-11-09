@@ -1,7 +1,7 @@
-class_name EntityStatus extends Resource
+class_name EntityStatus extends CombatObject
 
 @export var type: EntityStatusType
-@export var data := {}
+
 ## Internal data keys (Use the setter and getter instead)
 ## _lifetime -> Lifetime
 ## _targets -> EnemyAction - Fixed Targets
@@ -12,9 +12,6 @@ var logic: EntityStatusLogic
 var entity: Entity:
 	get:
 		return logic.entity
-var combat: Combat:
-	get:
-		return logic.combat
 var lifetime: int:
 	set(x):
 		data["_lifetime"] = x

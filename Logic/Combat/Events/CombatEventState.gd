@@ -1,6 +1,5 @@
-class_name CombatEventState extends Resource
+class_name CombatEventState extends CombatObjectState
 
-@export var id: CombatEventID
 @export var type: CombatEventType
 @export var params := {}
 @export var active: bool = false
