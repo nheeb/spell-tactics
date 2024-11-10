@@ -17,13 +17,18 @@ func get_new_id() -> int:
 	highest_id += 1
 	return highest_id
 
-func add_combat_object(object: CombatObject, id: int = -1):
+func add_combat_object(object: CombatObject):
 	assert(object != null)
-	assert(object.id <= 0 or object.id == id, "Object already has a (different) ID.")
+	var id := object.id
 	if id == -1:
 		id = get_new_id()
 	update_highest_id(id)
-	assert(id not in combat_objects, "ID is already in use.")
+	if id in combat_objects:
+		if combat_objects[id] == object:
+			push_warning("CombatObject was already added to ids.")
+		else:
+			push_error("ID of %s is already in use by object: %s." % \
+								[str(object), help_texts[id]])
 	combat_objects[id] = object
 	help_texts[id] = str(object)
 	object.id = id

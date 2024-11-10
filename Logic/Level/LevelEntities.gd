@@ -14,7 +14,7 @@ func create(location: Vector2i, entity_type: EntityType, create_with_active_visu
 	var entity := entity_type.create_entity(_level.combat, false) as Entity
 	
 	# Create id for entity
-	entity.id = EntityID.new(entity.type, _level.add_type_count(entity.type))
+	_level.combat.ids.add_combat_object(entity)
 	
 	entity_type.entity_on_create(entity, true)
 	

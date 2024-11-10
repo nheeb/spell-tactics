@@ -86,57 +86,40 @@ func setup() -> void:
 		@warning_ignore("integer_division")
 		var position = Vector2i(level.n_rows / 2 , level.n_cols / 2)
 		player = level.entities.create(position, load("res://Entities/Player/PlayerResource.tres"))
-		
-
+	
 	# Connect input signals
 	input.connect_with_event_signals()
 
+	# Create actives
+	actives = [
+		Active.new(ActiveType.load_from_file("res://Content/Actives/BasicMovement.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Content/Actives/Drain.tres"), self),
+		Active.new(ActiveType.load_from_file("res://Content/Actives/SimpleMelee.tres"), self),
+	]
+	for i in range(actives.size()):
+		ids.add_combat_object(actives[i])
+	
+	# Check if all spells have ids
+	for s in get_all_castables():
+		if s is Spell:
+			ids.add_combat_object(s)
+	
 	# Check if all entities have ids
 	# Refresh entities if its CombatBegin
 	if current_phase == RoundPhase.CombatBegin:
 		# If it's a fresh combat make every id new
 		log.add("Creating new entity ids")
 		for e in level.entities.get_all_entities():
-			e.id = EntityID.new(e.type, level.add_type_count(e.type))
-			# set energy to the EntityType's energy in case it changed from level creation
+			ids.add_combat_object(e)
 			e.sync_with_type()
-	else:
-		for e in level.entities.get_all_entities():
-			if e.id != null:
-				level.add_type_count(e.type)
-			else:
-				push_error("Entity without ID in savegame")
-
-	actives = [
-		Active.new(ActiveType.load_from_file("res://Content/Actives/BasicMovement.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Content/Actives/Drain.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Content/Actives/SimpleMelee.tres"), self),
-	]
-	for i in range(actives.size()): actives[i].id = ActiveID.new(i)
-
-	# Check if all spells have ids
-	# TODO change this when Overworld is done
-	for s in get_all_castables():
-		if s.id == null:
-			if not s.get_type() is ActiveType:  # for Actives it's fine atm
-				push_error("Warning: Spell without id (gets a new dangerous id)")
-			var id: SpellID = SpellID.new(Game.add_to_spell_count())
-			# normal assignment didn't work since Godot 4.3?? does this break things? FIXME
-			s.set("id", id)
-		else:
-			Game.add_to_spell_count()
-
+	
 	# TODO connect entity & spell references
-
 	t_effects.connect_all_effects()
 	
 	# Connect with ui
 	ui.setup(self)
 	
 	# Initial Animations
-	# TODO Nitai replace show drain and energy??
-	#energy.show_drains_in_ui()
-	#energy.show_energy_in_ui()
 	if player.current_tile != null:
 		animation.camera_reach(player.current_tile)
 	

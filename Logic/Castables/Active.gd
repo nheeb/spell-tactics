@@ -5,7 +5,6 @@ signal got_unlocked
 signal got_updated
 
 var type: ActiveType
-var id: ActiveID = null
 
 var logic: ActiveLogic
 
@@ -18,17 +17,11 @@ func _init(_type: ActiveType, _combat : Combat = null) -> void:
 	if combat != null:
 		logic = type.logic.new(self)
 
-func get_copy_for_combat(_combat: Combat) -> Active:
-	var active := Active.new(type, _combat)
-	active.combat_persistant_properties = combat_persistant_properties.duplicate()
-	return active
-
 func serialize() -> ActiveState:
 	var state := ActiveState.new()
 	state.type = type
 	state.id = id
-	state.combat_persistant_properties = combat_persistant_properties
-	state.round_persistant_properties = round_persistant_properties
+	state.data = data
 	return state
 	
 func _to_string() -> String:
@@ -47,7 +40,7 @@ var unlocked: bool = false:
 		else:
 			got_unlocked.emit()
 		unlocked = u
-		round_persistant_properties["unlocked"] = u
+		data["unlocked"] = u
 
 func is_selectable() -> bool:
 	return unlocked and logic.is_selectable()
@@ -93,7 +86,7 @@ func is_limited_per_round() -> bool:
 
 func set_limitation_uses_left(i: int) -> void:
 	i = max(0, i)
-	round_persistant_properties["uses_left"] = i
+	data["uses_left"] = i
 	got_updated.emit()
 	if i == 0:
 		unlocked = false
@@ -101,14 +94,14 @@ func set_limitation_uses_left(i: int) -> void:
 		unlocked = true
 
 func set_limitation_max_uses(i: int) -> void:
-	round_persistant_properties["max_uses"] = i
+	data["max_uses"] = i
 	got_updated.emit()
 
 func get_limitation_uses_left() -> int:
-	return round_persistant_properties.get("uses_left", 0)
+	return data.get("uses_left", 0)
 
 func get_limitation_max_uses() -> int:
-	return round_persistant_properties.get("max_uses", type.max_uses_per_round)
+	return data.get("max_uses", type.max_uses_per_round)
 
 func refresh_uses_left() -> void:
 	set_limitation_uses_left(get_limitation_max_uses())

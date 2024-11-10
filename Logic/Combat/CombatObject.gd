@@ -6,7 +6,7 @@ class_name CombatObject extends RefCounted
 var combat: Combat
 
 ## Unique ID for that object
-@export var id: int
+@export var id: int = -1
 @export var data: Dictionary
 
 var node3d: Node3D

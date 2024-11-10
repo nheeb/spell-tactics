@@ -59,3 +59,10 @@ func type_to_icon(_type) -> Texture:
 			return energy_icons[6]
 	push_error("unknown type")
 	return energy_icons[0]
+
+func get_icon_from_name(icon_name) -> Texture:
+	if icon_name is Texture:
+		return icon_name
+	if icon_name == "" or icon_name == null:
+		return null
+	return load("res://Assets/Sprites/Icons/%s.png" % icon_name)

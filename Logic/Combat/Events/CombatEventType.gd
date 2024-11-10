@@ -57,8 +57,7 @@ func create_event(combat: Combat, params := {}) -> CombatEvent:
 	event.combat = combat
 	event.logic = logic.new()
 	event.logic.setup(combat, event)
-	# TODO Nitai Make a better ID System
-	event.id = CombatEventID.new(Game.add_to_spell_count())
 	event.params = default_params.duplicate(true)
 	event.params.merge(params, true)
+	combat.ids.add_combat_object(event)
 	return event

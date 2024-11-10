@@ -73,10 +73,10 @@ func set_content(pretty_name: String, costs: EnergyStack, effect: String, fluff:
 
 func set_sub_icons(main_icon, color: Color, topic_icon_1, topic_icon_2, topic_text: String, \
 target_icon, target_range_start: int, target_range_end: int):
-	main_icon = Game.get_icon_from_name(main_icon)
-	topic_icon_1 = Game.get_icon_from_name(topic_icon_1)
-	topic_icon_2 = Game.get_icon_from_name(topic_icon_2)
-	target_icon = Game.get_icon_from_name(target_icon)
+	main_icon = VFX.get_icon_from_name(main_icon)
+	topic_icon_1 = VFX.get_icon_from_name(topic_icon_1)
+	topic_icon_2 = VFX.get_icon_from_name(topic_icon_2)
+	target_icon = VFX.get_icon_from_name(target_icon)
 
 	%MainIcon.texture = main_icon
 	%TopicIcon1.texture = topic_icon_1

@@ -119,9 +119,6 @@ func sync_with_type():
 	accuracy = type.accuracy
 	resistance = type.resistance
 
-func get_name() -> String:
-	return "%s" % id.to_string()
-
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 
 

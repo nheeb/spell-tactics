@@ -1,8 +1,7 @@
 extends SpellLogic
 
 ## Usable references:
-## spell - Corresponding spell
-##   (with round_persistant_properties & combat_persistant_properties)
+## spell - Corresponding spell (CombatObject with data)
 ## combat - The current combat for which the spell was created
 ## target - The target Tile (if Spell is targetable)
 ## targets - Array of target tiles (if Spell has multiple targets)

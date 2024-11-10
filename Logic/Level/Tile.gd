@@ -53,7 +53,7 @@ func serialize() -> TileState:
 	return tile_state
 
 func get_reference() -> TileReference:
-	return TileReference.new(location)
+	return TileReference.new(self)
 
 func _to_string() -> String:
 	return "Tile_%02d_%02d" % [r, q]

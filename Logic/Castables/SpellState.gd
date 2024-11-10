@@ -1,13 +1,10 @@
-class_name SpellState extends Resource
+class_name SpellState extends CombatObjectState
 
 @export var type: SpellType
-@export var id: SpellID
-@export var combat_persistant_properties := {}
-@export var round_persistant_properties := {}
+@export var data := {}
 
 func deserialize(combat: Combat = null) -> Spell:
 	var spell : Spell = Spell.new(type, combat)
-	spell.combat_persistant_properties = combat_persistant_properties
-	spell.round_persistant_properties = round_persistant_properties
+	spell.data = data
 	spell.id = id
 	return spell

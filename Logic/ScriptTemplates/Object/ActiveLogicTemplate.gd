@@ -1,8 +1,7 @@
 extends ActiveLogic
 
 ## Usable references:
-## active - Corresponding active
-##   (with round_persistant_properties & combat_persistant_properties)
+## active - Corresponding active (CombatObject with data)
 ## combat - The current combat for which the active was created
 ## target - The target Tile (if active is targetable)
 ## targets - Array of target tiles (if active has multiple targets)

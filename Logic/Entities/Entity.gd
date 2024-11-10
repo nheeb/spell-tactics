@@ -71,10 +71,13 @@ func get_reference() -> EntityReference:
 	return EntityReference.new(self)
 
 func _to_string() -> String:
-	if id != null:
+	if id >= 0:
 		return type.internal_name + '_' + str(id)
 	else:
 		return type.internal_name + '_null'
+
+func get_name() -> String:
+	return "%s [%s]" % [type.pretty_name, id]
 
 ####################
 ## Entity Methods ##
