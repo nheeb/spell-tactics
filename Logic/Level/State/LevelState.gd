@@ -12,6 +12,7 @@ const PLAYER_TYPE = preload("res://Content/Player/PlayerResource.tres")
 func deserialize(combat: Combat) -> Level:
 	var level := LEVEL.instantiate()
 	level.combat = combat
+	combat.level = level
 	level.init_tiles_array(rows, columns)
 	
 	var tile: Tile

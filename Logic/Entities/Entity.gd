@@ -109,8 +109,9 @@ func is_drainable():
 
 ## This will be executed after an entity has been created from a type.
 func on_create() -> void:
-	TimedEffect.new_combat_change(on_combat_change) \
-		.set_id("_cc").set_solo().register(combat)
+	# TODO reimplement this
+	#TimedEffect.new_combat_change(on_combat_change) \
+		#.set_id("_cc").set_solo().register(combat)
 	if visual_entity != null:
 		visual_entity.visible = false
 	else:

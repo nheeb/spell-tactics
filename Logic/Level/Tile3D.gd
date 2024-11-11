@@ -26,3 +26,6 @@ func _on_hover_timer_timeout() -> void:
 
 func _to_string() -> String:
 	return name
+
+func _ready() -> void:
+	pass

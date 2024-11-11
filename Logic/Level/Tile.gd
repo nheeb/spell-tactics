@@ -25,18 +25,19 @@ const TILE_3D = preload("res://Logic/Level/Tile3D.tscn")
 ## Create a new Tile along with tile3d
 static func create(r_tile: int, q_tile: int, r_center: float, q_center: float) -> Tile:
 	var tile := Tile.new()
-	var tile3d = TILE_3D.instantiate()
-	tile3d._ready()
+	var tile_3d = TILE_3D.instantiate()
+	tile_3d._ready()
 	# center position is needed to properly align the tile
 	var xz_translation: Vector2 = (r_tile-r_center) * Level.Q_BASIS \
 								+ (q_tile-q_center) * Level.R_BASIS 
-	tile3d.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
-	tile3d.get_node("DebugLabel").text = "(%s, %s)" % [r_tile, q_tile]
-	tile3d.name = "Tile_%02d_%02d" % [r_tile, q_tile]
+	tile_3d.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
+	tile_3d.get_node("DebugLabel").text = "(%s, %s)" % [r_tile, q_tile]
+	tile_3d.name = "Tile_%02d_%02d" % [r_tile, q_tile]
 	
 	tile.r = r_tile
 	tile.q = q_tile
-	tile.tile3d = tile3d
+	tile.tile3d = tile_3d
+	tile_3d.tile = tile
 	
 	return tile
 
@@ -184,6 +185,10 @@ func get_surrounding_tiles(_range := 1) -> Array[Tile]:
 ################
 ## DEPRECATED ##
 ################
+
+# Dirty solution for now
+func get_node(x):
+	return node3d.get_node(x)
 
 ## DEPRECATED
 #func get_drainable_energy_in_range(_range := 1) -> EnergyStack:

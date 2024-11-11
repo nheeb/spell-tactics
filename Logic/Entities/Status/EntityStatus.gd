@@ -64,9 +64,9 @@ func setup_logic() -> void:
 ## Visual changes when status effect enters the game
 func setup_visually() -> void:
 	if type.make_floating_icon:
-		var id := "%s_icons" % get_status_name()
+		var icon_name := "%s_icons" % get_status_name()
 		combat.animation.add_staying_effect(
-			VFX.ICON_VISUALS, entity.visual_entity, id, \
+			VFX.ICON_VISUALS, entity.visual_entity, icon_name, \
 			{"icon": type.icon, "color": type.color}
 		)
 	logic._setup_visually()
@@ -99,8 +99,8 @@ func on_remove() -> void:
 			te.kill()
 	# Remove floating icons
 	if type.make_floating_icon:
-		var id := "%s_icons" % get_status_name()
-		combat.animation.remove_staying_effect(entity.visual_entity, id)
+		var icon_name := "%s_icons" % get_status_name()
+		combat.animation.remove_staying_effect(entity.visual_entity, icon_name)
 	logic._on_remove()
 
 ## Special actions an enemy with the status could do

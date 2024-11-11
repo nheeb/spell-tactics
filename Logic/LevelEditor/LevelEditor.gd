@@ -7,7 +7,7 @@ class_name EditorUI extends Control
 
 
 var all_levels_paths: Array[String] = []
-var current_level_path = "res://Content/Levels/SpellTesting/spell_test.tres"
+var current_level_path = "res://Content/Levels/fight.tres"#"res://Content/Levels/SpellTesting/spell_test.tres"
 
 var tool_terrain_placer = TerrainPlace.new()
 var tool_raise = Raise.new()

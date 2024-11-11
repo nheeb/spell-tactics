@@ -1,0 +1,193 @@
+[gd_resource type="Resource" script_class="CombatState" load_steps=56 format=3 uid="uid://cxtmn8d8rw1jf"]
+
+[ext_resource type="Script" path="res://Logic/Castables/ActiveState.gd" id="1_2edog"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventState.gd" id="2_a8jnd"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/LogEntry.gd" id="3_rf1h5"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellState.gd" id="4_tw2c0"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/EnemyEventPlan.gd" id="5_2xuqg"]
+[ext_resource type="Resource" uid="uid://c4yj8j5clqch8" path="res://Content/Spells/Berserker.tres" id="5_osr73"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventSchedule.gd" id="6_8k1sr"]
+[ext_resource type="Resource" uid="uid://bhbal4070u1qk" path="res://Content/Spells/SummonWitchTotem.tres" id="6_rkmyy"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="7_2ybfg"]
+[ext_resource type="Resource" uid="uid://bmmnjqd2apbv0" path="res://Content/Spells/RockBlast.tres" id="7_rcvl3"]
+[ext_resource type="Script" path="res://Logic/Level/State/EntityState.gd" id="8_08kic"]
+[ext_resource type="Resource" uid="uid://cjit0u77ak3lu" path="res://Content/Spells/GrowingMycel.tres" id="8_8006n"]
+[ext_resource type="Script" path="res://Logic/Combat/CombatState.gd" id="8_kc8k2"]
+[ext_resource type="Resource" uid="uid://blp6qpy1q8qhr" path="res://Content/Spells/MudArmor.tres" id="9_clnrp"]
+[ext_resource type="Script" path="res://Logic/Level/State/LevelState.gd" id="9_g5mpk"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/TimedEffect.gd" id="9_kiefc"]
+[ext_resource type="Resource" uid="uid://bg42mk7gnksus" path="res://Content/Spells/SpellMemory.tres" id="10_odclg"]
+[ext_resource type="Script" path="res://Logic/Level/State/TileState.gd" id="10_tue0v"]
+[ext_resource type="Resource" uid="uid://coxs5uvjtigok" path="res://Content/Spells/DeadlyDart.tres" id="11_tc7a3"]
+[ext_resource type="Resource" uid="uid://cca31estceejt" path="res://Content/Spells/SporeFlight.tres" id="12_k5dkb"]
+[ext_resource type="Resource" uid="uid://d3xtwb7dcaenq" path="res://Content/Spells/SelfHeal.tres" id="13_20uwf"]
+[ext_resource type="Resource" uid="uid://dxx771mshrvgl" path="res://Content/Spells/Lifesteal.tres" id="14_nt1vr"]
+[ext_resource type="Resource" uid="uid://bcpsexkc1asv1" path="res://Content/Spells/SummonBush.tres" id="15_mgfo1"]
+[ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Content/Spells/WaterBlast.tres" id="16_0ct16"]
+[ext_resource type="Resource" uid="uid://bu7gx0wc5bbuh" path="res://Content/Spells/AirMissile.tres" id="17_bquc1"]
+[ext_resource type="Resource" uid="uid://dqy48gh8w80m0" path="res://Content/Spells/LightningStrike.tres" id="18_2ay2v"]
+[ext_resource type="Resource" uid="uid://c38oh270u86ke" path="res://Content/Spells/Teleport.tres" id="19_klcwq"]
+[ext_resource type="Resource" uid="uid://cd42nwwenro" path="res://Content/Spells/Cyclone.tres" id="20_dnrp4"]
+[ext_resource type="Resource" uid="uid://c2gimhhja8fi6" path="res://Content/Spells/Breath.tres" id="21_ukpbh"]
+[ext_resource type="Resource" uid="uid://bjrjvk0evvvyt" path="res://Content/Spells/PoisonPunch.tres" id="22_kidjc"]
+[ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Content/Entities/DirtTile.tres" id="29_r3bwl"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="29_rjv8u"]
+
+[sub_resource type="Resource" id="Resource_x8mog"]
+script = ExtResource("3_rf1h5")
+type = 0
+round_number = 1
+round_phase = 0
+text = "Combat was deserialized."
+
+[sub_resource type="Resource" id="Resource_5tbmm"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("5_osr73")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_jb0u5"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("6_rkmyy")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_cowhh"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("7_rcvl3")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_elnte"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("8_8006n")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_spbwd"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("9_clnrp")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_d8cq1"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("10_odclg")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_ikobi"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("11_tc7a3")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_8kn1g"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("12_k5dkb")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_lcud0"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("13_20uwf")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_efbc1"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("14_nt1vr")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_lfy2y"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("15_mgfo1")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_lqpde"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("16_0ct16")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_jd8y5"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("17_bquc1")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_0jt8g"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("18_2ay2v")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_7ijsi"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("19_klcwq")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_6lab3"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("20_dnrp4")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_cb5nk"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("21_ukpbh")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_7lc57"]
+script = ExtResource("4_tw2c0")
+type = ExtResource("22_kidjc")
+data = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_ox38f"]
+script = ExtResource("8_08kic")
+type = ExtResource("29_r3bwl")
+entity_props = {}
+script_props = {}
+visual_ent_props = {}
+id = -1
+
+[sub_resource type="Resource" id="Resource_gfvr1"]
+script = ExtResource("10_tue0v")
+r = 0
+q = 0
+entities = Array[ExtResource("8_08kic")]([SubResource("Resource_ox38f")])
+id = -1
+
+[sub_resource type="Resource" id="Resource_5dhg1"]
+script = ExtResource("9_g5mpk")
+tiles = Array[ExtResource("10_tue0v")]([SubResource("Resource_gfvr1")])
+graveyard = Array[ExtResource("8_08kic")]([])
+rows = 5
+columns = 5
+
+[sub_resource type="Resource" id="Resource_a2p3h"]
+script = ExtResource("29_rjv8u")
+stack = Array[int]([])
+
+[resource]
+script = ExtResource("8_kc8k2")
+level_state = SubResource("Resource_5dhg1")
+current_round = 1
+current_phase = 0
+player_energy = SubResource("Resource_a2p3h")
+deck_states = Array[ExtResource("4_tw2c0")]([SubResource("Resource_5tbmm"), SubResource("Resource_jb0u5"), SubResource("Resource_cowhh"), SubResource("Resource_elnte"), SubResource("Resource_spbwd"), SubResource("Resource_d8cq1"), SubResource("Resource_ikobi"), SubResource("Resource_8kn1g"), SubResource("Resource_lcud0"), SubResource("Resource_efbc1"), SubResource("Resource_lfy2y"), SubResource("Resource_lqpde"), SubResource("Resource_jd8y5"), SubResource("Resource_0jt8g"), SubResource("Resource_7ijsi"), SubResource("Resource_6lab3"), SubResource("Resource_cb5nk"), SubResource("Resource_7lc57")])
+hand_states = Array[ExtResource("4_tw2c0")]([])
+discard_pile_states = Array[ExtResource("4_tw2c0")]([])
+timed_effects = Array[ExtResource("9_kiefc")]([])
+combat_log = Array[ExtResource("3_rf1h5")]([SubResource("Resource_x8mog")])
+active_states = Array[ExtResource("1_2edog")]([])
+all_events = Array[ExtResource("2_a8jnd")]([])
+event_schedules = Array[ExtResource("6_8k1sr")]([])
+enemy_event_queue = Array[ExtResource("5_2xuqg")]([])
+enemy_meter = 0
+global_enemy_actions = Array[ExtResource("7_2ybfg")]([])

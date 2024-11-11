@@ -9,17 +9,24 @@ var combat: Combat
 @export var id: int = -1
 @export var data: Dictionary
 
+@export var born := false
+@export var dead := false
+
 var node3d: Node3D
 var position: Vector3:
 	set(x):
 		node3d.position = x
 	get:
-		return node3d.position
+		if node3d:
+			return node3d.position
+		return Vector3.ZERO
 var global_position: Vector3:
 	set(x):
 		node3d.global_position = x
 	get:
-		return node3d.global_position
+		if node3d:
+			return node3d.global_position
+		return Vector3.ZERO
 
 func get_reference() -> UniversalReference:
 	return null
@@ -27,6 +34,24 @@ func get_reference() -> UniversalReference:
 func serialize() -> CombatObjectState:
 	return null
 
+## ACTION
+func on_birth() -> void:
+	assert(not born)
+	born = true
+
+## ACTION
+func on_load() -> void:
+	pass
+
+## ACTION
+func on_death() -> void:
+	pass
+
 func connect_with_combat(_combat: Combat):
 	assert(combat == null, "CombatObject was already connected to combat.")
 	combat = _combat
+	combat.ids.add_combat_object(self)
+
+func update_properties(props: Dictionary):
+	for k in props.keys():
+		set(k, props[k])
