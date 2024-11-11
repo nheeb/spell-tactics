@@ -54,10 +54,10 @@ func deserialize() -> Combat:
 	if Game.DEBUG_SPELL_TESTING:
 		combat.log.add("Spell Testing Deck will be loaded")
 		combat.deck.clear()
-		combat.deck.append_array(Utility.DeckUtils.deck_for_spell_testing(combat))
+		combat.deck.append_array(Game.DeckUtils.deck_for_spell_testing(combat))
 	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 1:
 		combat.log.add("CombatState has no deck -> PrototypeDeck will be loaded")
-		combat.deck.append_array(Utility.DeckUtils.create_test_deck(combat))
+		combat.deck.append_array(Game.DeckUtils.create_test_deck(combat))
 	#combat.events.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
 	#combat.events.current_event = current_event
 	#if combat.events.events.is_empty():

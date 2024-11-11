@@ -7,7 +7,7 @@ class_name EditorUI extends Control
 
 
 var all_levels_paths: Array[String] = []
-var current_level_path = "res://Levels/SpellTesting/spell_test.tres"
+var current_level_path = "res://Content/Levels/SpellTesting/spell_test.tres"
 
 var tool_terrain_placer = TerrainPlace.new()
 var tool_raise = Raise.new()
@@ -68,7 +68,7 @@ func on_changed_render_resolution(res: Vector2i):
 	%Viewport3D.size = res
 
 
-const LEVEL_ROOT = "res://Levels/"
+const LEVEL_ROOT = "res://Content/Levels/"
 func find_all_levels():
 	var levels: Array[String] = []
 	_find_tres_files_recursive(LEVEL_ROOT, levels)

@@ -35,7 +35,7 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 	if mode == Mode.None:
 		return result
 	
-	var files: Array[String] = _get_all_file_paths("res://Entities/")
+	var files: Array[String] = _get_all_file_paths("res://Content/Entities/")
 	for file: String in files:
 		if not file.ends_with(".tres"):
 			continue

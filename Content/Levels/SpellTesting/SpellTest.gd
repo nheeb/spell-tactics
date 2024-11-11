@@ -1,6 +1,6 @@
 extends Node3D
 
-const NOTHING = preload("res://Spells/AllSpells/DoNothing.tres")
+const NOTHING = preload("res://Content/Spells/DoNothing.tres")
 
 @export var start_every_round_with : EnergyStack
 

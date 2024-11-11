@@ -35,7 +35,7 @@ func load_combat_from_state(combat_state: CombatState, combat_active: bool = tru
 	# we should) then some of the following lines could be cut & simplified
 	
 	# Take the default deck if there is no deck saved in combatstate
-	if combat_state.deck_states.is_empty():
+	if combat_state == null or combat_state.deck_states.is_empty():
 		combat_state.deck_states = Game.DeckUtils.create_test_deck_serialized()
 	
 	# Create combat

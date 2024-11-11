@@ -118,7 +118,7 @@ func _energy_count_progress(progress: float):
 	var size := Utility.clamp_map(progress, 1.0, 6.0, .9, 1.55)
 	var label_number := int(progress + .5)
 	var label_text := "" if label_number <= 1 else str(label_number)
-	var symbol_offset := Utility.clamp_map(progress, 1.0, 1.8, 0.0, 1.0) * SYMBOL_OFFSET
+	var symbol_offset := 0#Utility.clamp_map(progress, 1.0, 1.8, 0.0, 1.0) * SYMBOL_OFFSET
 	var label_size := Utility.clamp_map(
 		abs(progress - int(progress) - .5), .0, .4, .1, 1.0
 	)
