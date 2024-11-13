@@ -10,13 +10,11 @@ stack = Array[int]([1, 1])
 
 [resource]
 script = ExtResource("1_5loff")
-internal_name = "stump"
 can_be_hovered = true
-fluff_text = "Once it was a tree"
 visual_scene = ExtResource("3_djvx3")
-prototype_scale = Vector2(1, 1)
 tags = Array[String]([])
 is_terrain = false
+prototype_scale = Vector2(1, 1)
 is_drainable = true
 energy = SubResource("Resource_36c7q")
 obstacle_layer = 1

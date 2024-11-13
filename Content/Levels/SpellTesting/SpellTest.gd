@@ -15,7 +15,7 @@ const MAIN = preload("res://Logic/Main.tscn")
 func _ready() -> void:
 	if get_tree().current_scene == self:
 		print("Starting Spell Test Mode")
-		Game.DEBUG_SPELL_TESTING = true
+		Game.SPELL_TEST = true
 		
 		var test_deck = range(1,6).map(func(i): return get("test_spell_%s" % i) if get("test_spell_%s" % i) else NOTHING)
 		test_deck.append_array(range(10).map(func(i): return NOTHING))

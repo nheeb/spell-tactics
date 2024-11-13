@@ -82,37 +82,11 @@ func setup() -> void:
 		if entity is EnemyEntity:
 			if not entity.is_dead():
 				enemies.append(entity)
-	if player == null:
-		push_error("No Player entity was found. Creating a new one.")
-		@warning_ignore("integer_division")
-		var position = Vector2i(level.n_rows / 2 , level.n_cols / 2)
-		player = level.entities.create(position, load("res://Entities/Player/PlayerResource.tres"))
+	
+	# TODO Test if player and enemies exist
 	
 	# Connect input signals
 	input.connect_with_event_signals()
-
-	# Create actives
-	actives = [
-		Active.new(ActiveType.load_from_file("res://Content/Actives/BasicMovement.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Content/Actives/Drain.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Content/Actives/SimpleMelee.tres"), self),
-	]
-	for i in range(actives.size()):
-		ids.add_combat_object(actives[i])
-	
-	# Check if all spells have ids
-	for s in get_all_castables():
-		if s is Spell:
-			ids.add_combat_object(s)
-	
-	# Check if all entities have ids
-	# Refresh entities if its CombatBegin
-	if current_phase == RoundPhase.CombatBegin:
-		# If it's a fresh combat make every id new
-		log.add("Creating new entity ids")
-		for e in level.entities.get_all_entities():
-			ids.add_combat_object(e)
-			e.sync_with_type()
 	
 	# TODO connect entity & spell references
 	t_effects.connect_all_effects()
@@ -120,12 +94,9 @@ func setup() -> void:
 	# Connect with ui
 	ui.setup(self)
 	
-	# Initial Animations
+	# Initial Animation
 	if player.current_tile != null:
 		animation.camera_reach(player.current_tile)
-	
-	if current_phase == RoundPhase.CombatBegin:
-		cards.draw_to_hand_size()
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui

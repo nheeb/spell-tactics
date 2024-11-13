@@ -30,8 +30,13 @@ func add_combat_object(object: CombatObject):
 		if combat_objects[id] == object:
 			push_warning("CombatObject was already added to ids.")
 		else:
+			var old_name := str(object)
 			push_error("ID of %s is already in use by object: %s." % \
-								[str(object), help_texts[id]])
+								[old_name, help_texts[id]])
+			id = get_new_id()
+			object.id = id
+			push_error("Changing ID of %s -> %s" % [old_name, str(object)])
 	combat_objects[id] = object
-	help_texts[id] = str(object)
 	object.id = id
+	help_texts[id] = str(object)
+	

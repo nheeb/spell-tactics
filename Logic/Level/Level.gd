@@ -21,6 +21,9 @@ var entity_type_count := {}
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
 
+func _ready() -> void:
+	pass
+
 func clear():
 	for row in tiles:
 		for tile in row:

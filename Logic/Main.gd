@@ -3,7 +3,7 @@ extends Control
 
 func _ready() -> void:
 	ActivityManager.push(RootActivity.new())
-	if Game.DEBUG_SPELL_TESTING:
+	if Game.SPELL_TEST:
 		ActivityManager.push(OverworldActivity.new())
 		ActivityManager.push(CombatActivity.new(Game.LEVEL_PATH_SPELLTEST))
 	elif Game.DEBUG_SKIP_OVERWORLD:

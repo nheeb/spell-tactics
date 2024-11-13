@@ -10,17 +10,16 @@ stack = Array[int]([2, 2])
 
 [resource]
 script = ExtResource("1_aefp8")
-internal_name = "rock"
 can_be_hovered = true
-pretty_name = "Rock"
-fluff_text = "Rocky Rock"
 visual_scene = ExtResource("2_xwpuv")
-prototype_scale = Vector2(1, 1)
 tags = Array[String]([])
 is_terrain = false
+prototype_scale = Vector2(1, 1)
 is_drainable = true
 energy = SubResource("Resource_jhx8i")
 obstacle_layer = 1
 obstacle_mask = 0
 is_blocker = false
 cover_value = 3
+pretty_name = "Rock"
+fluff_text = "Rocky Rock"

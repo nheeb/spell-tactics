@@ -10,12 +10,14 @@ var location: Vector2i:
 		push_error("setting location is forbidden.")
 	get():
 		return Vector2i(r, q)
-
 var tile3d: Tile3D:
 	set(x):
 		node3d = x
 	get:
 		return node3d as Tile3D
+var highlight: Highlight:
+	get:
+		return tile3d.highlight
 
 #####################################
 ## Creation & CombatObject Methods ##

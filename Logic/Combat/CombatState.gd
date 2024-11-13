@@ -51,18 +51,12 @@ func deserialize() -> Combat:
 	if level_state == null:
 		push_error("Error deserializing: LevelState null in CombatState.gd")
 	#its important that level is deserialized after current round phase is set
-	combat.level = level_state.deserialize(combat) 
+	combat.level = level_state.deserialize(combat)
+	combat.level._ready()
 	# Cards
 	combat.deck.append_array(deck_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.hand.append_array(hand_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.discard_pile.append_array(discard_pile_states.map(func(x: SpellState): return x.deserialize(combat)))
-	if Game.DEBUG_SPELL_TESTING:
-		combat.log.add("Spell Testing Deck will be loaded")
-		combat.deck.clear()
-		combat.deck.append_array(Game.DeckUtils.deck_for_spell_testing(combat))
-	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 1:
-		combat.log.add("CombatState has no deck -> PrototypeDeck will be loaded")
-		combat.deck.append_array(Game.DeckUtils.create_test_deck(combat))
 	# Events
 	combat.events.all_events.append_array(all_events.map(
 		func (e): return e.deserialize(combat)
@@ -75,6 +69,15 @@ func deserialize() -> Combat:
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
 	combat.ids.highest_id = highest_id
+	
+	# TODO Do this in general with all CombatObjects
+	# Add castable ids
+	for c in combat.get_all_castables():
+		combat.ids.add_combat_object(c)
+	# Add entity ids
+	for e in combat.level.entities.get_all_entities():
+		combat.ids.add_combat_object(e)
+	
 	combat.deserialized.emit()
 	combat.log.add("Combat was deserialized.")
 	return combat

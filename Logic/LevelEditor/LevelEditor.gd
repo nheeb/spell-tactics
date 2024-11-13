@@ -7,7 +7,7 @@ class_name EditorUI extends Control
 
 
 var all_levels_paths: Array[String] = []
-var current_level_path = "res://Content/Levels/fight.tres"#"res://Content/Levels/SpellTesting/spell_test.tres"
+var current_level_path = Game.LEVEL_PATH_DEFAULT
 
 var tool_terrain_placer = TerrainPlace.new()
 var tool_raise = Raise.new()
@@ -30,6 +30,7 @@ var ent_active: EntityType = null
 
 ## LevelEditor should load with a combat state
 func _ready() -> void:
+	Game.LEVEL_EDITOR = true
 	if world == null:
 		if has_node("%World"):
 			world = get_node("%World")

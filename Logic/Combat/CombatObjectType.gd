@@ -27,7 +27,9 @@ func on_load() -> void:
 	if internal_name == "":
 		internal_name = resource_path.split("/")[-1].split(".")[0]
 		var directory = "/".join(resource_path.split("/").slice(0, -1))
-		logic_script = load(directory + "/" + internal_name + ".gd")
+		var script_path: String = directory + "/" + internal_name + ".gd"
+		if ResourceLoader.exists(script_path):
+			logic_script = load(script_path)
 		_on_load()
 
 ## This method can be overwritten by other Types to do special stuff

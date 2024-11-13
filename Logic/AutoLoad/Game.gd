@@ -26,8 +26,11 @@ const DEBUG_DECK_PURGE = false
 var DEBUG_INFO: bool:
 	get:
 		return DebugInfo.ACTIVE
-var DEBUG_SPELL_TESTING := false # Not meant to be changed.
-# Play the scene SpellTest.tscn to start spell testing
+## Play the scene SpellTest.tscn to start spell testing
+## Do not change the value
+var SPELL_TEST := false
+var LEVEL_EDITOR := false
+
 var testing_deck: Array[SpellType]
 var testing_energy: EnergyStack
 

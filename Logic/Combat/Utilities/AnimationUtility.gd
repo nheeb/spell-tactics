@@ -43,8 +43,8 @@ func callable(_callable: Callable) -> AnimationCallable:
 	return a
 
 func effect(_effect_scene: PackedScene, target: Object,_setup_properties := {}) -> AnimationEffect:
-	if target is Entity:
-		target = target.visual_entity
+	if target is CombatObject:
+		target = target.node3d
 	assert(target is Node3D)
 	var a = AnimationEffect.new(_effect_scene, target, _setup_properties)
 	add_animation_object(a)
@@ -72,16 +72,17 @@ func camera_set_player_input(enabled: bool) -> AnimationProperty:
 	return property(combat.camera, "player_input_enabled", enabled)
 
 func camera_follow(target) -> AnimationProperty:
-	if target is Entity:
-		target = target.visual_entity
+	if target is CombatObject:
+		target = target.node3d
 	return property(combat.camera, "follow_target", target)
 
 func camera_unfollow() -> AnimationProperty:
 	return property(combat.camera, "follow_target", null)
 
 func camera_reach(target) -> AnimationObject:
-	if target is Entity:
-		target = target.visual_entity
+	if target is CombatObject:
+		target = target.node3d
+	assert(target)
 	var animations : Array[AnimationObject] = []
 	animations.append(property(combat.camera, "follow_target", target))
 	animations.append(property(combat.camera, "just_reach_target", true).set_flag(AnimationObject.Flags.PlayWithStep))

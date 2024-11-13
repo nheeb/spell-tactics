@@ -13,7 +13,7 @@ var button: ActiveButtonWithUses
 
 func _init(_type: ActiveType, _combat : Combat = null) -> void:
 	type = _type
-	combat = _combat
+	connect_with_combat(_combat)
 	if combat != null:
 		logic = type.logic.new(self)
 
