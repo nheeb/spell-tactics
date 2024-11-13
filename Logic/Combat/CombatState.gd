@@ -28,9 +28,10 @@ class_name CombatState extends Resource
 @export var current_enemy_event: CombatEventReference
 ## Progress of the enemy meter
 @export var enemy_meter: int
-# Enemy Actions
+## Enemy Actions
 @export var global_enemy_actions: Array[EnemyActionArgs]
-
+## Highest ID given (for adding new ids)
+@export var highest_id: int
 @export var meta: SaveFileMeta = null
 
 const COMBAT = preload("res://Logic/Combat/Combat.tscn")
@@ -42,12 +43,16 @@ func deserialize() -> Combat:
 		for cc in c.get_children():
 			cc.set("combat", combat)
 	combat.log.add("Deserializing Combat...")
+	# Rounds & Energy
 	combat.current_round = current_round
 	combat.current_phase = current_phase
 	combat.energy.player_energy = player_energy
+	# Level
 	if level_state == null:
 		push_error("Error deserializing: LevelState null in CombatState.gd")
-	combat.level = level_state.deserialize(combat) #its important that level is deserialized after current round phase is set
+	#its important that level is deserialized after current round phase is set
+	combat.level = level_state.deserialize(combat) 
+	# Cards
 	combat.deck.append_array(deck_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.hand.append_array(hand_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.discard_pile.append_array(discard_pile_states.map(func(x: SpellState): return x.deserialize(combat)))
@@ -58,10 +63,7 @@ func deserialize() -> Combat:
 	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 1:
 		combat.log.add("CombatState has no deck -> PrototypeDeck will be loaded")
 		combat.deck.append_array(Game.DeckUtils.create_test_deck(combat))
-	#combat.events.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
-	#combat.events.current_event = current_event
-	#if combat.events.events.is_empty():
-		#combat.events.events.append_array(Game.get_prototype_events(combat))
+	# Events
 	combat.events.all_events.append_array(all_events.map(
 		func (e): return e.deserialize(combat)
 	))
@@ -72,6 +74,7 @@ func deserialize() -> Combat:
 	combat.global_enemy_actions = global_enemy_actions
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
+	combat.ids.highest_id = highest_id
 	combat.deserialized.emit()
 	combat.log.add("Combat was deserialized.")
 	return combat

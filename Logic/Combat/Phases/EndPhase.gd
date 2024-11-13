@@ -1,4 +1,4 @@
-class_name EndPhase extends AbstractPhase
+class_name EndPhase extends CombatPhase
 
 func process_phase() -> void:
 	combat.round_ended.emit(combat.current_round)

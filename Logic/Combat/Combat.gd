@@ -16,6 +16,7 @@ enum Result {
 	Draw
 }
 
+@onready var combat_begin_phase: CombatBeginPhase = %CombatBeginPhase
 @onready var start_phase: StartPhase = %StartPhase
 @onready var spell_phase: SpellPhase = %SpellPhase
 @onready var enemy_phase: EnemyPhase = %EnemyPhase
@@ -138,23 +139,25 @@ func advance_current_phase():
 		current_phase = RoundPhase.Start
 	log.register_entry(LogEntry.new("", LogEntry.Type.TurnTransition))
 
-func get_current_phase_node() -> AbstractPhase:
+func get_current_phase_node() -> CombatPhase:
 	return get_phase_node(current_phase)
 
 ## ACTION Processes the current phase.
 func process_current_phase() -> void:
 	await get_current_phase_node()._process_phase()
 
-func get_phase_node(phase: RoundPhase) -> AbstractPhase:
+func get_phase_node(phase: RoundPhase) -> CombatPhase:
 	match phase:
+		RoundPhase.CombatBegin:
+			return combat_begin_phase
 		RoundPhase.Start:
-			return %StartPhase
+			return start_phase
 		RoundPhase.Spell:
-			return %SpellPhase
+			return spell_phase
 		RoundPhase.Enemy:
-			return %EnemyPhase
+			return enemy_phase
 		RoundPhase.End:
-			return %EndPhase
+			return end_phase
 		RoundPhase.RoundRepeats:
 			push_error("Processes unreachble phase RoundRepeats")
 	return null
@@ -171,6 +174,7 @@ func advance_and_process_until_next_player_action_needed():
 func process_initial_phase() -> void:
 	match current_phase:
 		RoundPhase.CombatBegin:
+			action_stack.push_back(process_current_phase)
 			action_stack.push_back(advance_and_process_until_next_player_action_needed)
 		RoundPhase.Spell:
 			action_stack.push_back(process_current_phase)
@@ -190,6 +194,8 @@ func serialize() -> CombatState:
 	# TODO Nitai serialize events and enemy actions
 	#state.event_states.append_array(events.events.map(func(x: Spell): return x.serialize()))
 	#state.current_event = events.current_event
+	ids.update_highest_id()
+	state.highest_id = ids.highest_id
 	state.timed_effects = t_effects.effects
 	state.combat_log = self.log.log_entries
 	return state

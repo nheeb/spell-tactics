@@ -1,4 +1,4 @@
-class_name AbstractPhase extends Node
+class_name CombatPhase extends Node
 
 signal process_start
 signal process_end
@@ -25,4 +25,4 @@ func get_reference() -> CombatNodeReference:
 	return CombatNodeReference.new(combat.get_path_to(self))
 
 func _to_string() -> String:
-	return "testAbstractPhase"
+	return "testCombatPhase"

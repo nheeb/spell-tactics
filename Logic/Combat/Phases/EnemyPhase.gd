@@ -1,4 +1,4 @@
-class_name EnemyPhase extends AbstractPhase
+class_name EnemyPhase extends CombatPhase
 
 func process_phase() -> void:
 	combat.animation.call_method(combat.ui, "set_status", ["Enemies attacking..."])

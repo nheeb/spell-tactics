@@ -36,6 +36,8 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 		return result
 	
 	var files: Array[String] = _get_all_file_paths("res://Content/Entities/")
+	files.append_array(_get_all_file_paths("res://Content/Enemies/Types/"))
+	files.append_array(_get_all_file_paths("res://Content/Player/"))
 	for file: String in files:
 		if not file.ends_with(".tres"):
 			continue

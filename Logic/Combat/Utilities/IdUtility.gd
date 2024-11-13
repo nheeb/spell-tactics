@@ -10,8 +10,11 @@ var help_texts: Dictionary = {}
 
 var highest_id := 0
 
-func update_highest_id(id: int):
-	highest_id = max(highest_id, id)
+func update_highest_id(id: int = -1):
+	if id == -1:
+		highest_id = combat_objects.keys().max()
+	else:
+		highest_id = max(highest_id, id)
 
 func get_new_id() -> int:
 	highest_id += 1

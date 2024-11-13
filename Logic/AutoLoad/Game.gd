@@ -15,6 +15,9 @@ var world: World = null
 
 var settings: Settings = load("res://Prototype/default_game_settings.tres")
 
+const LEVEL_PATH_DEFAULT = "res://Content/Levels/fight.tres"
+const LEVEL_PATH_SPELLTEST = "res://Content/Levels/SpellTesting/spell_test.tres"
+
 # todo: add these to Settings.gd
 const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
