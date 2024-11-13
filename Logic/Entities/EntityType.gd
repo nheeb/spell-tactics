@@ -1,25 +1,16 @@
-class_name EntityType extends Resource
+class_name EntityType extends CombatObjectType
 
-## Lowercase unique entity identifier
-@export var internal_name: String
 ## whether a UI element should pop up with name / info on hover (might belong more in VisualEntity)
 @export var can_be_hovered: bool = true
-## Name that will be shown ingame (for example when hovering)
-@export var pretty_name: String
-## OPTIONAL, fluff text shown on hovering over the entity
-@export_multiline var fluff_text: String
 ## OPTIONAL, PackedScene inheriting from VisualEntity.tscn with mesh/particles/animations
 @export var visual_scene: PackedScene
-## OPTIONAL, logic script inheriting from EntityLogic for special behavior
-@export var entity_logic: Script
 
-@export_category("Prototype Graphics")
-@export var prototype_scale := Vector2.ONE
-
-@export_category("Gameplay")
 ## Which tags (categories) this entity belongs to, for example Mushroom
 @export var tags: Array[String] = []
 @export var is_terrain := false
+
+@export_group("Prototype Graphics")
+@export var prototype_scale := Vector2.ONE
 
 @export_group("Energy")
 @export var is_drainable := true
@@ -38,23 +29,22 @@ const ENEMY_LAYER = 2
 ## How good of a cover this is from projectiles (accuracy reduction)
 @export var cover_value: int = 0
 
-
 # instantiate this EntityType
 # usually calls on create, the flag is only for deserialize to call that function after the properties have been set
 func create_entity(combat: Combat, call_on_create := true) -> Entity:
+	on_load()
 	var ent: Entity = Entity.new()
 	setup_visuals_and_logic(ent, combat)
 	entity_on_create(ent, call_on_create)
 	return ent
-
 
 const PROTOTYPE_VISUALS = "res://VFX/Entities/VisualPrototype.tscn"
 func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	ent.combat = combat
 	# CARE, instantiate() might lead to lag, depending on the use we might want to instantiate later
 	# use billboard prototype visuals if no visual scene is set:
-	if self.visual_scene != null:
-		ent.visual_entity = self.visual_scene.instantiate()
+	if visual_scene != null:
+		ent.visual_entity = visual_scene.instantiate()
 	else:
 		# push_warning("Using a prototype visual")
 		# need to use load here since Godot 4.3 for some reason..
@@ -69,8 +59,8 @@ func setup_visuals_and_logic(ent: Entity, combat: Combat) -> void:
 	ent.type = self
 
 	# Creating entity logic
-	if self.entity_logic != null:
-		ent.logic = self.entity_logic.new(ent, combat)
+	if logic_script != null:
+		ent.logic = logic_script.new(ent, combat)
 
 	# Setting the energy
 	# TBD should this be moved somewhere else?

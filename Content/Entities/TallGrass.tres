@@ -10,17 +10,16 @@ stack = Array[int]([3])
 
 [resource]
 script = ExtResource("1_vtr3c")
-internal_name = "tall_grass"
 can_be_hovered = true
-pretty_name = "Tall grass"
-fluff_text = ""
 visual_scene = ExtResource("3_3xy54")
-prototype_scale = Vector2(0.7, 0.7)
 tags = Array[String]([])
 is_terrain = false
+prototype_scale = Vector2(0.7, 0.7)
 is_drainable = true
 energy = SubResource("Resource_lqpe5")
 obstacle_layer = 0
 obstacle_mask = 0
 is_blocker = false
 cover_value = 0
+pretty_name = "Tall grass"
+fluff_text = ""

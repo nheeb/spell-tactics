@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_cr1ai"]
 [ext_resource type="Script" path="res://Logic/Entities/EntityType.gd" id="2_j8ofm"]
-[ext_resource type="Script" path="res://Content/Entities/CycloneLogic.gd" id="2_rkyx6"]
+[ext_resource type="Script" path="res://Content/Entities/Cyclone.gd" id="2_rkyx6"]
 [ext_resource type="PackedScene" uid="uid://cjpf7sjg6gjsk" path="res://VFX/Entities/VisualTornado.tscn" id="4_xsl71"]
 
 [sub_resource type="Resource" id="Resource_tdi1b"]
@@ -26,3 +26,4 @@ obstacle_layer = 0
 obstacle_mask = 0
 is_blocker = false
 cover_value = 0
+pretty_name = "Cyclone"

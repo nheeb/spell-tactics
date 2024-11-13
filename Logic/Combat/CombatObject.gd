@@ -15,14 +15,16 @@ var combat: Combat
 var node3d: Node3D
 var position: Vector3:
 	set(x):
-		node3d.position = x
+		if node3d:
+			node3d.position = x
 	get:
 		if node3d:
 			return node3d.position
 		return Vector3.ZERO
 var global_position: Vector3:
 	set(x):
-		node3d.global_position = x
+		if node3d:
+			node3d.global_position = x
 	get:
 		if node3d:
 			return node3d.global_position

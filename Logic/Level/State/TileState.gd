@@ -9,6 +9,7 @@ func deserialize(combat: Combat) -> Tile:
 	var n_cols := combat.level.n_cols
 	@warning_ignore("integer_division")
 	var tile = Tile.create(r, q, n_rows/2 + n_rows % 1, n_cols/2 + n_cols % 1)
+	tile.connect_with_combat(combat)
 	#var ents: Array[Entity] = []
 	var ent: Entity
 	for entity_data in entities:

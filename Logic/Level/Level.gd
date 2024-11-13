@@ -64,6 +64,7 @@ func expand_level_boundaries():
 			if new_tiles[r][q] == null and Utility.rq_distance(r, q, new_rows/2, new_cols/2) <= new_rows/2:
 				@warning_ignore("integer_division")
 				var new_tile = Tile.create(r, q, new_rows/2, new_cols/2)
+				new_tile.connect_with_combat(combat)
 				add_child(new_tile.tile3d)
 				new_tile.tile3d.owner = self
 				new_tiles[r][q] = new_tile
@@ -144,6 +145,7 @@ func init_basic_grid(n: int):
 				continue
 
 			var new_tile = Tile.create(r, q, n, n)
+			new_tile.connect_with_combat(combat)
 			add_child(new_tile)
 			new_tile.owner = self
 			tiles[r][q] = new_tile
