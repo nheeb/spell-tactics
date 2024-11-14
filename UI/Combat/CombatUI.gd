@@ -140,12 +140,10 @@ func set_enemy_meter_event(event: EnemyEvent) -> void:
 
 
 func _on_tile_hover_blocker_mouse_entered() -> void:
-	print("block")
 	mouse_blocker.block()
 
 
 func _on_tile_hover_blocker_mouse_exited() -> void:
-	print("unblock")
 	mouse_blocker.unblock()
 
 
