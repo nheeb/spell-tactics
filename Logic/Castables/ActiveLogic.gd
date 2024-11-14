@@ -14,7 +14,7 @@ func get_castable() -> Castable:
 func after_cast():
 	super.after_cast()
 	if active.is_limited_per_round():
-		active.set_limitation_uses_left(active.get_limitation_uses_left() - 1)
+		active.add_to_uses_left(-1)
 		
 func _on_select_deselect(select: bool) -> void:
 	var text_button: TextureButton = active.button.button  # TODO active/not button visuals

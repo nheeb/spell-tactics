@@ -90,8 +90,8 @@ func _on_active_uses_updated():
 	
 	# check if we should update bubble count
 	if(max_uses != len(bubbles)):
-		if max_uses > len(bubbles):
-			restart_bubbles()
+		#if max_uses > len(bubbles):
+		restart_bubbles()
 		init_active(active)
 
 	# set bubbles enabled/disabled

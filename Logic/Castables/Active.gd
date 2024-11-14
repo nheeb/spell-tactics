@@ -91,6 +91,15 @@ func get_button_caption() -> String:
 func is_limited_per_round() -> bool:
 	return type.limitation == ActiveType.Limitation.X_PER_ROUND
 
+func add_to_uses_left(i: int) -> void:
+	if i < 0:
+		var bonus := round_persistant_properties.get("bonus_uses", 0) as int
+		if bonus > 0:
+			var diff = min(bonus, -i)
+			add_to_bonus_uses(-diff)
+			i += diff
+	set_limitation_uses_left(get_limitation_uses_left() + i)
+
 func set_limitation_uses_left(i: int) -> void:
 	i = max(0, i)
 	round_persistant_properties["uses_left"] = i
@@ -105,7 +114,8 @@ func set_limitation_max_uses(i: int) -> void:
 	got_updated.emit()
 
 func get_limitation_uses_left() -> int:
-	return round_persistant_properties.get("uses_left", 0)
+	var left := round_persistant_properties.get("uses_left", 0) as int
+	return left
 
 func get_limitation_max_uses() -> int:
 	return round_persistant_properties.get("max_uses", type.max_uses_per_round)
@@ -119,3 +129,9 @@ func reset_limitation_max_uses() -> void:
 func add_to_max_uses(i: int) -> void:
 	set_limitation_max_uses(get_limitation_max_uses() + i)
 	set_limitation_uses_left(get_limitation_uses_left() + i)
+
+func add_to_bonus_uses(i: int) -> void:
+	var bonus := round_persistant_properties.get("bonus_uses", 0) as int
+	bonus += i
+	round_persistant_properties["bonus_uses"] = bonus
+	add_to_max_uses(i)
