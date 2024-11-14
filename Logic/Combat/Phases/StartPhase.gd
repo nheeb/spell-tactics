@@ -12,7 +12,7 @@ func process_phase() -> void:
 	#await combat.action_stack.wait()
 	
 	if Game.DEBUG_SPELL_TESTING:
-		combat.energy.gain(Game.testing_energy)
+		combat.energy.gain(Game.testing_energy, combat.player)
 	
 	combat.log.add("Saving game...",)
 	await combat.action_stack.process_callable(auto_save)

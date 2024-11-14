@@ -30,7 +30,7 @@ func is_payable(payment: EnergyStack) -> bool:
 	var possible: EnergyStack = player_energy.get_possible_payment(payment)
 	return possible != null
 
-func gain(energy: EnergyStack, entity: Entity = null) -> AnimationObject:
+func gain(energy: EnergyStack, entity: Entity = combat.player) -> AnimationObject:
 	player_energy.stack.append_array(energy.stack)
 	return spawn_orbs(energy, entity)
 
