@@ -1,7 +1,9 @@
 class_name EntityStatusLogic extends CombatLogic
 
-var entity: Entity
 var status: EntityStatus
+var entity: Entity:
+	get:
+		return status.entity
 var type: EntityStatusType:
 	get:
 		return status.type
@@ -11,6 +13,10 @@ var data: Dictionary:
 	set (x):
 		status.data = x
 		push_warning("Do not set this. Just change the elements instead.")
+
+func connect_with_combat_object(co: CombatObject):
+	status = co as EntityStatus
+	assert(status)
 
 ############################
 ## Methods for overriding ##

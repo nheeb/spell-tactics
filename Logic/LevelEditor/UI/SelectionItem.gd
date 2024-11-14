@@ -1,4 +1,3 @@
-
 extends Control
 
 @export var display_name: String = ""

@@ -9,9 +9,7 @@ class_name EntityStatus extends CombatObject
 @export var is_logic_setup_done := false
 
 var logic: EntityStatusLogic
-var entity: Entity:
-	get:
-		return logic.entity
+var entity: Entity
 var lifetime: int:
 	set(x):
 		data["_lifetime"] = x
@@ -27,22 +25,18 @@ var targets: Array:
 			return []
 		return data["_targets"]
 
-func _init(_type: EntityStatusType = null, _data := {}) -> void:
-	type = _type
-	if type:
-		# Build data
-		data.clear()
-		if type.has_lifetime:
-			lifetime = type.lifetime_default # Uses data in the setter
-		data.merge(type.default_data, true)
-		data.merge(_data, true)
+#func _init(_type: EntityStatusType = null, _data := {}) -> void:
+	#type = _type
+	#if type:
+		## Build data
+		#data.clear()
+		#if type.has_lifetime:
+			#lifetime = type.lifetime_default # Uses data in the setter
+		#data.merge(type.default_data, true)
+		#data.merge(_data, true)
 
 func setup(_entity: Entity):
-	# Create Logic Object
-	logic = type.create_logic()
-	logic.entity = _entity
-	logic.combat = _entity.combat
-	logic.status = self
+	entity = _entity
 	# Execute Setup
 	if not is_logic_setup_done:
 		setup_logic()
@@ -120,6 +114,3 @@ func reduce_lifetime() -> void:
 	lifetime = lifetime - 1
 	if lifetime < 0:
 		remove()
-
-func get_reference() -> EntityStatusReference:
-	return EntityStatusReference.new(entity.get_reference(), get_status_name())

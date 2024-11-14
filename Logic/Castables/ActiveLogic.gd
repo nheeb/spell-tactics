@@ -2,11 +2,15 @@ class_name ActiveLogic extends CastableLogic
 
 var active: Active
 
-func _init(_active: Active):
-	active = _active
-	combat = active.combat
-	if active.type.logic != self.get_script():
-		push_error("Weird creation of SpellLogic Object")
+#func _init(_active: Active):
+	#active = _active
+	#combat = active.combat
+	#if active.type.logic != self.get_script():
+		#push_error("Weird creation of SpellLogic Object")
+
+func connect_with_combat_object(co: CombatObject):
+	active = co as Active
+	assert(active)
 
 func get_castable() -> Castable:
 	return active

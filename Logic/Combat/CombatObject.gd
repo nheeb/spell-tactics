@@ -30,11 +30,19 @@ var global_position: Vector3:
 			return node3d.global_position
 		return Vector3.ZERO
 
-func get_reference() -> UniversalReference:
-	return null
+func get_reference() -> CombatObjectReference:
+	var ref := combat.ids.references.get(id) as CombatObjectReference
+	assert(ref, "CombatObject wasn't added to ids")
+	return ref
+
+func get_generic_type() -> CombatObjectType:
+	return get("type") as CombatObjectType
+
+func get_generic_logic() -> CombatLogic:
+	return get("logic") as CombatLogic
 
 func serialize() -> CombatObjectState:
-	return null
+	return CombatObjectState.new(self)
 
 ## ACTION
 func on_birth() -> void:

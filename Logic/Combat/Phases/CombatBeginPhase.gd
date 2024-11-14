@@ -22,9 +22,9 @@ func process_phase() -> void:
 	if combat.actives.is_empty():
 		combat.log.add("Level has no actives -> Regular actives will be loaded")
 		combat.actives = [
-			Active.new(ActiveType.load_from_file(MOVE), combat),
-			Active.new(ActiveType.load_from_file(DRAIN), combat),
-			Active.new(ActiveType.load_from_file(MELEE), combat),
+			ActiveType.load_from_file(MOVE).create(combat),
+			ActiveType.load_from_file(DRAIN).create(combat),
+			ActiveType.load_from_file(MELEE).create(combat)
 		]
 	combat.ui.initialize_active_buttons(combat.actives)
 	combat.cards.draw_to_hand_size()

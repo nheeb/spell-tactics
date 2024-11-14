@@ -25,24 +25,29 @@ class_name CombatState extends Resource
 @export var event_schedules: Array[CombatEventSchedule]
 ## Planned Enemy events
 @export var enemy_event_queue: Array[EnemyEventPlan]
-@export var current_enemy_event: CombatEventReference
+@export var current_enemy_event: CombatObjectReference
 ## Progress of the enemy meter
 @export var enemy_meter: int
 ## Enemy Actions
 @export var global_enemy_actions: Array[EnemyActionArgs]
-## Highest ID given (for adding new ids)
-@export var highest_id: int
+## References
+@export var references: Dictionary
+@export var object_names: Dictionary
 @export var meta: SaveFileMeta = null
 
 const COMBAT = preload("res://Logic/Combat/Combat.tscn")
 
 func deserialize() -> Combat:
+	# Combat and children nodes
 	var combat : Combat = COMBAT.instantiate() as Combat
 	combat._ready()
 	for c in combat.get_children():
 		for cc in c.get_children():
 			cc.set("combat", combat)
 	combat.log.add("Deserializing Combat...")
+	# Old ids and refs
+	combat.ids.references = references
+	combat.ids.object_names = object_names
 	# Rounds & Energy
 	combat.current_round = current_round
 	combat.current_phase = current_phase
@@ -68,15 +73,9 @@ func deserialize() -> Combat:
 	combat.global_enemy_actions = global_enemy_actions
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
-	combat.ids.highest_id = highest_id
 	
-	# TODO Do this in general with all CombatObjects
-	# Add castable ids
-	for c in combat.get_all_castables():
-		combat.ids.add_combat_object(c)
-	# Add entity ids
-	for e in combat.level.entities.get_all_entities():
-		combat.ids.add_combat_object(e)
+	
+	combat.ids.check_integrity()
 	
 	combat.deserialized.emit()
 	combat.log.add("Combat was deserialized.")

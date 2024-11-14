@@ -6,12 +6,13 @@ func _init(level: Level):
 	_level = level
 	
 func create(location: Vector2i, entity_type: EntityType, create_with_active_visuals := true) -> Entity:
+	assert(false)
 	var tile = _level.get_tile(location)
 	if tile.has_entity_type(entity_type):
 		pass
 		# TODO delete old entity (still return the new one)
 
-	var entity := entity_type.create_entity(_level.combat, false) as Entity
+	var entity := entity_type.create_entity(_level.combat) as Entity
 	
 	# Create id for entity
 	_level.combat.ids.add_combat_object(entity)

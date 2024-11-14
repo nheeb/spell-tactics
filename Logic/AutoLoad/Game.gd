@@ -66,10 +66,10 @@ func unpause():
 
 class DeckUtils:
 	static func create_spell(spell_type: SpellType, combat: Combat) -> Spell:
-		return Spell.new(spell_type, combat)
+		return spell_type.create(combat)
 	
 	static func load_spell(name: String, combat: Combat) -> Spell:
-		return Spell.new(SpellType.load_from_file("res://Content/Spells/%s.tres" % name), combat)
+		return create_spell(SpellType.load_from_file("res://Content/Spells/%s.tres" % name), combat)
 	
 	static func load_spell_n_times(name: String, n: int, combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []

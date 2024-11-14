@@ -1,4 +1,3 @@
-
 class_name SelectionUI extends Control
 
 @export var editor_ui: EditorUI = null
@@ -41,7 +40,8 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 	for file: String in files:
 		if not file.ends_with(".tres"):
 			continue
-		var entity_type = load(file) as EntityType
+		var entity_type := load(file) as EntityType
+		entity_type.on_load()
 		if entity_type == null: # loaded anbother Resource type, ignore this
 			continue
 		if mode == Mode.Terrain and not entity_type.is_terrain:

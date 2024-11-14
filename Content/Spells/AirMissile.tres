@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://bu7gx0wc5bbuh"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://bu7gx0wc5bbuh"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_bpjub"]
 [ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="2_xtntf"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_iudyy"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_tipyf"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
@@ -12,14 +11,7 @@ stack = Array[int]([6, 6])
 [resource]
 script = ExtResource("4_tipyf")
 costs = SubResource("Resource_gkkbv")
-keywords = Array[ExtResource("3_iudyy")]([])
-pretty_name = "Air Missile"
 effect_text = "A short range burst of air deals 2 damage to enemy in range 2."
-fluff_text = "Fun
-
-"
-icon = ExtResource("2_xtntf")
-color = Color(1, 1, 1, 1)
 target = 1
 target_range = 2
 target_min_range = -1
@@ -32,3 +24,9 @@ topic = 1
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = "2"
+pretty_name = "Air Missile"
+fluff_text = "Fun
+
+"
+icon = ExtResource("2_xtntf")
+color = Color(1, 1, 1, 1)

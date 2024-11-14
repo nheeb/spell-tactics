@@ -3,8 +3,8 @@ class_name Tile extends CombatObject
 var entities: Array[Entity] = []
 var hovering := false
 
-var r: int
-var q: int
+@export var r: int
+@export var q: int
 var location: Vector2i:
 	set(l):
 		push_error("setting location is forbidden.")
@@ -44,19 +44,14 @@ static func create(r_tile: int, q_tile: int, r_center: float, q_center: float) -
 	return tile
 
 func serialize() -> TileState:
-	var tile_state := TileState.new()
-	tile_state.r = r
-	tile_state.q = q
+	var tile_state := TileState.new(self)
 	var entity_states: Array[EntityState] = []
 	
 	for entity: Entity in self.entities:
 		entity_states.append(entity.serialize())
 	
-	tile_state.entities = entity_states
+	tile_state.entity_states = entity_states
 	return tile_state
-
-func get_reference() -> TileReference:
-	return TileReference.new(self)
 
 func _to_string() -> String:
 	return "Tile_%02d_%02d" % [r, q]
@@ -71,6 +66,12 @@ func has_entity_type(entity_type: EntityType):
 func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)
+	if entity.visual_entity:
+		if entity.visual_entity.get_parent() == null:
+			combat.level.visual_entities.add_child(entity.visual_entity)
+			entity.visual_entity.owner = combat.level
+			entity.visual_entity.position = position
+			entity.visual_entity.visible = true
 
 func remove_entity(entity: Entity):
 	var i := entities.find(entity)

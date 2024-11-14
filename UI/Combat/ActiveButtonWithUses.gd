@@ -27,7 +27,7 @@ func _ready() -> void:
 		init_active(active)
 	elif get_tree().current_scene == self:
 		# load debug active
-		active = Active.new(ActiveType.load_from_file("res://Spells/AllActives/TestActive.tres"), null)
+		active = null # Active.new(ActiveType.load_from_file("res://Spells/AllActives/TestActive.tres"), null)
 	else:
 		push_warning("no active set on initializing ActiveButton")
 

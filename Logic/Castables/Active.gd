@@ -4,31 +4,16 @@ signal got_locked
 signal got_unlocked
 signal got_updated
 
-var type: ActiveType
+@export var type: ActiveType
 
 var logic: ActiveLogic
 
 ## set by the UI. Every Active should have an ActiveButton :)
 var button: ActiveButtonWithUses
 
-func _init(_type: ActiveType, _combat : Combat = null) -> void:
-	type = _type
-	connect_with_combat(_combat)
-	if combat != null:
-		logic = type.logic.new(self)
-
 func serialize() -> ActiveState:
-	var state := ActiveState.new()
-	state.type = type
-	state.id = id
-	state.data = data
+	var state := ActiveState.new(self)
 	return state
-	
-func _to_string() -> String:
-	return type.internal_name
-
-func get_reference() -> ActiveReference:
-	return ActiveReference.new(self)
 
 func get_effect_text() -> String:
 	return type.get_effect_text()

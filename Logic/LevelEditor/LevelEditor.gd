@@ -3,9 +3,6 @@ class_name EditorUI extends Control
 @export var world: World = null
 @onready var selection_ui = $%Entities
 
-
-
-
 var all_levels_paths: Array[String] = []
 var current_level_path = Game.LEVEL_PATH_DEFAULT
 

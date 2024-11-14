@@ -77,9 +77,9 @@ func _ready() -> void:
 	DebugInfo.global_settings_add("CLOSE_AT_NORM_MOUSE_POS", 0.0, 1.0)
 	
 	if get_tree().current_scene == self:
-		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
-		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
-		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
+		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
+		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
+		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
 		%EnergyUI.spawn_energy_orbs(EnergyStack.new([EnergyStack.EnergyType.Harmony, EnergyStack.EnergyType.Matter]))
 	
 	# Set cam mode

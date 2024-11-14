@@ -4,7 +4,7 @@ class_name Entity extends CombatObject
 ## enemies or environment.
 
 ## The EntityType (Resource) this Entity is an instance of.
-var type: EntityType
+@export var type: EntityType
 
 ## The visual representation of this Entity optional (can be null).
 ## This Node is only part of the scene tree if this Entity has been added to a tile.
@@ -15,11 +15,10 @@ var logic: EntityLogic
 
 ## A reference to the Tile this Entity is residing on.
 var current_tile: Tile
-var energy: EnergyStack
 
-var custom_props := {}
-## DEPRECATED old status effects
-#var status_effects: Array[StatusEffect] = []
+## Energy being held
+@export var energy: EnergyStack
+
 ## list of EntityStatus
 var status_array: Array[EntityStatus] = []
 
@@ -43,32 +42,8 @@ static func should_serialize_this_prop(name: String) -> bool:
 
 ## Write the entity into an EntityState (Resource)
 func serialize() -> EntityState:
-	var state: EntityState = EntityState.new()
-	state.type = type
-	
-	for prop in get_property_list():
-		if not Entity.should_serialize_this_prop(prop.name):
-			continue
-		state.entity_props[prop.name] = get(prop.name)
-
-	if logic != null:
-		for prop in logic.get_property_list():
-			# TODO maybe we'll need another exclusion method for the script props
-			if not Entity.should_serialize_this_prop(prop.name):
-				continue
-			state.script_props[prop.name] = get(prop.name)
-
-	if visual_entity != null:
-		for prop in Inspector.get_exported_properties(visual_entity):
-			if not Entity.should_serialize_this_prop(prop["name"]):
-				continue
-			state.visual_ent_props[prop["name"]] = prop["value"]
-
-	#print(state.entity_props)
+	var state: EntityState = EntityState.new(self)
 	return state
-
-func get_reference() -> EntityReference:
-	return EntityReference.new(self)
 
 func _to_string() -> String:
 	if id >= 0:
@@ -153,8 +128,9 @@ func apply_status(status_or_type: Variant, additional_data := {}) -> void:
 		status = status_or_type
 		status.data.merge(additional_data, true)
 	else:
-		assert(status_or_type is EntityStatusType)
-		status = EntityStatus.new(status_or_type, additional_data)
+		var type := status_or_type as EntityStatusType
+		assert(type)
+		status = type.create_status(combat, additional_data)
 	var existing_status := get_status(status.get_status_name())
 	if DebugInfo.ACTIVE:
 		combat.animation.say(visual_entity, status.type.pretty_name).set_duration(0.0)

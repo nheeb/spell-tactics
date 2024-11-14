@@ -56,7 +56,7 @@ func create_event(combat: Combat, params := {}) -> CombatEvent:
 	event.type = self
 	event.combat = combat
 	event.logic = logic.new()
-	event.logic.setup(combat, event)
+	event.logic.setup(event)
 	event.params = default_params.duplicate(true)
 	event.params.merge(params, true)
 	combat.ids.add_combat_object(event)

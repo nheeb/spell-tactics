@@ -38,7 +38,7 @@ enum Result {
 
 # TODO Nitai move those to the log utility
 signal round_ended
-signal spell_casted_successfully(spell: SpellReference)
+signal spell_casted_successfully(spell: CombatObjectReference)
 signal deserialized
 
 var result: Result = Result.Unfinished
@@ -84,6 +84,7 @@ func setup() -> void:
 				enemies.append(entity)
 	
 	# TODO Test if player and enemies exist
+	assert(player != null and not enemies.is_empty(), "Player or enemies missing")
 	
 	# Connect input signals
 	input.connect_with_event_signals()
@@ -165,8 +166,8 @@ func serialize() -> CombatState:
 	# TODO Nitai serialize events and enemy actions
 	#state.event_states.append_array(events.events.map(func(x: Spell): return x.serialize()))
 	#state.current_event = events.current_event
-	ids.update_highest_id()
-	state.highest_id = ids.highest_id
+	state.references = ids.references
+	state.object_names = ids.object_names
 	state.timed_effects = t_effects.effects
 	state.combat_log = self.log.log_entries
 	return state
@@ -188,6 +189,13 @@ static func serialize_level_as_combat_state(level: Level) -> CombatState:
 static func deserialize_level_from_combat_state(combat_state: CombatState) -> Level:
 	var combat := combat_state.deserialize()
 	return combat.level
+
+func get_all_combat_objects() -> Array[CombatObject]:
+	var all_objects : Array[CombatObject] = []
+	all_objects.append_array(level.get_all_tiles())
+	all_objects.append_array(level.entities.get_all_entities())
+	all_objects.append_array(get_all_castables())
+	return all_objects
 
 func get_all_castables() -> Array[Castable]:
 	var all_spells : Array[Castable] = []

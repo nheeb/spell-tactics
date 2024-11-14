@@ -2,11 +2,15 @@ class_name EntityLogic extends CombatLogic
 
 var entity: Entity
 
-func _init(e: Entity, c: Combat) -> void:
-	entity = e
-	combat = c
-	# connect to entity entering the graveyard
-	e.entered_graveyard.connect(on_graveyard)
+#func _init(e: Entity, c: Combat) -> void:
+	#entity = e
+	#combat = c
+	## connect to entity entering the graveyard
+	#e.entered_graveyard.connect(on_graveyard)
+
+func connect_with_combat_object(co: CombatObject):
+	entity = co as Entity
+	assert(entity)
 
 func on_graveyard():
 	pass

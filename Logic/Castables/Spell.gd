@@ -1,34 +1,16 @@
 class_name Spell extends Castable
 
-var type: SpellType
+@export var type: SpellType
 var logic: SpellLogic
 var visual_representation: HandCard2D
 var card: HandCard3D
 
-func _init(_type: SpellType, _combat : Combat = null) -> void:
-	type = _type
-	connect_with_combat(_combat)
-	if combat != null:
-		logic = type.logic.new(self)
-
 func serialize() -> SpellState:
-	var state := SpellState.new()
-	state.type = type
-	state.id = id
-	state.data = data
+	var state := SpellState.new(self)
 	return state
-	
-func _to_string() -> String:
-	return type.internal_name
-
-func get_reference() -> SpellReference:
-	return SpellReference.new(self)
-
-func get_keywords() -> Array[Keyword]:
-	return type.keywords
 
 func get_effect_text() -> String:
-	return type.get_effect_text(get_keywords())
+	return type.get_effect_text()
 
 func get_costs() -> EnergyStack:
 	return logic.get_costs()

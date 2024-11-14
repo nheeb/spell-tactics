@@ -5,9 +5,6 @@ var possible_targets : Array[Tile]
 
 var selected := false
 
-func get_reference() -> CastableReference:
-	return CastableReference.new(self)
-
 func get_effect_text() -> String:
 	return "<Effect Text not implemented>"
 

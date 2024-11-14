@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://cd42nwwenro"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://cd42nwwenro"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_28efp"]
 [ext_resource type="Texture2D" uid="uid://coreekhuqc5m2" path="res://Assets/Sprites/Icons/whirlwind.png" id="2_p1hui"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_hs4ut"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_6beri"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
@@ -12,13 +11,7 @@ stack = Array[int]([5, 6])
 [resource]
 script = ExtResource("4_6beri")
 costs = SubResource("Resource_gkkbv")
-keywords = Array[ExtResource("3_hs4ut")]([])
-pretty_name = "Cyclone"
 effect_text = "Create a cyclone that deals 2 damage per turn to nearby units at the end of the round. Lasts 3 rounds."
-fluff_text = "
-"
-icon = ExtResource("2_p1hui")
-color = Color(0.682353, 0.682353, 0.682353, 1)
 target = 3
 target_range = 4
 target_min_range = -1
@@ -31,3 +24,8 @@ topic = 5
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
+pretty_name = "Cyclone"
+fluff_text = "
+"
+icon = ExtResource("2_p1hui")
+color = Color(0.682353, 0.682353, 0.682353, 1)

@@ -126,8 +126,5 @@ func serialize() -> CombatEventState:
 	state.persistant_properties = persistant_properties
 	return state
 
-func get_reference() -> CombatEventReference:
-	return CombatEventReference.new(self)
-
 func get_effect_text() -> String:
 	return type.effect_text + persistant_properties.get("extra_text", "")

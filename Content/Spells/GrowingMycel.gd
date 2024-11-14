@@ -6,8 +6,9 @@ const SMALL_SHROOMS = preload("res://Content/Entities/SmallShrooms.tres")
 ## Here should be the effect
 func casting_effect() -> void:
 	target = target as Tile
-	var type = [SHROOMS, SMALL_SHROOMS].pick_random()
-	var shroom : Entity = combat.level.entities.create(target.location, type, false)
+	var type = [SHROOMS, SMALL_SHROOMS].pick_random() as EntityType
+	var shroom : Entity = type.create_entity(combat, target)
+	#combat.level.entities.create(target.location, type, false)
 	combat.animation.effect(VFX.HEX_RINGS, target, {"color": Color.DARK_VIOLET})
 	combat.animation.show(shroom.visual_entity).set_flag_with()
 	if type == SMALL_SHROOMS:

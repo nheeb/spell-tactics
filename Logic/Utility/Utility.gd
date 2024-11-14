@@ -246,6 +246,16 @@ static func create_static_signal(cls: Object, signal_name: StringName) -> Signal
 		cls.add_user_signal(signal_name)
 	return Signal(cls, signal_name)
 
+func get_exported_properties(object: Object) -> Array[String]:
+	var exported_properties: Array[String] = []
+	var script: Script = object.get_script()
+	if script:
+		var properties = script.get_script_property_list()
+		for property in properties:
+			if "usage" in property and property["usage"] & PROPERTY_USAGE_STORAGE:
+				exported_properties.append(property["name"])
+	return exported_properties
+
 #static func get_exported_properties(node: Node) -> Array:
 	#var exported_properties = []
 	#var script = node.get_script()

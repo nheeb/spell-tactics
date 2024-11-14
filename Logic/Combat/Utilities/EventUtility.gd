@@ -76,7 +76,7 @@ var enemy_event_queue: Array[EnemyEventPlan]
 # TODO Nitai serialize this
 var enemy_meter := 0
 var enemy_meter_max := 0
-var current_enemy_event: CombatEventReference
+var current_enemy_event: CombatObjectReference
 
 func process_enemy_events():
 	if not current_enemy_event:
