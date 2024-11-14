@@ -4,6 +4,8 @@ var combat : Combat
 var selected_spell: Spell
 var actives: Array[Active]
 
+@onready var mouse_blocker = MouseInput.mouse_block.register_blocker()
+
 @onready var cards3d: Cards3D = %Cards3D
 @onready var timeline: TimelineUI = %Timeline
 @onready var error_lines: StatusLines = %ErrorLines
@@ -31,9 +33,12 @@ func setup(_combat: Combat):
 	update_payable_cards()
 	cards3d.setup(_combat)
 
-	# Build timeline
-	# TODO Delete Timeline Code
-	# %Timeline.build_timeline_from_log(combat.log)
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("show_drain_overlay") and get_window().has_focus():
+		$OverlayBar/EnergyOverlay.button_pressed = not $OverlayBar/EnergyOverlay.button_pressed 
+		
+	if Input.is_action_just_pressed("toggle_debug_mode"):
+		$OverlayBar/DebugOverlay.button_pressed = not $OverlayBar/DebugOverlay.button_pressed 
 
 func next_round(current_round: int):
 	pass
@@ -135,8 +140,18 @@ func set_enemy_meter_event(event: EnemyEvent) -> void:
 
 
 func _on_tile_hover_blocker_mouse_entered() -> void:
-	pass # Replace with function body.
+	print("block")
+	mouse_blocker.block()
 
 
 func _on_tile_hover_blocker_mouse_exited() -> void:
-	pass # Replace with function body.
+	print("unblock")
+	mouse_blocker.unblock()
+
+
+func _on_debug_overlay_toggled(toggled_on: bool) -> void:
+	$LogSettingsPanel.advance()
+	Game.DEBUG_OVERLAY = toggled_on
+
+func _on_energy_overlay_toggled(toggled_on: bool) -> void:
+	Game.ENERGY_OVERLAY = toggled_on

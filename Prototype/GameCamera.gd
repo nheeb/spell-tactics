@@ -3,6 +3,7 @@ class_name GameCamera extends Node3D
 static var zoom_block: Block = Block.new()
 static var translate_block: Block = Block.new()
 
+static var follow_blocker = translate_block.register_blocker()
 
 var velocity := Vector3.ZERO
 var rotation_input := 0.0
@@ -28,6 +29,7 @@ var just_reach_target := false
 @export var follow_damp_ease := 8.0
 @export var follow_damp_range := 2.5
 @export var target_reach_range := .2
+@export var follow_move_extra_factor := 3.0
 
 func _ready() -> void:
 	zoom_pivot.position.y = camera_zoom
@@ -46,11 +48,12 @@ func _physics_process(delta: float) -> void:
 		
 	if follow_target != null:
 		var dist := global_position.distance_to(follow_target.global_position)
-		velocity += delta * move_acceleration * 1.6 * global_position.direction_to(follow_target.global_position)
+		velocity += delta * move_acceleration * follow_move_extra_factor * global_position.direction_to(follow_target.global_position)
 		velocity *= pow(damping, delta)
 		velocity *=  (1.0 - ease(Utility.clamp_map(dist, 0.0, follow_damp_range, 1.0, 0.0), follow_damp_ease))
 		
 		if just_reach_target and dist < target_reach_range:
+			follow_blocker.unblock()
 			follow_target = null
 			just_reach_target = false
 			target_reached.emit()

@@ -36,6 +36,7 @@ class RingProperties:
 	var hd_end: float
 	var hd_duration: float
 
+@warning_ignore("shadowed_variable")
 func spawn_sphere(location, size, parent):
 	if randf()<gap_chance:
 		return

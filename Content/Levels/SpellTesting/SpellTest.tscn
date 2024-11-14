@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1eod0pbyip4b"]
+[gd_scene load_steps=8 format=3 uid="uid://b1eod0pbyip4b"]
 
 [ext_resource type="Script" path="res://Content/Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="2_rjkex"]
-[ext_resource type="Resource" uid="uid://c38oh270u86ke" path="res://Content/Spells/Teleport.tres" id="3_478ls"]
 [ext_resource type="Resource" uid="uid://bjrjvk0evvvyt" path="res://Content/Spells/PoisonPunch.tres" id="4_fxv7j"]
 [ext_resource type="Resource" uid="uid://coxs5uvjtigok" path="res://Content/Spells/DeadlyDart.tres" id="5_f8kvd"]
 [ext_resource type="Resource" uid="uid://c2gimhhja8fi6" path="res://Content/Spells/Breath.tres" id="6_7ocbv"]
@@ -16,8 +15,7 @@ stack = Array[int]([1, 1, 2, 2, 3, 3, 4, 4, 5])
 transform = Transform3D(0.519788, 0, 0, 0, 0.519788, 0, 0, 0, 0.519788, 0, 0, 0)
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
-test_spell_1 = ExtResource("3_478ls")
+test_spell_1 = ExtResource("7_viktr")
 test_spell_2 = ExtResource("4_fxv7j")
 test_spell_3 = ExtResource("5_f8kvd")
 test_spell_4 = ExtResource("6_7ocbv")
-test_spell_5 = ExtResource("7_viktr")

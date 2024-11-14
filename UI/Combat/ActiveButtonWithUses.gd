@@ -105,9 +105,8 @@ func _on_active_uses_updated():
 		grey_out()
 	else:
 		undo_grey_out()
-		
 
-## TODO Idea: RayCast.register_new_blocker() -> blocker.block/unblock()
+# TODO use blockers here
 
 func _on_active_button_mouse_entered() -> void:
 	if Game.world != null:  

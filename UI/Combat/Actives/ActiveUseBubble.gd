@@ -17,8 +17,10 @@ var enabled: bool = true:
 		if enabled and not now_enabled:
 			# switch off
 			circle.color = disabled_color
+			circle.material.set_shader_parameter("icon_color", Color("afafaf"))
 		if not enabled and now_enabled:
 			# switch on
 			circle.color = enabled_color
+			circle.material.set_shader_parameter("icon_color", Color.WHITE)
 			
 		enabled = now_enabled

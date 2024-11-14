@@ -84,6 +84,7 @@ func camera_reach(target) -> AnimationObject:
 		target = target.visual_entity
 	var animations : Array[AnimationObject] = []
 	animations.append(property(combat.camera, "follow_target", target))
+	animations.append(callable(combat.camera.follow_blocker.block))
 	animations.append(property(combat.camera, "just_reach_target", true).set_flag(AnimationObject.Flags.PlayWithStep))
 	animations.append(wait_for_signal(combat.camera, "target_reached").set_flag(AnimationObject.Flags.ExtendStep))
 	return reappend_as_subqueue(animations)
