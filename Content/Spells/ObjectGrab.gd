@@ -2,8 +2,17 @@ extends SpellLogic
 
 func casting_effect() -> void:
 	var ent := get_non_terrain_entity_with_highest_energy(target_tile)
-	var direction := combat.player.current_tile.direction_to(target_tile)
-	var destination := combat.player.current_tile.step_in_direction(direction)
+	
+	# Get destination (near the origin & prefering a tile without obstacle)
+	var possible_tiles := Utility.array_sorted(
+		Utility.array_shuffled(combat.player.current_tile.get_surrounding_tiles()),
+		func (tile: Tile):
+			var score := tile.distance_to(target_tile)
+			if tile.is_blocked() or tile == combat.player.current_tile:
+				score += 10
+			return score
+	)
+	var destination : Tile = possible_tiles.front() as Tile
 	combat.movement.blink_entity(ent, destination)
 	
 	var drain_active := Utility.array_safe_get(

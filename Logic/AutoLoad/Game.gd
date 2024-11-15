@@ -102,7 +102,7 @@ class DeckUtils:
 		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
 		spells.append_array(load_spell_n_times("AirMissile", 1, combat))
 		spells.append_array(load_spell_n_times("Berserker", 1, combat))
-		#spells.append_array(load_spell_n_times("TrappingRoots", 1, combat))
+		spells.append_array(load_spell_n_times("ObjectGrab", 1, combat))
 		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
 		
 		spells.append_array(load_spell_n_times("SporeFlight", 1, combat))

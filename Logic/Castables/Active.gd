@@ -143,3 +143,8 @@ func add_to_bonus_uses(i: int) -> void:
 	bonus += i
 	round_persistant_properties["bonus_uses"] = bonus
 	add_to_max_uses(i)
+	if i > 0:
+		combat.animation.effect(VFX.HEX_RINGS, combat.player, \
+			{"color": Color.YELLOW}).set_duration(.6)
+		combat.animation.say(combat.player, "+%s %s" % [i, type.pretty_name]) \
+			.set_flag_with()

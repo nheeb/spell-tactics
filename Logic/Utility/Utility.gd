@@ -174,6 +174,23 @@ func array_safe_get(array: Array, index: int, mirror := false, default = null) -
 func dict_safe_get(dict: Dictionary, key: Variant, default = null) -> Variant:
 	return dict.get(key, default)
 
+## Returns a sorted version of the array.
+## Takes a callable which should turn the elements into numbers.
+func array_sorted(_array: Array, score_func: Callable, asc := true) -> Array:
+	var array := _array.duplicate()
+	array.sort_custom(
+		func (a, b):
+			return score_func.call(a) < score_func.call(b)
+	)
+	if not asc:
+		array.reverse()
+	return array
+
+func array_shuffled(_array: Array) -> Array:
+	var array := _array.duplicate()
+	array.shuffle()
+	return array
+
 func get_parent_of_type(n: Node, type) -> Node:
 	var parent: Node = n.get_parent()
 	while parent:
