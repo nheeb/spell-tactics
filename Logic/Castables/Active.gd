@@ -2,7 +2,7 @@ class_name Active extends Castable
 
 signal got_locked
 signal got_unlocked
-signal got_updated
+signal uses_got_updated(uses_left: int, max_uses: int)
 
 var type: ActiveType
 var id: ActiveID = null
@@ -88,6 +88,10 @@ func get_button_caption() -> String:
 ## We have to use round_pers_props for serialization ##
 #######################################################
 
+## ANIMATION
+func update_uses_visually(uses_left: int, max_uses: int):
+	uses_got_updated.emit(uses_left, max_uses)
+
 func is_limited_per_round() -> bool:
 	return type.limitation == ActiveType.Limitation.X_PER_ROUND
 
@@ -103,7 +107,9 @@ func add_to_uses_left(i: int) -> void:
 func set_limitation_uses_left(i: int) -> void:
 	i = max(0, i)
 	round_persistant_properties["uses_left"] = i
-	got_updated.emit()
+	combat.animation.callable(update_uses_visually.bind(
+		get_limitation_uses_left(), get_limitation_max_uses()
+	))
 	if i == 0:
 		unlocked = false
 	else:
@@ -111,7 +117,9 @@ func set_limitation_uses_left(i: int) -> void:
 
 func set_limitation_max_uses(i: int) -> void:
 	round_persistant_properties["max_uses"] = i
-	got_updated.emit()
+	combat.animation.callable(update_uses_visually.bind(
+		get_limitation_uses_left(), get_limitation_max_uses()
+	))
 
 func get_limitation_uses_left() -> int:
 	var left := round_persistant_properties.get("uses_left", 0) as int
