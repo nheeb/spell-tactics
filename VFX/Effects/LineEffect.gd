@@ -18,4 +18,3 @@ func effect_start() -> void:
 	await VisualTime.new_timer(duration).timeout
 	effect_done.emit()
 	queue_free()
-

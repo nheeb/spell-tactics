@@ -42,7 +42,7 @@ func callable(_callable: Callable) -> AnimationCallable:
 	add_animation_object(a)
 	return a
 
-func effect(_effect_scene: PackedScene, target: Object,_setup_properties := {}) -> AnimationEffect:
+func effect(_effect_scene: PackedScene, target: Object, _setup_properties := {}) -> AnimationEffect:
 	if target is CombatObject:
 		target = target.node3d
 	assert(target is Node3D)
@@ -101,11 +101,17 @@ func update_hp(ent: HPEntity) -> AnimationObject:
 	push_error("Neither HPLabel nor HealthBar3D for ent %s" % ent)
 	return null
 
-func show(node: Node3D) -> AnimationProperty:
-	return property(node, "visible", true)
+func show(target) -> AnimationProperty:
+	if target is CombatObject:
+		target = target.node3d
+	assert(target is Node)
+	return property(target, "visible", true)
 
-func hide(node: Node3D) -> AnimationProperty:
-	return property(node, "visible", false)
+func hide(target) -> AnimationProperty:
+	if target is CombatObject:
+		target = target.node3d
+	assert(target is Node)
+	return property(target, "visible", false)
 
 func combat_choice(activity: CombatChoiceActivity) -> AnimationCombatChoice:
 	var a = AnimationCombatChoice.new(activity)

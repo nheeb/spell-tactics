@@ -71,6 +71,8 @@ func setup_visuals(ent: Entity) -> void:
 		return
 	ent.visual_entity.type = self
 	ent.visual_entity.entity = ent
+	ent.visual_entity.visible = false
+	#combat.animation.show(ent.visual_entity)
 
 
 func setup_visuals_and_logic(ent: Entity) -> void:

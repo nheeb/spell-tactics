@@ -7,7 +7,14 @@ func enemy_shoot_projectile(enemy: EnemyEntity, projectile_bonus := 0, texture_n
 	var line := combat.level.get_line(enemy.current_tile, combat.player.current_tile)
 	if DebugInfo.SHOW_ENEMY_PROJECTILE_INFO:
 		combat.animation.wait(1.0)
-		combat.animation.effect(VFX.LINE, enemy.current_tile, {"start_node": enemy.current_tile, "end_node": combat.player.current_tile, "duration": 2.0}).set_max_duration(.1)
+		combat.animation.effect(
+			VFX.LINE, enemy.current_tile,
+			{
+				"start_node": enemy.current_tile.node3d,
+				"end_node": combat.player.current_tile.node3d,
+				"duration": 2.0
+			}
+		).set_max_duration(.1)
 	var total_cover := 0
 	for tile in line:
 		if DebugInfo.SHOW_ENEMY_PROJECTILE_INFO:

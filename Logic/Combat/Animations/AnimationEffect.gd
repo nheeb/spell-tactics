@@ -21,7 +21,10 @@ func play(level: Level):
 		effect.set("position", target.position)
 	for prop in setup_properties:
 		effect.set(prop, setup_properties[prop])
-
+		assert(
+			effect.get(prop) == setup_properties[prop],
+			"Effect property wasn't set properly."
+		)
 	if effect.has_signal("effect_done"):
 		effect.effect_done.connect(func(): animation_done_internally.emit(),CONNECT_ONE_SHOT)
 		if effect.has_method("effect_start"):

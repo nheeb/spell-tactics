@@ -8,7 +8,11 @@ class_name Entity extends CombatObject
 
 ## The visual representation of this Entity optional (can be null).
 ## This Node is only part of the scene tree if this Entity has been added to a tile.
-var visual_entity: VisualEntity
+var visual_entity: VisualEntity:
+	set(x):
+		node3d = x
+	get:
+		return node3d as VisualEntity
 
 ## Optional EntityLogic.
 var logic: EntityLogic
@@ -128,9 +132,9 @@ func apply_status(status_or_type: Variant, additional_data := {}) -> void:
 		status = status_or_type
 		status.data.merge(additional_data, true)
 	else:
-		var type := status_or_type as EntityStatusType
-		assert(type)
-		status = type.create_status(combat, additional_data)
+		var status_type := status_or_type as EntityStatusType
+		assert(status_type)
+		status = status_type.create_status(combat, additional_data)
 	var existing_status := get_status(status.get_status_name())
 	if DebugInfo.ACTIVE:
 		combat.animation.say(visual_entity, status.type.pretty_name).set_duration(0.0)

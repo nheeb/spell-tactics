@@ -6,7 +6,7 @@ func _init(level: Level):
 	_level = level
 	
 func create(location: Vector2i, entity_type: EntityType, create_with_active_visuals := true) -> Entity:
-	assert(false)
+	assert(false, "Deprecated")
 	var tile = _level.get_tile(location)
 	if tile.has_entity_type(entity_type):
 		pass
