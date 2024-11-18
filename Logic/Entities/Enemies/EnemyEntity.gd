@@ -90,7 +90,7 @@ func get_random_action_plan() -> EnemyActionPlan:
 		func (plan: EnemyActionPlan):
 			return plan.get_string_action_target(combat)
 	)
-	var title_for_log := get_name() + " chooses an action:"
+	var title_for_log := str(self) + " chooses an action:"
 	var index := Utility.random_index_of_scores(scores, true, names_for_log, title_for_log)
 	combat.log.add(Utility.random_index_of_scores_report)
 	assert(index != -1, "No enemy action was chosen. There should always be a backup action")
@@ -112,12 +112,12 @@ func on_death():
 	super.on_death()
 	combat.enemies.erase(self)
 
-func sync_with_type():
-	super()
-	agility = type.agility
-	strength = type.strength
-	accuracy = type.accuracy
-	resistance = type.resistance
+#func sync_with_type():
+	#super()
+	#agility = type.agility
+	#strength = type.strength
+	#accuracy = type.accuracy
+	#resistance = type.resistance
 
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 

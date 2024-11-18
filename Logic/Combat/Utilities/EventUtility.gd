@@ -47,7 +47,7 @@ func add_event_and_activate(event: CombatEvent, advance_when_activate := false):
 func get_unused_schedules_for_round(r: int) -> Array[CombatEventSchedule]:
 	var schedules: Array[CombatEventSchedule] = event_schedules.filter(
 		func (ces: CombatEventSchedule) -> bool:
-			return ces.event_type and (not ces.event_created) \
+			return ces.event_type and (not ces.was_deserialized) \
 				and ces.scheduled_round <= r
 	)
 	schedules.sort_custom(
@@ -88,15 +88,17 @@ func process_enemy_events():
 
 func get_next_enemy_event_plan() -> EnemyEventPlan:
 	var plan := Utility.array_safe_get(enemy_event_queue.filter(
-		func (e): return not e.event_created
+		func (e: EnemyEventPlan):
+			return not e.was_deserialized
 	), 0) as EnemyEventPlan
-	if plan: return plan
+	if plan:
+		return plan
 	var default := Utility.array_safe_get(enemy_event_queue.filter(
 		func (e): return e.use_as_default
 	), 0) as EnemyEventPlan
 	if default:
 		var new_plan : EnemyEventPlan = default.duplicate() as EnemyEventPlan
-		new_plan.event_created = false
+		new_plan.was_deserialized = false
 		enemy_event_queue.append(new_plan)
 		return new_plan
 	return null

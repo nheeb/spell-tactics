@@ -12,7 +12,8 @@ func deserialize(combat: Combat) -> Tile:
 	tile.update_properties(props)
 	tile.connect_with_combat(combat)
 	for entity_state in entity_states:
-		var ent = entity_state.deserialize(combat)
+		var ent := entity_state.deserialize(combat) as Entity
+		assert(ent)
 		tile.add_entity(ent)
 	
 	return tile

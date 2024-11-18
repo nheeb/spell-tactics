@@ -5,7 +5,7 @@ var logic: CombatEventLogic
 
 ## The event's parameters based on type.default_params. [br]
 ## { ParamName (String) -> Value (something serializable) }
-var params := {}
+#var params := {}
 
 ## Active CombatEvents will be advaced each round by the EventUtility.
 var active: bool = false
@@ -18,7 +18,7 @@ var rounds: int
 
 ## All persistant properties of the event should be saved here for serialization.
 ## (Only Primitives and Resources. Use References for anything complex.)
-var persistant_properties := {}
+#var persistant_properties := {}
 
 ## Reference to the icon in CombatUI
 var icon: CombatEventIcon
@@ -119,12 +119,12 @@ func serialize() -> CombatEventState:
 	var state := CombatEventState.new()
 	state.id = id
 	state.type = type
-	state.params = params
+	#state.params = params
 	state.active = active
 	state.finished = finished
 	state.rounds = rounds
-	state.persistant_properties = persistant_properties
+	#state.persistant_properties = persistant_properties
 	return state
 
 func get_effect_text() -> String:
-	return type.effect_text + persistant_properties.get("extra_text", "")
+	return type.effect_text + data.get("extra_text", "")

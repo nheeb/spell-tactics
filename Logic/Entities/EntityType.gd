@@ -30,18 +30,19 @@ const ENEMY_LAYER = 2
 @export var cover_value: int = 0
 
 func create_base_object() -> CombatObject:
-	var ent := Entity.new()
-	ent.type = self
+	return Entity.new()
+
+func set_type_properties(object: CombatObject) -> void:
+	var ent := object as Entity
+	assert(ent)
 	ent.energy = ent.type.energy
 	if ent.energy == null:  # give empty stack if it was left blank
 		ent.energy = EnergyStack.new()
-	return ent
 
 func create(combat: Combat, props := {}) -> CombatObject:
 	var ent := super(combat, props) as Entity
 	assert(ent)
 	setup_visuals_and_logic(ent)
-	# entity_on_create(ent, false)
 	return ent
 
 # instantiate this EntityType
@@ -72,7 +73,7 @@ func setup_visuals(ent: Entity) -> void:
 	ent.visual_entity.type = self
 	ent.visual_entity.entity = ent
 	ent.visual_entity.visible = false
-	#combat.animation.show(ent.visual_entity)
+	combat.animation.show(ent.visual_entity)
 
 
 func setup_visuals_and_logic(ent: Entity) -> void:

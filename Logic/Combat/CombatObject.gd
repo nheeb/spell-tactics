@@ -62,6 +62,12 @@ func connect_with_combat(_combat: Combat):
 	combat = _combat
 	combat.ids.add_combat_object(self)
 
+func sync_with_type(_type: CombatObjectType = null) -> void:
+	_type = get_generic_type() if _type == null else _type
+	assert(_type)
+	set("type", _type)
+	_type.set_type_properties(self)
+
 func update_properties(props: Dictionary):
 	for k in props.keys():
 		set(k, props[k])

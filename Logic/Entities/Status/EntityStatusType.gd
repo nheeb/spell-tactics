@@ -26,9 +26,7 @@ class_name EntityStatusType extends CombatObjectType
 @export var enemy_actions: Array[EnemyActionArgs]
 
 func create_base_object() -> CombatObject:
-	var status := EntityStatus.new()
-	status.type = self
-	return status
+	return EntityStatus.new()
 
 func create_status(combat: Combat, _data := {}) -> EntityStatus:
 	var status = create(combat, {"data": _data}) as EntityStatus

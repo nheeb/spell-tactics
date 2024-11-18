@@ -6,11 +6,11 @@
 [ext_resource type="Script" path="res://Logic/Castables/SpellState.gd" id="4_tw2c0"]
 [ext_resource type="Script" path="res://Logic/Combat/Events/EnemyEventPlan.gd" id="5_2xuqg"]
 [ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventSchedule.gd" id="6_8k1sr"]
-[ext_resource type="Resource" uid="uid://bq7d5bc5hk6l" path="res://Content/Levels/enemy_event_plan_spawn_new_bard.tres" id="6_d0gdf"]
+[ext_resource type="Resource" uid="uid://b2dqvayeg80ol" path="res://Content/Levels/enemy_event_plan_spawn_new_bard.tres" id="6_d0gdf"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="7_2ybfg"]
 [ext_resource type="Resource" uid="uid://c5b13jca15dvy" path="res://Content/Levels/enemy_event_plan_spawn_new_fighter.tres" id="7_p17wc"]
 [ext_resource type="Script" path="res://Logic/Level/State/EntityState.gd" id="8_08kic"]
-[ext_resource type="Resource" uid="uid://3aj3kmlbfoul" path="res://Content/Levels/enemy_event_plan_spawn_new_archer.tres" id="8_ftuqq"]
+[ext_resource type="Resource" uid="uid://jol6cvu7ygqj" path="res://Content/Levels/enemy_event_plan_spawn_new_archer.tres" id="8_ftuqq"]
 [ext_resource type="Script" path="res://Logic/Combat/CombatState.gd" id="8_kc8k2"]
 [ext_resource type="Script" path="res://Logic/Level/State/LevelState.gd" id="9_g5mpk"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/TimedEffect.gd" id="9_kiefc"]
@@ -43,6 +43,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_vkrx2"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -51,10 +52,12 @@ props = {
 "id": 265,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_53j2x"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_vkrx2")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -63,6 +66,7 @@ props = {
 "q": 6,
 "r": 0
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_lvdvm"]
 script = ExtResource("29_rjv8u")
@@ -71,6 +75,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_mnr8d"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -79,10 +84,12 @@ props = {
 "id": 264,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_xgpq8"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_mnr8d")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -91,6 +98,7 @@ props = {
 "q": 7,
 "r": 0
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_0drmi"]
 script = ExtResource("29_rjv8u")
@@ -99,6 +107,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_viy6b"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -107,10 +116,12 @@ props = {
 "id": 263,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4k70r"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_viy6b")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -119,6 +130,7 @@ props = {
 "q": 8,
 "r": 0
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_i8b31"]
 script = ExtResource("29_rjv8u")
@@ -127,6 +139,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_k4knr"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -135,10 +148,12 @@ props = {
 "id": 262,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4bfye"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_k4knr")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -147,6 +162,7 @@ props = {
 "q": 9,
 "r": 0
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_381k6"]
 script = ExtResource("29_rjv8u")
@@ -155,6 +171,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_vbnf0"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -163,6 +180,7 @@ props = {
 "id": 261,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_jhx8i"]
 script = ExtResource("29_rjv8u")
@@ -171,6 +189,7 @@ stack = Array[int]([2, 2])
 [sub_resource type="Resource" id="Resource_lw1s4"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -179,10 +198,12 @@ props = {
 "id": 273,
 "type": ExtResource("16_qoq3p")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_o7mcn"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_vbnf0"), SubResource("Resource_lw1s4")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -191,6 +212,7 @@ props = {
 "q": 10,
 "r": 0
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_61st1"]
 script = ExtResource("29_rjv8u")
@@ -199,6 +221,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_m55jd"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -207,6 +230,7 @@ props = {
 "id": 260,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_a466y"]
 script = ExtResource("29_rjv8u")
@@ -215,6 +239,7 @@ stack = Array[int]([5])
 [sub_resource type="Resource" id="Resource_cepfs"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -223,10 +248,12 @@ props = {
 "id": 277,
 "type": ExtResource("19_hf5c4")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ifm7y"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_m55jd"), SubResource("Resource_cepfs")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -235,6 +262,7 @@ props = {
 "q": 11,
 "r": 0
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_7yox7"]
 script = ExtResource("29_rjv8u")
@@ -243,6 +271,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_8dxk0"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -251,6 +280,7 @@ props = {
 "id": 259,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_jsre5"]
 script = ExtResource("29_rjv8u")
@@ -259,6 +289,7 @@ stack = Array[int]([4])
 [sub_resource type="Resource" id="Resource_evvvf"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -267,10 +298,12 @@ props = {
 "id": 305,
 "type": ExtResource("19_1nbj2")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ggifi"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_8dxk0"), SubResource("Resource_evvvf")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -279,6 +312,7 @@ props = {
 "q": 12,
 "r": 0
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4olmj"]
 script = ExtResource("29_rjv8u")
@@ -287,6 +321,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_8gux7"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -295,10 +330,12 @@ props = {
 "id": 266,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_q502k"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_8gux7")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -307,6 +344,7 @@ props = {
 "q": 5,
 "r": 1
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_sxynm"]
 script = ExtResource("29_rjv8u")
@@ -315,6 +353,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_64m4d"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -323,6 +362,7 @@ props = {
 "id": 1,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_wqck7"]
 script = ExtResource("29_rjv8u")
@@ -331,6 +371,7 @@ stack = Array[int]([2, 2])
 [sub_resource type="Resource" id="Resource_evnrn"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -339,10 +380,12 @@ props = {
 "id": 2,
 "type": ExtResource("16_qoq3p")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4dj3f"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_64m4d"), SubResource("Resource_evnrn")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -351,6 +394,7 @@ props = {
 "q": 6,
 "r": 1
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_o1dvc"]
 script = ExtResource("29_rjv8u")
@@ -359,6 +403,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_bgifl"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -367,10 +412,12 @@ props = {
 "id": 4,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_gqcnp"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_bgifl")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -379,6 +426,7 @@ props = {
 "q": 7,
 "r": 1
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ouayn"]
 script = ExtResource("29_rjv8u")
@@ -387,6 +435,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_2uw06"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -395,6 +444,7 @@ props = {
 "id": 6,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_v8c80"]
 script = ExtResource("29_rjv8u")
@@ -403,6 +453,7 @@ stack = Array[int]([2])
 [sub_resource type="Resource" id="Resource_nkh0x"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -411,10 +462,12 @@ props = {
 "id": 7,
 "type": ExtResource("17_c2n86")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_lwfjv"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_2uw06"), SubResource("Resource_nkh0x")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -423,6 +476,7 @@ props = {
 "q": 8,
 "r": 1
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_5npd2"]
 script = ExtResource("29_rjv8u")
@@ -431,6 +485,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_3rsni"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -439,10 +494,12 @@ props = {
 "id": 9,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_trh1h"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_3rsni")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -451,6 +508,7 @@ props = {
 "q": 9,
 "r": 1
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_p1rdm"]
 script = ExtResource("29_rjv8u")
@@ -459,6 +517,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_rd267"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -467,10 +526,12 @@ props = {
 "id": 11,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_jrbce"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_rd267")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -479,6 +540,7 @@ props = {
 "q": 10,
 "r": 1
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_sqn8h"]
 script = ExtResource("29_rjv8u")
@@ -487,6 +549,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_hrx8m"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -495,6 +558,7 @@ props = {
 "id": 13,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_dhd5e"]
 script = ExtResource("29_rjv8u")
@@ -503,6 +567,7 @@ stack = Array[int]([1])
 [sub_resource type="Resource" id="Resource_fl7y6"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -511,10 +576,12 @@ props = {
 "id": 268,
 "type": ExtResource("20_tmyrq")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_nnix8"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_hrx8m"), SubResource("Resource_fl7y6")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -523,6 +590,7 @@ props = {
 "q": 11,
 "r": 1
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ltgeq"]
 script = ExtResource("29_rjv8u")
@@ -531,6 +599,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_51tud"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -539,10 +608,12 @@ props = {
 "id": 258,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_o3dwd"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_51tud")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -551,6 +622,7 @@ props = {
 "q": 12,
 "r": 1
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_k4ol5"]
 script = ExtResource("29_rjv8u")
@@ -559,6 +631,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_pkmup"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -567,6 +640,7 @@ props = {
 "id": 267,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_vva5o"]
 script = ExtResource("29_rjv8u")
@@ -575,6 +649,7 @@ stack = Array[int]([2])
 [sub_resource type="Resource" id="Resource_q1th8"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -583,10 +658,12 @@ props = {
 "id": 283,
 "type": ExtResource("17_c2n86")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_rx8hs"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_pkmup"), SubResource("Resource_q1th8")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -595,6 +672,7 @@ props = {
 "q": 4,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_qdc2k"]
 script = ExtResource("29_rjv8u")
@@ -603,6 +681,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_7v1xv"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -611,10 +690,12 @@ props = {
 "id": 15,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_yu7ee"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_7v1xv")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -623,6 +704,7 @@ props = {
 "q": 5,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_jeqx4"]
 script = ExtResource("29_rjv8u")
@@ -631,6 +713,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_jj0he"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -639,10 +722,12 @@ props = {
 "id": 17,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_48vob"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_jj0he")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -651,6 +736,7 @@ props = {
 "q": 6,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_176uk"]
 script = ExtResource("29_rjv8u")
@@ -659,6 +745,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_4agdk"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -667,6 +754,7 @@ props = {
 "id": 19,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_36c7q"]
 script = ExtResource("29_rjv8u")
@@ -675,6 +763,7 @@ stack = Array[int]([1, 1])
 [sub_resource type="Resource" id="Resource_vmlru"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -683,10 +772,12 @@ props = {
 "id": 298,
 "type": ExtResource("22_f8ldu")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_lnh6h"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_4agdk"), SubResource("Resource_vmlru")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -695,6 +786,7 @@ props = {
 "q": 7,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_nutwd"]
 script = ExtResource("29_rjv8u")
@@ -703,6 +795,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_iyeml"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -711,10 +804,12 @@ props = {
 "id": 21,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_x4e6f"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_iyeml")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -723,6 +818,7 @@ props = {
 "q": 8,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_coce2"]
 script = ExtResource("29_rjv8u")
@@ -731,6 +827,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_tkpf8"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -739,6 +836,7 @@ props = {
 "id": 23,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_vir08"]
 script = ExtResource("29_rjv8u")
@@ -747,6 +845,7 @@ stack = Array[int]([3, 3, 3])
 [sub_resource type="Resource" id="Resource_dso8u"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -755,10 +854,12 @@ props = {
 "id": 280,
 "type": ExtResource("17_y2prn")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_vd0sj"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_tkpf8"), SubResource("Resource_dso8u")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -767,6 +868,7 @@ props = {
 "q": 9,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_rxx3m"]
 script = ExtResource("29_rjv8u")
@@ -775,6 +877,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_ha4wk"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -783,10 +886,12 @@ props = {
 "id": 25,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_mnwnx"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ha4wk")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -795,6 +900,7 @@ props = {
 "q": 10,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_1q5tt"]
 script = ExtResource("29_rjv8u")
@@ -803,6 +909,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_s7j1v"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -811,10 +918,12 @@ props = {
 "id": 27,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ds0fm"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_s7j1v")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -823,6 +932,7 @@ props = {
 "q": 11,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_m4rsq"]
 script = ExtResource("29_rjv8u")
@@ -831,6 +941,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_0dahi"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -839,10 +950,12 @@ props = {
 "id": 256,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_exbd2"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_0dahi")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -851,6 +964,7 @@ props = {
 "q": 12,
 "r": 2
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8deow"]
 script = ExtResource("29_rjv8u")
@@ -859,6 +973,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_g13le"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -867,6 +982,7 @@ props = {
 "id": 252,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_m1ybh"]
 script = ExtResource("29_rjv8u")
@@ -875,6 +991,7 @@ stack = Array[int]([4, 4])
 [sub_resource type="Resource" id="Resource_js5xu"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -883,10 +1000,12 @@ props = {
 "id": 307,
 "type": ExtResource("24_1trr6")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_bgtud"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_g13le"), SubResource("Resource_js5xu")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -895,6 +1014,7 @@ props = {
 "q": 3,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_f6idi"]
 script = ExtResource("29_rjv8u")
@@ -903,6 +1023,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_hem11"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -911,10 +1032,12 @@ props = {
 "id": 29,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8th72"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_hem11")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -923,6 +1046,7 @@ props = {
 "q": 4,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_f1ki0"]
 script = ExtResource("29_rjv8u")
@@ -931,6 +1055,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_j56gd"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -939,10 +1064,12 @@ props = {
 "id": 31,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_3xs1f"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -951,10 +1078,12 @@ props = {
 "id": 32,
 "type": ExtResource("17_c2n86")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4mquf"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_j56gd"), SubResource("Resource_3xs1f")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -963,6 +1092,7 @@ props = {
 "q": 5,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_wc80d"]
 script = ExtResource("29_rjv8u")
@@ -971,6 +1101,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_dpud1"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -979,10 +1110,12 @@ props = {
 "id": 34,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ejiff"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_dpud1")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -991,6 +1124,7 @@ props = {
 "q": 6,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_5ddan"]
 script = ExtResource("29_rjv8u")
@@ -999,6 +1133,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_yqhhm"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1007,10 +1142,12 @@ props = {
 "id": 36,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_j6r6t"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_yqhhm")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1019,6 +1156,7 @@ props = {
 "q": 7,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_0hjsg"]
 script = ExtResource("29_rjv8u")
@@ -1027,6 +1165,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_6h4rq"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1035,10 +1174,12 @@ props = {
 "id": 38,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_lvsdi"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1047,10 +1188,12 @@ props = {
 "id": 304,
 "type": ExtResource("19_1nbj2")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_v041c"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_6h4rq"), SubResource("Resource_lvsdi")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1059,6 +1202,7 @@ props = {
 "q": 8,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_57kap"]
 script = ExtResource("29_rjv8u")
@@ -1067,6 +1211,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_ink56"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1075,6 +1220,7 @@ props = {
 "id": 40,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_tsnpt"]
 script = ExtResource("29_rjv8u")
@@ -1083,6 +1229,7 @@ stack = Array[int]([3, 3])
 [sub_resource type="Resource" id="Resource_4m2y1"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1091,10 +1238,12 @@ props = {
 "id": 271,
 "type": ExtResource("22_6moxq")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_a5m0h"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ink56"), SubResource("Resource_4m2y1")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1103,6 +1252,7 @@ props = {
 "q": 9,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_0hcaq"]
 script = ExtResource("29_rjv8u")
@@ -1111,6 +1261,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_7co2j"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1119,10 +1270,12 @@ props = {
 "id": 42,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4g7ch"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_7co2j")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1131,6 +1284,7 @@ props = {
 "q": 10,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_6he0o"]
 script = ExtResource("29_rjv8u")
@@ -1139,6 +1293,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_ijfh8"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1147,10 +1302,12 @@ props = {
 "id": 44,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_oqtgi"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1160,10 +1317,12 @@ props = {
 "id": 278,
 "type": ExtResource("18_xmsct")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_al0dh"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ijfh8"), SubResource("Resource_oqtgi")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1172,6 +1331,7 @@ props = {
 "q": 11,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_pl6uk"]
 script = ExtResource("29_rjv8u")
@@ -1180,6 +1340,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_xipru"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1188,10 +1349,12 @@ props = {
 "id": 255,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_6j58c"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_xipru")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1200,6 +1363,7 @@ props = {
 "q": 12,
 "r": 3
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_p55og"]
 script = ExtResource("29_rjv8u")
@@ -1208,6 +1372,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_6724j"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1216,10 +1381,12 @@ props = {
 "id": 251,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_kuajw"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1228,10 +1395,12 @@ props = {
 "id": 269,
 "type": ExtResource("20_tmyrq")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_q5bi7"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_6724j"), SubResource("Resource_kuajw")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1240,6 +1409,7 @@ props = {
 "q": 2,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_d2sid"]
 script = ExtResource("29_rjv8u")
@@ -1248,6 +1418,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_4y8a4"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1256,10 +1427,12 @@ props = {
 "id": 46,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_0gen2"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_4y8a4")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1268,6 +1441,7 @@ props = {
 "q": 3,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_xp3b0"]
 script = ExtResource("29_rjv8u")
@@ -1276,6 +1450,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_7ht4i"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1284,10 +1459,12 @@ props = {
 "id": 48,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_niign"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_7ht4i")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1296,6 +1473,7 @@ props = {
 "q": 4,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_7xfj6"]
 script = ExtResource("29_rjv8u")
@@ -1304,6 +1482,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_x0j14"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1312,10 +1491,12 @@ props = {
 "id": 50,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_nafk6"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_x0j14")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1324,6 +1505,7 @@ props = {
 "q": 5,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_lqpe5"]
 script = ExtResource("29_rjv8u")
@@ -1332,6 +1514,7 @@ stack = Array[int]([3])
 [sub_resource type="Resource" id="Resource_hk4x3"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1340,6 +1523,7 @@ props = {
 "id": 52,
 "type": ExtResource("16_870sl")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_v3a68"]
 script = ExtResource("29_rjv8u")
@@ -1348,6 +1532,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_q1gqj"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1356,10 +1541,12 @@ props = {
 "id": 53,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_eo8jn"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_hk4x3"), SubResource("Resource_q1gqj")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1368,6 +1555,7 @@ props = {
 "q": 6,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_iemda"]
 script = ExtResource("29_rjv8u")
@@ -1376,6 +1564,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_6iv41"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1384,10 +1573,12 @@ props = {
 "id": 55,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_fgfcn"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_6iv41")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1396,6 +1587,7 @@ props = {
 "q": 7,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_dcwrw"]
 script = ExtResource("29_rjv8u")
@@ -1404,6 +1596,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_gopdv"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1412,10 +1605,12 @@ props = {
 "id": 57,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_1abel"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_gopdv")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1424,6 +1619,7 @@ props = {
 "q": 8,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_dgq8l"]
 script = ExtResource("29_rjv8u")
@@ -1432,6 +1628,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_jc0mq"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1440,10 +1637,12 @@ props = {
 "id": 59,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ip3cc"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_jc0mq")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1452,6 +1651,7 @@ props = {
 "q": 9,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_d05qh"]
 script = ExtResource("29_rjv8u")
@@ -1460,6 +1660,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_26s3i"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1468,10 +1669,12 @@ props = {
 "id": 61,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ne6t7"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_26s3i")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1480,6 +1683,7 @@ props = {
 "q": 10,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_cr4a5"]
 script = ExtResource("29_rjv8u")
@@ -1488,6 +1692,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_k45fc"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1496,10 +1701,12 @@ props = {
 "id": 63,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ijcsv"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_k45fc")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1508,6 +1715,7 @@ props = {
 "q": 11,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_2i5ar"]
 script = ExtResource("29_rjv8u")
@@ -1516,6 +1724,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_twj42"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1524,10 +1733,12 @@ props = {
 "id": 254,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_0ku7o"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1536,10 +1747,12 @@ props = {
 "id": 308,
 "type": ExtResource("24_1trr6")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_m8qg3"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_twj42"), SubResource("Resource_0ku7o")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1548,6 +1761,7 @@ props = {
 "q": 12,
 "r": 4
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_388er"]
 script = ExtResource("29_rjv8u")
@@ -1556,6 +1770,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_13f0c"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1564,6 +1779,7 @@ props = {
 "id": 250,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_b7q5g"]
 script = ExtResource("29_rjv8u")
@@ -1572,6 +1788,7 @@ stack = Array[int]([3])
 [sub_resource type="Resource" id="Resource_ekeev"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1580,10 +1797,12 @@ props = {
 "id": 270,
 "type": ExtResource("16_870sl")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_1t6im"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_13f0c"), SubResource("Resource_ekeev")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1592,6 +1811,7 @@ props = {
 "q": 1,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_millj"]
 script = ExtResource("29_rjv8u")
@@ -1600,6 +1820,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_45x0a"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1608,10 +1829,12 @@ props = {
 "id": 65,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_55po4"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_45x0a")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1620,6 +1843,7 @@ props = {
 "q": 2,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8xu58"]
 script = ExtResource("29_rjv8u")
@@ -1628,6 +1852,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_gxmpf"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1636,10 +1861,12 @@ props = {
 "id": 67,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_t5rmc"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1648,10 +1875,12 @@ props = {
 "id": 274,
 "type": ExtResource("17_y2prn")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_76xf3"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_gxmpf"), SubResource("Resource_t5rmc")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1660,6 +1889,7 @@ props = {
 "q": 3,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_er7dk"]
 script = ExtResource("29_rjv8u")
@@ -1668,6 +1898,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_ltqg8"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1676,10 +1907,12 @@ props = {
 "id": 69,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_7nrle"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ltqg8")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1688,6 +1921,7 @@ props = {
 "q": 4,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_mu7xg"]
 script = ExtResource("29_rjv8u")
@@ -1696,6 +1930,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_2jvyw"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1704,10 +1939,12 @@ props = {
 "id": 71,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_2y4yy"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_2jvyw")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1716,6 +1953,7 @@ props = {
 "q": 5,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_vpcxw"]
 script = ExtResource("29_rjv8u")
@@ -1724,6 +1962,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_qh0kx"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1732,10 +1971,12 @@ props = {
 "id": 73,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_238wt"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_qh0kx")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1744,6 +1985,7 @@ props = {
 "q": 6,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_vre03"]
 script = ExtResource("29_rjv8u")
@@ -1752,6 +1994,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_xo7py"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1760,10 +2003,12 @@ props = {
 "id": 75,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4vc0c"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_xo7py")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1772,10 +2017,12 @@ props = {
 "q": 7,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_3phy1"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1784,6 +2031,7 @@ props = {
 "id": 77,
 "type": ExtResource("16_870sl")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_preoh"]
 script = ExtResource("29_rjv8u")
@@ -1792,6 +2040,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_1ptsv"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1800,10 +2049,12 @@ props = {
 "id": 78,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_t4on8"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_3phy1"), SubResource("Resource_1ptsv")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1812,6 +2063,7 @@ props = {
 "q": 8,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_1shlq"]
 script = ExtResource("29_rjv8u")
@@ -1820,6 +2072,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_b4u5t"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1828,10 +2081,12 @@ props = {
 "id": 80,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_0qe2f"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_b4u5t")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1840,6 +2095,7 @@ props = {
 "q": 9,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_2d82w"]
 script = ExtResource("29_rjv8u")
@@ -1848,6 +2104,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_aldqy"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1856,10 +2113,12 @@ props = {
 "id": 82,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_jvc2b"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1868,10 +2127,12 @@ props = {
 "id": 272,
 "type": ExtResource("22_6moxq")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_r2hhb"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_aldqy"), SubResource("Resource_jvc2b")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1880,6 +2141,7 @@ props = {
 "q": 10,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_jp130"]
 script = ExtResource("29_rjv8u")
@@ -1888,6 +2150,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_ggx5v"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1896,6 +2159,7 @@ props = {
 "id": 84,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_o0xi8"]
 script = ExtResource("29_rjv8u")
@@ -1904,6 +2168,7 @@ stack = Array[int]([1, 1])
 [sub_resource type="Resource" id="Resource_1i10k"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1912,10 +2177,12 @@ props = {
 "id": 275,
 "type": ExtResource("25_uypxu")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_6i13y"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ggx5v"), SubResource("Resource_1i10k")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1924,6 +2191,7 @@ props = {
 "q": 11,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_5oukm"]
 script = ExtResource("29_rjv8u")
@@ -1932,6 +2200,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_dla2v"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1940,10 +2209,12 @@ props = {
 "id": 253,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_130em"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1952,10 +2223,12 @@ props = {
 "id": 281,
 "type": ExtResource("16_870sl")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_sgw4n"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_dla2v"), SubResource("Resource_130em")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1964,6 +2237,7 @@ props = {
 "q": 12,
 "r": 5
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8v02m"]
 script = ExtResource("29_rjv8u")
@@ -1972,6 +2246,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_k1y4s"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -1980,10 +2255,12 @@ props = {
 "id": 249,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ujhpi"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_k1y4s")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -1992,6 +2269,7 @@ props = {
 "q": 0,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_djx1e"]
 script = ExtResource("29_rjv8u")
@@ -2000,6 +2278,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_qmn86"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2008,10 +2287,12 @@ props = {
 "id": 86,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_1tyfp"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_qmn86")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2020,6 +2301,7 @@ props = {
 "q": 1,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_3n1vw"]
 script = ExtResource("29_rjv8u")
@@ -2028,6 +2310,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_ecmow"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2036,10 +2319,12 @@ props = {
 "id": 88,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_n7dw1"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ecmow")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2048,6 +2333,7 @@ props = {
 "q": 2,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_xat0u"]
 script = ExtResource("29_rjv8u")
@@ -2056,6 +2342,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_gfy2o"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2064,10 +2351,12 @@ props = {
 "id": 90,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8fder"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_gfy2o")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2076,6 +2365,7 @@ props = {
 "q": 3,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_i82n0"]
 script = ExtResource("29_rjv8u")
@@ -2084,6 +2374,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_hty66"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2092,10 +2383,12 @@ props = {
 "id": 92,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_xf8x5"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_hty66")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2104,6 +2397,7 @@ props = {
 "q": 4,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_r38br"]
 script = ExtResource("29_rjv8u")
@@ -2112,6 +2406,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_goqjs"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2120,10 +2415,12 @@ props = {
 "id": 94,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_x6ili"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2132,10 +2429,12 @@ props = {
 "id": 276,
 "type": ExtResource("25_uypxu")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_uo6eo"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_goqjs"), SubResource("Resource_x6ili")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2144,6 +2443,7 @@ props = {
 "q": 5,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_chei3"]
 script = ExtResource("29_rjv8u")
@@ -2152,6 +2452,7 @@ stack = Array[int]([3, 3, 3])
 [sub_resource type="Resource" id="Resource_ort4h"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2160,6 +2461,7 @@ props = {
 "id": 96,
 "type": ExtResource("17_y2prn")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_6uln8"]
 script = ExtResource("29_rjv8u")
@@ -2168,6 +2470,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_xftf3"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2176,10 +2479,12 @@ props = {
 "id": 97,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_gq00p"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ort4h"), SubResource("Resource_xftf3")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2188,6 +2493,7 @@ props = {
 "q": 6,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_wm36m"]
 script = ExtResource("29_rjv8u")
@@ -2196,6 +2502,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_a74wh"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2204,10 +2511,12 @@ props = {
 "id": 99,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_qmh25"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_a74wh")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2216,6 +2525,7 @@ props = {
 "q": 7,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_psiwc"]
 script = ExtResource("29_rjv8u")
@@ -2224,6 +2534,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_qpp2r"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2232,10 +2543,12 @@ props = {
 "id": 101,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_pv5u8"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_qpp2r")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2244,6 +2557,7 @@ props = {
 "q": 8,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_df7mx"]
 script = ExtResource("29_rjv8u")
@@ -2252,6 +2566,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_2i4wr"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2260,10 +2575,12 @@ props = {
 "id": 104,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_3gv2h"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2272,10 +2589,12 @@ props = {
 "id": 105,
 "type": ExtResource("17_c2n86")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_n7gp0"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_2i4wr"), SubResource("Resource_3gv2h")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2284,6 +2603,7 @@ props = {
 "q": 9,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_hfhpp"]
 script = ExtResource("29_rjv8u")
@@ -2292,6 +2612,7 @@ stack = Array[int]([3])
 [sub_resource type="Resource" id="Resource_siymu"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2300,10 +2621,12 @@ props = {
 "id": 107,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_iin1h"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_siymu")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2312,10 +2635,12 @@ props = {
 "q": 10,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4porb"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2324,10 +2649,12 @@ props = {
 "id": 109,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_14tit"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_4porb")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2336,6 +2663,7 @@ props = {
 "q": 11,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_j3vv8"]
 script = ExtResource("29_rjv8u")
@@ -2344,6 +2672,7 @@ stack = Array[int]([3])
 [sub_resource type="Resource" id="Resource_nat2q"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2352,10 +2681,12 @@ props = {
 "id": 243,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_2yv37"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_nat2q")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2364,6 +2695,7 @@ props = {
 "q": 12,
 "r": 6
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_q4c87"]
 script = ExtResource("29_rjv8u")
@@ -2372,6 +2704,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_hf3wc"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2380,10 +2713,12 @@ props = {
 "id": 248,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_svlpm"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_hf3wc")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2392,6 +2727,7 @@ props = {
 "q": 0,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_m6vm1"]
 script = ExtResource("29_rjv8u")
@@ -2400,6 +2736,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_nicmo"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2408,10 +2745,12 @@ props = {
 "id": 111,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_efuui"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_nicmo")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2420,6 +2759,7 @@ props = {
 "q": 1,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_xd2kc"]
 script = ExtResource("29_rjv8u")
@@ -2428,6 +2768,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_yu0u0"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2436,10 +2777,12 @@ props = {
 "id": 113,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_tjlsq"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2448,10 +2791,12 @@ props = {
 "id": 114,
 "type": ExtResource("16_qoq3p")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_hr6j7"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_yu0u0"), SubResource("Resource_tjlsq")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2460,6 +2805,7 @@ props = {
 "q": 2,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_qem8k"]
 script = ExtResource("29_rjv8u")
@@ -2468,6 +2814,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_0lsid"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2476,10 +2823,12 @@ props = {
 "id": 116,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8715f"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2488,10 +2837,12 @@ props = {
 "id": 309,
 "type": ExtResource("19_1nbj2")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_elegu"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_0lsid"), SubResource("Resource_8715f")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2500,6 +2851,7 @@ props = {
 "q": 3,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_74l5v"]
 script = ExtResource("29_rjv8u")
@@ -2508,6 +2860,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_30agp"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2516,10 +2869,12 @@ props = {
 "id": 118,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_gm8gn"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_30agp")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2528,6 +2883,7 @@ props = {
 "q": 4,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_05kpw"]
 script = ExtResource("29_rjv8u")
@@ -2536,6 +2892,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_oikfq"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2544,10 +2901,12 @@ props = {
 "id": 120,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_2vlw2"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_oikfq")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2556,6 +2915,7 @@ props = {
 "q": 5,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_rcg84"]
 script = ExtResource("29_rjv8u")
@@ -2564,6 +2924,7 @@ stack = Array[int]([5])
 [sub_resource type="Resource" id="Resource_3dhww"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2572,6 +2933,7 @@ props = {
 "id": 122,
 "type": ExtResource("19_hf5c4")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_edmxp"]
 script = ExtResource("29_rjv8u")
@@ -2580,6 +2942,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_kvl38"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2588,10 +2951,12 @@ props = {
 "id": 123,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_lnmpc"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_3dhww"), SubResource("Resource_kvl38")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2600,6 +2965,7 @@ props = {
 "q": 6,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ryfok"]
 script = ExtResource("29_rjv8u")
@@ -2608,6 +2974,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_f2b01"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2616,10 +2983,12 @@ props = {
 "id": 125,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_i1onx"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_f2b01")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2628,6 +2997,7 @@ props = {
 "q": 7,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4odih"]
 script = ExtResource("29_rjv8u")
@@ -2636,6 +3006,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_qv4wl"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2644,10 +3015,12 @@ props = {
 "id": 127,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_n6r0q"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2656,10 +3029,12 @@ props = {
 "id": 284,
 "type": ExtResource("17_c2n86")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_7tht7"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_qv4wl"), SubResource("Resource_n6r0q")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2668,10 +3043,12 @@ props = {
 "q": 8,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_dt5pv"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2680,10 +3057,12 @@ props = {
 "id": 129,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_cbe0k"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_dt5pv")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2692,10 +3071,12 @@ props = {
 "q": 9,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_40ocx"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2704,10 +3085,12 @@ props = {
 "id": 131,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8wjaa"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_40ocx")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2716,10 +3099,12 @@ props = {
 "q": 10,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_fbvx1"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2728,10 +3113,12 @@ props = {
 "id": 242,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_6a3pt"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_fbvx1")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2740,6 +3127,7 @@ props = {
 "q": 11,
 "r": 7
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_hstm0"]
 script = ExtResource("29_rjv8u")
@@ -2748,6 +3136,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_mapr5"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2756,10 +3145,12 @@ props = {
 "id": 247,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_fmj6f"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2768,10 +3159,12 @@ props = {
 "id": 282,
 "type": ExtResource("16_870sl")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_g1aua"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_mapr5"), SubResource("Resource_fmj6f")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2780,6 +3173,7 @@ props = {
 "q": 0,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ygmkg"]
 script = ExtResource("29_rjv8u")
@@ -2788,6 +3182,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_mm60q"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2796,10 +3191,12 @@ props = {
 "id": 133,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_yyxed"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_mm60q")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2808,6 +3205,7 @@ props = {
 "q": 1,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4a1yp"]
 script = ExtResource("29_rjv8u")
@@ -2816,6 +3214,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_2uffy"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2824,10 +3223,12 @@ props = {
 "id": 135,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_1pkt3"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_2uffy")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2836,6 +3237,7 @@ props = {
 "q": 2,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_b4kcc"]
 script = ExtResource("29_rjv8u")
@@ -2844,6 +3246,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_6dior"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2852,10 +3255,12 @@ props = {
 "id": 137,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ehnjr"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_6dior")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2864,6 +3269,7 @@ props = {
 "q": 3,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_3wef5"]
 script = ExtResource("29_rjv8u")
@@ -2872,6 +3278,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_tq8i8"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2880,10 +3287,12 @@ props = {
 "id": 139,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_eh41o"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2893,10 +3302,12 @@ props = {
 "id": 279,
 "type": ExtResource("27_8wft2")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_vkfgy"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_tq8i8"), SubResource("Resource_eh41o")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2905,6 +3316,7 @@ props = {
 "q": 4,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ap85j"]
 script = ExtResource("29_rjv8u")
@@ -2913,6 +3325,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_1m5so"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2921,10 +3334,12 @@ props = {
 "id": 141,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_unf4h"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_1m5so")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2933,6 +3348,7 @@ props = {
 "q": 5,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_gbvs4"]
 script = ExtResource("29_rjv8u")
@@ -2941,6 +3357,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_f2oem"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2949,10 +3366,12 @@ props = {
 "id": 143,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_mpv2b"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2962,10 +3381,12 @@ props = {
 "id": 144,
 "type": ExtResource("20_3urn3")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_jibgr"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_f2oem"), SubResource("Resource_mpv2b")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -2974,6 +3395,7 @@ props = {
 "q": 6,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_sewjk"]
 script = ExtResource("29_rjv8u")
@@ -2982,6 +3404,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_jbo1b"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -2990,10 +3413,12 @@ props = {
 "id": 146,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_1pydk"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3002,10 +3427,12 @@ props = {
 "id": 306,
 "type": ExtResource("24_1trr6")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_2k48m"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_jbo1b"), SubResource("Resource_1pydk")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3014,10 +3441,12 @@ props = {
 "q": 7,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ehhfy"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3026,10 +3455,12 @@ props = {
 "id": 148,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ikiuv"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ehhfy")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3038,10 +3469,12 @@ props = {
 "q": 8,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_2bt7b"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3050,10 +3483,12 @@ props = {
 "id": 150,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_rlppo"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_2bt7b")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3062,10 +3497,12 @@ props = {
 "q": 9,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_vabki"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3074,10 +3511,12 @@ props = {
 "id": 241,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_mt0k7"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_vabki")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3086,10 +3525,12 @@ props = {
 "q": 10,
 "r": 8
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_rmswq"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3098,10 +3539,12 @@ props = {
 "id": 246,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_xyoer"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_rmswq")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3110,10 +3553,12 @@ props = {
 "q": 0,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_5k6hc"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3122,10 +3567,12 @@ props = {
 "id": 152,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_tajwx"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_5k6hc")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3134,6 +3581,7 @@ props = {
 "q": 1,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_d17ws"]
 script = ExtResource("29_rjv8u")
@@ -3142,6 +3590,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_h8phh"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3150,10 +3599,12 @@ props = {
 "id": 154,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8ns1w"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3162,10 +3613,12 @@ props = {
 "id": 155,
 "type": ExtResource("17_c2n86")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_uld15"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_h8phh"), SubResource("Resource_8ns1w")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3174,6 +3627,7 @@ props = {
 "q": 2,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_7mg6o"]
 script = ExtResource("29_rjv8u")
@@ -3182,6 +3636,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_efplo"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3190,10 +3645,12 @@ props = {
 "id": 157,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_6n4l1"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_efplo")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3202,6 +3659,7 @@ props = {
 "q": 3,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_oftb8"]
 script = ExtResource("29_rjv8u")
@@ -3210,6 +3668,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_nqiqi"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3218,10 +3677,12 @@ props = {
 "id": 159,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_u1uqs"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_nqiqi")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3230,10 +3691,12 @@ props = {
 "q": 4,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ly1bu"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3242,10 +3705,12 @@ props = {
 "id": 294,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_akrvu"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ly1bu")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3254,10 +3719,12 @@ props = {
 "q": 5,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ci2wb"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3266,10 +3733,12 @@ props = {
 "id": 163,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4dnf2"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ci2wb")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3278,10 +3747,12 @@ props = {
 "q": 6,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_xu7aq"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3290,10 +3761,12 @@ props = {
 "id": 165,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_k362o"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_xu7aq")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3302,10 +3775,12 @@ props = {
 "q": 7,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_dqqdr"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3314,10 +3789,12 @@ props = {
 "id": 167,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_0txym"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_dqqdr")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3326,10 +3803,12 @@ props = {
 "q": 8,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_2wt5f"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3338,10 +3817,12 @@ props = {
 "id": 239,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_gbmdy"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_2wt5f")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3350,10 +3831,12 @@ props = {
 "q": 9,
 "r": 9
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_u4nm8"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3362,10 +3845,12 @@ props = {
 "id": 245,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_qc5l1"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_u4nm8")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3374,10 +3859,12 @@ props = {
 "q": 0,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8jwki"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3386,10 +3873,12 @@ props = {
 "id": 169,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_rp82p"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_8jwki")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3398,10 +3887,12 @@ props = {
 "q": 1,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_chfs7"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3410,10 +3901,12 @@ props = {
 "id": 171,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_fivk1"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_chfs7")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3422,10 +3915,12 @@ props = {
 "q": 2,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_s0ry0"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3434,10 +3929,12 @@ props = {
 "id": 173,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_cjq06"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_s0ry0")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3446,10 +3943,12 @@ props = {
 "q": 3,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_efyi6"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3458,10 +3957,12 @@ props = {
 "id": 175,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_lurdd"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_efyi6")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3470,10 +3971,12 @@ props = {
 "q": 4,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_c5eow"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3482,10 +3985,12 @@ props = {
 "id": 177,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_qtr2i"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_c5eow")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3494,10 +3999,12 @@ props = {
 "q": 5,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_mmrp8"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3506,10 +4013,12 @@ props = {
 "id": 179,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_a3uuu"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_mmrp8")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3518,10 +4027,12 @@ props = {
 "q": 6,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_5kluq"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3530,10 +4041,12 @@ props = {
 "id": 181,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_er74n"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_5kluq")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3542,6 +4055,7 @@ props = {
 "q": 7,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_tvini"]
 script = ExtResource("29_rjv8u")
@@ -3550,6 +4064,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_86343"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3558,10 +4073,12 @@ props = {
 "id": 290,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_pb1sv"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_86343")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3570,10 +4087,12 @@ props = {
 "q": 8,
 "r": 10
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_smtca"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3582,10 +4101,12 @@ props = {
 "id": 244,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_1b6sn"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_smtca")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3594,10 +4115,12 @@ props = {
 "q": 0,
 "r": 11
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_lm65b"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3606,10 +4129,12 @@ props = {
 "id": 183,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_8f6t4"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_lm65b")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3618,10 +4143,12 @@ props = {
 "q": 1,
 "r": 11
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ajjd7"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3630,10 +4157,12 @@ props = {
 "id": 185,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_q6j6b"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_ajjd7")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3642,10 +4171,12 @@ props = {
 "q": 2,
 "r": 11
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_tfkb0"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3654,10 +4185,12 @@ props = {
 "id": 187,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_hk3br"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_tfkb0")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3666,10 +4199,12 @@ props = {
 "q": 3,
 "r": 11
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_vb0la"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3678,10 +4213,12 @@ props = {
 "id": 189,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_4ji27"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_vb0la")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3690,6 +4227,7 @@ props = {
 "q": 4,
 "r": 11
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_pse2a"]
 script = ExtResource("29_rjv8u")
@@ -3698,6 +4236,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_6vhq7"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3706,10 +4245,12 @@ props = {
 "id": 296,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_7raih"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_6vhq7")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3718,6 +4259,7 @@ props = {
 "q": 5,
 "r": 11
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_6os0c"]
 script = ExtResource("29_rjv8u")
@@ -3726,6 +4268,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_1dkyx"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3734,10 +4277,12 @@ props = {
 "id": 291,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_c2k04"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_1dkyx")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3746,6 +4291,7 @@ props = {
 "q": 6,
 "r": 11
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_jqmuv"]
 script = ExtResource("29_rjv8u")
@@ -3754,6 +4300,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_v00hl"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3762,10 +4309,12 @@ props = {
 "id": 288,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_wk14e"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3774,10 +4323,12 @@ props = {
 "id": 303,
 "type": ExtResource("17_c2n86")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_70tfp"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_v00hl"), SubResource("Resource_wk14e")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3786,10 +4337,12 @@ props = {
 "q": 7,
 "r": 11
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_edpma"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3798,10 +4351,12 @@ props = {
 "id": 230,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_evk12"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_edpma")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3810,10 +4365,12 @@ props = {
 "q": 0,
 "r": 12
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_3w4b4"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3822,10 +4379,12 @@ props = {
 "id": 231,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_7roh1"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_3w4b4")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3834,10 +4393,12 @@ props = {
 "q": 1,
 "r": 12
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_deh08"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3846,10 +4407,12 @@ props = {
 "id": 232,
 "type": ExtResource("20_b80hp")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_hrdco"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_deh08")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3858,6 +4421,7 @@ props = {
 "q": 2,
 "r": 12
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_pnjub"]
 script = ExtResource("29_rjv8u")
@@ -3866,6 +4430,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_dwoc6"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3874,10 +4439,12 @@ props = {
 "id": 295,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_tga2m"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_dwoc6")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3886,6 +4453,7 @@ props = {
 "q": 3,
 "r": 12
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ahv4i"]
 script = ExtResource("29_rjv8u")
@@ -3894,6 +4462,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_prbi1"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3902,10 +4471,12 @@ props = {
 "id": 293,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ooy7a"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3914,10 +4485,12 @@ props = {
 "id": 300,
 "type": ExtResource("17_y2prn")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_yogml"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_prbi1"), SubResource("Resource_ooy7a")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3926,6 +4499,7 @@ props = {
 "q": 4,
 "r": 12
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_s0hhu"]
 script = ExtResource("29_rjv8u")
@@ -3934,6 +4508,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_raj1q"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3942,10 +4517,12 @@ props = {
 "id": 297,
 "type": ExtResource("16_go0qv")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_chjpi"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3954,10 +4531,12 @@ props = {
 "id": 302,
 "type": ExtResource("19_hf5c4")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_ctr3c"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_raj1q"), SubResource("Resource_chjpi")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -3966,6 +4545,7 @@ props = {
 "q": 5,
 "r": 12
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_0tfnb"]
 script = ExtResource("29_rjv8u")
@@ -3974,6 +4554,7 @@ stack = Array[int]([])
 [sub_resource type="Resource" id="Resource_xdtc2"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3982,10 +4563,12 @@ props = {
 "id": 287,
 "type": ExtResource("13_uxm04")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_5bbdd"]
 script = ExtResource("8_08kic")
 status_states = Array[ExtResource("15_wsatw")]([])
+data = {}
 props = {
 "born": true,
 "data": {},
@@ -3994,10 +4577,12 @@ props = {
 "id": 299,
 "type": ExtResource("16_qoq3p")
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_v55sm"]
 script = ExtResource("10_tue0v")
 entity_states = Array[ExtResource("8_08kic")]([SubResource("Resource_xdtc2"), SubResource("Resource_5bbdd")])
+data = {}
 props = {
 "born": false,
 "data": {},
@@ -4006,6 +4591,7 @@ props = {
 "q": 6,
 "r": 12
 }
+was_deserialized = false
 
 [sub_resource type="Resource" id="Resource_d7o3g"]
 script = ExtResource("9_g5mpk")

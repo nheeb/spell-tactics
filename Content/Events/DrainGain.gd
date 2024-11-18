@@ -13,7 +13,7 @@ const DEFAULT_GAIN_PATTERN = [2, 5]
 var gain_pattern: Array
 
 func _on_activate() -> void:
-	gain_pattern = event.params.get("gain_pattern", DEFAULT_GAIN_PATTERN)
+	gain_pattern = event.data.get("gain_pattern", DEFAULT_GAIN_PATTERN)
 	gain_pattern = Utility.array_unique(gain_pattern)
 	gain_pattern.sort()
 
@@ -25,6 +25,6 @@ func _on_advance(round_number: int) -> void:
 	if gain_pattern.is_empty():
 		event.finish()
 	else:
-		event.persistant_properties["extra_text"] = \
+		event.data["extra_text"] = \
 			"\nRounds until drain usage is increased: %s" % \
 			str(gain_pattern.front() - round_number)

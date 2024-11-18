@@ -71,7 +71,6 @@ func add_entity(entity: Entity):
 			combat.level.visual_entities.add_child(entity.visual_entity)
 			entity.visual_entity.owner = combat.level
 			entity.visual_entity.position = position
-			entity.visual_entity.visible = true
 
 func remove_entity(entity: Entity):
 	var i := entities.find(entity)

@@ -58,8 +58,6 @@ func inflict_heal_with_visuals(heal: int) -> AnimationObject:
 func is_wounded() -> bool:
 	return hp < type.max_hp 
 
-func sync_with_type() -> void:
+func on_load():
 	super()
-	hp = type.max_hp
-	team = type.team
 	combat.animation.update_hp(self)

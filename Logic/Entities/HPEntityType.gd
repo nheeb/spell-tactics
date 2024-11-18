@@ -6,8 +6,9 @@ enum Teams {Evil, Neutral, Good}
 @export var team := Teams.Evil
 
 func create_base_object() -> CombatObject:
-	var ent := HPEntity.new()
-	ent.type = self
-	ent.hp = max_hp
-	ent.team = team
-	return ent
+	return HPEntity.new()
+
+func set_type_properties(object: CombatObject) -> void:
+	super(object)
+	object.hp = max_hp
+	object.team = team

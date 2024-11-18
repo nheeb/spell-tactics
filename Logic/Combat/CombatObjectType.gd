@@ -18,6 +18,9 @@ var logic_script: GDScript
 func create_base_object() -> CombatObject:
 	return null
 
+func set_type_properties(object: CombatObject) -> void:
+	pass
+
 func create(combat: Combat, props := {}) -> CombatObject:
 	# Load script and name
 	on_load()
@@ -28,6 +31,8 @@ func create(combat: Combat, props := {}) -> CombatObject:
 	# Create combat independent base object from type
 	var obj := create_base_object()
 	assert(obj, "You need to create a base object")
+	# Set props based on type
+	obj.sync_with_type(self)
 	# Update props if any are given
 	obj.update_properties(props)
 	# Connect with combat

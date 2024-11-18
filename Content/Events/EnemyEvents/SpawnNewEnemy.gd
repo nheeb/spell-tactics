@@ -1,7 +1,7 @@
 extends EnemyEventLogic
 
 func _on_activate() -> void:
-	var type: EnemyEntityType = event.params.get("enemy_type") as EnemyEntityType
+	var type: EnemyEntityType = event.data.get("enemy_type") as EnemyEntityType
 	assert(type)
 	for enemy in combat.get_all_enemies():
 		for tile in enemy.current_tile.get_surrounding_tiles():
