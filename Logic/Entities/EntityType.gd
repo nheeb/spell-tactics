@@ -82,9 +82,9 @@ func setup_visuals(ent: Entity) -> void:
 
 
 func setup_visuals_and_logic(ent: Entity) -> void:
-	var start_time := Time.get_ticks_msec()
+	#var start_time := Time.get_ticks_msec()
 	setup_visuals(ent)
-	print("Type %s took %s msecs", [internal_name, Time.get_ticks_msec() - start_time])
+	#print("Type %s visual setup took %s msecs" % [internal_name, Time.get_ticks_msec() - start_time])
 	
 	# Creating entity logic
 	if logic_script != null:
