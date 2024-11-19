@@ -27,4 +27,3 @@ func casting_effect() -> void:
 	
 	for enemy in enemies:
 		enemy.inflict_damage_with_visuals(2)
-

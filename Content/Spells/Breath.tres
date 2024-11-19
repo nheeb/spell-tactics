@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://c2gimhhja8fi6"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_8ksyg"]
-[ext_resource type="Texture2D" uid="uid://djq58j63r2xxn" path="res://Assets/Sprites/Icons/breath.png" id="2_nuueu"]
 [ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_7wrpk"]
 [ext_resource type="Resource" uid="uid://dyolf6cfwkmj1" path="res://Prototype/Keywords/NoEnemies.tres" id="4_5380d"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="5_b0vkn"]
@@ -9,6 +8,9 @@
 [sub_resource type="Resource" id="Resource_61ndi"]
 script = ExtResource("1_8ksyg")
 stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_mm56g"]
+metadata/__load_path__ = "res://Assets/Sprites/Icons/breath.png"
 
 [resource]
 script = ExtResource("5_b0vkn")
@@ -18,7 +20,7 @@ pretty_name = "Breath"
 effect_text = "Draw 1 card and gain 1 Drain.
 Can only be played with no adjacent enemies."
 fluff_text = ""
-icon = ExtResource("2_nuueu")
+icon = SubResource("Resource_mm56g")
 color = Color(0.164706, 0.992157, 0.952941, 1)
 target = 0
 target_range = -1
