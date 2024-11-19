@@ -1,16 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://brewkay16y5my"]
+[gd_scene load_steps=18 format=3 uid="uid://brewkay16y5my"]
 
 [ext_resource type="PackedScene" uid="uid://uat6g64vbik4" path="res://Prototype/PostBattle.tscn" id="1_0hyh5"]
 [ext_resource type="Script" path="res://Prototype/Screens/ScreenPostCombat.gd" id="1_1lcfl"]
-[ext_resource type="PackedScene" uid="uid://dqbvdngdl7ass" path="res://Assets/Models/Prototype/firepit.blend" id="3_cnnwt"]
+[ext_resource type="PackedScene" uid="uid://bwkt7vm7l5e1h" path="res://Assets/Models/Prototype/Rock1.gltf" id="3_cnnwt"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ypnrt"]
 size = Vector2(2000, 2000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paw8q"]
 albedo_color = Color(0.145098, 0.47451, 0.235294, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_2yrc6"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2v0pm"]
 emission_shape = 1
@@ -108,9 +106,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_paw8q")
 
 [node name="firepit" parent="Node3D" instance=ExtResource("3_cnnwt")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0212293, 0, -0.435689)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/firepit"]
-mesh = SubResource("QuadMesh_2yrc6")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D/firepit"]
 amount = 90
