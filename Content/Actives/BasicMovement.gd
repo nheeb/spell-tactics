@@ -2,7 +2,7 @@ extends ActiveLogic
 
 var movement_range: int = 3
 
-func _on_combat_change():
+func on_combat_change():
 	var flavor := ActionFlavor.new().add_tag(ActionFlavor.Tag.Movement)\
 		.set_owner(combat.player).finalize(combat)
 	movement_range = await combat.action_stack.get_discussion_result(3, flavor)

@@ -10,7 +10,7 @@ func _setup_logic() -> void:
 	pass
 
 ## How does the status change, when another instance of the same effect get applied
-func _extend(other_status: EntityStatus) -> void:
+func _merge(other_status: EntityStatus) -> void:
 	var planned_damage: Array = data.get("planned_damage", []) as Array
 	var new_damage: int = other_status.data.get("damage", 0) as int
 	for i in range(other_status.lifetime):

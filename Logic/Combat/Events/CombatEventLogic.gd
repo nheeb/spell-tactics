@@ -1,17 +1,10 @@
 class_name CombatEventLogic extends CombatLogic
 
-var event: CombatEvent
-
-#func setup(_combat: Combat, _event: CombatEvent):
-	#combat = _combat
-	#event = _event
-
-func connect_with_combat_object(co: CombatObject):
-	event = co as CombatEvent
-	assert(event)
-
-func get_reference() -> PropertyReference:
-	return PropertyReference.new(event.get_reference(), "logic")
+var event: CombatEvent:
+	get:
+		return combat_object as CombatEvent
+	set(x):
+		push_error("Do not set this.")
 
 func on_activate() -> void:
 	_on_activate()

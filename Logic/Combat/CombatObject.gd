@@ -48,14 +48,25 @@ func serialize() -> CombatObjectState:
 func on_birth() -> void:
 	assert(not born)
 	born = true
+	if get_generic_logic():
+		await get_generic_logic().on_birth()
 
 ## ACTION
 func on_load() -> void:
-	pass
+	if get_generic_logic():
+		await get_generic_logic().on_load()
+
+## ACTION
+func die() -> void:
+	assert(combat != null and born and not dead)
+	dead = true
+	combat.ids.remove_combat_object(self)
+	await on_death()
 
 ## ACTION
 func on_death() -> void:
-	pass
+	if get_generic_logic():
+		await get_generic_logic().on_death()
 
 func connect_with_combat(_combat: Combat):
 	assert(combat == null, "CombatObject was already connected to combat.")

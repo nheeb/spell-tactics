@@ -1,12 +1,6 @@
 extends EntityLogic
 
-func on_create():
-	pass
-
 const BONES = preload("res://Content/Entities/Bones.tres")
-
-func on_graveyard():
-	pass
 
 func on_death(): # Happens when HP Entity dies
 	var tile := entity.current_tile

@@ -36,7 +36,7 @@ class RingProperties:
 	var hd_end: float
 	var hd_duration: float
 
-func spawn_sphere(location, size, parent):
+func spawn_sphere(location, _size, parent):
 	if randf()<gap_chance:
 		return
 	var material = StandardMaterial3D.new()
@@ -55,9 +55,9 @@ func spawn_sphere(location, size, parent):
 	sphere.rotate_z(randf())
 	parent.add_child(sphere)
 
-	var start_size = size+size*randf_range(-ball_size_variation, ball_size_variation)
+	var start_size = _size+_size*randf_range(-ball_size_variation, ball_size_variation)
 	sphere.scale = v3(start_size)
-	var end_size = start_size + size*randf_range(-ball_size_animation_range, ball_size_animation_range)
+	var end_size = start_size + _size*randf_range(-ball_size_animation_range, ball_size_animation_range)
 	var bp = BallProperties.new()
 	bp.ref = sphere
 	bp.start_scale=start_size

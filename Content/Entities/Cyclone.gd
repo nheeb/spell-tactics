@@ -4,7 +4,7 @@ var duration = 3
 
 @export var damage := 2
 
-func on_summon():
+func on_birth():
 	TimedEffect.new_end_phase_trigger_from_callable(make_damage).set_trigger_count(duration)\
 			.extra_last_callable(entity.die).register(combat)
 

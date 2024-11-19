@@ -21,6 +21,8 @@ class_name EntityStatusType extends CombatObjectType
 @export var make_floating_icon: bool = true
 
 @export_group("Extras")
+## New status of this type will always be merged ("extend") into an existing one if possible.
+@export var merge_this_type := false
 ## Kills all TimedEffects (from status & logic) automatically when being removed.
 @export var kill_te_on_remove := true
 @export var enemy_actions: Array[EnemyActionArgs]

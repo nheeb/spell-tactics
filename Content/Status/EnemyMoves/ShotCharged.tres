@@ -17,14 +17,15 @@ fixed_targets = []
 
 [resource]
 script = ExtResource("4_gbeyg")
-pretty_name = "Heavy Shot Charged"
-icon = ExtResource("3_rpt1h")
-color = Color(1, 1, 1, 1)
 text = ""
-default_data = {}
 has_lifetime = true
 lifetime_default = 1
 lifetime_extend_method = 0
 make_floating_icon = true
 kill_te_on_remove = true
 enemy_actions = Array[ExtResource("1_iiott")]([SubResource("Resource_e4x7k")])
+pretty_name = "Heavy Shot Charged"
+fluff_text = ""
+icon = ExtResource("3_rpt1h")
+color = Color(1, 1, 1, 1)
+default_data = {}
