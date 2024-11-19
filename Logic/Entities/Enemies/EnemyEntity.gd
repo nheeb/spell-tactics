@@ -104,20 +104,9 @@ func get_random_action_plan() -> EnemyActionPlan:
 func on_combat_change():
 	await combat.action_stack.process_callable(plan_next_action)
 
-func on_create():
-	super.on_create()
-	type = type as EnemyEntityType
-
 func on_death():
-	super.on_death()
+	super()
 	combat.enemies.erase(self)
-
-#func sync_with_type():
-	#super()
-	#agility = type.agility
-	#strength = type.strength
-	#accuracy = type.accuracy
-	#resistance = type.resistance
 
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 
