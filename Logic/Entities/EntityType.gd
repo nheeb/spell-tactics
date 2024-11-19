@@ -57,8 +57,9 @@ func create_entity(combat: Combat, tile: Tile = null) -> Entity:
 		tile.add_entity(ent)
 	return ent
 
-const PROTOTYPE_VISUALS = "res://VFX/Entities/VisualPrototype.tscn"
+const PROTOTYPE_VISUALS = preload("res://VFX/Entities/VisualPrototype.tscn")
 func setup_visuals(ent: Entity) -> void:
+	
 	var combat := ent.combat
 	# CARE, instantiate() might lead to lag, depending on the use we might want to instantiate later
 	# use billboard prototype visuals if no visual scene is set:
@@ -67,7 +68,7 @@ func setup_visuals(ent: Entity) -> void:
 	else:
 		# push_warning("Using a prototype visual")
 		# need to use load here since Godot 4.3 for some reason..
-		ent.visual_entity = load(PROTOTYPE_VISUALS).instantiate()
+		ent.visual_entity = PROTOTYPE_VISUALS.instantiate()#load(PROTOTYPE_VISUALS).instantiate()
 		
 	# hehehe - but these references are safe since entity and visual entity exists together
 	if ent.visual_entity == null or "type" not in ent.visual_entity:
@@ -77,11 +78,14 @@ func setup_visuals(ent: Entity) -> void:
 	ent.visual_entity.entity = ent
 	ent.visual_entity.visible = false
 	combat.animation.show(ent.visual_entity)
+	
 
 
 func setup_visuals_and_logic(ent: Entity) -> void:
+	var start_time := Time.get_ticks_msec()
 	setup_visuals(ent)
-
+	print("Type %s took %s msecs", [internal_name, Time.get_ticks_msec() - start_time])
+	
 	# Creating entity logic
 	if logic_script != null:
 		ent.logic = logic_script.new(ent, ent.combat)

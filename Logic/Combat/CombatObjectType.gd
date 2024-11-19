@@ -45,9 +45,9 @@ func create(combat: Combat, props := {}) -> CombatObject:
 		obj.set("logic", logic)
 	# Put on_birth on the stack for special creation effects
 	if not obj.born:
-		combat.action_stack.push_back(obj.on_birth)
+		combat.action_stack.push_before_active(obj.on_birth)
 	# Put on_load on the stack for animation related stuff
-	combat.action_stack.push_back(obj.on_load)
+	combat.action_stack.push_before_active(obj.on_load)
 	return obj
 
 ## This connects the Type to it's filename / script file

@@ -4,7 +4,9 @@ class_name EventUtility extends CombatUtility
 ## and advancing happens.
 func process_events() -> void:
 	process_enemy_events()
+	await combat.action_stack.wait()
 	process_event_schedules()
+	await combat.action_stack.wait()
 	process_active_events()
 
 ############################

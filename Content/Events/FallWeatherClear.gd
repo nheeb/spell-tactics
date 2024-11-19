@@ -14,4 +14,3 @@ func _on_advance(round_number: int) -> void:
 	for i in range(randi_range(1, 2)):
 		var random_enemy : EnemyEntity = combat.enemies.pick_random() as EnemyEntity
 		combat.animation.say(random_enemy.visual_entity, smalltalk_lines.pick_random()).set_min_duration(1)
-

@@ -240,6 +240,8 @@ func _connect_with_combat(combat: Combat) -> void:
 			push_error("Timed Effect: call object %s has no method %s" % [call_obj, call_method])
 	else:
 		push_error("Timed Effect: call reference %s is invalid" % call_ref)
+		var x = call_ref.resolve(combat)
+		print(x)
 	if owner_ref:
 		owner_obj = owner_ref.resolve(combat)
 	else:

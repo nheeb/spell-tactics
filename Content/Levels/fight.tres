@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=907 format=3 uid="uid://b2qpjfv8eir62"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=911 format=3 uid="uid://b2qpjfv8eir62"]
 
 [ext_resource type="Script" path="res://Logic/Castables/ActiveState.gd" id="1_2edog"]
 [ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventState.gd" id="2_a8jnd"]
@@ -10,10 +10,14 @@
 [ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventSchedule.gd" id="6_8k1sr"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="7_2ybfg"]
 [ext_resource type="Script" path="res://Logic/Level/State/EntityState.gd" id="8_08kic"]
+[ext_resource type="Resource" uid="uid://b2dqvayeg80ol" path="res://Content/Levels/enemy_event_plan_spawn_new_bard.tres" id="8_8m317"]
 [ext_resource type="Script" path="res://Logic/Combat/CombatState.gd" id="8_kc8k2"]
 [ext_resource type="Script" path="res://Logic/Level/State/LevelState.gd" id="9_g5mpk"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/TimedEffect.gd" id="9_kiefc"]
+[ext_resource type="Resource" uid="uid://c5b13jca15dvy" path="res://Content/Levels/enemy_event_plan_spawn_new_fighter.tres" id="9_ljt5q"]
+[ext_resource type="Resource" uid="uid://jol6cvu7ygqj" path="res://Content/Levels/enemy_event_plan_spawn_new_archer.tres" id="10_q3j15"]
 [ext_resource type="Script" path="res://Logic/Level/State/TileState.gd" id="10_tue0v"]
+[ext_resource type="Resource" uid="uid://diqf4kucf4hs8" path="res://Content/Levels/combat_event_schedule_weather.tres" id="12_30nfn"]
 [ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Content/Entities/DirtTile.tres" id="13_uxm04"]
 [ext_resource type="Script" path="res://Logic/Combat/CombatObjectState.gd" id="15_wsatw"]
 [ext_resource type="Resource" uid="uid://dq2qgws5vu0i2" path="res://Content/Entities/TallGrass.tres" id="16_870sl"]
@@ -1248,6 +1252,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_mkrw5"]
 script = ExtResource("10_tue0v")
@@ -1261,6 +1266,7 @@ props = {
 "r": 0
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_lvdvm"]
 script = ExtResource("29_rjv8u")
@@ -1278,6 +1284,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_47ugm"]
 script = ExtResource("10_tue0v")
@@ -1291,6 +1298,7 @@ props = {
 "r": 0
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_0drmi"]
 script = ExtResource("29_rjv8u")
@@ -1308,6 +1316,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_h6mpw"]
 script = ExtResource("10_tue0v")
@@ -1321,6 +1330,7 @@ props = {
 "r": 0
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_i8b31"]
 script = ExtResource("29_rjv8u")
@@ -1338,6 +1348,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ms276"]
 script = ExtResource("10_tue0v")
@@ -1351,6 +1362,7 @@ props = {
 "r": 0
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_381k6"]
 script = ExtResource("29_rjv8u")
@@ -1368,6 +1380,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jhx8i"]
 script = ExtResource("29_rjv8u")
@@ -1385,6 +1398,7 @@ props = {
 "type": ExtResource("16_qoq3p")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jqbt3"]
 script = ExtResource("10_tue0v")
@@ -1398,6 +1412,7 @@ props = {
 "r": 0
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_61st1"]
 script = ExtResource("29_rjv8u")
@@ -1415,6 +1430,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_a466y"]
 script = ExtResource("29_rjv8u")
@@ -1432,6 +1448,7 @@ props = {
 "type": ExtResource("19_hf5c4")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_7ax7m"]
 script = ExtResource("10_tue0v")
@@ -1445,6 +1462,7 @@ props = {
 "r": 0
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_7yox7"]
 script = ExtResource("29_rjv8u")
@@ -1462,6 +1480,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jsre5"]
 script = ExtResource("29_rjv8u")
@@ -1479,6 +1498,7 @@ props = {
 "type": ExtResource("19_1nbj2")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_2lh38"]
 script = ExtResource("10_tue0v")
@@ -1492,6 +1512,7 @@ props = {
 "r": 0
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_4olmj"]
 script = ExtResource("29_rjv8u")
@@ -1509,6 +1530,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_tcgyo"]
 script = ExtResource("10_tue0v")
@@ -1522,6 +1544,7 @@ props = {
 "r": 1
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_sxynm"]
 script = ExtResource("29_rjv8u")
@@ -1539,6 +1562,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_wqck7"]
 script = ExtResource("29_rjv8u")
@@ -1556,6 +1580,7 @@ props = {
 "type": ExtResource("16_qoq3p")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_8ef6f"]
 script = ExtResource("10_tue0v")
@@ -1569,6 +1594,7 @@ props = {
 "r": 1
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_o1dvc"]
 script = ExtResource("29_rjv8u")
@@ -1586,6 +1612,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_5fcig"]
 script = ExtResource("10_tue0v")
@@ -1599,6 +1626,7 @@ props = {
 "r": 1
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ouayn"]
 script = ExtResource("29_rjv8u")
@@ -1616,6 +1644,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_v8c80"]
 script = ExtResource("29_rjv8u")
@@ -1633,6 +1662,7 @@ props = {
 "type": ExtResource("17_c2n86")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_5jg5d"]
 script = ExtResource("10_tue0v")
@@ -1646,6 +1676,7 @@ props = {
 "r": 1
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_5npd2"]
 script = ExtResource("29_rjv8u")
@@ -1663,6 +1694,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_pv7h0"]
 script = ExtResource("10_tue0v")
@@ -1676,6 +1708,7 @@ props = {
 "r": 1
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_p1rdm"]
 script = ExtResource("29_rjv8u")
@@ -1693,6 +1726,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_7okst"]
 script = ExtResource("10_tue0v")
@@ -1706,6 +1740,7 @@ props = {
 "r": 1
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_sqn8h"]
 script = ExtResource("29_rjv8u")
@@ -1723,6 +1758,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_dhd5e"]
 script = ExtResource("29_rjv8u")
@@ -1740,6 +1776,7 @@ props = {
 "type": ExtResource("20_tmyrq")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ckhcg"]
 script = ExtResource("10_tue0v")
@@ -1753,6 +1790,7 @@ props = {
 "r": 1
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ltgeq"]
 script = ExtResource("29_rjv8u")
@@ -1770,6 +1808,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ui225"]
 script = ExtResource("10_tue0v")
@@ -1783,6 +1822,7 @@ props = {
 "r": 1
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_k4ol5"]
 script = ExtResource("29_rjv8u")
@@ -1800,6 +1840,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_vva5o"]
 script = ExtResource("29_rjv8u")
@@ -1817,6 +1858,7 @@ props = {
 "type": ExtResource("17_c2n86")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_o3u86"]
 script = ExtResource("10_tue0v")
@@ -1830,6 +1872,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_qdc2k"]
 script = ExtResource("29_rjv8u")
@@ -1847,6 +1890,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_5pqb1"]
 script = ExtResource("10_tue0v")
@@ -1860,6 +1904,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jeqx4"]
 script = ExtResource("29_rjv8u")
@@ -1877,6 +1922,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ds40r"]
 script = ExtResource("10_tue0v")
@@ -1890,6 +1936,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_176uk"]
 script = ExtResource("29_rjv8u")
@@ -1907,6 +1954,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_36c7q"]
 script = ExtResource("29_rjv8u")
@@ -1924,6 +1972,7 @@ props = {
 "type": ExtResource("22_f8ldu")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_pkgh4"]
 script = ExtResource("10_tue0v")
@@ -1937,6 +1986,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_nutwd"]
 script = ExtResource("29_rjv8u")
@@ -1954,6 +2004,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_e0arq"]
 script = ExtResource("10_tue0v")
@@ -1967,6 +2018,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_coce2"]
 script = ExtResource("29_rjv8u")
@@ -1984,6 +2036,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_vir08"]
 script = ExtResource("29_rjv8u")
@@ -2001,6 +2054,7 @@ props = {
 "type": ExtResource("17_y2prn")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_fqxnh"]
 script = ExtResource("10_tue0v")
@@ -2014,6 +2068,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_rxx3m"]
 script = ExtResource("29_rjv8u")
@@ -2031,6 +2086,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_sh3gn"]
 script = ExtResource("10_tue0v")
@@ -2044,6 +2100,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_1q5tt"]
 script = ExtResource("29_rjv8u")
@@ -2061,6 +2118,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ycu4j"]
 script = ExtResource("10_tue0v")
@@ -2074,6 +2132,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_m4rsq"]
 script = ExtResource("29_rjv8u")
@@ -2091,6 +2150,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_f0vn6"]
 script = ExtResource("10_tue0v")
@@ -2104,6 +2164,7 @@ props = {
 "r": 2
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_8deow"]
 script = ExtResource("29_rjv8u")
@@ -2121,6 +2182,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_m1ybh"]
 script = ExtResource("29_rjv8u")
@@ -2138,6 +2200,7 @@ props = {
 "type": ExtResource("24_1trr6")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_10mwl"]
 script = ExtResource("10_tue0v")
@@ -2151,6 +2214,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_f6idi"]
 script = ExtResource("29_rjv8u")
@@ -2168,6 +2232,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_3m2us"]
 script = ExtResource("10_tue0v")
@@ -2181,6 +2246,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_f1ki0"]
 script = ExtResource("29_rjv8u")
@@ -2198,6 +2264,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_afmiu"]
 script = ExtResource("8_08kic")
@@ -2211,6 +2278,7 @@ props = {
 "type": ExtResource("17_c2n86")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_tjdxi"]
 script = ExtResource("10_tue0v")
@@ -2224,6 +2292,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_wc80d"]
 script = ExtResource("29_rjv8u")
@@ -2241,6 +2310,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_xlw20"]
 script = ExtResource("10_tue0v")
@@ -2254,6 +2324,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_5ddan"]
 script = ExtResource("29_rjv8u")
@@ -2271,6 +2342,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_cohke"]
 script = ExtResource("10_tue0v")
@@ -2284,6 +2356,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_0hjsg"]
 script = ExtResource("29_rjv8u")
@@ -2301,6 +2374,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_s3yqf"]
 script = ExtResource("8_08kic")
@@ -2314,6 +2388,7 @@ props = {
 "type": ExtResource("19_1nbj2")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_pdfmt"]
 script = ExtResource("10_tue0v")
@@ -2327,6 +2402,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_57kap"]
 script = ExtResource("29_rjv8u")
@@ -2344,6 +2420,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_tsnpt"]
 script = ExtResource("29_rjv8u")
@@ -2361,6 +2438,7 @@ props = {
 "type": ExtResource("22_6moxq")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_em8ph"]
 script = ExtResource("10_tue0v")
@@ -2374,6 +2452,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_0hcaq"]
 script = ExtResource("29_rjv8u")
@@ -2391,6 +2470,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_xctnd"]
 script = ExtResource("10_tue0v")
@@ -2404,6 +2484,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_6he0o"]
 script = ExtResource("29_rjv8u")
@@ -2421,6 +2502,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_1cb1j"]
 script = ExtResource("8_08kic")
@@ -2435,6 +2517,7 @@ props = {
 "type": ExtResource("18_xmsct")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_m0aqb"]
 script = ExtResource("10_tue0v")
@@ -2448,6 +2531,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_pl6uk"]
 script = ExtResource("29_rjv8u")
@@ -2465,6 +2549,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_vuu7d"]
 script = ExtResource("10_tue0v")
@@ -2478,6 +2563,7 @@ props = {
 "r": 3
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_p55og"]
 script = ExtResource("29_rjv8u")
@@ -2495,6 +2581,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_g0yw0"]
 script = ExtResource("8_08kic")
@@ -2508,6 +2595,7 @@ props = {
 "type": ExtResource("20_tmyrq")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_v0b6y"]
 script = ExtResource("10_tue0v")
@@ -2521,6 +2609,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_d2sid"]
 script = ExtResource("29_rjv8u")
@@ -2538,6 +2627,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_f6fxx"]
 script = ExtResource("10_tue0v")
@@ -2551,6 +2641,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_xp3b0"]
 script = ExtResource("29_rjv8u")
@@ -2568,6 +2659,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_02o1i"]
 script = ExtResource("10_tue0v")
@@ -2581,6 +2673,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_7xfj6"]
 script = ExtResource("29_rjv8u")
@@ -2598,6 +2691,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_1c4fs"]
 script = ExtResource("10_tue0v")
@@ -2611,6 +2705,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_lqpe5"]
 script = ExtResource("29_rjv8u")
@@ -2628,6 +2723,7 @@ props = {
 "type": ExtResource("16_870sl")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_v3a68"]
 script = ExtResource("29_rjv8u")
@@ -2645,6 +2741,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_3ciix"]
 script = ExtResource("10_tue0v")
@@ -2658,6 +2755,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_iemda"]
 script = ExtResource("29_rjv8u")
@@ -2675,6 +2773,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_51e85"]
 script = ExtResource("10_tue0v")
@@ -2688,6 +2787,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_dcwrw"]
 script = ExtResource("29_rjv8u")
@@ -2705,6 +2805,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ls578"]
 script = ExtResource("10_tue0v")
@@ -2718,6 +2819,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_dgq8l"]
 script = ExtResource("29_rjv8u")
@@ -2735,6 +2837,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_l2fat"]
 script = ExtResource("10_tue0v")
@@ -2748,6 +2851,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_d05qh"]
 script = ExtResource("29_rjv8u")
@@ -2765,6 +2869,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_m5lmy"]
 script = ExtResource("10_tue0v")
@@ -2778,6 +2883,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_cr4a5"]
 script = ExtResource("29_rjv8u")
@@ -2795,6 +2901,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_40v1w"]
 script = ExtResource("10_tue0v")
@@ -2808,6 +2915,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_2i5ar"]
 script = ExtResource("29_rjv8u")
@@ -2825,6 +2933,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_3e6wb"]
 script = ExtResource("8_08kic")
@@ -2838,6 +2947,7 @@ props = {
 "type": ExtResource("24_1trr6")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ey8dp"]
 script = ExtResource("10_tue0v")
@@ -2851,6 +2961,7 @@ props = {
 "r": 4
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_388er"]
 script = ExtResource("29_rjv8u")
@@ -2868,6 +2979,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_b7q5g"]
 script = ExtResource("29_rjv8u")
@@ -2885,6 +2997,7 @@ props = {
 "type": ExtResource("16_870sl")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_3a01n"]
 script = ExtResource("10_tue0v")
@@ -2898,6 +3011,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_millj"]
 script = ExtResource("29_rjv8u")
@@ -2915,6 +3029,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_qqa5u"]
 script = ExtResource("10_tue0v")
@@ -2928,6 +3043,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_8xu58"]
 script = ExtResource("29_rjv8u")
@@ -2945,6 +3061,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_la2c2"]
 script = ExtResource("8_08kic")
@@ -2958,6 +3075,7 @@ props = {
 "type": ExtResource("17_y2prn")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_a043k"]
 script = ExtResource("10_tue0v")
@@ -2971,6 +3089,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_er7dk"]
 script = ExtResource("29_rjv8u")
@@ -2988,6 +3107,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_yhg3f"]
 script = ExtResource("10_tue0v")
@@ -3001,6 +3121,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_mu7xg"]
 script = ExtResource("29_rjv8u")
@@ -3018,6 +3139,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_eqwj1"]
 script = ExtResource("10_tue0v")
@@ -3031,6 +3153,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_vpcxw"]
 script = ExtResource("29_rjv8u")
@@ -3048,6 +3171,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_p2iyh"]
 script = ExtResource("10_tue0v")
@@ -3061,6 +3185,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_vre03"]
 script = ExtResource("29_rjv8u")
@@ -3078,6 +3203,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_i62j1"]
 script = ExtResource("10_tue0v")
@@ -3091,6 +3217,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_tcu6k"]
 script = ExtResource("8_08kic")
@@ -3104,6 +3231,7 @@ props = {
 "type": ExtResource("16_870sl")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_preoh"]
 script = ExtResource("29_rjv8u")
@@ -3121,6 +3249,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ceits"]
 script = ExtResource("10_tue0v")
@@ -3134,6 +3263,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_1shlq"]
 script = ExtResource("29_rjv8u")
@@ -3151,6 +3281,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_p7jj7"]
 script = ExtResource("10_tue0v")
@@ -3164,6 +3295,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_2d82w"]
 script = ExtResource("29_rjv8u")
@@ -3181,6 +3313,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_yyfm1"]
 script = ExtResource("8_08kic")
@@ -3194,6 +3327,7 @@ props = {
 "type": ExtResource("22_6moxq")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_07ch8"]
 script = ExtResource("10_tue0v")
@@ -3207,6 +3341,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jp130"]
 script = ExtResource("29_rjv8u")
@@ -3224,6 +3359,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_o0xi8"]
 script = ExtResource("29_rjv8u")
@@ -3241,6 +3377,7 @@ props = {
 "type": ExtResource("25_uypxu")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_twphv"]
 script = ExtResource("10_tue0v")
@@ -3254,6 +3391,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_5oukm"]
 script = ExtResource("29_rjv8u")
@@ -3271,6 +3409,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_rxdnw"]
 script = ExtResource("8_08kic")
@@ -3284,6 +3423,7 @@ props = {
 "type": ExtResource("16_870sl")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_0gc2i"]
 script = ExtResource("10_tue0v")
@@ -3297,6 +3437,7 @@ props = {
 "r": 5
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_8v02m"]
 script = ExtResource("29_rjv8u")
@@ -3314,6 +3455,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_d2564"]
 script = ExtResource("10_tue0v")
@@ -3327,6 +3469,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_djx1e"]
 script = ExtResource("29_rjv8u")
@@ -3344,6 +3487,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jpe57"]
 script = ExtResource("10_tue0v")
@@ -3357,6 +3501,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_3n1vw"]
 script = ExtResource("29_rjv8u")
@@ -3374,6 +3519,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_8bay4"]
 script = ExtResource("10_tue0v")
@@ -3387,6 +3533,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_xat0u"]
 script = ExtResource("29_rjv8u")
@@ -3404,6 +3551,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_sr8jl"]
 script = ExtResource("10_tue0v")
@@ -3417,6 +3565,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_i82n0"]
 script = ExtResource("29_rjv8u")
@@ -3434,6 +3583,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_es3ln"]
 script = ExtResource("10_tue0v")
@@ -3447,6 +3597,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_r38br"]
 script = ExtResource("29_rjv8u")
@@ -3464,6 +3615,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_r5psd"]
 script = ExtResource("8_08kic")
@@ -3477,6 +3629,7 @@ props = {
 "type": ExtResource("25_uypxu")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_plcj1"]
 script = ExtResource("10_tue0v")
@@ -3490,6 +3643,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_chei3"]
 script = ExtResource("29_rjv8u")
@@ -3507,6 +3661,7 @@ props = {
 "type": ExtResource("17_y2prn")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_6uln8"]
 script = ExtResource("29_rjv8u")
@@ -3524,6 +3679,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ldbow"]
 script = ExtResource("10_tue0v")
@@ -3537,6 +3693,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_wm36m"]
 script = ExtResource("29_rjv8u")
@@ -3554,6 +3711,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_vh06x"]
 script = ExtResource("10_tue0v")
@@ -3567,6 +3725,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_psiwc"]
 script = ExtResource("29_rjv8u")
@@ -3584,6 +3743,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_eulbw"]
 script = ExtResource("10_tue0v")
@@ -3597,6 +3757,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_df7mx"]
 script = ExtResource("29_rjv8u")
@@ -3614,6 +3775,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_drug7"]
 script = ExtResource("8_08kic")
@@ -3627,6 +3789,7 @@ props = {
 "type": ExtResource("17_c2n86")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_b6xit"]
 script = ExtResource("10_tue0v")
@@ -3640,6 +3803,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_hfhpp"]
 script = ExtResource("29_rjv8u")
@@ -3657,6 +3821,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_xaw22"]
 script = ExtResource("10_tue0v")
@@ -3670,6 +3835,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_8hjou"]
 script = ExtResource("8_08kic")
@@ -3683,6 +3849,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_anes3"]
 script = ExtResource("10_tue0v")
@@ -3696,6 +3863,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_j3vv8"]
 script = ExtResource("29_rjv8u")
@@ -3713,6 +3881,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_i4m7b"]
 script = ExtResource("10_tue0v")
@@ -3726,6 +3895,7 @@ props = {
 "r": 6
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_q4c87"]
 script = ExtResource("29_rjv8u")
@@ -3743,6 +3913,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_qd216"]
 script = ExtResource("10_tue0v")
@@ -3756,6 +3927,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_m6vm1"]
 script = ExtResource("29_rjv8u")
@@ -3773,6 +3945,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_qokv4"]
 script = ExtResource("10_tue0v")
@@ -3786,6 +3959,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_xd2kc"]
 script = ExtResource("29_rjv8u")
@@ -3803,6 +3977,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_aq5a4"]
 script = ExtResource("8_08kic")
@@ -3816,6 +3991,7 @@ props = {
 "type": ExtResource("16_qoq3p")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_u7s7l"]
 script = ExtResource("10_tue0v")
@@ -3829,6 +4005,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_qem8k"]
 script = ExtResource("29_rjv8u")
@@ -3846,6 +4023,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_8y73p"]
 script = ExtResource("8_08kic")
@@ -3859,6 +4037,7 @@ props = {
 "type": ExtResource("19_1nbj2")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_i3mut"]
 script = ExtResource("10_tue0v")
@@ -3872,6 +4051,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_74l5v"]
 script = ExtResource("29_rjv8u")
@@ -3889,6 +4069,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_csd2a"]
 script = ExtResource("10_tue0v")
@@ -3902,6 +4083,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_05kpw"]
 script = ExtResource("29_rjv8u")
@@ -3919,6 +4101,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_2rhew"]
 script = ExtResource("10_tue0v")
@@ -3932,6 +4115,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_rcg84"]
 script = ExtResource("29_rjv8u")
@@ -3949,6 +4133,7 @@ props = {
 "type": ExtResource("19_hf5c4")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_edmxp"]
 script = ExtResource("29_rjv8u")
@@ -3966,6 +4151,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_2g1og"]
 script = ExtResource("10_tue0v")
@@ -3979,6 +4165,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ryfok"]
 script = ExtResource("29_rjv8u")
@@ -3996,6 +4183,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_hhtuy"]
 script = ExtResource("10_tue0v")
@@ -4009,6 +4197,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_4odih"]
 script = ExtResource("29_rjv8u")
@@ -4026,6 +4215,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_unquq"]
 script = ExtResource("8_08kic")
@@ -4039,6 +4229,7 @@ props = {
 "type": ExtResource("17_c2n86")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ih5rl"]
 script = ExtResource("10_tue0v")
@@ -4052,6 +4243,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_d6c7b"]
 script = ExtResource("8_08kic")
@@ -4065,6 +4257,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_yjgds"]
 script = ExtResource("10_tue0v")
@@ -4078,6 +4271,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_1up4d"]
 script = ExtResource("8_08kic")
@@ -4091,6 +4285,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_onspd"]
 script = ExtResource("10_tue0v")
@@ -4104,6 +4299,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_1sdsy"]
 script = ExtResource("8_08kic")
@@ -4117,6 +4313,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_kxqcq"]
 script = ExtResource("10_tue0v")
@@ -4130,6 +4327,7 @@ props = {
 "r": 7
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_hstm0"]
 script = ExtResource("29_rjv8u")
@@ -4147,6 +4345,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jtcsn"]
 script = ExtResource("8_08kic")
@@ -4160,6 +4359,7 @@ props = {
 "type": ExtResource("16_870sl")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_mu24n"]
 script = ExtResource("10_tue0v")
@@ -4173,6 +4373,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ygmkg"]
 script = ExtResource("29_rjv8u")
@@ -4190,6 +4391,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_8p87r"]
 script = ExtResource("10_tue0v")
@@ -4203,6 +4405,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_4a1yp"]
 script = ExtResource("29_rjv8u")
@@ -4220,6 +4423,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_h0edr"]
 script = ExtResource("10_tue0v")
@@ -4233,6 +4437,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_b4kcc"]
 script = ExtResource("29_rjv8u")
@@ -4250,6 +4455,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_32iel"]
 script = ExtResource("10_tue0v")
@@ -4263,6 +4469,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_3wef5"]
 script = ExtResource("29_rjv8u")
@@ -4280,6 +4487,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_yb0c8"]
 script = ExtResource("8_08kic")
@@ -4294,6 +4502,7 @@ props = {
 "type": ExtResource("27_8wft2")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_d7d2k"]
 script = ExtResource("10_tue0v")
@@ -4307,6 +4516,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ap85j"]
 script = ExtResource("29_rjv8u")
@@ -4324,6 +4534,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_dgbye"]
 script = ExtResource("10_tue0v")
@@ -4337,6 +4548,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_gbvs4"]
 script = ExtResource("29_rjv8u")
@@ -4354,6 +4566,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_o7m45"]
 script = ExtResource("8_08kic")
@@ -4368,6 +4581,7 @@ props = {
 "type": ExtResource("20_3urn3")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_oyms8"]
 script = ExtResource("10_tue0v")
@@ -4381,6 +4595,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_sewjk"]
 script = ExtResource("29_rjv8u")
@@ -4398,6 +4613,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_itd6f"]
 script = ExtResource("8_08kic")
@@ -4411,6 +4627,7 @@ props = {
 "type": ExtResource("24_1trr6")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_a5jsb"]
 script = ExtResource("10_tue0v")
@@ -4424,6 +4641,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_tt1mb"]
 script = ExtResource("8_08kic")
@@ -4437,6 +4655,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_sri4a"]
 script = ExtResource("10_tue0v")
@@ -4450,6 +4669,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ijbyv"]
 script = ExtResource("8_08kic")
@@ -4463,6 +4683,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_3b6gq"]
 script = ExtResource("10_tue0v")
@@ -4476,6 +4697,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_n3hc8"]
 script = ExtResource("8_08kic")
@@ -4489,6 +4711,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_g8kr8"]
 script = ExtResource("10_tue0v")
@@ -4502,6 +4725,7 @@ props = {
 "r": 8
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_g5fsk"]
 script = ExtResource("8_08kic")
@@ -4515,6 +4739,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_vbd77"]
 script = ExtResource("10_tue0v")
@@ -4528,6 +4753,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_rgrbb"]
 script = ExtResource("8_08kic")
@@ -4541,6 +4767,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_g5b65"]
 script = ExtResource("10_tue0v")
@@ -4554,6 +4781,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_d17ws"]
 script = ExtResource("29_rjv8u")
@@ -4571,6 +4799,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_pqb8g"]
 script = ExtResource("8_08kic")
@@ -4584,6 +4813,7 @@ props = {
 "type": ExtResource("17_c2n86")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_kvdxr"]
 script = ExtResource("10_tue0v")
@@ -4597,6 +4827,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_7mg6o"]
 script = ExtResource("29_rjv8u")
@@ -4614,6 +4845,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_5ulie"]
 script = ExtResource("10_tue0v")
@@ -4627,6 +4859,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_oftb8"]
 script = ExtResource("29_rjv8u")
@@ -4644,6 +4877,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_y5tfd"]
 script = ExtResource("10_tue0v")
@@ -4657,6 +4891,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_iywbe"]
 script = ExtResource("8_08kic")
@@ -4670,6 +4905,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_6o87q"]
 script = ExtResource("10_tue0v")
@@ -4683,6 +4919,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ectdm"]
 script = ExtResource("8_08kic")
@@ -4696,6 +4933,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_qky3c"]
 script = ExtResource("10_tue0v")
@@ -4709,6 +4947,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_pfaol"]
 script = ExtResource("8_08kic")
@@ -4722,6 +4961,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_v2w3o"]
 script = ExtResource("10_tue0v")
@@ -4735,6 +4975,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_454cc"]
 script = ExtResource("8_08kic")
@@ -4748,6 +4989,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_6josv"]
 script = ExtResource("10_tue0v")
@@ -4761,6 +5003,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_3lc1d"]
 script = ExtResource("8_08kic")
@@ -4774,6 +5017,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_fwva1"]
 script = ExtResource("10_tue0v")
@@ -4787,6 +5031,7 @@ props = {
 "r": 9
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_csh1t"]
 script = ExtResource("8_08kic")
@@ -4800,6 +5045,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_fm68g"]
 script = ExtResource("10_tue0v")
@@ -4813,6 +5059,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_tq1hy"]
 script = ExtResource("8_08kic")
@@ -4826,6 +5073,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_i22hx"]
 script = ExtResource("10_tue0v")
@@ -4839,6 +5087,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_r2u7t"]
 script = ExtResource("8_08kic")
@@ -4852,6 +5101,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_u031o"]
 script = ExtResource("10_tue0v")
@@ -4865,6 +5115,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_rd8d0"]
 script = ExtResource("8_08kic")
@@ -4878,6 +5129,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ifl17"]
 script = ExtResource("10_tue0v")
@@ -4891,6 +5143,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_onnnb"]
 script = ExtResource("8_08kic")
@@ -4904,6 +5157,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_l6gk4"]
 script = ExtResource("10_tue0v")
@@ -4917,6 +5171,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jlroe"]
 script = ExtResource("8_08kic")
@@ -4930,6 +5185,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_gs8yw"]
 script = ExtResource("10_tue0v")
@@ -4943,6 +5199,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_7fvsw"]
 script = ExtResource("8_08kic")
@@ -4956,6 +5213,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_oii8k"]
 script = ExtResource("10_tue0v")
@@ -4969,6 +5227,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_egycc"]
 script = ExtResource("8_08kic")
@@ -4982,6 +5241,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_v801i"]
 script = ExtResource("10_tue0v")
@@ -4995,6 +5255,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_tvini"]
 script = ExtResource("29_rjv8u")
@@ -5012,6 +5273,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_xp3rw"]
 script = ExtResource("10_tue0v")
@@ -5025,6 +5287,7 @@ props = {
 "r": 10
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_20he0"]
 script = ExtResource("8_08kic")
@@ -5038,6 +5301,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_nddba"]
 script = ExtResource("10_tue0v")
@@ -5051,6 +5315,7 @@ props = {
 "r": 11
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_35v85"]
 script = ExtResource("8_08kic")
@@ -5064,6 +5329,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_xqive"]
 script = ExtResource("10_tue0v")
@@ -5077,6 +5343,7 @@ props = {
 "r": 11
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_c7qjx"]
 script = ExtResource("8_08kic")
@@ -5090,6 +5357,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_cnyia"]
 script = ExtResource("10_tue0v")
@@ -5103,6 +5371,7 @@ props = {
 "r": 11
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_qedu5"]
 script = ExtResource("8_08kic")
@@ -5116,6 +5385,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_macce"]
 script = ExtResource("10_tue0v")
@@ -5129,6 +5399,7 @@ props = {
 "r": 11
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_a4ngv"]
 script = ExtResource("8_08kic")
@@ -5142,6 +5413,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_qvh23"]
 script = ExtResource("10_tue0v")
@@ -5155,6 +5427,7 @@ props = {
 "r": 11
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_pse2a"]
 script = ExtResource("29_rjv8u")
@@ -5172,6 +5445,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ju7gh"]
 script = ExtResource("10_tue0v")
@@ -5185,6 +5459,7 @@ props = {
 "r": 11
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_6os0c"]
 script = ExtResource("29_rjv8u")
@@ -5202,6 +5477,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_1gx76"]
 script = ExtResource("10_tue0v")
@@ -5215,6 +5491,7 @@ props = {
 "r": 11
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_jqmuv"]
 script = ExtResource("29_rjv8u")
@@ -5232,6 +5509,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_7ny5t"]
 script = ExtResource("8_08kic")
@@ -5245,6 +5523,7 @@ props = {
 "type": ExtResource("17_c2n86")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_weg2h"]
 script = ExtResource("10_tue0v")
@@ -5258,6 +5537,7 @@ props = {
 "r": 11
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_a3m1x"]
 script = ExtResource("8_08kic")
@@ -5271,6 +5551,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_y7br3"]
 script = ExtResource("10_tue0v")
@@ -5284,6 +5565,7 @@ props = {
 "r": 12
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_an61f"]
 script = ExtResource("8_08kic")
@@ -5297,6 +5579,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_iuqe1"]
 script = ExtResource("10_tue0v")
@@ -5310,6 +5593,7 @@ props = {
 "r": 12
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_571og"]
 script = ExtResource("8_08kic")
@@ -5323,6 +5607,7 @@ props = {
 "type": ExtResource("20_b80hp")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_v5paj"]
 script = ExtResource("10_tue0v")
@@ -5336,6 +5621,7 @@ props = {
 "r": 12
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_pnjub"]
 script = ExtResource("29_rjv8u")
@@ -5353,6 +5639,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_s0xri"]
 script = ExtResource("10_tue0v")
@@ -5366,6 +5653,7 @@ props = {
 "r": 12
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_ahv4i"]
 script = ExtResource("29_rjv8u")
@@ -5383,6 +5671,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_heuol"]
 script = ExtResource("8_08kic")
@@ -5396,6 +5685,7 @@ props = {
 "type": ExtResource("17_y2prn")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_6h47t"]
 script = ExtResource("10_tue0v")
@@ -5409,6 +5699,7 @@ props = {
 "r": 12
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_s0hhu"]
 script = ExtResource("29_rjv8u")
@@ -5426,6 +5717,7 @@ props = {
 "type": ExtResource("16_go0qv")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_1q58l"]
 script = ExtResource("8_08kic")
@@ -5439,6 +5731,7 @@ props = {
 "type": ExtResource("19_hf5c4")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_uu5o0"]
 script = ExtResource("10_tue0v")
@@ -5452,6 +5745,7 @@ props = {
 "r": 12
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_0tfnb"]
 script = ExtResource("29_rjv8u")
@@ -5469,6 +5763,7 @@ props = {
 "type": ExtResource("13_uxm04")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_y5qhu"]
 script = ExtResource("8_08kic")
@@ -5482,6 +5777,7 @@ props = {
 "type": ExtResource("16_qoq3p")
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_y0ugf"]
 script = ExtResource("10_tue0v")
@@ -5495,6 +5791,7 @@ props = {
 "r": 12
 }
 was_deserialized = false
+_deserialize_count = 0
 
 [sub_resource type="Resource" id="Resource_n6uli"]
 script = ExtResource("9_g5mpk")
@@ -7278,8 +7575,8 @@ timed_effects = Array[ExtResource("9_kiefc")]([])
 combat_log = Array[ExtResource("3_rf1h5")]([SubResource("Resource_x43p3"), SubResource("Resource_uun7p"), SubResource("Resource_leyyo"), SubResource("Resource_4kyfw"), SubResource("Resource_6ghin"), SubResource("Resource_43t0h"), SubResource("Resource_sqa87"), SubResource("Resource_uchh8"), SubResource("Resource_rro60"), SubResource("Resource_xk4t0"), SubResource("Resource_pqbjt"), SubResource("Resource_dljp5"), SubResource("Resource_cimrj"), SubResource("Resource_ncp66"), SubResource("Resource_1lhw1"), SubResource("Resource_olbdr"), SubResource("Resource_pesjs"), SubResource("Resource_v0b8e"), SubResource("Resource_vw4d7"), SubResource("Resource_plibu"), SubResource("Resource_7ieat"), SubResource("Resource_3ye1o"), SubResource("Resource_q3jah"), SubResource("Resource_ifmf5"), SubResource("Resource_olna4"), SubResource("Resource_cn8c8"), SubResource("Resource_mrl10"), SubResource("Resource_046qr"), SubResource("Resource_hyv56"), SubResource("Resource_n3jtk"), SubResource("Resource_y1vys"), SubResource("Resource_tf1t3"), SubResource("Resource_rgwr2"), SubResource("Resource_nyvkf"), SubResource("Resource_p4u14"), SubResource("Resource_q8vb8"), SubResource("Resource_r5tx5"), SubResource("Resource_cbffi"), SubResource("Resource_ad1h0"), SubResource("Resource_0b7j6"), SubResource("Resource_wcug1"), SubResource("Resource_fo6qu"), SubResource("Resource_v81wg"), SubResource("Resource_sm7fr"), SubResource("Resource_3c13i"), SubResource("Resource_dlslk"), SubResource("Resource_q25ch"), SubResource("Resource_qteea"), SubResource("Resource_myt02"), SubResource("Resource_0b55e"), SubResource("Resource_l5sg6"), SubResource("Resource_s4aut"), SubResource("Resource_1ab04"), SubResource("Resource_5shft"), SubResource("Resource_h48ug"), SubResource("Resource_ikvf8"), SubResource("Resource_a55vq"), SubResource("Resource_x0l7s"), SubResource("Resource_nutjn"), SubResource("Resource_gbo4s"), SubResource("Resource_pe75f"), SubResource("Resource_fyeo2"), SubResource("Resource_0hasy"), SubResource("Resource_ydvv4"), SubResource("Resource_8ssyh"), SubResource("Resource_dgy80"), SubResource("Resource_wari3"), SubResource("Resource_ohvka"), SubResource("Resource_wbk1c"), SubResource("Resource_cxvkf"), SubResource("Resource_xyd3p"), SubResource("Resource_ego46"), SubResource("Resource_e7mkx"), SubResource("Resource_j1lfp"), SubResource("Resource_8iir5"), SubResource("Resource_kqq2f"), SubResource("Resource_a8o5s"), SubResource("Resource_xyhhu"), SubResource("Resource_2ah4n"), SubResource("Resource_cneqx"), SubResource("Resource_ybm1g"), SubResource("Resource_pafkl"), SubResource("Resource_7bd7o"), SubResource("Resource_8xpv0"), SubResource("Resource_6o5uo"), SubResource("Resource_2x2oj"), SubResource("Resource_loxey"), SubResource("Resource_k3kdj"), SubResource("Resource_fdd3t"), SubResource("Resource_5h7gm"), SubResource("Resource_paja3"), SubResource("Resource_5tbe8"), SubResource("Resource_ygtha"), SubResource("Resource_vbau7"), SubResource("Resource_cm8dy"), SubResource("Resource_qk3lq"), SubResource("Resource_gsbvm"), SubResource("Resource_3v3ko"), SubResource("Resource_vw3av"), SubResource("Resource_h7qlr"), SubResource("Resource_u5k12"), SubResource("Resource_rs3u3"), SubResource("Resource_s0u11"), SubResource("Resource_pjcj7"), SubResource("Resource_tcu0o"), SubResource("Resource_g86ql"), SubResource("Resource_a5dd1"), SubResource("Resource_sione"), SubResource("Resource_8r8lu"), SubResource("Resource_nw45x"), SubResource("Resource_2likp"), SubResource("Resource_nij2t"), SubResource("Resource_upcsg"), SubResource("Resource_6v42o"), SubResource("Resource_ns3ms"), SubResource("Resource_x0yqi"), SubResource("Resource_p2557"), SubResource("Resource_f08ld"), SubResource("Resource_6negy"), SubResource("Resource_sn0jc"), SubResource("Resource_2ggnr"), SubResource("Resource_crnlb"), SubResource("Resource_lbvft"), SubResource("Resource_3eqxe"), SubResource("Resource_o06ba"), SubResource("Resource_dutd8"), SubResource("Resource_jrfsy"), SubResource("Resource_i5vec"), SubResource("Resource_8lpsd"), SubResource("Resource_pokhl"), SubResource("Resource_awiy7"), SubResource("Resource_klp7j"), SubResource("Resource_83plg"), SubResource("Resource_c5r3q"), SubResource("Resource_mpl3e"), SubResource("Resource_fa4rn"), SubResource("Resource_xoxv7"), SubResource("Resource_386hh"), SubResource("Resource_6j72e"), SubResource("Resource_rojk7"), SubResource("Resource_iujxo"), SubResource("Resource_d13bg"), SubResource("Resource_gftxa"), SubResource("Resource_cg7au"), SubResource("Resource_vphav"), SubResource("Resource_q5e4h"), SubResource("Resource_haf3e"), SubResource("Resource_wjdm2"), SubResource("Resource_xuexp"), SubResource("Resource_qrpw2"), SubResource("Resource_m1hwm"), SubResource("Resource_ponky"), SubResource("Resource_34qxj"), SubResource("Resource_menag"), SubResource("Resource_xdil8"), SubResource("Resource_8xuf2"), SubResource("Resource_qysol"), SubResource("Resource_6v4fn"), SubResource("Resource_iufug"), SubResource("Resource_ieohx"), SubResource("Resource_x86up"), SubResource("Resource_wmike"), SubResource("Resource_avcuy"), SubResource("Resource_gtvkp"), SubResource("Resource_i374m"), SubResource("Resource_1k0o1"), SubResource("Resource_tf4od"), SubResource("Resource_updet"), SubResource("Resource_dvr4e")])
 active_states = Array[ExtResource("1_2edog")]([])
 all_events = Array[ExtResource("2_a8jnd")]([])
-event_schedules = Array[ExtResource("6_8k1sr")]([])
-enemy_event_queue = Array[ExtResource("5_2xuqg")]([])
+event_schedules = Array[ExtResource("6_8k1sr")]([ExtResource("12_30nfn")])
+enemy_event_queue = Array[ExtResource("5_2xuqg")]([ExtResource("8_8m317"), ExtResource("9_ljt5q"), ExtResource("10_q3j15")])
 enemy_meter = 0
 global_enemy_actions = Array[ExtResource("7_2ybfg")]([])
 references = {

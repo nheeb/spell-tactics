@@ -15,15 +15,17 @@ func _on_advance(round_number: int) -> void:
 		var tile := tree.current_tile
 		combat.level.move_entity_to_graveyard(tree)
 		
-		var leafless := combat.level.entities.create(tile.location, LEAFLESS, false)
+		var leafless := LEAFLESS.create_entity(combat, tile)
 		combat.animation.effect(VFX.HEX_RINGS, tile, {"color": Color.YELLOW}).set_duration(1.0)
 		combat.animation.hide(tree.visual_entity).set_flag_with()
 		combat.animation.show(leafless.visual_entity).set_flag_with()
+		await combat.action_stack.wait()
 		
 		var free_tiles : Array[Tile] = tile.get_surrounding_tiles().filter(func (t): return not t.is_obstacle())
 		free_tiles.shuffle()
 		free_tiles = free_tiles.slice(0, 3)
 		for t in free_tiles:
-			var foliage := combat.level.entities.create(t.location, FOLIAGE, false)
+			var foliage := FOLIAGE.create_entity(combat, t)
 			combat.animation.effect(VFX.HEX_RINGS, t, {"color": Color.GREEN}).set_duration(.3)
 			combat.animation.show(foliage.visual_entity).set_flag_with()
+			await combat.action_stack.wait()

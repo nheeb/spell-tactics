@@ -9,6 +9,7 @@ func setup(co: CombatObject):
 
 func connect_with_combat_object(co: CombatObject):
 	combat_object = co
+	co.set("logic", self)
 
 func connect_with_combat(_combat: Combat):
 	assert(combat == null, "CombatLogic was already connected to combat.")
