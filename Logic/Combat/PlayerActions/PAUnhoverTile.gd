@@ -14,6 +14,7 @@ func execute(combat: Combat) -> void:
 		await combat.input.current_castable.get_logic()._set_preview_visuals(false, tile)
 	if PAHoverTile.currently_hovering_drainable != null and PAHoverTile.currently_hovering_drainable == tile:
 		PAHoverTile.open_cards_shelf_blocker.unblock()
+		PAHoverTile.currently_hovering_drainable.set_highlight(Highlight.Type.HoverAction, false)
 		PAHoverTile.on_drainable_tile_unhovered.emit(PAHoverTile.currently_hovering_drainable)
 		PAHoverTile.currently_hovering_drainable = null
 

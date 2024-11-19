@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Content/Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="2_rjkex"]
 [ext_resource type="Resource" uid="uid://da45ulpggv3c8" path="res://Content/Spells/ObjectGrab.tres" id="4_d4ysr"]
-[ext_resource type="Resource" uid="uid://c2gimhhja8fi6" path="res://Content/Spells/Breath.tres" id="6_7ocbv"]
+[ext_resource type="Resource" uid="uid://bmmnjqd2apbv0" path="res://Content/Spells/RockBlast.tres" id="4_jspnx"]
 [ext_resource type="Resource" uid="uid://dqy48gh8w80m0" path="res://Content/Spells/LightningStrike.tres" id="6_yjt3k"]
 [ext_resource type="Resource" uid="uid://cd42nwwenro" path="res://Content/Spells/Cyclone.tres" id="7_viktr"]
 
@@ -16,6 +16,6 @@ transform = Transform3D(0.519788, 0, 0, 0, 0.519788, 0, 0, 0, 0.519788, 0, 0, 0)
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
 test_spell_1 = ExtResource("7_viktr")
-test_spell_2 = ExtResource("4_d4ysr")
-test_spell_3 = ExtResource("6_7ocbv")
+test_spell_2 = ExtResource("4_jspnx")
+test_spell_3 = ExtResource("4_d4ysr")
 test_spell_4 = ExtResource("6_yjt3k")
