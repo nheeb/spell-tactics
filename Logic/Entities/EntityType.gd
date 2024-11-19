@@ -29,6 +29,9 @@ const ENEMY_LAYER = 2
 ## How good of a cover this is from projectiles (accuracy reduction)
 @export var cover_value: int = 0
 
+@export_group("Destruction")
+@export var corpse_state: EntityState
+
 func create_base_object() -> CombatObject:
 	return Entity.new()
 
@@ -83,12 +86,6 @@ func setup_visuals_and_logic(ent: Entity) -> void:
 	if logic_script != null:
 		ent.logic = logic_script.new(ent, ent.combat)
 
-
-func entity_on_create(ent: Entity, call_on_create: bool) -> void:
-	if call_on_create:
-		ent.on_create()
-		if ent.logic:
-			ent.logic.on_create()
 
 func get_prototype_texture():
 	var texture_path := "res://Assets/Sprites/PrototypeBillboard/" + internal_name + ".png"

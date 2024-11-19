@@ -1,16 +1,10 @@
 class_name SpellLogic extends CastableLogic
 
-var spell: Spell
-
-#func _init(_spell: Spell):
-	#spell = _spell
-	#combat = spell.combat
-	#if spell.type.logic != self.get_script():
-		#push_error("Weird creation of SpellLogic Object")
-
-func connect_with_combat_object(co: CombatObject):
-	spell = co as Spell
-	assert(spell)
+var spell: Spell:
+	get:
+		return combat_object as Spell
+	set(x):
+		push_error("Do not set this.")
 
 func get_castable() -> Castable:
 	return spell

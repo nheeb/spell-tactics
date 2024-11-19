@@ -6,11 +6,11 @@ var event_type: CombatEventType:
 		return type
 @export var scheduled_round := 0
 
-static func from_type(cet: CombatEventType, data := {}, round := 0) -> CombatEventSchedule:
+static func from_type(cet: CombatEventType, _data := {}, _round := 0) -> CombatEventSchedule:
 	var ces := CombatEventSchedule.new()
 	ces.type = cet
-	ces.scheduled_round = round
-	ces.data = data
+	ces.scheduled_round = _round
+	ces.data = _data
 	return ces
 
 func create_event(combat: Combat) -> CombatEvent:

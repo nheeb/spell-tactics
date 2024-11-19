@@ -66,7 +66,7 @@ func setup_visually() -> void:
 	logic._setup_visually()
 
 ## Extend the status by another one of the same kind
-func extend(other_status: EntityStatus) -> void:
+func merge(other_status: EntityStatus) -> void:
 	if type.has_lifetime:
 		match type.lifetime_extend_method:
 			0: # max
@@ -77,7 +77,7 @@ func extend(other_status: EntityStatus) -> void:
 				lifetime = other_status.lifetime
 			3: # ignore
 				pass
-	logic._extend(other_status)
+	logic._merge(other_status)
 
 ## Effects on being removed (clean up timed effects)
 func on_remove() -> void:

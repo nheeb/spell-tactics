@@ -6,6 +6,7 @@ class_name CombatObjectState extends Resource
 @export var props: Dictionary
 ## A flag saving if this was ever deserialized
 @export var was_deserialized := false
+@export var _deserialize_count := 0
 
 func _init(object: CombatObject = null) -> void:
 	if object:
@@ -31,9 +32,11 @@ func deserialize(combat: Combat) -> CombatObject:
 	if not object_was_born_before():
 		props.merge(get_creation_props(), true)
 	# Set deserialized flag
-	if was_deserialized:
-		push_warning("CombatObjectState was already deserialized: %s" % props)
+	# TBD do we want this warning?
+	#if was_deserialized:
+		#push_warning("CombatObjectState was already deserialized: %s" % props)
 	was_deserialized = true
+	_deserialize_count += 1
 	# Get type
 	var type := props.get("type") as CombatObjectType
 	if type == null:
@@ -41,6 +44,14 @@ func deserialize(combat: Combat) -> CombatObject:
 		return null
 	# Create object
 	return type.create(combat, props)
+
+## Wrapper for deserialize that warns if the Object was once serialized.
+## This is intended to be used for States created in the inspector.
+func create(combat: Combat) -> CombatObject:
+	if object_was_born_before():
+		push_warning("Creating CombatObject that was serialized before.")
+		push_warning("If this is intended use 'deserialize' instead.")
+	return deserialize(combat)
 
 func object_was_born_before() -> bool:
 	return props.get("born", false) as bool

@@ -1,5 +1,7 @@
 class_name EntityState extends CombatObjectState
 
+## Type of the Entity
+@export var type: EntityType
 ## States of the Entity's Status
 @export var status_states: Array[CombatObjectState] = []
 

@@ -67,14 +67,14 @@ func is_drainable():
 	return type.is_drainable and energy != null and not energy.is_empty()
 
 ## This will be executed after an entity has been created from a type.
-func on_create() -> void:
-	# TODO reimplement this
-	#TimedEffect.new_combat_change(on_combat_change) \
-		#.set_id("_cc").set_solo().register(combat)
+func on_load() -> void:
+	await super()
+	TimedEffect.new_combat_change(on_combat_change) \
+		.set_id("_cc").set_solo().register(combat)
 	if visual_entity != null:
 		visual_entity.visible = false
 	else:
-		push_warning("visual_entity for entity_type %s is null in on_create()" % type.internal_name)
+		push_warning("visual_entity for entity_type %s is null in on_load()" % type.internal_name)
 
 ## TE
 func on_combat_change():
@@ -85,16 +85,13 @@ func is_dead() -> bool:
 
 ## Removes the entity from the level and moves it into the graveyard.
 ## Returns the die animation (hiding the model for now).
-func die() -> AnimationObject:
+func die():
 	combat.level.move_entity_to_graveyard(self)
-	return combat.animation.hide(visual_entity)
+	combat.animation.hide(visual_entity)
+	await super()
 
 func get_tags() -> Array[String]:
 	return type.tags
-
-### This takes all relevant information from the type in CombatBegin Phase.
-#func sync_with_type() -> void:
-	#energy = type.energy
 
 ## SUBACTION
 func on_hover_long(h: bool) -> void:
@@ -115,17 +112,18 @@ func apply_status(status_or_type: Variant, additional_data := {}) -> void:
 		var status_type := status_or_type as EntityStatusType
 		assert(status_type)
 		status = status_type.create_status(combat, additional_data)
-	var existing_status := get_status(status.get_status_name())
 	if DebugInfo.ACTIVE:
 		combat.animation.say(visual_entity, status.type.pretty_name).set_duration(0.0)
-	if existing_status:
-		existing_status.extend(status)
+	var existing_status := get_status(status.get_status_name())
+	if existing_status and status.type.merge_this_type:
+		existing_status.front().merge(status)
 	else:
 		status_array.append(status)
 		status.setup(self)
 
 ## Returns the status that fits given name or type.
-func get_status(status_name_or_type: Variant) -> EntityStatus:
+func get_status(status_name_or_type: Variant) -> Array[EntityStatus]:
+	var all_status: Array[EntityStatus] = []
 	var status_name: String
 	if status_name_or_type is EntityStatusType:
 		status_name = status_name_or_type.internal_name
@@ -133,12 +131,16 @@ func get_status(status_name_or_type: Variant) -> EntityStatus:
 		status_name = str(status_name_or_type)
 	for status in status_array:
 		if status.get_status_name().to_lower() == status_name.to_lower():
-			return status
-	return null
+			all_status.append(status)
+	return all_status
 
 ## Removes a status from the entity. To be clean use EntityStaus.remove() instead.
-func remove_status(status_name_or_type: Variant) -> void:
-	var status := get_status(status_name_or_type)
-	if status:
+func remove_status(status_or_name_or_type: Variant) -> void:
+	var to_be_removed: Array[EntityStatus] = []
+	if status_or_name_or_type is EntityStatus:
+		to_be_removed = [status_or_name_or_type]
+	else:
+		to_be_removed = get_status(status_or_name_or_type)
+	for status in to_be_removed:
 		status.on_remove()
 		status_array.erase(status)

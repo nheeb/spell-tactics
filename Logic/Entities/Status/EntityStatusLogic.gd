@@ -1,6 +1,10 @@
 class_name EntityStatusLogic extends CombatLogic
 
-var status: EntityStatus
+var status: EntityStatus:
+	get:
+		return combat_object as EntityStatus
+	set(x):
+		push_error("Do not set this.")
 var entity: Entity:
 	get:
 		return status.entity
@@ -13,10 +17,6 @@ var data: Dictionary:
 	set (x):
 		status.data = x
 		push_warning("Do not set this. Just change the elements instead.")
-
-func connect_with_combat_object(co: CombatObject):
-	status = co as EntityStatus
-	assert(status)
 
 ############################
 ## Methods for overriding ##
@@ -32,7 +32,7 @@ func _setup_visually() -> void:
 	pass
 
 ## How does the effect change, when the entity would get another instance of the same effect
-func _extend(other_status: EntityStatus) -> void:
+func _merge(other_status: EntityStatus) -> void:
 	pass
 
 ## Effects on being removed (timed effects are removed by default)

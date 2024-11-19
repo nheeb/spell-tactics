@@ -10,7 +10,7 @@ func _setup_visually() -> void:
 	pass
 
 ## Change of status when another instance of the same status get applied
-func _extend(other_status: EntityStatus) -> void:
+func _merge(other_status: EntityStatus) -> void:
 	pass
 
 ## Effects on being removed (timed effects get removed by default)

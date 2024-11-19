@@ -1,6 +1,6 @@
 extends EntityLogic
 
-func on_summon():
+func on_birth():
 	TimedEffect.new_flavor_reaction(
 		ActionFlavor.new()
 			.add_tag(ActionFlavor.Tag.Spell)
