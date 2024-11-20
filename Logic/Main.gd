@@ -25,29 +25,29 @@ func _ready() -> void:
 
 # todo: move elsewhere
 func add_test_border():
-	test()
-
 	var parent = get_tree().root.get_node('Main/ActivityRouter/MainScene/Viewport3D/World/Level')
-	var selected_tiles: Array[Vector2i] = [
+	selection_mesh(parent, [
 		Vector2i(5,5),
 		Vector2i(7,5),
 		Vector2i(6,4),
+		Vector2i(7,3),
 		Vector2i(5,7),
 		Vector2i(7,4),
-	]
+	])
+
+func selection_mesh(parent: Node3D, selected_tiles: Array[Vector2i]) -> Array[MeshInstance3D]:
 	var chunks = continuous_chunks(selected_tiles)
+	var result: Array[MeshInstance3D] = []
 	for c in chunks:
 		var chunk: Array[Vector2i]
 		chunk.assign(c)
 		var borders = remove_shared_borders(chunk)
 		var coords = create_mesh(borders)
+		# todo: merge all chunks into a single mesh?
 		var mesh = render_mesh(coords, 0.3)
 		parent.add_child(mesh)
-	# parent.add_child(render_mesh([Vector2(5.5, 5), Vector2(7, 5)], 0.3))
-
-
-func xy(v: Vector3i) -> Vector2:
-	return Vector2(v.x, v.y)
+		result.append(mesh)
+	return result
 
 func tile_coord_to_screen_coord(tile: Vector2, height: float):
 	var r_tile = tile.x
@@ -58,36 +58,35 @@ func tile_coord_to_screen_coord(tile: Vector2, height: float):
 	var xz_translation: Vector2 = (r_tile-r_center) * level.Q_BASIS + (q_tile-q_center) * level.R_BASIS 
 	return Vector3(xz_translation.x, height, xz_translation.y)
 
-func get_border_offset(border: int) -> Array[Vector2]:
-	const h = 0.5
-	const q = 0.25
-	if border == BORDER_WEST:
-		return [Vector2(-h, -q), Vector2(-h, q)]
-	if border == BORDER_NW:
-		return [Vector2(-h, -q), Vector2(0, -h)]
-	if border == BORDER_NE:
-		return [Vector2(0, -h), Vector2(h, -q)]
-	if border == BORDER_EAST:
-		return [Vector2(h, -q), Vector2(h, q)]
-	if border == BORDER_SE:
-		return [Vector2(h, q), Vector2(0, h)]
-	if border == BORDER_SW:
-		return [Vector2(0, h), Vector2(-h, q)]
-	push_error("Invalid border")
-	return [Vector2(-q, 0), Vector2(q, 0)]
+func get_border_offset(border: int) -> Vector3:
+	var out = Vector3(-1,0, 0).rotated(Vector3.UP, deg_to_rad(-(border & 1) * 60 + 30))
+	border >>= 1
+	while border > 1:
+		out = out.rotated(Vector3.UP, deg_to_rad(-60))
+		border >>= 1
+	return out
+
+func apply_offset(point: Vector3, height: float):
+	return tile_coord_to_screen_coord(Vector2(point.x, point.y), height) + get_border_offset(int(point.z))
 
 const HEIGHT_LOW = 0
-func render_mesh(points: Array[Vector2], height: float):
+func render_mesh(points: Array[Vector3], height: float) -> MeshInstance3D:
 	assert(len(points) >= 2)
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var i = 0
 	while i < len(points) - 1:
+		print([
+			apply_offset(points[i], HEIGHT_LOW),
+			apply_offset(points[i], HEIGHT_LOW+height),
+			apply_offset(points[i+1], HEIGHT_LOW+height),
+			apply_offset(points[i+1], HEIGHT_LOW),
+		])
 		st.add_triangle_fan(PackedVector3Array([
-			tile_coord_to_screen_coord(points[i], HEIGHT_LOW),
-			tile_coord_to_screen_coord(points[i], HEIGHT_LOW+height),
-			tile_coord_to_screen_coord(points[i+1], HEIGHT_LOW+height),
-			tile_coord_to_screen_coord(points[i+1], HEIGHT_LOW),
+			apply_offset(points[i], HEIGHT_LOW),
+			apply_offset(points[i], HEIGHT_LOW+height),
+			apply_offset(points[i+1], HEIGHT_LOW+height),
+			apply_offset(points[i+1], HEIGHT_LOW),
 		]), PackedVector2Array([
 			Vector2(0, 0),
 			Vector2(0, 1),
@@ -101,18 +100,17 @@ func render_mesh(points: Array[Vector2], height: float):
 	var material = preload("res://VFX/Materials/DebugPink.tres")
 	mesh.set_mesh(st.commit())
 	mesh.material_override = material
-	mesh.name = "TEST_BORDER"
+	mesh.name = "SHADER_BORDER"
 	return mesh
 
-func create_mesh(tiles: Array[Vector3i]) -> Array[Vector2]:
-	var out: Array[Vector2] = []
+func create_mesh(tiles: Array[Vector3i]) -> Array[Vector3]:
+	var out: Array[Vector3] = []
 	for tile in tiles:
 		var i = 1
 		while i < BORDER_ALL:
 			if tile.z & i > 0:
-				var o = get_border_offset(i)
-				out.append(xy(tile) + o[0])
-				out.append(xy(tile) + o[1])
+				out.append(Vector3(tile.x, tile.y, (i<<1) + 0))
+				out.append(Vector3(tile.x, tile.y, (i<<1) + 1))
 			i = i << 1
 	return out
 
