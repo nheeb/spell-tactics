@@ -100,6 +100,11 @@ func get_random_action_plan() -> EnemyActionPlan:
 ## Entity Overrides ##
 ######################
 
+func on_birth():
+	await super()
+	TimedEffect.new_combat_change(on_combat_change) \
+		.set_id("_cc").set_solo().register(combat)
+
 ## TE
 func on_combat_change():
 	await combat.action_stack.process_callable(plan_next_action)

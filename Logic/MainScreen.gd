@@ -18,9 +18,9 @@ func _ready():
 		activity = CombatActivity.new("res://Levels/Area1/clearing.tres")
 	if activity:
 		if activity.combat_state:
-			%World.load_combat_from_state(activity.combat_state)
+			await %World.load_combat_from_state(activity.combat_state)
 		elif activity.level_path:
-			%World.load_combat_from_path(activity.level_path)
+			await %World.load_combat_from_path(activity.level_path)
 		else:
 			push_error("Invalid Combat Activity")
 		activity.combat = %World.get_node("Combat")

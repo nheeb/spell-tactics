@@ -25,45 +25,27 @@ var targets: Array:
 			return []
 		return data["_targets"]
 
-#func _init(_type: EntityStatusType = null, _data := {}) -> void:
-	#type = _type
-	#if type:
-		## Build data
-		#data.clear()
-		#if type.has_lifetime:
-			#lifetime = type.lifetime_default # Uses data in the setter
-		#data.merge(type.default_data, true)
-		#data.merge(_data, true)
-
-func setup(_entity: Entity):
-	entity = _entity
-	# Execute Setup
-	if not is_logic_setup_done:
-		setup_logic()
-		is_logic_setup_done = true
-	setup_visually()
-
 func get_status_name() -> String:
 	return type.internal_name
 
 ## Logic when status effect enters the game
 ## This will only be called when the status effect is applied
 ## not when it is loaded
-func setup_logic() -> void:
+func on_birth() -> void:
 	if type.has_lifetime:
 		TimedEffect.new_end_phase_trigger_from_callable(reduce_lifetime) \
 			.set_id("_lt").set_priority(-100).register(combat)
-	logic._setup_logic()
+	await super()
 
 ## Visual changes when status effect enters the game
-func setup_visually() -> void:
+func on_load() -> void:
 	if type.make_floating_icon:
 		var icon_name := "%s_icons" % get_status_name()
 		combat.animation.add_staying_effect(
 			VFX.ICON_VISUALS, entity.visual_entity, icon_name, \
 			{"icon": type.icon, "color": type.color}
 		)
-	logic._setup_visually()
+	await super()
 
 ## Extend the status by another one of the same kind
 func merge(other_status: EntityStatus) -> void:

@@ -3,6 +3,13 @@ class_name CombatLogic extends RefCounted
 var combat: Combat
 var combat_object: CombatObject
 
+var data: Dictionary:
+	get:
+		return combat_object.data
+	set (x):
+		combat_object.data = x
+		push_warning("Do not set this. Just change the elements instead.")
+
 func setup(co: CombatObject):
 	connect_with_combat_object(co)
 	connect_with_combat(co.combat)
@@ -14,8 +21,6 @@ func connect_with_combat_object(co: CombatObject):
 func connect_with_combat(_combat: Combat):
 	assert(combat == null, "CombatLogic was already connected to combat.")
 	combat = _combat
-	TimedEffect.new_combat_change(on_combat_change)\
-		.force_freshness().set_id("_cc").set_solo().register(combat)
 
 func get_reference() -> PropertyReference:
 	assert(combat_object.get("logic") == self)
@@ -31,8 +36,4 @@ func on_load() -> void:
 
 ## ACTION
 func on_death() -> void:
-	pass
-
-## TE
-func on_combat_change() -> void:
 	pass

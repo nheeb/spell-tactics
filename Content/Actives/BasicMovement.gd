@@ -2,6 +2,10 @@ extends ActiveLogic
 
 var movement_range: int = 3
 
+func on_birth():
+	TimedEffect.new_combat_change(on_combat_change) \
+		.set_id("_cc").set_solo().register(combat)
+
 func on_combat_change():
 	var flavor := ActionFlavor.new().add_tag(ActionFlavor.Tag.Movement)\
 		.set_owner(combat.player).finalize(combat)

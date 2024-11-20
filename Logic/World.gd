@@ -28,20 +28,14 @@ func load_combat_from_path(level_path: String) -> void:
 	var combat_state: CombatState = load(level_path) as CombatState
 	if combat_state == null:
 		assert(combat_state != null, "Failed to load CombatState")
-	load_combat_from_state(combat_state)
+	await load_combat_from_state(combat_state)
 
 func load_combat_from_state(combat_state: CombatState, combat_active: bool = true) -> void:
 	# If we always create a new ScreenCombat for every Combat (which I think
 	# we should) then some of the following lines could be cut & simplified
 	
-	## DEPRECATED This is now done in CombatBeginPhase
-	# Take the default deck if there is no deck saved in combatstate
-	#if combat_state == null or combat_state.deck_states.is_empty():
-		#combat_state.deck_states = Game.DeckUtils.create_test_deck_serialized()
-	
 	# Create combat
-	combat = combat_state.deserialize()
-	add_child(combat)
+	combat = await combat_state.deserialize(self)
 	
 	# Add level to tree
 	level = combat.level

@@ -88,7 +88,7 @@ func _find_tres_files_recursive(path: String, result: Array):
 func load_level(level_path: String):
 	var combat_state = ResourceLoader.load(level_path) as CombatState
 	world._reset_combat()
-	world.load_combat_from_state(combat_state, false)
+	await world.load_combat_from_state(combat_state, false)
 	current_level_path = level_path
 	$%LevelSize.value = world.level.get_grid_size()
 	

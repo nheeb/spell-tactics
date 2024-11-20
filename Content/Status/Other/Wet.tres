@@ -6,13 +6,16 @@
 
 [resource]
 script = ExtResource("2_jku8u")
-pretty_name = "Wet"
-icon = ExtResource("2_rbvpp")
-color = Color(0.117325, 0.705754, 0.910156, 1)
 text = "This entity is wet."
-default_data = {}
 has_lifetime = true
-lifetime_default = 3
+lifetime_default = 2
 lifetime_extend_method = 0
 make_floating_icon = true
+merge_this_type = false
+kill_te_on_remove = true
 enemy_actions = Array[ExtResource("1_l3kmx")]([])
+pretty_name = "Wet"
+fluff_text = ""
+icon = ExtResource("2_rbvpp")
+color = Color(0.117325, 0.705754, 0.910156, 1)
+default_data = {}

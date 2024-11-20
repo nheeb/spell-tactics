@@ -11,12 +11,7 @@ var entity: Entity:
 var type: EntityStatusType:
 	get:
 		return status.type
-var data: Dictionary:
-	get:
-		return status.data
-	set (x):
-		status.data = x
-		push_warning("Do not set this. Just change the elements instead.")
+
 
 ############################
 ## Methods for overriding ##

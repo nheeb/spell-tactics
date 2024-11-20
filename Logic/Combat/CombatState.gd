@@ -37,13 +37,19 @@ class_name CombatState extends Resource
 
 const COMBAT = preload("res://Logic/Combat/Combat.tscn")
 
-func deserialize() -> Combat:
+func deserialize(world: World) -> Combat:
 	# Combat and children nodes
 	var combat : Combat = COMBAT.instantiate() as Combat
+	world.add_child(combat)
 	combat._ready()
 	for c in combat.get_children():
 		for cc in c.get_children():
 			cc.set("combat", combat)
+	combat.action_stack.push_front(_deserialize_into.bind(combat))
+	await combat.action_stack.clear
+	return combat
+
+func _deserialize_into(combat: Combat):
 	combat.log.add("Deserializing Combat...")
 	# Old ids and refs
 	combat.ids.references = references
@@ -51,6 +57,8 @@ func deserialize() -> Combat:
 	# Rounds & Energy
 	combat.current_round = current_round
 	combat.current_phase = current_phase
+	if player_energy == null:
+		player_energy = EnergyStack.new()
 	combat.energy.player_energy = player_energy
 	# Level
 	if level_state == null:
@@ -73,7 +81,6 @@ func deserialize() -> Combat:
 	combat.global_enemy_actions = global_enemy_actions
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
-	
 	
 	combat.ids.check_integrity()
 	

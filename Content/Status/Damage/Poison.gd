@@ -1,5 +1,8 @@
 extends EntityStatusLogic
 
+func on_birth():
+	print("!!")
+
 ## Logic when status enters the game
 ## This will only be called when the status effect is applied, not when it is loaded
 func _setup_logic() -> void:

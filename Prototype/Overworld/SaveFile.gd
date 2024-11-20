@@ -9,11 +9,13 @@ static func exists(path: String) -> bool:
 static func save_to_disk(combat_state: CombatState, path: String) -> void:
 	var thread := Thread.new()
 	thread.start(
-		func():
-			var err = ResourceSaver.save(combat_state, path)
-			if not err == OK:
-				push_error("Err when saving level state: ", err)
+		_save_to_disk.bind(combat_state, path)
 	)
+
+static func _save_to_disk(combat_state: CombatState, path: String) -> void:
+	var err = ResourceSaver.save(combat_state, path)
+	if not err == OK:
+		push_error("Err when saving level state: ", err)
 
 static func load_from_disk(path: String) -> CombatState:
 	var overworld_state = ResourceLoader.load(path) as CombatState

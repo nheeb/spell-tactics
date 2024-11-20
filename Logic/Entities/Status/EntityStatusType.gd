@@ -30,6 +30,5 @@ class_name EntityStatusType extends CombatObjectType
 func create_base_object() -> CombatObject:
 	return EntityStatus.new()
 
-func create_status(combat: Combat, _data := {}) -> EntityStatus:
-	var status = create(combat, {"data": _data}) as EntityStatus
-	return status
+func create_status(combat: Combat, entity: Entity, _data := {}) -> EntityStatus:
+	return create(combat, {"data": _data, "entity": entity}) as EntityStatus

@@ -8,12 +8,6 @@ func on_birth():
 	TimedEffect.new_end_phase_trigger_from_callable(make_damage).set_trigger_count(duration)\
 			.extra_last_callable(entity.die).register(combat)
 
-func on_load():
-	pass
-
-func on_graveyard():
-	pass
-
 func make_damage():
 	var anims = []
 	anims.append(combat.animation.wait())

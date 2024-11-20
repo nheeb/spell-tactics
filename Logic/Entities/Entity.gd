@@ -69,16 +69,10 @@ func is_drainable():
 ## This will be executed after an entity has been created from a type.
 func on_load() -> void:
 	await super()
-	TimedEffect.new_combat_change(on_combat_change) \
-		.set_id("_cc").set_solo().register(combat)
 	if visual_entity != null:
 		visual_entity.visible = false
 	else:
 		push_warning("visual_entity for entity_type %s is null in on_load()" % type.internal_name)
-
-## TE
-func on_combat_change():
-	pass
 
 func is_dead() -> bool:
 	return current_tile == null
@@ -111,7 +105,7 @@ func apply_status(status_or_type: Variant, additional_data := {}) -> void:
 	else:
 		var status_type := status_or_type as EntityStatusType
 		assert(status_type)
-		status = status_type.create_status(combat, additional_data)
+		status = status_type.create_status(combat, self, additional_data)
 	if DebugInfo.ACTIVE:
 		combat.animation.say(visual_entity, status.type.pretty_name).set_duration(0.0)
 	var existing_status := get_status(status.get_status_name())
@@ -119,7 +113,7 @@ func apply_status(status_or_type: Variant, additional_data := {}) -> void:
 		existing_status.front().merge(status)
 	else:
 		status_array.append(status)
-		status.setup(self)
+		#status.setup(self)
 
 ## Returns the status that fits given name or type.
 func get_status(status_name_or_type: Variant) -> Array[EntityStatus]:
