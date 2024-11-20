@@ -33,8 +33,6 @@ const superseding_types: Dictionary = {
 var current_highlights: Array[Type] = []
 
 func enable_highlight(type: Type):
-	if type == Type.HoverAction:
-		print("stop")
 	if not type in current_highlights:
 		current_highlights.append(type)
 		
