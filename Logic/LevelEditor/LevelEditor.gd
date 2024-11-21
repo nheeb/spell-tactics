@@ -42,6 +42,8 @@ func _ready() -> void:
 
 	for level_path in all_levels_paths:
 		var filename = level_path.split("/")[-1].split(".tres")[0]
+		if "event" in filename:
+			continue
 		$%LevelSelection.add_item(filename)
 		var idx = $%LevelSelection.item_count - 1
 		$%LevelSelection.set_item_metadata(idx, level_path)

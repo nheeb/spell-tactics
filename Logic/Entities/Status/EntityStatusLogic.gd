@@ -19,23 +19,23 @@ var type: EntityStatusType:
 
 ## Logic when status effect enters the game
 ## This will only be called when the status effect is applied, not when it is loaded
-func _setup_logic() -> void:
+func on_birth() -> void:
 	pass
 
 ## Visual changes when status effect enters the game
-func _setup_visually() -> void:
+func on_load() -> void:
 	pass
 
 ## How does the effect change, when the entity would get another instance of the same effect
-func _merge(other_status: EntityStatus) -> void:
+func merge(other_status: EntityStatus) -> void:
 	pass
 
 ## Effects on being removed (timed effects are removed by default)
-func _on_remove() -> void:
+func on_death() -> void:
 	pass
 
 ## Special actions an enemy with the status could do
-func _get_enemy_actions() -> Array[EnemyActionArgs]:
+func get_enemy_actions() -> Array[EnemyActionArgs]:
 	return []
 
 ####################
@@ -43,7 +43,4 @@ func _get_enemy_actions() -> Array[EnemyActionArgs]:
 ####################
 
 func self_remove() -> void:
-	entity.remove_status(status.get_status_name())
-
-func get_reference() -> PropertyReference:
-	return PropertyReference.new(status.get_reference(), "logic")
+	await combat.action_stack.process_callable(status.die)

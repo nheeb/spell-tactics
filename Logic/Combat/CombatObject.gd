@@ -61,7 +61,7 @@ func die() -> void:
 	assert(combat != null and born and not dead)
 	dead = true
 	combat.ids.remove_combat_object(self)
-	await on_death()
+	await combat.action_stack.process_callable(on_death)
 
 ## ACTION
 func on_death() -> void:
@@ -82,3 +82,11 @@ func sync_with_type(_type: CombatObjectType = null) -> void:
 func update_properties(props: Dictionary):
 	for k in props.keys():
 		set(k, props[k])
+
+func get_name() -> String:
+	if get_generic_type():
+		return get_generic_type().internal_name
+	return "TypelessCO"
+
+func _to_string() -> String:
+	return "%s:%s" % [get_name(), str(id) if id >= 0 else "?"]

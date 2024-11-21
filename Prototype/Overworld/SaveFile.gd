@@ -11,6 +11,9 @@ static func save_to_disk(combat_state: CombatState, path: String) -> void:
 	thread.start(
 		_save_to_disk.bind(combat_state, path)
 	)
+	while thread.is_alive():
+		await VisualTime.visual_process
+	thread.wait_to_finish()
 
 static func _save_to_disk(combat_state: CombatState, path: String) -> void:
 	var err = ResourceSaver.save(combat_state, path)

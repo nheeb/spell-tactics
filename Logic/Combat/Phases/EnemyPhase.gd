@@ -24,6 +24,7 @@ func process_phase() -> void:
 			ActionTicket.new(do_enemy_action.bind(enemy))
 		)
 		await combat.action_stack.wait()
+	combat.animation.wait(.7)
 
 ## ACTION
 func do_enemy_action(enemy: EnemyEntity):

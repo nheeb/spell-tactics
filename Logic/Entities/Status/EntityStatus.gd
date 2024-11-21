@@ -25,9 +25,6 @@ var targets: Array:
 			return []
 		return data["_targets"]
 
-func get_status_name() -> String:
-	return type.internal_name
-
 ## Logic when status effect enters the game
 ## This will only be called when the status effect is applied
 ## not when it is loaded
@@ -40,7 +37,7 @@ func on_birth() -> void:
 ## Visual changes when status effect enters the game
 func on_load() -> void:
 	if type.make_floating_icon:
-		var icon_name := "%s_icons" % get_status_name()
+		var icon_name := "%s_icons" % get_name()
 		combat.animation.add_staying_effect(
 			VFX.ICON_VISUALS, entity.visual_entity, icon_name, \
 			{"icon": type.icon, "color": type.color}
@@ -59,10 +56,13 @@ func merge(other_status: EntityStatus) -> void:
 				lifetime = other_status.lifetime
 			3: # ignore
 				pass
-	logic._merge(other_status)
+	logic.merge(other_status)
 
 ## Effects on being removed (clean up timed effects)
-func on_remove() -> void:
+func on_death() -> void:
+	await super()
+	# Remove status from entity
+	entity._erase_status(self)
 	# Kill TimedEffects automatically if activated
 	if type.kill_te_on_remove:
 		for te in combat.t_effects.get_effects(self):
@@ -75,24 +75,20 @@ func on_remove() -> void:
 			te.kill()
 	# Remove floating icons
 	if type.make_floating_icon:
-		var icon_name := "%s_icons" % get_status_name()
+		var icon_name := "%s_icons" % get_name()
 		combat.animation.remove_staying_effect(entity.visual_entity, icon_name)
-	logic._on_remove()
 
 ## Special actions an enemy with the status could do
 func get_enemy_actions() -> Array[EnemyActionArgs]:
 	var actions : Array[EnemyActionArgs] = type.enemy_actions.duplicate()
-	actions.append_array(logic._get_enemy_actions())
+	actions.append_array(logic.get_enemy_actions())
 	if targets:
 		for action in actions:
 			action.fixed_targets = targets
 	return actions
 
-func remove() -> void:
-	logic.self_remove()
-
 ## TE
 func reduce_lifetime() -> void:
 	lifetime = lifetime - 1
 	if lifetime < 0:
-		remove()
+		combat.action_stack.process_callable(die)

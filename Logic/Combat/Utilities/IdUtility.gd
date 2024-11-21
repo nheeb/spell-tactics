@@ -75,6 +75,10 @@ func check_integrity() -> void:
 			if not ref.removed:
 				integrity_broken = true
 				push_warning("ID Integrity: No object at %s (%s)" % [i, _name])
+		elif str(object) != _name:
+			integrity_broken = true
+			push_warning("ID Integrity: Unexpected name change '%s' -> '%s'" % \
+						[_name, str(object)])
 	if integrity_broken:
 		push_warning("ID Integrity: Everything will be rearranged.")
 		rearrage_everything()

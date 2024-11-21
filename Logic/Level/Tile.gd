@@ -53,8 +53,8 @@ func serialize() -> TileState:
 	tile_state.entity_states = entity_states
 	return tile_state
 
-func _to_string() -> String:
-	return "Tile_%02d_%02d" % [r, q]
+func get_name() -> String:
+	return "Tile(%02d/%02d)" % [r, q]
 
 ############################
 ## Entity Related Methods ##

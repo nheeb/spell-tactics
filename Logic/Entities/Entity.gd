@@ -108,7 +108,7 @@ func apply_status(status_or_type: Variant, additional_data := {}) -> void:
 		status = status_type.create_status(combat, self, additional_data)
 	if DebugInfo.ACTIVE:
 		combat.animation.say(visual_entity, status.type.pretty_name).set_duration(0.0)
-	var existing_status := get_status(status.get_status_name())
+	var existing_status := get_status(status.get_name())
 	if existing_status and status.type.merge_this_type:
 		existing_status.front().merge(status)
 	else:
@@ -124,11 +124,11 @@ func get_status(status_name_or_type: Variant) -> Array[EntityStatus]:
 	else:
 		status_name = str(status_name_or_type)
 	for status in status_array:
-		if status.get_status_name().to_lower() == status_name.to_lower():
+		if status.get_name().to_lower() == status_name.to_lower():
 			all_status.append(status)
 	return all_status
 
-## Removes a status from the entity. To be clean use EntityStaus.remove() instead.
+## Removes a status from the entity.
 func remove_status(status_or_name_or_type: Variant) -> void:
 	var to_be_removed: Array[EntityStatus] = []
 	if status_or_name_or_type is EntityStatus:
@@ -136,5 +136,18 @@ func remove_status(status_or_name_or_type: Variant) -> void:
 	else:
 		to_be_removed = get_status(status_or_name_or_type)
 	for status in to_be_removed:
-		status.on_remove()
-		status_array.erase(status)
+		if not status in status_array:
+			push_warning("Remove status got a status which is not on the entity.")
+			continue
+		if status.dead:
+			push_warning("Trying to kill a dead status")
+			continue
+		combat.action_stack.push_before_active(status.die)
+	await combat.action_stack.wait()
+
+func _erase_status(status: EntityStatus) -> void:
+	if not status.dead:
+		push_warning("Status should be dead when getting erased.")
+	if not status in status_array:
+		push_warning("Erase status got a status which is not on the entity.")
+	status_array.erase(status)
