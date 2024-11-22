@@ -23,6 +23,10 @@ func _ready() -> void:
 	# should be put somewhere else but 🤷‍♂️
 	Input.set_custom_mouse_cursor(load("res://Assets/Sprites/Cursor/wood_oak_24_highlight.png"),
 								  Input.CURSOR_POINTING_HAND)
+	if OS.is_debug_build():  # start with sound off by default in debug builds
+		await get_tree().process_frame
+		combat_ui._on_sound_toggle_toggled(false)
+			
 
 func load_combat_from_path(level_path: String) -> void:
 	var combat_state: CombatState = load(level_path) as CombatState

@@ -153,3 +153,8 @@ func _on_debug_overlay_toggled(toggled_on: bool) -> void:
 
 func _on_energy_overlay_toggled(toggled_on: bool) -> void:
 	Game.ENERGY_OVERLAY = toggled_on
+
+
+func _on_sound_toggle_toggled(toggled_on: bool) -> void:
+	AudioServer.set_bus_mute(0, not toggled_on)
+	$OverlayBar/SoundToggle.button_pressed = toggled_on
