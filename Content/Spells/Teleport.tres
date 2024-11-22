@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://c38oh270u86ke"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_f502n"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_un8mj"]
+[ext_resource type="Texture2D" uid="uid://dtrpo0mc6xmo5" path="res://Assets/Sprites/Icons/back-forth.png" id="2_2dk7w"]
+[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="2_ayqwy"]
+
+[sub_resource type="Resource" id="Resource_in1y4"]
+script = ExtResource("1_f502n")
+stack = Array[int]([4, 6])
+
+[resource]
+script = ExtResource("1_un8mj")
+costs = SubResource("Resource_in1y4")
+keywords = Array[ExtResource("2_ayqwy")]([])
+pretty_name = "Teleport"
+effect_text = "Changes your location."
+fluff_text = ""
+icon = ExtResource("2_2dk7w")
+color = Color(1, 0.90387, 0.121094, 1)
+target = 3
+target_range = 4
+target_min_range = -1
+target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
+topic = 3
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""

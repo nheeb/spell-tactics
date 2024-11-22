@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EntityType" load_steps=5 format=3 uid="uid://iq34rfnf6t4w"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_4q1xh"]
+[ext_resource type="Script" path="res://Logic/Entities/EntityType.gd" id="1_cxs30"]
+[ext_resource type="PackedScene" uid="uid://comglywow87xc" path="res://VFX/Entities/VisualWaterTile.tscn" id="2_xo0pv"]
+
+[sub_resource type="Resource" id="Resource_hfhpp"]
+script = ExtResource("1_4q1xh")
+stack = Array[int]([3])
+
+[resource]
+script = ExtResource("1_cxs30")
+internal_name = "water_tile"
+can_be_hovered = true
+pretty_name = "Water"
+fluff_text = ""
+visual_scene = ExtResource("2_xo0pv")
+prototype_scale = Vector2(1, 1)
+tags = Array[String]([])
+is_terrain = true
+is_drainable = true
+energy = SubResource("Resource_hfhpp")
+obstacle_layer = 1
+obstacle_mask = 1
+is_blocker = false
+cover_value = 0

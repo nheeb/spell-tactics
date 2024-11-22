@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=8 format=3 uid="uid://naanj6ysv6v5"]
+
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_8b5hi"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyAction.gd" id="1_h275o"]
+[ext_resource type="Texture2D" uid="uid://ccnyf8c432pm" path="res://Assets/Sprites/Icons/dart.png" id="2_dmtsk"]
+[ext_resource type="Resource" uid="uid://dcpjaerkeyfjv" path="res://Content/Enemies/Moves/Movement/MoveRandom.tres" id="3_n14ve"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="4_ypory"]
+
+[sub_resource type="Resource" id="Resource_iq87n"]
+script = ExtResource("1_8b5hi")
+criteria = 0
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_ppxig"]
+script = ExtResource("4_ypory")
+action = ExtResource("3_n14ve")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[resource]
+script = ExtResource("1_h275o")
+pretty_name = "Arrow Shot"
+icon = ExtResource("2_dmtsk")
+color = Color(1, 1, 1, 1)
+target_type = 1
+can_self_target = false
+target_range_looking = -1
+target_range_walking = -1
+target_consider_count = 2
+target_consider_method = 0
+default_scores = Array[ExtResource("1_8b5hi")]([SubResource("Resource_iq87n")])
+cooldown = 0
+movement_action_args = SubResource("Resource_ppxig")
+default_args = []
+default_kwargs = {}

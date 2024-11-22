@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3t7dsskwul4j"]
+
+[ext_resource type="Script" path="res://Logic/MainScreen.gd" id="1_mxjyu"]
+[ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_pqauw"]
+[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="3_im24c"]
+[ext_resource type="Script" path="res://Logic/Utility/ViewportSizer.gd" id="4_dkfaa"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qgsc2"]
+viewport_path = NodePath("Viewport3D")
+
+[node name="MainScene" type="CanvasLayer" groups=["ui_root"]]
+layer = 2
+script = ExtResource("1_mxjyu")
+
+[node name="Viewport3D" type="SubViewport" parent="."]
+unique_name_in_owner = true
+own_world_3d = true
+msaa_3d = 1
+use_debanding = true
+physics_object_picking = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="World" parent="Viewport3D" node_paths=PackedStringArray("popup_handler") instance=ExtResource("2_pqauw")]
+unique_name_in_owner = true
+popup_handler = NodePath("../../PopUpHandler")
+
+[node name="Drainables" type="Control" parent="Viewport3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PopUps" type="Control" parent="Viewport3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ViewportTexture" type="TextureRect" parent="CenterContainer" groups=["ui_root"]]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_qgsc2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PopUpHandler" parent="." node_paths=PackedStringArray("viewport", "drainable_root", "popup_root") instance=ExtResource("3_im24c")]
+viewport = NodePath("../Viewport3D")
+drainable_root = NodePath("../Viewport3D/Drainables")
+popup_root = NodePath("../Viewport3D/PopUps")
+
+[node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport", "debug_label")]
+script = ExtResource("4_dkfaa")
+target_viewport = NodePath("../Viewport3D")
+debug_label = NodePath("../DebugLabel")
+
+[node name="DebugLabel" type="Label" parent="."]
+visible = false
+offset_left = 176.0
+offset_right = 216.0
+offset_bottom = 23.0
+
+[connection signal="combat_changed" from="Viewport3D/World" to="PopUpHandler" method="_on_world_combat_changed"]

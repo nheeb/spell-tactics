@@ -1,0 +1,111 @@
+[gd_scene load_steps=10 format=3 uid="uid://dkl8yhcu2dmjh"]
+
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/BaseMaterials/TileGroundMaterial.tres" id="1_24n3e"]
+[ext_resource type="Script" path="res://VFX/Entities/VisualPlayer.gd" id="2_nidg8"]
+[ext_resource type="PackedScene" uid="uid://667ohrdomp4u" path="res://Assets/Models/Character/MagicRaccoon_Model.tscn" id="3_p2lke"]
+[ext_resource type="PackedScene" uid="uid://71nxh6lmao86" path="res://VFX/Effects/HealthBar/HPLabel.tscn" id="4_joyyb"]
+[ext_resource type="PackedScene" uid="uid://dox42qum5t0vk" path="res://Logic/Utility/OrbitalMovementBody.tscn" id="5_yrafp"]
+[ext_resource type="PackedScene" uid="uid://dqbvijkk2njrj" path="res://VFX/Effects/HealthBar/HealthBar3D.tscn" id="6_ys3y4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v522e"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q4f3v"]
+material = ExtResource("1_24n3e")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.2
+radial_segments = 6
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aaaaa"]
+albedo_color = Color(0.32549, 0.65098, 0.890196, 1)
+emission_enabled = true
+emission = Color(0.32549, 0.65098, 0.890196, 1)
+
+[node name="VisualPlayer" type="Node3D"]
+script = ExtResource("2_nidg8")
+idle_break_chance = 0.5
+
+[node name="Capsule" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_v522e")
+
+[node name="DebugTile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+visible = false
+
+[node name="Hexagon" type="MeshInstance3D" parent="DebugTile"]
+mesh = SubResource("CylinderMesh_q4f3v")
+
+[node name="MagicRaccoon_Model" parent="." instance=ExtResource("3_p2lke")]
+transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 0, 0, 0)
+
+[node name="Skeleton3D" parent="MagicRaccoon_Model/MagicRaccoon/rig_deform" index="0"]
+bones/0/position = Vector3(-0.00314386, 0.369355, -0.0189529)
+bones/2/rotation = Quaternion(0.0466946, 0.0723801, 0.0158396, 0.996158)
+bones/3/rotation = Quaternion(0.100376, 0.0232721, 0.0119157, 0.994606)
+bones/4/rotation = Quaternion(0.129535, -0.00276583, -0.0140516, 0.991471)
+bones/6/rotation = Quaternion(0.0393261, -0.00651401, -0.0178879, 0.999045)
+bones/13/rotation = Quaternion(-0.0834128, 0.630957, -0.562411, 0.527854)
+bones/14/rotation = Quaternion(1.44036e-07, 0.0180392, 2.25654e-07, 0.999837)
+bones/15/rotation = Quaternion(0.507274, 0.0180382, -0.0106198, 0.86153)
+bones/16/rotation = Quaternion(-3.98632e-07, -0.542675, -7.27232e-08, 0.839943)
+bones/17/rotation = Quaternion(0.0863223, -0.542715, -0.0589486, 0.833387)
+bones/39/rotation = Quaternion(0.177731, -0.648708, 0.376428, 0.637096)
+bones/40/rotation = Quaternion(2.43346e-08, 0.0310155, 9.93848e-08, 0.999519)
+bones/41/rotation = Quaternion(0.484868, 0.0314296, -0.017439, 0.873848)
+bones/42/rotation = Quaternion(2.07225e-08, 0.282136, -1.87744e-08, 0.959374)
+bones/43/rotation = Quaternion(0.0643569, 0.282166, 0.0451636, 0.956139)
+bones/64/rotation = Quaternion(0.988511, -0.0275195, 0.00645378, -0.148482)
+bones/65/rotation = Quaternion(-0.178982, -8.15068e-05, -0.000386797, 0.983852)
+bones/66/rotation = Quaternion(-0.0212472, -1.93478e-05, -0.000394853, 0.999774)
+bones/67/rotation = Quaternion(0.00321712, -9.68233e-06, -0.000395213, 0.999995)
+bones/68/rotation = Quaternion(0.909139, -0.0465441, -0.100785, -0.401426)
+bones/69/rotation = Quaternion(0.0562935, -0.000418036, 0.0171728, 0.998267)
+bones/70/rotation = Quaternion(0.0710445, -0.000672187, 0.0171466, 0.997326)
+bones/71/rotation = Quaternion(0.103015, -0.00122199, 0.0171362, 0.994531)
+bones/72/rotation = Quaternion(0.0151125, 0.000285806, 0.017146, 0.999739)
+bones/75/rotation = Quaternion(0.98599, 0.135063, 0.00128798, 0.0978792)
+bones/77/rotation = Quaternion(0.253966, -0.0643386, 0.0169339, 0.964922)
+bones/78/rotation = Quaternion(5.47737e-09, -0.0548591, -2.03036e-08, 0.998494)
+bones/79/rotation = Quaternion(-0.668093, -0.0546062, 0.0803137, 0.737713)
+bones/81/rotation = Quaternion(0.983828, -0.127712, -0.00121768, -0.125581)
+bones/82/rotation = Quaternion(1.05133e-08, 0.0364888, 1.30168e-09, 0.999334)
+bones/83/rotation = Quaternion(0.0863548, 0.0358771, -0.00311185, 0.995613)
+bones/84/rotation = Quaternion(-7.49946e-08, 0.0287994, 1.32735e-08, 0.999585)
+bones/85/rotation = Quaternion(-0.717643, 0.0288094, -0.151151, 0.679199)
+
+[node name="RightHand" parent="MagicRaccoon_Model" index="2"]
+transform = Transform3D(0.998744, -0.044021, -0.0239118, 0.0438466, 0.999008, -0.00776512, 0.0242299, 0.00670686, 0.999684, -0.229881, 0.671779, 0.192285)
+
+[node name="MeshInstance3D" parent="MagicRaccoon_Model/RightHand" index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_aaaaa")
+
+[node name="Gem" type="Node3D" parent="MagicRaccoon_Model/RightHand" index="1"]
+transform = Transform3D(0.999195, 0.0401168, 9.44287e-05, -0.0401164, 0.999194, -0.000890057, -0.000129808, 0.000885604, 0.999999, 0.00178528, 0.252752, 4.60148e-05)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MagicRaccoon_Model/RightHand/Gem"]
+light_color = Color(0.32549, 0.65098, 0.890196, 1)
+omni_range = 3.57803
+
+[node name="LeftHand" parent="MagicRaccoon_Model" index="3"]
+transform = Transform3D(0.998035, 0.00487362, 0.0624711, -0.00274842, 0.999416, -0.0340614, -0.0626006, 0.0338226, 0.997465, 0.162577, 0.648181, 0.18806)
+
+[node name="IdleBreakChance" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="HPLabel" parent="." instance=ExtResource("4_joyyb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+visible = false
+
+[node name="OrbitalMovementBody" parent="." instance=ExtResource("5_yrafp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881703, 0)
+
+[node name="HealthBar3D" parent="." instance=ExtResource("6_ys3y4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50545, 0)
+
+[connection signal="timeout" from="IdleBreakChance" to="." method="_on_idle_break_chance_timeout"]
+
+[editable path="MagicRaccoon_Model"]

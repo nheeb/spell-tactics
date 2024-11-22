@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CombatEventType" load_steps=3 format=3 uid="uid://dm0qkqxrppqop"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventType.gd" id="1_4ebxx"]
+[ext_resource type="Texture2D" uid="uid://djsebf6rh3g6d" path="res://Assets/Sprites/Icons/raining.png" id="1_eyoex"]
+
+[resource]
+script = ExtResource("1_4ebxx")
+pretty_name = "Rainy Weather"
+effect_text = "Player and Enemies get wet.
+Each drain lets you gain +1 Harmony."
+fluff_text = "Getting wet is a small price for all that extra energy."
+order = 10
+icons = Array[Texture]([ExtResource("1_eyoex")])
+hidden_icon = false
+show_info_on_advancing = true
+show_info_on_activation = false
+max_duration = 2
+default_params = {}

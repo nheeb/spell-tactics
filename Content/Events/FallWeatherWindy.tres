@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CombatEventType" load_steps=3 format=3 uid="uid://df7lvpmm8xf44"]
+
+[ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="1_8sgiq"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventType.gd" id="2_876ac"]
+
+[resource]
+script = ExtResource("2_876ac")
+pretty_name = "Windy Weather"
+effect_text = "Some trees loose their leafs."
+fluff_text = "It is wimdy."
+order = 10
+icons = Array[Texture]([ExtResource("1_8sgiq")])
+hidden_icon = false
+show_info_on_advancing = true
+show_info_on_activation = false
+max_duration = 2
+default_params = {}

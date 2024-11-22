@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EntityStatusType" load_steps=4 format=3 uid="uid://bttwri4xys5eo"]
+
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="1_w031f"]
+[ext_resource type="Script" path="res://Logic/Entities/Status/EntityStatusType.gd" id="2_1enxd"]
+[ext_resource type="Texture2D" uid="uid://b6dfkoojmw45j" path="res://Assets/Sprites/Icons/axe-plus.png" id="2_8mq37"]
+
+[resource]
+script = ExtResource("2_1enxd")
+pretty_name = "Berserker"
+icon = ExtResource("2_8mq37")
+color = Color(1, 0.632813, 0, 1)
+text = "The next melee attack of this entity deals +2 damage."
+default_data = {}
+has_lifetime = false
+lifetime_default = 1
+lifetime_extend_method = 0
+make_floating_icon = true
+kill_te_on_remove = true
+enemy_actions = Array[ExtResource("1_w031f")]([])

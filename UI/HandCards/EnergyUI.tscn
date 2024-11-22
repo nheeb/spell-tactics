@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd31m3tfjuouh"]
+
+[ext_resource type="PackedScene" uid="uid://dox42qum5t0vk" path="res://Logic/Utility/OrbitalMovementBody.tscn" id="1_x6q8j"]
+[ext_resource type="Script" path="res://UI/HandCards/EnergyUI.gd" id="1_xtscc"]
+[ext_resource type="PackedScene" uid="uid://bns7gujnghjmt" path="res://VFX/Effects/EnergyOrbs/EnergyOrbAttractor.tscn" id="3_ns07y"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_m4n00"]
+
+[node name="EnergyUI" type="Node3D"]
+script = ExtResource("1_xtscc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_m4n00")
+
+[node name="OrbitalMovementBody" parent="." instance=ExtResource("1_x6q8j")]
+use_global_up_vector = true
+radius_scale = 0.6
+speed_scale = 0.4
+
+[node name="EnergyOrbAttractor" parent="." instance=ExtResource("3_ns07y")]

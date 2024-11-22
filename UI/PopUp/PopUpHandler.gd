@@ -6,7 +6,7 @@ class_name PopUpHandler extends Control
 
 @onready var popup
 
-const POPUP = preload ("res://UI/PopUp.tscn")
+const POPUP = preload("res://UI/PopUp/PopUp.tscn")
 const DRAINABLE_ENTRY = preload ("res://UI/PopUp/DrainableEntry.tscn")
 var current_tile: Tile
 var screen_pos: Vector2 # target from unprojecting the camera
@@ -21,7 +21,14 @@ func _ready() -> void:
 	Events.tile_unhovered_long.connect(hide_tile_popup)
 	PAHoverTile.on_drainable_tile_hovered.connect(on_drainable_tile_hovered)
 	PAHoverTile.on_drainable_tile_unhovered.connect(on_drainable_tile_unhovered)
+	Game.energy_overlay_changed.connect(energy_overlay_changed)
 	popup = POPUP.instantiate()
+
+func energy_overlay_changed(overlay_active: bool):
+	if overlay_active:
+		show_drainable_overlay()
+	else:
+		hide_drainable_overlay()
 
 func _exit_tree():
 	Events.tile_hovered_long.disconnect(show_tile_popup)
@@ -163,11 +170,12 @@ func show_surrounding_drainable_entries():  # broken?!?
 			active_entries[neighbour].show()
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("show_drain_overlay") and get_window().has_focus():
-		show_drainable_overlay()
-		
-	if Input.is_action_just_released("show_drain_overlay") or (not get_window().has_focus()):
-		hide_drainable_overlay()
+	#if Input.is_action_just_pressed("show_drain_overlay") and get_window().has_focus():
+		#show_drainable_overlay()
+		#
+	#if Input.is_action_just_released("show_drain_overlay") or (not get_window().has_focus()):
+		#hide_drainable_overlay()
+	pass
 
 func update_entry_position(entry: DrainableEntry):
 	var cam = viewport.get_camera_3d()

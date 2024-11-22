@@ -1,0 +1,140 @@
+[gd_scene load_steps=19 format=3 uid="uid://brewkay16y5my"]
+
+[ext_resource type="PackedScene" uid="uid://uat6g64vbik4" path="res://Prototype/PostBattle.tscn" id="1_0hyh5"]
+[ext_resource type="Script" path="res://Prototype/Screens/ScreenPostCombat.gd" id="1_1lcfl"]
+[ext_resource type="PackedScene" uid="uid://dqbvdngdl7ass" path="res://Assets/Models/Prototype/firepit.blend" id="3_cnnwt"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ypnrt"]
+size = Vector2(2000, 2000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paw8q"]
+albedo_color = Color(0.145098, 0.47451, 0.235294, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_2yrc6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2v0pm"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0.9, 0)
+linear_accel_max = 0.1
+radial_accel_max = 1.0
+turbulence_noise_strength = 0.2
+turbulence_noise_scale = 1.727
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gau84"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.380392, 0.101961, 0.407843)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_xwm5f"]
+material = SubResource("StandardMaterial3D_gau84")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cweov"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0.9, 0)
+linear_accel_max = 0.1
+radial_accel_max = 1.0
+turbulence_noise_strength = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbcih"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.741176, 0.00392157, 0.407843)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_0b3ux"]
+material = SubResource("StandardMaterial3D_dbcih")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ybfg4"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+gravity = Vector3(0, 0.9, 0)
+linear_accel_max = 0.1
+radial_accel_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5k3i"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.133333, 0.137255, 0.137255, 0.407843)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_nlqlw"]
+material = SubResource("StandardMaterial3D_c5k3i")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_05vg3"]
+sky_top_color = Color(0.117647, 0.321569, 0.596078, 1)
+sky_horizon_color = Color(0.670588, 0.435294, 0.223529, 1)
+sky_curve = 0.0337969
+ground_bottom_color = Color(0, 0.2, 0.0352941, 1)
+
+[sub_resource type="Sky" id="Sky_omx6t"]
+sky_material = SubResource("ProceduralSkyMaterial_05vg3")
+
+[sub_resource type="Environment" id="Environment_nyovh"]
+background_mode = 2
+sky = SubResource("Sky_omx6t")
+ambient_light_energy = 1.97
+
+[node name="ScreenPostCombat" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_1lcfl")
+
+[node name="PostBattle" parent="." instance=ExtResource("1_0hyh5")]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.673245, 0.73942, 0, -0.73942, 0.673245, 0, 2.59349, 1.48396)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("PlaneMesh_ypnrt")
+surface_material_override/0 = SubResource("StandardMaterial3D_paw8q")
+
+[node name="firepit" parent="Node3D" instance=ExtResource("3_cnnwt")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0212293, 0, -0.435689)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/firepit"]
+mesh = SubResource("QuadMesh_2yrc6")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D/firepit"]
+amount = 90
+process_material = SubResource("ParticleProcessMaterial_2v0pm")
+draw_pass_1 = SubResource("QuadMesh_xwm5f")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D/firepit"]
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_cweov")
+draw_pass_1 = SubResource("QuadMesh_0b3ux")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="Node3D/firepit"]
+amount = 90
+lifetime = 5.9
+process_material = SubResource("ParticleProcessMaterial_ybfg4")
+draw_pass_1 = SubResource("QuadMesh_nlqlw")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/firepit"]
+light_color = Color(1, 0.364706, 0.054902, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_nyovh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.865982, 0.500076, 0, -0.500076, 0.865982, 0, 1.29818, 0)
+light_color = Color(1, 0.713726, 0.6, 1)
+light_energy = 0.2

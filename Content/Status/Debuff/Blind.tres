@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EntityStatusType" load_steps=4 format=3 uid="uid://b2exj57wx7c4s"]
+
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="1_g05aq"]
+[ext_resource type="Texture2D" uid="uid://b24puyw8qshuf" path="res://Assets/Sprites/Icons/blind.png" id="2_iqpb1"]
+[ext_resource type="Script" path="res://Logic/Entities/Status/EntityStatusType.gd" id="2_wpmlu"]
+
+[resource]
+script = ExtResource("2_wpmlu")
+pretty_name = "Blinded"
+icon = ExtResource("2_iqpb1")
+color = Color(1, 1, 1, 1)
+text = "This enemy has a high chance of missing his next attack."
+default_data = {
+"acc_malus": 3
+}
+has_lifetime = true
+lifetime_default = 1
+lifetime_extend_method = 0
+make_floating_icon = true
+kill_te_on_remove = true
+enemy_actions = Array[ExtResource("1_g05aq")]([])

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://dqy48gh8w80m0"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_8p5mh"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_ve8pr"]
+[ext_resource type="Texture2D" uid="uid://fwpgjubsutfa" path="res://Assets/Sprites/Icons/lightning-storm.png" id="2_6m0fi"]
+[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_0ikr7"]
+
+[sub_resource type="Resource" id="Resource_a4kwb"]
+script = ExtResource("1_8p5mh")
+stack = Array[int]([4, 4, 6])
+
+[resource]
+script = ExtResource("1_ve8pr")
+costs = SubResource("Resource_a4kwb")
+keywords = Array[ExtResource("3_0ikr7")]([])
+pretty_name = "Lightning Strike"
+effect_text = "Deals 3 damage. (Double damage to wet enemies)"
+fluff_text = ""
+icon = ExtResource("2_6m0fi")
+color = Color(1, 0.960784, 0, 1)
+target = 1
+target_range = -1
+target_min_range = -1
+target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
+topic = 1
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = "3 (6)"

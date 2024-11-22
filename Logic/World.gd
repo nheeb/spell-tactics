@@ -1,7 +1,7 @@
 class_name World extends Node3D
 
-const COMBAT = preload("res://Logic/CombatUtility/Combat.tscn")
-const COMBAT_UI = preload("res://UI/CombatUI/CombatUI.tscn")
+const COMBAT = preload("res://Logic/Combat/Combat.tscn")
+const COMBAT_UI = preload("res://UI/Combat/CombatUI.tscn")
 
 var level : Level
 var camera : Camera3D
@@ -27,15 +27,16 @@ func _ready() -> void:
 func load_combat_from_path(level_path: String) -> void:
 	var combat_state: CombatState = load(level_path) as CombatState
 	if combat_state == null:
-		push_error("Not combat state at path: %s" % level_path)
+		assert(combat_state != null, "Failed to load CombatState")
 	load_combat_from_state(combat_state)
 
 func load_combat_from_state(combat_state: CombatState, combat_active: bool = true) -> void:
 	# If we always create a new ScreenCombat for every Combat (which I think
 	# we should) then some of the following lines could be cut & simplified
 	
-	# Take the deck from the current adventure
-	combat_state.deck_states = Adventure.deck_states
+	# Take the default deck if there is no deck saved in combatstate
+	if combat_state == null or combat_state.deck_states.is_empty():
+		combat_state.deck_states = Game.DeckUtils.create_test_deck_serialized()
 	
 	# Create combat
 	combat = combat_state.deserialize()
@@ -66,7 +67,7 @@ func load_combat_from_state(combat_state: CombatState, combat_active: bool = tru
 	if combat_active:
 		combat.connect_with_ui_and_camera(combat_ui, $GameCamera)
 		combat.setup()
-
+		# Put first phases in action stack
 		combat.process_initial_phase()
 		
 	# Play initial animations

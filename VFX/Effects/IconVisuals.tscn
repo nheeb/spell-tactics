@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://cs2w87t01erw7"]
+
+[ext_resource type="Script" path="res://VFX/Effects/IconVisuals.gd" id="1_bybv3"]
+[ext_resource type="Texture2D" uid="uid://dh0vrvv6jiuue" path="res://Assets/Sprites/Icons/thorns.png" id="1_n42k5"]
+
+[sub_resource type="Curve" id="Curve_7t44h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.503448, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8dxwv"]
+curve = SubResource("Curve_7t44h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l55gn"]
+emission_shape = 2
+emission_sphere_radius = 0.65
+angular_velocity_min = 20.0
+angular_velocity_max = 20.0
+gravity = Vector3(0, 0.02, 0)
+damping_min = 0.5
+damping_max = 0.5
+scale_min = 0.25
+scale_max = 0.35
+scale_curve = SubResource("CurveTexture_8dxwv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7iiwu"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("1_n42k5")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ktx5b"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_7iiwu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a025u"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_x78dy"]
+
+[node name="IconVisuals" type="Node3D"]
+script = ExtResource("1_bybv3")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+amount = 10
+lifetime = 8.0
+visibility_aabb = AABB(-1.97427, -1.97611, -1.88484, 3.92776, 3.97568, 3.85607)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_l55gn")
+draw_pass_1 = SubResource("QuadMesh_ktx5b")
+
+[node name="Quad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_a025u")
+mesh = SubResource("QuadMesh_x78dy")

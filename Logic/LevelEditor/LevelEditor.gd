@@ -7,7 +7,7 @@ class_name EditorUI extends Control
 
 
 var all_levels_paths: Array[String] = []
-var current_level_path = "res://Levels/SpellTesting/spell_test.tres"
+var current_level_path = "res://Content/Levels/SpellTesting/spell_test.tres"
 
 var tool_terrain_placer = TerrainPlace.new()
 var tool_raise = Raise.new()
@@ -57,7 +57,7 @@ func _ready() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_current_level()
+		#save_current_level()
 		get_tree().quit()
 
 func _input(event: InputEvent) -> void:
@@ -68,7 +68,7 @@ func on_changed_render_resolution(res: Vector2i):
 	%Viewport3D.size = res
 
 
-const LEVEL_ROOT = "res://Levels/"
+const LEVEL_ROOT = "res://Content/Levels/"
 func find_all_levels():
 	var levels: Array[String] = []
 	_find_tres_files_recursive(LEVEL_ROOT, levels)
@@ -134,7 +134,7 @@ func mouse_exited_editor_ui():
 
 func _on_level_selection_item_selected(idx: int) -> void:
 	var new_lvl_path = $%LevelSelection.get_item_metadata(idx)
-	save_current_level()
+	#save_current_level()
 	load_level(new_lvl_path)
 
 func _on_level_size_value_changed(value: float) -> void:
@@ -150,3 +150,10 @@ func _on_level_size_value_changed(value: float) -> void:
 			$%LevelSize.set_value_no_signal(current_size)
 	
 	$%LevelSize.set_value_no_signal(world.level.get_grid_size())
+
+
+func _on_save_button_pressed() -> void:
+	save_current_level()
+	%SavedLabel.visible = true
+	await get_tree().create_timer(2.5).timeout
+	%SavedLabel.visible = false

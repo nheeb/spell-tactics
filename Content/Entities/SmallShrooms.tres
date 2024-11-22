@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EntityType" load_steps=5 format=3 uid="uid://bnqbor0d6tjit"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_y63ui"]
+[ext_resource type="Script" path="res://Logic/Entities/EntityType.gd" id="2_ucixi"]
+[ext_resource type="PackedScene" uid="uid://cqp8tnepge8mh" path="res://VFX/Entities/SmallMushrooms.tscn" id="3_ogx4a"]
+
+[sub_resource type="Resource" id="Resource_dhd5e"]
+script = ExtResource("1_y63ui")
+stack = Array[int]([1])
+
+[resource]
+script = ExtResource("2_ucixi")
+internal_name = "small_shrooms"
+can_be_hovered = true
+pretty_name = "Small Mushrooms"
+fluff_text = ""
+visual_scene = ExtResource("3_ogx4a")
+prototype_scale = Vector2(0.6, 0.6)
+tags = Array[String](["shroom"])
+is_terrain = false
+is_drainable = true
+energy = SubResource("Resource_dhd5e")
+obstacle_layer = 0
+obstacle_mask = 0
+is_blocker = false
+cover_value = 0

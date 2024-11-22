@@ -1,0 +1,444 @@
+[gd_scene load_steps=19 format=3 uid="uid://bysejqqiloy1u"]
+
+[ext_resource type="Script" path="res://UI/Combat/CombatUI.gd" id="1_uhqdp"]
+[ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/Theme/LabelSettings/DefaultLabelSettings.tres" id="3_wybdv"]
+[ext_resource type="PackedScene" uid="uid://upcefttcpy6o" path="res://UI/HandCards/Cards3D.tscn" id="4_a38j0"]
+[ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="5_jttea"]
+[ext_resource type="Texture2D" uid="uid://ditt5pum2lahc" path="res://Assets/Sprites/Icons/plain-arrow.png" id="5_myaa6"]
+[ext_resource type="PackedScene" uid="uid://cp5c8if6axsd6" path="res://UI/Combat/EnemyEventIcon.tscn" id="8_isphm"]
+[ext_resource type="PackedScene" uid="uid://cn2mfqtdouxdu" path="res://UI/Combat/Timeline.tscn" id="9_denmg"]
+[ext_resource type="PackedScene" uid="uid://k4w38jjb4tmp" path="res://UI/Combat/StatusLines.tscn" id="10_gtdym"]
+[ext_resource type="PackedScene" uid="uid://cm4ux8unrhhbi" path="res://UI/Combat/AnimationSpeedUI.tscn" id="11_ups4t"]
+[ext_resource type="PackedScene" uid="uid://b7cdtyuptrypr" path="res://UI/Combat/CombatEventIcons.tscn" id="12_8b75y"]
+[ext_resource type="Texture2D" uid="uid://uqrcfoamicxx" path="res://Assets/Sprites/Icons/debug.png" id="12_10gh6"]
+[ext_resource type="Texture2D" uid="uid://btg08ryu7gs7l" path="res://Assets/Sprites/EnergyIconMasks/any_button.png" id="13_8adq1"]
+[ext_resource type="PackedScene" uid="uid://rsv86yvvojk4" path="res://UI/Combat/CombatEventInfo.tscn" id="13_37g1a"]
+[ext_resource type="PackedScene" uid="uid://drxy2f6dh4jq0" path="res://UI/Menu/LogSettingsPanel.tscn" id="13_jiaoo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqwoa"]
+bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.682353)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc21w"]
+bg_color = Color(0.321569, 0.333333, 0.321569, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_so122"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tifs0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="CombatUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_uhqdp")
+
+[node name="CardContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.666667
+anchor_right = 0.819917
+anchor_bottom = 0.984
+offset_right = -0.544067
+offset_bottom = -0.16803
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Next" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.892708
+anchor_top = 0.52037
+anchor_right = 0.989062
+anchor_bottom = 0.611419
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqwoa")
+text = " End Turn "
+metadata/_edit_use_anchors_ = true
+
+[node name="Cast" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.764583
+anchor_top = 0.572222
+anchor_right = 0.831424
+anchor_bottom = 0.663272
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 36
+disabled = true
+text = "CAST"
+metadata/_edit_use_anchors_ = true
+
+[node name="Status" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.686632
+anchor_right = 1.0
+anchor_bottom = 0.129
+offset_top = 10.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "<DebugStatus>"
+label_settings = ExtResource("5_jttea")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CardsAspectContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+ratio = 1.7778
+alignment_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CardViewportContainer" type="SubViewportContainer" parent="CardsAspectContainer"]
+layout_mode = 2
+size_flags_horizontal = 7
+mouse_filter = 2
+stretch = true
+
+[node name="CardViewport" type="SubViewport" parent="CardsAspectContainer/CardViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 1
+size = Vector2i(1920, 1079)
+render_target_update_mode = 4
+
+[node name="Cards3D" parent="CardsAspectContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
+unique_name_in_owner = true
+
+[node name="TileHoverBlocker" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 0.735185
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="EnergyArea" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.849479
+anchor_top = 0.685185
+anchor_right = 0.949479
+anchor_bottom = 1.0213
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
+metadata/_edit_use_anchors_ = true
+
+[node name="Drains" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00104167
+anchor_top = 0.462037
+anchor_right = 0.122563
+anchor_bottom = 0.515444
+offset_right = -0.320004
+offset_bottom = 0.319998
+text = "Drains left: X"
+label_settings = ExtResource("3_wybdv")
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOverText" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.244792
+anchor_top = 0.338889
+anchor_right = 0.751729
+anchor_bottom = 0.580259
+offset_right = -0.320004
+offset_bottom = 0.319998
+text = "GAME OVER"
+label_settings = ExtResource("5_jttea")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Actives" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00625
+anchor_top = 0.67037
+anchor_right = 0.129687
+anchor_bottom = 0.955556
+theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Actives"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0897439
+anchor_top = 0.0688261
+anchor_right = 1.36539
+anchor_bottom = 0.919031
+offset_bottom = -3.05176e-05
+grow_horizontal = 0
+theme_override_constants/separation = 70
+metadata/_edit_use_anchors_ = true
+
+[node name="ActivePos1" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 120.0
+offset_right = 35.0
+offset_bottom = 120.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos1"]
+
+[node name="ActivePos2" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 120.0
+offset_top = 35.0
+offset_right = 120.0
+offset_bottom = 35.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos2"]
+
+[node name="ActivePos3" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 205.0
+offset_top = 120.0
+offset_right = 205.0
+offset_bottom = 120.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos3"]
+
+[node name="ActivePos4" type="Control" parent="Actives"]
+anchors_preset = 0
+offset_left = 120.0
+offset_top = 205.0
+offset_right = 120.0
+offset_bottom = 205.0
+
+[node name="Position" type="Marker2D" parent="Actives/ActivePos4"]
+
+[node name="EnemyArea" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.755208
+anchor_top = 0.00555556
+anchor_right = 0.989875
+anchor_bottom = 0.122815
+offset_right = 0.439972
+offset_bottom = 0.359985
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_so122")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyMeterLabel" type="Label" parent="EnemyArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enemy Meter: 0 / 5"
+label_settings = ExtResource("5_jttea")
+
+[node name="EnemyArrow" type="TextureRect" parent="EnemyArea"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.543767
+anchor_top = 0.362205
+anchor_right = 0.891347
+anchor_bottom = 1.19665
+offset_right = -0.0379944
+offset_bottom = 0.0249939
+texture = ExtResource("5_myaa6")
+expand_mode = 1
+flip_v = true
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyEventIcon" parent="EnemyArea" instance=ExtResource("8_isphm")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.698448
+anchor_top = 0.0629921
+anchor_right = 1.67192
+anchor_bottom = 1.04724
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationSpeedUI" parent="." instance=ExtResource("11_ups4t")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015
+anchor_top = 0.015
+anchor_right = 0.113
+anchor_bottom = 0.109
+metadata/_edit_use_anchors_ = true
+
+[node name="TimelineArea" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.443229
+anchor_top = -0.00462963
+anchor_right = 0.591958
+anchor_bottom = 0.0792963
+offset_right = 0.439972
+offset_bottom = 0.359985
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_so122")
+metadata/_edit_use_anchors_ = true
+
+[node name="Timeline" parent="TimelineArea" instance=ExtResource("9_denmg")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.093
+anchor_right = 0.855
+anchor_bottom = 1.135
+offset_left = 163.598
+offset_top = 89.0
+offset_right = -76.53
+offset_bottom = 29.715
+scale = Vector2(0.607886, 0.607886)
+
+[node name="ErrorLines" parent="." instance=ExtResource("10_gtdym")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.156481
+mouse_filter = 2
+color = Color(0.32, 0.16, 0.16, 1)
+metadata/_edit_lock_ = true
+
+[node name="CombatEventIcons" parent="." instance=ExtResource("12_8b75y")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.159896
+anchor_top = 0.00555556
+anchor_right = 0.415104
+anchor_bottom = 0.1
+metadata/_edit_use_anchors_ = true
+
+[node name="CombatEventInfo" parent="." instance=ExtResource("13_37g1a")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.19375
+anchor_top = 0.0833333
+anchor_right = 0.46875
+anchor_bottom = 0.389815
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyEventInfo" parent="." instance=ExtResource("13_37g1a")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.550521
+anchor_top = 0.107407
+anchor_right = 0.844271
+anchor_bottom = 0.389815
+metadata/_edit_use_anchors_ = true
+
+[node name="OverlayBar" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 995.0
+offset_right = 614.0
+offset_bottom = 1088.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tifs0")
+
+[node name="DebugOverlay" type="Button" parent="OverlayBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -23.5
+offset_right = 49.0
+offset_bottom = 23.5
+grow_vertical = 2
+tooltip_text = "Toggle Debug Overlay [F1]"
+focus_mode = 0
+theme_override_colors/icon_normal_color = Color(0.402344, 0.402344, 0.402344, 1)
+theme_override_colors/icon_pressed_color = Color(0.964844, 0.964844, 0.964844, 1)
+theme_override_colors/icon_hover_color = Color(0.988281, 0.988281, 0.988281, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.988235, 0.988235, 0.988235, 1)
+toggle_mode = true
+icon = ExtResource("12_10gh6")
+icon_alignment = 1
+expand_icon = true
+
+[node name="EnergyOverlay" type="Button" parent="OverlayBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_top = -23.5
+offset_right = 108.0
+offset_bottom = 23.5
+grow_vertical = 2
+tooltip_text = "Toggle Energy Overlay [Alt]"
+focus_mode = 0
+theme_override_colors/icon_normal_color = Color(0.402344, 0.402344, 0.402344, 1)
+theme_override_colors/icon_pressed_color = Color(0.964706, 0.964706, 0.964706, 1)
+theme_override_colors/icon_hover_color = Color(0.988281, 0.988281, 0.988281, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.988235, 0.988235, 0.988235, 1)
+toggle_mode = true
+icon = ExtResource("13_8adq1")
+icon_alignment = 1
+expand_icon = true
+
+[node name="LogSettingsPanel" parent="." instance=ExtResource("13_jiaoo")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013
+anchor_top = 0.038
+anchor_right = 0.366
+anchor_bottom = 0.344
+metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
+[connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="mouse_entered" from="Cast" to="." method="_on_button_entered"]
+[connection signal="mouse_exited" from="Cast" to="." method="_on_button_exited"]
+[connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]
+[connection signal="mouse_entered" from="TileHoverBlocker" to="." method="_on_tile_hover_blocker_mouse_entered"]
+[connection signal="mouse_exited" from="TileHoverBlocker" to="." method="_on_tile_hover_blocker_mouse_exited"]
+[connection signal="toggled" from="OverlayBar/DebugOverlay" to="." method="_on_debug_overlay_toggled"]
+[connection signal="toggled" from="OverlayBar/EnergyOverlay" to="." method="_on_energy_overlay_toggled"]

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://coxs5uvjtigok"]
+
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_3xw06"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_45yov"]
+[ext_resource type="Texture2D" uid="uid://ccnyf8c432pm" path="res://Assets/Sprites/Icons/dart.png" id="2_ayoco"]
+[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_cubgh"]
+
+[sub_resource type="Resource" id="Resource_kfprs"]
+script = ExtResource("1_45yov")
+stack = Array[int]([1, 1, 6, 6])
+
+[resource]
+script = ExtResource("1_3xw06")
+costs = SubResource("Resource_kfprs")
+keywords = Array[ExtResource("3_cubgh")]([])
+pretty_name = "Deadly Dart"
+effect_text = "Poisons an enemy. Kills the enemy if it was already poisoned."
+fluff_text = ""
+icon = ExtResource("2_ayoco")
+color = Color(0.914063, 0.0214233, 0.914063, 1)
+target = 1
+target_range = 4
+target_min_range = -1
+target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
+topic = 7
+topic_secondary = 8
+topic_icons = Array[int]([])
+topic_caption = ""

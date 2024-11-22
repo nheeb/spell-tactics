@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://bhbal4070u1qk"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_cq3mu"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_xaj57"]
+[ext_resource type="Texture2D" uid="uid://bq8ifmwjq7tlf" path="res://Assets/Sprites/Icons/pentacle.png" id="2_1hxqo"]
+[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_j26b4"]
+
+[sub_resource type="Resource" id="Resource_6ekvi"]
+script = ExtResource("1_cq3mu")
+stack = Array[int]([2, 6, 6])
+
+[resource]
+script = ExtResource("1_xaj57")
+costs = SubResource("Resource_6ekvi")
+keywords = Array[ExtResource("3_j26b4")]([])
+pretty_name = "Witch Totem"
+effect_text = "The witch totem gives 1 Decay Energy whenever you cast a spell next to it."
+fluff_text = ""
+icon = ExtResource("2_1hxqo")
+color = Color(0.894829, 0.390625, 1, 1)
+target = 3
+target_range = -1
+target_min_range = -1
+target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
+topic = 6
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""

@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://comglywow87xc"]
+
+[ext_resource type="Script" path="res://VFX/Entities/VisualTerrain.gd" id="1_pqm35"]
+[ext_resource type="Material" uid="uid://cvjghqsy2rnqy" path="res://VFX/Materials/VisualWater.tres" id="2_cql7c"]
+[ext_resource type="Texture2D" uid="uid://gm3812yylk" path="res://Assets/BaseMaterials/Textures/dirt_albedo_seamless.jpeg" id="3_evw5i"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jwrwj"]
+material = ExtResource("2_cql7c")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.001
+radial_segments = 6
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2ud3"]
+albedo_color = Color(0.721569, 0.721569, 0.721569, 1)
+albedo_texture = ExtResource("3_evw5i")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x53ak"]
+material = SubResource("StandardMaterial3D_u2ud3")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.0
+radial_segments = 6
+rings = 1
+
+[node name="WaterTile" type="Node3D"]
+script = ExtResource("1_pqm35")
+
+[node name="DebugTile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+visible = false
+
+[node name="Hexagon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.073937, 0)
+mesh = SubResource("CylinderMesh_jwrwj")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_x53ak")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CombatEventSchedule" load_steps=3 format=3 uid="uid://diqf4kucf4hs8"]
+
+[ext_resource type="Resource" uid="uid://ovrqq0tqoc0w" path="res://Content/Events/FallWeather.tres" id="1_cmjts"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventSchedule.gd" id="2_wdpp2"]
+
+[resource]
+script = ExtResource("2_wdpp2")
+event_type = ExtResource("1_cmjts")
+params = {}
+event_created = false
+scheduled_round = 0

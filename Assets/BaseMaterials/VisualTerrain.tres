@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ct4ixvt4vev11"]
+
+[ext_resource type="Shader" path="res://VFX/Materials/VisualTerrainShader.gdshader" id="1_2wtwm"]
+[ext_resource type="Texture2D" uid="uid://scx4p67jxoo3" path="res://Assets/BaseMaterials/Textures/dirt_albedo_seamless_test.jpeg" id="2_0fmp6"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_2wtwm")
+shader_parameter/albedo_modulate = Color(0.886719, 0.886719, 0.886719, 1)
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.0
+shader_parameter/normal_scale = 7.6e-07
+shader_parameter/uv1_scale = Vector3(0.2, 0.2, 0.2)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/texture_albedo = ExtResource("2_0fmp6")

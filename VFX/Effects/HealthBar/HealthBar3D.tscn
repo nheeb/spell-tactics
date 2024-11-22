@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqbvijkk2njrj"]
+
+[ext_resource type="PackedScene" uid="uid://bxdl5jg7evhch" path="res://VFX/Effects/HealthBar/HealthBar2D.tscn" id="1_jw6cy"]
+[ext_resource type="Script" path="res://VFX/Effects/HealthBar/HealthBar.gd" id="1_m7oi7"]
+[ext_resource type="Texture2D" uid="uid://bnq8y7mlwhdjg" path="res://Assets/Sprites/healthbar_placeholder.png" id="2_qkfub"]
+[ext_resource type="Shader" path="res://VFX/Effects/HealthBar/HealthBar.gdshader" id="3_h6n5t"]
+
+[sub_resource type="Curve" id="Curve_obtwm"]
+_data = [Vector2(0, 0.495278), 0.0, 0.0, 0, 0, Vector2(0.149897, 0.960214), -4.2486, -4.2486, 0, 0, Vector2(0.404517, 0.144606), 0.0, 0.0, 0, 0, Vector2(0.989733, 0.000382543), -0.526983, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_ctv0e"]
+_data = [Vector2(0.00210526, 0.989772), 0.0, 0.0, 0, 0, Vector2(0.391579, 0.676741), -0.0578378, -0.0578378, 0, 0, Vector2(0.618947, 0.171519), -0.785914, -0.785914, 0, 0, Vector2(0.865263, 0.00275385), 0.231354, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="QuadMesh" id="QuadMesh_ur3u6"]
+size = Vector2(0.15, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wlnt3"]
+resource_local_to_scene = true
+render_priority = 8
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = ExtResource("2_qkfub")
+billboard_mode = 1
+billboard_keep_scale = true
+fixed_size = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glbrl"]
+resource_local_to_scene = true
+shader = ExtResource("3_h6n5t")
+shader_parameter/health = 3.0
+shader_parameter/max_health = 4.0
+shader_parameter/shield = 0.0
+shader_parameter/highlight_progress = 0.0
+shader_parameter/shield_damage_progress = 0.0
+shader_parameter/target_health = 0.0
+shader_parameter/healthy_color = Color(0.4233, 0.83, 0.332, 1)
+shader_parameter/bg_color = Color(0.140625, 0.0680443, 0.031754, 1)
+shader_parameter/tick_base_color = Color(0.203125, 0.163313, 0.089375, 1)
+shader_parameter/shield_color = Color(0.1288, 0.788133, 0.92, 1)
+shader_parameter/highlight_color = Color(0.898438, 0.898438, 0.898438, 1)
+shader_parameter/tick_width = 0.024
+shader_parameter/border_width_px = 30.0
+
+[node name="HealthBar3D" type="Node3D"]
+script = ExtResource("1_m7oi7")
+highlight_progress = SubResource("Curve_obtwm")
+hp_progress = SubResource("Curve_ctv0e")
+
+[node name="HealthbarQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.3, 0, 0, 0, 1.12, 0, 0, 0, 1.28, 0, 0, 0)
+mesh = SubResource("QuadMesh_ur3u6")
+surface_material_override/0 = SubResource("StandardMaterial3D_wlnt3")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="HealthBar2D" parent="SubViewport" instance=ExtResource("1_jw6cy")]
+
+[node name="Bar" parent="SubViewport/HealthBar2D/Container" index="0"]
+material = SubResource("ShaderMaterial_glbrl")
+
+[editable path="SubViewport/HealthBar2D"]

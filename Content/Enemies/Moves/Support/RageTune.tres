@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=8 format=3 uid="uid://dakjn22p87jge"]
+
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_kmbie"]
+[ext_resource type="Texture2D" uid="uid://ccekhxcjtlp77" path="res://Assets/Sprites/Icons/fangs.png" id="2_1wslc"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyAction.gd" id="2_4au1c"]
+[ext_resource type="Resource" uid="uid://dcpjaerkeyfjv" path="res://Content/Enemies/Moves/Movement/MoveRandom.tres" id="3_ilku2"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="4_lp4cg"]
+
+[sub_resource type="Resource" id="Resource_ddiiu"]
+script = ExtResource("1_kmbie")
+criteria = 4
+value = 1.2
+
+[sub_resource type="Resource" id="Resource_jryke"]
+script = ExtResource("4_lp4cg")
+action = ExtResource("3_ilku2")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[resource]
+script = ExtResource("2_4au1c")
+pretty_name = "Rage Tune"
+icon = ExtResource("2_1wslc")
+color = Color(0.898438, 0, 1, 1)
+target_type = 2
+can_self_target = false
+target_range_looking = -1
+target_range_walking = -1
+target_consider_count = 2
+target_consider_method = 0
+default_scores = Array[ExtResource("1_kmbie")]([SubResource("Resource_ddiiu")])
+cooldown = 2
+movement_action_args = SubResource("Resource_jryke")
+default_args = []
+default_kwargs = {}

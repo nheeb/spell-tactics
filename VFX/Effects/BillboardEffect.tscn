@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://db14scij5vei0"]
+
+[ext_resource type="Script" path="res://VFX/Effects/BillboardEffect.gd" id="1_gbmem"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_woa1a"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_fyi78"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_gbmem")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_woa1a")
+mesh = SubResource("QuadMesh_fyi78")

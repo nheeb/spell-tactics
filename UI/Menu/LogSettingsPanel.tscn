@@ -1,72 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://drxy2f6dh4jq0"]
+[gd_scene load_steps=3 format=3 uid="uid://drxy2f6dh4jq0"]
 
 [ext_resource type="Script" path="res://UI/Menu/LogSettingsPanel.gd" id="1_avhb5"]
-[ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/Theme/LabelSettings/DefaultLabelSettings.tres" id="1_yyowp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vbk4n"]
-content_margin_left = 15.0
-content_margin_top = 15.0
-content_margin_right = 15.0
-content_margin_bottom = 40.0
-bg_color = Color(0.396078, 0.396078, 0.396078, 0.772549)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.4, 0.4, 0.4, 0.654902)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0.156863, 0.156863, 0.156863, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnpkh"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="LogSettingsPanel" type="PanelContainer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_vbk4n")
 script = ExtResource("1_avhb5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_mnpkh")
-
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Panel"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="VBoxContainer/Panel/CenterContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
-text = "Combat Log"
-label_settings = ExtResource("1_yyowp")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Entries" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="Entries" type="VBoxContainer" parent="ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ScrollContainer" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer" to="." method="_on_mouse_exited"]

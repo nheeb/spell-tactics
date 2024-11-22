@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://vyxoc5136bpp"]
+
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/BaseMaterials/TileGroundMaterial.tres" id="1_t28lc"]
+[ext_resource type="Script" path="res://VFX/Entities/VisualEntity.gd" id="1_w8loy"]
+[ext_resource type="PackedScene" uid="uid://bwkt7vm7l5e1h" path="res://Assets/Models/Prototype/Rock1.gltf" id="2_0q5yx"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7mulb"]
+material = ExtResource("1_t28lc")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.2
+radial_segments = 6
+rings = 1
+
+[node name="ClickableRock" type="Node3D"]
+script = ExtResource("1_w8loy")
+
+[node name="DebugTile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+visible = false
+
+[node name="Hexagon" type="MeshInstance3D" parent="DebugTile"]
+mesh = SubResource("CylinderMesh_7mulb")
+
+[node name="Rock1" parent="." instance=ExtResource("2_0q5yx")]
+transform = Transform3D(0.814839, 0, 0, 0, 0.764948, 0, 0, 0, 0.814841, 0.10245, 1.19209e-07, 0.0124449)
+
+[node name="Rock2" parent="." instance=ExtResource("2_0q5yx")]
+transform = Transform3D(0.786749, -0.199118, 0, 0.212104, 0.738578, 0, 0, 0, 0.814841, 0.10245, 0.546787, 0.0124449)
+visible = false
+
+[node name="Rock3" parent="." instance=ExtResource("2_0q5yx")]
+transform = Transform3D(-0.70781, 0.179139, 0.355745, 0.212105, 0.738578, 0, -0.343481, 0.0869312, -0.733083, -0.177381, 1.21345, -0.0714636)
+visible = false

@@ -20,8 +20,19 @@ const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false
 const DEBUG_DECK_PURGE = false
+var DEBUG_INFO: bool:
+	get:
+		return DebugInfo.ACTIVE
 var DEBUG_SPELL_TESTING := false # Not meant to be changed.
 # Play the scene SpellTest.tscn to start spell testing
+
+var DEBUG_OVERLAY : bool = true  # toggled in Combat UI
+signal energy_overlay_changed(c: bool)
+var ENERGY_OVERLAY: bool = false:
+	set(e):
+		ENERGY_OVERLAY = e
+		energy_overlay_changed.emit(e)
+
 var testing_deck: Array[SpellType]
 var testing_energy: EnergyStack
 
@@ -30,17 +41,6 @@ var tree: SceneTree:
 		return get_tree()
 
 var combats: Array[Combat] # For debuging
-
-func get_prototype_events(combat: Combat) -> Array[Spell]:
-	var prototype_events: Array[Spell] = []
-	
-	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/LeafDrop.tres"), combat))
-	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEvents/StumpShroom.tres"), combat))
-	prototype_events.append(Spell.new(SpellType.load_from_file("res://Spells/AllEnemyEvents/SpawnGoblinFighter.tres"), combat))
-	
-	for spell in prototype_events:
-		spell.id = SpellID.new(add_to_spell_count())
-	return prototype_events
 
 var spell_count: int = 0
 ## Prototype Function for creating ids for spells. This will later be done by the Overworld
@@ -76,3 +76,66 @@ func get_icon_from_name(icon_name) -> Texture:
 	if icon_name == "" or icon_name == null:
 		return null
 	return load("res://Assets/Sprites/Icons/%s.png" % icon_name)
+	
+
+class DeckUtils:
+	static func create_spell(spell_type: SpellType, combat: Combat) -> Spell:
+		return Spell.new(spell_type, combat)
+	
+	static func load_spell(name: String, combat: Combat) -> Spell:
+		return Spell.new(SpellType.load_from_file("res://Content/Spells/%s.tres" % name), combat)
+	
+	static func load_spell_n_times(name: String, n: int, combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		for i in range(n):
+			spells.append(load_spell(name, combat))
+		return spells
+		
+	static func create_test_deck_serialized() -> Array[SpellState]:
+		var spell_states: Array[SpellState] = []
+		for i in create_test_deck(null):
+			spell_states.append(i.serialize())
+		return spell_states
+
+	static func create_test_deck(combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
+		spells.append_array(load_spell_n_times("AirMissile", 1, combat))
+		spells.append_array(load_spell_n_times("Berserker", 1, combat))
+		spells.append_array(load_spell_n_times("ObjectGrab", 1, combat))
+		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
+		
+		spells.append_array(load_spell_n_times("SporeFlight", 1, combat))
+		spells.append_array(load_spell_n_times("Cyclone", 1, combat))
+		spells.append_array(load_spell_n_times("SelfHeal", 1, combat))
+		spells.append_array(load_spell_n_times("GrowingMycel", 1, combat))
+		spells.append_array(load_spell_n_times("DeadlyDart", 1, combat))
+		
+		spells.append_array(load_spell_n_times("RockBlast", 1, combat))
+		spells.append_array(load_spell_n_times("SummonWitchTotem", 1, combat))
+		spells.append_array(load_spell_n_times("Teleport", 1, combat))
+		spells.append_array(load_spell_n_times("Breath", 1, combat))
+		spells.append_array(load_spell_n_times("SpellMemory", 1, combat))
+		
+		spells.append_array(load_spell_n_times("WaterBlast", 1, combat))
+		spells.append_array(load_spell_n_times("LightningStrike", 1, combat))
+		spells.append_array(load_spell_n_times("PoisonPunch", 1, combat))
+		spells.append_array(load_spell_n_times("Lifesteal", 1, combat))
+		
+		
+		for spell in spells:
+			spell.id = SpellID.new(Game.add_to_spell_count())
+		
+		spells.shuffle()
+		
+		return spells
+		
+	
+	static func deck_for_spell_testing(combat: Combat) -> Array[Spell]:
+		var spells: Array[Spell] = []
+		for spell_type in Game.testing_deck:
+			spell_type._on_load()
+			spells.append(create_spell(spell_type, combat))
+		for spell in spells:
+			spell.id = SpellID.new(Game.add_to_spell_count())
+		return spells

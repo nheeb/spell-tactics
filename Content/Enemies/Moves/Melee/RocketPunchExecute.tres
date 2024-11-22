@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=5 format=3 uid="uid://xswdvwwo083f"]
+
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_m45d8"]
+[ext_resource type="Texture2D" uid="uid://b7ov46i1xo5yf" path="res://Assets/Sprites/Icons/mailed-fist.png" id="2_nod40"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyAction.gd" id="2_wcnas"]
+
+[sub_resource type="Resource" id="Resource_cfnpu"]
+script = ExtResource("1_m45d8")
+criteria = 0
+value = 20.0
+
+[resource]
+script = ExtResource("2_wcnas")
+pretty_name = "Rocket Punch!"
+icon = ExtResource("2_nod40")
+color = Color(1, 0, 0, 1)
+target_type = 1
+can_self_target = false
+target_range_looking = -1
+target_range_walking = -1
+target_consider_count = 2
+target_consider_method = 0
+default_scores = Array[ExtResource("1_m45d8")]([SubResource("Resource_cfnpu")])
+cooldown = 1
+default_args = []
+default_kwargs = {}

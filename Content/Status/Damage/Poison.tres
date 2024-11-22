@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EntityStatusType" load_steps=4 format=3 uid="uid://begvixs6y8u6p"]
+
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="1_hipwu"]
+[ext_resource type="Texture2D" uid="uid://232nkwhp5oea" path="res://Assets/Sprites/Icons/poison.png" id="2_hani7"]
+[ext_resource type="Script" path="res://Logic/Entities/Status/EntityStatusType.gd" id="2_xgsvr"]
+
+[resource]
+script = ExtResource("2_xgsvr")
+pretty_name = "Poisoned"
+icon = ExtResource("2_hani7")
+color = Color(0.460938, 0, 0.453735, 1)
+text = "This entity gets damage every round."
+default_data = {
+"damage": 1
+}
+has_lifetime = true
+lifetime_default = 3
+lifetime_extend_method = 0
+make_floating_icon = true
+kill_te_on_remove = true
+enemy_actions = Array[ExtResource("1_hipwu")]([])

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://bddxc6d1tivsv"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_d0ods"]
+[ext_resource type="Texture2D" uid="uid://d3h6s74nk3x4p" path="res://Assets/Sprites/Icons/think.png" id="2_t4y4x"]
+[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_bi55r"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_lp1rj"]
+
+[sub_resource type="Resource" id="Resource_ufdj6"]
+script = ExtResource("1_d0ods")
+stack = Array[int]([6])
+
+[resource]
+script = ExtResource("4_lp1rj")
+costs = SubResource("Resource_ufdj6")
+keywords = Array[ExtResource("3_bi55r")]([])
+pretty_name = "Do Nothing"
+effect_text = "Does nothing."
+fluff_text = "When nothing is done,
+nothing is left undone.
+- Lao Tsu"
+icon = ExtResource("2_t4y4x")
+color = Color(1, 1, 1, 1)
+target = 0
+target_range = -1
+target_min_range = -1
+target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
+topic = 14
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""

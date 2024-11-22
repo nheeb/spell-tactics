@@ -1,0 +1,4005 @@
+[gd_resource type="Resource" script_class="CombatState" load_steps=470 format=3 uid="uid://ckq8v1s3aruw7"]
+
+[ext_resource type="Script" path="res://Logic/Combat/CombatState.gd" id="1_a77op"]
+[ext_resource type="Script" path="res://Logic/Castables/ActiveState.gd" id="1_opmkl"]
+[ext_resource type="Script" path="res://Logic/Level/State/LevelState.gd" id="1_worvi"]
+[ext_resource type="Script" path="res://Logic/Entities/EntityID.gd" id="2_2i3es"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/EnemyEventPlan.gd" id="2_kcnt0"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventState.gd" id="2_pdf0p"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/LogEntry.gd" id="3_kxbah"]
+[ext_resource type="Resource" uid="uid://b1uiotlalbmul" path="res://Content/Entities/GrassTile.tres" id="3_vhrki"]
+[ext_resource type="Script" path="res://Logic/Level/State/EntityState.gd" id="4_qk5jy"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellState.gd" id="4_x7vib"]
+[ext_resource type="Script" path="res://Logic/Level/State/TileState.gd" id="5_6hme5"]
+[ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Content/Entities/DirtTile.tres" id="6_8em4m"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="6_c7ku8"]
+[ext_resource type="Resource" uid="uid://brvjvj8i7f7kw" path="res://Content/Entities/Tree.tres" id="7_ay4xs"]
+[ext_resource type="Resource" uid="uid://3aj3kmlbfoul" path="res://Content/Levels/enemy_event_plan_spawn_new_archer.tres" id="7_bdtcp"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="8_d2swj"]
+[ext_resource type="Resource" uid="uid://b7xqo2ltiqbwk" path="res://Content/Entities/Bush.tres" id="9_b8i77"]
+[ext_resource type="Resource" uid="uid://ddr1tv8hf3bj3" path="res://Content/Entities/Stump.tres" id="10_q3j68"]
+[ext_resource type="Resource" uid="uid://c6t18hbsmwiha" path="res://Content/Entities/Rock.tres" id="11_7c360"]
+[ext_resource type="Resource" uid="uid://kq07x16lyno7" path="res://Content/Enemies/Types/GoblinArcher.tres" id="11_54udb"]
+[ext_resource type="Resource" uid="uid://nuucsrbi1dqp" path="res://Content/Entities/MediumShrooms.tres" id="11_fn0u2"]
+[ext_resource type="Resource" uid="uid://bwuf4tmcob7ue" path="res://Content/Enemies/Moves/Other/HeavyInsult.tres" id="13_7pg6x"]
+[ext_resource type="Resource" uid="uid://b8ef7eh8cp7ub" path="res://Content/Entities/Flower.tres" id="13_l3am2"]
+[ext_resource type="Resource" uid="uid://b38c7gip0ynr" path="res://Content/Enemies/Moves/Support/CallHelp.tres" id="14_83ejw"]
+[ext_resource type="Resource" uid="uid://dxf83ay5rsin2" path="res://Content/Enemies/Types/Goblin.tres" id="14_jrk47"]
+[ext_resource type="Resource" uid="uid://bnqbor0d6tjit" path="res://Content/Entities/SmallShrooms.tres" id="14_xioyu"]
+[ext_resource type="Resource" uid="uid://dq2qgws5vu0i2" path="res://Content/Entities/TallGrass.tres" id="15_s3iof"]
+[ext_resource type="Script" path="res://Content/Player/PlayerTraits.gd" id="15_uvvh0"]
+[ext_resource type="Resource" uid="uid://d1wcrekyije7v" path="res://Content/Player/PlayerResource.tres" id="16_0ybmk"]
+[ext_resource type="Resource" uid="uid://bftmj7ayhlcs2" path="res://Content/Entities/FlowSmall.tres" id="16_j2ocy"]
+[ext_resource type="Resource" uid="uid://bhq0pkvdokid6" path="res://Content/Entities/Pebbles.tres" id="17_73e5m"]
+[ext_resource type="Resource" uid="uid://dh4ll7t2j71pq" path="res://Content/Entities/FlowMedium.tres" id="19_25pqm"]
+[ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Content/Enemies/Types/GoblinBard.tres" id="19_amp3j"]
+[ext_resource type="Resource" uid="uid://iq34rfnf6t4w" path="res://Content/Entities/WaterTile.tres" id="19_ncl4f"]
+[ext_resource type="Resource" uid="uid://c5b13jca15dvy" path="res://Content/Levels/enemy_event_plan_spawn_new_fighter.tres" id="26_gdvax"]
+[ext_resource type="Resource" uid="uid://diqf4kucf4hs8" path="res://Content/Levels/combat_event_schedule_weather.tres" id="28_o6fso"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventSchedule.gd" id="29_e34ni"]
+[ext_resource type="Script" path="res://Content/Status/Deprecated/StatusEffect.gd" id="32_moxhk"]
+[ext_resource type="Script" path="res://Logic/Entities/Status/EntityStatus.gd" id="35_eu3yc"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/TimedEffect.gd" id="53_jcir5"]
+
+[sub_resource type="Resource" id="Resource_eacys"]
+script = ExtResource("6_c7ku8")
+action = ExtResource("13_7pg6x")
+score_factor = 1.0
+try_to_avoid = true
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[sub_resource type="Resource" id="Resource_foolh"]
+script = ExtResource("6_c7ku8")
+action = ExtResource("14_83ejw")
+score_factor = 1.0
+try_to_avoid = true
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[sub_resource type="Resource" id="Resource_25aem"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 29
+
+[sub_resource type="Resource" id="Resource_m2bdo"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_25aem"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_vir08"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0, 2])
+
+[sub_resource type="Resource" id="Resource_0wesg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 7
+
+[sub_resource type="Resource" id="Resource_g28mu"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_0wesg"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_u6iio"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_m2bdo"), SubResource("Resource_g28mu")])
+
+[sub_resource type="Resource" id="Resource_kb7tj"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 18
+
+[sub_resource type="Resource" id="Resource_1o8ya"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_kb7tj"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_o0xi8"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_tq1la"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 2
+
+[sub_resource type="Resource" id="Resource_ssfim"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_o0xi8"),
+"id": SubResource("Resource_tq1la"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_1pi8w"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1o8ya"), SubResource("Resource_ssfim")])
+
+[sub_resource type="Resource" id="Resource_jnhih"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 2
+
+[sub_resource type="Resource" id="Resource_c6qsp"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_jnhih"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_1yliu"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_c6qsp")])
+
+[sub_resource type="Resource" id="Resource_7yj30"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 41
+
+[sub_resource type="Resource" id="Resource_1ag2b"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_7yj30"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_lqpe5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 4])
+
+[sub_resource type="Resource" id="Resource_6mygu"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 4
+
+[sub_resource type="Resource" id="Resource_rj4f5"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_lqpe5"),
+"id": SubResource("Resource_6mygu"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_pd13m"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_1ag2b"), SubResource("Resource_rj4f5")])
+
+[sub_resource type="Resource" id="Resource_flbpx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 4
+
+[sub_resource type="Resource" id="Resource_vjejg"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_flbpx"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_v8c80"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2])
+
+[sub_resource type="Resource" id="Resource_ryjh4"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 1
+
+[sub_resource type="Resource" id="Resource_mjgmn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_v8c80"),
+"id": SubResource("Resource_ryjh4"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"count": 4,
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ankg4"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vjejg"), SubResource("Resource_mjgmn")])
+
+[sub_resource type="Resource" id="Resource_2i7ss"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 5
+
+[sub_resource type="Resource" id="Resource_p6ihu"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2i7ss"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_jhx8i"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2, 2, 2])
+
+[sub_resource type="Resource" id="Resource_dsqsf"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 1
+
+[sub_resource type="Resource" id="Resource_wio3a"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_dsqsf"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_k1bm6"]
+script = ExtResource("5_6hme5")
+r = 0
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_p6ihu"), SubResource("Resource_wio3a")])
+
+[sub_resource type="Resource" id="Resource_aaskx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 28
+
+[sub_resource type="Resource" id="Resource_qms4m"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_aaskx"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_egrib"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 2
+
+[sub_resource type="Resource" id="Resource_q1ccp"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_lqpe5"),
+"id": SubResource("Resource_egrib"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_n2i47"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qms4m"), SubResource("Resource_q1ccp")])
+
+[sub_resource type="Resource" id="Resource_t32jh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 56
+
+[sub_resource type="Resource" id="Resource_iswwr"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_t32jh"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_04x36"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_iswwr")])
+
+[sub_resource type="Resource" id="Resource_may3j"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 57
+
+[sub_resource type="Resource" id="Resource_pcesi"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_may3j"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_37sk6"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 1
+
+[sub_resource type="Resource" id="Resource_ebped"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_lqpe5"),
+"id": SubResource("Resource_37sk6"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_0fpjn"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pcesi"), SubResource("Resource_ebped")])
+
+[sub_resource type="Resource" id="Resource_u8ptc"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 58
+
+[sub_resource type="Resource" id="Resource_xt11o"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_u8ptc"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_x3nhf"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0])
+
+[sub_resource type="Resource" id="Resource_toi7o"]
+script = ExtResource("2_2i3es")
+type = ExtResource("9_b8i77")
+id = 3
+
+[sub_resource type="Resource" id="Resource_miuxj"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("9_b8i77")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_x3nhf"),
+"id": SubResource("Resource_toi7o"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_g84hj"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xt11o"), SubResource("Resource_miuxj")])
+
+[sub_resource type="Resource" id="Resource_qwgqp"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 42
+
+[sub_resource type="Resource" id="Resource_f6uku"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_qwgqp"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_gwrkn"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0, 2])
+
+[sub_resource type="Resource" id="Resource_nhsut"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 21
+
+[sub_resource type="Resource" id="Resource_yoqyj"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_gwrkn"),
+"id": SubResource("Resource_nhsut"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_d6d6o"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f6uku"), SubResource("Resource_yoqyj")])
+
+[sub_resource type="Resource" id="Resource_f7vrg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 59
+
+[sub_resource type="Resource" id="Resource_std0l"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_f7vrg"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_a0j1o"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([2])
+
+[sub_resource type="Resource" id="Resource_qhjjx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 1
+
+[sub_resource type="Resource" id="Resource_xhyjl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_qhjjx"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"count": 4,
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_h0avo"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_std0l"), SubResource("Resource_xhyjl")])
+
+[sub_resource type="Resource" id="Resource_ln7nh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 6
+
+[sub_resource type="Resource" id="Resource_o3t5e"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ln7nh"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_o87nd"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 2
+
+[sub_resource type="Resource" id="Resource_g1hbe"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_o87nd"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_28m5r"]
+script = ExtResource("5_6hme5")
+r = 1
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_o3t5e"), SubResource("Resource_g1hbe")])
+
+[sub_resource type="Resource" id="Resource_3q8ae"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 27
+
+[sub_resource type="Resource" id="Resource_fmpn6"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_3q8ae"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_nvrhd"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 3
+
+[sub_resource type="Resource" id="Resource_c1i1g"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_lqpe5"),
+"id": SubResource("Resource_nvrhd"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_osuef"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_fmpn6"), SubResource("Resource_c1i1g")])
+
+[sub_resource type="Resource" id="Resource_sugdk"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 90
+
+[sub_resource type="Resource" id="Resource_nw740"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_sugdk"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_regrk"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nw740")])
+
+[sub_resource type="Resource" id="Resource_l1458"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 55
+
+[sub_resource type="Resource" id="Resource_ga1d2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_l1458"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ypaex"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ga1d2")])
+
+[sub_resource type="Resource" id="Resource_w5c4k"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 61
+
+[sub_resource type="Resource" id="Resource_cyt8f"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_w5c4k"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ywjdp"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_4y7ft"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_jrk47")
+id = 1
+
+[sub_resource type="Resource" id="Resource_2bvwu"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_jrk47")
+entity_props = {
+"accuracy": 9,
+"action_logic": {},
+"action_plan": null,
+"agility": 1,
+"armor": 0,
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_ywjdp"),
+"hp": 5,
+"id": SubResource("Resource_4y7ft"),
+"movement_range": 2,
+"resistance": 0,
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
+"strength": 2,
+"team": 0
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_o8ykk"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cyt8f"), SubResource("Resource_2bvwu")])
+
+[sub_resource type="Resource" id="Resource_tv4qm"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 43
+
+[sub_resource type="Resource" id="Resource_htcgh"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_tv4qm"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_baouo"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 1])
+
+[sub_resource type="Resource" id="Resource_1idxw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_nkf1v"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_baouo"),
+"id": SubResource("Resource_1idxw"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_r0smv"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_htcgh"), SubResource("Resource_nkf1v")])
+
+[sub_resource type="Resource" id="Resource_r2qb0"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 44
+
+[sub_resource type="Resource" id="Resource_j8jov"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_r2qb0"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_a466y"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([5])
+
+[sub_resource type="Resource" id="Resource_ku5tm"]
+script = ExtResource("2_2i3es")
+type = ExtResource("13_l3am2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_osy30"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("13_l3am2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a466y"),
+"id": SubResource("Resource_ku5tm"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_7xgko"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_j8jov"), SubResource("Resource_osy30")])
+
+[sub_resource type="Resource" id="Resource_k5dr0"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 57
+
+[sub_resource type="Resource" id="Resource_23orv"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_k5dr0"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_uuiip"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 4])
+
+[sub_resource type="Resource" id="Resource_lumk2"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 7
+
+[sub_resource type="Resource" id="Resource_6b374"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_lumk2"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ltr50"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_23orv"), SubResource("Resource_6b374")])
+
+[sub_resource type="Resource" id="Resource_eljp3"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 7
+
+[sub_resource type="Resource" id="Resource_qrnn1"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_eljp3"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_j3w3r"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 6
+
+[sub_resource type="Resource" id="Resource_aq340"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_j3w3r"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_rblnn"]
+script = ExtResource("5_6hme5")
+r = 2
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qrnn1"), SubResource("Resource_aq340")])
+
+[sub_resource type="Resource" id="Resource_o0nhg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 25
+
+[sub_resource type="Resource" id="Resource_524hq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_o0nhg"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_1enrw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 4
+
+[sub_resource type="Resource" id="Resource_k4iwe"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_1enrw"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_4ywwn"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_524hq"), SubResource("Resource_k4iwe")])
+
+[sub_resource type="Resource" id="Resource_xsa65"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 26
+
+[sub_resource type="Resource" id="Resource_rtw6i"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_xsa65"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_jsre5"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
+[sub_resource type="Resource" id="Resource_pi5kt"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_j2ocy")
+id = 1
+
+[sub_resource type="Resource" id="Resource_nq4ts"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_j2ocy")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jsre5"),
+"id": SubResource("Resource_pi5kt"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_nk0hm"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rtw6i"), SubResource("Resource_nq4ts")])
+
+[sub_resource type="Resource" id="Resource_2xhne"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 93
+
+[sub_resource type="Resource" id="Resource_eoxb2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2xhne"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_bgl1q"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_l8xvh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_54udb")
+id = 1
+
+[sub_resource type="Resource" id="Resource_jwfjs"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_54udb")
+entity_props = {
+"accuracy": 9,
+"action_logic": {},
+"action_plan": null,
+"agility": 0,
+"armor": 0,
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_bgl1q"),
+"hp": 4,
+"id": SubResource("Resource_l8xvh"),
+"movement_range": 2,
+"resistance": 0,
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
+"strength": 1,
+"team": 0
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_rhtsj"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_eoxb2"), SubResource("Resource_jwfjs")])
+
+[sub_resource type="Resource" id="Resource_hw624"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 91
+
+[sub_resource type="Resource" id="Resource_om14y"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_hw624"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_dhd5e"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 3])
+
+[sub_resource type="Resource" id="Resource_e53m6"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 2
+
+[sub_resource type="Resource" id="Resource_s3xl0"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_e53m6"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_l2gpn"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_om14y"), SubResource("Resource_s3xl0")])
+
+[sub_resource type="Resource" id="Resource_bklsd"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 82
+
+[sub_resource type="Resource" id="Resource_dvmqo"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_bklsd"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_m1ybh"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4, 4])
+
+[sub_resource type="Resource" id="Resource_1k8qr"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_25pqm")
+id = 1
+
+[sub_resource type="Resource" id="Resource_3jlri"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_25pqm")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_m1ybh"),
+"id": SubResource("Resource_1k8qr"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_v5wd1"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_dvmqo"), SubResource("Resource_3jlri")])
+
+[sub_resource type="Resource" id="Resource_4ai4x"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 45
+
+[sub_resource type="Resource" id="Resource_2jogx"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_4ai4x"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_7aeij"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 3
+
+[sub_resource type="Resource" id="Resource_rvnah"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_7aeij"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ulxjj"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_2jogx"), SubResource("Resource_rvnah")])
+
+[sub_resource type="Resource" id="Resource_hfhpp"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_oaucm"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 4
+
+[sub_resource type="Resource" id="Resource_gur7t"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_oaucm"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_gut30"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_gur7t")])
+
+[sub_resource type="Resource" id="Resource_4jp04"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 3
+
+[sub_resource type="Resource" id="Resource_w6oqr"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_4jp04"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_eyxv8"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_w6oqr")])
+
+[sub_resource type="Resource" id="Resource_2iepg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 8
+
+[sub_resource type="Resource" id="Resource_6w3cl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2iepg"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_77kiq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 5
+
+[sub_resource type="Resource" id="Resource_osjvb"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_77kiq"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_wapmp"]
+script = ExtResource("5_6hme5")
+r = 3
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_6w3cl"), SubResource("Resource_osjvb")])
+
+[sub_resource type="Resource" id="Resource_7v3sp"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 24
+
+[sub_resource type="Resource" id="Resource_macmk"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_7v3sp"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_7s7wq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 8
+
+[sub_resource type="Resource" id="Resource_kv1jn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_7s7wq"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_i0b8g"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_macmk"), SubResource("Resource_kv1jn")])
+
+[sub_resource type="Resource" id="Resource_ce0aw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 30
+
+[sub_resource type="Resource" id="Resource_qoku0"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ce0aw"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_g7tji"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 1
+
+[sub_resource type="Resource" id="Resource_114ie"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_g7tji"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_wwvjo"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_qoku0"), SubResource("Resource_114ie")])
+
+[sub_resource type="Resource" id="Resource_pend8"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 94
+
+[sub_resource type="Resource" id="Resource_uxp1g"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_pend8"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_6x62q"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_uxp1g")])
+
+[sub_resource type="Resource" id="Resource_skjpa"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 84
+
+[sub_resource type="Resource" id="Resource_ucnb5"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_skjpa"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_0gtdw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 3
+
+[sub_resource type="Resource" id="Resource_naavq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_0gtdw"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"count": 4,
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_7cc3e"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ucnb5"), SubResource("Resource_naavq")])
+
+[sub_resource type="Resource" id="Resource_kc6lw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 83
+
+[sub_resource type="Resource" id="Resource_a38ti"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_kc6lw"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_q0xmb"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_a38ti")])
+
+[sub_resource type="Resource" id="Resource_gvgte"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 62
+
+[sub_resource type="Resource" id="Resource_0tspo"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_gvgte"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_e2lkh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 2
+
+[sub_resource type="Resource" id="Resource_1hb63"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_e2lkh"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"count": 4,
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_a43eg"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0tspo"), SubResource("Resource_1hb63")])
+
+[sub_resource type="Resource" id="Resource_g6soj"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 46
+
+[sub_resource type="Resource" id="Resource_o67p7"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_g6soj"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_nf2or"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 3])
+
+[sub_resource type="Resource" id="Resource_dgy1e"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 3
+
+[sub_resource type="Resource" id="Resource_gno87"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_nf2or"),
+"id": SubResource("Resource_dgy1e"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_fkjc7"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_o67p7"), SubResource("Resource_gno87")])
+
+[sub_resource type="Resource" id="Resource_uqdun"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 5
+
+[sub_resource type="Resource" id="Resource_rpnvw"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_uqdun"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_p5ue8"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rpnvw")])
+
+[sub_resource type="Resource" id="Resource_a4sok"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 2
+
+[sub_resource type="Resource" id="Resource_im1ca"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_a4sok"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ufikm"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_im1ca")])
+
+[sub_resource type="Resource" id="Resource_tru5f"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 9
+
+[sub_resource type="Resource" id="Resource_lwvn8"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_tru5f"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_fhjde"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 5
+
+[sub_resource type="Resource" id="Resource_5bl6u"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_fhjde"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_aidxr"]
+script = ExtResource("5_6hme5")
+r = 4
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_lwvn8"), SubResource("Resource_5bl6u")])
+
+[sub_resource type="Resource" id="Resource_frtvy"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 23
+
+[sub_resource type="Resource" id="Resource_pxsn8"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_frtvy"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_tsnpt"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 0])
+
+[sub_resource type="Resource" id="Resource_7o2br"]
+script = ExtResource("2_2i3es")
+type = ExtResource("9_b8i77")
+id = 4
+
+[sub_resource type="Resource" id="Resource_72jvs"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("9_b8i77")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_tsnpt"),
+"id": SubResource("Resource_7o2br"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_dhmly"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_pxsn8"), SubResource("Resource_72jvs")])
+
+[sub_resource type="Resource" id="Resource_ixb76"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 31
+
+[sub_resource type="Resource" id="Resource_hok7j"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ixb76"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_eoarx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 27
+
+[sub_resource type="Resource" id="Resource_5nttp"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_gwrkn"),
+"id": SubResource("Resource_eoarx"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ui2vx"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hok7j"), SubResource("Resource_5nttp")])
+
+[sub_resource type="Resource" id="Resource_f0vox"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 39
+
+[sub_resource type="Resource" id="Resource_xi8no"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_f0vox"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_7a77a"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 3
+
+[sub_resource type="Resource" id="Resource_cts6h"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_o0xi8"),
+"id": SubResource("Resource_7a77a"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_awxn1"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xi8no"), SubResource("Resource_cts6h")])
+
+[sub_resource type="Resource" id="Resource_7cgwk"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 79
+
+[sub_resource type="Resource" id="Resource_haoea"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_7cgwk"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_8ddat"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 12
+
+[sub_resource type="Resource" id="Resource_s4gck"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_8ddat"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_v3ah4"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_haoea"), SubResource("Resource_s4gck")])
+
+[sub_resource type="Resource" id="Resource_gby3q"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 80
+
+[sub_resource type="Resource" id="Resource_olifd"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_gby3q"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_xs8m7"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_olifd")])
+
+[sub_resource type="Resource" id="Resource_ym36i"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 81
+
+[sub_resource type="Resource" id="Resource_vxhn7"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ym36i"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_wfmfy"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vxhn7")])
+
+[sub_resource type="Resource" id="Resource_8wmgq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 67
+
+[sub_resource type="Resource" id="Resource_xgfe8"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_8wmgq"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_mbu80"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 9
+
+[sub_resource type="Resource" id="Resource_gp7c6"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_mbu80"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_iy4tw"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_xgfe8"), SubResource("Resource_gp7c6")])
+
+[sub_resource type="Resource" id="Resource_qm8mu"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 66
+
+[sub_resource type="Resource" id="Resource_u22e8"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_qm8mu"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_0uyjv"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_u22e8")])
+
+[sub_resource type="Resource" id="Resource_hokop"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 1
+
+[sub_resource type="Resource" id="Resource_v8p4g"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hfhpp"),
+"id": SubResource("Resource_hokop"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_bnblp"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_v8p4g")])
+
+[sub_resource type="Resource" id="Resource_ogme0"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 53
+
+[sub_resource type="Resource" id="Resource_yqho5"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ogme0"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_0vqwt"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_yqho5")])
+
+[sub_resource type="Resource" id="Resource_x7a3h"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 2
+
+[sub_resource type="Resource" id="Resource_sc28f"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_x7a3h"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_gwjex"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 6
+
+[sub_resource type="Resource" id="Resource_r31dd"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_gwjex"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_lvvc7"]
+script = ExtResource("5_6hme5")
+r = 5
+q = 10
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_sc28f"), SubResource("Resource_r31dd")])
+
+[sub_resource type="Resource" id="Resource_cq2rq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 22
+
+[sub_resource type="Resource" id="Resource_3e5gx"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_cq2rq"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ur5mk"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 6
+
+[sub_resource type="Resource" id="Resource_r8prf"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_ur5mk"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_p7u5g"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_3e5gx"), SubResource("Resource_r8prf")])
+
+[sub_resource type="Resource" id="Resource_1q36g"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 32
+
+[sub_resource type="Resource" id="Resource_ktdh2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_1q36g"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_tfkxq"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_2mt7g"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_amp3j")
+id = 1
+
+[sub_resource type="Resource" id="Resource_ruok6"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_amp3j")
+entity_props = {
+"accuracy": 6,
+"action_logic": {},
+"action_plan": null,
+"agility": 2,
+"armor": 0,
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_tfkxq"),
+"hp": 3,
+"id": SubResource("Resource_2mt7g"),
+"movement_range": 2,
+"resistance": 0,
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
+"strength": 1,
+"team": 0
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_nd8jp"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ktdh2"), SubResource("Resource_ruok6")])
+
+[sub_resource type="Resource" id="Resource_uemo2"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 38
+
+[sub_resource type="Resource" id="Resource_vb5vn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_uemo2"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_brhi3"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 5
+
+[sub_resource type="Resource" id="Resource_evma3"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_brhi3"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"count": 4,
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_u4hwr"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vb5vn"), SubResource("Resource_evma3")])
+
+[sub_resource type="Resource" id="Resource_b5a52"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 85
+
+[sub_resource type="Resource" id="Resource_aifx7"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_b5a52"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_3cico"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_aifx7")])
+
+[sub_resource type="Resource" id="Resource_7l5rb"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 74
+
+[sub_resource type="Resource" id="Resource_ltvdp"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_7l5rb"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ta070"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ltvdp")])
+
+[sub_resource type="Resource" id="Resource_2473n"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 73
+
+[sub_resource type="Resource" id="Resource_7rrcu"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2473n"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_bojn3"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_7rrcu")])
+
+[sub_resource type="Resource" id="Resource_26vah"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 68
+
+[sub_resource type="Resource" id="Resource_c0quc"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_26vah"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_cnis3"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 3
+
+[sub_resource type="Resource" id="Resource_14mwq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_cnis3"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_6kwj5"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_c0quc"), SubResource("Resource_14mwq")])
+
+[sub_resource type="Resource" id="Resource_lwjr2"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 49
+
+[sub_resource type="Resource" id="Resource_n3gfk"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_lwjr2"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_hj5xo"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_76224"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 2
+
+[sub_resource type="Resource" id="Resource_xdotx"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_hj5xo"),
+"id": SubResource("Resource_76224"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_dfjrb"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_n3gfk"), SubResource("Resource_xdotx")])
+
+[sub_resource type="Resource" id="Resource_ohqbn"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 1
+
+[sub_resource type="Resource" id="Resource_ngb8y"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ohqbn"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_difmj"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 2
+
+[sub_resource type="Resource" id="Resource_akb1b"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_difmj"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_w11wi"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ngb8y"), SubResource("Resource_akb1b")])
+
+[sub_resource type="Resource" id="Resource_s7t5o"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 52
+
+[sub_resource type="Resource" id="Resource_u033b"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_s7t5o"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_6ex1c"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 2
+
+[sub_resource type="Resource" id="Resource_cfhmi"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_6ex1c"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_uxj55"]
+script = ExtResource("5_6hme5")
+r = 6
+q = 9
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_u033b"), SubResource("Resource_cfhmi")])
+
+[sub_resource type="Resource" id="Resource_bytmc"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 21
+
+[sub_resource type="Resource" id="Resource_hefx2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_bytmc"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_kfff7"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([0, 1])
+
+[sub_resource type="Resource" id="Resource_5ocxp"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_ki7ih"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_kfff7"),
+"id": SubResource("Resource_5ocxp"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_pf81o"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hefx2"), SubResource("Resource_ki7ih")])
+
+[sub_resource type="Resource" id="Resource_0odk8"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 33
+
+[sub_resource type="Resource" id="Resource_f8oyn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_0odk8"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_1dgty"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 1
+
+[sub_resource type="Resource" id="Resource_24tye"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vir08"),
+"id": SubResource("Resource_1dgty"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_vs6ad"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f8oyn"), SubResource("Resource_24tye")])
+
+[sub_resource type="Resource" id="Resource_clrpf"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 37
+
+[sub_resource type="Resource" id="Resource_aqq33"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_clrpf"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_8g8yh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_25pqm")
+id = 2
+
+[sub_resource type="Resource" id="Resource_vvfi3"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_25pqm")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_m1ybh"),
+"id": SubResource("Resource_8g8yh"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_jmchj"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_aqq33"), SubResource("Resource_vvfi3")])
+
+[sub_resource type="Resource" id="Resource_2ye8h"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 75
+
+[sub_resource type="Resource" id="Resource_f14e2"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2ye8h"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_fa2pd"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 6
+
+[sub_resource type="Resource" id="Resource_lh8oo"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_fa2pd"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_mhtfp"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f14e2"), SubResource("Resource_lh8oo")])
+
+[sub_resource type="Resource" id="Resource_fn11g"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 72
+
+[sub_resource type="Resource" id="Resource_ufjth"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_fn11g"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_0t2p0"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ufjth")])
+
+[sub_resource type="Resource" id="Resource_6vmw6"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 69
+
+[sub_resource type="Resource" id="Resource_l0hiw"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_6vmw6"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_m5yt8"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_l0hiw")])
+
+[sub_resource type="Resource" id="Resource_t22j2"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 41
+
+[sub_resource type="Resource" id="Resource_vvww4"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_t22j2"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_pgb0e"]
+script = ExtResource("2_2i3es")
+type = ExtResource("9_b8i77")
+id = 1
+
+[sub_resource type="Resource" id="Resource_u82ku"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("9_b8i77")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_x3nhf"),
+"id": SubResource("Resource_pgb0e"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_3iibj"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_vvww4"), SubResource("Resource_u82ku")])
+
+[sub_resource type="Resource" id="Resource_35y1w"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 50
+
+[sub_resource type="Resource" id="Resource_igedv"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_35y1w"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_htuh4"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_igedv")])
+
+[sub_resource type="Resource" id="Resource_8rsn7"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 51
+
+[sub_resource type="Resource" id="Resource_cmtbl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_8rsn7"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_fkwcc"]
+script = ExtResource("2_2i3es")
+type = ExtResource("7_ay4xs")
+id = 4
+
+[sub_resource type="Resource" id="Resource_5mckc"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("7_ay4xs")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_gwrkn"),
+"id": SubResource("Resource_fkwcc"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_a0s6h"]
+script = ExtResource("5_6hme5")
+r = 7
+q = 8
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_cmtbl"), SubResource("Resource_5mckc")])
+
+[sub_resource type="Resource" id="Resource_sf6sg"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 20
+
+[sub_resource type="Resource" id="Resource_kmure"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_sf6sg"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_yxrxq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_7c360")
+id = 10
+
+[sub_resource type="Resource" id="Resource_ax4kg"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_7c360")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_jhx8i"),
+"id": SubResource("Resource_yxrxq"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_2buxc"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_kmure"), SubResource("Resource_ax4kg")])
+
+[sub_resource type="Resource" id="Resource_ncx8v"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 40
+
+[sub_resource type="Resource" id="Resource_hrcpb"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_ncx8v"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_7de58"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 5
+
+[sub_resource type="Resource" id="Resource_niqyn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_7de58"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_41nss"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_hrcpb"), SubResource("Resource_niqyn")])
+
+[sub_resource type="Resource" id="Resource_c8wdn"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_b7ag6"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 1
+
+[sub_resource type="Resource" id="Resource_rxb71"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_c8wdn"),
+"id": SubResource("Resource_b7ag6"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_4vgsw"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_rxb71")])
+
+[sub_resource type="Resource" id="Resource_pcm55"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 71
+
+[sub_resource type="Resource" id="Resource_b6ug8"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_pcm55"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_2p27s"]
+script = ExtResource("2_2i3es")
+type = ExtResource("11_fn0u2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_bb7ts"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("11_fn0u2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_o0xi8"),
+"id": SubResource("Resource_2p27s"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_jimdd"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_b6ug8"), SubResource("Resource_bb7ts")])
+
+[sub_resource type="Resource" id="Resource_xvikx"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 70
+
+[sub_resource type="Resource" id="Resource_mtjhy"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_xvikx"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_jsjy5"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_mtjhy")])
+
+[sub_resource type="Resource" id="Resource_jkxij"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 40
+
+[sub_resource type="Resource" id="Resource_0s1gt"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_jkxij"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ip86j"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_0s1gt")])
+
+[sub_resource type="Resource" id="Resource_nor5m"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 42
+
+[sub_resource type="Resource" id="Resource_4utaf"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_nor5m"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ynb5v"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_0ybmk")
+id = 1
+
+[sub_resource type="Resource" id="Resource_rtejl"]
+script = ExtResource("15_uvvh0")
+max_handsize = 3
+movement_range = 3
+max_drains = 3
+
+[sub_resource type="Resource" id="Resource_15qpt"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_0ybmk")
+entity_props = {
+"armor": 0,
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"hp": 5,
+"id": SubResource("Resource_ynb5v"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([]),
+"team": 0,
+"traits": SubResource("Resource_rtejl")
+}
+script_props = {}
+visual_ent_props = {
+"idle_break_chance": 0.5,
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_jdhh3"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_4utaf"), SubResource("Resource_15qpt")])
+
+[sub_resource type="Resource" id="Resource_gdkwn"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 6
+
+[sub_resource type="Resource" id="Resource_a7oks"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_gdkwn"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_7iq24"]
+script = ExtResource("2_2i3es")
+type = ExtResource("14_xioyu")
+id = 4
+
+[sub_resource type="Resource" id="Resource_irf5s"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("14_xioyu")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dhd5e"),
+"id": SubResource("Resource_7iq24"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ucex2"]
+script = ExtResource("5_6hme5")
+r = 8
+q = 7
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_a7oks"), SubResource("Resource_irf5s")])
+
+[sub_resource type="Resource" id="Resource_5x6n7"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 19
+
+[sub_resource type="Resource" id="Resource_tjqpr"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_5x6n7"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_n50ds"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([5])
+
+[sub_resource type="Resource" id="Resource_eqlqb"]
+script = ExtResource("2_2i3es")
+type = ExtResource("13_l3am2")
+id = 1
+
+[sub_resource type="Resource" id="Resource_7jppt"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("13_l3am2")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_n50ds"),
+"id": SubResource("Resource_eqlqb"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_wgb1a"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tjqpr"), SubResource("Resource_7jppt")])
+
+[sub_resource type="Resource" id="Resource_dok8u"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([3, 4])
+
+[sub_resource type="Resource" id="Resource_mp706"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 1
+
+[sub_resource type="Resource" id="Resource_f2f6r"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dok8u"),
+"id": SubResource("Resource_mp706"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_vfvnk"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([4])
+
+[sub_resource type="Resource" id="Resource_xql1y"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_j2ocy")
+id = 3
+
+[sub_resource type="Resource" id="Resource_uewi7"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_j2ocy")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vfvnk"),
+"id": SubResource("Resource_xql1y"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ogkq3"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f2f6r"), SubResource("Resource_uewi7")])
+
+[sub_resource type="Resource" id="Resource_lw87u"]
+script = ExtResource("2_2i3es")
+type = ExtResource("19_ncl4f")
+id = 2
+
+[sub_resource type="Resource" id="Resource_h0urk"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("19_ncl4f")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_dok8u"),
+"id": SubResource("Resource_lw87u"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_f6f7f"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_h0urk")])
+
+[sub_resource type="Resource" id="Resource_o5ttf"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 33
+
+[sub_resource type="Resource" id="Resource_454ov"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_o5ttf"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_36c7q"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([1, 2])
+
+[sub_resource type="Resource" id="Resource_kjv5c"]
+script = ExtResource("2_2i3es")
+type = ExtResource("10_q3j68")
+id = 2
+
+[sub_resource type="Resource" id="Resource_ko446"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("10_q3j68")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_36c7q"),
+"id": SubResource("Resource_kjv5c"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_mv5cf"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_454ov"), SubResource("Resource_ko446")])
+
+[sub_resource type="Resource" id="Resource_t6f63"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 38
+
+[sub_resource type="Resource" id="Resource_5f2e5"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_t6f63"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_fwj85"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_5f2e5")])
+
+[sub_resource type="Resource" id="Resource_x2umi"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 39
+
+[sub_resource type="Resource" id="Resource_nb7rn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_x2umi"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_a70yn"]
+script = ExtResource("2_2i3es")
+type = ExtResource("17_73e5m")
+id = 4
+
+[sub_resource type="Resource" id="Resource_41sb4"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("17_73e5m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_a0j1o"),
+"id": SubResource("Resource_a70yn"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"count": 4,
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_7uvjw"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_nb7rn"), SubResource("Resource_41sb4")])
+
+[sub_resource type="Resource" id="Resource_03sds"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 5
+
+[sub_resource type="Resource" id="Resource_ni35d"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_03sds"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_uhlsy"]
+script = ExtResource("5_6hme5")
+r = 9
+q = 6
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_ni35d")])
+
+[sub_resource type="Resource" id="Resource_t6yuj"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 18
+
+[sub_resource type="Resource" id="Resource_d80on"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_t6yuj"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_px6di"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 0
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_d80on")])
+
+[sub_resource type="Resource" id="Resource_2abkn"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 17
+
+[sub_resource type="Resource" id="Resource_tayvl"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_2abkn"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_5rj2v"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 5
+
+[sub_resource type="Resource" id="Resource_8dabn"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_5rj2v"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_ahlnp"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 1
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tayvl"), SubResource("Resource_8dabn")])
+
+[sub_resource type="Resource" id="Resource_jd0fv"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 16
+
+[sub_resource type="Resource" id="Resource_f56xs"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_jd0fv"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_xql0m"]
+script = ExtResource("2_2i3es")
+type = ExtResource("15_s3iof")
+id = 4
+
+[sub_resource type="Resource" id="Resource_sm444"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("15_s3iof")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_uuiip"),
+"id": SubResource("Resource_xql0m"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_mtfn2"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 2
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_f56xs"), SubResource("Resource_sm444")])
+
+[sub_resource type="Resource" id="Resource_22pxl"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 15
+
+[sub_resource type="Resource" id="Resource_4touo"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_22pxl"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_uq3uh"]
+script = ExtResource("2_2i3es")
+type = ExtResource("16_j2ocy")
+id = 2
+
+[sub_resource type="Resource" id="Resource_8hkwc"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("16_j2ocy")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_vfvnk"),
+"id": SubResource("Resource_uq3uh"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_c7mo7"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 3
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_4touo"), SubResource("Resource_8hkwc")])
+
+[sub_resource type="Resource" id="Resource_k1jkw"]
+script = ExtResource("2_2i3es")
+type = ExtResource("3_vhrki")
+id = 13
+
+[sub_resource type="Resource" id="Resource_b4tuq"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("3_vhrki")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_k1jkw"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_umfaq"]
+script = ExtResource("2_2i3es")
+type = ExtResource("9_b8i77")
+id = 3
+
+[sub_resource type="Resource" id="Resource_b8ker"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("9_b8i77")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": SubResource("Resource_tsnpt"),
+"id": SubResource("Resource_umfaq"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_24ir6"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 4
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_b4tuq"), SubResource("Resource_b8ker")])
+
+[sub_resource type="Resource" id="Resource_foa5s"]
+script = ExtResource("2_2i3es")
+type = ExtResource("6_8em4m")
+id = 4
+
+[sub_resource type="Resource" id="Resource_tgql7"]
+script = ExtResource("4_qk5jy")
+type = ExtResource("6_8em4m")
+entity_props = {
+"custom_props": {},
+"drained_energy": null,
+"energy": null,
+"id": SubResource("Resource_foa5s"),
+"status_array": Array[ExtResource("35_eu3yc")]([]),
+"status_effects": Array[ExtResource("32_moxhk")]([])
+}
+script_props = {}
+visual_ent_props = {
+"visual_rotation": 0
+}
+
+[sub_resource type="Resource" id="Resource_1kbjx"]
+script = ExtResource("5_6hme5")
+r = 10
+q = 5
+entities = Array[ExtResource("4_qk5jy")]([SubResource("Resource_tgql7")])
+
+[sub_resource type="Resource" id="Resource_e8v3f"]
+script = ExtResource("1_worvi")
+tiles = Array[ExtResource("5_6hme5")]([SubResource("Resource_u6iio"), SubResource("Resource_1pi8w"), SubResource("Resource_1yliu"), SubResource("Resource_pd13m"), SubResource("Resource_ankg4"), SubResource("Resource_k1bm6"), SubResource("Resource_n2i47"), SubResource("Resource_04x36"), SubResource("Resource_0fpjn"), SubResource("Resource_g84hj"), SubResource("Resource_d6d6o"), SubResource("Resource_h0avo"), SubResource("Resource_28m5r"), SubResource("Resource_osuef"), SubResource("Resource_regrk"), SubResource("Resource_ypaex"), SubResource("Resource_o8ykk"), SubResource("Resource_r0smv"), SubResource("Resource_7xgko"), SubResource("Resource_ltr50"), SubResource("Resource_rblnn"), SubResource("Resource_4ywwn"), SubResource("Resource_nk0hm"), SubResource("Resource_rhtsj"), SubResource("Resource_l2gpn"), SubResource("Resource_v5wd1"), SubResource("Resource_ulxjj"), SubResource("Resource_gut30"), SubResource("Resource_eyxv8"), SubResource("Resource_wapmp"), SubResource("Resource_i0b8g"), SubResource("Resource_wwvjo"), SubResource("Resource_6x62q"), SubResource("Resource_7cc3e"), SubResource("Resource_q0xmb"), SubResource("Resource_a43eg"), SubResource("Resource_fkjc7"), SubResource("Resource_p5ue8"), SubResource("Resource_ufikm"), SubResource("Resource_aidxr"), SubResource("Resource_dhmly"), SubResource("Resource_ui2vx"), SubResource("Resource_awxn1"), SubResource("Resource_v3ah4"), SubResource("Resource_xs8m7"), SubResource("Resource_wfmfy"), SubResource("Resource_iy4tw"), SubResource("Resource_0uyjv"), SubResource("Resource_bnblp"), SubResource("Resource_0vqwt"), SubResource("Resource_lvvc7"), SubResource("Resource_p7u5g"), SubResource("Resource_nd8jp"), SubResource("Resource_u4hwr"), SubResource("Resource_3cico"), SubResource("Resource_ta070"), SubResource("Resource_bojn3"), SubResource("Resource_6kwj5"), SubResource("Resource_dfjrb"), SubResource("Resource_w11wi"), SubResource("Resource_uxj55"), SubResource("Resource_pf81o"), SubResource("Resource_vs6ad"), SubResource("Resource_jmchj"), SubResource("Resource_mhtfp"), SubResource("Resource_0t2p0"), SubResource("Resource_m5yt8"), SubResource("Resource_3iibj"), SubResource("Resource_htuh4"), SubResource("Resource_a0s6h"), SubResource("Resource_2buxc"), SubResource("Resource_41nss"), SubResource("Resource_4vgsw"), SubResource("Resource_jimdd"), SubResource("Resource_jsjy5"), SubResource("Resource_ip86j"), SubResource("Resource_jdhh3"), SubResource("Resource_ucex2"), SubResource("Resource_wgb1a"), SubResource("Resource_ogkq3"), SubResource("Resource_f6f7f"), SubResource("Resource_mv5cf"), SubResource("Resource_fwj85"), SubResource("Resource_7uvjw"), SubResource("Resource_uhlsy"), SubResource("Resource_px6di"), SubResource("Resource_ahlnp"), SubResource("Resource_mtfn2"), SubResource("Resource_c7mo7"), SubResource("Resource_24ir6"), SubResource("Resource_1kbjx")])
+graveyard = Array[ExtResource("4_qk5jy")]([])
+rows = 11
+columns = 11
+
+[sub_resource type="Resource" id="Resource_5dxda"]
+script = ExtResource("8_d2swj")
+stack = Array[int]([])
+
+[resource]
+script = ExtResource("1_a77op")
+level_state = SubResource("Resource_e8v3f")
+current_round = 1
+current_phase = 0
+player_energy = SubResource("Resource_5dxda")
+deck_states = Array[ExtResource("4_x7vib")]([])
+hand_states = Array[ExtResource("4_x7vib")]([])
+discard_pile_states = Array[ExtResource("4_x7vib")]([])
+timed_effects = Array[ExtResource("53_jcir5")]([])
+combat_log = Array[ExtResource("3_kxbah")]([])
+active_states = Array[ExtResource("1_opmkl")]([])
+all_events = Array[ExtResource("2_pdf0p")]([])
+event_schedules = Array[ExtResource("29_e34ni")]([ExtResource("28_o6fso")])
+enemy_event_queue = Array[ExtResource("2_kcnt0")]([ExtResource("26_gdvax"), ExtResource("7_bdtcp")])
+enemy_meter = 0
+global_enemy_actions = Array[ExtResource("6_c7ku8")]([SubResource("Resource_eacys"), SubResource("Resource_foolh")])

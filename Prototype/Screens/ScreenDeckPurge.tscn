@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtahis2beh6hw"]
+
+[ext_resource type="Script" path="res://Prototype/Screens/ScreenDeckPurge.gd" id="1_o3kee"]
+[ext_resource type="Texture2D" uid="uid://dtsm01nltudbh" path="res://Assets/Sprites/Icons/bone-knife.png" id="2_135m2"]
+[ext_resource type="Texture2D" uid="uid://be6nb7ss5vxk2" path="res://Assets/Sprites/Icons/cancel.png" id="2_paocd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fd7va"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jtemp"]
+font_size = 50
+
+[node name="ScreenDeckExplorer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o3kee")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 2
+
+[node name="Container" type="HFlowContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -237.0
+offset_top = 16.0
+offset_right = -33.0
+offset_bottom = 102.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="Purge" type="Button" parent="HFlowContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fd7va")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fd7va")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fd7va")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_fd7va")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fd7va")
+icon = ExtResource("2_135m2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Control" type="Control" parent="HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Back" type="Button" parent="HFlowContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fd7va")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fd7va")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fd7va")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_fd7va")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fd7va")
+icon = ExtResource("2_paocd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -482.0
+offset_top = 15.0
+offset_right = 488.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "0 / 1 spells selected"
+label_settings = SubResource("LabelSettings_jtemp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="HFlowContainer/Purge" to="." method="_on_purge_pressed"]
+[connection signal="pressed" from="HFlowContainer/Back" to="." method="_on_back_pressed"]

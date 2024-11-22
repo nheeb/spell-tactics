@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://dxx771mshrvgl"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_d8lvr"]
+[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="1_ew52w"]
+[ext_resource type="Texture2D" uid="uid://dhqkr2ewl34wd" path="res://Assets/Sprites/Icons/heart-drop.png" id="2_5k7uv"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="2_whf0t"]
+
+[sub_resource type="Resource" id="Resource_i52y1"]
+script = ExtResource("1_d8lvr")
+stack = Array[int]([1, 1, 6])
+
+[resource]
+script = ExtResource("2_whf0t")
+costs = SubResource("Resource_i52y1")
+keywords = Array[ExtResource("1_ew52w")]([])
+pretty_name = "Lifesteal"
+effect_text = "Deals 2 damage to a hurt target. Heal the same amount."
+fluff_text = ""
+icon = ExtResource("2_5k7uv")
+color = Color(0.890625, 0, 0, 1)
+target = 1
+target_range = 4
+target_min_range = -1
+target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
+topic = 1
+topic_secondary = 11
+topic_icons = Array[int]([])
+topic_caption = ""

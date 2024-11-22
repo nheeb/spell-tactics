@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EntityStatusType" load_steps=6 format=3 uid="uid://1t83rrrq7u7f"]
+
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="1_yhkjp"]
+[ext_resource type="Resource" uid="uid://xswdvwwo083f" path="res://Content/Enemies/Moves/Melee/RocketPunchExecute.tres" id="2_rbxf3"]
+[ext_resource type="Texture2D" uid="uid://b7ov46i1xo5yf" path="res://Assets/Sprites/Icons/mailed-fist.png" id="3_rw7gu"]
+[ext_resource type="Script" path="res://Logic/Entities/Status/EntityStatusType.gd" id="4_agesx"]
+
+[sub_resource type="Resource" id="Resource_u8xge"]
+script = ExtResource("1_yhkjp")
+action = ExtResource("2_rbxf3")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[resource]
+script = ExtResource("4_agesx")
+pretty_name = "Rocket Punch Charged"
+icon = ExtResource("3_rw7gu")
+color = Color(1, 1, 1, 1)
+text = ""
+default_data = {}
+has_lifetime = true
+lifetime_default = 1
+lifetime_extend_method = 0
+make_floating_icon = true
+kill_te_on_remove = true
+enemy_actions = Array[ExtResource("1_yhkjp")]([SubResource("Resource_u8xge")])

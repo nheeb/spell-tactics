@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="EnemyAction" load_steps=8 format=3 uid="uid://bdwlt6833b7xr"]
+
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_x2y3l"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyAction.gd" id="2_l02lf"]
+[ext_resource type="Texture2D" uid="uid://p004jcm2i247" path="res://Assets/Sprites/Icons/shield.png" id="2_v3uqw"]
+[ext_resource type="Resource" uid="uid://dcpjaerkeyfjv" path="res://Content/Enemies/Moves/Movement/MoveRandom.tres" id="3_6wtfa"]
+[ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="4_3coiw"]
+
+[sub_resource type="Resource" id="Resource_5vnub"]
+script = ExtResource("1_x2y3l")
+criteria = 12
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_mwkxs"]
+script = ExtResource("4_3coiw")
+action = ExtResource("3_6wtfa")
+score_factor = 1.0
+try_to_avoid = false
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
+[resource]
+script = ExtResource("2_l02lf")
+pretty_name = "Earth Tune"
+icon = ExtResource("2_v3uqw")
+color = Color(0.421875, 0.384281, 0.181274, 1)
+target_type = 2
+can_self_target = false
+target_range_looking = -1
+target_range_walking = -1
+target_consider_count = 2
+target_consider_method = 0
+default_scores = Array[ExtResource("1_x2y3l")]([SubResource("Resource_5vnub")])
+cooldown = 1
+movement_action_args = SubResource("Resource_mwkxs")
+default_args = []
+default_kwargs = {}
