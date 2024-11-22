@@ -1,4 +1,4 @@
-class_name CastableLogic extends CombatLogic
+class_name CastableLogic extends CombatActionLogic
 
 var target # Tile
 var target_tile: Tile:

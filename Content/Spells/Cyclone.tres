@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://cd42nwwenro"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://cd42nwwenro"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_28efp"]
 [ext_resource type="Texture2D" uid="uid://coreekhuqc5m2" path="res://Assets/Sprites/Icons/whirlwind.png" id="2_p1hui"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_4ybit"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_6beri"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
@@ -24,6 +25,7 @@ topic = 5
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
+target_requirements = Array[ExtResource("4_4ybit")]([])
 pretty_name = "Cyclone"
 fluff_text = "
 "

@@ -1,4 +1,4 @@
-class_name Castable extends CombatObject
+class_name Castable extends CombatAction
 
 var targets: Array[Tile]
 var possible_targets : Array[Tile]

@@ -1,4 +1,4 @@
-class_name CastableType extends CombatObjectType
+class_name CastableType extends CombatActionType
 
 ## Effect text shown on the card
 @export_multiline var effect_text: String

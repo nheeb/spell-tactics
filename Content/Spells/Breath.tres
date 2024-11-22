@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://c2gimhhja8fi6"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://c2gimhhja8fi6"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_8ksyg"]
 [ext_resource type="Texture2D" uid="uid://djq58j63r2xxn" path="res://Assets/Sprites/Icons/breath.png" id="2_nuueu"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_2g1fx"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="5_b0vkn"]
 
 [sub_resource type="Resource" id="Resource_61ndi"]
@@ -25,6 +26,7 @@ topic = 12
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = "2"
+target_requirements = Array[ExtResource("4_2g1fx")]([])
 pretty_name = "Breath"
 fluff_text = ""
 icon = ExtResource("2_nuueu")

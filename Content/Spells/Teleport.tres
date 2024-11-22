@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://c38oh270u86ke"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://c38oh270u86ke"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_f502n"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_un8mj"]
 [ext_resource type="Texture2D" uid="uid://dtrpo0mc6xmo5" path="res://Assets/Sprites/Icons/back-forth.png" id="2_2dk7w"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_2uyud"]
 
 [sub_resource type="Resource" id="Resource_in1y4"]
 script = ExtResource("1_f502n")
@@ -24,6 +25,7 @@ topic = 3
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
+target_requirements = Array[ExtResource("4_2uyud")]([])
 pretty_name = "Teleport"
 fluff_text = ""
 icon = ExtResource("2_2dk7w")
