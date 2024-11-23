@@ -8,9 +8,9 @@ var animation_queue: Array[AnimationObject]
 var currently_playing_queues: Array[AnimationQueue]
 var currently_queued_queues: Array[AnimationQueue]
 
-########################################
-## Wrapper Functions (only use those) ##
-########################################
+#########################################
+## Shortcut Functions (only use those) ##
+#########################################
 
 func call_method(ref: Object, method: String, parameters: Array = []) -> AnimationCallable:
 	var _callable = ref.get(method) as Callable
