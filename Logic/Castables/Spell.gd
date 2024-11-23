@@ -3,7 +3,6 @@ class_name Spell extends Castable
 var type: SpellType
 var id: SpellID
 var logic: SpellLogic
-var visual_representation: HandCard2D
 var card: HandCard3D
 
 func _init(_type: SpellType, _combat : Combat = null) -> void:
