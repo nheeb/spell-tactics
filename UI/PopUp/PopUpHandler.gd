@@ -4,15 +4,15 @@ class_name PopUpHandler extends Control
 @export var drainable_root: Control
 @export var popup_root: Control
 
-@onready var popup
+@onready var popup: TileHoverPopup
 
-const POPUP = preload("res://UI/PopUp/PopUp.tscn")
+const POPUP = preload("res://UI/PopUp/TileHoverPopup.tscn")
 const DRAINABLE_ENTRY = preload ("res://UI/PopUp/DrainableEntry.tscn")
 var current_tile: Tile
 var screen_pos: Vector2 # target from unprojecting the camera
 var prev_screen_pos: Vector2
-var active_entries: Dictionary = {}
-var active_hovers: Dictionary = {}  # don't ask..
+var active_entries: Dictionary = {} # Tile -> DrainableEntry
+var active_hovers: Dictionary = {}  # Tile -> DrainableEntry
 var combat: Combat
 var is_showing_energy_overlay: bool = false
 
@@ -36,8 +36,12 @@ func _exit_tree():
 	reset()
 
 func show_tile_popup(tile: Tile):
+	# don't show popup if the tile only has drainable entities (so nothing special to show e.g. enemies)
+	# AND we are already showing the drainable overlay for this tile
+	if (not tile.has_enemy()) and tile in active_hovers:
+		return
 	current_tile = tile
-	# can use Camera3D.is_position_behind() to check, but should not be relevant here for now	
+	# can use Camera3D.is_position_behind() to check, but should not be relevant here for now
 	screen_pos = viewport.get_camera_3d().unproject_position(tile.global_position)
 	
 	if not popup.is_inside_tree():
@@ -51,7 +55,9 @@ func hide_tile_popup(tile: Tile):
 	if popup.is_inside_tree():
 		popup_root.remove_child(popup)
 	else:
-		push_error("weird not inside tree")
+		# this happens if we did NOT show a popup on long hover for any reason
+		# (early return in show_tile_popup)
+		pass
 	current_tile = null
 	popup.hide_popup()
 
@@ -81,6 +87,9 @@ func show_drainable_overlay():
 
 var tile_hovered: Tile
 func on_drainable_tile_hovered(tile: Tile):
+	# don't show extra if energyoverlay is active
+	if Game.ENERGY_OVERLAY:
+		return
 	var entry: DrainableEntry
 	#print("show ", tile)
 	if not tile in active_hovers:  # active_hovers
@@ -168,14 +177,6 @@ func show_surrounding_drainable_entries():  # broken?!?
 	for neighbour in neighbours:
 		if neighbour in active_entries:
 			active_entries[neighbour].show()
-
-func _input(event: InputEvent) -> void:
-	#if Input.is_action_just_pressed("show_drain_overlay") and get_window().has_focus():
-		#show_drainable_overlay()
-		#
-	#if Input.is_action_just_released("show_drain_overlay") or (not get_window().has_focus()):
-		#hide_drainable_overlay()
-	pass
 
 func update_entry_position(entry: DrainableEntry):
 	var cam = viewport.get_camera_3d()

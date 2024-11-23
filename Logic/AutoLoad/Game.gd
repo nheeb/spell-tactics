@@ -26,7 +26,7 @@ var DEBUG_INFO: bool:
 var DEBUG_SPELL_TESTING := false # Not meant to be changed.
 # Play the scene SpellTest.tscn to start spell testing
 
-var DEBUG_OVERLAY : bool = true  # toggled in Combat UI
+var DEBUG_OVERLAY : bool = false  # toggled in Combat UI
 signal energy_overlay_changed(c: bool)
 var ENERGY_OVERLAY: bool = false:
 	set(e):

@@ -12,8 +12,8 @@ class_name EnergyIcon extends Control
 	set(t):
 		type = t
 		if is_instance_valid(color_rect):
-			color_rect.color = type_to_color(type)
-			color_rect.material.set_shader_parameter("icon_mask", type_to_icon(type))
+			color_rect.color = VFX.type_to_color(type)
+			color_rect.material.set_shader_parameter("icon_mask", VFX.type_to_icon(type))
 			color_rect.material.set_shader_parameter("icon_color", type_to_icon_color(type))
 
 
@@ -24,24 +24,24 @@ class_name EnergyIcon extends Control
 @export var flow_color: Color
 @export var decay_color: Color
 @export var spectral_color: Color
-func type_to_color(_type) -> Color:
-	match _type:
-		EnergyStack.EnergyType.Any:
-			return any_color
-		EnergyStack.EnergyType.Matter:
-			return matter_color
-		EnergyStack.EnergyType.Empty:
-			return life_color
-		EnergyStack.EnergyType.Harmony:
-			return harmony_color
-		EnergyStack.EnergyType.Flow:
-			return flow_color
-		EnergyStack.EnergyType.Decay:
-			return decay_color
-		EnergyStack.EnergyType.Spectral:
-			return spectral_color
-	push_error("unknown type")
-	return Color.RED
+#func type_to_color(_type) -> Color:
+	#match _type:
+		#EnergyStack.EnergyType.Any:
+			#return any_color
+		#EnergyStack.EnergyType.Matter:
+			#return matter_color
+		#EnergyStack.EnergyType.Empty:
+			#return life_color
+		#EnergyStack.EnergyType.Harmony:
+			#return harmony_color
+		#EnergyStack.EnergyType.Flow:
+			#return flow_color
+		#EnergyStack.EnergyType.Decay:
+			#return decay_color
+		#EnergyStack.EnergyType.Spectral:
+			#return spectral_color
+	#push_error("unknown type")
+	#return Color.RED
 
 @export var icons: Array[Texture]
 @export var icon_colors: Array[Color]
@@ -85,7 +85,7 @@ func type_to_icon_color(_type) -> Color:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	color_rect.color = type_to_color(type)
+	color_rect.color = VFX.type_to_color(type)
 	color_rect.material.set_shader_parameter("icon_mask", type_to_icon(type))
 	color_rect.material.set_shader_parameter("icon_color", type_to_icon_color(type))
 	color_rect.custom_minimum_size = Vector2(min_size, min_size)

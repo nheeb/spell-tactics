@@ -53,7 +53,6 @@ func on_hurt_visuals() -> void:
 
 func on_death_visuals():
 	hide()
-	pass
 
 const GREY_OUT_MAT: Material = preload("res://VFX/Materials/GreyOut3D.material")
 ## For overriding and making the drain effect

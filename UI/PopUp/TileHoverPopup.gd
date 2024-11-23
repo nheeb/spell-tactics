@@ -1,4 +1,4 @@
-extends Control
+class_name TileHoverPopup extends Control
 
 
 # no instancing for now, just max it out at 3 entries
@@ -10,6 +10,10 @@ func show_tile(tile: Tile):
 	
 	if len(tile.entities) > 3:
 		push_warning("PopUp show_tile() only supports up to 3 Entities.")
+		return
+	
+	if (not tile.is_drainable()) and (not Game.DEBUG_OVERLAY):
+		# don't show "empty popup"
 		return
 	
 	var i = 0
@@ -39,8 +43,9 @@ func show_tile(tile: Tile):
 	
 func hide_popup():
 	hide()
-	for j in range(0, len(ent_entries)):
-		ent_entries[j].hide()
+	if ent_entries != null:
+		for j in range(0, len(ent_entries)):
+			ent_entries[j].hide()
 
 # Try one of those calls if Container resizing fails again...
 #$MarginContainer/VBoxContainer.sort_children.emit()
