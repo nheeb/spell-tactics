@@ -19,7 +19,7 @@ func _get_updated_energy_price(price: EnergyStack, spell: Spell) -> EnergyStack:
 	return price
 
 func is_selectable(spell: Spell) -> bool:
-	return _is_selectable(spell.combat, spell)
+	return is_selectable(spell.combat, spell)
 
-func _is_selectable(combat: Combat, spell: Spell) -> bool:
+func is_selectable(combat: Combat, spell: Spell) -> bool:
 	return true

@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	assert(target is Array)
 	combat.animation.wait(.8)
 	for tile in target:

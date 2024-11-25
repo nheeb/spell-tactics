@@ -3,7 +3,7 @@ extends SpellLogic
 var acc_loss := 3
 var damage := 3
 
-func casting_effect() -> void:
+func execute() -> void:
 	target = target as Tile
 	for enemy in target.get_enemies():
 		enemy = enemy as EnemyEntity

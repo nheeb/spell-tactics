@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	target_enemy.inflict_damage_with_visuals(2)
 	combat.player.inflict_heal_with_visuals(2)
 

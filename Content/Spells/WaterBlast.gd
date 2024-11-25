@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	for enemy in target_enemies:
 		enemy.inflict_damage_with_visuals(3)
 		enemy.apply_status(Preloaded.STATUS_WET)

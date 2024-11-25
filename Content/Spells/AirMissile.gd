@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	assert(target is Tile, "AirMissile expecting Tile as target")
 	target = target as Tile
 	var enemies = target.get_enemies()

@@ -4,7 +4,7 @@ const SHROOMS = preload("res://Content/Entities/MediumShrooms.tres")
 const SMALL_SHROOMS = preload("res://Content/Entities/SmallShrooms.tres")
 
 ## Here should be the effect
-func casting_effect() -> void:
+func execute() -> void:
 	target = target as Tile
 	var type = [SHROOMS, SMALL_SHROOMS].pick_random() as EntityType
 	var shroom : Entity = type.create_entity(combat, target)

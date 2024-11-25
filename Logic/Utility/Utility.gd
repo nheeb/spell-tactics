@@ -1,4 +1,4 @@
-class_name Utils extends Node
+extends Node
 
 func remove_y_value(pos: Vector3) -> Vector3:
 	pos.y = 0.0

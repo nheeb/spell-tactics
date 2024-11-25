@@ -13,7 +13,7 @@ extends SpellLogic
 	#return true
 
 ## Most important function for overwriting. Here should be the effect
-func casting_effect() -> void:
+func execute() -> void:
 	combat.animation.call_method(combat.ui, "set_status", ["Doing nothing..."])
 	combat.animation.wait(1.2)
 	combat.animation.call_method(combat.ui, "set_status", ["Nothing was done."])

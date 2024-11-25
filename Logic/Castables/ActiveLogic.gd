@@ -14,7 +14,7 @@ func after_cast():
 	if active.is_limited_per_round():
 		active.set_limitation_uses_left(active.get_limitation_uses_left() - 1)
 		
-func _on_select_deselect(select: bool) -> void:
+func on_select_deselect(select: bool) -> void:
 	var text_button: TextureButton = active.button.button  # TODO active/not button visuals
 	text_button.button_pressed = select
 
@@ -32,5 +32,5 @@ func _on_select_deselect(select: bool) -> void:
 	#return true
 #
 ### Most important function for overwriting. Here should be the effect
-#func casting_effect() -> void:
+#func execute() -> void:
 	#pass

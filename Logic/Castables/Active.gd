@@ -15,9 +15,6 @@ func serialize() -> ActiveState:
 	var state := ActiveState.new(self)
 	return state
 
-func get_effect_text() -> String:
-	return type.get_effect_text()
-
 var unlocked: bool = false:
 	set(u):
 		if not u:

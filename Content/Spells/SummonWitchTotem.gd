@@ -2,7 +2,7 @@ extends SpellLogic
 
 const TOTEM = preload("res://Content/Entities/WitchTotem.tres")
 
-func casting_effect() -> void:
+func execute() -> void:
 	target = target as Tile
 	#var totem := combat.level.entities.create(target.location, TOTEM, false)
 	var totem := TOTEM.create_entity(combat, target)

@@ -8,7 +8,7 @@ extends SpellLogic
 
 
 ## Here should be the effect
-func casting_effect() -> void:
+func execute() -> void:
 	pass
 
 ## Change the spells costs
@@ -16,11 +16,11 @@ func casting_effect() -> void:
 	#return spell.type.costs
 
 ## Spell can be selected
-#func _is_selectable() -> bool:
+#func is_selectable() -> bool:
 	#return true
 
 ## Spell can be casted
-#func _is_castable() -> bool:
+#func is_castable() -> bool:
 	#return true
 
 ## Can a target tile be selected
@@ -28,7 +28,7 @@ func casting_effect() -> void:
 	#return true
 
 ## Visuals or something else on spell select / deselect
-#func _on_select_deselect(select: bool) -> void:
+#func on_select_deselect(select: bool) -> void:
 	#pass
 
 ## Does the spell take additional targets
@@ -40,5 +40,5 @@ func casting_effect() -> void:
 	#return true
 
 ## Set special preview visuals when a target is hovered / selected
-#func _set_preview_visuals(show: bool, _target: Tile = null, active: bool) -> void:
+#func set_preview_visuals(show: bool, _target: Tile = null, active: bool) -> void:
 	#pass

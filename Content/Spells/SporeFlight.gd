@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	target = target as Tile
 	combat.animation.effect(VFX.BILLBOARD_EFFECT, target, {"grow_size": 2.0, "texture_name": "poison_cloud"})
 	var enemies : Array[EnemyEntity] = []

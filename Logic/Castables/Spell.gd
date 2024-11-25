@@ -9,9 +9,6 @@ func serialize() -> SpellState:
 	var state := SpellState.new(self)
 	return state
 
-func get_effect_text() -> String:
-	return type.get_effect_text()
-
 func get_costs() -> EnergyStack:
 	return logic.get_costs()
 

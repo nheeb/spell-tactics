@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	var base_damage := 3
 	target = target as Tile
 	for enemy in target.get_enemies():

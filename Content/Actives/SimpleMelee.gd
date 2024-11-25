@@ -3,7 +3,7 @@ class_name SimpleMelee extends ActiveLogic
 const BASE_DMG = 1
 
 ## Here should be the effect
-func casting_effect() -> void:
+func execute() -> void:
 	assert(target is Tile, "Melee expecting Tile as target")
 	target = target as Tile
 	var enemies = target.get_enemies()

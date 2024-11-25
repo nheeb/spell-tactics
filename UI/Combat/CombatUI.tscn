@@ -122,7 +122,7 @@ own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 msaa_3d = 1
-size = Vector2i(2, 2)
+size = Vector2i(1920, 1079)
 render_target_update_mode = 4
 
 [node name="Cards3D" parent="CardsAspectContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
@@ -329,7 +329,10 @@ scale = Vector2(0.607886, 0.607886)
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.156481
+anchor_left = 0.449
+anchor_top = 0.038
+anchor_right = 0.8
+anchor_bottom = 0.576
 mouse_filter = 2
 color = Color(0.32, 0.16, 0.16, 1)
 metadata/_edit_lock_ = true

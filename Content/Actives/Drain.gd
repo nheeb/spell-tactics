@@ -1,6 +1,6 @@
 extends ActiveLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	await combat.action_stack.set_active_flavor(
 		ActionFlavor.new().set_owner(combat.player)
 			.add_tag(ActionFlavor.Tag.Drain)

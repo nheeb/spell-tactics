@@ -11,7 +11,7 @@ func on_combat_change():
 		.set_owner(combat.player).finalize(combat)
 	movement_range = await combat.action_stack.get_discussion_result(3, flavor)
 
-func casting_effect() -> void:
+func execute() -> void:
 	combat.log.add("Move Player to (%d, %d)" % [target.r, target.q])
 	var path := combat.level.get_shortest_path_with_memory(combat.player.current_tile, target)
 	var actual_path = []
@@ -35,7 +35,7 @@ func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
 	return length > 0 and length <= movement_range
 
 ## Set special preview visuals when a target is hovered / selected
-func _set_preview_visuals(show: bool, _target: Tile = null, clicked: bool = false) -> void:
+func set_preview_visuals(show: bool, _target: Tile = null, clicked: bool = false) -> void:
 	if show:
 		if not _is_target_suitable(_target):
 			return
