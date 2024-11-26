@@ -60,7 +60,7 @@ func get_button_caption() -> String:
 
 #######################################################
 ## Wrappers for (most common) X per round limitation ##
-## We have to use round_pers_props for serialization ##
+## We use the data dict to save everything related   ##
 #######################################################
 
 func is_limited_per_round() -> bool:

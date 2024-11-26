@@ -15,7 +15,8 @@ func create_details(actor: Entity):
 	details = CombatActionDetails.new(actor, self)
 
 func add_target_to_details(target: Variant):
-	pass
+	assert(details)
+	details.add_targets(target)
 
 func reset_details():
 	assert(details)
@@ -31,9 +32,9 @@ func get_action_type() -> CombatActionType:
 func get_action_logic() -> CombatActionLogic:
 	return get_generic_logic() as CombatActionLogic
 
-############################
-## Deal with requirements ##
-############################
+##############################
+## Wrapper for requirements ##
+##############################
 
 func get_target_requirements() -> Array[TargetRequirement]:
 	if get_action_type():
@@ -45,5 +46,10 @@ func are_requirements_fullfilled() -> bool:
 	assert(details, "Details should exist at this point.")
 	return details.are_requirements_fullfilled()
 
+func get_unfullfilled_requirements() -> Array[TargetRequirement]:
+	assert(details, "Details should exist at this point.")
+	return details.get_unfullfilled_requirements()
+
 func get_next_requirement() -> TargetRequirement:
-	return 
+	assert(details, "Details should exist at this point.")
+	return details.get_next_requirement()

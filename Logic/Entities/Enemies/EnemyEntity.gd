@@ -26,7 +26,7 @@ func plan_next_action():
 			if not new_action_plan.action_args.try_to_avoid:
 				action_plan = new_action_plan
 
-## SUBACTION
+## ACTION
 func do_action():
 	while true:
 		# If no plan, make one
@@ -122,7 +122,7 @@ func get_bahviour() -> EnemyBehaviour:
 		return get_enemy_type().behaviour
 	return DEFAULT_BEHAVIOUR
 
-## SUBACTION
+## ACTION
 func on_hover_long(h: bool) -> void:
 	if action_plan:
 		await action_plan.show_preview(combat, h)

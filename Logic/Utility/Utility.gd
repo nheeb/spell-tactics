@@ -1,4 +1,4 @@
-extends Node
+class_name GeneralUtilityClass extends Node
 
 func remove_y_value(pos: Vector3) -> Vector3:
 	pos.y = 0.0
@@ -163,6 +163,23 @@ func array_safe_get(array: Array, index: int, mirror := false, default = null) -
 func dict_safe_get(dict: Dictionary, key: Variant, default = null) -> Variant:
 	return dict.get(key, default)
 
+## Returns a sorted version of the array.
+## Takes a callable which should turn the elements into numbers.
+func array_sorted(_array: Array, score_func: Callable, asc := true) -> Array:
+	var array := _array.duplicate()
+	array.sort_custom(
+		func (a, b):
+			return score_func.call(a) <= score_func.call(b)
+	)
+	if not asc:
+		array.reverse()
+	return array
+
+func array_shuffled(_array: Array) -> Array:
+	var array := _array.duplicate()
+	array.shuffle()
+	return array
+
 func get_parent_of_type(n: Node, type) -> Node:
 	var parent: Node = n.get_parent()
 	while parent:
@@ -172,11 +189,16 @@ func get_parent_of_type(n: Node, type) -> Node:
 	push_error("No parent of %s with type %s found." % [n, type])
 	return null
 
-func array_sum(array: Array):
+func array_sum(array: Array) -> Variant:
 	return array.reduce(func(a,b): return a+b)
 
-func array_average(array: Array):
+func array_average(array: Array) -> float:
 	return array_sum(array) * (1.0 / array.size())
+
+func array_from(value: Variant) -> Array:
+	if value is Array:
+		return value
+	return [value]
 
 func random_direction() -> Vector3:
 	return Vector3.UP.rotated(Vector3.FORWARD, TAU * randf())\

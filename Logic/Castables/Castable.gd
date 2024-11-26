@@ -1,10 +1,8 @@
 class_name Castable extends CombatAction
 
-#var targets: Array[Tile]
-#var possible_targets : Array[Tile]
-
 var selected := false
 var current_requirement: TargetRequirement
+var current_possible_targets: Array
 
 #########################
 ## Selecting & Casting ##
@@ -22,18 +20,15 @@ func cast() -> void:
 
 func select():
 	selected = true
-	details.remove_targets()
+	details = CombatActionDetails.new(combat.player, self)
 	get_logic().on_select_deselect(true)
-	combat.animation.callable(update_current_state)
+	update_current_state()
 
 func deselect():
 	selected = false
-	details.remove_targets()
-	for tile in combat.level.get_all_tiles():
-		tile.set_highlight(get_type().target_possible_highlight, false)
-		tile.set_highlight(get_type().target_selected_highlight, false)
+	details = null
 	get_logic().on_select_deselect(false)
-	combat.ui.error_lines.clear()
+	update_current_state()
 
 ################################
 ## Type, Logic & Card Getters ##
@@ -51,109 +46,68 @@ func get_type() -> CastableType:
 func get_effect_text() -> String:
 	return get_type().effect_text
 
-#############
-## Targets ##
-#############
-#
-#func is_target_possible(target: Tile) -> bool:
-	#return target in possible_targets
-#
-#func is_target_suitable_as_next_target(target: Tile) -> bool:
-	#return get_logic()._is_target_suitable(target, targets.size())
-#
-#func reset_targets() -> void:
-	#targets.clear()
-#
-#func add_target(target: Tile) -> void:
-	#targets.append(target)
-	#target.set_highlight(get_type().target_selected_highlight, true)
-	#combat.animation.callable(update_current_state)
-#
-#func remove_target(target: Tile) -> void:
-	#targets.erase(target)
-	#target.set_highlight(get_type().target_selected_highlight, false)
-	#combat.animation.callable(update_current_state)
-
-#func are_targets_full() -> bool:
-	#if get_type().target == CastableType.Target.None or \
-							#get_type().target_count_max == 0:
-		#return true
-	#var target_count := targets.size()
-	#if get_type().target_count_max < 0:
-		#return get_logic()._are_targets_full(targets)
-	#return target_count >= get_type().target_count_max
-#
-#func are_targets_castable() -> bool:
-	#if get_type().target == CastableType.Target.None:
-		#if targets.is_empty():
-			#return true
-		#else:
-			#push_error("NoneTarget Castable has targets???")
-	#var target_count := targets.size()
-	#var logic_castable = get_logic()._are_targets_castable(targets)
-	#return target_count >= get_type().target_count_min and logic_castable
-
-#func get_possible_targets() -> Array[Tile]:
-	#var target_range = get_type().target_range
-	#var target_min_range = get_type().target_min_range
-	#var tiles: Array[Tile]
-	#if target_range != -1:
-		#tiles = combat.level.get_all_tiles_in_distance_of_tile(combat.player.current_tile, 
-															   #target_range)
-	#else:
-		#tiles = combat.level.get_all_tiles()
-	#if target_min_range != -1:
-		#var min_range_tiles = combat.level.get_all_tiles_with_min_distance_of_tile(combat.player.current_tile, target_min_range)
-		#tiles = tiles.filter(func (t): return t in min_range_tiles)
-#
-	#if get_type().target == SpellType.Target.Enemy:
-		#tiles = tiles.filter(func(t): return t.has_enemy())
-	#elif get_type().target == SpellType.Target.TileWithoutObstacles:
-		#tiles = tiles.filter(func(t): return not(t.get_obstacle_layers() & EntityType.NAV_OBSTACLE_LAYER))
-	#elif get_type().target == SpellType.Target.Tag:
-		#tiles = tiles.filter(func(t): return get_type().target_tag in t.get_tags())
-	#elif get_type().target == SpellType.Target.Cone:
-		#var none : Array[Tile] = []
-		#return none
-	#elif get_type().target == SpellType.Target.None:
-		#var none : Array[Tile] = []
-		#return none
-	#tiles = tiles.filter(func(t): return is_target_suitable_as_next_target(t))
-	#return tiles 
-
-## This calculates which targets are possible to choose in the current state.
-func update_possible_targets() -> void:
-	possible_targets = get_possible_targets()
-
 ####################
 ## Visual Updates ##
 ####################
 
+## ANIMATOR
+func update_current_state() -> AnimationObject:
+	if selected:
+		assert(details)
+		current_requirement = get_next_requirement()
+		if current_requirement:
+			current_possible_targets = current_requirement.get_possible_targets(self, details.actor)
+	return combat.animation.callable(update_cast_visuals)
+
+## ANIM
 ## This updates all ui / highlights / possible targets.
-func update_current_state(reset := false) -> void:
-	var highlight_possible := get_type().target_possible_highlight
-	if reset:
-		for tile in combat.level.get_all_tiles():
-			tile.set_highlight(highlight_possible, false)
-		combat.ui.error_lines.clear()
-		return
-	if not get_card():
-		return
-	update_possible_targets()
-	for tile in combat.level.get_all_tiles():
-		tile.set_highlight(highlight_possible, false)
-	for tile in possible_targets:
-		tile.set_highlight(highlight_possible, true)
-	combat.ui.error_lines.clear()
+func update_cast_visuals() -> void:
+	reset_cast_lines()
+	build_cast_lines()
+	update_tile_highlights()
+	update_card()
+
+## ANIM
+func reset_cast_lines():
+	combat.ui.cast_lines.clear()
+
+## ANIM
+func build_cast_lines():
+	if selected:
+		var unfullfilled := get_unfullfilled_requirements()
+		for req in get_target_requirements():
+			if req in unfullfilled:
+				if req == current_requirement:
+					if current_possible_targets:
+						combat.ui.cast_lines.add("Select the %s!" % req.help_text, Color.ORANGE)
+					else:
+						combat.ui.cast_lines.add("No suitable %s" % req.help_text, Color.RED)
+				else:
+					combat.ui.cast_lines.add("%s not selected yet" % req.help_text, Color.LIGHT_GOLDENROD)
+			else:
+				combat.ui.cast_lines.add("%s was selected" % req.help_text, Color.WEB_GREEN)
+
+## ANIM
+func update_tile_highlights():
+	# TODO Clear all highlights
+	if selected:
+		for req in get_target_requirements():
+			if req.type == TargetRequirement.Type.Tile:
+				# Highlight all previously selected Tiles
+				var selected_targets := details.get_target_array(req)
+				if selected_targets:
+					for target in selected_targets:
+						if target is Tile:
+							target.set_highlight(req.selected_highlight, true)
+				# Highlight all possible tiles
+				elif req == current_requirement:
+					for target in current_possible_targets:
+						if target is Tile:
+							target.set_highlight(req.possible_highlight, true)
+
+## ANIM
+func update_card():
 	if is_instance_valid(get_card()):
 		get_card().set_glow(is_castable())
 	else:
 		push_error("Card for Castable visual update not found")
-	update_target_ui()
-
-func update_target_ui():
-	if not are_targets_castable():
-		if possible_targets.is_empty():
-			combat.ui.error_lines.add("No suitable targets")
-		else:
-			combat.ui.error_lines.add("Select target tile(s)")

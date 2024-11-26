@@ -9,7 +9,7 @@ signal process_end
 func process_phase() -> void:
 	push_error("Abstract Phase used")
 
-## SUBACTION
+## ACTION
 func _process_phase() -> void:
 	process_start.emit()
 	await combat.action_stack.wait()

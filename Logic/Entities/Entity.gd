@@ -87,7 +87,7 @@ func die():
 func get_tags() -> Array[String]:
 	return type.tags
 
-## SUBACTION
+## ACTION
 func on_hover_long(h: bool) -> void:
 	pass
 

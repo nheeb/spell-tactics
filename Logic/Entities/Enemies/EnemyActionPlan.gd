@@ -163,7 +163,7 @@ func get_estimated_destination(combat: Combat, start_from: Tile = null) -> Tile:
 		start_from = after_movement.value
 	return await get_logic().estimated_destination(start_from)
 
-## SUBACTION
+## ACTION
 func show_preview(combat: Combat, show: bool) -> void:
 	await get_logic().show_preview(show)
 

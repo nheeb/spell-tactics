@@ -2,9 +2,9 @@ class_name TargetRequirement extends Resource
 
 enum Type {
 	Tile,
-	Entity,
-	Spell,
-	EnergyStack
+	EntityXX,
+	SpellXX,
+	EnergyStackXX
 }
 
 ## Type of the target object / objects
@@ -54,14 +54,36 @@ enum Shape {
 @export var shape_size := 1
 
 @export_group("Visuals")
-@export var help_text := "Select target"
+@export var help_text := "Target"
 @export var possible_highlight: Highlight.Type = Highlight.Type.PossibleTarget
 @export var selected_highlight: Highlight.Type = Highlight.Type.SelectedTarget
 
-func convert_target(target: Variant, actor: Entity = null, action: CombatAction = null) -> Array:
+##########################
+## Possible Target Pool ##
+##########################
+
+func get_possible_targets(action: CombatAction, actor: Entity) -> Array:
+	return convert_target(get_base_pool(action.combat), action, actor)
+
+func get_base_pool(combat: Combat) -> Array:
+	match type:
+		Type.Tile:
+			return combat.level.tiles.duplicate()
+	return []
+
+####################################
+## Filtering / Converting targets ##
+####################################
+
+## Takes a single / array of targets and converts them to whatever might suit the requirement.
+## If the target is invalid it returns an empty array.
+func convert_target(target: Variant, action: CombatAction = null, actor: Entity = null) -> Array:
+	if action:
+		if actor == null and action.details != null:
+			actor = action.details.actor
 	if target == null or target == []:
 		return []
-	var targets := convert_target_to_array(target)
+	var targets := Utility.array_from(target)
 	targets = convert_targets_based_on_type(targets)
 	targets = filter_null_and_duplicates(targets)
 	targets = filter_based_on_limitation(targets)
@@ -70,12 +92,6 @@ func convert_target(target: Variant, actor: Entity = null, action: CombatAction 
 		if action:
 			targets = filter_based_on_action_logic(targets, actor, action)
 	return targets
-
-func convert_target_to_array(target: Variant) -> Array:
-	if target is Array:
-		return target
-	else:
-		return [target]
 
 func convert_targets_based_on_type(targets: Array) -> Array:
 	var converted_targets := []
@@ -86,13 +102,13 @@ func convert_targets_based_on_type(targets: Array) -> Array:
 					converted_targets.append(target.current_tile)
 				else:
 					converted_targets.append(target as Tile)
-			Type.Entity:
+			Type.EntityXX:
 				if target is Tile:
 					converted_targets.append_array(target.entities)
 				converted_targets.append(target as Entity)
-			Type.Spell:
+			Type.SpellXX:
 				converted_targets.append(target as Spell)
-			Type.EnergyStack:
+			Type.EnergyStackXX:
 				converted_targets.append(target as EnergyStack)
 	return converted_targets
 
@@ -131,7 +147,7 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						)
 					return true
 			)
-		elif type == Type.Entity:
+		elif type == Type.EntityXX:
 			targets = targets.filter(
 				func (t):
 					if t is Entity:
@@ -151,7 +167,7 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						)
 					return true
 			)
-		elif type == Type.Entity:
+		elif type == Type.EntityXX:
 			targets = targets.filter(
 				func (t):
 					if t is Entity:
@@ -161,7 +177,7 @@ func filter_based_on_limitation(targets: Array) -> Array:
 	
 	# If not include terrain, exclude it
 	if not Utility.has_int_flag(limitation, Limitation.IncludeTerrain):
-		if type == Type.Entity:
+		if type == Type.EntityXX:
 			targets = targets.filter(
 				func (t):
 					if t is Entity:
@@ -187,7 +203,5 @@ func filter_based_on_range(targets: Array, actor: Entity) -> Array:
 func filter_based_on_action_logic(targets: Array, actor: Entity, action: CombatAction) -> Array:
 	return targets.filter(
 		func (t: Variant):
-			return action.get_action_logic().are_targets_valid(
-				targets, self, actor
-			)
+			return action.get_action_logic().are_targets_valid([t], self, actor)
 	)

@@ -29,7 +29,7 @@ func add_targets(value: Variant):
 		push_warning("Target added although all requirements are fullfilled.")
 		return
 	var req := get_next_requirement()
-	var targets := req.convert_target(value, actor, combat_action)
+	var targets := req.convert_target(value, combat_action, actor)
 	target_details[req] = targets
 
 func remove_targets(value: Variant = null):
@@ -91,7 +91,7 @@ func get_target_tiles() -> Array[Tile]:
 	for req in target_requirements:
 		if req.type == TargetRequirement.Type.Tile:
 			tiles.append_array(get_target_array(req))
-		elif req.type == TargetRequirement.Type.Entity:
+		elif req.type == TargetRequirement.Type.EntityXX:
 			tiles.append_array(get_target_array(req).map(
 				func (e: Entity):
 					return e.current_tile
@@ -108,7 +108,7 @@ func get_target_entities(exclude_terrain := true) -> Array[Entity]:
 			for tile in get_target_array(req):
 				if tile is Tile:
 					entities.append_array(tile.entities)
-		elif req.type == TargetRequirement.Type.Entity:
+		elif req.type == TargetRequirement.Type.EntityXX:
 			entities.append_array(get_target_array(req))
 	if exclude_terrain:
 		entities = entities.filter(

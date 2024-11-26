@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=5 format=3 uid="uid://blp6qpy1q8qhr"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://blp6qpy1q8qhr"]
 
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_38xla"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_nv1qk"]
 [ext_resource type="Texture2D" uid="uid://cfgiqlm5ta72r" path="res://Assets/Sprites/Icons/abdominal-armor.png" id="2_oe1el"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_m2r7c"]
 
 [sub_resource type="Resource" id="Resource_k65jt"]
 script = ExtResource("1_nv1qk")
@@ -12,19 +13,13 @@ stack = Array[int]([2, 3])
 script = ExtResource("1_38xla")
 costs = SubResource("Resource_k65jt")
 effect_text = "Gain 2 armor."
-target = 0
-target_range = -1
-target_min_range = -1
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
 topic = 2
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = "2"
+target_requirements = Array[ExtResource("4_m2r7c")]([])
 pretty_name = "Mud armor"
 fluff_text = "Surely no fashion choice."
 icon = ExtResource("2_oe1el")
 color = Color(0.695313, 0.599452, 0.478027, 1)
+default_data = {}

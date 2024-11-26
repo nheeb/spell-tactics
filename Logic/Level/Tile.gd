@@ -148,7 +148,7 @@ func get_tags() -> Array[String]:
 func set_highlight(type: Highlight.Type, active: bool):
 	tile3d.set_highlight(type, active)
 
-## SUBACTION
+## ACTION
 func _hover_long(h: bool) -> void:
 	if h:
 		Events.tile_hovered_long.emit(self)

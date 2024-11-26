@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_5k7na"]
 [ext_resource type="Texture2D" uid="uid://d2nv0e6ua6agd" path="res://Assets/Sprites/Icons/card-discard.png" id="2_wilbh"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_e3cdh"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_37l5o"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_ew654"]
 
 [sub_resource type="Resource" id="Resource_3rffs"]
@@ -12,21 +12,14 @@ stack = Array[int]([2, 6, 6])
 [resource]
 script = ExtResource("4_ew654")
 costs = SubResource("Resource_3rffs")
-keywords = Array[ExtResource("3_e3cdh")]([])
-pretty_name = "Unload"
 effect_text = "Deal 1 damage to a target for each spell in your hand. Discard your hand. Draw 3 cards."
-fluff_text = ""
-icon = ExtResource("2_wilbh")
-color = Color(1, 0.398438, 0.398438, 1)
-target = 1
-target_range = 4
-target_min_range = -1
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
 topic = 1
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = "X"
+target_requirements = Array[ExtResource("4_37l5o")]([])
+pretty_name = "Unload"
+fluff_text = ""
+icon = ExtResource("2_wilbh")
+color = Color(1, 0.398438, 0.398438, 1)
+default_data = {}

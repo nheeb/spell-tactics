@@ -325,7 +325,7 @@ offset_right = -76.53
 offset_bottom = 29.715
 scale = Vector2(0.607886, 0.607886)
 
-[node name="ErrorLines" parent="." instance=ExtResource("10_gtdym")]
+[node name="CastLines" parent="." instance=ExtResource("10_gtdym")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -334,7 +334,7 @@ anchor_top = 0.038
 anchor_right = 0.8
 anchor_bottom = 0.576
 mouse_filter = 2
-color = Color(0.32, 0.16, 0.16, 1)
+default_color = Color(1, 1, 1, 1)
 metadata/_edit_lock_ = true
 
 [node name="CombatEventIcons" parent="." instance=ExtResource("12_8b75y")]

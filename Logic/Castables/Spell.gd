@@ -2,7 +2,6 @@ class_name Spell extends Castable
 
 @export var type: SpellType
 var logic: SpellLogic
-var visual_representation: HandCard2D
 var card: HandCard3D
 
 func serialize() -> SpellState:
@@ -49,16 +48,10 @@ func get_type() -> CastableType:
 	return type
 
 func on_energy_load():
-	combat.animation.callable(update_current_state)
+	update_current_state()
 
-func update_current_state(reset := false):
-	super.update_current_state(reset)
-	if reset:
-		return
-	if not get_card():
-		return
-	update_energy_ui()
-
-func update_energy_ui():
-	if not is_energy_loaded_fully():
-		combat.ui.error_lines.add("Select missing energy")
+func build_cast_lines():
+	super()
+	if selected:
+		if not is_energy_loaded_fully():
+			combat.ui.cast_lines.add("Select missing energy!", Color.ORANGE)

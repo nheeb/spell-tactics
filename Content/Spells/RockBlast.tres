@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_gd7ug"]
 [ext_resource type="Texture2D" uid="uid://r1cjym6wndxs" path="res://Assets/Sprites/Icons/menhir.png" id="2_mv6un"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="2_tlmru"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_8y3u2"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_h2qn2"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
 script = ExtResource("1_gd7ug")
@@ -12,23 +12,16 @@ stack = Array[int]([2, 6])
 [resource]
 script = ExtResource("2_tlmru")
 costs = SubResource("Resource_gkkbv")
-keywords = Array[ExtResource("3_8y3u2")]([])
-pretty_name = "Rock Blast"
 effect_text = "Deal 1 damage. Deal 2 additional damage to enemy armor."
+topic = 1
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = "1 (3)"
+target_requirements = Array[ExtResource("4_h2qn2")]([])
+pretty_name = "Rock Blast"
 fluff_text = "Fun
 
 "
 icon = ExtResource("2_mv6un")
 color = Color(0.547292, 0.558594, 0.447311, 1)
-target = 1
-target_range = 4
-target_min_range = -1
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
-topic = 1
-topic_secondary = 0
-topic_icons = Array[int]([])
-topic_caption = "1 (3)"
+default_data = {}

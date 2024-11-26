@@ -60,7 +60,6 @@ var test_mode := false # This is true when the scene runs solo
 
 var combat: Combat
 
-const HAND_CARD_2D = preload("res://UI/HandCards/HandCard2D.tscn")
 func _ready() -> void:
 	RenderingServer.global_shader_parameter_set("pinned_card_global_pos", %PinnedCard.global_position)
 	# enable this once everything is set up
@@ -157,8 +156,8 @@ func hide_event() -> void:
 func remove_card(card_hint):
 	var to_be_removed : Card3D = null
 
-	if card_hint is HandCard2D:
-		card_hint = card_hint.spell
+	#if card_hint is HandCard2D:
+		#card_hint = card_hint.spell
 
 	if card_hint is Castable:
 		var castable := card_hint as Castable
