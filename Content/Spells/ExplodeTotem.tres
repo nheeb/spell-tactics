@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://p5fvyfsfxnvk"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_2xc7y"]
+[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="1_r0dll"]
+[ext_resource type="Texture2D" uid="uid://cepnfkvduoe5h" path="res://Assets/Sprites/Icons/rolling-energy.png" id="2_3i7na"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="2_58uj4"]
+
+[sub_resource type="Resource" id="Resource_xp8vt"]
+script = ExtResource("1_2xc7y")
+stack = Array[int]([4, 6, 6])
+
+[resource]
+script = ExtResource("2_58uj4")
+costs = SubResource("Resource_xp8vt")
+keywords = Array[ExtResource("1_r0dll")]([])
+pretty_name = "Explode Totem"
+effect_text = "Explodes a Totem to deal 2 damage to ALL surrounding entities."
+fluff_text = ""
+icon = ExtResource("2_3i7na")
+color = Color(1, 0.129412, 0.054902, 1)
+target = 2
+target_range = -1
+target_min_range = -1
+target_tag = ""
+target_count_min = 1
+target_count_max = 1
+target_possible_highlight = 7
+target_selected_highlight = 8
+topic = 6
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""
