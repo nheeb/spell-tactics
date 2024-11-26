@@ -1,4 +1,4 @@
 extends SpellLogic
 
 func execute() -> void:
-	combat.movement.blink_entity(combat.player, target)
+	combat.movement.blink_entity(combat.player, target_tile)

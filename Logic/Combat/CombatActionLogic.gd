@@ -48,7 +48,7 @@ var target_enemy: EnemyEntity:
 func execute():
 	pass
 
-func are_targets_valid(targets: Array, requirement: TargetRequirement, _actor: Entity) -> bool:
+func is_target_valid(target: Variant, requirement: TargetRequirement, _actor: Entity) -> bool:
 	return true
 
 ## ACTION

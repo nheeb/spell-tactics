@@ -6,7 +6,6 @@ extends ActiveLogic
 ## target - The target Tile (if active is targetable)
 ## targets - Array of target tiles (if active has multiple targets)
 
-
 ## Here should be the effect
 func execute() -> void:
 	pass
@@ -20,25 +19,13 @@ func execute() -> void:
 	#return true
 
 ## Can a target tile be selected
-#func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
+#func is_target_valid(target: Variant, requirement: TargetRequirement, _actor: Entity) -> bool:
 	#return true
 
 ## Visuals or something else on active select / deselect
 #func on_select_deselect(select: bool) -> void:
 	#pass
 
-## Does the active take additional targets
-#func _are_targets_full(_targets: Array[Tile]) -> bool:
-	#return true
-
-## Are the selected targets valid
-#func _are_targets_castable(_targets: Array[Tile]) -> bool:
-	#return true
-
 ## Set special preview visuals when a target is hovered / selected
-#func set_preview_visuals(show: bool, _target: Tile = null, active: bool) -> void:
-	#pass
-
-## Use this to calculate values that depend on the current game state
-#func _update_current_state() -> void:
+#func set_preview_visuals(show: bool, tile: Tile = null) -> void:
 	#pass

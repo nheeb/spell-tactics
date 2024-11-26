@@ -8,7 +8,7 @@ func execute() -> void:
 			.add_target_array(target_entities)
 			.finalize(combat)
 	)
-	for entity in target.entities:
+	for entity in target_entities:
 		entity = entity as Entity
 		var energy_stack : EnergyStack = null
 		if entity.is_drainable():
@@ -20,5 +20,5 @@ func execute() -> void:
 			#for tag in entity.get_tags():
 				#combat.log.register_incident("drained_tag_%s" % tag)
 
-func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
-	return _target.is_drainable()
+func is_target_valid(target: Variant, requirement: TargetRequirement, _actor: Entity) -> bool:
+	return target.is_drainable()

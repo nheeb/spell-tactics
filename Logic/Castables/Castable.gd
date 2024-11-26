@@ -107,7 +107,8 @@ func update_tile_highlights():
 
 ## ANIM
 func update_card():
-	if is_instance_valid(get_card()):
-		get_card().set_glow(is_castable())
-	else:
-		push_error("Card for Castable visual update not found")
+	if selected:
+		if is_instance_valid(get_card()):
+			get_card().set_glow(is_castable())
+		else:
+			push_error("Card for Castable visual update not found")

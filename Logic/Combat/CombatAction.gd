@@ -18,6 +18,10 @@ func add_target_to_details(target: Variant):
 	assert(details)
 	details.add_targets(target)
 
+func remove_target_from_details(value: Variant = null):
+	assert(details)
+	details.remove_targets(value)
+
 func reset_details():
 	assert(details)
 	details = null

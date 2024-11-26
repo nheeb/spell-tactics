@@ -31,11 +31,12 @@ enum Limitation {
 
 enum RangeSize {
 	UNLIMITED = 0,
-	ADJACENT = 1,
-	SHORT = 2,
-	MEDIUM = 4,
-	LONG = 6,
-	EXTREME = 8,
+	ADJACENT_1 = 1,
+	SHORT_2 = 2,
+	MEDIUM_3 = 3,
+	FAR_4 = 4,
+	LONG_6 = 6,
+	EXTREME_8 = 8,
 }
 
 ## Max distance between actor and targets
@@ -68,7 +69,7 @@ func get_possible_targets(action: CombatAction, actor: Entity) -> Array:
 func get_base_pool(combat: Combat) -> Array:
 	match type:
 		Type.Tile:
-			return combat.level.tiles.duplicate()
+			return combat.level.get_all_tiles()
 	return []
 
 ####################################
@@ -81,8 +82,11 @@ func convert_target(target: Variant, action: CombatAction = null, actor: Entity 
 	if action:
 		if actor == null and action.details != null:
 			actor = action.details.actor
-	if target == null or target == []:
+	if target == null:
 		return []
+	if target is Array:
+		if target.is_empty():
+			return []
 	var targets := Utility.array_from(target)
 	targets = convert_targets_based_on_type(targets)
 	targets = filter_null_and_duplicates(targets)
@@ -203,5 +207,5 @@ func filter_based_on_range(targets: Array, actor: Entity) -> Array:
 func filter_based_on_action_logic(targets: Array, actor: Entity, action: CombatAction) -> Array:
 	return targets.filter(
 		func (t: Variant):
-			return action.get_action_logic().are_targets_valid([t], self, actor)
+			return action.get_action_logic().is_target_valid(t, self, actor)
 	)

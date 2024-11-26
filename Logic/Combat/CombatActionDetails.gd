@@ -71,20 +71,18 @@ func are_requirements_fullfilled() -> bool:
 ## Common Getters for targets ##
 ################################
 
-func get_target_array(requirement_or_index) -> Array:
+func get_target_array(requirement_or_index = null) -> Array:
 	var requirement: TargetRequirement
 	if requirement_or_index is int:
 		requirement = Utility.array_safe_get(target_requirements, requirement_or_index)
 	elif requirement_or_index is TargetRequirement:
 		requirement = requirement_or_index
-	if requirement == null:
-		push_error("Invalid requirement_or_index")
-		return []
-	var array := target_details.get(requirement, []) as Array
+	if requirement != null:
+		return target_details.get(requirement, []) as Array
+	var array := []
+	for req in target_requirements:
+		array.append_array(target_details.get(req, []) as Array)
 	return array
-
-func get_target_value(requirement_or_index) -> Variant:
-	return Utility.array_safe_get(get_target_array(requirement_or_index), 0)
 
 func get_target_tiles() -> Array[Tile]:
 	var tiles: Array[Tile] = []

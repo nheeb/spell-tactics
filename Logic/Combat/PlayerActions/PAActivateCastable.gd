@@ -13,9 +13,7 @@ func is_valid(combat: Combat) -> bool:
 	return false
 
 func execute(combat: Combat) -> void:
-	combat.animation.callable(
-		combat.input.current_castable.update_current_state.bind(true)
-	)
+	combat.input.current_castable.update_current_state()
 	if clicked_on_card:
 		combat.animation.callable(combat.input.current_castable.get_card() \
 						.warp.bind(Events.cards3d_ray_collision_point)) \

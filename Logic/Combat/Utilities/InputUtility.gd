@@ -30,7 +30,7 @@ func process_action(action: PlayerAction, force_action := false) -> void:
 		action.failed.emit()
 		action_failed.emit(action)
 
-var current_castable : Castable
+var current_castable: Castable
 
 func select_castable(castable: Castable):
 	current_castable = castable
