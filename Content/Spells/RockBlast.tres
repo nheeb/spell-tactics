@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://bmmnjqd2apbv0"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://bmmnjqd2apbv0"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_gd7ug"]
 [ext_resource type="Texture2D" uid="uid://r1cjym6wndxs" path="res://Assets/Sprites/Icons/menhir.png" id="2_mv6un"]
@@ -9,6 +9,19 @@
 script = ExtResource("1_gd7ug")
 stack = Array[int]([2, 6])
 
+[sub_resource type="Resource" id="Resource_576o5"]
+script = ExtResource("4_h2qn2")
+type = 0
+limitation = 2
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("2_tlmru")
 costs = SubResource("Resource_gkkbv")
@@ -17,7 +30,7 @@ topic = 1
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = "1 (3)"
-target_requirements = Array[ExtResource("4_h2qn2")]([])
+target_requirements = Array[ExtResource("4_h2qn2")]([SubResource("Resource_576o5")])
 pretty_name = "Rock Blast"
 fluff_text = "Fun
 

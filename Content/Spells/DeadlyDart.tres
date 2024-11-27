@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://coxs5uvjtigok"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://coxs5uvjtigok"]
 
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_3xw06"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_45yov"]
@@ -9,6 +9,19 @@
 script = ExtResource("1_45yov")
 stack = Array[int]([1, 1, 6, 6])
 
+[sub_resource type="Resource" id="Resource_co3cj"]
+script = ExtResource("4_u7uic")
+type = 0
+limitation = 2
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("1_3xw06")
 costs = SubResource("Resource_kfprs")
@@ -17,7 +30,7 @@ topic = 7
 topic_secondary = 8
 topic_icons = Array[int]([])
 topic_caption = ""
-target_requirements = Array[ExtResource("4_u7uic")]([])
+target_requirements = Array[ExtResource("4_u7uic")]([SubResource("Resource_co3cj")])
 pretty_name = "Deadly Dart"
 fluff_text = ""
 icon = ExtResource("2_ayoco")

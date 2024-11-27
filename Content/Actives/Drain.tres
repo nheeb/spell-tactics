@@ -1,27 +1,35 @@
-[gd_resource type="Resource" script_class="ActiveType" load_steps=3 format=3 uid="uid://b473588q3kmw8"]
+[gd_resource type="Resource" script_class="ActiveType" load_steps=5 format=3 uid="uid://b473588q3kmw8"]
 
 [ext_resource type="Texture2D" uid="uid://biorajere27vy" path="res://Assets/Sprites/Icons/drain.png" id="1_3a7rt"]
 [ext_resource type="Script" path="res://Logic/Castables/ActiveType.gd" id="1_u6iil"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="3_l2ulj"]
+
+[sub_resource type="Resource" id="Resource_e74sa"]
+script = ExtResource("3_l2ulj")
+type = 0
+limitation = 0
+range_size = 1
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
 
 [resource]
 script = ExtResource("1_u6iil")
 limitation = 0
 max_uses_per_round = 1
 hotkey_label = "R"
-pretty_name = "Drain Tile"
 effect_text = "Drain a tile."
-fluff_text = ""
-icon = ExtResource("1_3a7rt")
-color = Color(1, 1, 1, 1)
-target = 2
-target_range = 1
-target_min_range = -1
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
 topic = 0
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
+target_requirements = Array[ExtResource("3_l2ulj")]([SubResource("Resource_e74sa")])
+pretty_name = "Drain Tile"
+fluff_text = ""
+icon = ExtResource("1_3a7rt")
+color = Color(1, 1, 1, 1)
+default_data = {}

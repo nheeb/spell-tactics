@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://bcpsexkc1asv1"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://bcpsexkc1asv1"]
 
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_5j3uk"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_nytuo"]
@@ -9,6 +9,19 @@
 script = ExtResource("1_nytuo")
 stack = Array[int]([3, 2])
 
+[sub_resource type="Resource" id="Resource_7nsv7"]
+script = ExtResource("4_jx0mp")
+type = 0
+limitation = 1
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("1_5j3uk")
 costs = SubResource("Resource_0bd4s")
@@ -17,7 +30,7 @@ topic = 9
 topic_secondary = 2
 topic_icons = Array[int]([])
 topic_caption = ""
-target_requirements = Array[ExtResource("4_jx0mp")]([])
+target_requirements = Array[ExtResource("4_jx0mp")]([SubResource("Resource_7nsv7")])
 pretty_name = "Fortified Bush"
 fluff_text = ""
 icon = ExtResource("2_hjx7q")

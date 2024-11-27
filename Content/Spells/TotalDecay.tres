@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://dcbq3ohb123xy"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://dcbq3ohb123xy"]
 
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_l2jrd"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_soxba"]
@@ -9,6 +9,19 @@
 script = ExtResource("1_soxba")
 stack = Array[int]([1, 1, 1])
 
+[sub_resource type="Resource" id="Resource_tn016"]
+script = ExtResource("4_iupjb")
+type = 0
+limitation = 2
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("1_l2jrd")
 costs = SubResource("Resource_f4asu")
@@ -18,7 +31,7 @@ topic = 1
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = "1+X"
-target_requirements = Array[ExtResource("4_iupjb")]([])
+target_requirements = Array[ExtResource("4_iupjb")]([SubResource("Resource_tn016")])
 pretty_name = "Total decay"
 fluff_text = ""
 icon = ExtResource("2_hsywt")

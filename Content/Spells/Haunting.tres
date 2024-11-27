@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://d2k4vhkqurk7r"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://d2k4vhkqurk7r"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_mw187"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_wm1qt"]
@@ -9,6 +9,19 @@
 script = ExtResource("1_mw187")
 stack = Array[int]([1, 1])
 
+[sub_resource type="Resource" id="Resource_7og31"]
+script = ExtResource("4_bg4eg")
+type = 0
+limitation = 2
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("1_wm1qt")
 costs = SubResource("Resource_yiuyf")
@@ -17,7 +30,7 @@ topic = 1
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = "3"
-target_requirements = Array[ExtResource("4_bg4eg")]([])
+target_requirements = Array[ExtResource("4_bg4eg")]([SubResource("Resource_7og31")])
 pretty_name = "Haunting"
 fluff_text = ""
 icon = ExtResource("2_ersji")

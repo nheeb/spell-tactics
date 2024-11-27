@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://cca31estceejt"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://cca31estceejt"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_c2j37"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_hms4h"]
@@ -9,6 +9,19 @@
 script = ExtResource("1_c2j37")
 stack = Array[int]([1, 6, 6])
 
+[sub_resource type="Resource" id="Resource_5pf8l"]
+script = ExtResource("4_if5iq")
+type = 0
+limitation = 4
+range_size = 0
+mandatory = true
+target_tag = "shroom"
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("1_hms4h")
 costs = SubResource("Resource_fjmuh")
@@ -17,7 +30,7 @@ topic = 7
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
-target_requirements = Array[ExtResource("4_if5iq")]([])
+target_requirements = Array[ExtResource("4_if5iq")]([SubResource("Resource_5pf8l")])
 pretty_name = "Spore Flight"
 fluff_text = ""
 icon = ExtResource("2_gpts7")
