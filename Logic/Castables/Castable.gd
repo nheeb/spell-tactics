@@ -56,7 +56,7 @@ func update_current_state() -> AnimationObject:
 		assert(details)
 		current_requirement = get_next_requirement()
 		if current_requirement:
-			current_possible_targets = current_requirement.get_possible_targets(self, details.actor)
+			current_possible_targets = current_requirement.get_possible_targets(self)
 	return combat.animation.callable(update_cast_visuals)
 
 ## ANIM
@@ -89,7 +89,16 @@ func build_cast_lines():
 
 ## ANIM
 func update_tile_highlights():
-	# TODO Clear all highlights
+	# Clear all highlights
+	var castable_highlights := Utility.array_unique(Utility.array_flat(
+		get_target_requirements().map(
+			func (req: TargetRequirement):
+				return [req.possible_highlight, req.selected_highlight]
+	)))
+	for hl in castable_highlights:
+		for tile in combat.level.get_all_tiles():
+			tile.set_highlight(hl, false)
+	# Build new highlights
 	if selected:
 		for req in get_target_requirements():
 			if req.type == TargetRequirement.Type.Tile:

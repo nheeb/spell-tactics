@@ -7,7 +7,7 @@ func on_birth():
 		.set_id("_cc").set_solo().register(combat)
 
 func on_combat_change():
-	var flavor := ActionFlavor.new().add_tag(ActionFlavor.Tag.Movement)\
+	var flavor := ActionFlavor.new().add_tag(ActionFlavor.Tag.Movement) \
 		.set_owner(combat.player).finalize(combat)
 	movement_range = await combat.action_stack.get_discussion_result(3, flavor)
 
@@ -27,9 +27,9 @@ func execute() -> void:
 		combat.animation.call_method(combat.player.visual_entity, "go_idle")
 
 ## Can a target tile be selected
-func is_target_valid(target: Variant, requirement: TargetRequirement, _actor: Entity) -> bool:
+func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 	target = target as Tile
-	var path = combat.level.get_shortest_path(_actor.current_tile, target)
+	var path = combat.level.get_shortest_path(actor.current_tile, target)
 	var length = len(path)
 	return length > 0 and length <= movement_range
 
@@ -38,7 +38,7 @@ func set_preview_visuals(show: bool, tile: Tile = null) -> void:
 	if show:
 		if not actor:
 			return
-		if not is_target_valid(tile, null, actor):
+		if not active.is_target_valid(tile):
 			return
 		var path = combat.level.get_shortest_path_with_memory(combat.player.current_tile, tile)
 		var length = len(path)

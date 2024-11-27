@@ -20,5 +20,5 @@ func execute() -> void:
 			#for tag in entity.get_tags():
 				#combat.log.register_incident("drained_tag_%s" % tag)
 
-func is_target_valid(target: Variant, requirement: TargetRequirement, _actor: Entity) -> bool:
+func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 	return target.is_drainable()

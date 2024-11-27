@@ -63,8 +63,9 @@ enum Shape {
 ## Possible Target Pool ##
 ##########################
 
-func get_possible_targets(action: CombatAction, actor: Entity) -> Array:
-	return convert_target(get_base_pool(action.combat), action, actor)
+func get_possible_targets(action: CombatAction) -> Array:
+	assert(action.details)
+	return convert_target(get_base_pool(action.combat), action)
 
 func get_base_pool(combat: Combat) -> Array:
 	match type:
@@ -78,9 +79,10 @@ func get_base_pool(combat: Combat) -> Array:
 
 ## Takes a single / array of targets and converts them to whatever might suit the requirement.
 ## If the target is invalid it returns an empty array.
-func convert_target(target: Variant, action: CombatAction = null, actor: Entity = null) -> Array:
+func convert_target(target: Variant, action: CombatAction = null) -> Array:
+	var actor: Entity
 	if action:
-		if actor == null and action.details != null:
+		if action.details:
 			actor = action.details.actor
 	if target == null:
 		return []
@@ -94,7 +96,7 @@ func convert_target(target: Variant, action: CombatAction = null, actor: Entity 
 	if actor:
 		targets = filter_based_on_range(targets, actor)
 		if action:
-			targets = filter_based_on_action_logic(targets, actor, action)
+			targets = filter_based_on_action_logic(targets, action)
 	return targets
 
 func convert_targets_based_on_type(targets: Array) -> Array:
@@ -204,8 +206,8 @@ func filter_based_on_range(targets: Array, actor: Entity) -> Array:
 			return tile.distance_to(actor.current_tile) <= int(range_size)
 	)
 
-func filter_based_on_action_logic(targets: Array, actor: Entity, action: CombatAction) -> Array:
+func filter_based_on_action_logic(targets: Array, action: CombatAction) -> Array:
 	return targets.filter(
 		func (t: Variant):
-			return action.get_action_logic().is_target_valid(t, self, actor)
+			return action.get_action_logic().is_target_valid(t, self)
 	)

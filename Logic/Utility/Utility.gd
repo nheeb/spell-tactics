@@ -1,5 +1,24 @@
 class_name GeneralUtilityClass extends Node
 
+#########################
+## Number Calculations ##
+#########################
+
+func clamp_map(value: float, istart: float, istop: float, ostart: float, ostop: float) -> float:
+	value = clamp(value, istart, istop)
+	return ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
+
+func clamp_map_pow(value: float, istart: float, istop: float, ostart: float, ostop: float, e: float) -> float:
+	var middle = pow(clamp_map(value, istart, istop, 0.0, 1.0), e)
+	return lerp(ostart, ostop, middle)
+
+func positive_angle(radians: float) -> float:
+	return fposmod(radians, TAU)
+
+#############
+## Vectors ##
+#############
+
 func remove_y_value(pos: Vector3) -> Vector3:
 	pos.y = 0.0
 	return pos
@@ -10,13 +29,30 @@ func no_y_normalized(vec: Vector3) -> Vector3:
 func y_plane_dist(pos1: Vector3, pos2: Vector3) -> float:
 	return remove_y_value(pos1).distance_to(remove_y_value(pos2))
 
-func clamp_map(value: float, istart: float, istop: float, ostart: float, ostop: float) -> float:
-	value = clamp(value, istart, istop)
-	return ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
+func vec_xy_to_vec3(v: Vector2, z := 0.0) -> Vector3:
+	return Vector3(v.x, v.y, z)
 
-func clamp_map_pow(value: float, istart: float, istop: float, ostart: float, ostop: float, e: float) -> float:
-	var middle = pow(clamp_map(value, istart, istop, 0.0, 1.0), e)
-	return lerp(ostart, ostop, middle)
+func vec3_discard_z(v: Vector3) -> Vector2:
+	return Vector2(v.x, v.y)
+
+func quadratic_bezier_3D(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vector3:
+	var q0 = p0.lerp(p1, t)
+	var q1 = p1.lerp(p2, t)
+	var r = q0.lerp(q1, t)
+	return r
+
+#############
+## Strings ##
+#############
+
+## Returns the first substring between left and right
+func string_beween(s: String, left: String, right: String) -> String:
+	if left not in s or right not in s: return ""
+	return s.split(left)[1].split(right)[0]
+
+###########
+## Nodes ##
+###########
 
 func align_node(node: Node3D, local_direction: Vector3, target_global_direction: Vector3):
 	var current_global_direction := node.global_position.direction_to(node.to_global(local_direction))
@@ -39,12 +75,31 @@ func get_recursive_mesh_instances(node: Node) -> Array[MeshInstance3D]:
 			mesh_instances.append(c)
 	return mesh_instances
 
-# ----- Hex functions -----
+func get_parent_of_type(n: Node, type) -> Node:
+	var parent: Node = n.get_parent()
+	while parent:
+		if is_instance_of(parent, type):
+			return parent
+		parent = parent.get_parent()
+	push_error("No parent of %s with type %s found." % [n, type])
+	return null
+
+##############
+## Hex Grid ##
+##############
+
 func cube_add(r1: int, q1: int, s1: int, r2: int, q2: int, s2: int) -> Vector3i:
 	return Vector3i(r1 + r2, q1 + q2, s1 + s2)
-	
-func axial_add():
-	pass
+
+## Hex distance using rq coordinates
+func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
+	return (abs(q1 - q2) 
+			+ abs(q1 + r1 - q2 - r2)
+			+ abs(r1 - r2)) / 2
+
+################
+## Randomness ##
+################
 
 var random_index_of_scores_report: String
 func random_index_of_scores(scores: Array, create_report := false, \
@@ -86,25 +141,93 @@ func random_hit(hit_chance: float) -> bool:
 	#assert(hit_chance >= 0.0 and hit_chance <= 100.0)
 	return randf() <= (hit_chance * 0.01)
 
-## Hex distance using rq coordinates
-func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
-	return (abs(q1 - q2) 
-			+ abs(q1 + r1 - q2 - r2)
-			+ abs(r1 - r2)) / 2
-
-func array_unique(array: Array) -> Array:
-	var unique: Array = []
-	for item in array:
-		if not unique.has(item):
-			unique.append(item)
-	return unique
-
 func random_hash(length:int, chars := "abcdefghijklmnopqrstuvwxyz") -> String:
 	var word: String = ""
 	var n_char = len(chars)
 	for i in range(length):
 		word += chars[randi()% n_char]
 	return word
+
+func random_direction() -> Vector3:
+	return Vector3.UP.rotated(Vector3.FORWARD, TAU * randf())\
+					 .rotated(Vector3.UP, TAU * randf())
+
+############
+## Arrays ##
+############
+
+func array_unique(array: Array, no_null_values := true) -> Array:
+	var unique: Array = []
+	for item in array:
+		if no_null_values and item == null:
+			continue
+		if not unique.has(item):
+			unique.append(item)
+	return unique
+
+func array_safe_get(array: Array, index: int, mirror := false, default = null) -> Variant:
+	if mirror:
+		while not index < len(array):
+			index -= len(array)
+		while not index >= -len(array):
+			index += len(array)
+	if index >= -len(array) and index < len(array):
+		return array[index]
+	else:
+		return default
+
+## Returns a sorted version of the array.
+## Takes a callable which should turn the elements into numbers.
+func array_sorted(array: Array, score_func: Callable, asc := true) -> Array:
+	var _array := array.duplicate()
+	_array.sort_custom(
+		func (a, b):
+			return score_func.call(a) <= score_func.call(b)
+	)
+	if not asc:
+		_array.reverse()
+	return _array
+
+func array_shuffled(array: Array) -> Array:
+	var _array := array.duplicate()
+	_array.shuffle()
+	return _array
+
+func array_sum(array: Array) -> Variant:
+	return array.reduce(func(a,b): return a+b)
+
+func array_average(array: Array) -> float:
+	return array_sum(array) * (1.0 / array.size())
+
+## Returns the value if it's an array, puts it into an array otherwise
+func array_from(value: Variant) -> Array:
+	if value is Array:
+		return value
+	return [value]
+
+## Flattens an array which might contain other arrays.
+func array_flat(array: Array) -> Array:
+	if array.all(func (x): return x is not Array):
+		return array.duplicate()
+	var result := []
+	for item in array:
+		if item is Array:
+			var flat := array_flat(item)
+			result.append_array(item)
+		else:
+			result.append(item)
+	return result
+
+###########
+## Dicts ##
+###########
+
+func dict_safe_get(dict: Dictionary, key: Variant, default = null) -> Variant:
+	return dict.get(key, default)
+
+###########
+## Flags ##
+###########
 
 func has_int_flag(flags: int, target_flag: int) -> bool:
 	return (flags & target_flag) == target_flag
@@ -114,6 +237,10 @@ func add_int_flag(flags: int, target_flag: int) -> int:
 
 func remove_int_flag(flags: int, target_flag: int) -> int:
 	return flags & (~target_flag)
+
+#################
+## Game Screen ##
+#################
 
 func take_screenshot(shrink_count := 0) -> ImageTexture:
 	var image := Game.get_viewport().get_texture().get_image()
@@ -143,100 +270,25 @@ func get_mouse_pos_normalized(invert_y_axis := true) -> Vector2:
 	else:
 		return Vector2(absolute.x / get_viewport().get_visible_rect().size.x, absolute.y / get_viewport().get_visible_rect().size.y)
 
-func vec_xy_to_vec3(v: Vector2, z := 0.0) -> Vector3:
-	return Vector3(v.x, v.y, z)
-
-func vec3_discard_z(v: Vector3) -> Vector2:
-	return Vector2(v.x, v.y)
-
-func array_safe_get(array: Array, index: int, mirror := false, default = null) -> Variant:
-	if mirror:
-		while not index < len(array):
-			index -= len(array)
-		while not index >= -len(array):
-			index += len(array)
-	if index >= -len(array) and index < len(array):
-		return array[index]
-	else:
-		return default
-
-func dict_safe_get(dict: Dictionary, key: Variant, default = null) -> Variant:
-	return dict.get(key, default)
-
-## Returns a sorted version of the array.
-## Takes a callable which should turn the elements into numbers.
-func array_sorted(_array: Array, score_func: Callable, asc := true) -> Array:
-	var array := _array.duplicate()
-	array.sort_custom(
-		func (a, b):
-			return score_func.call(a) <= score_func.call(b)
-	)
-	if not asc:
-		array.reverse()
-	return array
-
-func array_shuffled(_array: Array) -> Array:
-	var array := _array.duplicate()
-	array.shuffle()
-	return array
-
-func get_parent_of_type(n: Node, type) -> Node:
-	var parent: Node = n.get_parent()
-	while parent:
-		if is_instance_of(parent, type):
-			return parent
-		parent = parent.get_parent()
-	push_error("No parent of %s with type %s found." % [n, type])
-	return null
-
-func array_sum(array: Array) -> Variant:
-	return array.reduce(func(a,b): return a+b)
-
-func array_average(array: Array) -> float:
-	return array_sum(array) * (1.0 / array.size())
-
-func array_from(value: Variant) -> Array:
-	if value is Array:
-		return value
-	return [value]
-
-func random_direction() -> Vector3:
-	return Vector3.UP.rotated(Vector3.FORWARD, TAU * randf())\
-					 .rotated(Vector3.UP, TAU * randf())
-
-func positive_angle(radians: float) -> float:
-	return fposmod(radians, TAU)
-
-func quadratic_bezier_3D(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vector3:
-	var q0 = p0.lerp(p1, t)
-	var q1 = p1.lerp(p2, t)
-	var r = q0.lerp(q1, t)
-	return r
+#############
+## Signals ##
+#############
 
 func disconnect_all_connections(s: Signal):
 	for c in s.get_connections():
 		s.disconnect(c["callable"])
 
-## Returns the first substring between left and right
-func string_beween(s: String, left: String, right: String) -> String:
-	if left not in s or right not in s: return ""
-	return s.split(left)[1].split(right)[0]
+## Creates a signal without needing to bind it to an instance. This means the signal can be
+## assigned to a static var and accessed globally. `cls` should be a global class identifier. 
+## Taken from https://stackoverflow.com/questions/77026156/how-to-write-a-static-event-emitter-in-gdscript
+static func create_static_signal(cls: Object, signal_name: StringName) -> Signal:
+	if not cls.has_user_signal(signal_name):
+		cls.add_user_signal(signal_name)
+	return Signal(cls, signal_name)
 
-## Returns the method names of methods actually written / typed in the script.
-## So no methods from the base class except overwritten ones.
-func script_get_actual_method_names(script: Script) -> Array[String]:
-	var a: Array[String] = []
-	a.append_array(Array(script.source_code.split("\n")).filter(
-		func (x: String): return x.strip_edges().begins_with("func ")
-	).map(
-		func (x: String): return string_beween(x.strip_edges(), "func ", "(")
-	).filter(
-		func (x: String): return not x.is_empty()
-	))
-	return a
-
-func script_has_actual_method(script: Script, method: String) -> bool:
-	return method in script_get_actual_method_names(script)
+###########
+## Debug ##
+###########
 
 ## Turns a stack trace object into readable lines.
 ## stack_trace is an Array with dicts having function, line and source
@@ -260,13 +312,25 @@ func get_stack_trace_lines(stack_trace: Array[Dictionary], exclude_front_element
 				result.append("")
 			return result
 
-## Creates a signal without needing to bind it to an instance. This means the signal can be
-## assigned to a static var and accessed globally. `cls` should be a global class identifier. 
-## Taken from https://stackoverflow.com/questions/77026156/how-to-write-a-static-event-emitter-in-gdscript
-static func create_static_signal(cls: Object, signal_name: StringName) -> Signal:
-	if not cls.has_user_signal(signal_name):
-		cls.add_user_signal(signal_name)
-	return Signal(cls, signal_name)
+#############
+## Scripts ##
+#############
+
+## Returns the method names of methods actually written / typed in the script.
+## So no methods from the base class except overwritten ones.
+func script_get_actual_method_names(script: Script) -> Array[String]:
+	var a: Array[String] = []
+	a.append_array(Array(script.source_code.split("\n")).filter(
+		func (x: String): return x.strip_edges().begins_with("func ")
+	).map(
+		func (x: String): return string_beween(x.strip_edges(), "func ", "(")
+	).filter(
+		func (x: String): return not x.is_empty()
+	))
+	return a
+
+func script_has_actual_method(script: Script, method: String) -> bool:
+	return method in script_get_actual_method_names(script)
 
 func get_exported_properties(object: Object) -> Array[String]:
 	var exported_properties: Array[String] = []

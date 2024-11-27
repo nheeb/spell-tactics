@@ -29,7 +29,7 @@ func add_targets(value: Variant):
 		push_warning("Target added although all requirements are fullfilled.")
 		return
 	var req := get_next_requirement()
-	var targets := req.convert_target(value, combat_action, actor)
+	var targets := req.convert_target(value, combat_action)
 	target_details[req] = targets
 
 func remove_targets(value: Variant = null):

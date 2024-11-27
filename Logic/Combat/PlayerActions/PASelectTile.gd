@@ -12,16 +12,14 @@ func is_valid(combat: Combat) -> bool:
 		var req := combat.input.current_castable.get_next_requirement()
 		if req:
 			if req.type == TargetRequirement.Type.Tile:
-				var converted := req.convert_target(tile, castable)
-				if converted:
-					return true
+				return castable.is_target_valid(tile, req)
 	return false
 
 func execute(combat: Combat) -> void:
 	combat.input.current_castable.add_target_to_details(tile)
 	await combat.action_stack.wait()
 	combat.action_stack.active_ticket.finish()
-	await VisualTime.new_timer(.1).timeout
+	await VisualTime.new_timer(.6).timeout
 	combat.action_stack.process_player_action(PAActivateCastable.new(false))
 
 func on_fail(combat: Combat) -> void:

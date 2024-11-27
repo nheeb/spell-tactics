@@ -19,7 +19,7 @@ func execute() -> void:
 	#return true
 
 ## Can a target tile be selected
-#func is_target_valid(target: Variant, requirement: TargetRequirement, _actor: Entity) -> bool:
+#func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 	#return true
 
 ## Visuals or something else on active select / deselect

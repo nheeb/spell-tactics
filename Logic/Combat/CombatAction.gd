@@ -26,6 +26,19 @@ func reset_details():
 	assert(details)
 	details = null
 
+func is_target_valid(target: Variant, requirement_or_index = null) -> bool:
+	assert(details)
+	assert(get_target_requirements())
+	if requirement_or_index == null:
+		requirement_or_index = 0
+	if requirement_or_index is int:
+		requirement_or_index = Utility.array_safe_get(
+			get_target_requirements(), requirement_or_index
+		)
+	var req := requirement_or_index as TargetRequirement
+	assert(req)
+	return not req.convert_target(target).is_empty()
+
 ##########################
 ## Type & Logic Getters ##
 ##########################
