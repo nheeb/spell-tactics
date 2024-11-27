@@ -1,11 +1,8 @@
 class_name Tile extends Node3D
 
-# TODO these are not yet connected -- maybe this makes more sense to put into tile?
-signal drainable_hovered
-signal drainable_unhovered
-
 var entities: Array[Entity] = []
 var hovering := false
+var energy_popup: EnergyPopup
 
 var r: int
 var q: int
@@ -22,9 +19,11 @@ var combat: Combat:
 @onready var highlight: Highlight = $Highlight
 
 const TILE = preload("res://Logic/Level/Tile.tscn")
+const ENERGY_POPUP = preload("res://UI/PopUp/EnergyPopup.tscn")
 static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	# center position is needed to properly align the tile
 	var tile = TILE.instantiate()
+	tile.energy_popup = ENERGY_POPUP.instantiate()
 	var xz_translation: Vector2 = (r_tile-r_center) * Level.Q_BASIS + (q_tile-q_center) * Level.R_BASIS 
 	tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
 
@@ -80,11 +79,8 @@ func remove_entity(entity: Entity):
 		return
 	
 	entities.remove_at(i)
-
 	entity.current_tile = null
-	# should we turn it invisible then? huh
-	#entity.visual_entity.visible = false
-	
+
 ## Returns all enemy entities on this tile.
 func get_enemies() -> Array[EnemyEntity]:
 	var enemies: Array[EnemyEntity] = []

@@ -40,13 +40,17 @@ var tree: SceneTree:
 	get:
 		return get_tree()
 
-var combats: Array[Combat] # For debuging
+var combats: Array[Combat] # For debugging
 
 var spell_count: int = 0
 ## Prototype Function for creating ids for spells. This will later be done by the Overworld
 func add_to_spell_count() -> int:
 	spell_count += 1
 	return spell_count
+
+func _ready() -> void:
+	# so the _input callback is active on pause to unpause 
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
 
 # --- PAUSE STUFF ---	
 @onready var pause_activity: PauseActivity = PauseActivity.new()

@@ -1,8 +1,8 @@
-class_name TileHoverPopup extends Control
+class_name HoverPopup extends Control
 
 
 # no instancing for now, just max it out at 3 entries
-const ENT_ENTRY = preload("res://UI/PopUp/PopUpEntityEntry.tscn")
+const ENT_ENTRY = preload("res://UI/PopUp/HoverPopupEntry.tscn")
 
 @onready var ent_entries = [%EntityEntry1, %EntityEntry2, %EntityEntry3]
 func show_tile(tile: Tile):
