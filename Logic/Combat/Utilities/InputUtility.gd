@@ -49,8 +49,6 @@ func is_taking_actions() -> bool:
 func update_ui():
 	combat.ui.update_payable_cards()
 
-	
-	
 func tile_unhovered(tile: Tile):
 	combat.action_stack.process_player_action(PAUnhoverTile.new(tile))
 

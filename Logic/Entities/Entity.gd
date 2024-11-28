@@ -66,6 +66,34 @@ func get_drained_energy() -> EnergyStack:
 func is_drainable():
 	return type.is_drainable and energy != null and not energy.is_empty()
 
+func get_tags() -> Array[String]:
+	return type.tags
+
+## ACTION
+func on_hover_long(h: bool) -> void:
+	pass
+
+############################
+## CombatObject Overrides ##
+############################
+
+var pre_death_tile: Tile
+
+## Removes the entity from the level and moves it into the graveyard.
+## Returns the die animation (hiding the model for now).
+func die():
+	pre_death_tile = current_tile
+	combat.level.move_entity_to_graveyard(self)
+	combat.animation.hide(visual_entity)
+	await super()
+
+func on_death():
+	await super()
+	assert(pre_death_tile)
+	if type.corpse_state:
+		var corpse := type.corpse_state.deserialize_on_tile(pre_death_tile)
+		combat.animation.effect(VFX.HEX_RINGS, pre_death_tile, {"color": corpse.type.color})
+
 ## This will be executed after an entity has been created from a type.
 func on_load() -> void:
 	await super()
@@ -73,23 +101,6 @@ func on_load() -> void:
 		visual_entity.visible = false
 	else:
 		push_warning("visual_entity for entity_type %s is null in on_load()" % type.internal_name)
-
-func is_dead() -> bool:
-	return current_tile == null
-
-## Removes the entity from the level and moves it into the graveyard.
-## Returns the die animation (hiding the model for now).
-func die():
-	combat.level.move_entity_to_graveyard(self)
-	combat.animation.hide(visual_entity)
-	await super()
-
-func get_tags() -> Array[String]:
-	return type.tags
-
-## ACTION
-func on_hover_long(h: bool) -> void:
-	pass
 
 ##############################
 ## Methods for EntityStatus ##

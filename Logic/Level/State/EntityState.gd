@@ -13,3 +13,9 @@ func deserialize(combat: Combat) -> Entity:
 		assert(status)
 		entity.status_array.append(status)
 	return entity
+
+func deserialize_on_tile(tile: Tile) -> Entity:
+	var entity := deserialize(tile.combat)
+	assert(entity)
+	tile.add_entity(entity)
+	return entity

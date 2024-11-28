@@ -1,25 +1,12 @@
 class_name HPEntity extends Entity
 
-signal hp_changed(hp)
-signal died
-@export var hp: int:
-	set(h):
-		hp = h
-		hp_changed.emit(hp)
-		if hp <= 0:
-			died.emit()
-
-var armor := 0
-var team : HPEntityType.Teams
+@export var hp: int
+@export var armor := 0
+@export var team : HPEntityType.Teams
 
 func on_load():
 	await super.on_load()
 	combat.animation.update_hp(self)
-	#if not Engine.is_editor_hint():
-		## only connect once everything is set up
-		## previously the deserialization ran into errors in on_death() since
-		## combat.level was still null
-		#died.connect(on_death)  
 
 func on_death():
 	combat.animation.call_method(visual_entity, "on_death_visuals")
@@ -37,7 +24,6 @@ func inflict_damage(damage: int):
 
 func inflict_damage_with_visuals(damage: int, with_text := false) -> AnimationObject:
 	inflict_damage(damage)
-	
 	var animations = []
 	animations.append(combat.animation.update_hp(self))
 	animations.append(combat.animation.call_method(visual_entity, "on_hurt_visuals"))
@@ -54,3 +40,13 @@ func inflict_heal_with_visuals(heal: int) -> AnimationObject:
 
 func is_wounded() -> bool:
 	return hp < type.max_hp 
+
+func on_birth():
+	await super()
+	TimedEffect.new_combat_change(check_hp) \
+		.set_id("_cc_check_hp").set_solo().register(combat)
+
+## TE
+func check_hp():
+	if hp <= 0:
+		await combat.action_stack.process_callable(die)

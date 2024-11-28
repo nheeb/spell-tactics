@@ -80,7 +80,7 @@ func setup() -> void:
 				push_error("Two players in a level??")
 			player = entity
 		if entity is EnemyEntity:
-			if not entity.is_dead():
+			if not entity.dead:
 				enemies.append(entity)
 	
 	# TODO Test if player and enemies exist

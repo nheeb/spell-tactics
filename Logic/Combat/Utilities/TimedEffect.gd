@@ -201,7 +201,7 @@ func needs_flavor(target_flavor: ActionFlavor) -> TimedEffect:
 func kill() -> void:
 	dead = true
 
-## Kaufland Freshboy, Freshboy Kaufland, Obst und Gemüse so fresh & so drippy
+## Kaufland Freshboy, Freshboy Kaufland, Obst und Gemüse so fresh & so drippy!
 ## TE gets broken if the callable isn't (over)written in the object's direct script.
 func force_freshness() -> TimedEffect:
 	assert(call_obj, "TE must be created with _set_callable() for this.")
@@ -286,16 +286,21 @@ func _validate() -> bool:
 	if not Utility.has_int_flag(flags, Flags.DontDisconnectWhenInGraveyard):
 		if call_obj:
 			if call_obj is Entity:
-				if call_obj.is_dead():
+				if call_obj.dead:
 					dead = true
 			elif call_obj is EntityLogic or \
 				call_obj is EntityStatusLogic:
-				if call_obj.entity.is_dead():
+				if call_obj.entity.dead:
 					dead = true
 	return not dead
 
 ## ACTION
 func _trigger(signal_params := []):
+	# We use _validate here for a second time (first one is in TEUtility)
+	# because other TEs of the same signal could invalidate this one
+	_validate()
+	if dead:
+		return
 	if delay > 0:
 		delay -= 1
 		return

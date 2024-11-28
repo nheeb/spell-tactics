@@ -54,6 +54,7 @@ func string_beween(s: String, left: String, right: String) -> String:
 ## Nodes ##
 ###########
 
+## Rotates a node3d so that the local_direction alligns with target_global_direction
 func align_node(node: Node3D, local_direction: Vector3, target_global_direction: Vector3):
 	var current_global_direction := node.global_position.direction_to(node.to_global(local_direction))
 	var cross_direction := current_global_direction.cross(target_global_direction).normalized()
@@ -181,8 +182,10 @@ func array_safe_get(array: Array, index: int, mirror := false, default = null) -
 func array_sorted(array: Array, score_func: Callable, asc := true) -> Array:
 	var _array := array.duplicate()
 	_array.sort_custom(
-		func (a, b):
-			return score_func.call(a) <= score_func.call(b)
+		func (a, b) -> bool:
+			var score_a := score_func.call(a) as float
+			var score_b := score_func.call(b) as float
+			return score_a < score_b
 	)
 	if not asc:
 		_array.reverse()
