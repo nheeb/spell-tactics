@@ -3,13 +3,14 @@ class_name EndPhase extends CombatPhase
 func process_phase() -> void:
 	combat.round_ended.emit(combat.current_round)
 	
+	await combat.action_stack.force_combat_change_update()
+	
 	# Events
 	await combat.action_stack.process_ticket(
 		ActionTicket.new(combat.events.process_events)
 	)
 	
-	# All stat resets here
-	# combat.energy.pay(combat.energy.player_energy)
+	await combat.action_stack.force_combat_change_update()
 	
 	if combat.enemies.is_empty():
 		# TODO Game won
@@ -23,5 +24,3 @@ func process_phase() -> void:
 	
 	combat.current_round += 1
 	combat.action_stack.mark_combat_changed()
-	#combat.animation.callable(
-		#combat.ui.timeline.jump_to_round.bind(combat.current_round))

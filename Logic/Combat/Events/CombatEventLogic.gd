@@ -9,8 +9,9 @@ var event: CombatEvent:
 func on_activate() -> void:
 	_on_activate()
 
+## ACTION
 func on_advance(round_number: int) -> void:
-	_on_advance(round_number)
+	await _on_advance(round_number)
 
 func on_finish() -> void:
 	_on_finish()
@@ -31,6 +32,7 @@ func on_click() -> void:
 func _on_activate() -> void:
 	pass
 
+## ACTION
 func _on_advance(round_number: int) -> void:
 	pass
 

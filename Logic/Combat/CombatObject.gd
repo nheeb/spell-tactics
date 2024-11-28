@@ -46,7 +46,8 @@ func serialize() -> CombatObjectState:
 
 ## ACTION
 func on_birth() -> void:
-	assert(not born)
+	if not born:
+		pass
 	born = true
 	if get_generic_logic():
 		await get_generic_logic().on_birth()

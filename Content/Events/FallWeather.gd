@@ -9,7 +9,7 @@ func _on_advance(round_number: int) -> void:
 		var weather_type := weather_pool.pick_random() as CombatEventType
 		if weather_type:
 			var new_event = weather_type.create_event(combat)
-			combat.events.add_event_and_activate(new_event, true)
+			await combat.events.add_event_and_activate(new_event, true)
 		else:
 			push_error("Add types to the weather_pool data entry")
 	else:

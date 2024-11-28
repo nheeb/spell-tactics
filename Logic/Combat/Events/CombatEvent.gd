@@ -45,13 +45,13 @@ func advance() -> void:
 	if type.max_duration > 0:
 		if rounds >= type.max_duration:
 			highlight_icon(false)
-			combat.animation.wait(.6)
+			combat.animation.wait(.4)
 			finish_and_remove_icon()
 			return
 	if type.show_info_on_advancing:
 		show_info(true)
-		combat.animation.wait(.6)
-	logic.on_advance(rounds)
+		combat.animation.wait(.4)
+	await logic.on_advance(rounds)
 	if type.show_info_on_advancing:
 		show_info(false)
 	highlight_icon(false)

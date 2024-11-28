@@ -28,6 +28,8 @@ func process_phase() -> void:
 		]
 	combat.ui.initialize_active_buttons(combat.actives)
 	combat.cards.draw_to_hand_size()
+	
+	combat.action_stack.mark_combat_changed()
 
 func _to_string() -> String:
 	return "CombatBeginPhase"

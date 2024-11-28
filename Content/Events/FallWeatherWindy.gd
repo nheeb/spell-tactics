@@ -21,7 +21,9 @@ func _on_advance(round_number: int) -> void:
 		combat.animation.show(leafless.visual_entity).set_flag_with()
 		await combat.action_stack.wait()
 		
-		var free_tiles : Array[Tile] = tile.get_surrounding_tiles().filter(func (t): return not t.is_obstacle())
+		var free_tiles : Array[Tile] = tile.get_surrounding_tiles().filter(
+			func (t: Tile): return not t.is_blocked()
+		)
 		free_tiles.shuffle()
 		free_tiles = free_tiles.slice(0, 3)
 		for t in free_tiles:

@@ -41,7 +41,7 @@ func _execute():
 	for tile in target_tiles:
 		combat.animation.effect(
 			VFX.BILLBOARD_PROJECTILE, enemy,
-			{"texture_name": "notes", "target": tile}
+			{"texture_name": "notes", "target": tile.node3d}
 		).set_flag_extend()
 	combat.animation.wait()
 	for tile in target_tiles:

@@ -3,11 +3,9 @@ class_name EventUtility extends CombatUtility
 ## This method will be called every end step. This is where all the activation
 ## and advancing happens.
 func process_events() -> void:
-	process_enemy_events()
-	await combat.action_stack.wait()
-	process_event_schedules()
-	await combat.action_stack.wait()
-	process_active_events()
+	await combat.action_stack.process_callable(process_enemy_events)
+	await combat.action_stack.process_callable(process_event_schedules)
+	await combat.action_stack.process_callable(process_active_events)
 
 ############################
 ## Handling Combat Events ##
@@ -40,11 +38,12 @@ func add_event(event: CombatEvent):
 	assert(not (event in all_events), "Added event that was already in the list")
 	all_events.append(event)
 
+## ACTION
 func add_event_and_activate(event: CombatEvent, advance_when_activate := false):
 	add_event(event)
-	event.activate()
+	await event.activate()
 	if advance_when_activate:
-		event.advance()
+		await event.advance()
 
 func get_unused_schedules_for_round(r: int) -> Array[CombatEventSchedule]:
 	var schedules: Array[CombatEventSchedule] = event_schedules.filter(
@@ -58,14 +57,16 @@ func get_unused_schedules_for_round(r: int) -> Array[CombatEventSchedule]:
 	)
 	return schedules
 
+## ACTION
 func process_event_schedules():
 	var game_round := combat.current_round
 	for schedule in get_unused_schedules_for_round(game_round):
-		add_event_and_activate(schedule.create_event(combat))
+		await add_event_and_activate(schedule.create_event(combat))
 
+## ACTION
 func process_active_events():
 	for event in get_active_events():
-		event.advance()
+		await event.advance()
 
 ###########################
 ## Handling Enemy Events ##
@@ -80,11 +81,12 @@ var enemy_meter := 0
 var enemy_meter_max := 0
 var current_enemy_event: CombatObjectReference
 
+## ACTION
 func process_enemy_events():
 	if not current_enemy_event:
 		discover_next_enemy_event()
 	add_to_enemy_meter()
-	try_to_activate_enemy_event()
+	await try_to_activate_enemy_event()
 	if not current_enemy_event:
 		discover_next_enemy_event()
 
@@ -118,10 +120,11 @@ func discover_next_enemy_event():
 		connect_enemy_meter_to_event(event)
 		event.discover()
 
+## ACTION
 func try_to_activate_enemy_event():
 	if current_enemy_event:
 		if is_enemy_meter_full():
-			current_enemy_event.get_enemy_event(combat).activate()
+			await current_enemy_event.get_enemy_event(combat).activate()
 			current_enemy_event = null
 			reset_enemy_meter()
 
