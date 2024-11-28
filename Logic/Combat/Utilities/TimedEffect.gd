@@ -67,6 +67,14 @@ static func new_end_phase_trigger_from_callable(callable: Callable, start := tru
 	var process := "process_start" if start else "process_end"
 	return TimedEffect.new(end_phase_ref, process)._set_callable(callable)
 
+## Creates a TE that triggers at each EnemyPhase.
+## If start is true the TE triggers at the start of the enemy phase (before Enemies attack)
+## otherwise it triggers at the end.
+static func new_enemy_phase_trigger_from_callable(callable: Callable, start := true) -> TimedEffect:
+	var end_phase_ref = CombatNodeReference.new("Phases/EnemyPhase")
+	var process := "process_start" if start else "process_end"
+	return TimedEffect.new(end_phase_ref, process)._set_callable(callable)
+
 ## Creates a simple TE from a signal and a callable.
 ## Only works of the owners of the signal and callable have "get_reference()"
 static func new_from_signal_and_callable(sig: Signal, callable: Callable) -> TimedEffect:

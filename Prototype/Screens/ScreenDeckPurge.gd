@@ -1,1 +1,1 @@
-## DEPRECATED
+extends Control ## DEPRECATED

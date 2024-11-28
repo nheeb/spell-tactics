@@ -41,6 +41,9 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 		if not file.ends_with(".tres"):
 			continue
 		var entity_type := load(file) as EntityType
+		if entity_type == null:
+			push_error("Could not load file %s" % file)
+			continue
 		entity_type.on_load()
 		if entity_type == null: # loaded anbother Resource type, ignore this
 			continue
