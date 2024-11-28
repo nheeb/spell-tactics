@@ -21,28 +21,27 @@ var targets: Array:
 	set(x):
 		data["_targets"] = x
 	get:
-		if not data.has("_targets"):
-			return []
-		return data["_targets"]
+		return data.get("_targets", [])
 
 ## Logic when status effect enters the game
 ## This will only be called when the status effect is applied
 ## not when it is loaded
 func on_birth() -> void:
+	await super()
 	if type.has_lifetime:
 		TimedEffect.new_end_phase_trigger_from_callable(reduce_lifetime) \
 			.set_id("_lt").set_priority(-100).register(combat)
-	await super()
+
 
 ## Visual changes when status effect enters the game
 func on_load() -> void:
+	await super()
 	if type.make_floating_icon:
 		var icon_name := "%s_icons" % get_name()
 		combat.animation.add_staying_effect(
 			VFX.ICON_VISUALS, entity.visual_entity, icon_name, \
 			{"icon": type.icon, "color": type.color}
 		)
-	await super()
 
 ## Extend the status by another one of the same kind
 func merge(other_status: EntityStatus) -> void:

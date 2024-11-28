@@ -30,5 +30,9 @@ class_name EntityStatusType extends CombatObjectType
 func create_base_object() -> CombatObject:
 	return EntityStatus.new()
 
+func set_type_properties(object: CombatObject) -> void:
+	object = object as EntityStatus
+	object.lifetime = lifetime_default
+
 func create_status(combat: Combat, entity: Entity, _data := {}) -> EntityStatus:
 	return create(combat, {"data": _data, "entity": entity}) as EntityStatus

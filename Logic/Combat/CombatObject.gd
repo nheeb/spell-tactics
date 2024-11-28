@@ -81,7 +81,10 @@ func sync_with_type(_type: CombatObjectType = null) -> void:
 
 func update_properties(props: Dictionary):
 	for k in props.keys():
-		set(k, props[k])
+		if k == "data":
+			data.merge(props[k], true)
+		else:
+			set(k, props[k])
 
 func get_name() -> String:
 	if get_generic_type():

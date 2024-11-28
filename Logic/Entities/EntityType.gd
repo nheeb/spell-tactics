@@ -45,7 +45,7 @@ func set_type_properties(object: CombatObject) -> void:
 func create(combat: Combat, props := {}) -> CombatObject:
 	var ent := super(combat, props) as Entity
 	assert(ent)
-	setup_visuals_and_logic(ent)
+	setup_visuals(ent)
 	return ent
 
 # instantiate this EntityType
@@ -59,7 +59,6 @@ func create_entity(combat: Combat, tile: Tile = null) -> Entity:
 
 const PROTOTYPE_VISUALS = preload("res://VFX/Entities/VisualPrototype.tscn")
 func setup_visuals(ent: Entity) -> void:
-	
 	var combat := ent.combat
 	# CARE, instantiate() might lead to lag, depending on the use we might want to instantiate later
 	# use billboard prototype visuals if no visual scene is set:
@@ -69,7 +68,6 @@ func setup_visuals(ent: Entity) -> void:
 		# push_warning("Using a prototype visual")
 		# need to use load here since Godot 4.3 for some reason..
 		ent.visual_entity = PROTOTYPE_VISUALS.instantiate()#load(PROTOTYPE_VISUALS).instantiate()
-		
 	# hehehe - but these references are safe since entity and visual entity exists together
 	if ent.visual_entity == null or "type" not in ent.visual_entity:
 		push_error("Error in initializing VisualEntity '%s', maybe it's missing VisualEntity.gd assignment?" % internal_name)
@@ -78,18 +76,6 @@ func setup_visuals(ent: Entity) -> void:
 	ent.visual_entity.entity = ent
 	ent.visual_entity.visible = false
 	combat.animation.show(ent.visual_entity)
-	
-
-
-func setup_visuals_and_logic(ent: Entity) -> void:
-	#var start_time := Time.get_ticks_msec()
-	setup_visuals(ent)
-	#print("Type %s visual setup took %s msecs" % [internal_name, Time.get_ticks_msec() - start_time])
-	
-	# Creating entity logic
-	if logic_script != null:
-		ent.logic = logic_script.new(ent, ent.combat)
-
 
 func get_prototype_texture():
 	var texture_path := "res://Assets/Sprites/PrototypeBillboard/" + internal_name + ".png"
