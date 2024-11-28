@@ -67,7 +67,6 @@ func setup_number_slider(_target_property: String, _question_text: String) -> Re
 
 func _setup() -> void:
 	%TextEdit.visible = false
-	%HandCard2D.visible = false
 	%SliderContainer.visible = false
 	%TextureRect.visible = false
 	%QuestionLabel.text = question_text
@@ -91,8 +90,8 @@ func _on_custom_cb_toggled(toggled_on: bool) -> void:
 	%CustomOptionText.editable = toggled_on
 
 func set_spell(spell: SpellType) -> ReviewQuestion:
-	%HandCard2D.set_spell_type(spell)
-	%HandCard2D.visible = true
+	# TODO we used handcard2d here
+	# replace with 3D Card / or rather: the 2d one we use in the viewport
 	return self
 
 func set_image(texture) -> ReviewQuestion:

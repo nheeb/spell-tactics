@@ -11,8 +11,8 @@ func process_phase() -> void:
 		#combat.action_stack.push_back(enemy.plan_next_action)
 	#await combat.action_stack.wait()
 	
-	if Game.SPELL_TEST:
-		combat.energy.gain(Game.testing_energy)
+	if Game.DEBUG_SPELL_TESTING:
+		combat.energy.gain(Game.testing_energy, combat.player)
 	
 	combat.log.add("Saving game...",)
 	await combat.action_stack.process_callable(auto_save)

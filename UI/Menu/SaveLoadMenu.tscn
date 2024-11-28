@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://mdk6ql82hwrt"]
+[gd_scene load_steps=6 format=3 uid="uid://mdk6ql82hwrt"]
 
 [ext_resource type="Script" path="res://UI/Menu/SaveLoadMenu.gd" id="1_mblr7"]
-[ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/HandCard2D_panel_default.tres" id="2_4sh0h"]
+[ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/panel_default.tres" id="2_4sh0h"]
 [ext_resource type="LabelSettings" uid="uid://bbcw8bd7m6puj" path="res://UI/Theme/LabelSettings/EventCardTitleLableSettings.tres" id="3_i56hl"]
-[ext_resource type="PackedScene" uid="uid://cvncydl2y0lon" path="res://UI/Menu/SavefileMenuEntry.tscn" id="4_4ds5w"]
 [ext_resource type="FontFile" uid="uid://d2paqurb1iqxc" path="res://Assets/Fonts/Teachers/Teachers-Regular.ttf" id="5_6qet8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yp4xp"]
@@ -63,9 +62,6 @@ vertical_scroll_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="SavefileMenuEntry" parent="PanelContainer/VBoxContainer/SaveFiles/ScrollContainer/SaveEntries" instance=ExtResource("4_4ds5w")]
-layout_mode = 2
 
 [node name="SaveName" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

@@ -8,9 +8,9 @@ var animation_queue: Array[AnimationObject]
 var currently_playing_queues: Array[AnimationQueue]
 var currently_queued_queues: Array[AnimationQueue]
 
-########################################
-## Wrapper Functions (only use those) ##
-########################################
+#########################################
+## Shortcut Functions (only use those) ##
+#########################################
 
 func call_method(ref: Object, method: String, parameters: Array = []) -> AnimationCallable:
 	var _callable = ref.get(method) as Callable
@@ -85,6 +85,7 @@ func camera_reach(target) -> AnimationObject:
 	assert(target)
 	var animations : Array[AnimationObject] = []
 	animations.append(property(combat.camera, "follow_target", target))
+	animations.append(callable(combat.camera.follow_blocker.block))
 	animations.append(property(combat.camera, "just_reach_target", true).set_flag(AnimationObject.Flags.PlayWithStep))
 	animations.append(wait_for_signal(combat.camera, "target_reached").set_flag(AnimationObject.Flags.ExtendStep))
 	return reappend_as_subqueue(animations)

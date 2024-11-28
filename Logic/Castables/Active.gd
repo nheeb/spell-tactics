@@ -2,7 +2,7 @@ class_name Active extends Castable
 
 signal got_locked
 signal got_unlocked
-signal got_updated
+signal uses_got_updated(uses_left: int, max_uses: int)
 
 @export var type: ActiveType
 
@@ -63,13 +63,28 @@ func get_button_caption() -> String:
 ## We use the data dict to save everything related   ##
 #######################################################
 
+## ANIMATION
+func update_uses_visually(uses_left: int, max_uses: int):
+	uses_got_updated.emit(uses_left, max_uses)
+
 func is_limited_per_round() -> bool:
 	return type.limitation == ActiveType.Limitation.X_PER_ROUND
+
+func add_to_uses_left(i: int) -> void:
+	if i < 0:
+		var bonus := data.get("bonus_uses", 0) as int
+		if bonus > 0:
+			var diff = min(bonus, -i)
+			add_to_bonus_uses(-diff)
+			i += diff
+	set_limitation_uses_left(get_limitation_uses_left() + i)
 
 func set_limitation_uses_left(i: int) -> void:
 	i = max(0, i)
 	data["uses_left"] = i
-	got_updated.emit()
+	combat.animation.callable(update_uses_visually.bind(
+		get_limitation_uses_left(), get_limitation_max_uses()
+	))
 	if i == 0:
 		unlocked = false
 	else:
@@ -77,10 +92,13 @@ func set_limitation_uses_left(i: int) -> void:
 
 func set_limitation_max_uses(i: int) -> void:
 	data["max_uses"] = i
-	got_updated.emit()
+	combat.animation.callable(update_uses_visually.bind(
+		get_limitation_uses_left(), get_limitation_max_uses()
+	))
 
 func get_limitation_uses_left() -> int:
-	return data.get("uses_left", 0)
+	var left := data.get("uses_left", 0) as int
+	return left
 
 func get_limitation_max_uses() -> int:
 	return data.get("max_uses", type.max_uses_per_round)
@@ -94,3 +112,14 @@ func reset_limitation_max_uses() -> void:
 func add_to_max_uses(i: int) -> void:
 	set_limitation_max_uses(get_limitation_max_uses() + i)
 	set_limitation_uses_left(get_limitation_uses_left() + i)
+
+func add_to_bonus_uses(i: int) -> void:
+	var bonus := data.get("bonus_uses", 0) as int
+	bonus += i
+	data["bonus_uses"] = bonus
+	add_to_max_uses(i)
+	if i > 0:
+		combat.animation.effect(VFX.HEX_RINGS, combat.player, \
+			{"color": Color.YELLOW}).set_duration(.6)
+		combat.animation.say(combat.player, "+%s %s" % [i, type.pretty_name]) \
+			.set_flag_with()

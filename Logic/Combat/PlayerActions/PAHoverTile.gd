@@ -25,15 +25,18 @@ func execute(combat: Combat) -> void:
 	# TODO ideally, move tile_hovered signals from Events into this script and bundle the logic here
 	if tile.distance_to(combat.player.current_tile) <= 1 and tile.is_drainable():
 		if tile != currently_hovering_drainable:
+			tile.set_highlight(Highlight.Type.HoverAction, true)
 			on_drainable_tile_hovered.emit(tile)
 			open_cards_shelf_blocker.block()
 			if currently_hovering_drainable != null:
+				currently_hovering_drainable.set_highlight(Highlight.Type.HoverAction, false)
 				on_drainable_tile_unhovered.emit(currently_hovering_drainable)
 			currently_hovering_drainable = tile
 	else:
 		if currently_hovering_drainable != null:
 			open_cards_shelf_blocker.unblock()
 			on_drainable_tile_unhovered.emit(currently_hovering_drainable)
+			currently_hovering_drainable.set_highlight(Highlight.Type.HoverAction, false)
 			currently_hovering_drainable = null
 
 func log_me(combat: Combat, valid: bool) -> void:

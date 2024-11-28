@@ -1,7 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4yepuo1ynkja"]
+[gd_scene load_steps=14 format=3 uid="uid://c4yepuo1ynkja"]
 
 [ext_resource type="Script" path="res://UI/Menu/Review/ReviewQuestion.gd" id="1_qp4pk"]
-[ext_resource type="Texture2D" uid="uid://syt1oca21qvx" path="res://Assets/Sprites/Icons/hexagon.png" id="2_qnh2o"]
+[ext_resource type="StyleBox" uid="uid://cewasynbvcgc4" path="res://UI/Theme/panel_default.tres" id="3_2yhqs"]
+[ext_resource type="FontFile" uid="uid://hxpop83lvr07" path="res://Assets/Fonts/Gothica-Book.ttf" id="4_3pr84"]
+[ext_resource type="FontFile" uid="uid://cgljgdhswqtmj" path="res://Assets/Fonts/Gothica-Bold.ttf" id="5_t2em2"]
+[ext_resource type="FontFile" uid="uid://d2paqurb1iqxc" path="res://Assets/Fonts/Teachers/Teachers-Regular.ttf" id="6_6boqu"]
+[ext_resource type="StyleBox" uid="uid://dpdsrccqpqxih" path="res://UI/Theme/CardInteriorPanel.tres" id="7_h1ie2"]
+[ext_resource type="Texture2D" uid="uid://cta2n4shiew5p" path="res://Assets/Sprites/Icons/question.png" id="8_f8x7n"]
+[ext_resource type="LabelSettings" uid="uid://b763i3yueosu6" path="res://UI/Theme/LabelSettings/DefaultLabelSettingsLarge.tres" id="9_phu2h"]
+[ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="10_bargp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_trwkk"]
+resource_local_to_scene = true
+font = ExtResource("4_3pr84")
+font_size = 32
+font_color = Color(0.266667, 0.164706, 0.0705882, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_05ksa"]
+resource_local_to_scene = true
+font = ExtResource("5_t2em2")
+font_size = 58
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7unna"]
+content_margin_left = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_wc065"]
+resource_local_to_scene = true
+font = ExtResource("6_6boqu")
+font_size = 42
 
 [node name="ReviewQuestion" type="VBoxContainer"]
 size_flags_horizontal = 3
@@ -16,20 +44,168 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Container2" type="Container" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="ThisUsedToBeHandCard2D" type="AspectRatioContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(500, 400)
 layout_mode = 2
+size_flags_stretch_ratio = 0.0
+ratio = 0.7143
+stretch_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_2yhqs")
+
+[node name="Fluff" type="Label" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer"]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
-texture = ExtResource("2_qnh2o")
-expand_mode = 4
+size_flags_vertical = 8
+text = "<FLUFF>
 
-[node name="HandCard2D" type="Control" parent="HBoxContainer"]
+
+
+
+
+
+"
+label_settings = SubResource("LabelSettings_trwkk")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer"]
+clip_contents = true
 layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="Name" type="Label" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "FIX ME"
+label_settings = SubResource("LabelSettings_05ksa")
+horizontal_alignment = 1
+clip_text = true
+
+[node name="Gap" type="Control" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_stretch_ratio = 1.7
+
+[node name="EnergyContainer" type="HBoxContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Gap2" type="Control" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_stretch_ratio = 1.7
+
+[node name="Effect" type="Label" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7unna")
+text = "Does Nothing
+AAA sddfsdfs dfsd sdf sdfsssdfsdf sdfsdfsdfsdf sdfsdfsdf"
+label_settings = SubResource("LabelSettings_wc065")
+autowrap_mode = 3
+text_overrun_behavior = 1
+
+[node name="CardTopicIconsUI" type="PanelContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("7_h1ie2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTopicIconsUI"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTopicIconsUI/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TopicIcon1" type="TextureRect" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTopicIconsUI/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("8_f8x7n")
+expand_mode = 2
+
+[node name="TopicIcon2" type="TextureRect" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTopicIconsUI/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("8_f8x7n")
+expand_mode = 2
+
+[node name="TopicText" type="Label" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTopicIconsUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "2"
+label_settings = ExtResource("9_phu2h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardTargetIconsUI" type="PanelContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = ExtResource("7_h1ie2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTargetIconsUI"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTargetIconsUI/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TargetIcon" type="TextureRect" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTargetIconsUI/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("8_f8x7n")
+expand_mode = 2
+
+[node name="TargetText" type="Label" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/CardTargetIconsUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "2 - 4"
+label_settings = ExtResource("9_phu2h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconContainer" type="VBoxContainer" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+alignment = 1
+
+[node name="MainIcon" type="TextureRect" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/IconContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("10_bargp")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Gap" type="Control" parent="HBoxContainer/ThisUsedToBeHandCard2D/PanelContainer/IconContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 1.7
 
 [node name="QuestionBody" type="VBoxContainer" parent="HBoxContainer"]
 unique_name_in_owner = true

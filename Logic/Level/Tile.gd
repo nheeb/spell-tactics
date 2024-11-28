@@ -1,5 +1,9 @@
 class_name Tile extends CombatObject
 
+# TODO these are not yet connected -- maybe this makes more sense to put into tile?
+signal drainable_hovered
+signal drainable_unhovered
+
 var entities: Array[Entity] = []
 var hovering := false
 

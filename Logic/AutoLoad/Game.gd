@@ -30,6 +30,15 @@ var DEBUG_INFO: bool:
 ## Do not change the value
 var SPELL_TEST := false
 var LEVEL_EDITOR := false
+var DEBUG_SPELL_TESTING := false # Not meant to be changed.
+# Play the scene SpellTest.tscn to start spell testing
+
+var DEBUG_OVERLAY : bool = true  # toggled in Combat UI
+signal energy_overlay_changed(c: bool)
+var ENERGY_OVERLAY: bool = false:
+	set(e):
+		ENERGY_OVERLAY = e
+		energy_overlay_changed.emit(e)
 
 var testing_deck: Array[SpellType]
 var testing_energy: EnergyStack
@@ -88,7 +97,7 @@ class DeckUtils:
 		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
 		spells.append_array(load_spell_n_times("AirMissile", 1, combat))
 		spells.append_array(load_spell_n_times("Berserker", 1, combat))
-		#spells.append_array(load_spell_n_times("TrappingRoots", 1, combat))
+		spells.append_array(load_spell_n_times("ObjectGrab", 1, combat))
 		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
 		
 		spells.append_array(load_spell_n_times("SporeFlight", 1, combat))

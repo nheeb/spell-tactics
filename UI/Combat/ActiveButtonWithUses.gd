@@ -18,12 +18,12 @@ var active: Active = null:
 		active = new_active
 	
 		if is_inside_tree() and old_active == null:
-			new_active.got_updated.connect(_on_active_uses_updated)
+			new_active.uses_got_updated.connect(_on_active_uses_updated)
 			init_active(new_active)
 
 func _ready() -> void:
 	if active != null:
-		active.got_updated.connect(_on_active_uses_updated)
+		active.uses_got_updated.connect(_on_active_uses_updated)
 		init_active(active)
 	elif get_tree().current_scene == self:
 		# load debug active
@@ -84,14 +84,16 @@ func undo_grey_out():
 	%ActiveButton.material.set_shader_parameter("grey_out_progress", 0.0)
 	
 
-func _on_active_uses_updated():
-	var uses_left: int = active.get_limitation_uses_left()
-	var max_uses: int = active.get_limitation_max_uses() # TODO read max_uses and double-check the following logic
+func _on_active_uses_updated(uses_left: int, max_uses: int):
+	#var uses_left: int = active.get_limitation_uses_left()
+	#var max_uses: int = active.get_limitation_max_uses() # TODO read max_uses and double-check the following logic
+	
+	uses_left = min(uses_left, max_uses)
 	
 	# check if we should update bubble count
 	if(max_uses != len(bubbles)):
-		if max_uses > len(bubbles):
-			restart_bubbles()
+		#if max_uses > len(bubbles):
+		restart_bubbles()
 		init_active(active)
 
 	# set bubbles enabled/disabled
@@ -105,9 +107,8 @@ func _on_active_uses_updated():
 		grey_out()
 	else:
 		undo_grey_out()
-		
 
-## TODO Idea: RayCast.register_new_blocker() -> blocker.block/unblock()
+# TODO use blockers here
 
 func _on_active_button_mouse_entered() -> void:
 	if Game.world != null:  

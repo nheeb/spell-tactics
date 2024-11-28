@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3t7dsskwul4j"]
+[gd_scene load_steps=6 format=3 uid="uid://c3t7dsskwul4j"]
 
 [ext_resource type="Script" path="res://Logic/MainScreen.gd" id="1_mxjyu"]
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_pqauw"]
 [ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="3_im24c"]
 [ext_resource type="Script" path="res://Logic/Utility/ViewportSizer.gd" id="4_dkfaa"]
-[ext_resource type="PackedScene" uid="uid://drxy2f6dh4jq0" path="res://UI/Menu/LogSettingsPanel.tscn" id="5_web1m"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qgsc2"]
 viewport_path = NodePath("Viewport3D")
@@ -81,13 +80,5 @@ visible = false
 offset_left = 176.0
 offset_right = 216.0
 offset_bottom = 23.0
-
-[node name="LogSettingsPanel" parent="." instance=ExtResource("5_web1m")]
-visible = false
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
 
 [connection signal="combat_changed" from="Viewport3D/World" to="PopUpHandler" method="_on_world_combat_changed"]

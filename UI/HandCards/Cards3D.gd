@@ -156,8 +156,8 @@ func hide_event() -> void:
 func remove_card(card_hint):
 	var to_be_removed : Card3D = null
 
-	#if card_hint is HandCard2D:
-		#card_hint = card_hint.spell
+	if card_hint is EventCard2D:  # changed HandCard2D to EventCard2D :)
+		card_hint = card_hint.spell
 
 	if card_hint is Castable:
 		var castable := card_hint as Castable
