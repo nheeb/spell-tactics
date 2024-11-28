@@ -30,8 +30,6 @@ func create(combat: Combat, props := {}) -> CombatObject:
 	props["data"] = data
 	# Create combat independent base object from type
 	var obj := create_base_object()
-	if obj is EntityStatus:
-		pass
 	assert(obj, "You need to create a base object")
 	# Set props based on type
 	obj.sync_with_type(self)

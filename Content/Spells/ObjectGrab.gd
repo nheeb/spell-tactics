@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	var ents := target_tile.entities.filter(func(e: Entity): return not e.type.is_terrain)
 	
 	# Get destination (near the origin & prefering a tile without obstacle)
@@ -22,8 +22,10 @@ func casting_effect() -> void:
 		), 0) as Active
 	drain_active.add_to_bonus_uses(1)
 
-func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
-	return not _target.entities.filter(func(e: Entity): return not e.type.is_terrain).is_empty()
+func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
+	if target is Tile:
+		return not target.entities.filter(func(e: Entity): return not e.type.is_terrain).is_empty()
+	return false
 
 func get_non_terrain_entity_with_highest_energy(tile: Tile) -> Entity:
 	var entities := tile.entities.duplicate()

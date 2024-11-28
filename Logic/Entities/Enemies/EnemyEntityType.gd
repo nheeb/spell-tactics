@@ -3,6 +3,8 @@ class_name EnemyEntityType extends HPEntityType
 @export var behaviour: EnemyBehaviour
 @export var actions: Array[EnemyActionArgs]
 
+@export var gain_drain_on_kill := true
+
 @export_group("Traits")
 @export var agility: int = 0
 @export var strength: int = 1

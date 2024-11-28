@@ -11,7 +11,7 @@ func process_phase() -> void:
 		e.sync_with_type()
 	
 	# Create Deck
-	if Game.SPELL_TEST:
+	if Game.DEBUG_SPELL_TESTING:
 		combat.log.add("Spell Testing Deck will be loaded")
 		combat.deck.clear()
 		combat.deck.append_array(Game.DeckUtils.deck_for_spell_testing(combat))

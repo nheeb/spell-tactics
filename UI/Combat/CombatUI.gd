@@ -21,6 +21,9 @@ var buttons: Array[ActiveButtonWithUses] = []
 
 func setup(_combat: Combat):
 	self.combat = _combat
+	# Turn sound off
+	if OS.is_debug_build():  # start with sound off by default in debug builds
+		_on_sound_toggle_toggled(false)
 	# Update UI
 	for spell in self.combat.hand:
 		cards3d.add_card(spell)

@@ -1,33 +1,39 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://da45ulpggv3c8"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://da45ulpggv3c8"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_2h2ot"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="1_o4gnp"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="2_pd3w5"]
 [ext_resource type="Texture2D" uid="uid://ditt5pum2lahc" path="res://Assets/Sprites/Icons/plain-arrow.png" id="2_ybq2f"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_oueyi"]
 
 [sub_resource type="Resource" id="Resource_s0ebv"]
 script = ExtResource("1_2h2ot")
 stack = Array[int]([6, 6])
 
+[sub_resource type="Resource" id="Resource_bgyn4"]
+script = ExtResource("4_oueyi")
+type = 0
+limitation = 0
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("2_pd3w5")
 costs = SubResource("Resource_s0ebv")
-keywords = Array[ExtResource("1_o4gnp")]([])
-pretty_name = "Object Grab"
 effect_text = "Move all entities from a tile to a tile next to you.
 Gain a drain."
-fluff_text = ""
-icon = ExtResource("2_ybq2f")
-color = Color(1, 1, 1, 1)
-target = 2
-target_range = -1
-target_min_range = 2
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
 topic = 0
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
+target_requirements = Array[ExtResource("4_oueyi")]([SubResource("Resource_bgyn4")])
+pretty_name = "Object Grab"
+fluff_text = ""
+icon = ExtResource("2_ybq2f")
+color = Color(1, 1, 1, 1)
+default_data = {}
