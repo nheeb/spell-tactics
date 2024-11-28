@@ -1,25 +1,21 @@
-[gd_scene load_steps=22 format=3 uid="uid://dgrhssy80ss18"]
+[gd_scene load_steps=20 format=3 uid="uid://dgrhssy80ss18"]
 
-[ext_resource type="Script" path="res://Logic/Level/Tile3D.gd" id="1_mcw8s"]
-[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/BaseMaterials/TileGroundMaterial.tres" id="2_ee63n"]
-[ext_resource type="Script" path="res://Logic/Level/TileHighlight.gd" id="3_w11xv"]
-[ext_resource type="Material" uid="uid://dbf6q34gmno45" path="res://Assets/BaseMaterials/TileHighlightMaterial.tres" id="4_wo0k0"]
-[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://VFX/Materials/HoverHighlight.tres" id="5_o8u5u"]
-[ext_resource type="Material" uid="uid://cflryfsltxrpy" path="res://VFX/Materials/HoverHighlightActive.tres" id="6_noi3a"]
-[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://VFX/Materials/MovementTarget.tres" id="7_q3dld"]
-[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://VFX/Materials/SpellTargetHighlightStatic.tres" id="8_ph2oi"]
-[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://VFX/Materials/SpellTargetHighlight.tres" id="9_tj686"]
+[ext_resource type="Script" path="res://Logic/Level/Tile3D.gd" id="1_scmar"]
+[ext_resource type="Material" uid="uid://dybc4a2mp16cg" path="res://Assets/BaseMaterials/TileGroundMaterial.tres" id="2_c24a5"]
+[ext_resource type="Script" path="res://Logic/Level/TileHighlight.gd" id="3_ho6t1"]
+[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://VFX/Materials/HoverHighlight.tres" id="5_ihgi2"]
+[ext_resource type="Material" uid="uid://cflryfsltxrpy" path="res://VFX/Materials/HoverHighlightActive.tres" id="5_pdjhx"]
+[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://VFX/Materials/MovementTarget.tres" id="6_alyjn"]
+[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://VFX/Materials/SpellTargetHighlight.tres" id="6_bryv2"]
+[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://VFX/Materials/SpellTargetHighlightStatic.tres" id="7_p4ipm"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wyt28"]
-material = ExtResource("2_ee63n")
+material = ExtResource("2_c24a5")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 1.0
 radial_segments = 6
 rings = 1
-
-[sub_resource type="BoxMesh" id="BoxMesh_ltq8m"]
-material = ExtResource("4_wo0k0")
 
 [sub_resource type="QuadMesh" id="QuadMesh_m1xtl"]
 
@@ -158,7 +154,7 @@ shader_parameter/width = -0.075
 shader_parameter/alpha = 0.465
 
 [node name="Tile3D" type="Node3D"]
-script = ExtResource("1_mcw8s")
+script = ExtResource("1_scmar")
 
 [node name="Hexagon" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -185,46 +181,7 @@ polygon = PackedVector2Array(1, 0, 0.5, 0.866, -0.5, 0.866, -1, 0, -0.5, -0.866,
 
 [node name="Highlight" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.117866, 0)
-script = ExtResource("3_w11xv")
-
-[node name="Edges" type="Node3D" parent="Highlight"]
-visible = false
-
-[node name="Edge1" type="MeshInstance3D" parent="Highlight/Edges"]
-transform = Transform3D(0.866025, 0, 0.018452, 0, 0.235877, 0, -0.5, 0, 0.0319599, 0.42628, 0, 0.738338)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../../..")
-
-[node name="Edge2" type="MeshInstance3D" parent="Highlight/Edges"]
-transform = Transform3D(0.8941, 0, 0.018452, 0, 0.235877, 0, -0.516209, 0, 0.0319599, -0.429618, 0, -0.744119)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../../..")
-
-[node name="Edge3" type="MeshInstance3D" parent="Highlight/Edges"]
-transform = Transform3D(-5.85972e-08, 0, 0.0369041, 0, 0.235877, 0, -0.983099, 0, -3.72529e-09, -0.866, 0, 0.003)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../../..")
-
-[node name="Edge4" type="MeshInstance3D" parent="Highlight/Edges"]
-transform = Transform3D(-6.11726e-08, 0, 0.0369041, 0, 0.235877, 0, -1.02631, 0, -3.72529e-09, 0.852, 0, 0)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../../..")
-
-[node name="Edge5" type="MeshInstance3D" parent="Highlight/Edges"]
-transform = Transform3D(-0.857549, 0, 0.018452, 0, 0.235877, 0, -0.495107, 0, -0.0319599, 0.433373, 2.38419e-07, -0.755619)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../../..")
-
-[node name="Edge6" type="MeshInstance3D" parent="Highlight/Edges"]
-transform = Transform3D(-0.877268, 0, 0.018452, 0, 0.235877, 0, -0.506491, 0, -0.0319599, -0.436516, 2.38419e-07, 0.751075)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_ltq8m")
-skeleton = NodePath("../../..")
+script = ExtResource("3_ho6t1")
 
 [node name="HoverHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -232,15 +189,15 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("5_o8u5u")
+surface_material_override/0 = ExtResource("5_ihgi2")
 
-[node name="HoverHexQuad2" type="MeshInstance3D" parent="Highlight"]
+[node name="HoverAction" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
 visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("6_noi3a")
+surface_material_override/0 = ExtResource("5_pdjhx")
 
 [node name="MovementTarget" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
@@ -248,7 +205,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("7_q3dld")
+surface_material_override/0 = ExtResource("6_alyjn")
 
 [node name="PlayerFocus" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
@@ -256,7 +213,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("7_q3dld")
+surface_material_override/0 = ExtResource("6_alyjn")
 
 [node name="CombatHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -264,7 +221,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_g7058")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("8_ph2oi")
+surface_material_override/0 = ExtResource("7_p4ipm")
 
 [node name="PossibleTargetQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
@@ -303,14 +260,14 @@ transform = Transform3D(1.70261, 0.983, 4.29683e-08, 0, -8.59366e-08, 1.966, 0.9
 visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
-surface_material_override/0 = ExtResource("9_tj686")
+surface_material_override/0 = ExtResource("6_bryv2")
 
 [node name="DrainProgressHexQuad" type="MeshInstance3D" parent="Highlight"]
 transform = Transform3D(1.78401, 1.03, 4.50226e-08, 0, -9.00455e-08, 2.06, 1.03, -1.78401, -7.79817e-08, 0, 0.146, 0)
 visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_m1xtl")
-surface_material_override/0 = ExtResource("9_tj686")
+surface_material_override/0 = ExtResource("6_bryv2")
 
 [node name="HoverTimer" type="Timer" parent="."]
 wait_time = 0.3
