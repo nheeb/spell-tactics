@@ -16,6 +16,10 @@ var location: Vector2i:
 var combat: Combat:
 	get:
 		return level.combat
+	set(c):
+		combat = c
+		energy_popup.combat = combat
+
 @onready var highlight: Highlight = $Highlight
 
 const TILE = preload("res://Logic/Level/Tile.tscn")
@@ -24,6 +28,8 @@ static func create(r_tile, q_tile, r_center, q_center) -> Tile:
 	# center position is needed to properly align the tile
 	var tile = TILE.instantiate()
 	tile.energy_popup = ENERGY_POPUP.instantiate()
+	tile.energy_popup.tile = tile  # :)
+	
 	var xz_translation: Vector2 = (r_tile-r_center) * Level.Q_BASIS + (q_tile-q_center) * Level.R_BASIS 
 	tile.position = Vector3(xz_translation.x, 0.0, xz_translation.y)
 
@@ -71,7 +77,9 @@ func has_entity(entity_type: EntityType):
 func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)
-
+	if level != null:  # combat's getter checks against level, so this is the proper combat null check
+		combat.animation.callable(energy_popup.update)
+	
 func remove_entity(entity: Entity):
 	var i = entities.find(entity)
 	if i == -1:

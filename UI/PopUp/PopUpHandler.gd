@@ -3,7 +3,6 @@
 class_name PopupHandler extends Control
 
 @export var viewport: Viewport
-@export var drainable_root: Control
 @export var popup_root: Control
 
 @onready var hover_popup: HoverPopup
@@ -17,6 +16,8 @@ var active_entries: Dictionary = {} # Tile -> DrainableEntry
 var active_hovers: Dictionary = {}  # Tile -> DrainableEntry
 var combat: Combat
 
+var is_already_setup := false  # set to true after setup
+
 
 func _ready() -> void:
 	Events.tile_hovered_long.connect(show_tile_popup)
@@ -28,14 +29,13 @@ func _ready() -> void:
 
 func energy_overlay_changed(overlay_active: bool):
 	if overlay_active:
-		show_drainable_overlay()
+		show_energy_popups()
 	else:
-		hide_drainable_overlay()
+		hide_energy_popups()
 
 func _exit_tree():
 	Events.tile_hovered_long.disconnect(show_tile_popup)
 	Events.tile_unhovered_long.disconnect(hide_tile_popup)
-	reset()
 
 func show_tile_popup(tile: Tile):
 	# don't show popup if the tile only has drainable entities (so nothing special to show e.g. enemies)
@@ -63,32 +63,26 @@ func hide_tile_popup(tile: Tile):
 	current_tile = null
 	hover_popup.hide_popup()
 
-## should be called on level changed!
-func reset():
-	active_entries = {}
-	set_process(false)
-	pass
-
 func start():
 	set_process(true)
 
 ## Reference to the list of control popup entries. 
-func show_drainable_overlay():
-	drainable_root.show()
+func show_energy_popups():
 	if combat == null:
-		push_error("can't show overlay without combat reference")
+		push_error("can't show energy overlay without combat reference!")
 		return
-	if not active_entries.is_empty():
-		for key in active_entries.keys():
-			active_entries[key].queue_free()
-		active_entries.clear()
-
-	# recalculate every time for now..
-	# TODO put this into beginning of combat!!!
-	# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	setup_popups()
+	#if not active_entries.is_empty():
+		#for key in active_entries.keys():
+			#active_entries[key].queue_free()
+		#active_entries.clear()
+	assert(popup_root != null)
+	if not is_already_setup:
+		setup_popups()
+	else:
+		for tile in combat.level.get_all_tiles():
+			if tile.is_drainable():
+				tile.energy_popup.active = true
 	
-	# TODO remove :)
 
 var tile_hovered: Tile
 func on_drainable_tile_hovered(tile: Tile):
@@ -100,7 +94,7 @@ func on_drainable_tile_hovered(tile: Tile):
 	if not tile in active_hovers:  # active_hovers
 		#entry = place_drainable_entry(tile)
 		push_warning("drainable tile hovered not implemented yet")
-		active_hovers[tile] = entry
+		#active_hovers[tile] = entry
 	else:
 		entry = active_hovers[tile]
 	
@@ -121,18 +115,31 @@ func on_drainable_tile_unhovered(tile: Tile):
 	if entry != null:
 		entry.hide()
 	
-func hide_drainable_overlay():
-	drainable_root.hide()
-	for drainable in drainable_root.get_children():
-		if tile_hovered in active_entries and drainable == active_entries[tile_hovered]:
-			continue
-		else:
-			drainable.visible = false
+func hide_energy_popups():
+	# we have to go backwards through the active popups since the "active" setter
+	# modifies the ACTIVE_POPUPS array33333333
+	for i in range(len(EnergyPopup.ACTIVE_POPUPS) - 1, -1, -1):
+		var popup = EnergyPopup.ACTIVE_POPUPS[i]
+		popup.active = false
+	print("%d active popups" % len(EnergyPopup.ACTIVE_POPUPS))
+
+		
 
 
 func setup_popups():
-	# TODO new functionality: go over all tiles and add the popup to the popup_root
-	pass
+	var popup: EnergyPopup
+	for tile in combat.level.get_all_tiles():
+		popup = tile.energy_popup
+		if not popup.is_inside_tree():
+			popup_root.add_child(popup)
+			popup.name = "EnergyPopup_%2d2_%2d" % [tile.r, tile.q]
+			popup.update()
+		else:
+			# anything to do here?
+			push_warning("should not happen")
+			pass
+
+	is_already_setup = true
 
 
 #func setup_active_entries() -> Dictionary:  # Tile -> DrainableEntry
@@ -190,9 +197,8 @@ func show_surrounding_drainable_entries():  # broken?!?
 
 func update_popup_position(popup: EnergyPopup):
 	var cam = viewport.get_camera_3d()
-	#if entry.visible:
-	popup.visible = not cam.is_position_behind(popup.connected_tile.global_position)
-	var _screen_pos = viewport.get_camera_3d().unproject_position(popup.connected_tile.global_position)
+	popup.visible = not cam.is_position_behind(popup.tile.global_position)
+	var _screen_pos = viewport.get_camera_3d().unproject_position(popup.tile.global_position)
 	#_screen_pos = Utility.inv_scale_screen_pos(_screen_pos).round()
 	popup.position = _screen_pos - popup.size / 2 # unfortunately necessary..
 
@@ -206,18 +212,10 @@ func _process(delta: float) -> void:
 		if prev_screen_pos.distance_to(screen_pos) > threshold:
 			hover_popup.position = screen_pos
 	
-	# once we have large levels in theory we could some kind of frustum culling...
-	for popup in EnergyPopup.active_popups:
-		#if tile == null or entry == null:
-			#push_error("unexpected key", tile, "in active entries. (expecting a Tile)")
-			#return
-		
+	# PERFORMANCE check how this performs for large levels
+	for popup in EnergyPopup.ACTIVE_POPUPS:
 		update_popup_position(popup)
 
-	# should not be needed anymore:
-	#for tile in active_hovers:
-		#update_popup_position(active_hovers[tile])
 
 func _on_world_combat_changed(_combat: Combat):
 	self.combat = _combat
-	#combat.get_phase_node(Combat.RoundPhase.Spell).process_start.connect(show_surrounding_drainable_entries)

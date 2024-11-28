@@ -1,4 +1,4 @@
-extends Node
+class_name VFXUtils extends Node
 
 const HEX_RINGS = preload("res://VFX/Effects/HexRings.tscn")
 const HEX_COLOR = preload("res://VFX/Effects/HexColor.tscn")
