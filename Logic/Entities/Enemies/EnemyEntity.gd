@@ -109,11 +109,7 @@ func on_death():
 	super()
 	combat.enemies.erase(self)
 	if get_enemy_type().gain_drain_on_kill:
-		var drain_active := Utility.array_safe_get(
-		combat.actives.filter(
-			func (a: Active): return a.type.internal_name == "Drain"
-		), 0) as Active
-		drain_active.add_to_bonus_uses(1)
+		combat.castables.get_active_from_name("Drain").add_to_bonus_uses(1)
 
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 

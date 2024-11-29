@@ -18,7 +18,9 @@ enum Limitation {
 	## Only Tiles with entity with target_tag can be selected
 	EntityWithTag = 4,
 	## Terrain will not be removed from the targets
-	IncludeTerrain = 8
+	IncludeTerrain = 8,
+	## Only Tiles that have more than terrain
+	NoEmpty = 16,
 }
 
 ## Common limitations for the selectable targets
@@ -26,7 +28,8 @@ enum Limitation {
 	"No Blocker / Obstacle:1",
 	"Enemy:2",
 	"Entity with special Tag:4",
-	"Include Terrain:8"
+	"Include Terrain:8",
+	"No empty Tile:16"
 ) var limitation: int
 
 enum RangeSize {
@@ -188,6 +191,19 @@ func filter_based_on_limitation(targets: Array) -> Array:
 				func (t):
 					if t is Entity:
 						return not t.type.is_terrain
+					return true
+			)
+	
+	# Filter empty tiles
+	if Utility.has_int_flag(limitation, Limitation.NoEmpty):
+		if type == Type.Tile:
+			targets = targets.filter(
+				func (t):
+					if t is Tile:
+						return t.entities.any(
+							func (e: Entity):
+								return not e.type.is_terrain
+						)
 					return true
 			)
 	

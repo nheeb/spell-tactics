@@ -79,13 +79,15 @@ func build_cast_lines():
 			if req in unfullfilled:
 				if req == current_requirement:
 					if current_possible_targets:
-						combat.ui.cast_lines.add("Select the %s!" % req.help_text, Color.ORANGE)
+						combat.ui.cast_lines.add("Select the %s" % req.help_text, Color.ORANGE)
 					else:
-						combat.ui.cast_lines.add("No suitable %s" % req.help_text, Color.RED)
+						combat.ui.cast_lines.add("No suitable %s" % req.help_text, Color.PALE_VIOLET_RED)
 				else:
 					combat.ui.cast_lines.add("%s not selected yet" % req.help_text, Color.LIGHT_GOLDENROD)
 			else:
-				combat.ui.cast_lines.add("%s was selected" % req.help_text, Color.WEB_GREEN)
+				pass
+				# TBD Positive texts concerning target selection?
+				combat.ui.cast_lines.add("%s selected" % req.help_text, Color.MEDIUM_SEA_GREEN)
 
 ## ANIM
 func update_tile_highlights():

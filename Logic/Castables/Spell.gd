@@ -51,7 +51,9 @@ func on_energy_load():
 	update_current_state()
 
 func build_cast_lines():
-	super()
 	if selected:
 		if not is_energy_loaded_fully():
-			combat.ui.cast_lines.add("Select missing energy!", Color.ORANGE)
+			combat.ui.cast_lines.add("Load the Energy", Color.ORANGE)
+		else:
+			combat.ui.cast_lines.add("Energy loaded", Color.MEDIUM_SEA_GREEN)
+	super()
