@@ -10,7 +10,7 @@ func is_valid(combat: Combat) -> bool:
 func execute(combat: Combat) -> void:
 	var available_orbs := combat.ui.cards3d.energy_ui.get_orbs()
 	var spell := combat.input.current_castable as Spell
-	var payment := combat.energy.player_energy.get_possible_payment(spell.get_costs())
+	var payment := combat.energy.player_energy.get_forced_payment(spell.get_costs())
 	var actions : Array[PlayerAction] = []
 	
 	actions.append(PABlockInput.new(true))

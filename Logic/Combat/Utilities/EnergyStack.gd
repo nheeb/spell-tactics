@@ -45,6 +45,30 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 		push_error("Something went wrong in the Payment calculation")
 	return EnergyStack.new(possible_payment)
 
+func get_forced_payment(cost_stack: EnergyStack) -> EnergyStack:
+	if get_possible_payment(cost_stack) == null:
+		return null
+	var bank := Utility.array_sorted(self.stack, score_lamda_payment_calculation)
+	var cost := Utility.array_sorted(cost_stack.stack, score_lamda_payment_calculation)
+	var forced_payment : Array[EnergyType] = []
+	var any_count := 0
+	for e in cost:
+		if e != EnergyType.Any:
+			if e in bank:
+				forced_payment.append(e)
+				bank.erase(e)
+			else:
+				return null
+		else:
+			any_count += 1
+	if bank.size() == any_count:
+		forced_payment.append_array(bank)
+		bank.clear()
+	elif bank.size() > any_count and Utility.array_unique(bank).size() == 1:
+		for i in range(any_count):
+			forced_payment.append(bank.pop_front())
+	return EnergyStack.new(forced_payment)
+
 func can_pay_costs(costs: EnergyStack) -> bool:
 	return get_possible_payment(costs) != null
 
