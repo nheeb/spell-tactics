@@ -95,6 +95,13 @@ func load_level(level_path: String):
 	$%LevelSize.value = world.level.get_grid_size()
 	
 func save_current_level():
+	var combat_state := world.combat.serialize()
+	# FIXME
+	# We copy the events from the old state because serialization is broken rn
+	var old_state := ResourceLoader.load(current_level_path) as CombatState
+	if old_state:
+		combat_state.event_schedules = old_state.event_schedules
+		combat_state.enemy_event_queue = old_state.enemy_event_queue
 	ResourceSaver.save(world.combat.serialize(), current_level_path)
 
 func _on_terrain_place_pressed() -> void:

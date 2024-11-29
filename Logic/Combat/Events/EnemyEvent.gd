@@ -13,20 +13,22 @@ func get_enemy_meter_costs() -> int:
 	else:
 		return enemy_event_type().enemy_meter_costs
 
+## ACTION
 func discover():
 	combat.animation.callable(combat.ui.enemy_event_icon.spawn)
 	show_info(true)
 	combat.animation.wait(1.4)
-	enemy_event_logic().on_discover()
+	await enemy_event_logic().on_discover()
 	combat.animation.wait(.7)
 	show_info(false)
 
+## ACTION
 func activate():
 	show_info(true)
 	combat.animation.wait(.5)
 	combat.animation.callable(combat.ui.enemy_event_icon.activate)
 	combat.animation.wait(.5)
-	enemy_event_logic().on_activate()
+	await enemy_event_logic().on_activate()
 	combat.animation.wait(.7)
 	show_info(false)
 	combat.animation.callable(combat.ui.enemy_event_icon.clear)

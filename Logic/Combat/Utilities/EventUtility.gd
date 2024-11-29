@@ -84,11 +84,11 @@ var current_enemy_event: CombatObjectReference
 ## ACTION
 func process_enemy_events():
 	if not current_enemy_event:
-		discover_next_enemy_event()
+		await discover_next_enemy_event()
 	add_to_enemy_meter()
 	await try_to_activate_enemy_event()
 	if not current_enemy_event:
-		discover_next_enemy_event()
+		await discover_next_enemy_event()
 
 func get_next_enemy_event_plan() -> EnemyEventPlan:
 	var plan := Utility.array_safe_get(enemy_event_queue.filter(
@@ -107,6 +107,7 @@ func get_next_enemy_event_plan() -> EnemyEventPlan:
 		return new_plan
 	return null
 
+## ACTION
 func discover_next_enemy_event():
 	if current_enemy_event:
 		assert(not current_enemy_event.get_enemy_event(combat).active, \
@@ -118,7 +119,7 @@ func discover_next_enemy_event():
 		add_event(event)
 		current_enemy_event = event.get_reference()
 		connect_enemy_meter_to_event(event)
-		event.discover()
+		await event.discover()
 
 ## ACTION
 func try_to_activate_enemy_event():
@@ -140,8 +141,9 @@ func set_enemy_meter_max(value: int) -> AnimationObject:
 	return combat.animation.call_method(combat.ui, "set_enemy_meter_max", [value])
 
 func add_to_enemy_meter(value := ENEMY_METER_GAIN_DEFAULT) -> AnimationCallable:
-	if not current_enemy_event:
-		discover_next_enemy_event()
+	# I removed discovering here because add to meter should not be an ACTION
+	#if not current_enemy_event:
+		#await discover_next_enemy_event()
 	return set_enemy_meter(enemy_meter + value)
 
 func is_enemy_meter_full() -> bool:

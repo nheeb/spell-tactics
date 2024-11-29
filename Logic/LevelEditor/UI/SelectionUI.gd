@@ -42,7 +42,7 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 			continue
 		var entity_type := load(file) as EntityType
 		if entity_type == null:
-			push_error("Could not load file %s" % file)
+			push_warning("Could not load file %s. It may not be an EntityType." % file)
 			continue
 		entity_type.on_load()
 		if entity_type == null: # loaded anbother Resource type, ignore this
@@ -56,6 +56,8 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 	
 	
 func _get_all_file_paths(path: String) -> Array[String]:
+	while path.ends_with("/"):
+		path = path.trim_suffix("/")
 	var file_paths: Array[String] = []
 	var dir = DirAccess.open(path)
 	dir.list_dir_begin()

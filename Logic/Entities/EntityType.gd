@@ -11,6 +11,8 @@ class_name EntityType extends CombatObjectType
 
 @export_group("Prototype Graphics")
 @export var prototype_scale := Vector2.ONE
+@export var prototype_modulate := Color.WHITE
+@export var only_show_in_editor := false
 
 @export_group("Energy")
 @export var is_drainable := true
@@ -76,7 +78,3 @@ func setup_visuals(ent: Entity) -> void:
 	ent.visual_entity.entity = ent
 	ent.visual_entity.visible = false
 	combat.animation.show(ent.visual_entity)
-
-func get_prototype_texture():
-	var texture_path := "res://Assets/Sprites/PrototypeBillboard/" + internal_name + ".png"
-	return load(texture_path)

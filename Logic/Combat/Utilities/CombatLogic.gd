@@ -10,6 +10,19 @@ var data: Dictionary:
 		combat_object.data = x
 		push_warning("Do not set this. Just change the elements instead.")
 
+func data_store_reference(key: String, object_or_reference: Variant):
+	data[key] = UniversalReference.from(object_or_reference)
+
+func data_resolve_reference(key: String) -> Variant:
+	var ref = data.get(key)
+	if ref == null:
+		return null
+	if ref is UniversalReference:
+		return ref.resolve(combat)
+	else:
+		push_warning("data_resolve_reference: The was no reference but %s at key %s" % [str(ref), key])
+		return ref
+
 func setup(co: CombatObject):
 	connect_with_combat_object(co)
 	connect_with_combat(co.combat)

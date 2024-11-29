@@ -7,7 +7,7 @@ var event: CombatEvent:
 		push_error("Do not set this.")
 
 func on_activate() -> void:
-	_on_activate()
+	await _on_activate()
 
 ## ACTION
 func on_advance(round_number: int) -> void:
@@ -29,6 +29,7 @@ func on_click() -> void:
 ## Methods for overriding ##
 ############################
 
+## ACTION
 func _on_activate() -> void:
 	pass
 
