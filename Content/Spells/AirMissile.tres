@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://bu7gx0wc5bbuh"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_bpjub"]
-[ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="2_xtntf"]
+[ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="2_pnupt"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_tipyf"]
 [ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_xq64e"]
 
@@ -35,6 +35,6 @@ pretty_name = "Air Missile"
 fluff_text = "Fun
 
 "
-icon = SubResource("Resource_384l4")
+icon = ExtResource("2_pnupt")
 color = Color(1, 1, 1, 1)
 default_data = {}
