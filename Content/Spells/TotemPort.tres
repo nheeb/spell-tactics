@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://e11g6t1krvn2"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_jl1nc"]
+[ext_resource type="Texture2D" uid="uid://dvhi3itdwod3h" path="res://Assets/Sprites/Icons/totem.png" id="2_2am3d"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="2_md7bi"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_x720o"]
+
+[sub_resource type="Resource" id="Resource_q3l1n"]
+script = ExtResource("1_jl1nc")
+stack = Array[int]([4, 6])
+
+[sub_resource type="Resource" id="Resource_jv5k1"]
+script = ExtResource("4_x720o")
+type = 0
+limitation = 1
+range_size = 0
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
+[resource]
+script = ExtResource("2_md7bi")
+costs = SubResource("Resource_q3l1n")
+effect_text = "Teleports the player to a tile near a Totem."
+topic = 6
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""
+target_requirements = Array[ExtResource("4_x720o")]([SubResource("Resource_jv5k1")])
+pretty_name = "Totemport"
+fluff_text = ""
+icon = ExtResource("2_2am3d")
+color = Color(0.152941, 1, 1, 1)
+default_data = {}
