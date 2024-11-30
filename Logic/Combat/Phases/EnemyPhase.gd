@@ -1,4 +1,4 @@
-class_name EnemyPhase extends AbstractPhase
+class_name EnemyPhase extends CombatPhase
 
 func process_phase() -> void:
 	combat.animation.call_method(combat.ui, "set_status", ["Enemies attacking..."])
@@ -24,6 +24,7 @@ func process_phase() -> void:
 			ActionTicket.new(do_enemy_action.bind(enemy))
 		)
 		await combat.action_stack.wait()
+	combat.animation.wait(.7)
 
 ## ACTION
 func do_enemy_action(enemy: EnemyEntity):

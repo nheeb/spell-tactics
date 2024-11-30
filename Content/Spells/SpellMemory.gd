@@ -1,5 +1,5 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	combat.cards.draw()
 	combat.cards.draw()

@@ -1,32 +1,38 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://qhnw7yi6brvf"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://qhnw7yi6brvf"]
 
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_khymq"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_ojgum"]
 [ext_resource type="Texture2D" uid="uid://bbrkmv3445iks" path="res://Assets/Sprites/Icons/root-tip.png" id="2_8d6xg"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_ieajw"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_cjuyj"]
 
 [sub_resource type="Resource" id="Resource_duit4"]
 script = ExtResource("1_ojgum")
 stack = Array[int]([3, 6])
 
+[sub_resource type="Resource" id="Resource_rps1p"]
+script = ExtResource("4_cjuyj")
+type = 0
+limitation = 2
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("1_khymq")
 costs = SubResource("Resource_duit4")
-keywords = Array[ExtResource("3_ieajw")]([])
-pretty_name = "Trapping Roots"
 effect_text = "Traps an enemy for 2 rounds"
-fluff_text = "Wurzel Wurzel"
-icon = ExtResource("2_8d6xg")
-color = Color(0.486275, 0.505882, 0.329412, 1)
-target = 1
-target_range = -1
-target_min_range = -1
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
 topic = 16
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
+target_requirements = Array[ExtResource("4_cjuyj")]([SubResource("Resource_rps1p")])
+pretty_name = "Trapping Roots"
+fluff_text = "Wurzel Wurzel"
+icon = ExtResource("2_8d6xg")
+color = Color(0.486275, 0.505882, 0.329412, 1)
+default_data = {}

@@ -1,4 +1,3 @@
-
 class_name SelectionUI extends Control
 
 @export var editor_ui: EditorUI = null
@@ -36,10 +35,16 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 		return result
 	
 	var files: Array[String] = _get_all_file_paths("res://Content/Entities/")
+	files.append_array(_get_all_file_paths("res://Content/Enemies/Types/"))
+	files.append_array(_get_all_file_paths("res://Content/Player/"))
 	for file: String in files:
 		if not file.ends_with(".tres"):
 			continue
-		var entity_type = load(file) as EntityType
+		var entity_type := load(file) as EntityType
+		if entity_type == null:
+			push_warning("Could not load file %s. It may not be an EntityType." % file)
+			continue
+		entity_type.on_load()
 		if entity_type == null: # loaded anbother Resource type, ignore this
 			continue
 		if mode == Mode.Terrain and not entity_type.is_terrain:
@@ -51,6 +56,8 @@ func _get_entities_of_type(mode: Mode) -> Array[EntityType]:
 	
 	
 func _get_all_file_paths(path: String) -> Array[String]:
+	while path.ends_with("/"):
+		path = path.trim_suffix("/")
 	var file_paths: Array[String] = []
 	var dir = DirAccess.open(path)
 	dir.list_dir_begin()

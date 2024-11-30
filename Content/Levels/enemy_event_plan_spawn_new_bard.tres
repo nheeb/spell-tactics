@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyEventPlan" load_steps=4 format=3 uid="uid://b2dqvayeg80ol"]
+
+[ext_resource type="Resource" uid="uid://cyfghwiu5p4y4" path="res://Content/Events/EnemyEvents/SpawnNewEnemy.tres" id="1_8c2kq"]
+[ext_resource type="Resource" uid="uid://shswrcu1hkq5" path="res://Content/Enemies/Types/GoblinBard.tres" id="2_87n40"]
+[ext_resource type="Script" path="res://Logic/Combat/Events/EnemyEventPlan.gd" id="3_1ueb8"]
+
+[resource]
+script = ExtResource("3_1ueb8")
+type = ExtResource("1_8c2kq")
+override_meter_costs = 2
+use_as_default = false
+data = {
+"enemy_type": ExtResource("2_87n40")
+}
+props = {}
+was_deserialized = false
+_deserialize_count = 0

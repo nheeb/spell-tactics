@@ -14,6 +14,5 @@ func _drag(_level: Level, tile: Tile, eitorUI: EditorUI):
 	pass
 
 func _set_tile(level: Level, tile: Tile, ent_active: EntityType):
-	if not tile.has_entity(ent_active):  # prevent duplicate entities
-		level.entities.create(tile.location, ent_active)
-	
+	if not tile.has_entity_type(ent_active):  # prevent duplicate entities
+		var ent := ent_active.create_entity(level.combat, tile)

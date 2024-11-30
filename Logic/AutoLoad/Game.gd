@@ -15,6 +15,9 @@ var world: World = null
 
 var settings: Settings = load("res://Prototype/default_game_settings.tres")
 
+const LEVEL_PATH_DEFAULT = "res://Content/Levels/fight.tres"
+const LEVEL_PATH_SPELLTEST = "res://Content/Levels/SpellTesting/spell_test.tres"
+
 # todo: add these to Settings.gd
 const DEBUG_SKIP_OVERWORLD = true
 const DEBUG_SKIP_POST_COMBAT = true
@@ -23,8 +26,10 @@ const DEBUG_DECK_PURGE = false
 var DEBUG_INFO: bool:
 	get:
 		return DebugInfo.ACTIVE
-var DEBUG_SPELL_TESTING := false # Not meant to be changed.
-# Play the scene SpellTest.tscn to start spell testing
+## Play the scene SpellTest.tscn to start spell testing
+## Do not change the value
+var DEBUG_SPELL_TESTING := false
+var LEVEL_EDITOR := false
 
 var DEBUG_OVERLAY : bool = true  # toggled in Combat UI
 signal energy_overlay_changed(c: bool)
@@ -42,11 +47,6 @@ var tree: SceneTree:
 
 var combats: Array[Combat] # For debuging
 
-var spell_count: int = 0
-## Prototype Function for creating ids for spells. This will later be done by the Overworld
-func add_to_spell_count() -> int:
-	spell_count += 1
-	return spell_count
 
 # --- PAUSE STUFF ---	
 @onready var pause_activity: PauseActivity = PauseActivity.new()
@@ -70,39 +70,32 @@ func unpause():
 	got_unpaused.emit()
 # --- PAUSE STUFF OVER ---
 
-func get_icon_from_name(icon_name) -> Texture:
-	if icon_name is Texture:
-		return icon_name
-	if icon_name == "" or icon_name == null:
-		return null
-	return load("res://Assets/Sprites/Icons/%s.png" % icon_name)
-	
 
 class DeckUtils:
 	static func create_spell(spell_type: SpellType, combat: Combat) -> Spell:
-		return Spell.new(spell_type, combat)
+		return spell_type.create(combat)
 	
 	static func load_spell(name: String, combat: Combat) -> Spell:
-		return Spell.new(SpellType.load_from_file("res://Content/Spells/%s.tres" % name), combat)
+		return create_spell(SpellType.load_from_file("res://Content/Spells/%s.tres" % name), combat)
 	
 	static func load_spell_n_times(name: String, n: int, combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []
 		for i in range(n):
 			spells.append(load_spell(name, combat))
 		return spells
-		
+	
 	static func create_test_deck_serialized() -> Array[SpellState]:
 		var spell_states: Array[SpellState] = []
 		for i in create_test_deck(null):
 			spell_states.append(i.serialize())
 		return spell_states
-
+	
 	static func create_test_deck(combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []
 		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
 		spells.append_array(load_spell_n_times("AirMissile", 1, combat))
 		spells.append_array(load_spell_n_times("Berserker", 1, combat))
-		#spells.append_array(load_spell_n_times("TrappingRoots", 1, combat))
+		spells.append_array(load_spell_n_times("ObjectGrab", 1, combat))
 		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
 		
 		spells.append_array(load_spell_n_times("SporeFlight", 1, combat))
@@ -122,20 +115,15 @@ class DeckUtils:
 		spells.append_array(load_spell_n_times("PoisonPunch", 1, combat))
 		spells.append_array(load_spell_n_times("Lifesteal", 1, combat))
 		
-		
-		for spell in spells:
-			spell.id = SpellID.new(Game.add_to_spell_count())
-		
 		spells.shuffle()
 		
 		return spells
-		
 	
 	static func deck_for_spell_testing(combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []
 		for spell_type in Game.testing_deck:
 			spell_type._on_load()
 			spells.append(create_spell(spell_type, combat))
-		for spell in spells:
-			spell.id = SpellID.new(Game.add_to_spell_count())
+		#for spell in spells:
+			#spell.id = SpellID.new(Game.add_to_spell_count())
 		return spells

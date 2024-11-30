@@ -6,10 +6,12 @@
 
 [resource]
 script = ExtResource("2_hnj42")
-event_type = ExtResource("1_xawlx")
-params = {
+type = ExtResource("1_xawlx")
+override_meter_costs = 3
+use_as_default = true
+data = {
 "enemy_type": ExtResource("2_ug4de")
 }
-override_meter_costs = 4
-event_created = false
-use_as_default = false
+props = {}
+was_deserialized = false
+_deserialize_count = 0

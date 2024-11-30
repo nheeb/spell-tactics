@@ -26,7 +26,7 @@ func plan_next_action():
 			if not new_action_plan.action_args.try_to_avoid:
 				action_plan = new_action_plan
 
-## SUBACTION
+## ACTION
 func do_action():
 	while true:
 		# If no plan, make one
@@ -90,7 +90,7 @@ func get_random_action_plan() -> EnemyActionPlan:
 		func (plan: EnemyActionPlan):
 			return plan.get_string_action_target(combat)
 	)
-	var title_for_log := get_name() + " chooses an action:"
+	var title_for_log := str(self) + " chooses an action:"
 	var index := Utility.random_index_of_scores(scores, true, names_for_log, title_for_log)
 	combat.log.add(Utility.random_index_of_scores_report)
 	assert(index != -1, "No enemy action was chosen. There should always be a backup action")
@@ -100,27 +100,16 @@ func get_random_action_plan() -> EnemyActionPlan:
 ## Entity Overrides ##
 ######################
 
-## TE
-func on_combat_change():
-	await combat.action_stack.process_callable(plan_next_action)
-
-func on_create():
-	super.on_create()
-	type = type as EnemyEntityType
+func on_birth():
+	await super()
+	TimedEffect.new_combat_change(plan_next_action) \
+		.set_id("_cc_plan_action").set_solo().register(combat)
 
 func on_death():
-	super.on_death()
-	combat.enemies.erase(self)
-
-func sync_with_type():
 	super()
-	agility = type.agility
-	strength = type.strength
-	accuracy = type.accuracy
-	resistance = type.resistance
-
-func get_name() -> String:
-	return "%s" % id.to_string()
+	combat.enemies.erase(self)
+	if get_enemy_type().gain_drain_on_kill:
+		combat.castables.get_active_from_name("Drain").add_to_bonus_uses(1)
 
 func get_enemy_type() -> EnemyEntityType:
 	return type as EnemyEntityType 
@@ -131,7 +120,7 @@ func get_bahviour() -> EnemyBehaviour:
 		return get_enemy_type().behaviour
 	return DEFAULT_BEHAVIOUR
 
-## SUBACTION
+## ACTION
 func on_hover_long(h: bool) -> void:
 	if action_plan:
 		await action_plan.show_preview(combat, h)

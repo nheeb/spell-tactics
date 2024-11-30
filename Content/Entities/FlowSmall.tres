@@ -10,17 +10,18 @@ stack = Array[int]([4])
 
 [resource]
 script = ExtResource("2_hcncf")
-internal_name = "flow_small"
 can_be_hovered = true
-pretty_name = "Flow Energy"
-fluff_text = ""
 visual_scene = ExtResource("3_fch0q")
-prototype_scale = Vector2(1, 1)
 tags = Array[String]([])
 is_terrain = false
+prototype_scale = Vector2(1, 1)
 is_drainable = true
 energy = SubResource("Resource_jsre5")
 obstacle_layer = 0
 obstacle_mask = 0
 is_blocker = false
 cover_value = 0
+pretty_name = "Flow Energy"
+fluff_text = ""
+color = Color(0, 0, 0, 1)
+default_data = {}

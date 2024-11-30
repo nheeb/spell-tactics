@@ -1,4 +1,4 @@
-class_name SpellPhase extends AbstractPhase
+class_name SpellPhase extends CombatPhase
 
 func process_phase() -> void:
 	combat.animation.call_method(combat.player.visual_entity, "start_idling") # was in movement phase before

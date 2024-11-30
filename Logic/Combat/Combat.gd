@@ -16,6 +16,7 @@ enum Result {
 	Draw
 }
 
+@onready var combat_begin_phase: CombatBeginPhase = %CombatBeginPhase
 @onready var start_phase: StartPhase = %StartPhase
 @onready var spell_phase: SpellPhase = %SpellPhase
 @onready var enemy_phase: EnemyPhase = %EnemyPhase
@@ -33,10 +34,11 @@ enum Result {
 @onready var attack: AttackUtility = %AttackUtility
 @onready var action_stack: ActionStackUtility = %ActionStackUtility
 @onready var castables: CastableUtility = %CastableUtility
+@onready var ids: IdUtility = %IdUtility
 
 # TODO Nitai move those to the log utility
 signal round_ended
-signal spell_casted_successfully(spell: SpellReference)
+signal spell_casted_successfully(spell: CombatObjectReference)
 signal deserialized
 
 var result: Result = Result.Unfinished
@@ -78,69 +80,24 @@ func setup() -> void:
 				push_error("Two players in a level??")
 			player = entity
 		if entity is EnemyEntity:
-			if not entity.is_dead():
+			if not entity.dead:
 				enemies.append(entity)
-	if player == null:
-		push_error("No Player entity was found. Creating a new one.")
-		@warning_ignore("integer_division")
-		var position = Vector2i(level.n_rows / 2 , level.n_cols / 2)
-		player = level.entities.create(position, load("res://Entities/Player/PlayerResource.tres"))
-		
-
+	
+	# TODO Test if player and enemies exist
+	assert(player != null and not enemies.is_empty(), "Player or enemies missing")
+	
 	# Connect input signals
 	input.connect_with_event_signals()
-
-	# Check if all entities have ids
-	# Refresh entities if its CombatBegin
-	if current_phase == RoundPhase.CombatBegin:
-		# If it's a fresh combat make every id new
-		log.add("Creating new entity ids")
-		for e in level.entities.get_all_entities():
-			e.id = EntityID.new(e.type, level.add_type_count(e.type))
-			# set energy to the EntityType's energy in case it changed from level creation
-			e.sync_with_type()
-	else:
-		for e in level.entities.get_all_entities():
-			if e.id != null:
-				level.add_type_count(e.type)
-			else:
-				push_error("Entity without ID in savegame")
-
-	actives = [
-		Active.new(ActiveType.load_from_file("res://Content/Actives/BasicMovement.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Content/Actives/Drain.tres"), self),
-		Active.new(ActiveType.load_from_file("res://Content/Actives/SimpleMelee.tres"), self),
-	]
-	for i in range(actives.size()): actives[i].id = ActiveID.new(i)
-
-	# Check if all spells have ids
-	# TODO change this when Overworld is done
-	for s in get_all_castables():
-		if s.id == null:
-			if not s.get_type() is ActiveType:  # for Actives it's fine atm
-				push_error("Warning: Spell without id (gets a new dangerous id)")
-			var id: SpellID = SpellID.new(Game.add_to_spell_count())
-			# normal assignment didn't work since Godot 4.3?? does this break things? FIXME
-			s.set("id", id)
-		else:
-			Game.add_to_spell_count()
-
+	
 	# TODO connect entity & spell references
-
 	t_effects.connect_all_effects()
 	
 	# Connect with ui
 	ui.setup(self)
 	
-	# Initial Animations
-	# TODO Nitai replace show drain and energy??
-	#energy.show_drains_in_ui()
-	#energy.show_energy_in_ui()
+	# Initial Animation
 	if player.current_tile != null:
 		animation.camera_reach(player.current_tile)
-	
-	if current_phase == RoundPhase.CombatBegin:
-		cards.draw_to_hand_size()
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
@@ -154,23 +111,25 @@ func advance_current_phase():
 		current_phase = RoundPhase.Start
 	log.register_entry(LogEntry.new("", LogEntry.Type.TurnTransition))
 
-func get_current_phase_node() -> AbstractPhase:
+func get_current_phase_node() -> CombatPhase:
 	return get_phase_node(current_phase)
 
 ## ACTION Processes the current phase.
 func process_current_phase() -> void:
 	await get_current_phase_node()._process_phase()
 
-func get_phase_node(phase: RoundPhase) -> AbstractPhase:
+func get_phase_node(phase: RoundPhase) -> CombatPhase:
 	match phase:
+		RoundPhase.CombatBegin:
+			return combat_begin_phase
 		RoundPhase.Start:
-			return %StartPhase
+			return start_phase
 		RoundPhase.Spell:
-			return %SpellPhase
+			return spell_phase
 		RoundPhase.Enemy:
-			return %EnemyPhase
+			return enemy_phase
 		RoundPhase.End:
-			return %EndPhase
+			return end_phase
 		RoundPhase.RoundRepeats:
 			push_error("Processes unreachble phase RoundRepeats")
 	return null
@@ -187,6 +146,7 @@ func advance_and_process_until_next_player_action_needed():
 func process_initial_phase() -> void:
 	match current_phase:
 		RoundPhase.CombatBegin:
+			action_stack.push_back(process_current_phase)
 			action_stack.push_back(advance_and_process_until_next_player_action_needed)
 		RoundPhase.Spell:
 			action_stack.push_back(process_current_phase)
@@ -206,6 +166,8 @@ func serialize() -> CombatState:
 	# TODO Nitai serialize events and enemy actions
 	#state.event_states.append_array(events.events.map(func(x: Spell): return x.serialize()))
 	#state.current_event = events.current_event
+	state.references = ids.references
+	state.object_names = ids.object_names
 	state.timed_effects = t_effects.effects
 	state.combat_log = self.log.log_entries
 	return state
@@ -214,19 +176,18 @@ func save_to_disk(path: String = ""):
 	var state: CombatState = serialize()
 	state.save_to_disk(path)
 
-static func load_from_disk(path: String) -> Combat:
-	var state: CombatState = CombatState.load_from_disk(path)
-	return state.deserialize()
-
 @warning_ignore("shadowed_variable")  # stupid that static funcs raise a shadow warning but ok..
 static func serialize_level_as_combat_state(level: Level) -> CombatState:
 	var state := CombatState.new()
 	state.level_state = level.serialize()
 	return state
 
-static func deserialize_level_from_combat_state(combat_state: CombatState) -> Level:
-	var combat := combat_state.deserialize()
-	return combat.level
+func get_all_combat_objects() -> Array[CombatObject]:
+	var all_objects : Array[CombatObject] = []
+	all_objects.append_array(level.get_all_tiles())
+	all_objects.append_array(level.entities.get_all_entities())
+	all_objects.append_array(get_all_castables())
+	return all_objects
 
 func get_all_castables() -> Array[Castable]:
 	var all_spells : Array[Castable] = []

@@ -12,7 +12,7 @@ func _init():
 func reset():
 	health = 10
 	coins = 0
-	deck_states = Game.DeckUtils.create_test_deck_serialized()
+#	deck_states = Game.DeckUtils.create_test_deck_serialized()
 	
 func sync_health(amount: int):
 	health = amount

@@ -8,9 +8,9 @@ var animation_queue: Array[AnimationObject]
 var currently_playing_queues: Array[AnimationQueue]
 var currently_queued_queues: Array[AnimationQueue]
 
-########################################
-## Wrapper Functions (only use those) ##
-########################################
+#########################################
+## Shortcut Functions (only use those) ##
+#########################################
 
 func call_method(ref: Object, method: String, parameters: Array = []) -> AnimationCallable:
 	var _callable = ref.get(method) as Callable
@@ -42,9 +42,9 @@ func callable(_callable: Callable) -> AnimationCallable:
 	add_animation_object(a)
 	return a
 
-func effect(_effect_scene: PackedScene, target: Object,_setup_properties := {}) -> AnimationEffect:
-	if target is Entity:
-		target = target.visual_entity
+func effect(_effect_scene: PackedScene, target: Object, _setup_properties := {}) -> AnimationEffect:
+	if target is CombatObject:
+		target = target.node3d
 	assert(target is Node3D)
 	var a = AnimationEffect.new(_effect_scene, target, _setup_properties)
 	add_animation_object(a)
@@ -72,16 +72,17 @@ func camera_set_player_input(enabled: bool) -> AnimationProperty:
 	return property(combat.camera, "player_input_enabled", enabled)
 
 func camera_follow(target) -> AnimationProperty:
-	if target is Entity:
-		target = target.visual_entity
+	if target is CombatObject:
+		target = target.node3d
 	return property(combat.camera, "follow_target", target)
 
 func camera_unfollow() -> AnimationProperty:
 	return property(combat.camera, "follow_target", null)
 
 func camera_reach(target) -> AnimationObject:
-	if target is Entity:
-		target = target.visual_entity
+	if target is CombatObject:
+		target = target.node3d
+	assert(target)
 	var animations : Array[AnimationObject] = []
 	animations.append(property(combat.camera, "follow_target", target))
 	animations.append(callable(combat.camera.follow_blocker.block))
@@ -101,11 +102,17 @@ func update_hp(ent: HPEntity) -> AnimationObject:
 	push_error("Neither HPLabel nor HealthBar3D for ent %s" % ent)
 	return null
 
-func show(node: Node3D) -> AnimationProperty:
-	return property(node, "visible", true)
+func show(target) -> AnimationProperty:
+	if target is CombatObject:
+		target = target.node3d
+	assert(target is Node)
+	return property(target, "visible", true)
 
-func hide(node: Node3D) -> AnimationProperty:
-	return property(node, "visible", false)
+func hide(target) -> AnimationProperty:
+	if target is CombatObject:
+		target = target.node3d
+	assert(target is Node)
+	return property(target, "visible", false)
 
 func combat_choice(activity: CombatChoiceActivity) -> AnimationCombatChoice:
 	var a = AnimationCombatChoice.new(activity)

@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	target = target as Tile
 	var decay_energy := combat.energy.player_energy.count(EnergyStack.EnergyType.Decay)
 	var total_damage = 3 + 3 * int(bool(decay_energy))

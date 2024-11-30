@@ -13,7 +13,7 @@ extends SpellLogic
 	#return true
 
 ## Most important function for overwriting. Here should be the effect
-func casting_effect() -> void:
+func execute() -> void:
 	combat.player.inflict_damage(10)
 	
 	if combat.player.arch_enemy != null:

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EntityState" load_steps=4 format=3 uid="uid://6xh03fswv7ip"]
+
+[ext_resource type="Script" path="res://Logic/Level/State/EntityState.gd" id="1_ifttj"]
+[ext_resource type="Script" path="res://Logic/Combat/CombatObjectState.gd" id="2_50yrb"]
+[ext_resource type="Resource" uid="uid://6o6jdwkwgw0e" path="res://Content/Entities/Bones.tres" id="3_jho0m"]
+
+[resource]
+script = ExtResource("1_ifttj")
+type = ExtResource("3_jho0m")
+status_states = Array[ExtResource("2_50yrb")]([])
+data = {}
+props = {}
+was_deserialized = false
+_deserialize_count = 0

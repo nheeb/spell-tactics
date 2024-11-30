@@ -3,11 +3,8 @@ class_name EditorUI extends Control
 @export var world: World = null
 @onready var selection_ui = $%Entities
 
-
-
-
 var all_levels_paths: Array[String] = []
-var current_level_path = "res://Content/Levels/SpellTesting/spell_test.tres"
+var current_level_path = Game.LEVEL_PATH_DEFAULT
 
 var tool_terrain_placer = TerrainPlace.new()
 var tool_raise = Raise.new()
@@ -30,6 +27,7 @@ var ent_active: EntityType = null
 
 ## LevelEditor should load with a combat state
 func _ready() -> void:
+	Game.LEVEL_EDITOR = true
 	if world == null:
 		if has_node("%World"):
 			world = get_node("%World")
@@ -44,6 +42,8 @@ func _ready() -> void:
 
 	for level_path in all_levels_paths:
 		var filename = level_path.split("/")[-1].split(".tres")[0]
+		if "event" in filename:
+			continue
 		$%LevelSelection.add_item(filename)
 		var idx = $%LevelSelection.item_count - 1
 		$%LevelSelection.set_item_metadata(idx, level_path)
@@ -90,11 +90,18 @@ func _find_tres_files_recursive(path: String, result: Array):
 func load_level(level_path: String):
 	var combat_state = ResourceLoader.load(level_path) as CombatState
 	world._reset_combat()
-	world.load_combat_from_state(combat_state, false)
+	await world.load_combat_from_state(combat_state, false)
 	current_level_path = level_path
 	$%LevelSize.value = world.level.get_grid_size()
 	
 func save_current_level():
+	var combat_state := world.combat.serialize()
+	# FIXME
+	# We copy the events from the old state because serialization is broken rn
+	var old_state := ResourceLoader.load(current_level_path) as CombatState
+	if old_state:
+		combat_state.event_schedules = old_state.event_schedules
+		combat_state.enemy_event_queue = old_state.enemy_event_queue
 	ResourceSaver.save(world.combat.serialize(), current_level_path)
 
 func _on_terrain_place_pressed() -> void:

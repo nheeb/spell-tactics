@@ -1,35 +1,39 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://cd42nwwenro"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://cd42nwwenro"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_28efp"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_hs4ut"]
+[ext_resource type="Texture2D" uid="uid://coreekhuqc5m2" path="res://Assets/Sprites/Icons/whirlwind.png" id="2_p1hui"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_4ybit"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_6beri"]
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
 script = ExtResource("1_28efp")
 stack = Array[int]([5, 6])
 
-[sub_resource type="Resource" id="Resource_68cmv"]
-metadata/__load_path__ = "res://Assets/Sprites/Icons/whirlwind.png"
+[sub_resource type="Resource" id="Resource_jicsb"]
+script = ExtResource("4_4ybit")
+type = 0
+limitation = 1
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
 
 [resource]
 script = ExtResource("4_6beri")
 costs = SubResource("Resource_gkkbv")
-keywords = Array[ExtResource("3_hs4ut")]([])
-pretty_name = "Cyclone"
 effect_text = "Create a cyclone that deals 2 damage per turn to nearby units at the end of the round. Lasts 3 rounds."
-fluff_text = "
-"
-icon = SubResource("Resource_68cmv")
-color = Color(0.682353, 0.682353, 0.682353, 1)
-target = 3
-target_range = 4
-target_min_range = -1
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
 topic = 5
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
+target_requirements = Array[ExtResource("4_4ybit")]([SubResource("Resource_jicsb")])
+pretty_name = "Cyclone"
+fluff_text = "
+"
+icon = ExtResource("2_p1hui")
+color = Color(0.682353, 0.682353, 0.682353, 1)
+default_data = {}

@@ -8,7 +8,7 @@ var actives: Array[Active]
 
 @onready var cards3d: Cards3D = %Cards3D
 @onready var timeline: TimelineUI = %Timeline
-@onready var error_lines: StatusLines = %ErrorLines
+@onready var cast_lines: StatusLines = %CastLines
 @onready var event_icons: CombatEventIcons = %CombatEventIcons
 @onready var event_info: CombatEventInfo = %CombatEventInfo
 @onready var enemy_event_info: CombatEventInfo = %EnemyEventInfo
@@ -21,6 +21,9 @@ var buttons: Array[ActiveButtonWithUses] = []
 
 func setup(_combat: Combat):
 	self.combat = _combat
+	# Turn sound off
+	if OS.is_debug_build():  # start with sound off by default in debug builds
+		_on_sound_toggle_toggled(false)
 	# Update UI
 	for spell in self.combat.hand:
 		cards3d.add_card(spell)
@@ -104,7 +107,10 @@ func on_game_unpaused():
 	show()
 
 func _on_active_button_pressed(i: int) -> void:
-	combat.action_stack.process_player_action(PASelectCastable.new(actives[i]))
+	if combat.input.current_castable == actives[i]:
+		combat.action_stack.process_player_action(PADeselectCastable.new())
+	else:
+		combat.action_stack.process_player_action(PASelectCastable.new(actives[i]))
 	
 func _on_active_unlocked(i: int) -> void:
 	var active_button = $Actives.get_node("ActiveButton%d" % i)
@@ -153,3 +159,8 @@ func _on_debug_overlay_toggled(toggled_on: bool) -> void:
 
 func _on_energy_overlay_toggled(toggled_on: bool) -> void:
 	Game.ENERGY_OVERLAY = toggled_on
+
+
+func _on_sound_toggle_toggled(toggled_on: bool) -> void:
+	AudioServer.set_bus_mute(0, not toggled_on)
+	$OverlayBar/SoundToggle.button_pressed = toggled_on

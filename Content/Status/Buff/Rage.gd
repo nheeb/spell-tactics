@@ -1,6 +1,6 @@
 extends EntityStatusLogic
 
-func _setup_logic() -> void:
+func on_birth() -> void:
 	TimedEffect.new_flavor_reaction(
 		ActionFlavor.new().set_owner(entity)
 			.add_tag(ActionFlavor.Tag.EnemyActionGeneric)

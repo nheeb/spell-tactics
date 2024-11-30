@@ -13,9 +13,7 @@ func is_valid(combat: Combat) -> bool:
 	return false
 
 func execute(combat: Combat) -> void:
-	combat.animation.callable(
-		combat.input.current_castable.update_current_state.bind(true)
-	)
+	combat.input.current_castable.update_current_state()
 	if clicked_on_card:
 		combat.animation.callable(combat.input.current_castable.get_card() \
 						.warp.bind(Events.cards3d_ray_collision_point)) \
@@ -32,7 +30,7 @@ func execute(combat: Combat) -> void:
 		combat.animation.callable(combat.input.current_castable.get_card().warp) \
 						.set_duration(.2)
 	combat.animation.wait(.3)
-	await combat.input.current_castable.get_logic()._set_preview_visuals(false)
+	await combat.input.current_castable.get_logic().set_preview_visuals(false)
 	combat.action_stack.preset_combat_change()
 	var flavor := ActionFlavor.new().set_owner(combat.player).add_tag(ActionFlavor.Tag.Cast)
 	if combat.input.current_castable is Spell:
@@ -42,7 +40,7 @@ func execute(combat: Combat) -> void:
 	combat.action_stack.preset_flavor(
 		flavor.finalize(combat)
 	)
-	await combat.action_stack.process_callable(combat.input.current_castable.try_cast)
+	await combat.action_stack.process_callable(combat.input.current_castable.cast)
 
 func on_fail(combat: Combat) -> void:
 	pass

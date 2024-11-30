@@ -10,6 +10,16 @@ var combat: Combat
 
 var disabled := false
 
+const BasicMovement = preload("res://Content/Actives/BasicMovement.tres")
+func get_highlight_type() -> Highlight.Type:
+
+	if combat.input.current_castable != null and combat.input.current_castable.get_type() == BasicMovement:
+		return Highlight.Type.HoverAction
+	elif targeting:
+		return Highlight.Type.HoverTarget
+	else:
+		return Highlight.Type.Hover
+
 var targeting: bool = false
 func hover_tile(tile: Tile):
 	if mouse_block.is_blocked():
@@ -18,13 +28,14 @@ func hover_tile(tile: Tile):
 		targeting = combat.current_phase == Combat.RoundPhase.Spell \
 					and combat.input.current_castable
 
-	tile.set_highlight(Highlight.Type.HoverTarget if targeting else Highlight.Type.Hover, true)
+	tile.set_highlight(get_highlight_type(), true)
 	PAHoverTile.on_tile_hovered.emit(tile)  # alternativ: PaHoverTile.new(), combat.trigger_action(PaHoverTile.new(args))
 	tile.get_node("HoverTimer").start()
 	
 func unhover_tile(tile: Tile):
 	tile.set_highlight(Highlight.Type.Hover, false)
 	tile.set_highlight(Highlight.Type.HoverTarget, false)
+	tile.set_highlight(Highlight.Type.HoverAction, false)
 	if tile.hovering:
 		tile.hovering = false
 		combat.action_stack.process_player_action(PAHoverTileLong.new(tile, false))
@@ -51,7 +62,8 @@ func _process(delta: float) -> void:
 		var collider = get_collider()
 		if collider is Area3D:
 			if collider.is_in_group("tile_area"):
-				var tile: Tile = collider.get_parent()
+				var tile3d: Tile3D = collider.get_parent()
+				var tile: Tile = tile3d.tile
 				if currently_hovering != null and currently_hovering != tile:
 					unhover_tile(currently_hovering)
 				if tile != currently_hovering:

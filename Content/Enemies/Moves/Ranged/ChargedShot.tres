@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionCriteriaValue.gd" id="1_dbl4u"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyAction.gd" id="2_aqlqs"]
 [ext_resource type="Texture2D" uid="uid://cta2n4shiew5p" path="res://Assets/Sprites/Icons/question.png" id="2_so4pd"]
-[ext_resource type="Resource" uid="uid://dcpjaerkeyfjv" path="res://Content/Enemies/Moves/Movement/MoveRandom.tres" id="3_8ee16"]
+[ext_resource type="Resource" uid="uid://csqalxq6tc64q" path="res://Content/Enemies/Moves/Movement/MoveStayRanged.tres" id="3_o0mvn"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="4_qrwnp"]
 
 [sub_resource type="Resource" id="Resource_b4jyd"]
@@ -13,7 +13,7 @@ value = 2.0
 
 [sub_resource type="Resource" id="Resource_xpo2k"]
 script = ExtResource("4_qrwnp")
-action = ExtResource("3_8ee16")
+action = ExtResource("3_o0mvn")
 score_factor = 1.0
 try_to_avoid = false
 avoid_score_factor = 0.01

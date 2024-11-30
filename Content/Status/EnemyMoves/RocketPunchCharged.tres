@@ -17,14 +17,16 @@ fixed_targets = []
 
 [resource]
 script = ExtResource("4_agesx")
-pretty_name = "Rocket Punch Charged"
-icon = ExtResource("3_rw7gu")
-color = Color(1, 1, 1, 1)
 text = ""
-default_data = {}
 has_lifetime = true
 lifetime_default = 1
 lifetime_extend_method = 0
 make_floating_icon = true
+merge_this_type = false
 kill_te_on_remove = true
 enemy_actions = Array[ExtResource("1_yhkjp")]([SubResource("Resource_u8xge")])
+pretty_name = "Rocket Punch Charged"
+fluff_text = ""
+icon = ExtResource("3_rw7gu")
+color = Color(1, 1, 1, 1)
+default_data = {}

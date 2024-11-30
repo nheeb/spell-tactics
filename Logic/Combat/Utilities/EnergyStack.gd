@@ -10,21 +10,22 @@ enum EnergyType {
 	Any = 6,
 }
 
+@export var stack : Array[EnergyType] = []
+
 static func type_to_str(type: EnergyType) -> String:
 	return EnergyType.keys()[type]
 
-@export var stack : Array[EnergyType] = []
+func score_lamda_payment_calculation(et: EnergyType) -> int:
+	var value := int(et)
+	return value
+
+func score_lamda_default(et: EnergyType) -> int:
+	return int(et)
 
 ## Returns an EnergyStack with possible payment arrangement if possible or null if not
 func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
-	sort()
-	cost_stack.sort()
-	var bank := stack.duplicate()
-	var cost := cost_stack.stack.duplicate()
-	## Ever since the sort reversal we need to reverse the duplicates here
-	## TODO nitai make payment algorithm order-robust
-	bank.reverse()
-	cost.reverse()
+	var bank := Utility.array_sorted(self.stack, score_lamda_payment_calculation)
+	var cost := Utility.array_sorted(cost_stack.stack, score_lamda_payment_calculation)
 	if EnergyType.Any in bank:
 		push_error("Any Type Energy should not be in a bank Stack")
 	var possible_payment : Array[EnergyType] = []
@@ -44,6 +45,30 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 		push_error("Something went wrong in the Payment calculation")
 	return EnergyStack.new(possible_payment)
 
+func get_forced_payment(cost_stack: EnergyStack) -> EnergyStack:
+	if get_possible_payment(cost_stack) == null:
+		return null
+	var bank := Utility.array_sorted(self.stack, score_lamda_payment_calculation)
+	var cost := Utility.array_sorted(cost_stack.stack, score_lamda_payment_calculation)
+	var forced_payment : Array[EnergyType] = []
+	var any_count := 0
+	for e in cost:
+		if e != EnergyType.Any:
+			if e in bank:
+				forced_payment.append(e)
+				bank.erase(e)
+			else:
+				return null
+		else:
+			any_count += 1
+	if bank.size() == any_count:
+		forced_payment.append_array(bank)
+		bank.clear()
+	elif bank.size() > any_count and Utility.array_unique(bank).size() == 1:
+		for i in range(any_count):
+			forced_payment.append(bank.pop_front())
+	return EnergyStack.new(forced_payment)
+
 func can_pay_costs(costs: EnergyStack) -> bool:
 	return get_possible_payment(costs) != null
 
@@ -55,13 +80,11 @@ func shares_type_with(other: EnergyStack) -> bool:
 	return false
 
 func sort(reversed := true) -> void:
-	stack.sort()
-	if reversed:
-		stack.reverse()
-	
-	
+	stack = Utility.array_sorted(stack, score_lamda_default, not reversed)
+
 func add(e: EnergyStack) -> EnergyStack:
 	stack.append_array(e.stack)
+	sort()
 	return self
 
 ## Applies a payment (reducing the energy by the exact energies in that payment)
@@ -71,6 +94,7 @@ func apply_payment(payment: EnergyStack) -> void:
 			stack.erase(e)
 		else:
 			push_error("Non existing energy was payed.")
+	sort()
 
 const ENERGY_TO_LETTER = {
 	EnergyType.Any: "X",

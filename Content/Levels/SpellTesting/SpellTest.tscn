@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Content/Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="2_rjkex"]
-[ext_resource type="Resource" uid="uid://bsq8y8x2onm0t" path="res://Content/Spells/SummonFireTotem.tres" id="3_2h5g2"]
-[ext_resource type="Resource" uid="uid://e11g6t1krvn2" path="res://Content/Spells/TotemPort.tres" id="4_ohb60"]
-[ext_resource type="Resource" uid="uid://bj26l2ka8x4pi" path="res://Content/Spells/Rehydrate.tres" id="5_ggtw0"]
-[ext_resource type="Resource" uid="uid://dejellym72t87" path="res://Content/Spells/WaterBlast.tres" id="6_mvnj2"]
-[ext_resource type="Resource" uid="uid://bhbal4070u1qk" path="res://Content/Spells/SummonWitchTotem.tres" id="7_qcq8n"]
+[ext_resource type="Resource" uid="uid://djuhody4na5qo" path="res://Content/Spells/OmniDamage.tres" id="3_sfqgu"]
+[ext_resource type="Resource" uid="uid://bjrjvk0evvvyt" path="res://Content/Spells/PoisonPunch.tres" id="4_fxv7j"]
+[ext_resource type="Resource" uid="uid://coxs5uvjtigok" path="res://Content/Spells/DeadlyDart.tres" id="5_f8kvd"]
+[ext_resource type="Resource" uid="uid://da45ulpggv3c8" path="res://Content/Spells/ObjectGrab.tres" id="6_cdex4"]
+[ext_resource type="Resource" uid="uid://cd42nwwenro" path="res://Content/Spells/Cyclone.tres" id="7_viktr"]
 
 [sub_resource type="Resource" id="Resource_vfkqf"]
 script = ExtResource("2_rjkex")
@@ -16,8 +16,8 @@ stack = Array[int]([1, 1, 2, 2, 3, 3, 4, 4, 5])
 transform = Transform3D(0.519788, 0, 0, 0, 0.519788, 0, 0, 0, 0.519788, 0, 0, 0)
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
-test_spell_1 = ExtResource("3_2h5g2")
-test_spell_2 = ExtResource("4_ohb60")
-test_spell_3 = ExtResource("5_ggtw0")
-test_spell_4 = ExtResource("6_mvnj2")
-test_spell_5 = ExtResource("7_qcq8n")
+test_spell_1 = ExtResource("3_sfqgu")
+test_spell_2 = ExtResource("4_fxv7j")
+test_spell_3 = ExtResource("5_f8kvd")
+test_spell_4 = ExtResource("6_cdex4")
+test_spell_5 = ExtResource("7_viktr")

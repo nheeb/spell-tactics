@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckq60oohm00q3"]
+[gd_scene load_steps=3 format=3 uid="uid://ckq60oohm00q3"]
 
 [ext_resource type="Script" path="res://UI/PopUp/DrainableEntry.gd" id="1_xhwgx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqe7b"]
+bg_color = Color(0.109, 0.109, 0.109, 0.508)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="DrainableEntry" type="PanelContainer"]
 anchors_preset = 8
@@ -16,6 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(26, 12)
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_nqe7b")
 script = ExtResource("1_xhwgx")
 
 [node name="GridContainer" type="GridContainer" parent="."]

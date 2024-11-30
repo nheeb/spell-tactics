@@ -1,13 +1,11 @@
-class_name CombatEvent extends Object
+class_name CombatEvent extends CombatObject
 
-var combat: Combat
-var id: CombatEventID
 var type: CombatEventType
 var logic: CombatEventLogic
 
 ## The event's parameters based on type.default_params. [br]
 ## { ParamName (String) -> Value (something serializable) }
-var params := {}
+#var params := {}
 
 ## Active CombatEvents will be advaced each round by the EventUtility.
 var active: bool = false
@@ -20,7 +18,7 @@ var rounds: int
 
 ## All persistant properties of the event should be saved here for serialization.
 ## (Only Primitives and Resources. Use References for anything complex.)
-var persistant_properties := {}
+#var persistant_properties := {}
 
 ## Reference to the icon in CombatUI
 var icon: CombatEventIcon
@@ -47,13 +45,13 @@ func advance() -> void:
 	if type.max_duration > 0:
 		if rounds >= type.max_duration:
 			highlight_icon(false)
-			combat.animation.wait(.6)
+			combat.animation.wait(.4)
 			finish_and_remove_icon()
 			return
 	if type.show_info_on_advancing:
 		show_info(true)
-		combat.animation.wait(.6)
-	logic.on_advance(rounds)
+		combat.animation.wait(.4)
+	await logic.on_advance(rounds)
 	if type.show_info_on_advancing:
 		show_info(false)
 	highlight_icon(false)
@@ -121,15 +119,12 @@ func serialize() -> CombatEventState:
 	var state := CombatEventState.new()
 	state.id = id
 	state.type = type
-	state.params = params
+	#state.params = params
 	state.active = active
 	state.finished = finished
 	state.rounds = rounds
-	state.persistant_properties = persistant_properties
+	#state.persistant_properties = persistant_properties
 	return state
 
-func get_reference() -> CombatEventReference:
-	return CombatEventReference.new(self)
-
 func get_effect_text() -> String:
-	return type.effect_text + persistant_properties.get("extra_text", "")
+	return type.effect_text + data.get("extra_text", "")

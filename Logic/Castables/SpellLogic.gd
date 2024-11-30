@@ -1,12 +1,10 @@
 class_name SpellLogic extends CastableLogic
 
-var spell: Spell
-
-func _init(_spell: Spell):
-	spell = _spell
-	combat = spell.combat
-	if spell.type.logic != self.get_script():
-		push_error("Weird creation of SpellLogic Object")
+var spell: Spell:
+	get:
+		return combat_object as Spell
+	set(x):
+		push_error("Do not set this.")
 
 func get_castable() -> Castable:
 	return spell
@@ -26,12 +24,8 @@ func pay_for_spell(payment: EnergyStack) -> void:
 
 func before_cast():
 	super.before_cast()
-	for keyword in spell.get_keywords():
-		keyword.logic.before_spell(spell)
 
 func after_cast():
-	for keyword in spell.get_keywords():
-		keyword.logic.after_spell(spell)
 	if spell.get_card().has_empty_energy_sockets():
 		push_error("Spell has empty energy sockets after cast!?!?!?")
 	var payment := spell.get_card().get_loaded_energy()
@@ -42,9 +36,6 @@ func after_cast():
 ## The current costs with all the modifiers if there are any
 func get_costs() -> EnergyStack:
 	var costs := _get_costs()
-	for keyword in spell.get_keywords():
-		var logic = keyword.logic as KeywordLogic
-		costs = logic.get_updated_energy_price(costs, spell)
 	return costs
 
 #####################################

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://k4w38jjb4tmp"]
+[gd_scene load_steps=4 format=3 uid="uid://k4w38jjb4tmp"]
 
 [ext_resource type="Script" path="res://UI/Combat/StatusLines.gd" id="1_6e5gp"]
+[ext_resource type="LabelSettings" uid="uid://2vhmhjpoj4e4" path="res://UI/Theme/LabelSettings/ErrorMessageLabelSettings.tres" id="2_xc5qb"]
+[ext_resource type="LabelSettings" uid="uid://cqbhl5jelsw5k" path="res://UI/Theme/LabelSettings/BoldItalicOutline.tres" id="3_gycr5"]
 
 [node name="StatusLines" type="Control"]
 layout_mode = 3
@@ -22,4 +24,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Teest Teststs"
+label_settings = ExtResource("2_xc5qb")
+horizontal_alignment = 2
+uppercase = true
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "Select a target!"
+label_settings = ExtResource("3_gycr5")
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Teest Teststs"
+label_settings = ExtResource("2_xc5qb")
+horizontal_alignment = 2
+uppercase = true

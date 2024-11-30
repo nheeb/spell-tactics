@@ -35,7 +35,7 @@ var target_entity: Entity:
 ## Methods for calling ##
 #########################
 
-## SUBACTION
+## ACTION
 func execute():
 	await _execute()
 
@@ -74,7 +74,7 @@ func get_alternative_plan() -> EnemyActionPlan:
 func get_target_pool() -> Array:
 	return _get_target_pool()
 
-## SUBACTION
+## ACTION
 func setup() -> void:
 	await _setup()
 
@@ -82,7 +82,7 @@ func setup() -> void:
 ## Methods for overriding ##
 ############################
 
-## SUBACTION
+## ACTION
 func _execute():
 	pass
 
@@ -98,7 +98,7 @@ func _evaluate(enemy_tile: Tile, eval: EnemyActionEval) -> EnemyActionEval:
 func _estimated_destination(enemy_tile: Tile) -> Tile:
 	return enemy_tile
 
-## SUBACTION ANIMATOR
+## ACTION ANIMATOR
 func _show_preview(show: bool) -> void:
 	await show_movement_arrow(show)
 	await show_action_icon_over_enemy(show)
@@ -129,7 +129,7 @@ func _get_target_pool() -> Array:
 			all_targets = combat.level.get_all_entities()
 	return all_targets
 
-## SUBACTION
+## ACTION
 func _setup() -> void:
 	pass
 
@@ -137,7 +137,7 @@ func _setup() -> void:
 ## Helper Methods ##
 ####################
 
-## SUBACTION ANIMATOR
+## ACTION ANIMATOR
 func show_movement_arrow(show: bool):
 	var from: Tile = enemy.current_tile
 	var to: Tile

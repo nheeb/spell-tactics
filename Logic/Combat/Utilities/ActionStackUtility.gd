@@ -1,6 +1,6 @@
 class_name ActionStackUtility extends CombatUtility
 
-const FRAME_ACTION_MAX_MSECS = 10
+const FRAME_ACTION_MAX_MSECS = 5
 
 var _stack : Array[ActionTicket]
 var stack_string: PackedStringArray:

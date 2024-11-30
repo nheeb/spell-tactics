@@ -60,7 +60,6 @@ var test_mode := false # This is true when the scene runs solo
 
 var combat: Combat
 
-const HAND_CARD_2D = preload("res://UI/HandCards/HandCard2D.tscn")
 func _ready() -> void:
 	RenderingServer.global_shader_parameter_set("pinned_card_global_pos", %PinnedCard.global_position)
 	# enable this once everything is set up
@@ -77,9 +76,9 @@ func _ready() -> void:
 	DebugInfo.global_settings_add("CLOSE_AT_NORM_MOUSE_POS", 0.0, 1.0)
 	
 	if get_tree().current_scene == self:
-		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
-		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
-		add_card(Spell.new(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres")))
+		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
+		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
+		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
 		%EnergyUI.spawn_energy_orbs(EnergyStack.new([EnergyStack.EnergyType.Harmony, EnergyStack.EnergyType.Matter]))
 	
 	# Set cam mode
@@ -157,7 +156,7 @@ func hide_event() -> void:
 func remove_card(card_hint):
 	var to_be_removed : Card3D = null
 
-	if card_hint is HandCard2D:
+	if card_hint is EventCard2D:  # changed HandCard2D to EventCard2D :)
 		card_hint = card_hint.spell
 
 	if card_hint is Castable:

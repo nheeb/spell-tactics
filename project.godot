@@ -27,6 +27,7 @@ ActivityManager="*res://Logic/Activities/ActivityManager.gd"
 Adventure="*res://Prototype/Adventure/Adventure.gd"
 VFX="*res://Logic/AutoLoad/VFX.tscn"
 Sx="*res://addons/signal_extensions/sx_autoload.gd"
+Audio="*res://Logic/Audio/Audio.tscn"
 Preloaded="*res://Logic/AutoLoad/Preloaded.gd"
 
 [debug]
@@ -73,6 +74,10 @@ folder_colors={
 "res://VFX/Effects/": "purple",
 "res://VFX/Materials/": "pink"
 }
+
+[filesystem]
+
+import/blender/enabled=false
 
 [input]
 

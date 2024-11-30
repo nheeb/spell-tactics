@@ -10,17 +10,18 @@ stack = Array[int]([3])
 
 [resource]
 script = ExtResource("1_cxs30")
-internal_name = "water_tile"
 can_be_hovered = true
-pretty_name = "Water"
-fluff_text = ""
 visual_scene = ExtResource("2_xo0pv")
-prototype_scale = Vector2(1, 1)
 tags = Array[String]([])
 is_terrain = true
+prototype_scale = Vector2(1, 1)
 is_drainable = true
 energy = SubResource("Resource_hfhpp")
 obstacle_layer = 1
 obstacle_mask = 1
 is_blocker = false
 cover_value = 0
+pretty_name = "Water"
+fluff_text = ""
+color = Color(0, 0, 0, 1)
+default_data = {}

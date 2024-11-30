@@ -53,7 +53,9 @@ static func reference_or_value(x: Variant) -> Variant:
 	if x is Object:
 		if x.has_method("get_reference"):
 			assert(x is not UniversalReference, "Reference with get_ref??")
-			return x.get_reference()
+			var ref = x.get_reference()
+			assert(ref is UniversalReference, "get_ref returns no reference")
+			return ref
 	return x
 
 static func dereference_array(array: Array, combat: Combat) -> Array:

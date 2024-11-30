@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="EnemyEntityType" load_steps=11 format=3 uid="uid://dxf83ay5rsin2"]
 
-[ext_resource type="Script" path="res://Content/Enemies/Types/CorpseLogic.gd" id="1_air4k"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyEntityType.gd" id="1_kdhbk"]
 [ext_resource type="Resource" uid="uid://dogyiyxl5nlgo" path="res://Content/Enemies/Moves/Melee/Punch.tres" id="1_u7plf"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="2_brx3d"]
 [ext_resource type="PackedScene" uid="uid://2hog155pphl4" path="res://VFX/Entities/Enemies/VisualGoblin.tscn" id="3_87dth"]
 [ext_resource type="Resource" uid="uid://dpva1xd10eiwv" path="res://Content/Enemies/Moves/Movement/MoveNearTarget.tres" id="3_l54jj"]
+[ext_resource type="Resource" uid="uid://6xh03fswv7ip" path="res://Content/Enemies/Types/GoblinCorpseState.tres" id="5_tfnd2"]
 [ext_resource type="Resource" uid="uid://bi6yoibph34kq" path="res://Content/Enemies/Moves/Melee/RocketPunchCharge.tres" id="5_wpy73"]
 
 [sub_resource type="Resource" id="Resource_6kdtt"]
@@ -41,6 +41,7 @@ fixed_targets = []
 [resource]
 script = ExtResource("1_kdhbk")
 actions = Array[ExtResource("2_brx3d")]([SubResource("Resource_6kdtt"), SubResource("Resource_swso0"), SubResource("Resource_f6w7x")])
+gain_drain_on_kill = true
 agility = 1
 strength = 2
 accuracy = 9
@@ -48,17 +49,18 @@ resistance = 0
 movement_range = 2
 max_hp = 5
 team = 0
-internal_name = "goblin"
 can_be_hovered = true
-pretty_name = "Goblin"
-fluff_text = ""
 visual_scene = ExtResource("3_87dth")
-entity_logic = ExtResource("1_air4k")
-prototype_scale = Vector2(1, 1)
 tags = Array[String]([])
 is_terrain = false
+prototype_scale = Vector2(1, 1)
 is_drainable = false
 obstacle_layer = 2
 obstacle_mask = 3
 is_blocker = true
 cover_value = 0
+corpse_state = ExtResource("5_tfnd2")
+pretty_name = "Goblin"
+fluff_text = ""
+color = Color(0, 0, 0, 1)
+default_data = {}

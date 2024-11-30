@@ -1,6 +1,6 @@
 extends EntityStatusLogic
 
-func _setup_logic() -> void:
+func on_birth() -> void:
 	var flavor := ActionFlavor.new() \
 		.add_tag(ActionFlavor.Tag.Movement) \
 		.set_owner(entity).finalize(combat)

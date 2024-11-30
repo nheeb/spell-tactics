@@ -8,11 +8,11 @@ var action_string := "Undefined"
 func is_valid(combat: Combat) -> bool:
 	return true
 
-## SUBACTION
+## ACTION
 func execute(combat: Combat) -> void:
 	pass
 
-## SUBACTION
+## ACTION
 func on_fail(combat: Combat) -> void:
 	pass
 
