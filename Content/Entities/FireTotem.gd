@@ -2,8 +2,7 @@ extends EntityLogic
 
 var damage := 1
 
-func on_summon():
-	
+func on_birth():
 	TimedEffect.new_end_phase_trigger_from_callable(
 		deal_damage
 	).register(combat)
