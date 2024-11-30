@@ -119,6 +119,12 @@ func get_drainable_energy() -> EnergyStack:
 		drainable_e.add(ent.energy)
 	return drainable_e
 
+func get_cover() -> int:
+	return entities.reduce(
+		func (accum: int, ent: Entity) -> int:
+			return accum + ent.type.cover_value
+			, 0)
+
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
 func is_obstacle(mask: int = Constants.INT64_MAX) -> bool:
@@ -187,6 +193,18 @@ func step_in_direction(direction: Vector2i) -> Tile:
 
 func get_surrounding_tiles(_range := 1) -> Array[Tile]:
 	return combat.level.get_all_tiles_in_distance_of_tile(self, _range)
+
+func get_tiles_in_walking_range(_range: int) -> Array[Tile]:
+	return get_surrounding_tiles(_range).filter(
+		func (t: Tile):
+			if t.is_blocked():
+				return false
+			var walking_dist := self.get_walking_distance(t)
+			return walking_dist > 0 and walking_dist <= _range
+	)
+
+func get_walking_distance(other_tile: Tile) -> int:
+	return combat.level.get_shortest_distance(self, other_tile)
 
 ################
 ## DEPRECATED ##

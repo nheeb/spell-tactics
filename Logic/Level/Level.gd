@@ -262,6 +262,7 @@ func get_tiles_from_float_vec(vec: Vector2, just_one := false) -> Array[Tile]:
 	return _tiles
 
 ## this can be used for enemy movement, since it respects obstacles.
+## source tile is not included
 func get_shortest_path(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX) -> Array[Tile]:
 	var search_object := search(tile1.location, tile2.location, mask)
 	search_object.execute()
@@ -273,6 +274,8 @@ func get_shortest_path(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX
 func get_shortest_distance(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX):
 	var path = get_shortest_path(tile1, tile2, mask)
 	assert(path != null, "path == null in get_shortest_distance")
+	if path.is_empty():
+		return -1
 	return len(path)
 
 func get_all_tiles_in_distance_of_tile(tile: Tile, dist: int) -> Array[Tile]:

@@ -157,6 +157,7 @@ func random_direction() -> Vector3:
 ## Arrays ##
 ############
 
+## Returns a copy of the array with only unique and non null values
 func array_unique(array: Array, no_null_values := true) -> Array:
 	var unique: Array = []
 	for item in array:
@@ -166,6 +167,7 @@ func array_unique(array: Array, no_null_values := true) -> Array:
 			unique.append(item)
 	return unique
 
+## Get an array element with default value instead of error if index is out of bounds
 func array_safe_get(array: Array, index: int, mirror := false, default = null) -> Variant:
 	if mirror:
 		while not index < len(array):
@@ -177,18 +179,24 @@ func array_safe_get(array: Array, index: int, mirror := false, default = null) -
 	else:
 		return default
 
-## Returns a sorted version of the array.
-## Takes a callable which should turn the elements into numbers.
-func array_sorted(array: Array, score_func: Callable, asc := true) -> Array:
-	var _array := array.duplicate()
-	_array.sort_custom(
+## Sorts the given array. In contrary to Array.sort_custom(Callable)
+## this takes a callable with just one parameter which should turn each elements
+## into number. The elements are sorted based on that.
+func array_sort(array: Array, score_func: Callable, asc := true) -> void:
+	array.sort_custom(
 		func (a, b) -> bool:
 			var score_a := score_func.call(a) as float
 			var score_b := score_func.call(b) as float
 			return score_a < score_b
 	)
 	if not asc:
-		_array.reverse()
+		array.reverse()
+
+## Returns a sorted version of the array.
+## Takes a callable which should turn the elements into numbers.
+func array_sorted(array: Array, score_func: Callable, asc := true) -> Array:
+	var _array := array.duplicate()
+	array_sort(_array, score_func, asc)
 	return _array
 
 func array_shuffled(array: Array) -> Array:
