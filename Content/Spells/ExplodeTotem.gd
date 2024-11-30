@@ -19,7 +19,7 @@ func casting_effect() -> void:
 		if "summoned" in e.get_tags():
 			var totem = e
 			totem.die()
-	#TODO make Totems disappear
+
 	
 		
 	var anims = []
@@ -42,17 +42,7 @@ func casting_effect() -> void:
 	
 	
 
-## Change the spells costs
-#func _get_costs() -> EnergyStack:
-	#return spell.type.costs
 
-## Spell can be selected
-#func _is_selectable() -> bool:
-	#return true
-
-## Spell can be casted
-#func _is_castable() -> bool:
-	#return true
 
 ## Can a target tile be selected
 func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
@@ -61,20 +51,3 @@ func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
 		if "summoned" in e.get_tags():
 			return true
 	return false
-
-## Visuals or something else on spell select / deselect
-#func _on_select_deselect(select: bool) -> void:
-	#pass
-
-## Does the spell take additional targets
-#func _are_targets_full(_targets: Array[Tile]) -> bool:
-	#return true
-
-## Are the selected targets valid
-#func _are_targets_castable(_targets: Array[Tile]) -> bool:
-
-#	return false
-
-## Set special preview visuals when a target is hovered / selected
-#func _set_preview_visuals(show: bool, _target: Tile = null, active: bool) -> void:
-	#pass
