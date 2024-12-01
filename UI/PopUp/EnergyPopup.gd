@@ -9,6 +9,8 @@ static var ACTIVE_POPUPS: Array[EnergyPopup] = []
 var tile: Tile = null
 var combat: Combat
 
+# TODO change all icon's min_size on window resized!
+
 var active: bool = false:
 	set(a):
 		if a and not active:
