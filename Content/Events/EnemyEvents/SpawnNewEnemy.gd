@@ -53,4 +53,3 @@ func get_free_tile_near_enemy() -> Tile:
 				continue
 			return tile
 	return null
-	

@@ -352,29 +352,3 @@ func get_exported_properties(object: Object) -> Array[String]:
 			if "usage" in property and property["usage"] & PROPERTY_USAGE_STORAGE:
 				exported_properties.append(property["name"])
 	return exported_properties
-
-#static func get_exported_properties(node: Node) -> Array:
-	#var exported_properties = []
-	#var script = node.get_script()
-	#
-	#if script:
-		#var properties = script.get_script_property_list()
-		#for property in properties:
-			#if "usage" in property and property["usage"] & PROPERTY_USAGE_STORAGE:
-				#var prop_info = {
-					#"name": property["name"],
-					#"type": type_string(property["type"]),
-					#"value": node.get(property["name"])
-				#}
-				#
-				## Check if it's a numeric range
-				#if property["hint"] == PROPERTY_HINT_RANGE:
-					#var range_info = property["hint_string"].split(",")
-					#if range_info.size() >= 3:
-						#prop_info["min"] = float(range_info[0])
-						#prop_info["max"] = float(range_info[1])
-						#prop_info["step"] = float(range_info[2])
-				#
-				#exported_properties.append(prop_info)
-	#
-	#return exported_properties
