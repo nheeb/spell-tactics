@@ -73,8 +73,8 @@ func has_entity_type(entity_type: EntityType):
 func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)
-	if combat != null:
-		combat.animation.callable(energy_popup.update)
+	#if combat != null:
+	combat.animation.callable(energy_popup.update)
 	
 	if entity.visual_entity:
 		if entity.visual_entity.get_parent() == null:
@@ -89,6 +89,8 @@ func remove_entity(entity: Entity):
 		return
 	entities.remove_at(i)
 	entity.current_tile = null
+	if combat != null:
+		combat.animation.callable(energy_popup.update)
 	
 ## Returns all enemy entities on this tile.
 func get_enemies() -> Array[EnemyEntity]:

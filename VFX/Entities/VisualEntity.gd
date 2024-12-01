@@ -111,6 +111,5 @@ func spawn_energy_orbs(stack: EnergyStack, omb: OrbitalMovementBody):
 func look_at_tile(tile: Tile, ticket: WaitTicket):
 	# TODO implement this
 	var tween := VisualTime.create_tween()
-	tween.tween_property(self, "foo", 1, 1.0)
 	await tween.finished
 	ticket.resolve()

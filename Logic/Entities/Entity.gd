@@ -52,6 +52,7 @@ func drain() -> AnimationObject:
 	assert(is_drainable(), "Tried draining entity which is not drainable.")
 	drained_energy = energy
 	energy = EnergyStack.new([])
+	combat.animation.callable(current_tile.energy_popup.update)
 	return combat.animation.call_method(visual_entity, "visual_drain").set_max_duration(.5)
 
 var drained_energy: EnergyStack

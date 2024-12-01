@@ -117,14 +117,10 @@ func on_drainable_tile_unhovered(tile: Tile):
 	
 func hide_energy_popups():
 	# we have to go backwards through the active popups since the "active" setter
-	# modifies the ACTIVE_POPUPS array33333333
+	# modifies the ACTIVE_POPUPS array
 	for i in range(len(EnergyPopup.ACTIVE_POPUPS) - 1, -1, -1):
 		var popup = EnergyPopup.ACTIVE_POPUPS[i]
 		popup.active = false
-	print("%d active popups" % len(EnergyPopup.ACTIVE_POPUPS))
-
-		
-
 
 func setup_popups():
 	var popup: EnergyPopup
