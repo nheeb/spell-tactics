@@ -1,6 +1,6 @@
 extends ActiveLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	await combat.action_stack.set_active_flavor(
 		ActionFlavor.new().set_owner(combat.player)
 			.add_tag(ActionFlavor.Tag.Drain)
@@ -8,7 +8,7 @@ func casting_effect() -> void:
 			.add_target_array(target_entities)
 			.finalize(combat)
 	)
-	for entity in target.entities:
+	for entity in target_entities:
 		entity = entity as Entity
 		var energy_stack : EnergyStack = null
 		if entity.is_drainable():
@@ -18,5 +18,5 @@ func casting_effect() -> void:
 		elif entity.type.is_terrain:  # terrain only gets drained visually
 			combat.animation.callable(entity.visual_entity.visual_drain)
 
-func _is_target_suitable(_target: Tile, target_index: int = 0) -> bool:
-	return _target.is_drainable()
+func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
+	return target.is_drainable()

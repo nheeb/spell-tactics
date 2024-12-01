@@ -6,30 +6,8 @@ func _init(level: Level):
 	_level = level
 	
 func create(location: Vector2i, entity_type: EntityType, create_with_active_visuals := true) -> Entity:
-	var tile = _level.get_tile(location)
-	if tile.has_entity(entity_type):
-		pass
-		# TODO delete old entity (still return the new one)
-
-	var entity := entity_type.create_entity(_level.combat, false) as Entity
-	
-	# Create id for entity
-	entity.id = EntityID.new(entity.type, _level.add_type_count(entity.type))
-	
-	entity_type.entity_on_create(entity, true)
-	
-	entity.visual_entity.visible = create_with_active_visuals
-	_level.visual_entities.add_child(entity.visual_entity)
-	entity.visual_entity.owner = _level
-	
-	tile.add_entity(entity)
-	if entity.visual_entity != null:
-		entity.visual_entity.position = tile.position
-
-	if entity.logic:
-		entity.logic.on_summon()
-
-	return entity
+	assert(false, "Deprecated")
+	return entity_type.create_entity(_level.combat, _level.get_tile(location))
 
 func fill_entity(entity_type: EntityType):
 	for tile in _level.get_all_tiles():

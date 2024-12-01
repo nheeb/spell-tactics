@@ -7,7 +7,7 @@ func is_valid(combat: Combat) -> bool:
 	return combat.input.current_castable != null
 
 func execute(combat: Combat) -> void:
-	await combat.input.current_castable.get_logic()._set_preview_visuals(false)
+	await combat.input.current_castable.get_logic().set_preview_visuals(false)
 	#var unload := PAAutoUnloadEnergy.new()
 	#Sx.merge([
 		#Sx.from(unload.executed),

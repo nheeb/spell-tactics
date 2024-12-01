@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1eod0pbyip4b"]
+[gd_scene load_steps=9 format=3 uid="uid://b1eod0pbyip4b"]
 
 [ext_resource type="Script" path="res://Content/Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="2_rjkex"]
-[ext_resource type="Resource" uid="uid://da45ulpggv3c8" path="res://Content/Spells/ObjectGrab.tres" id="4_d4ysr"]
-[ext_resource type="Resource" uid="uid://bmmnjqd2apbv0" path="res://Content/Spells/RockBlast.tres" id="4_jspnx"]
-[ext_resource type="Resource" uid="uid://dqy48gh8w80m0" path="res://Content/Spells/LightningStrike.tres" id="6_yjt3k"]
-[ext_resource type="Resource" uid="uid://cd42nwwenro" path="res://Content/Spells/Cyclone.tres" id="7_viktr"]
+[ext_resource type="Resource" uid="uid://f7tf26i2rvfl" path="res://Content/Spells/TotemicInspiration.tres" id="3_aaaa6"]
+[ext_resource type="Resource" uid="uid://e11g6t1krvn2" path="res://Content/Spells/TotemPort.tres" id="4_abga2"]
+[ext_resource type="Resource" uid="uid://bsq8y8x2onm0t" path="res://Content/Spells/SummonFireTotem.tres" id="5_ankct"]
+[ext_resource type="Resource" uid="uid://crulutmxosaai" path="res://Content/Spells/SummonEarthTotem.tres" id="6_ckump"]
+[ext_resource type="Resource" uid="uid://p5fvyfsfxnvk" path="res://Content/Spells/ExplodeTotem.tres" id="7_8tl2f"]
 
 [sub_resource type="Resource" id="Resource_vfkqf"]
 script = ExtResource("2_rjkex")
@@ -15,7 +16,8 @@ stack = Array[int]([1, 1, 2, 2, 3, 3, 4, 4, 5])
 transform = Transform3D(0.519788, 0, 0, 0, 0.519788, 0, 0, 0, 0.519788, 0, 0, 0)
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
-test_spell_1 = ExtResource("7_viktr")
-test_spell_2 = ExtResource("4_jspnx")
-test_spell_3 = ExtResource("4_d4ysr")
-test_spell_4 = ExtResource("6_yjt3k")
+test_spell_1 = ExtResource("3_aaaa6")
+test_spell_2 = ExtResource("4_abga2")
+test_spell_3 = ExtResource("5_ankct")
+test_spell_4 = ExtResource("6_ckump")
+test_spell_5 = ExtResource("7_8tl2f")

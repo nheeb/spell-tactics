@@ -1,32 +1,38 @@
-[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://bcpsexkc1asv1"]
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://bcpsexkc1asv1"]
 
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_5j3uk"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_nytuo"]
 [ext_resource type="Texture2D" uid="uid://bxpflo075bdmc" path="res://Assets/Sprites/Icons/fortified-bush.png" id="2_hjx7q"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="3_wq8w3"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_jx0mp"]
 
 [sub_resource type="Resource" id="Resource_0bd4s"]
 script = ExtResource("1_nytuo")
 stack = Array[int]([3, 2])
 
+[sub_resource type="Resource" id="Resource_7nsv7"]
+script = ExtResource("4_jx0mp")
+type = 0
+limitation = 1
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
 [resource]
 script = ExtResource("1_5j3uk")
 costs = SubResource("Resource_0bd4s")
-keywords = Array[ExtResource("3_wq8w3")]([])
-pretty_name = "Fortified Bush"
 effect_text = "Creates a bush with high defense."
-fluff_text = ""
-icon = ExtResource("2_hjx7q")
-color = Color(0.33734, 0.820313, 0.217896, 1)
-target = 3
-target_range = 3
-target_min_range = -1
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
 topic = 9
 topic_secondary = 2
 topic_icons = Array[int]([])
 topic_caption = ""
+target_requirements = Array[ExtResource("4_jx0mp")]([SubResource("Resource_7nsv7")])
+pretty_name = "Fortified Bush"
+fluff_text = ""
+icon = ExtResource("2_hjx7q")
+color = Color(0.33734, 0.820313, 0.217896, 1)
+default_data = {}

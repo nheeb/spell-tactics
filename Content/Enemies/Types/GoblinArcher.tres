@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="EnemyEntityType" load_steps=9 format=3 uid="uid://kq07x16lyno7"]
 
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyEntityType.gd" id="1_uc3fh"]
-[ext_resource type="Script" path="res://Content/Enemies/Types/CorpseLogic.gd" id="1_v3v1y"]
 [ext_resource type="Resource" uid="uid://naanj6ysv6v5" path="res://Content/Enemies/Moves/Ranged/ArrowShot.tres" id="1_xa1ni"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="2_ebnix"]
 [ext_resource type="Resource" uid="uid://dpi03y33eyfyl" path="res://Content/Enemies/Moves/Ranged/ChargedShot.tres" id="3_iyp0c"]
+[ext_resource type="Resource" uid="uid://6xh03fswv7ip" path="res://Content/Enemies/Types/GoblinCorpseState.tres" id="4_05jnh"]
 [ext_resource type="PackedScene" uid="uid://8jt836ivwsy6" path="res://VFX/Entities/Enemies/VisualGoblinArcher.tscn" id="6_tkxns"]
 
 [sub_resource type="Resource" id="Resource_p4f2w"]
@@ -30,6 +30,7 @@ fixed_targets = []
 [resource]
 script = ExtResource("1_uc3fh")
 actions = Array[ExtResource("2_ebnix")]([SubResource("Resource_p4f2w"), SubResource("Resource_u3r4g")])
+gain_drain_on_kill = true
 agility = 0
 strength = 1
 accuracy = 9
@@ -37,17 +38,18 @@ resistance = 0
 movement_range = 2
 max_hp = 4
 team = 0
-internal_name = "goblin_archer"
 can_be_hovered = true
-pretty_name = "Goblin Archer"
-fluff_text = ""
 visual_scene = ExtResource("6_tkxns")
-entity_logic = ExtResource("1_v3v1y")
-prototype_scale = Vector2(1, 1)
 tags = Array[String]([])
 is_terrain = false
+prototype_scale = Vector2(1, 1)
 is_drainable = false
 obstacle_layer = 2
 obstacle_mask = 3
 is_blocker = true
 cover_value = 0
+corpse_state = ExtResource("4_05jnh")
+pretty_name = "Goblin Archer"
+fluff_text = ""
+color = Color(0, 0, 0, 1)
+default_data = {}

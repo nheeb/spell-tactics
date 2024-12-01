@@ -1,12 +1,12 @@
 extends EntityLogic
 
-func on_create(): # Executed when the entity is created (deserialized or summoned)
+func on_load(): # Executed when the entity is created (deserialized or summoned)
 	pass # visuals here
 
-func on_summon(): # Executed when the entity is created (deserialized or summoned)
-	pass # logic here
+func on_birth(): # Executed when the entity is created (deserialized or summoned)
+	pass
 
-func on_graveyard(): # Executed when the entity enters the graveyard
+func on_death(): # Executed when the entity enters the graveyard
 	pass
 
 # Only for HP Entity

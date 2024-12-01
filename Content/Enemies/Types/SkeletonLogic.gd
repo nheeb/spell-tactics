@@ -1,8 +1,8 @@
 extends EntityLogic
 
-const SKULL = preload("res://Entities/Environment/Skull.tres")
+const SKULL = preload("res://Content/Entities/Skull.tres")
 
-func on_summon():
+func on_birth():
 	combat.t_effects.add_effect(
 		TimedEffect.new_end_phase_trigger_from_callable(decay).set_owner(entity)
 	)

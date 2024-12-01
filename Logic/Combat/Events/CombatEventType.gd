@@ -1,18 +1,7 @@
-class_name CombatEventType extends Resource
-
-@export_category("Event Attributes")
-
-## Unique entity identifier (name of the resource file)
-var internal_name: String = ""
-
-## Name that will be shown ingame
-@export var pretty_name: String
+class_name CombatEventType extends CombatObjectType
 
 ## Effect text shown on the card
 @export_multiline var effect_text: String
-
-## Fluff text shown on the card
-@export_multiline var fluff_text: String
 
 enum OrderPrio {First = 5, Middle = 10, Last = 15}
 @export var order: OrderPrio = OrderPrio.Middle
@@ -29,10 +18,6 @@ enum OrderPrio {First = 5, Middle = 10, Last = 15}
 ## If the value is > 0, the event will finish automatically after X rounds.
 @export var max_duration := 0
 
-## The event effect's parameters (e.g. spawn location of an enemy) as property
-## names should go here along with their default values.
-@export var default_params := {}
-
 ## Logic script
 var logic: Script
 
@@ -40,25 +25,13 @@ const DEFAULT_ICON = preload("res://Assets/Sprites/Icons/circle.png")
 func get_icon(index := 0) -> Texture:
 	return Utility.array_safe_get(icons, index, false, DEFAULT_ICON)
 
-func _on_load() -> void:
-	if internal_name == "":
-		internal_name = resource_path.split("/")[-1].split(".")[0]
-		var directory = "/".join(resource_path.split("/").slice(0, -1))
-		logic = load(directory + "/" + internal_name + ".gd")
-
-func create_event(combat: Combat, params := {}) -> CombatEvent:
-	_on_load()
+func create_base_object() -> CombatEvent:
 	var event : CombatEvent
 	if self is EnemyEventType:
 		event = EnemyEvent.new()
 	else:
 		event = CombatEvent.new()
-	event.type = self
-	event.combat = combat
-	event.logic = logic.new()
-	event.logic.setup(combat, event)
-	# TODO Nitai Make a better ID System
-	event.id = CombatEventID.new(Game.add_to_spell_count())
-	event.params = default_params.duplicate(true)
-	event.params.merge(params, true)
 	return event
+
+func create_event(combat: Combat, props := {}) -> CombatEvent:
+	return create(combat, props) as CombatEvent

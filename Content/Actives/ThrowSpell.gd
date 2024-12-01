@@ -1,7 +1,7 @@
 extends ActiveLogic
 
 ## Here should be the effect
-func casting_effect() -> void:
+func execute() -> void:
 	assert(target is Tile)
 	target = target as Tile
 	

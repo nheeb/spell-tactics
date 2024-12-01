@@ -1,4 +1,3 @@
-
 extends Control
 
 @export var display_name: String = ""
@@ -9,8 +8,8 @@ extends Control
 func _ready():
 	$Button.text = display_name
 	if res:
-		var texture_path := "res://Assets/Sprites/PrototypeBillboard/" + res.internal_name + ".png"
-		if ResourceLoader.exists(texture_path):
+		var texture_path := PrototypeBillboard.get_billboard_filepath(res.internal_name)
+		if texture_path:
 			var texture = load(texture_path)
 			if texture:
 				$Button/TextureRect.texture = texture

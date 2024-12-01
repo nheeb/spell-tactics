@@ -43,7 +43,7 @@ func load_energy(_type: EnergyStack.EnergyType):
 	loaded_color = VFX.type_to_color(_type)
 	card.get_spell().on_energy_load()
 
-## ANIMATION
+## ANIM
 func load_animation(_type: EnergyStack.EnergyType):
 	loaded_color = VFX.type_to_color(_type)
 	%Light.light_color = loaded_color
@@ -64,7 +64,7 @@ func unload_energy() -> EnergyStack.EnergyType:
 	card.get_spell().on_energy_load()
 	return e
 
-## ANIMATION 
+## ANIM 
 func unload_animation():
 	%Light.hide()
 	mi.material_override.albedo_color = energy_color.lerp(Color.DARK_GRAY, .1)

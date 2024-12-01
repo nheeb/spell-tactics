@@ -8,12 +8,11 @@ func _init(_tile: Tile) -> void:
 
 func is_valid(combat: Combat) -> bool:
 	if combat.input.current_castable:
-		if tile in combat.input.current_castable.targets:
-			return true
+		return tile in combat.input.current_castable.details.get_target_array()
 	return false
 
 func execute(combat: Combat) -> void:
-	combat.input.current_castable.remove_target(tile)
+	combat.input.current_castable.remove_target_from_details(tile)
 
 func on_fail(combat: Combat) -> void:
 	if combat.input.current_castable:

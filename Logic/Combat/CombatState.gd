@@ -25,43 +25,52 @@ class_name CombatState extends Resource
 @export var event_schedules: Array[CombatEventSchedule]
 ## Planned Enemy events
 @export var enemy_event_queue: Array[EnemyEventPlan]
-@export var current_enemy_event: CombatEventReference
+@export var current_enemy_event: CombatObjectReference
 ## Progress of the enemy meter
 @export var enemy_meter: int
-# Enemy Actions
+## Enemy Actions
 @export var global_enemy_actions: Array[EnemyActionArgs]
-
+## References
+@export var references: Dictionary
+@export var object_names: Dictionary
 @export var meta: SaveFileMeta = null
 
 const COMBAT = preload("res://Logic/Combat/Combat.tscn")
 
-func deserialize() -> Combat:
+func deserialize(world: World) -> Combat:
+	# Combat and children nodes
 	var combat : Combat = COMBAT.instantiate() as Combat
+	world.add_child(combat)
 	combat._ready()
 	for c in combat.get_children():
 		for cc in c.get_children():
 			cc.set("combat", combat)
+	combat.action_stack.push_front(_deserialize_into.bind(combat))
+	await combat.action_stack.clear
+	return combat
+
+func _deserialize_into(combat: Combat):
 	combat.log.add("Deserializing Combat...")
+	# Old ids and refs
+	combat.ids.references = references
+	combat.ids.object_names = object_names
+	# Rounds & Energy
 	combat.current_round = current_round
 	combat.current_phase = current_phase
+	if player_energy == null:
+		player_energy = EnergyStack.new()
 	combat.energy.player_energy = player_energy
+	# Level
 	if level_state == null:
 		push_error("Error deserializing: LevelState null in CombatState.gd")
-	combat.level = level_state.deserialize(combat) #its important that level is deserialized after current round phase is set
+	#its important that level is deserialized after current round phase is set
+	combat.level = level_state.deserialize(combat)
+	combat.level._ready()
+	# Cards
 	combat.deck.append_array(deck_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.hand.append_array(hand_states.map(func(x: SpellState): return x.deserialize(combat)))
 	combat.discard_pile.append_array(discard_pile_states.map(func(x: SpellState): return x.deserialize(combat)))
-	if Game.DEBUG_SPELL_TESTING:
-		combat.log.add("Spell Testing Deck will be loaded")
-		combat.deck.clear()
-		combat.deck.append_array(Game.DeckUtils.deck_for_spell_testing(combat))
-	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 1:
-		combat.log.add("CombatState has no deck -> PrototypeDeck will be loaded")
-		combat.deck.append_array(Game.DeckUtils.create_test_deck(combat))
-	#combat.events.events.append_array(event_states.map(func(x: SpellState): return x.deserialize(combat)))
-	#combat.events.current_event = current_event
-	#if combat.events.events.is_empty():
-		#combat.events.events.append_array(Game.get_prototype_events(combat))
+	# Events
 	combat.events.all_events.append_array(all_events.map(
 		func (e): return e.deserialize(combat)
 	))
@@ -72,6 +81,9 @@ func deserialize() -> Combat:
 	combat.global_enemy_actions = global_enemy_actions
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
+	
+	combat.ids.check_integrity()
+	
 	combat.deserialized.emit()
 	combat.log.add("Combat was deserialized.")
 	return combat

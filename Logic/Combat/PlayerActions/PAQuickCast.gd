@@ -9,18 +9,17 @@ func _init(_castable: Castable, _targets: Array[Tile] = []) -> void:
 	action_string = "Quick Cast <%s> on [%s]" % [castable, targets]
 
 func is_valid(combat: Combat) -> bool:
-	if castable is Spell:
-		# TODO Nitai implement for spells? Is this necesarry?
-		push_error("Quick cast for spells is not implemented.")
+	if not castable is Active:
+		push_error("Quick cast for spells / other is not implemented.")
 		return false
-	castable.update_possible_targets()
-	castable.reset_targets()
-	castable.targets = targets
-	return castable.is_selectable() and castable.is_castable()
+	castable.create_details(combat.player)
+	castable.add_target_to_details(targets)
+	var valid := castable.is_selectable() and castable.is_castable()
+	castable.reset_details()
+	return valid
 
 func execute(combat: Combat) -> void:
-	await combat.action_stack.process_callable(castable.try_cast)
-	castable.reset_targets()
-
-func on_fail(combat: Combat) -> void:
-	pass
+	castable.create_details(combat.player)
+	castable.add_target_to_details(targets)
+	await combat.action_stack.process_callable(castable.cast)
+	castable.reset_details()

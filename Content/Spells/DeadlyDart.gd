@@ -1,6 +1,6 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	for enemy in target_enemies:
 		combat.animation.effect(VFX.BILLBOARD_PROJECTILE, combat.player.visual_entity, \
 			{"texture_name": spell.type.internal_name, "target": enemy.visual_entity})

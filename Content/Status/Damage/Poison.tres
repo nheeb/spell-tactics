@@ -6,16 +6,18 @@
 
 [resource]
 script = ExtResource("2_xgsvr")
-pretty_name = "Poisoned"
-icon = ExtResource("2_hani7")
-color = Color(0.460938, 0, 0.453735, 1)
 text = "This entity gets damage every round."
-default_data = {
-"damage": 1
-}
 has_lifetime = true
 lifetime_default = 3
 lifetime_extend_method = 0
 make_floating_icon = true
+merge_this_type = false
 kill_te_on_remove = true
 enemy_actions = Array[ExtResource("1_hipwu")]([])
+pretty_name = "Poisoned"
+fluff_text = ""
+icon = ExtResource("2_hani7")
+color = Color(0.460938, 0, 0.453735, 1)
+default_data = {
+"damage": 1
+}

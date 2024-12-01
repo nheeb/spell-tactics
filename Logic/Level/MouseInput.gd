@@ -62,7 +62,8 @@ func _process(delta: float) -> void:
 		var collider = get_collider()
 		if collider is Area3D:
 			if collider.is_in_group("tile_area"):
-				var tile: Tile = collider.get_parent()
+				var tile3d: Tile3D = collider.get_parent()
+				var tile: Tile = tile3d.tile
 				if currently_hovering != null and currently_hovering != tile:
 					unhover_tile(currently_hovering)
 				if tile != currently_hovering:

@@ -37,7 +37,7 @@ func get_effects(effect_owner: Object, id := "") -> Array[TimedEffect]:
 		if te == null:
 			push_warning("How did a null value get into the t_effects?")
 			continue
-		if te.get_owner() == effect_owner and (id == "" or id == te.get_id()):
+		if (te.get_owner() == effect_owner) and (id == "" or id == te.get_id()):
 			_effects.append(te)
 	return _effects
 

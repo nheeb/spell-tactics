@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EntityType" load_steps=2 format=3 uid="uid://disir5hh0xx06"]
+
+[ext_resource type="Script" path="res://Logic/Entities/EntityType.gd" id="1_eaws2"]
+
+[resource]
+script = ExtResource("1_eaws2")
+can_be_hovered = false
+tags = Array[String]([])
+is_terrain = false
+prototype_scale = Vector2(0.6, 0.6)
+prototype_modulate = Color(1, 0, 0, 1)
+only_show_in_editor = true
+is_drainable = false
+obstacle_layer = 0
+obstacle_mask = 0
+is_blocker = false
+cover_value = 0
+pretty_name = "Enemy Spawner"
+fluff_text = ""
+color = Color(0, 0, 0, 1)
+default_data = {}

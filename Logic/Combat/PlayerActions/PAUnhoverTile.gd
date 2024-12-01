@@ -11,7 +11,7 @@ func is_valid(combat: Combat) -> bool:
 
 func execute(combat: Combat) -> void:
 	if combat.input.current_castable != null:
-		await combat.input.current_castable.get_logic()._set_preview_visuals(false, tile)
+		await combat.input.current_castable.get_logic().set_preview_visuals(false, tile)
 	if PAHoverTile.currently_hovering_drainable != null and PAHoverTile.currently_hovering_drainable == tile:
 		PAHoverTile.open_cards_shelf_blocker.unblock()
 		PAHoverTile.currently_hovering_drainable.set_highlight(Highlight.Type.HoverAction, false)

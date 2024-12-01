@@ -1,4 +1,4 @@
 extends SpellLogic
 
-func casting_effect() -> void:
+func execute() -> void:
 	combat.player.apply_status(Preloaded.STATUS_POISON_MELEE)

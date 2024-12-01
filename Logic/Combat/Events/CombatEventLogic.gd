@@ -1,19 +1,17 @@
 class_name CombatEventLogic extends CombatLogic
 
-var event: CombatEvent
-
-func setup(_combat: Combat, _event: CombatEvent):
-	combat = _combat
-	event = _event
-
-func get_reference() -> PropertyReference:
-	return PropertyReference.new(event.get_reference(), "logic")
+var event: CombatEvent:
+	get:
+		return combat_object as CombatEvent
+	set(x):
+		push_error("Do not set this.")
 
 func on_activate() -> void:
-	_on_activate()
+	await _on_activate()
 
+## ACTION
 func on_advance(round_number: int) -> void:
-	_on_advance(round_number)
+	await _on_advance(round_number)
 
 func on_finish() -> void:
 	_on_finish()
@@ -31,9 +29,11 @@ func on_click() -> void:
 ## Methods for overriding ##
 ############################
 
+## ACTION
 func _on_activate() -> void:
 	pass
 
+## ACTION
 func _on_advance(round_number: int) -> void:
 	pass
 

@@ -1,12 +1,10 @@
 class_name ActiveLogic extends CastableLogic
 
-var active: Active
-
-func _init(_active: Active):
-	active = _active
-	combat = active.combat
-	if active.type.logic != self.get_script():
-		push_error("Weird creation of SpellLogic Object")
+var active: Active:
+	get:
+		return combat_object as Active
+	set(x):
+		push_error("Do not set this.")
 
 func get_castable() -> Castable:
 	return active
@@ -16,7 +14,7 @@ func after_cast():
 	if active.is_limited_per_round():
 		active.add_to_uses_left(-1)
 		
-func _on_select_deselect(select: bool) -> void:
+func on_select_deselect(select: bool) -> void:
 	var text_button: TextureButton = active.button.button  # TODO active/not button visuals
 	text_button.button_pressed = select
 
@@ -34,5 +32,5 @@ func _on_select_deselect(select: bool) -> void:
 	#return true
 #
 ### Most important function for overwriting. Here should be the effect
-#func casting_effect() -> void:
+#func execute() -> void:
 	#pass

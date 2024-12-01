@@ -18,9 +18,11 @@ var combat: Combat
 
 var entity_type_count := {}
 
-var TileScene = preload("res://Logic/Level/Tile.tscn")
 const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
 const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
+
+func _ready() -> void:
+	pass
 
 func clear():
 	for row in tiles:
@@ -65,15 +67,16 @@ func expand_level_boundaries():
 			if new_tiles[r][q] == null and Utility.rq_distance(r, q, new_rows/2, new_cols/2) <= new_rows/2:
 				@warning_ignore("integer_division")
 				var new_tile = Tile.create(r, q, new_rows/2, new_cols/2)
-				add_child(new_tile)
-				new_tile.owner = self
+				new_tile.connect_with_combat(combat)
+				add_child(new_tile.tile3d)
+				new_tile.tile3d.owner = self
 				new_tiles[r][q] = new_tile
 	
 	# Update level properties
 	tiles = new_tiles
 	n_rows = new_rows
 	n_cols = new_cols
-	
+
 func shrink_level_boundaries() -> bool:
 	if n_rows <= 3 or n_cols <= 3:
 		#push_error("Cannot shrink further: grid too small")
@@ -145,6 +148,7 @@ func init_basic_grid(n: int):
 				continue
 
 			var new_tile = Tile.create(r, q, n, n)
+			new_tile.connect_with_combat(combat)
 			add_child(new_tile)
 			new_tile.owner = self
 			tiles[r][q] = new_tile
@@ -258,6 +262,7 @@ func get_tiles_from_float_vec(vec: Vector2, just_one := false) -> Array[Tile]:
 	return _tiles
 
 ## this can be used for enemy movement, since it respects obstacles.
+## source tile is not included
 func get_shortest_path(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX) -> Array[Tile]:
 	var search_object := search(tile1.location, tile2.location, mask)
 	search_object.execute()
@@ -269,6 +274,8 @@ func get_shortest_path(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX
 func get_shortest_distance(tile1: Tile, tile2: Tile, mask: int = Constants.INT64_MAX):
 	var path = get_shortest_path(tile1, tile2, mask)
 	assert(path != null, "path == null in get_shortest_distance")
+	if path.is_empty():
+		return -1
 	return len(path)
 
 func get_all_tiles_in_distance_of_tile(tile: Tile, dist: int) -> Array[Tile]:
@@ -445,9 +452,6 @@ func search(from: Vector2i, to: Vector2i, mask: int = Constants.INT64_MAX) -> Le
 
 func save_without_combat(path: String):
 	Combat.serialize_level_as_combat_state(self).save_to_disk(path)
-
-static func load_without_combat(path: String):
-	return Combat.deserialize_level_from_combat_state(CombatState.load_from_disk(path))
 
 var _im_arr: ImmediateArrows
 func immediate_arrows() -> ImmediateArrows:

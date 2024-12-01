@@ -1,6 +1,5 @@
-class_name CombatEventState extends Resource
+class_name CombatEventState extends CombatObjectState
 
-@export var id: CombatEventID
 @export var type: CombatEventType
 @export var params := {}
 @export var active: bool = false
@@ -15,10 +14,10 @@ func deserialize(combat: Combat) -> CombatEvent:
 	else:
 		event = CombatEvent.new()
 	event.combat = combat
-	event.id = id
+	#event.id = id
 	event.type = type
 	event.logic = type.logic.new()
-	event.logic.setup(combat, event)
+	event.logic.setup(event)
 	event.params = params
 	event.active = active
 	event.finished = finished

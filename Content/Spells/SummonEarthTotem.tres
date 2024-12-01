@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=7 format=3 uid="uid://crulutmxosaai"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_bkllr"]
+[ext_resource type="Texture2D" uid="uid://p004jcm2i247" path="res://Assets/Sprites/Icons/shield.png" id="2_p1yaj"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_hb5tb"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="4_q1csv"]
+
+[sub_resource type="Resource" id="Resource_4h5xy"]
+script = ExtResource("1_bkllr")
+stack = Array[int]([2, 2, 6])
+
+[sub_resource type="Resource" id="Resource_nctp1"]
+script = ExtResource("4_hb5tb")
+type = 0
+limitation = 1
+range_size = 4
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
+[resource]
+script = ExtResource("4_q1csv")
+costs = SubResource("Resource_4h5xy")
+effect_text = "The Earth Totem grants the player 2 armor each turn in a 1 tile radius."
+topic = 6
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""
+target_requirements = Array[ExtResource("4_hb5tb")]([SubResource("Resource_nctp1")])
+pretty_name = "Earth Totem"
+fluff_text = ""
+icon = ExtResource("2_p1yaj")
+color = Color(0.701961, 0.521569, 0.0352941, 1)
+default_data = {}

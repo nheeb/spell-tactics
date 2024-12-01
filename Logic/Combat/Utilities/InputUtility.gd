@@ -30,7 +30,7 @@ func process_action(action: PlayerAction, force_action := false) -> void:
 		action.failed.emit()
 		action_failed.emit(action)
 
-var current_castable : Castable
+var current_castable: Castable
 
 func select_castable(castable: Castable):
 	current_castable = castable
@@ -49,8 +49,6 @@ func is_taking_actions() -> bool:
 func update_ui():
 	combat.ui.update_payable_cards()
 
-	
-	
 func tile_unhovered(tile: Tile):
 	combat.action_stack.process_player_action(PAUnhoverTile.new(tile))
 

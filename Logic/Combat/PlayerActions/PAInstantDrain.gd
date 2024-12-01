@@ -11,14 +11,11 @@ func is_valid(combat: Combat) -> bool:
 	if combat.input.current_castable:
 		return false
 	# Get the drain active from combat
-	drain_active = Utility.array_safe_get(
-		combat.actives.filter(
-			func (a: Active): return a.type.internal_name == "Drain"
-		), 0)
-	if drain_active == null:
-		push_error("No Drain Active found for PAInstantDrain")
-	drain_active.update_possible_targets()
-	return drain_active.is_selectable() and drain_active.is_target_possible(target_tile)
+	drain_active = combat.castables.get_active_from_name("drain")
+	drain_active.create_details(combat.player)
+	var possible := drain_active.is_selectable() and drain_active.is_target_valid(target_tile)
+	drain_active.reset_details()
+	return possible
 
 func abort(tile = null):
 	signal_disposer.dispose()

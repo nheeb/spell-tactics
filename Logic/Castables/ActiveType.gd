@@ -12,3 +12,8 @@ enum Limitation {
 @export var max_uses_per_round: int
 
 @export var hotkey_label: String
+
+func create_base_object() -> CombatObject:
+	var active := Active.new()
+	active.type = self
+	return active

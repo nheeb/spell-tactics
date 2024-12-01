@@ -67,6 +67,14 @@ static func new_end_phase_trigger_from_callable(callable: Callable, start := tru
 	var process := "process_start" if start else "process_end"
 	return TimedEffect.new(end_phase_ref, process)._set_callable(callable)
 
+## Creates a TE that triggers at each EnemyPhase.
+## If start is true the TE triggers at the start of the enemy phase (before Enemies attack)
+## otherwise it triggers at the end.
+static func new_enemy_phase_trigger_from_callable(callable: Callable, start := true) -> TimedEffect:
+	var end_phase_ref = CombatNodeReference.new("Phases/EnemyPhase")
+	var process := "process_start" if start else "process_end"
+	return TimedEffect.new(end_phase_ref, process)._set_callable(callable)
+
 ## Creates a simple TE from a signal and a callable.
 ## Only works of the owners of the signal and callable have "get_reference()"
 static func new_from_signal_and_callable(sig: Signal, callable: Callable) -> TimedEffect:
@@ -201,7 +209,7 @@ func needs_flavor(target_flavor: ActionFlavor) -> TimedEffect:
 func kill() -> void:
 	dead = true
 
-## Kaufland Freshboy, Freshboy Kaufland, Obst und Gemüse so fresh & so drippy
+## Kaufland Freshboy, Freshboy Kaufland, Obst und Gemüse so fresh & so drippy!
 ## TE gets broken if the callable isn't (over)written in the object's direct script.
 func force_freshness() -> TimedEffect:
 	assert(call_obj, "TE must be created with _set_callable() for this.")
@@ -240,6 +248,8 @@ func _connect_with_combat(combat: Combat) -> void:
 			push_error("Timed Effect: call object %s has no method %s" % [call_obj, call_method])
 	else:
 		push_error("Timed Effect: call reference %s is invalid" % call_ref)
+		var x = call_ref.resolve(combat)
+		print(x)
 	if owner_ref:
 		owner_obj = owner_ref.resolve(combat)
 	else:
@@ -284,16 +294,21 @@ func _validate() -> bool:
 	if not Utility.has_int_flag(flags, Flags.DontDisconnectWhenInGraveyard):
 		if call_obj:
 			if call_obj is Entity:
-				if call_obj.is_dead():
+				if call_obj.dead:
 					dead = true
 			elif call_obj is EntityLogic or \
 				call_obj is EntityStatusLogic:
-				if call_obj.entity.is_dead():
+				if call_obj.entity.dead:
 					dead = true
 	return not dead
 
 ## ACTION
 func _trigger(signal_params := []):
+	# We use _validate here for a second time (first one is in TEUtility)
+	# because other TEs of the same signal could invalidate this one
+	_validate()
+	if dead:
+		return
 	if delay > 0:
 		delay -= 1
 		return

@@ -8,7 +8,7 @@ var actives: Array[Active]
 
 @onready var cards3d: Cards3D = %Cards3D
 @onready var timeline: TimelineUI = %Timeline
-@onready var error_lines: StatusLines = %ErrorLines
+@onready var cast_lines: StatusLines = %CastLines
 @onready var event_icons: CombatEventIcons = %CombatEventIcons
 @onready var event_info: CombatEventInfo = %CombatEventInfo
 @onready var enemy_event_info: CombatEventInfo = %EnemyEventInfo
@@ -21,6 +21,9 @@ var buttons: Array[ActiveButtonWithUses] = []
 
 func setup(_combat: Combat):
 	self.combat = _combat
+	# Turn sound off
+	if OS.is_debug_build():  # start with sound off by default in debug builds
+		_on_sound_toggle_toggled(false)
 	# Update UI
 	for spell in self.combat.hand:
 		cards3d.add_card(spell)

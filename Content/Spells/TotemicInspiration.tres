@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://f7tf26i2rvfl"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_47weu"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="2_0a8ro"]
+[ext_resource type="Texture2D" uid="uid://bk6gubcidtwpg" path="res://Assets/Sprites/Icons/book-cover.png" id="2_mjxux"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_xdtf5"]
+
+[sub_resource type="Resource" id="Resource_eo7dg"]
+script = ExtResource("1_47weu")
+stack = Array[int]([6, 6])
+
+[resource]
+script = ExtResource("2_0a8ro")
+costs = SubResource("Resource_eo7dg")
+effect_text = "Draw Cards based on the number of Totems surrounding the player."
+topic = 0
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""
+target_requirements = Array[ExtResource("4_xdtf5")]([])
+pretty_name = "Totemic Inspiration"
+fluff_text = ""
+icon = ExtResource("2_mjxux")
+color = Color(0.388235, 0.231373, 0.439216, 1)
+default_data = {}

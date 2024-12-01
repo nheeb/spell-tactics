@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SpellType" load_steps=6 format=3 uid="uid://bjrjvk0evvvyt"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_q48k8"]
-[ext_resource type="Script" path="res://Logic/Castables/Keyword.gd" id="1_vqcp2"]
 [ext_resource type="Texture2D" uid="uid://bubonlhd64x0k" path="res://Assets/Sprites/Icons/axe-poison.png" id="2_hh5yw"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="2_yruvw"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="4_jue61"]
 
 [sub_resource type="Resource" id="Resource_tswei"]
 script = ExtResource("1_q48k8")
@@ -12,21 +12,14 @@ stack = Array[int]([1, 6])
 [resource]
 script = ExtResource("2_yruvw")
 costs = SubResource("Resource_tswei")
-keywords = Array[ExtResource("1_vqcp2")]([])
-pretty_name = "Poison Punch"
 effect_text = "Your next melee attack inflicts poison."
-fluff_text = ""
-icon = ExtResource("2_hh5yw")
-color = Color(1, 1, 1, 1)
-target = 0
-target_range = -1
-target_min_range = -1
-target_tag = ""
-target_count_min = 1
-target_count_max = 1
-target_possible_highlight = 7
-target_selected_highlight = 8
 topic = 1
 topic_secondary = 7
 topic_icons = Array[int]([])
 topic_caption = ""
+target_requirements = Array[ExtResource("4_jue61")]([])
+pretty_name = "Poison Punch"
+fluff_text = ""
+icon = ExtResource("2_hh5yw")
+color = Color(0.513085, 0.250778, 0.675781, 1)
+default_data = {}

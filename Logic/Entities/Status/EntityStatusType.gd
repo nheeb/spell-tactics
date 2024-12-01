@@ -1,12 +1,6 @@
-class_name EntityStatusType extends Resource
+class_name EntityStatusType extends CombatObjectType
 
-var internal_name: String
-@export var pretty_name: String
-@export var icon: Texture
-@export var color: Color = Color.WHITE
 @export_multiline var text: String = ""
-
-@export var default_data := {}
 
 @export_group("Lifetime")
 ## This will add the value '_lifetime' to the data.
@@ -27,26 +21,18 @@ var internal_name: String
 @export var make_floating_icon: bool = true
 
 @export_group("Extras")
+## New status of this type will always be merged ("extend") into an existing one if possible.
+@export var merge_this_type := false
 ## Kills all TimedEffects (from status & logic) automatically when being removed.
 @export var kill_te_on_remove := true
 @export var enemy_actions: Array[EnemyActionArgs]
 
-## Logic script
-var logic_script: GDScript
+func create_base_object() -> CombatObject:
+	return EntityStatus.new()
 
-func _on_load() -> void:
-	if internal_name == "":
-		internal_name = resource_path.split("/")[-1].split(".")[0]
-		var directory = "/".join(resource_path.split("/").slice(0, -1))
-		var script_path = directory + "/" + internal_name + ".gd"
-		if ResourceLoader.exists(script_path):
-			logic_script = load(script_path)
+func set_type_properties(object: CombatObject) -> void:
+	object = object as EntityStatus
+	object.lifetime = lifetime_default
 
-func create_logic() -> EntityStatusLogic:
-	_on_load()
-	if logic_script:
-		return logic_script.new()
-	return EntityStatusLogic.new()
-
-func create_status(_data := {}) -> EntityStatus:
-	return EntityStatus.new(self, _data)
+func create_status(combat: Combat, entity: Entity, _data := {}) -> EntityStatus:
+	return create(combat, {"data": _data, "entity": entity}) as EntityStatus

@@ -41,7 +41,7 @@ func create_questions():
 				"very nice enemy"
 			]
 			add_new_qestion().setup_multiple_choice("enemy_remarks", "Do you have a strong opinion on this enemy?", choices)\
-			.set_target_index(entity_type.internal_name).set_image(entity_type.get_prototype_texture())
+			.set_target_index(entity_type.internal_name)#.set_image(entity_type.get_prototype_texture())
 	for i in Game.review_questions.size():
 		add_new_qestion().setup_text("special_answers", Game.review_questions[i]).set_target_index(i)
 

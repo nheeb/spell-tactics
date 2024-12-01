@@ -1,7 +1,5 @@
 class_name HandCard3D extends Card3D
 
-#var card_2d: HandCard2D
-
 var spell: Spell
 
 func _enter_tree() -> void:
@@ -15,14 +13,7 @@ func get_castable() -> Castable:
 	return get_spell()
 
 func get_spell() -> Spell:
-	# deprecated?
-	#var spell =  $Quad/SubViewport/HandCard2D.spell
 	return spell
-
-#func set_card(card: HandCard2D):
-	#card_2d = card
-	#$Quad/SubViewport.add_child(card)  # does Quad still get used?
-	#set_spell(card.spell)
 	
 func set_render_prio(p: int) -> void:
 	$Quad.get_surface_override_material(0).set("render_priority", p)
@@ -34,10 +25,7 @@ func set_render_prio(p: int) -> void:
 func set_collision_scale(s: float) -> void:
 	$Area3D/CollisionShape3D.scale = Vector3.ONE * s
 
- 
 func set_spell(s: Spell) -> void:
-	## TODO nitai remove card_2d
-	#card_2d.set_spell(s)
 	spell = s
 	s.card = self
 	set_spell_type(s.type)
@@ -111,7 +99,6 @@ func set_pinned(s: bool):
 		c = c as HandCardEnergySocket
 		if c:
 			c.set_hoverarble(s)
-
 
 const HOVER_MAT = preload("res://VFX/Materials/HandCardHover.tres")
 func hover():

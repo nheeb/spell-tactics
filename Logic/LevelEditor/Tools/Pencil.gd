@@ -1,4 +1,3 @@
-
 class_name TerrainPlace extends Tool
 
 var _active_set: Array[Tile] = []
@@ -24,5 +23,5 @@ func _set_tile(level: Level, tile: Tile, placement_active: EntityType):
 	if current_terrain != null:
 		level.entities.remove(tile.location, current_terrain)
 	if placement_active != null:
-		level.entities.create(tile.location, placement_active)
-	
+		placement_active.create_entity(level.combat, tile)
+		#level.entities.create(tile.location, placement_active)

@@ -31,7 +31,8 @@ func draw() -> AnimationObject:
 
 func draw_to_hand_size():
 	# TODO make some start hand
-	while combat.hand.size() < START_HAND_SIZE and can_draw():
+	var hand_size := 4 if Game.DEBUG_SPELL_TESTING else START_HAND_SIZE 
+	while combat.hand.size() < hand_size and can_draw():
 		draw()
 
 func can_draw():

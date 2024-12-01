@@ -23,28 +23,20 @@ func _ready() -> void:
 	# should be put somewhere else but 🤷‍♂️
 	Input.set_custom_mouse_cursor(load("res://Assets/Sprites/Cursor/wood_oak_24_highlight.png"),
 								  Input.CURSOR_POINTING_HAND)
-	if OS.is_debug_build():  # start with sound off by default in debug builds
-		await get_tree().process_frame
-		combat_ui._on_sound_toggle_toggled(false)
-			
+
 
 func load_combat_from_path(level_path: String) -> void:
 	var combat_state: CombatState = load(level_path) as CombatState
 	if combat_state == null:
 		assert(combat_state != null, "Failed to load CombatState")
-	load_combat_from_state(combat_state)
+	await load_combat_from_state(combat_state)
 
 func load_combat_from_state(combat_state: CombatState, combat_active: bool = true) -> void:
 	# If we always create a new ScreenCombat for every Combat (which I think
 	# we should) then some of the following lines could be cut & simplified
 	
-	# Take the default deck if there is no deck saved in combatstate
-	if combat_state == null or combat_state.deck_states.is_empty():
-		combat_state.deck_states = Game.DeckUtils.create_test_deck_serialized()
-	
 	# Create combat
-	combat = combat_state.deserialize()
-	add_child(combat)
+	combat = await combat_state.deserialize(self)
 	
 	# Add level to tree
 	level = combat.level

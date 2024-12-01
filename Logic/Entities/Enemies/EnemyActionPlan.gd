@@ -1,6 +1,6 @@
 class_name EnemyActionPlan extends Resource
 
-@export var enemy_ref: EntityReference
+@export var enemy_ref: CombatObjectReference
 @export var action_args: EnemyActionArgs
 @export var target_ref: UniversalReference
 @export var plan_details := {}
@@ -21,7 +21,7 @@ var fizzled := false
 #####################################################
 
 func _init(_enemy = null, _action_args = null, _target = null, combat: Combat = null) -> void:
-	if _enemy is EntityReference:
+	if _enemy is CombatObjectReference:
 		enemy_ref = _enemy
 	elif _enemy is EnemyEntity:
 		enemy_ref = _enemy.get_reference()
@@ -163,7 +163,7 @@ func get_estimated_destination(combat: Combat, start_from: Tile = null) -> Tile:
 		start_from = after_movement.value
 	return await get_logic().estimated_destination(start_from)
 
-## SUBACTION
+## ACTION
 func show_preview(combat: Combat, show: bool) -> void:
 	await get_logic().show_preview(show)
 

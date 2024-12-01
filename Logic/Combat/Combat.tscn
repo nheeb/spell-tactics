@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://svag2bbhgyid"]
+[gd_scene load_steps=20 format=3 uid="uid://svag2bbhgyid"]
 
 [ext_resource type="Script" path="res://Logic/Combat/Combat.gd" id="1_65o0h"]
+[ext_resource type="Script" path="res://Logic/Combat/Phases/CombatBeginPhase.gd" id="2_c1nva"]
 [ext_resource type="Script" path="res://Logic/Combat/Phases/StartPhase.gd" id="2_jgbr1"]
 [ext_resource type="Script" path="res://Logic/Combat/Phases/SpellPhase.gd" id="4_xof1w"]
 [ext_resource type="Script" path="res://Logic/Combat/Phases/EnemyPhase.gd" id="6_52d1n"]
@@ -17,11 +18,16 @@
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/AttackUtility.gd" id="16_067l4"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/CastableUtility.gd" id="17_x76i2"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/ViewUtility.gd" id="17_xyw06"]
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/IdUtility.gd" id="18_xt7lj"]
 
 [node name="Combat" type="Node"]
 script = ExtResource("1_65o0h")
 
 [node name="Phases" type="Node" parent="."]
+
+[node name="CombatBeginPhase" type="Node" parent="Phases"]
+unique_name_in_owner = true
+script = ExtResource("2_c1nva")
 
 [node name="StartPhase" type="Node" parent="Phases"]
 unique_name_in_owner = true
@@ -88,3 +94,7 @@ script = ExtResource("16_1yub7")
 [node name="CastableUtility" type="Node" parent="Utility"]
 unique_name_in_owner = true
 script = ExtResource("17_x76i2")
+
+[node name="IdUtility" type="Node" parent="Utility"]
+unique_name_in_owner = true
+script = ExtResource("18_xt7lj")

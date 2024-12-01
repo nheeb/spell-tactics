@@ -1,4 +1,4 @@
 extends SpellLogic
 
-func casting_effect() -> void:
-	combat.movement.blink_entity(combat.player, target)
+func execute() -> void:
+	combat.movement.blink_entity(combat.player, target_tile)
