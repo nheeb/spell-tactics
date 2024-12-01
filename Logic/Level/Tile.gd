@@ -26,8 +26,7 @@ var highlight: Highlight:
 
 const TILE_3D = preload("res://Logic/Level/Tile3D.tscn")
 const ENERGY_POPUP = preload("res://UI/PopUp/EnergyPopup.tscn")
-	tile.energy_popup = ENERGY_POPUP.instantiate()
-	tile.energy_popup.tile = tile  # :)
+
 ## Create a new Tile along with tile3d
 static func create(r_tile: int, q_tile: int, r_center: float, q_center: float) -> Tile:
 	var tile := Tile.new()
@@ -74,7 +73,7 @@ func has_entity_type(entity_type: EntityType):
 func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)
-	if level != null:  # combat's getter checks against level, so this is the proper combat null check
+	if combat != null:
 		combat.animation.callable(energy_popup.update)
 	
 	if entity.visual_entity:

@@ -43,7 +43,9 @@ func tile_has_energy_to_show() -> bool:
 
 # FIXME maybe make do without freeing/instantiating every time, but honestly should be no big deal here
 const ENERGY_ICON = preload("res://UI/PopUp/EnergyIcon.tscn")
-func update(): 
+func update():
+	if not is_inside_tree():
+		return
 	var energy: EnergyStack = tile.get_drainable_energy()
 	for icon in $List.get_children():
 		icon.free()
