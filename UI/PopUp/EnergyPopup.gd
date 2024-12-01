@@ -52,7 +52,7 @@ func update():
 	if energy.is_empty():
 		active = false
 		return
-	active = true
+
 	energy.sort()
 	for e in energy.stack:
 		var icon = ENERGY_ICON.instantiate()

@@ -40,7 +40,7 @@ func _exit_tree():
 func show_tile_popup(tile: Tile):
 	# don't show popup if the tile only has drainable entities (so nothing special to show e.g. enemies)
 	# AND we are already showing the drainable overlay for this tile
-	if (not tile.has_enemy()) and tile in active_hovers:
+	if (not tile.has_enemy()) and tile.energy_popup.active:
 		return
 	current_tile = tile
 	# can use Camera3D.is_position_behind() to check, but should not be relevant here for now
@@ -78,42 +78,22 @@ func show_energy_popups():
 	assert(popup_root != null)
 	if not is_already_setup:
 		setup_popups()
-	else:
-		for tile in combat.level.get_all_tiles():
-			if tile.is_drainable():
-				tile.energy_popup.active = true
+	
+	for tile in combat.level.get_all_tiles():
+		if tile.is_drainable():
+			tile.energy_popup.active = true
 	
 
 var tile_hovered: Tile
 func on_drainable_tile_hovered(tile: Tile):
-	# don't show extra if energyoverlay is active
-	if Game.ENERGY_OVERLAY:
-		return
-	var entry: EnergyPopup
-	#print("show ", tile)
-	if not tile in active_hovers:  # active_hovers
-		#entry = place_drainable_entry(tile)
-		push_warning("drainable tile hovered not implemented yet")
-		#active_hovers[tile] = entry
-	else:
-		entry = active_hovers[tile]
-	
-	if entry != null:
-		entry.show()
-	tile_hovered = tile
+	if not is_already_setup:
+		setup_popups()
+
+	tile.energy_popup.active = true
 
 func on_drainable_tile_unhovered(tile: Tile):
-	if not tile in active_hovers:
-		return
-		
-	#if drainable_hovered != null: # is this needed??
-		#active_entries[drainable_hovered].hide()
-		#drainable_hovered = null
-
-	var entry: EnergyPopup = active_hovers[tile]
-	#print("hide ", tile)
-	if entry != null:
-		entry.hide()
+	if not Game.ENERGY_OVERLAY:
+		tile.energy_popup.active = false
 	
 func hide_energy_popups():
 	# we have to go backwards through the active popups since the "active" setter
@@ -131,8 +111,7 @@ func setup_popups():
 			popup.name = "EnergyPopup_%2d2_%2d" % [tile.r, tile.q]
 			popup.update()
 		else:
-			# anything to do here?
-			push_warning("should not happen")
+			push_warning("Popups: called setup with popup already in tree.")
 			pass
 
 	is_already_setup = true

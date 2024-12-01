@@ -7,6 +7,7 @@ const ENT_ENTRY = preload("res://UI/PopUp/HoverPopupEntry.tscn")
 @onready var ent_entries = [%EntityEntry1, %EntityEntry2, %EntityEntry3]
 func show_tile(tile: Tile):
 	%TileLabel.text = "Tile (%s, %s)" % [tile.r, tile.q]
+	%TileLabel.visible = Game.DEBUG_OVERLAY
 	
 	if len(tile.entities) > 3:
 		push_warning("PopUp show_tile() only supports up to 3 Entities.")
