@@ -10,6 +10,9 @@ var tile: Tile = null
 var combat: Combat
 
 # TODO change all icon's min_size on window resized!
+enum ActiveCause {  # not implemented yet - just an idea
+	OVERLAY, DRAIN_HOVER, DRAIN_ACTIVE, DISABLE_ALL
+}
 
 var active: bool = false:
 	set(a):
@@ -30,6 +33,12 @@ var active: bool = false:
 				push_warning("EnergyPopup for tile %s was not in ACTIVE_POPUPS." % tile.to_string())
 			ACTIVE_POPUPS.erase(self)
 			
+func activate(cause: ActiveCause = ActiveCause.OVERLAY):
+	push_error("not yet implemented")
+
+func deactivate(cause: ActiveCause):
+	push_error("not yet implemented")
+
 static func deactivate_all_popups():
 	for i in range(len(ACTIVE_POPUPS) - 1, -1, -1):
 		var popup = ACTIVE_POPUPS[i]

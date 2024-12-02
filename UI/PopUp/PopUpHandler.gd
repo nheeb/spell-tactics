@@ -65,19 +65,17 @@ func hide_tile_popup(tile: Tile):
 
 func start():
 	set_process(true)
+	setup_popups()
 
 ## Reference to the list of control popup entries. 
 func show_energy_popups():
 	if combat == null:
 		push_error("can't show energy overlay without combat reference!")
 		return
-	#if not active_entries.is_empty():
-		#for key in active_entries.keys():
-			#active_entries[key].queue_free()
-		#active_entries.clear()
+
 	assert(popup_root != null)
-	if not is_already_setup:
-		setup_popups()
+	#if not is_already_setup:
+		#setup_popups()
 	
 	for tile in combat.level.get_all_tiles():
 		if tile.is_drainable():
@@ -86,13 +84,12 @@ func show_energy_popups():
 
 var tile_hovered: Tile
 func on_drainable_tile_hovered(tile: Tile):
-	if not is_already_setup:
-		setup_popups()
-
-	tile.energy_popup.active = true
+	if combat.input.current_castable == null:
+		tile.energy_popup.active = true
 
 func on_drainable_tile_unhovered(tile: Tile):
-	if not Game.ENERGY_OVERLAY:
+	# FIXME this will break once the popup conditions get more complicated -> use EnergyPopup.ActiveCause
+	if not Game.ENERGY_OVERLAY and combat.input.current_castable == null:
 		tile.energy_popup.active = false
 	
 func hide_energy_popups():
