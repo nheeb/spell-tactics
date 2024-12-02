@@ -24,10 +24,6 @@ func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 
 func on_select_deselect(select: bool):
 	# tile
-	if select:
-		print("select")
-	else:
-		print("deselect")
 	for tile: Tile in active.current_possible_targets:
-		print(tile.to_string() + " active = " + str(select))
+		#print(tile.to_string() + " active = " + str(select))
 		tile.energy_popup.active = select
