@@ -10,10 +10,11 @@ stack = Array[int]([2, 2])
 
 [resource]
 script = ExtResource("1_aefp8")
-can_be_hovered = true
 visual_scene = ExtResource("2_xwpuv")
 tags = Array[String]([])
 is_terrain = false
+can_be_hovered = true
+team = 0
 prototype_scale = Vector2(1, 1)
 prototype_modulate = Color(1, 1, 1, 1)
 only_show_in_editor = false
@@ -22,7 +23,12 @@ energy = SubResource("Resource_jhx8i")
 obstacle_layer = 1
 obstacle_mask = 0
 is_blocker = false
+has_hp = true
+max_hp = 3
+always_show_hp = false
+hp_bar_height = 1.5
 cover_value = 3
+destroy_on_drain = false
 pretty_name = "Rock"
 fluff_text = "Rocky Rock"
 color = Color(0, 0, 0, 1)

@@ -119,11 +119,20 @@ func get_drainable_energy() -> EnergyStack:
 		drainable_e.add(ent.energy)
 	return drainable_e
 
-func get_cover() -> int:
+func get_highest_cover() -> int:
 	return entities.reduce(
 		func (accum: int, ent: Entity) -> int:
-			return accum + ent.type.cover_value
+			if not ent.type.has_hp:
+				return accum
+			return max(accum, ent.cover)
 			, 0)
+
+func get_entities_with_highest_cover() -> Array[Entity]:
+	var hightest_cover := get_highest_cover()
+	return entities.filter(
+		func (e: Entity):
+			return e.cover == hightest_cover
+	)
 
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
@@ -206,6 +215,9 @@ func get_tiles_in_walking_range(_range: int) -> Array[Tile]:
 func get_walking_distance(other_tile: Tile) -> int:
 	return combat.level.get_shortest_distance(self, other_tile)
 
+func get_line(other_tile: Tile) -> Array[Tile]:
+	return combat.level.get_line(self, other_tile)
+
 ################
 ## DEPRECATED ##
 ################
@@ -213,18 +225,3 @@ func get_walking_distance(other_tile: Tile) -> int:
 # Dirty solution for now
 func get_node(x):
 	return node3d.get_node(x)
-
-## DEPRECATED
-#func get_drainable_energy_in_range(_range := 1) -> EnergyStack:
-	#var energy := get_drainable_energy()
-	#for t in get_surrounding_tiles(_range):
-		#energy.add(t.get_drainable_energy())
-	#return energy
-
-## Coverage factor for accuracy calculation.
-## DEPRECATED
-#func get_coverage_factor() -> int:
-	#var factor := 0
-	#for ent in entities:
-		#factor = max(factor, ent.resource.cover_value)
-	#return factor

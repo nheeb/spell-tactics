@@ -9,7 +9,7 @@ func _execute():
 	combat.animation.effect(VFX.BILLBOARD_PROJECTILE, enemy, \
 		 {"texture_name": "notes", "target": target_entity.visual_entity})
 	combat.animation.wait(1)
-	(target_entity as HPEntity).armor += 3
+	(target_entity as Entity).armor += 3
 	combat.animation.update_hp(target_entity)
 	combat.animation.effect(VFX.HEX_RINGS, target, \
 		 {"color": Color.DODGER_BLUE}).set_flag_with()

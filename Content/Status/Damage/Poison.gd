@@ -5,6 +5,6 @@ func on_birth() -> void:
 
 func poison_damage() -> void:
 	var damage := data.get_or_add("damage", 1) as int
-	if entity is HPEntity:
+	if entity is Entity:
 		entity.inflict_damage_with_visuals(damage)
 		combat.animation.say(entity, "Poison Damage")

@@ -1,4 +1,4 @@
-class_name EnemyEntity extends HPEntity
+class_name EnemyEntity extends Entity
 
 var agility: int = 0
 var strength: int = 1
@@ -122,5 +122,6 @@ func get_bahviour() -> EnemyBehaviour:
 
 ## ACTION
 func on_hover_long(h: bool) -> void:
+	await super(h)
 	if action_plan:
 		await action_plan.show_preview(combat, h)
