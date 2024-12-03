@@ -1,4 +1,4 @@
-class_name PlayerEntityType extends HPEntityType
+class_name PlayerEntityType extends EntityType
 
 func create_base_object() -> CombatObject:
 	var ent := PlayerEntity.new()

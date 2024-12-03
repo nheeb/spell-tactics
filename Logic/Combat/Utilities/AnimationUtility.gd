@@ -90,17 +90,18 @@ func camera_reach(target) -> AnimationObject:
 	animations.append(wait_for_signal(combat.camera, "target_reached").set_flag(AnimationObject.Flags.ExtendStep))
 	return reappend_as_subqueue(animations)
 
-func update_hp(ent: HPEntity) -> AnimationObject:
-	if ent.visual_entity.has_node("HealthBar3D"):
-		return call_method(ent.visual_entity.get_node("HealthBar3D"), "update_hp", [ent.hp, ent.type.max_hp, ent.armor]).set_flag_with()
-	elif ent.visual_entity.has_node("HPLabel"):
-		if ent.armor:
-			return property(ent.visual_entity.get_node("HPLabel"), "text", "%s [+%s] / %s" % [ent.hp, ent.armor, ent.type.max_hp])
-		else:
-			return property(ent.visual_entity.get_node("HPLabel"), "text", "%s / %s" % [ent.hp, ent.type.max_hp])
-
-	push_error("Neither HPLabel nor HealthBar3D for ent %s" % ent)
-	return null
+func update_hp(ent: Entity) -> AnimationObject:
+	var anims := []
+	if ent.visual_entity.health_bar:
+		anims.append(call_method(
+			ent.visual_entity.health_bar, "update_hp", [ent.hp, ent.max_hp, ent.armor]
+		))
+		if not ent.type.always_show_hp:
+			anims.push_front(show(ent.visual_entity.health_bar).set_duration(.2))
+			anims.push_back(hide(ent.visual_entity.health_bar).set_duration(.2))
+		return reappend_as_subqueue(anims)
+	push_warning("Animation update hp: No HealthBar3D for ent %s" % ent)
+	return wait()
 
 func show(target) -> AnimationProperty:
 	if target is CombatObject:
@@ -118,6 +119,10 @@ func combat_choice(activity: CombatChoiceActivity) -> AnimationCombatChoice:
 	var a = AnimationCombatChoice.new(activity)
 	add_animation_object(a)
 	return a
+
+#######################################
+## Methods for organizing animations ##
+#######################################-
 
 func reappend_as_subqueue(_anims: Array) -> AnimationSubQueue:
 	var anims: Array[AnimationObject] = get_flat_animation_array(_anims)
@@ -148,6 +153,27 @@ func get_flat_animation_array(anims) -> Array[AnimationObject]:
 	else:
 		push_error("No array or animobj given to flatten")
 	return anim_array
+
+## Record is an easy way to get the last X AnimationObjects that were added to the queue
+func record_start(record_id := "") -> AnimationWait:
+	return wait().set_record_id(record_id).set_flag_with()
+
+## Returns all AnimationObjects that were added since the record with given id was started
+func record_finish(record_id := "") -> Array[AnimationObject]:
+	var record_object := Utility.array_get_first_filtered_value(
+		Utility.array_reversed(animation_queue),
+		func (a: AnimationObject):
+			if a is AnimationWait:
+				return a.record_id == record_id
+			return false
+	) as AnimationWait
+	if not record_object:
+		push_warning("No animation record found for id %s" % record_id)
+		return []
+	var index := animation_queue.find(record_object)
+	var recorded_animations := animation_queue.slice(index + 1)
+	animation_queue.erase(record_object)
+	return recorded_animations
 
 #######################################
 ## Logic Functions (don't use those) ##

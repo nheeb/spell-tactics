@@ -11,6 +11,6 @@ func on_birth() -> void:
 func poison_melee_effect():
 	var flavor := combat.action_stack.active_ticket.get_flavor(true)
 	for target in UniversalReference.dereference_array(flavor.targets, combat):
-		if target is HPEntity:
+		if target is Entity:
 			target.apply_status(Preloaded.STATUS_POISON)
 	combat.action_stack.push_behind_active(self_remove)

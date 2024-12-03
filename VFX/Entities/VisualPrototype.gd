@@ -1,6 +1,7 @@
 extends VisualEntity
 
-func _ready() -> void:
+func setup(ent: Entity) -> void:
+	super(ent)
 	if is_instance_valid($Label) and is_instance_valid(type):
 		if type.only_show_in_editor:
 			if not Game.LEVEL_EDITOR:
@@ -14,9 +15,6 @@ func _ready() -> void:
 			$PrototypeBillboard.scale.y = type.prototype_scale.y
 			$Label.visible = false
 			$PrototypeBillboard.visible = true
-			if type is HPEntityType:
-				$HealthBar3D.visible = true
-				$HealthBar3D.position.y += 2.00 * type.prototype_scale.y
 		else:
 			$PrototypeBillboard.visible = false
 			$Label.visible = true

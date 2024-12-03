@@ -2,6 +2,29 @@ class_name AttackUtility extends CombatUtility
 
 # everything in here should be an ACTION imo
 
+## ANIMATOR
+func projectile_animation(source: CombatObject, destination: CombatObject, \
+			target: CombatObject, texture_name := "arrow") -> AnimationObject:
+	combat.animation.record_start("projectile")
+	if DebugInfo.SHOW_ENEMY_PROJECTILE_INFO:
+		combat.animation.effect(
+			VFX.LINE, source.node3d,
+			{
+				"start_node": source.node3d,
+				"end_node": target.node3d,
+				"duration": 1.0
+			}
+		).set_max_duration(.1)
+	combat.animation.wait(.6)
+	combat.animation.effect(VFX.HEX_RINGS, combat.player.current_tile, \
+		 {"color": Color.RED}).set_flag_with()
+	combat.animation.effect(VFX.HEX_COLOR, destination).set_flag_with()
+	combat.animation.effect(VFX.BILLBOARD_PROJECTILE, source, \
+		 {"texture_name": texture_name, "target": destination.node3d})
+	return combat.animation.reappend_as_subqueue(
+		combat.animation.record_finish("projectile")
+	)
+
 func enemy_shoot_projectile(enemy: EnemyEntity, projectile_bonus := 0, texture_name := "arrow") -> bool:
 	combat.animation.wait(.5)
 	var line := combat.level.get_line(enemy.current_tile, combat.player.current_tile)
@@ -20,7 +43,7 @@ func enemy_shoot_projectile(enemy: EnemyEntity, projectile_bonus := 0, texture_n
 		if DebugInfo.SHOW_ENEMY_PROJECTILE_INFO:
 			combat.animation.effect(VFX.HEX_COLOR, tile).set_flag_with()
 		for ent in tile.entities:
-			var cover := ent.type.cover_value
+			var cover := ent.cover
 			if cover != 0:
 				total_cover += cover
 				if DebugInfo.SHOW_ENEMY_PROJECTILE_INFO:

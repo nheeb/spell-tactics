@@ -1,25 +1,56 @@
 class_name VisualEntity extends Node3D
 
-# Here we could define some common callbacks / signals that other VisualEntities inheriting
-# from this could use
+const HEALTH_BAR = preload("res://VFX/Effects/HealthBar/HealthBar3D.tscn")
 
-## reference to the resource could be needed for variety of effects 
-## (e.g. in VisualPrototype for the name)
-var type: EntityType
 var entity: Entity
+var type: EntityType:
+	get:
+		return entity.type as EntityType
+var entity_name: String:
+	get:
+		return str(entity)
+var health_bar: HealthBar3D
 
 @export_range(0, 360, 60) var visual_rotation: int:
 	set(v):
 		visual_rotation = v
 		rotation_degrees.y = v
 
-@onready var entity_name = str(entity.id) if entity != null else "null_entity"
+func _ready() -> void:
+	pass
 
+## This gets called in EntityType.setup_visuals()
+func setup(ent: Entity):
+	entity = ent
+	visible = false
+	# Create / Setup HealthBar
+	if type.has_hp:
+		if not has_node("HealthBar3D"):
+			health_bar = HEALTH_BAR.instantiate()
+			add_child(health_bar)
+		else:
+			health_bar = get_node("HealthBar3D") as HealthBar3D
+			assert(health_bar)
+		health_bar._ready()
+		health_bar.position.y = type.hp_bar_height
+		health_bar.visible = type.always_show_hp
+		health_bar.update_hp(ent.hp, ent.max_hp, ent.armor)
+	else:
+		if has_node("HealthBar3D"):
+			get_node("HealthBar3D").queue_free()
+
+## Ticket Handler and getter for all kinds of animation
 var ticket_handler := WaitTicketHandler.new()
 func get_wait_ticket_handler() -> WaitTicketHandler:
 	return ticket_handler
 
-var tile_speed := 0.5  # s per tile
+######################
+## Basic animations ##
+######################
+
+## Base Movement (in seconds per tile)
+var tile_speed := 0.5
+## ANIM
 func animation_move_to(tile: Tile) -> void:
 	var ticket = ticket_handler.get_ticket()
 	var tween := VisualTime.new_tween()
@@ -29,6 +60,7 @@ func animation_move_to(tile: Tile) -> void:
 	await tween.finished
 	ticket.resolve()
 
+## ANIM
 func animation_blink_to(tile: Tile) -> void:
 	var ticket = ticket_handler.get_ticket()
 	var tween := VisualTime.new_tween()
@@ -42,19 +74,26 @@ func animation_blink_to(tile: Tile) -> void:
 	turn_tween.tween_property(self, "rotation_degrees:y", \
 			rotation_degrees.y + 360 * 3, .8)
 
+############################
+## Animations to override ##
+############################
+
+## ANIM
 func on_movement_visuals(tile: Tile) -> void:
 	# abstract, override for player/enemy
 	pass
 
+## ANIM
 func on_hurt_visuals() -> void:
 	# abstract, override for player/enemy
 	pass
 
+## ANIM
 func on_death_visuals():
 	hide()
 
 const GREY_OUT_MAT: Material = preload("res://VFX/Materials/GreyOut3D.material")
-## For overriding and making the drain effect
+## ANIM For overriding and making the drain effect
 func visual_drain(drained := true):
 	Audio.play("absorb")
 	for child in Utility.get_recursive_mesh_instances(self):
@@ -64,6 +103,10 @@ func visual_drain(drained := true):
 			var tween = VisualTime.new_tween()
 			child.set_instance_shader_parameter("grey_out_progress", 0.0)
 			tween.tween_property(child, "instance_shader_parameters/grey_out_progress", 1.0, VFX.DRAIN_DURATION)
+
+####################
+## Visual Effects ##
+####################
 
 var visual_effects := {}
 
@@ -81,6 +124,10 @@ func remove_visual_effect(id: String) -> void:
 		visual_effects.erase(id)
 	else:
 		push_error("VisualEntity has no effect %s" % id)
+
+#########################
+## Energy Orb Spawning ##
+#########################
 
 const ENERGY_ORB_ATTRACTOR = preload("res://VFX/Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
 const ENERGY_ORB = preload("res://VFX/Effects/EnergyOrbs/EnergyOrb.tscn")
