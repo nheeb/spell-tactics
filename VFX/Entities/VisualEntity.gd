@@ -109,9 +109,8 @@ func spawn_energy_orbs(stack: EnergyStack, omb: OrbitalMovementBody):
 		
 		
 func look_at_tile(tile: Tile, ticket: WaitTicket):
-	# TODO implement this
-	var tween := VisualTime.create_tween()
-	var new_rotation_y: float = rotation_degrees.y + 60
-	tween.tween_property(self, "rotation_degrees:y", new_rotation_y, 0.35)
-	await tween.finished
+	#var tween := VisualTime.create_tween()
+	#var new_rotation_y: float = rotation_degrees.y + 60
+	#tween.tween_property(self, "rotation_degrees:y", new_rotation_y, 0.35)
+	#await tween.finished
 	ticket.resolve()

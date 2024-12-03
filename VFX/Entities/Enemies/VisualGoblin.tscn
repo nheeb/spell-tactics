@@ -3690,7 +3690,7 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70249, 0)
 
 [node name="CharacterArmature" type="Node3D" parent="." index="1"]
-transform = Transform3D(0.503869, 0, 0, 0, 0.503869, 0, 0, 0, 0.503869, 0, 0, 0)
+transform = Transform3D(-0.503869, 0, 4.40496e-08, 0, 0.503869, 0, -4.40496e-08, 0, -0.503869, 0, 0, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="CharacterArmature" index="0"]
 bones/0/name = "Root"
