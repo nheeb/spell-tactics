@@ -31,7 +31,7 @@ var DEBUG_INFO: bool:
 var DEBUG_SPELL_TESTING := false
 var LEVEL_EDITOR := false
 
-var DEBUG_OVERLAY : bool = true  # toggled in Combat UI
+var DEBUG_OVERLAY : bool = false  # toggled in Combat UI
 signal energy_overlay_changed(c: bool)
 var ENERGY_OVERLAY: bool = false:
 	set(e):
@@ -45,8 +45,12 @@ var tree: SceneTree:
 	get:
 		return get_tree()
 
-var combats: Array[Combat] # For debuging
+var combats: Array[Combat] # For debugging
 
+
+func _ready() -> void:
+	# so the _input callback is active on pause to unpause 
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
 
 # --- PAUSE STUFF ---	
 @onready var pause_activity: PauseActivity = PauseActivity.new()

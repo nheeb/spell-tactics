@@ -66,4 +66,5 @@ draw_pass_1 = SubResource("QuadMesh_ktx5b")
 [node name="Quad" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = SubResource("StandardMaterial3D_a025u")
+cast_shadow = 0
 mesh = SubResource("QuadMesh_x78dy")

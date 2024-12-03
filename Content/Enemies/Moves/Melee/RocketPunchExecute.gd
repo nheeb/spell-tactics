@@ -29,7 +29,7 @@ func _execute():
 				break
 	
 	if obstacle_tile:
-		var destination := previous_tile as Tile
+		var destination := previous_tile as Tile # TODO bug with destionation == null
 		combat.movement.move_entity(enemy, destination)
 
 		if blocking_entity:

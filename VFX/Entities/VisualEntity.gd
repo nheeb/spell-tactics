@@ -91,7 +91,6 @@ func on_hurt_visuals() -> void:
 ## ANIM
 func on_death_visuals():
 	hide()
-	pass
 
 const GREY_OUT_MAT: Material = preload("res://VFX/Materials/GreyOut3D.material")
 ## ANIM For overriding and making the drain effect
@@ -154,3 +153,12 @@ func spawn_energy_orbs(stack: EnergyStack, omb: OrbitalMovementBody):
 		orb.type = stack.stack[i]
 		orb._ready()
 		orb.spawn(omb, attractors[i])
+		
+		
+func look_at_tile(tile: Tile, ticket: WaitTicket):
+	# TODO implement this
+	var tween := VisualTime.create_tween()
+	var new_rotation_y: float = rotation_degrees.y + 60
+	tween.tween_property(self, "rotation_degrees:y", new_rotation_y, 0.35)
+	await tween.finished
+	ticket.resolve()

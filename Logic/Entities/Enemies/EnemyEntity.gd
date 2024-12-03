@@ -123,5 +123,5 @@ func get_bahviour() -> EnemyBehaviour:
 ## ACTION
 func on_hover_long(h: bool) -> void:
 	await super(h)
-	if action_plan:
+	if action_plan and Game.DEBUG_OVERLAY:
 		await action_plan.show_preview(combat, h)

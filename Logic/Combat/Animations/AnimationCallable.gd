@@ -13,7 +13,7 @@ func _init(_callable: Callable):
 
 func play(level: Level) -> void:
 	if is_instance_valid(object):
-		if _add_ticket_to_parameter:
+		if _add_wait_ticket_to_args:
 			var ticket := WaitTicket.new()
 			ticket.resolved.connect(func(): animation_done_internally.emit(), CONNECT_ONE_SHOT)
 			var bound_args = callable.get_bound_arguments()

@@ -1,4 +1,4 @@
-extends MarginContainer
+class_name TileHoverPopupEntry extends MarginContainer
 
 @onready var icons = [%EnergyIcon1, %EnergyIcon2, %EnergyIcon3, %EnergyIcon4]
 

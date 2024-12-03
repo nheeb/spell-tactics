@@ -21,14 +21,18 @@ func cast() -> void:
 func select():
 	selected = true
 	details = CombatActionDetails.new(combat.player, self)
-	get_logic().on_select_deselect(true)
+	
 	update_current_state()
+	get_logic().on_select_deselect(true)
+
 
 func deselect():
 	selected = false
 	details = null
-	get_logic().on_select_deselect(false)
+	
 	update_current_state()
+	get_logic().on_select_deselect(false)
+	
 
 ################################
 ## Type, Logic & Card Getters ##

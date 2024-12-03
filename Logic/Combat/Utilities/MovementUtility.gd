@@ -1,6 +1,7 @@
 class_name MovementUtility extends CombatUtility
 
 func move_entity(entity: Entity, target: Tile, make_animation := true) -> AnimationObject:
+	# TODO null checks?
 	entity.move(target)
 	if make_animation:
 		return combat.animation.call_method(entity.visual_entity, "animation_move_to", [target])

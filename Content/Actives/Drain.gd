@@ -15,10 +15,14 @@ func execute() -> void:
 			entity.drain() # removes the energy and queues the visual drain animation
 			energy_stack = entity.get_drained_energy()
 			combat.energy.gain(energy_stack, entity)
-		elif entity.type.is_terrain:
+		elif entity.type.is_terrain:  # terrain only gets drained visually
 			combat.animation.callable(entity.visual_entity.visual_drain)
-			#for tag in entity.get_tags():
-				#combat.log.register_incident("drained_tag_%s" % tag)
 
 func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 	return target.is_drainable()
+
+
+func on_select_deselect(select: bool):
+	super(select)
+	for tile: Tile in active.current_possible_targets:
+		tile.energy_popup.active = select or Game.ENERGY_OVERLAY

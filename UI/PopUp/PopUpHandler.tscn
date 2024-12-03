@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhjgr5kq0vfdw"]
 
-[ext_resource type="Script" path="res://UI/PopUp/PopUpHandler.gd" id="1_it7hp"]
-[ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp/PopUp.tscn" id="2_35ane"]
+[ext_resource type="Script" path="res://UI/PopUp/PopupHandler.gd" id="1_oh8er"]
+[ext_resource type="PackedScene" uid="uid://dofxa8sxjy7aw" path="res://UI/PopUp/HoverPopup.tscn" id="2_okrei"]
 
 [node name="PopUpHandler" type="Control"]
 layout_mode = 3
@@ -11,9 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_it7hp")
+script = ExtResource("1_oh8er")
 
-[node name="PopUp" parent="." instance=ExtResource("2_35ane")]
+[node name="PopUp" parent="." instance=ExtResource("2_okrei")]
 visible = false
 layout_mode = 0
 offset_left = 855.0

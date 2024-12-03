@@ -1,11 +1,8 @@
 class_name Tile extends CombatObject
 
-# TODO these are not yet connected -- maybe this makes more sense to put into tile?
-signal drainable_hovered
-signal drainable_unhovered
-
 var entities: Array[Entity] = []
 var hovering := false
+var energy_popup: EnergyPopup
 
 @export var r: int
 @export var q: int
@@ -28,9 +25,15 @@ var highlight: Highlight:
 #####################################
 
 const TILE_3D = preload("res://Logic/Level/Tile3D.tscn")
+const ENERGY_POPUP = preload("res://UI/PopUp/EnergyPopup.tscn")
+
 ## Create a new Tile along with tile3d
 static func create(r_tile: int, q_tile: int, r_center: float, q_center: float) -> Tile:
 	var tile := Tile.new()
+
+	tile.energy_popup = ENERGY_POPUP.instantiate()
+	tile.energy_popup.tile = tile  # :)
+
 	var tile_3d = TILE_3D.instantiate()
 	tile_3d._ready()
 	# center position is needed to properly align the tile
@@ -70,6 +73,9 @@ func has_entity_type(entity_type: EntityType):
 func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)
+	#if combat != null:
+	combat.animation.callable(energy_popup.update)
+	
 	if entity.visual_entity:
 		if entity.visual_entity.get_parent() == null:
 			combat.level.visual_entities.add_child(entity.visual_entity)
@@ -83,6 +89,8 @@ func remove_entity(entity: Entity):
 		return
 	entities.remove_at(i)
 	entity.current_tile = null
+	if combat != null:
+		combat.animation.callable(energy_popup.update)
 	
 ## Returns all enemy entities on this tile.
 func get_enemies() -> Array[EnemyEntity]:
