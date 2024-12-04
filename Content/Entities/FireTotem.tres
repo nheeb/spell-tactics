@@ -1,20 +1,21 @@
-[gd_resource type="Resource" script_class="EntityType" load_steps=3 format=3 uid="uid://1t03dylaq5h6"]
+[gd_resource type="Resource" script_class="EntityType" load_steps=2 format=3 uid="uid://1t03dylaq5h6"]
 
 [ext_resource type="Script" path="res://Logic/Entities/EntityType.gd" id="1_1xdp3"]
-[ext_resource type="Script" path="res://Content/Entities/FireTotem.gd" id="1_l3ci2"]
 
 [resource]
 script = ExtResource("1_1xdp3")
-internal_name = "fire_totem"
 can_be_hovered = true
-pretty_name = "Fire Totem"
-fluff_text = ""
-entity_logic = ExtResource("1_l3ci2")
-prototype_scale = Vector2(1, 1)
 tags = Array[String](["summoned"])
 is_terrain = false
+prototype_scale = Vector2(1, 1)
+prototype_modulate = Color(1, 1, 1, 1)
+only_show_in_editor = false
 is_drainable = true
 obstacle_layer = 0
 obstacle_mask = 0
 is_blocker = false
 cover_value = 0
+pretty_name = "Fire Totem"
+fluff_text = ""
+color = Color(0, 0, 0, 1)
+default_data = {}
