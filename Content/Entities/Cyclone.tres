@@ -10,10 +10,11 @@ stack = Array[int]([4, 4, 4])
 
 [resource]
 script = ExtResource("2_j8ofm")
-can_be_hovered = true
 visual_scene = ExtResource("4_xsl71")
 tags = Array[String](["summoned"])
 is_terrain = false
+can_be_hovered = true
+team = 0
 prototype_scale = Vector2(1, 1)
 prototype_modulate = Color(1, 1, 1, 1)
 only_show_in_editor = false
@@ -22,7 +23,12 @@ energy = SubResource("Resource_tdi1b")
 obstacle_layer = 0
 obstacle_mask = 0
 is_blocker = false
+has_hp = false
+max_hp = 1
+always_show_hp = false
+hp_bar_height = 1.5
 cover_value = 0
+destroy_on_drain = false
 pretty_name = "Cyclone"
 fluff_text = "Deals 2 damage to all units standing on it at the end of the turn."
 color = Color(0, 0, 0, 1)

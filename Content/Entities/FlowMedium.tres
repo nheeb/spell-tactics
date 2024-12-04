@@ -10,17 +10,25 @@ stack = Array[int]([4, 4])
 
 [resource]
 script = ExtResource("2_8f1fg")
-can_be_hovered = true
 visual_scene = ExtResource("3_u5r2g")
 tags = Array[String]([])
 is_terrain = false
+can_be_hovered = true
+team = 0
 prototype_scale = Vector2(1, 1)
+prototype_modulate = Color(1, 1, 1, 1)
+only_show_in_editor = false
 is_drainable = true
 energy = SubResource("Resource_m1ybh")
 obstacle_layer = 0
 obstacle_mask = 0
 is_blocker = false
+has_hp = false
+max_hp = 1
+always_show_hp = false
+hp_bar_height = 1.5
 cover_value = 0
+destroy_on_drain = false
 pretty_name = "Double Flow Energy"
 fluff_text = ""
 color = Color(0, 0, 0, 1)

@@ -13,7 +13,7 @@ func execute(combat: Combat) -> void:
 	var energy := socket.unload_energy()
 	combat.animation.callable(socket.unload_animation)
 	combat.animation.callable(execute_animation.bind(combat, energy)) \
-		.add_ticket_to_parameter()
+		.add_wait_ticket_to_args()
 
 func execute_animation(combat: Combat, energy, ticket: WaitTicket) -> void:
 	combat.ui.cards3d.energy_ui.spawn_energy_orbs(EnergyStack.new([energy]))

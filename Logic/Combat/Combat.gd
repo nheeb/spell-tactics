@@ -200,8 +200,8 @@ func get_all_castables() -> Array[Castable]:
 func get_all_enemies() -> Array[EnemyEntity]:
 	return enemies.duplicate()
 
-func get_all_hp_entities() -> Array[HPEntity]:
-	var hps : Array[HPEntity] = []
+func get_all_hp_entities() -> Array[Entity]:
+	var hps : Array[Entity] = []
 	hps.append_array(get_all_enemies())
 	hps.append(player)
 	# TODO What about HP Entities != player or enemies?

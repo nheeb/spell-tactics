@@ -37,7 +37,7 @@ func is_target_valid(target: Variant, requirement_or_index = null) -> bool:
 		)
 	var req := requirement_or_index as TargetRequirement
 	assert(req)
-	return not req.convert_target(target).is_empty()
+	return not req.convert_target(target, self).is_empty()
 
 ##########################
 ## Type & Logic Getters ##

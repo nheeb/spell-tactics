@@ -1,12 +1,21 @@
-extends Control
+class_name HoverPopup extends Control
 
 
 # no instancing for now, just max it out at 3 entries
-const ENT_ENTRY = preload("res://UI/PopUp/PopUpEntityEntry.tscn")
+const ENT_ENTRY = preload("res://UI/PopUp/HoverPopupEntry.tscn")
 
 @onready var ent_entries = [%EntityEntry1, %EntityEntry2, %EntityEntry3]
 func show_tile(tile: Tile):
 	%TileLabel.text = "Tile (%s, %s)" % [tile.r, tile.q]
+	%TileLabel.visible = Game.DEBUG_OVERLAY
+	
+	if len(tile.entities) > 3:
+		push_warning("PopUp show_tile() only supports up to 3 Entities.")
+		return
+	
+	if (not tile.is_drainable()) and (not Game.DEBUG_OVERLAY):
+		# don't show "empty popup"
+		return
 	
 	var i = 0
 	# tile has an array of entities, show one entry for each of these
@@ -35,8 +44,9 @@ func show_tile(tile: Tile):
 	
 func hide_popup():
 	hide()
-	for j in range(0, len(ent_entries)):
-		ent_entries[j].hide()
+	if ent_entries != null:
+		for j in range(0, len(ent_entries)):
+			ent_entries[j].hide()
 
 # Try one of those calls if Container resizing fails again...
 #$MarginContainer/VBoxContainer.sort_children.emit()

@@ -23,13 +23,13 @@ func _execute():
 	
 	if obstacle_tile:
 		for ent in obstacle_tile.entities:
-			var cover := ent.type.cover_value as int
+			var cover := ent.cover as int
 			if cover >= 1:
 				blocking_entity = ent
 				break
 	
 	if obstacle_tile:
-		var destination := previous_tile as Tile
+		var destination := previous_tile as Tile # TODO bug with destionation == null
 		combat.movement.move_entity(enemy, destination)
 
 		if blocking_entity:
@@ -38,7 +38,7 @@ func _execute():
 		tiles_in_the_way.pop_back()
 		var destination := tiles_in_the_way[-1]
 		combat.movement.move_entity(enemy, destination)
-		(target_entity as HPEntity).inflict_damage_with_visuals(3)
+		(target_entity as Entity).inflict_damage_with_visuals(3)
 		combat.movement.apply_knockback(
 			target_entity,
 			start_tile.direction_to(target_entity.current_tile)

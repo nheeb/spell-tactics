@@ -9,14 +9,11 @@
 script = ExtResource("1_8ksyg")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_mm56g"]
-metadata/__load_path__ = "res://Assets/Sprites/Icons/breath.png"
-
 [resource]
 script = ExtResource("5_b0vkn")
 costs = SubResource("Resource_61ndi")
-effect_text = "Draw 1 card and gain 1 Drain.
-Can only be played with no adjacent enemies."
+effect_text = "Draw 1 Spell and gain 1 Drain.
+Only playable without enemy in range 3."
 topic = 12
 topic_secondary = 0
 topic_icons = Array[int]([])
@@ -26,4 +23,6 @@ pretty_name = "Breath"
 fluff_text = ""
 icon = ExtResource("2_nuueu")
 color = Color(0.164706, 0.992157, 0.952941, 1)
-default_data = {}
+default_data = {
+"no_enemies_range": 3
+}

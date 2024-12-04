@@ -1,4 +1,4 @@
-class_name EnemyEntityType extends HPEntityType
+class_name EnemyEntityType extends EntityType
 
 @export var behaviour: EnemyBehaviour
 @export var actions: Array[EnemyActionArgs]
@@ -10,7 +10,7 @@ class_name EnemyEntityType extends HPEntityType
 @export var strength: int = 1
 @export var accuracy: int = 0
 @export var resistance: int = 0
-@export var movement_range: int = 2
+@export var movement_range: int = 3
 
 func create_base_object() -> CombatObject:
 	return EnemyEntity.new()

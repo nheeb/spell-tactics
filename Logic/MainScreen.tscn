@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Logic/MainScreen.gd" id="1_mxjyu"]
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_pqauw"]
-[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="3_im24c"]
+[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopupHandler.tscn" id="3_im24c"]
 [ext_resource type="Script" path="res://Logic/Utility/ViewportSizer.gd" id="4_dkfaa"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qgsc2"]
@@ -23,7 +23,7 @@ render_target_update_mode = 4
 
 [node name="World" parent="Viewport3D" node_paths=PackedStringArray("popup_handler") instance=ExtResource("2_pqauw")]
 unique_name_in_owner = true
-popup_handler = NodePath("../../PopUpHandler")
+popup_handler = NodePath("../../PopupHandler")
 
 [node name="Drainables" type="Control" parent="Viewport3D"]
 layout_mode = 3
@@ -65,7 +65,7 @@ texture = SubResource("ViewportTexture_qgsc2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PopUpHandler" parent="." node_paths=PackedStringArray("viewport", "drainable_root", "popup_root") instance=ExtResource("3_im24c")]
+[node name="PopupHandler" parent="." node_paths=PackedStringArray("viewport", "drainable_root", "popup_root") instance=ExtResource("3_im24c")]
 viewport = NodePath("../Viewport3D")
 drainable_root = NodePath("../Viewport3D/Drainables")
 popup_root = NodePath("../Viewport3D/PopUps")
@@ -81,4 +81,4 @@ offset_left = 176.0
 offset_right = 216.0
 offset_bottom = 23.0
 
-[connection signal="combat_changed" from="Viewport3D/World" to="PopUpHandler" method="_on_world_combat_changed"]
+[connection signal="combat_changed" from="Viewport3D/World" to="PopupHandler" method="_on_world_combat_changed"]

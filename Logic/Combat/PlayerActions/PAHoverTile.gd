@@ -23,7 +23,7 @@ func execute(combat: Combat) -> void:
 	if castable:
 		await castable.get_logic().set_preview_visuals(true, tile)
 	# TODO ideally, move tile_hovered signals from Events into this script and bundle the logic here
-	if tile.distance_to(combat.player.current_tile) <= 1 and tile.is_drainable():
+	if tile.distance_to(combat.player.current_tile) <= 1 and tile.is_drainable() and combat.actives[1].unlocked:
 		if tile != currently_hovering_drainable:
 			tile.set_highlight(Highlight.Type.HoverAction, true)
 			on_drainable_tile_hovered.emit(tile)

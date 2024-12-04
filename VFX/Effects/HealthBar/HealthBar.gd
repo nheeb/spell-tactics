@@ -1,4 +1,4 @@
-extends Node3D
+class_name HealthBar3D extends Node3D
 
 @onready var bar: Panel = $SubViewport/HealthBar2D.get_node("%Bar")
 @onready var container: Container = $SubViewport/HealthBar2D.get_node("%Container")
@@ -12,10 +12,16 @@ extends Node3D
 
 @export var base_cell_width_px := 50.0
 
+var parent_node: Node:
+	get:
+		return get_parent()
+
 func _enter_tree() -> void:
 	$HealthbarQuad.get_active_material(0).albedo_color = Color.WHITE 	# was transparent for editor beauty ;)
 	$HealthbarQuad.get_active_material(0).albedo_texture = $SubViewport.get_texture()
-	
+
+func _ready() -> void:
+	pass
 
 const BORDER_WIDTH := 30.0;
 const MAX_WIDTH := 1080.0;
@@ -30,7 +36,8 @@ func update_container_offsets():  # cells ~= max_hp
 	#print("width for ", get_parent().entity_name, " = ", width_diff_halved)
 	container.offset_left = width_diff_halved
 	container.offset_right = -width_diff_halved
-	
+
+## ANIM
 func update_hp(hp_new, max_hp_new, shield_new):
 	#print("UPDATE HP ", hp_new)
 	# determine whether any animation should play, these are responsible for affecting
@@ -47,8 +54,6 @@ func update_hp(hp_new, max_hp_new, shield_new):
 			# got shielded
 			shield_by(shield_new - shield)
 	else:
-		# (re-)initialize everything, play no animation
-		#print("setting up ", get_parent().entity_name, " hp = ", hp_new, " / ", max_hp_new)
 		bar.material.set_shader_parameter("health", hp_new)
 		bar.material.set_shader_parameter("shield", shield_new)
 		bar.material.set_shader_parameter("max_health", max_hp_new)
@@ -61,9 +66,6 @@ func update_hp(hp_new, max_hp_new, shield_new):
 	
 	scale.x = Utility.clamp_map(self.max_hp, 1.0, 14.0, 1.0, 1.6)
 	#update_container_offsets()
-
-
-
 
 var start_health: float
 var target_health: float
@@ -95,12 +97,11 @@ func damage_by(damage: int):
 	await tween.finished
 
 	bar.material.set("shader_parameter/highlight_progression", 0.0)
-	
 
 func shield_by(by: int):
 	#print("shield by ", by)
 	bar.material.set_shader_parameter("shield", shield + by)
-	
+
 func heal_by(heal: int):
 	#print("heal %s by %d" % [get_parent().entity_name, heal])
 	var old_hp = bar.material.get_shader_parameter("health")

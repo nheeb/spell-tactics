@@ -1,11 +1,8 @@
 class_name Tile extends CombatObject
 
-# TODO these are not yet connected -- maybe this makes more sense to put into tile?
-signal drainable_hovered
-signal drainable_unhovered
-
 var entities: Array[Entity] = []
 var hovering := false
+var energy_popup: EnergyPopup
 
 @export var r: int
 @export var q: int
@@ -28,9 +25,15 @@ var highlight: Highlight:
 #####################################
 
 const TILE_3D = preload("res://Logic/Level/Tile3D.tscn")
+const ENERGY_POPUP = preload("res://UI/PopUp/EnergyPopup.tscn")
+
 ## Create a new Tile along with tile3d
 static func create(r_tile: int, q_tile: int, r_center: float, q_center: float) -> Tile:
 	var tile := Tile.new()
+
+	tile.energy_popup = ENERGY_POPUP.instantiate()
+	tile.energy_popup.tile = tile  # :)
+
 	var tile_3d = TILE_3D.instantiate()
 	tile_3d._ready()
 	# center position is needed to properly align the tile
@@ -70,6 +73,9 @@ func has_entity_type(entity_type: EntityType):
 func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)
+	#if combat != null:
+	combat.animation.callable(energy_popup.update).set_flag_with()
+	
 	if entity.visual_entity:
 		if entity.visual_entity.get_parent() == null:
 			combat.level.visual_entities.add_child(entity.visual_entity)
@@ -83,6 +89,8 @@ func remove_entity(entity: Entity):
 		return
 	entities.remove_at(i)
 	entity.current_tile = null
+	if combat != null:
+		combat.animation.callable(energy_popup.update)
 	
 ## Returns all enemy entities on this tile.
 func get_enemies() -> Array[EnemyEntity]:
@@ -119,11 +127,20 @@ func get_drainable_energy() -> EnergyStack:
 		drainable_e.add(ent.energy)
 	return drainable_e
 
-func get_cover() -> int:
+func get_highest_cover() -> int:
 	return entities.reduce(
 		func (accum: int, ent: Entity) -> int:
-			return accum + ent.type.cover_value
+			if not ent.type.has_hp:
+				return accum
+			return max(accum, ent.cover)
 			, 0)
+
+func get_entities_with_highest_cover() -> Array[Entity]:
+	var hightest_cover := get_highest_cover()
+	return entities.filter(
+		func (e: Entity):
+			return e.cover == hightest_cover
+	)
 
 ## Whether player/enemy can move on this. Can move on this if this tile has no entity which is
 ## an obstacle.
@@ -150,6 +167,15 @@ func get_tags() -> Array[String]:
 			if not t in tags:
 				tags.append(t)
 	return tags
+
+func inflict_damage_with_visuals(dmg: int) -> AnimationObject:
+	combat.animation.record_start()
+	for entity in entities:
+		if entity.type.has_hp:
+			entity.inflict_damage_with_visuals(dmg).set_flag_extend()
+			combat.animation.say(entity, "%s DAMAGE" % dmg,
+				{"font_size": 42, "color": Color.RED}).set_flag_extend()
+	return combat.animation.record_finish_as_subqueue()
 
 #######################
 ## Hover & Highlight ##
@@ -206,6 +232,9 @@ func get_tiles_in_walking_range(_range: int) -> Array[Tile]:
 func get_walking_distance(other_tile: Tile) -> int:
 	return combat.level.get_shortest_distance(self, other_tile)
 
+func get_line(other_tile: Tile) -> Array[Tile]:
+	return combat.level.get_line(self, other_tile)
+
 ################
 ## DEPRECATED ##
 ################
@@ -213,18 +242,3 @@ func get_walking_distance(other_tile: Tile) -> int:
 # Dirty solution for now
 func get_node(x):
 	return node3d.get_node(x)
-
-## DEPRECATED
-#func get_drainable_energy_in_range(_range := 1) -> EnergyStack:
-	#var energy := get_drainable_energy()
-	#for t in get_surrounding_tiles(_range):
-		#energy.add(t.get_drainable_energy())
-	#return energy
-
-## Coverage factor for accuracy calculation.
-## DEPRECATED
-#func get_coverage_factor() -> int:
-	#var factor := 0
-	#for ent in entities:
-		#factor = max(factor, ent.resource.cover_value)
-	#return factor

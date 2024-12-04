@@ -10,4 +10,3 @@ func _init(_num, _allow_back):
 func process_result(spell_states: Array[SpellState]):
 	Adventure.remove_cards(spell_states)
 	ActivityManager.pop()
-

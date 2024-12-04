@@ -58,9 +58,9 @@ func set_duration(d: float) -> AnimationObject:
 	set_max_duration(d)
 	return self
 
-var _add_ticket_to_parameter := false
-func add_ticket_to_parameter() -> AnimationCallable:
-	_add_ticket_to_parameter = true
+var _add_wait_ticket_to_args := false
+func add_wait_ticket_to_args() -> AnimationCallable:
+	_add_wait_ticket_to_args = true
 	return self
 
 func _play(level: Level) -> void:

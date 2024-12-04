@@ -51,6 +51,7 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 	# Test if same action was done before and is on cooldown
 	var cooldown: int = get_kwarg("cooldown", action.cooldown) as int
 	if cooldown > 0:
+		# Get last usage by filtering the log with ActionFlavor
 		var previous_log_entries := combat.log.filtered_entries(
 			ActionFlavor.new().set_owner(enemy)
 				.add_tag(ActionFlavor.Tag.EnemyActionSpecific)

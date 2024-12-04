@@ -22,8 +22,19 @@ var current_tile: Tile
 
 ## Energy being held
 @export var energy: EnergyStack
+## Current hp if destructable
+@export var hp: int
+## Max hp
+@export var max_hp: int
+## Armor as addition to hp
+@export var armor: int
+## Team when it comes to enemy targetting
+@export var team: EntityType.Teams
+## Value for size or height when it comes to taking damage being applied to a tile
+@export var cover: int
 
-## list of EntityStatus
+
+## List of EntityStatus
 var status_array: Array[EntityStatus] = []
 
 signal entering_graveyard # Before the graveyard
@@ -52,6 +63,7 @@ func drain() -> AnimationObject:
 	assert(is_drainable(), "Tried draining entity which is not drainable.")
 	drained_energy = energy
 	energy = EnergyStack.new([])
+	combat.animation.callable(current_tile.energy_popup.update)
 	return combat.animation.call_method(visual_entity, "visual_drain").set_max_duration(.5)
 
 var drained_energy: EnergyStack
@@ -71,7 +83,11 @@ func get_tags() -> Array[String]:
 
 ## ACTION
 func on_hover_long(h: bool) -> void:
-	pass
+	if (not type.always_show_hp) and visual_entity.health_bar:
+		if h:
+			combat.animation.show(visual_entity.health_bar)
+		else:
+			combat.animation.hide(visual_entity.health_bar)
 
 ############################
 ## CombatObject Overrides ##
@@ -88,19 +104,26 @@ func die():
 	await super()
 
 func on_death():
+	combat.animation.call_method(visual_entity, "on_death_visuals")
 	await super()
 	assert(pre_death_tile)
 	if type.corpse_state:
 		var corpse := type.corpse_state.deserialize_on_tile(pre_death_tile)
 		combat.animation.effect(VFX.HEX_RINGS, pre_death_tile, {"color": corpse.type.color})
 
+func on_birth():
+	await super()
+	if type.has_hp:
+		TimedEffect.new_combat_change(check_hp) \
+			.set_id("_cc_check_hp").set_solo().register(combat)
+
 ## This will be executed after an entity has been created from a type.
 func on_load() -> void:
 	await super()
-	if visual_entity != null:
-		visual_entity.visible = false
-	else:
-		push_warning("visual_entity for entity_type %s is null in on_load()" % type.internal_name)
+	#if visual_entity != null:
+		#visual_entity.visible = false
+	#else:
+		#push_warning("visual_entity for entity_type %s is null in on_load()" % type.internal_name)
 
 ##############################
 ## Methods for EntityStatus ##
@@ -162,3 +185,43 @@ func _erase_status(status: EntityStatus) -> void:
 	if not status in status_array:
 		push_warning("Erase status got a status which is not on the entity.")
 	status_array.erase(status)
+
+################
+## HP Related ##
+################
+
+func inflict_damage(damage: int):
+	if damage <= 0:
+		return
+	var new_armor = max(0, armor - damage)
+	damage -= armor
+	armor = new_armor
+	if damage <= 0:
+		return
+	hp = hp - damage
+
+func inflict_damage_with_visuals(damage: int, with_text := false) -> AnimationObject:
+	inflict_damage(damage)
+	var animations = []
+	animations.append(combat.animation.update_hp(self))
+	animations.append(combat.animation.call_method(visual_entity, "on_hurt_visuals"))
+	if with_text:
+		animations.append(combat.animation.say(self.visual_entity, "%s Damage" % damage,\
+		 		{"color": Color.RED, "font_size": 64}).set_duration(.5).set_flag_with())
+	
+	return combat.animation.reappend_as_subqueue(animations)
+
+func inflict_heal_with_visuals(heal: int, overheal_as_armor := false) -> AnimationObject:
+	type = type as EntityType
+	var old_hp := hp
+	hp = min(max_hp, hp + heal)
+	armor += max(0, heal - (hp - old_hp))
+	return combat.animation.update_hp(self)
+
+func is_wounded() -> bool:
+	return hp < type.max_hp 
+
+## TE
+func check_hp():
+	if hp <= 0:
+		await combat.action_stack.process_callable(die)
