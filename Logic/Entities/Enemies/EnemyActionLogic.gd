@@ -115,7 +115,8 @@ func _get_target_pool() -> Array:
 			all_targets = combat.get_all_hp_entities()
 			all_targets = all_targets.filter(
 				func (t):
-					return t.team != enemy.team
+					## FIXME This is shitty
+					return t is PlayerEntity
 			)
 		EnemyAction.TargetType.Allies:
 			all_targets = combat.get_all_hp_entities()
