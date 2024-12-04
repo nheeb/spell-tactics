@@ -211,9 +211,11 @@ func inflict_damage_with_visuals(damage: int, with_text := false) -> AnimationOb
 	
 	return combat.animation.reappend_as_subqueue(animations)
 
-func inflict_heal_with_visuals(heal: int) -> AnimationObject:
+func inflict_heal_with_visuals(heal: int, overheal_as_armor := false) -> AnimationObject:
 	type = type as EntityType
-	hp = min(type.max_hp, hp + heal)
+	var old_hp := hp
+	hp = min(max_hp, hp + heal)
+	armor += max(0, heal - (hp - old_hp))
 	return combat.animation.update_hp(self)
 
 func is_wounded() -> bool:

@@ -376,8 +376,8 @@ func calc_positions():
 		scales[pinned_card] = PINNED_SCALE
 		rotations[pinned_card] = PINNED_ROTATION
 
-	var z_move: float = max(0.0, 1.0 * (all_cards.size() - 5))
-	var y_move: float = - max(0.0, .1 * (all_cards.size() - 5))
+	var z_move: float = max(0.0, 1.3 * (all_cards.size() - 5))
+	var y_move: float = - max(0.0, .13 * (all_cards.size() - 5))
 
 	# Submit all transformations to the
 	for card in all_cards:

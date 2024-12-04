@@ -95,4 +95,4 @@ func setup_visuals(ent: Entity) -> void:
 	if ent.visual_entity.has_method("_ready"):
 		ent.visual_entity._ready()
 	ent.visual_entity.setup(ent)
-	ent.combat.animation.show(ent.visual_entity)
+	ent.combat.animation.show(ent.visual_entity).set_flag_with()

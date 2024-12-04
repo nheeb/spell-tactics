@@ -1,7 +1,7 @@
 extends EntityLogic
 
 func on_birth():
-	TimedEffect.new_end_phase_trigger_from_callable(
+	TimedEffect.new_enemy_phase_trigger_from_callable(
 		give_armor
 	).register(combat)
 

@@ -12,14 +12,16 @@ stack = Array[int]([2, 6])
 [resource]
 script = ExtResource("1_38xla")
 costs = SubResource("Resource_k65jt")
-effect_text = "Gain 3 armor."
+effect_text = "Gain 2 armor. Draw 1 Spell."
 topic = 2
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = "2"
 target_requirements = Array[ExtResource("4_m2r7c")]([])
-pretty_name = "Mud armor"
+pretty_name = "Earth armor"
 fluff_text = "Surely no fashion choice."
 icon = ExtResource("2_oe1el")
 color = Color(0.695313, 0.599452, 0.478027, 1)
-default_data = {}
+default_data = {
+"armor": 2
+}

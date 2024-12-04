@@ -62,6 +62,8 @@ func get_loaded_energy_sockets() -> Array[HandCardEnergySocket]:
 	return a
 
 func get_empty_energy_socket(type : EnergyStack.EnergyType) -> HandCardEnergySocket:
+	if type == EnergyStack.EnergyType.Spectral:
+		type = EnergyStack.EnergyType.Any
 	var socket_children := %EnergySocketPivot.get_children()
 	socket_children.reverse()
 	for c in socket_children:

@@ -7,20 +7,19 @@
 
 [sub_resource type="Resource" id="Resource_gkkbv"]
 script = ExtResource("1_8rpxy")
-stack = Array[int]([6, 6])
+stack = Array[int]([3, 6, 6])
 
 [resource]
 script = ExtResource("2_x2nta")
 costs = SubResource("Resource_gkkbv")
-effect_text = "Draw 2 Spells."
+effect_text = "Draw 3 Spells. Heal 1."
 topic = 12
-topic_secondary = 0
+topic_secondary = 11
 topic_icons = Array[int]([])
-topic_caption = "2"
+topic_caption = "3"
 target_requirements = Array[ExtResource("4_tg1nd")]([])
 pretty_name = "Spell Memory"
-fluff_text = "The spell at the tip of one's tongue..
-"
+fluff_text = "The spell at the tip of one's tongue."
 icon = ExtResource("2_t86vg")
 color = Color(0.164706, 0.992157, 0.952941, 1)
 default_data = {}

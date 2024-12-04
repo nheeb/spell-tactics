@@ -74,7 +74,7 @@ func add_entity(entity: Entity):
 	entity.current_tile = self
 	entities.append(entity)
 	#if combat != null:
-	combat.animation.callable(energy_popup.update)
+	combat.animation.callable(energy_popup.update).set_flag_with()
 	
 	if entity.visual_entity:
 		if entity.visual_entity.get_parent() == null:

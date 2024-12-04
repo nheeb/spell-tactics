@@ -16,8 +16,7 @@ static func type_to_str(type: EnergyType) -> String:
 	return EnergyType.keys()[type]
 
 func score_lamda_payment_calculation(et: EnergyType) -> int:
-	var value := int(et)
-	return value
+	return int(et)
 
 func score_lamda_default(et: EnergyType) -> int:
 	return int(et)
@@ -34,6 +33,9 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 			if e in bank:
 				possible_payment.append(e)
 				bank.erase(e)
+			elif EnergyType.Spectral in bank:
+				possible_payment.append(EnergyType.Spectral)
+				bank.erase(EnergyType.Spectral)
 			else:
 				return null
 		else:
@@ -47,7 +49,7 @@ func get_possible_payment(cost_stack: EnergyStack) -> EnergyStack:
 
 func get_forced_payment(cost_stack: EnergyStack) -> EnergyStack:
 	if get_possible_payment(cost_stack) == null:
-		return null
+		return EnergyStack.new()
 	var bank := Utility.array_sorted(self.stack, score_lamda_payment_calculation)
 	var cost := Utility.array_sorted(cost_stack.stack, score_lamda_payment_calculation)
 	var forced_payment : Array[EnergyType] = []
@@ -58,7 +60,7 @@ func get_forced_payment(cost_stack: EnergyStack) -> EnergyStack:
 				forced_payment.append(e)
 				bank.erase(e)
 			else:
-				return null
+				return EnergyStack.new()
 		else:
 			any_count += 1
 	if bank.size() == any_count:
