@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Logic/LevelEditor/LevelEditor.gd" id="1_bl8t1"]
 [ext_resource type="PackedScene" uid="uid://cs6vnuiljtmct" path="res://Logic/World.tscn" id="2_85xti"]
-[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopupHandler.tscn" id="4_q1uoy"]
+[ext_resource type="PackedScene" uid="uid://dhjgr5kq0vfdw" path="res://UI/PopUp/PopUpHandler.tscn" id="4_q1uoy"]
 [ext_resource type="LabelSettings" uid="uid://cxgi1adxsmvqn" path="res://Logic/LevelEditor/UI/LevelEditorFontSmall.tres" id="5_73if2"]
 [ext_resource type="Script" path="res://Logic/LevelEditor/UI/SelectionUI.gd" id="5_ep6w4"]
 [ext_resource type="Script" path="res://Logic/Utility/ViewportSizer.gd" id="6_jgjps"]
@@ -89,10 +89,9 @@ texture = SubResource("ViewportTexture_2ukqi")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PopUpHandler" parent="." node_paths=PackedStringArray("viewport", "drainable_root", "popup_root") instance=ExtResource("4_q1uoy")]
+[node name="PopUpHandler" parent="." node_paths=PackedStringArray("viewport", "popup_root") instance=ExtResource("4_q1uoy")]
 layout_mode = 1
 viewport = NodePath("../Viewport3D")
-drainable_root = NodePath("../Viewport3D/Drainables")
 popup_root = NodePath("../Viewport3D/PopUps")
 
 [node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport")]

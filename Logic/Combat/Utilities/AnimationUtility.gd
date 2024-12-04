@@ -175,6 +175,9 @@ func record_finish(record_id := "") -> Array[AnimationObject]:
 	animation_queue.erase(record_object)
 	return recorded_animations
 
+func record_finish_as_subqueue(record_id := "") -> AnimationSubQueue:
+	return reappend_as_subqueue(record_finish(record_id))
+
 #######################################
 ## Logic Functions (don't use those) ##
 #######################################

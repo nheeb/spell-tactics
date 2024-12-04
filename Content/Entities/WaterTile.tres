@@ -10,10 +10,11 @@ stack = Array[int]([3])
 
 [resource]
 script = ExtResource("1_cxs30")
-can_be_hovered = true
 visual_scene = ExtResource("2_xo0pv")
 tags = Array[String]([])
 is_terrain = true
+can_be_hovered = true
+team = 0
 prototype_scale = Vector2(1, 1)
 prototype_modulate = Color(1, 1, 1, 1)
 only_show_in_editor = false
@@ -22,7 +23,12 @@ energy = SubResource("Resource_hfhpp")
 obstacle_layer = 1
 obstacle_mask = 1
 is_blocker = false
+has_hp = false
+max_hp = 1
+always_show_hp = false
+hp_bar_height = 1.5
 cover_value = 0
+destroy_on_drain = false
 pretty_name = "Water"
 fluff_text = ""
 color = Color(0, 0, 0, 1)

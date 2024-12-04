@@ -4,9 +4,10 @@
 
 [resource]
 script = ExtResource("1_eaws2")
-can_be_hovered = false
 tags = Array[String]([])
 is_terrain = false
+can_be_hovered = false
+team = 0
 prototype_scale = Vector2(0.6, 0.6)
 prototype_modulate = Color(1, 0, 0, 1)
 only_show_in_editor = true
@@ -14,7 +15,12 @@ is_drainable = false
 obstacle_layer = 0
 obstacle_mask = 0
 is_blocker = false
+has_hp = false
+max_hp = 1
+always_show_hp = false
+hp_bar_height = 1.5
 cover_value = 0
+destroy_on_drain = false
 pretty_name = "Enemy Spawner"
 fluff_text = ""
 color = Color(0, 0, 0, 1)

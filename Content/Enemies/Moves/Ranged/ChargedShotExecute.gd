@@ -6,6 +6,7 @@ const STATUS_SHOT_CHARGED = preload(
 
 func _execute():
 	combat.animation.say(enemy.visual_entity, "Super triple shot!").set_duration(.6)
+	combat.animation.camera_reach(target_entity).set_duration(.6)
 	for i in range(3):
 		var line := enemy.current_tile.get_line(target_entity.current_tile)
 		var hit_tile := Utility.array_get_first_filtered_value(

@@ -11,7 +11,7 @@ func _setup():
 
 func get_path(enemy_tile: Tile) -> Array[Tile]:
 	var range_target := target_tile
-	if not range_target:
+	if range_target == null:
 		range_target = combat.player.current_tile
 	assert(range_target)
 	var tiles_in_range := enemy_tile.get_tiles_in_walking_range(movement)

@@ -376,6 +376,9 @@ func calc_positions():
 		scales[pinned_card] = PINNED_SCALE
 		rotations[pinned_card] = PINNED_ROTATION
 
+	var z_move: float = max(0.0, 1.0 * (all_cards.size() - 5))
+	var y_move: float = - max(0.0, .1 * (all_cards.size() - 5))
+
 	# Submit all transformations to the
 	for card in all_cards:
 		#card.smooth_movement.target_pos = Utility.vec_xy_to_vec3(positions[card],\
@@ -391,6 +394,10 @@ func calc_positions():
 			+ 20 * int(card == dragged_card)
 		card.set_render_prio(render_prio)
 		card.smooth_movement.target_pos += Vector3.BACK * Z_UNIT * render_prio
+		
+		if card != pinned_card:
+			card.smooth_movement.target_pos += Vector3.FORWARD * z_move
+			card.smooth_movement.target_pos += Vector3.UP * y_move
 		
 		# Hover card bigger collision
 		card.set_collision_scale(1.2 if card == hovered_card else 1.0)

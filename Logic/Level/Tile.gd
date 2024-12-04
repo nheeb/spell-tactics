@@ -168,6 +168,15 @@ func get_tags() -> Array[String]:
 				tags.append(t)
 	return tags
 
+func inflict_damage_with_visuals(dmg: int) -> AnimationObject:
+	combat.animation.record_start()
+	for entity in entities:
+		if entity.type.has_hp:
+			entity.inflict_damage_with_visuals(dmg).set_flag_extend()
+			combat.animation.say(entity, "%s DAMAGE" % dmg,
+				{"font_size": 42, "color": Color.RED}).set_flag_extend()
+	return combat.animation.record_finish_as_subqueue()
+
 #######################
 ## Hover & Highlight ##
 #######################

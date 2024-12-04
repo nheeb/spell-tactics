@@ -102,8 +102,9 @@ func get_random_action_plan() -> EnemyActionPlan:
 
 func on_birth():
 	await super()
-	TimedEffect.new_combat_change(plan_next_action) \
-		.set_id("_cc_plan_action").set_solo().register(combat)
+	# TBD Removed this for now.
+	#TimedEffect.new_combat_change(plan_next_action) \
+		#.set_id("_cc_plan_action").set_solo().register(combat)
 
 func on_death():
 	super()
