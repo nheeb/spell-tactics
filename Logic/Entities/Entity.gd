@@ -32,7 +32,8 @@ var current_tile: Tile
 @export var team: EntityType.Teams
 ## Value for size or height when it comes to taking damage being applied to a tile
 @export var cover: int
-
+## Whether the player can interact with the entity
+@export var can_interact: bool
 
 ## List of EntityStatus
 var status_array: Array[EntityStatus] = []
@@ -106,7 +107,7 @@ func die():
 func on_death():
 	combat.animation.call_method(visual_entity, "on_death_visuals")
 	await super()
-	assert(pre_death_tile)
+	assert(pre_death_tile, "If this is null the method 'die' was never executed.")
 	if type.corpse_state:
 		var corpse := type.corpse_state.deserialize_on_tile(pre_death_tile)
 		combat.animation.effect(VFX.HEX_RINGS, pre_death_tile, {"color": corpse.type.color})
@@ -120,10 +121,6 @@ func on_birth():
 ## This will be executed after an entity has been created from a type.
 func on_load() -> void:
 	await super()
-	#if visual_entity != null:
-		#visual_entity.visible = false
-	#else:
-		#push_warning("visual_entity for entity_type %s is null in on_load()" % type.internal_name)
 
 ##############################
 ## Methods for EntityStatus ##
@@ -147,7 +144,6 @@ func apply_status(status_or_type: Variant, additional_data := {}) -> void:
 		existing_status.front().merge(status)
 	else:
 		status_array.append(status)
-		#status.setup(self)
 
 ## Returns the status that fits given name or type.
 func get_status(status_name_or_type: Variant) -> Array[EntityStatus]:
@@ -179,7 +175,9 @@ func remove_status(status_or_name_or_type: Variant) -> void:
 		combat.action_stack.push_before_active(status.die)
 	await combat.action_stack.wait()
 
-func _erase_status(status: EntityStatus) -> void:
+## This is just to remove the status from the array.
+## Use remove_status or Status.self_remove instead.
+func erase_status(status: EntityStatus) -> void:
 	if not status.dead:
 		push_warning("Status should be dead when getting erased.")
 	if not status in status_array:
