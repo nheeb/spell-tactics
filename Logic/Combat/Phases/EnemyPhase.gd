@@ -26,7 +26,7 @@ func process_phase() -> void:
 		
 		await combat.action_stack.wait()
 		
-		combat.animation.callable(enemy.visual_entity.look_at_tile.bind(combat.player.current_tile))\
+		combat.animation.callable(enemy.visual_entity.look_at_entity_tile_border.bind(combat.player))\
 			.add_wait_ticket_to_args()
 	# nils - should we really wait here?
 	combat.animation.wait(.7)
