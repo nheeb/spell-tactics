@@ -47,7 +47,7 @@ func _execute():
 	for tile in target_tiles:
 		for entity in tile.entities:
 			if entity.is_drainable():
-				entity.drain().set_flag_extend()
+				await combat.action_stack.process_callable(entity.drain)
 			elif entity.type.is_terrain:
 				combat.animation.callable(entity.visual_entity.visual_drain).set_flag_with()
 

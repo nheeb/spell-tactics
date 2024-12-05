@@ -58,22 +58,17 @@ func move(target: Tile):
 	current_tile.remove_entity(self)
 	target.add_entity(self)
 
+## ACTION
 ## Removes the entitys energy and returns the visual DrainAnimation.
-## The drained energy can be accessed only once with get_drained_energy().
-func drain() -> AnimationObject:
-	assert(is_drainable(), "Tried draining entity which is not drainable.")
-	drained_energy = energy
+func drain() -> void:
+	if not is_drainable():
+		push_error("Tried draining entity which is not drainable.")
+		return
 	energy = EnergyStack.new([])
 	combat.animation.callable(current_tile.energy_popup.update)
-	return combat.animation.call_method(visual_entity, "visual_drain").set_max_duration(.5)
-
-var drained_energy: EnergyStack
-## Returns an EnergyStack only if the entity was drained previously.
-func get_drained_energy() -> EnergyStack:
-	assert(drained_energy != null, "The entity wasn't drained before")
-	var _drained_energy = drained_energy
-	drained_energy = null
-	return _drained_energy
+	combat.animation.call_method(visual_entity, "visual_drain").set_max_duration(.5)
+	if logic:
+		await logic.on_drain()
 
 ## Returns true if the entity has drainable energy on it.
 func is_drainable():

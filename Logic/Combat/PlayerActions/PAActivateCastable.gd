@@ -13,34 +13,35 @@ func is_valid(combat: Combat) -> bool:
 	return false
 
 func execute(combat: Combat) -> void:
-	combat.input.current_castable.update_current_state()
+	var castable := combat.input.current_castable
+	castable.update_current_state()
 	if clicked_on_card:
-		combat.animation.callable(combat.input.current_castable.get_card() \
+		combat.animation.callable(castable.get_card() \
 						.warp.bind(Events.cards3d_ray_collision_point)) \
-						.set_duration(.3)
+						.set_duration(.25)
 	else:
 		# TODO check how these situations can even occur
-		if combat.input.current_castable == null:
+		if castable == null:
 			push_error("ActivateCastable executed without a current_castable")
 			return
 		# this happened with the "throw card" active
-		if combat.input.current_castable.get_card() == null:
+		if castable.get_card() == null:
 			push_error("ActivateCastable executed but current_castable has no card.")
 			return
-		combat.animation.callable(combat.input.current_castable.get_card().warp) \
-						.set_duration(.2)
-	combat.animation.wait(.3)
-	await combat.input.current_castable.get_logic().set_preview_visuals(false)
+		combat.animation.callable(castable.get_card().warp) \
+						.set_duration(.1)
+	combat.animation.wait(.05)
+	await castable.get_logic().set_preview_visuals(false)
 	combat.action_stack.preset_combat_change()
 	var flavor := ActionFlavor.new().set_owner(combat.player).add_tag(ActionFlavor.Tag.Cast)
-	if combat.input.current_castable is Spell:
+	if castable is Spell:
 		flavor.add_tag(ActionFlavor.Tag.Spell)
 	else:
 		flavor.add_tag(ActionFlavor.Tag.Active)
 	combat.action_stack.preset_flavor(
 		flavor.finalize(combat)
 	)
-	await combat.action_stack.process_callable(combat.input.current_castable.cast)
+	await combat.action_stack.process_callable(castable.cast)
 
 func on_fail(combat: Combat) -> void:
 	pass

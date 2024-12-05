@@ -10,11 +10,9 @@ func execute() -> void:
 	)
 	for entity in target_entities:
 		entity = entity as Entity
-		var energy_stack : EnergyStack = null
 		if entity.is_drainable():
-			entity.drain() # removes the energy and queues the visual drain animation
-			energy_stack = entity.get_drained_energy()
-			combat.energy.gain(energy_stack, entity)
+			combat.energy.gain(entity.energy, entity)
+			await combat.action_stack.process_callable(entity.drain)
 		elif entity.type.is_terrain:  # terrain only gets drained visually
 			combat.animation.callable(entity.visual_entity.visual_drain)
 
