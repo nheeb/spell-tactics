@@ -24,6 +24,11 @@ func process_phase() -> void:
 			ActiveType.load_from_file(INTERACT).create(combat)
 		]
 	combat.ui.initialize_active_buttons(combat.actives)
+	
+	# Initial Animation
+	if combat.player.current_tile != null:
+		combat.animation.camera_reach(combat.player.current_tile)
+	
 	combat.cards.draw_to_hand_size()
 	
 	combat.action_stack.mark_combat_changed()

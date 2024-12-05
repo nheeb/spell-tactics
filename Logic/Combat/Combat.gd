@@ -94,10 +94,6 @@ func setup() -> void:
 	
 	# Connect with ui
 	ui.setup(self)
-	
-	# Initial Animation
-	if player.current_tile != null:
-		animation.camera_reach(player.current_tile)
 
 func connect_with_ui_and_camera(_ui: CombatUI, cam: GameCamera = null) -> void:
 	ui = _ui
