@@ -3,13 +3,9 @@ class_name CombatBeginPhase extends CombatPhase
 const MOVE  = "res://Content/Actives/BasicMovement.tres"
 const DRAIN = "res://Content/Actives/Drain.tres"
 const MELEE = "res://Content/Actives/SimpleMelee.tres"
+const INTERACT = "res://Content/Actives/Interact.tres"
 
 func process_phase() -> void:
-	# TODO Do this in general with all CombatObjects
-	# entities sync with type
-	for e in combat.level.entities.get_all_entities():
-		e.sync_with_type()
-	
 	# Create Deck
 	if Game.DEBUG_SPELL_TESTING:
 		combat.log.add("Spell Testing Deck will be loaded")
@@ -24,7 +20,8 @@ func process_phase() -> void:
 		combat.actives = [
 			ActiveType.load_from_file(MOVE).create(combat),
 			ActiveType.load_from_file(DRAIN).create(combat),
-			ActiveType.load_from_file(MELEE).create(combat)
+			ActiveType.load_from_file(MELEE).create(combat),
+			ActiveType.load_from_file(INTERACT).create(combat)
 		]
 	combat.ui.initialize_active_buttons(combat.actives)
 	combat.cards.draw_to_hand_size()

@@ -1,11 +1,5 @@
 extends ActiveLogic
 
-## Usable references:
-## active - Corresponding active (CombatObject with data)
-## combat - The current combat for which the active was created
-## target - The target Tile (if active is targetable)
-## targets - Array of target tiles (if active has multiple targets)
-
 ## Here should be the effect
 func execute() -> void:
 	pass

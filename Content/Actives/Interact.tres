@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="ActiveType" load_steps=5 format=3 uid="uid://q71fhw1j6g0l"]
+
+[ext_resource type="Script" path="res://Logic/Castables/ActiveType.gd" id="1_drj2s"]
+[ext_resource type="Texture2D" uid="uid://c88tbc4ws4vau" path="res://Assets/Sprites/Icons/upgrade.png" id="1_xtpvd"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="2_ea0hq"]
+
+[sub_resource type="Resource" id="Resource_12ymq"]
+script = ExtResource("2_ea0hq")
+type = 0
+limitation = 0
+range_size = 1
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
+[resource]
+script = ExtResource("1_drj2s")
+limitation = 2
+max_uses_per_round = 0
+show_button_in_ui = false
+hotkey_label = ""
+effect_text = "Interact with Target"
+topic = 0
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""
+target_requirements = Array[ExtResource("2_ea0hq")]([SubResource("Resource_12ymq")])
+pretty_name = "Interact"
+fluff_text = ""
+icon = ExtResource("1_xtpvd")
+color = Color(0, 0, 0, 1)
+default_data = {}

@@ -161,3 +161,12 @@ func size() -> int:
 
 func count(type: EnergyType) -> int:
 	return stack.count(type)
+
+static func random_energy_type(include_spectral := false, include_any := false) -> EnergyType:
+	var type_pool := [EnergyType.Decay, EnergyType.Harmony, EnergyType.Matter, EnergyType.Flow]
+	if include_spectral:
+		type_pool.append(EnergyType.Spectral)
+	if include_any:
+		type_pool.append(EnergyType.Any)
+	type_pool.shuffle()
+	return type_pool.pick_random()
