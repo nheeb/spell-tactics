@@ -29,6 +29,13 @@ func draw() -> AnimationObject:
 	combat.hand.append(spell)
 	return combat.animation.call_method(combat.ui.cards3d, "add_card", [spell])
 
+## ACTION
+func draw_from_type(spell_type: SpellType):
+	var spell := spell_type.create(combat) as Spell
+	await combat.action_stack.wait()
+	combat.hand.append(spell)
+	combat.animation.call_method(combat.ui.cards3d, "add_card", [spell])
+
 func draw_to_hand_size():
 	# TODO make some start hand
 	var hand_size := 4 if Game.DEBUG_SPELL_TESTING else START_HAND_SIZE 

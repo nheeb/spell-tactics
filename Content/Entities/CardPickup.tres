@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EntityType" load_steps=3 format=3 uid="uid://xkrd2ybc7tbe"]
+
+[ext_resource type="Script" path="res://Logic/Entities/EntityType.gd" id="1_kd352"]
+[ext_resource type="PackedScene" uid="uid://bc4prx2h0rdkg" path="res://VFX/Entities/VisualCardPickup.tscn" id="2_boxhg"]
+
+[resource]
+script = ExtResource("1_kd352")
+visual_scene = ExtResource("2_boxhg")
+tags = Array[String]([])
+is_terrain = false
+can_be_hovered = true
+can_interact = true
+destroy_on_interact = true
+team = 0
+prototype_scale = Vector2(1, 1)
+prototype_modulate = Color(1, 1, 1, 1)
+only_show_in_editor = false
+is_drainable = true
+destroy_on_drain = false
+obstacle_layer = 0
+obstacle_mask = 0
+is_blocker = false
+has_hp = false
+max_hp = 1
+always_show_hp = false
+hp_bar_height = 1.5
+cover_value = 0
+pretty_name = "Floating Spell"
+fluff_text = ""
+color = Color(0, 0, 0, 1)
+default_data = {}

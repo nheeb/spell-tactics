@@ -5,15 +5,15 @@ func execute() -> void:
 		ActionFlavor.new().set_owner(combat.player)
 			.add_tag(ActionFlavor.Tag.Drain)
 			.add_target(target_tile)
-			.add_target_array(target_entities)
+			.add_target_array(target_tile.entities)
 			.finalize(combat)
 	)
-	for entity in target_entities:
+	for entity in target_tile.entities:
 		entity = entity as Entity
 		if entity.is_drainable():
 			combat.energy.gain(entity.energy, entity)
 			await combat.action_stack.process_callable(entity.drain)
-		elif entity.type.is_terrain:  # terrain only gets drained visually
+		elif entity.type.is_terrain: # not drainable terrain only gets drained visually
 			combat.animation.callable(entity.visual_entity.visual_drain)
 
 func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:

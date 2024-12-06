@@ -84,6 +84,7 @@ func interact() -> void:
 		return
 	if logic:
 		await logic.on_interact()
+		await combat.action_stack.wait()
 	else:
 		push_warning("Tried interacting with %s but it has no logic" % self)
 	if type.destroy_on_interact:
