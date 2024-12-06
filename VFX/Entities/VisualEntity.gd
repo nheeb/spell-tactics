@@ -170,30 +170,15 @@ func look_at_entity_exact(target: Entity):
 	var tween := VisualTime.create_tween() 
 	pass
 
-func look_at_entity_tile_border(target: Entity, ticket: WaitTicket = null):
-	# origin tile coordinates
-	var r_origin = entity.current_tile.r
-	var q_origin = entity.current_tile.q
-	# target tile coordinates
-	var tile = target.current_tile
-	var r_target = tile.r
-	var q_target = tile.q
-
-	# find closest cube direction
-	var cube_dir = Utility.closest_hex_direction(r_origin, q_origin, r_target, q_target)
-
-	var axial_dir = Utility.cube_to_axial(cube_dir)
-	var world_dir = Utility.axial_to_world_space(axial_dir).normalized()
-	
-	print("world_dir: " + str(world_dir))
-	
-	# calculate rotation angle
-	var angle_radians = atan2(world_dir.y, world_dir.x)
-	angle_radians += deg_to_rad(30)  # edge alignment
-	var angle_degrees = rad_to_deg(angle_radians)
+## look at in x-z plane while "rounding" it to closest hex tile border
+func look_at_entity_tile_border(target: Node3D, ticket: WaitTicket = null):
+	var direction = (target.global_position - self.global_position).normalized()
+	print("direction: " + str(direction))
+	var xz_degrees = rad_to_deg(atan2(direction.y, direction.x))
+	var hex_snap = round(xz_degrees / 60.0) * 60.0
 
 	var tween := VisualTime.create_tween()
-	tween.tween_property(self, "rotation_degrees:y", angle_degrees, 0.4)  
+	tween.tween_property(self, "rotation_degrees:y", hex_snap, 0.4)  
 	
 	if ticket != null:
 		await tween.finished
