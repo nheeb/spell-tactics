@@ -177,6 +177,7 @@ mesh = SubResource("QuadMesh_33eg3")
 [node name="Center" type="Node3D" parent="."]
 
 [node name="EnergyOrb" parent="Center" instance=ExtResource("4_vptsa")]
+unique_name_in_owner = true
 transform = Transform3D(1.88265, 0, 0, 0, 1.88265, 0, 0, 0, 1.88265, 0.019959, 0.625052, -0.106382)
 type = 4
 orbital_movement_active = false

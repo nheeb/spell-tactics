@@ -44,7 +44,7 @@ func create(combat: Combat, props := {}) -> CombatObject:
 		logic.setup(obj)
 		obj.set("logic", logic)
 	# Put on_birth on the stack for special creation effects
-	if (not obj.born or combat.current_phase == Combat.RoundPhase.CombatBegin) \
+	if ( (not obj.born) or combat.current_phase == Combat.RoundPhase.CombatBegin) \
 		and (not Game.LEVEL_EDITOR):
 		combat.action_stack.push_before_active(obj.on_birth)
 	# Put on_load on the stack for animation related stuff

@@ -69,10 +69,25 @@ func drain() -> void:
 	combat.animation.call_method(visual_entity, "visual_drain").set_max_duration(.5)
 	if logic:
 		await logic.on_drain()
+	if type.destroy_on_drain:
+		await combat.action_stack.process_callable(die)
 
 ## Returns true if the entity has drainable energy on it.
 func is_drainable():
 	return type.is_drainable and energy != null and not energy.is_empty()
+
+## ACTION
+## Execute logic method if there is any
+func interact() -> void:
+	if not can_interact:
+		push_error("Tried interacting with entity which can not interact.")
+		return
+	if logic:
+		await logic.on_interact()
+	else:
+		push_warning("Tried interacting with %s but it has no logic" % self)
+	if type.destroy_on_interact:
+		await combat.action_stack.process_callable(die)
 
 func get_tags() -> Array[String]:
 	return type.tags
@@ -85,9 +100,9 @@ func on_hover_long(h: bool) -> void:
 		else:
 			combat.animation.hide(visual_entity.health_bar)
 
-############################
+####################################
 ## CombatObject Overrides ##
-############################
+####################################
 
 var pre_death_tile: Tile
 

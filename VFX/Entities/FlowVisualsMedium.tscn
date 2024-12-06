@@ -80,11 +80,13 @@ autoplay = "flow"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60407, 0)
 
 [node name="EnergyOrb2" parent="Center" instance=ExtResource("3_ecmsq")]
+unique_name_in_owner = true
 transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, 0, 0.2, 0.2)
 type = 4
 orbital_movement_active = false
 
 [node name="EnergyOrb" parent="Center" instance=ExtResource("3_ecmsq")]
+unique_name_in_owner = true
 transform = Transform3D(1.83697, 0, 0, 0, 1.83697, 0, 0, 0, 1.83697, 0, -0.2, -0.2)
 type = 4
 orbital_movement_active = false

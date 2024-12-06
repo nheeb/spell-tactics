@@ -14,7 +14,7 @@ func merge(other_status: EntityStatus) -> void:
 	pass
 
 ## Effects on being removed (timed effects get removed by default)
-func _on_remove() -> void:
+func on_death() -> void:
 	pass
 
 ## Special actions an enemy with the status could do.
