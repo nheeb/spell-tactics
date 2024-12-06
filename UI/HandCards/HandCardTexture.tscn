@@ -37,26 +37,30 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="VBoxContainer" parent="Container/GridContainer"]
+[node name="VSpace" type="Control" parent="Container/GridContainer"]
+custom_minimum_size = Vector2(0, 5.115)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="TitleLabel" type="Label" parent="Container/GridContainer/CenterContainer"]
+[node name="TitleLabel" type="Label" parent="Container/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Long Spell Name"
 label_settings = ExtResource("2_pa4o0")
 horizontal_alignment = 1
-clip_text = true
+
+[node name="VSpace2" type="Control" parent="Container/GridContainer"]
+custom_minimum_size = Vector2(0, 58.12)
+layout_mode = 2
 
 [node name="CenterContainer2" type="VBoxContainer" parent="Container/GridContainer"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(50, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
 [node name="SpellTextLabel" type="Label" parent="Container/GridContainer/CenterContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(512, 384)
 layout_mode = 2
 text = "Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text "

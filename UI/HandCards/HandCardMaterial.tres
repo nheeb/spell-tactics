@@ -1,8 +1,6 @@
-[gd_resource type="StandardMaterial3D" load_steps=9 format=3 uid="uid://72pgvo6r6k7c"]
+[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://72pgvo6r6k7c"]
 
 [ext_resource type="Texture2D" uid="uid://pm47cyr36mlc" path="res://Assets/BaseMaterials/Textures/cardstone/concrete_0001_color_1k.jpg" id="1_eyb0m"]
-[ext_resource type="Texture2D" uid="uid://dvaivjm6driaw" path="res://Assets/BaseMaterials/Textures/cardstone/concrete_0001_normal_opengl_1k.png" id="2_vgsgm"]
-[ext_resource type="Texture2D" uid="uid://4obtweismhqm" path="res://Assets/BaseMaterials/Textures/cardstone/concrete_0001_roughness_1k_high.jpg" id="3_nddtx"]
 
 [sub_resource type="Shader" id="Shader_xxhw5"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's StandardMaterial3D.
@@ -124,7 +122,7 @@ shader_parameter/glow_uv_scale = 0.9
 shader_parameter/glow_time_scale = 0.07
 shader_parameter/glow_power = 1.5
 shader_parameter/glow_process = 4.75e-08
-shader_parameter/brightness = 0.2
+shader_parameter/brightness = 0.166
 shader_parameter/title_uv_aa = Vector2(0.04, 0.09)
 shader_parameter/title_uv_bb = Vector2(0.395, 0.202)
 shader_parameter/icon_uv_aa = Vector2(0.07, 0.145)
@@ -146,9 +144,6 @@ render_priority = 1
 next_pass = SubResource("ShaderMaterial_ip25q")
 transparency = 1
 albedo_texture = ExtResource("1_eyb0m")
-roughness_texture = ExtResource("3_nddtx")
-normal_enabled = true
 normal_scale = 0.05
-normal_texture = ExtResource("2_vgsgm")
-uv1_scale = Vector3(3.8, 3.8, 3.8)
-uv1_offset = Vector3(0.74, 0.295, 0)
+uv1_offset = Vector3(-0.015, 0.705, 0)
+uv1_triplanar = true
