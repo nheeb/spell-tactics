@@ -37,6 +37,10 @@ const HOVER_BALANCE_RAD = PI / 12
 const HOVER_BALANCE_RANGE = .5
 const HOVER_BALANCE_Y_BONUS = 1.5
 const CHOSEN_LIFT = .5
+const SIZING_START_AT = 5
+const SIZING_Z_PER_EXTRA_CARD = 1.3
+const SIZING_Y_PER_EXTRA_CARD = .13
+
 
 static var open_hand_block = Block.new("OpenHandBlock", false)
 
@@ -376,8 +380,13 @@ func calc_positions():
 		scales[pinned_card] = PINNED_SCALE
 		rotations[pinned_card] = PINNED_ROTATION
 
-	var z_move: float = max(0.0, 1.3 * (all_cards.size() - 5))
-	var y_move: float = - max(0.0, .13 * (all_cards.size() - 5))
+	var card_count_for_sizing := all_cards.size()
+	if pinned_card:
+		card_count_for_sizing -= 1
+	var sizing_extra_cards: int = max(0, card_count_for_sizing - SIZING_START_AT)
+
+	var z_move: float = SIZING_Z_PER_EXTRA_CARD * sizing_extra_cards
+	var y_move: float = - SIZING_Y_PER_EXTRA_CARD * sizing_extra_cards
 
 	# Submit all transformations to the
 	for card in all_cards:
