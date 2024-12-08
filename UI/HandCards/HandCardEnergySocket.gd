@@ -41,7 +41,7 @@ func load_energy(_type: EnergyStack.EnergyType):
 	is_loaded = true
 	loaded_energy = _type
 	loaded_color = VFX.type_to_color(_type)
-	card.get_spell().on_energy_load()
+	card.get_castable().on_energy_load()
 
 ## ANIM
 func load_animation(_type: EnergyStack.EnergyType):

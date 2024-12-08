@@ -9,10 +9,12 @@ var current_possible_targets: Array
 #########################
 
 func is_selectable() -> bool:
-	return false
+	return get_logic().is_selectable()
 
 func is_castable() -> bool:
-	return are_requirements_fullfilled()
+	return are_requirements_fullfilled() \
+		and is_energy_loaded_fully() \
+		and get_logic().is_castable()
 
 ## ACTION
 func cast() -> void:
@@ -21,18 +23,14 @@ func cast() -> void:
 func select():
 	selected = true
 	details = CombatActionDetails.new(combat.player, self)
-	
-	update_current_state()
+	animate_current_state()
 	get_logic().on_select_deselect(true)
-
 
 func deselect():
 	selected = false
 	details = null
-	
-	update_current_state()
+	animate_current_state()
 	get_logic().on_select_deselect(false)
-	
 
 ################################
 ## Type, Logic & Card Getters ##
@@ -50,12 +48,33 @@ func get_type() -> CastableType:
 func get_effect_text() -> String:
 	return get_type().effect_text
 
+############################
+## Energy Payment Related ##
+############################
+
+func get_costs() -> EnergyStack:
+	return get_logic().get_costs()
+
+func player_has_enough_energy() -> bool:
+	var energy := combat.energy.player_energy
+	var costs := get_costs()
+	return energy.get_possible_payment(costs) != null
+
+func is_energy_loaded_fully() -> bool:
+	# If it's quickcast, then there is no card
+	if get_card() == null:
+		return true
+	return not get_card().has_empty_energy_sockets()
+
+func on_energy_load():
+	animate_current_state()
+
 ####################
 ## Visual Updates ##
 ####################
 
 ## ANIMATOR
-func update_current_state() -> AnimationObject:
+func animate_current_state() -> AnimationObject:
 	if selected:
 		assert(details)
 		current_requirement = get_next_requirement()
@@ -78,6 +97,14 @@ func reset_cast_lines():
 ## ANIM
 func build_cast_lines():
 	if selected:
+		if get_costs().size() > 0:
+			if not is_energy_loaded_fully():
+				if player_has_enough_energy():
+					combat.ui.cast_lines.add("Load the Energy", Color.ORANGE)
+				else:
+					combat.ui.cast_lines.add("Not enough Energy", Color.PALE_VIOLET_RED)
+			else:
+				combat.ui.cast_lines.add("Energy loaded", Color.MEDIUM_SEA_GREEN)
 		var unfullfilled := get_unfullfilled_requirements()
 		for req in get_target_requirements():
 			if req in unfullfilled:

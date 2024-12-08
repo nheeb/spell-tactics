@@ -2,7 +2,7 @@ class_name CardTexture extends Control
 
 @onready var icon_texture : CardIconTexture = $HandCardIconTexture
 
-func set_spell_type(type: SpellType):
+func set_castable_type(type: CastableType):
 	$HandCardIconTexture.set_castable_type(type)
 	$Container/GridContainer/CenterContainer/TitleLabel.text=type.pretty_name
 	$Container/GridContainer/CenterContainer2/SpellTextLabel.text=type.effect_text

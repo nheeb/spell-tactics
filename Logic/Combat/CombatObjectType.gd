@@ -65,3 +65,10 @@ func on_load() -> void:
 ## This method can be overwritten by other Types to do special stuff
 func _on_load() -> void:
 	pass
+
+static func load_from_file(path: String) -> CombatObjectType:
+	var res = load(path) as CombatObjectType
+	if res == null:
+		push_error("Castable could not be loaded. Path is %s" % path)
+	res.on_load()
+	return res

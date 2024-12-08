@@ -99,7 +99,6 @@ func setup(_combat : Combat):
 	combat = _combat
 
 const HAND_CARD = preload("res://UI/HandCards/HandCard3D.tscn")
-const ACTIVE_CARD = preload("res://UI/HandCards/ActiveCard.tscn")
 func add_card(spell: Spell):
 	var hand_card = HAND_CARD.instantiate()
 	if spell:
@@ -112,7 +111,7 @@ func add_card(spell: Spell):
 
 func add_active_to_pin(active: Active):
 	if not pinned_card:
-		var active_card = ACTIVE_CARD.instantiate()
+		var active_card = HAND_CARD.instantiate()
 		active_card.set_active(active)
 		cards.add_child(active_card)
 		all_cards.append(active_card)
@@ -120,6 +119,7 @@ func add_active_to_pin(active: Active):
 		active_card.global_position = %ActiveCardSpawn.global_position
 		active_card.global_position.z = Z_BASE
 		active_card._ready()
+		active_card.set_distort(false)
 	else:
 		push_error("Tried to add pinned active while another card is pinned")
 
@@ -471,8 +471,10 @@ func pin_card(card: Card3D):
 func unpin_card():
 	if pinned_card:
 		pinned_card.set_pinned(false)
-		if pinned_card is HandCard3D:
+		if pinned_card.get_castable() is Spell:
 			hand_cards.append(pinned_card)
 			pinned_card = null
-		elif pinned_card is ActiveCard:
+		elif pinned_card.get_castable() is Active:
 			remove_card(pinned_card)
+		else:
+			push_error("The card's castable is neither Spell nor Active!!?!?")
