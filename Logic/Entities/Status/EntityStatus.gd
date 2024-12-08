@@ -61,7 +61,7 @@ func merge(other_status: EntityStatus) -> void:
 func on_death() -> void:
 	await super()
 	# Remove status from entity
-	entity._erase_status(self)
+	entity.erase_status(self)
 	# Kill TimedEffects automatically if activated
 	if type.kill_te_on_remove:
 		for te in combat.t_effects.get_effects(self):

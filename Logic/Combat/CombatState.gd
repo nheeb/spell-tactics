@@ -49,6 +49,7 @@ func deserialize(world: World) -> Combat:
 	await combat.action_stack.clear
 	return combat
 
+## ACTION
 func _deserialize_into(combat: Combat):
 	combat.log.add("Deserializing Combat...")
 	# Old ids and refs

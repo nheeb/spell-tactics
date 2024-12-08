@@ -3,6 +3,30 @@ class_name CombatLogic extends RefCounted
 var combat: Combat
 var combat_object: CombatObject
 
+#######################
+## Setup & Reference ##
+#######################
+
+func setup(co: CombatObject):
+	connect_with_combat_object(co)
+	connect_with_combat(co.combat)
+
+func connect_with_combat_object(co: CombatObject):
+	combat_object = co
+	co.set("logic", self)
+
+func connect_with_combat(_combat: Combat):
+	assert(combat == null, "CombatLogic was already connected to combat.")
+	combat = _combat
+
+func get_reference() -> PropertyReference:
+	assert(combat_object.get("logic") == self)
+	return PropertyReference.new(combat_object.get_reference(), "logic")
+
+###########################
+## Data access shortcuts ##
+###########################
+
 var data: Dictionary:
 	get:
 		return combat_object.data
@@ -23,21 +47,9 @@ func data_resolve_reference(key: String) -> Variant:
 		push_warning("data_resolve_reference: The was no reference but %s at key %s" % [str(ref), key])
 		return ref
 
-func setup(co: CombatObject):
-	connect_with_combat_object(co)
-	connect_with_combat(co.combat)
-
-func connect_with_combat_object(co: CombatObject):
-	combat_object = co
-	co.set("logic", self)
-
-func connect_with_combat(_combat: Combat):
-	assert(combat == null, "CombatLogic was already connected to combat.")
-	combat = _combat
-
-func get_reference() -> PropertyReference:
-	assert(combat_object.get("logic") == self)
-	return PropertyReference.new(combat_object.get_reference(), "logic")
+#########################
+## Methods to override ##
+#########################
 
 ## ACTION
 func on_birth() -> void:

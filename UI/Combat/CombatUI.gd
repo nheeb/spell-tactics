@@ -64,7 +64,10 @@ func set_drains_left(x: int) -> void:
 const ACTIVE_BUTTON = preload("res://UI/Combat/ActiveButtonWithUses.tscn")
 
 func initialize_active_buttons(new_actives: Array[Active]):
-	actives = new_actives
+	actives = new_actives.filter(
+		func (active: Active):
+			return active.type.show_button_in_ui
+	)
 	var i = 0
 	for active in actives:
 		#var active_button = buttons[i]

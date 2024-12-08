@@ -9,6 +9,8 @@ class_name EntityType extends CombatObjectType
 @export var is_terrain := false
 ## whether a UI element should pop up with name / info on hover (might belong more in VisualEntity)
 @export var can_be_hovered: bool = true
+@export var can_interact: bool = false
+@export var destroy_on_interact: bool = false
 enum Teams {Neutral = 0, Good = 1, Evil = 2}
 @export var team := Teams.Neutral
 
@@ -24,6 +26,8 @@ enum Teams {Neutral = 0, Good = 1, Evil = 2}
 @export var is_drainable := true
 ## The energy this entity gives (if it's drainable)
 @export var energy: EnergyStack = null
+## This entity will be destroyed after getting drained
+@export var destroy_on_drain := false
 
 @export_group("Collision")
 const NAV_OBSTACLE_LAYER = 1
@@ -48,8 +52,7 @@ const ENEMY_LAYER = 2
 @export var hp_bar_height := 1.5
 ## Value for size or height when it comes to taking damage being applied to a tile
 @export var cover_value: int = 0
-## TODO This entity will be destroyed after getting drained
-@export var destroy_on_drain := false
+
 
 func create_base_object() -> CombatObject:
 	return Entity.new()
@@ -65,6 +68,7 @@ func set_type_properties(object: CombatObject) -> void:
 		ent.hp = max_hp
 		ent.cover = cover_value
 	ent.team = team
+	ent.can_interact = can_interact
 
 func create(combat: Combat, props := {}) -> CombatObject:
 	var ent := super(combat, props) as Entity

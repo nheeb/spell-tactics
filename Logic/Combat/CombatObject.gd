@@ -46,8 +46,10 @@ func serialize() -> CombatObjectState:
 
 ## ACTION
 func on_birth() -> void:
-	if not born:
-		pass
+	if combat.current_phase == Combat.RoundPhase.CombatBegin:
+		sync_with_type()
+	elif born:
+		push_warning("on_birth on object %s although born and not combatbegin" % self)
 	born = true
 	if get_generic_logic():
 		await get_generic_logic().on_birth()

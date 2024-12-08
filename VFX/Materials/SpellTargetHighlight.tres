@@ -6,12 +6,11 @@
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_8yiw0")
-shader_parameter/albedo = Color(0.749227, 0.752938, 0.773826, 1)
-shader_parameter/blink_color = Color(1, 1, 1, 1)
-shader_parameter/time_scale = 4.0
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/blink_color = Color(0.9375, 0.9375, 0.9375, 1)
 shader_parameter/range = 0.04
-shader_parameter/smooth_edge = 0.02
-shader_parameter/width = 0.08
+shader_parameter/smooth_edge = 0.01
+shader_parameter/width = 0.07
 shader_parameter/progress = 0.0
 shader_parameter/blink_start = 0.7
-shader_parameter/blink_strength = 2.0
+shader_parameter/blink_strength = 2.5

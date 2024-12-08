@@ -16,7 +16,7 @@ func get_top_energy_tiles(origin: Tile, _range := 1, count := -1) -> Array[Tile]
 		return drainable
 
 func _execute():
-	var target_tiles := get_top_energy_tiles(combat.player.current_tile, 1, 2)
+	var target_tiles := get_top_energy_tiles(combat.player.current_tile, 2, 3)
 	var all_entities := []
 	for tile in target_tiles:
 		all_entities.append_array(tile.entities)
@@ -47,9 +47,9 @@ func _execute():
 	for tile in target_tiles:
 		for entity in tile.entities:
 			if entity.is_drainable():
-				entity.drain().set_flag_extend()
+				await combat.action_stack.process_callable(entity.drain)
 			elif entity.type.is_terrain:
 				combat.animation.callable(entity.visual_entity.visual_drain).set_flag_with()
 
 func _is_possible(enemy_tile: Tile) -> bool:
-	return get_top_energy_tiles(combat.player.current_tile, 1).size() >= 2
+	return get_top_energy_tiles(combat.player.current_tile, 2).size() >= 3

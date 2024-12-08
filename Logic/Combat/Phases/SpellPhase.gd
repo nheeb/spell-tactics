@@ -9,6 +9,8 @@ func process_phase() -> void:
 	for active in combat.actives:
 		if active.is_limited_per_round():
 			active.refresh_uses_left()
+		if active.type.limitation == ActiveType.Limitation.ALWAYS:
+			active.unlocked = true
 
 func needs_user_input_to_proceed() -> bool:
 	return true

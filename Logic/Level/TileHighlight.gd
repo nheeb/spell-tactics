@@ -64,7 +64,12 @@ func disable_highlight(type: Type):
 				typeToMesh[superseded].visible = true
 
 ## Shows and sets the progress of the drain-hex-bar to a value between 0.0 and 1.0 .
-func set_drain_progress(p := 0.0) -> void:
-	$DrainProgressHexQuad.visible = p != 0.0
-	$DrainProgressHexQuad.get_surface_override_material(0).set("shader_parameter/progress", p)
-	
+func set_border_progress(p := 0.0) -> void:
+	$BorderProgressHexQuad.visible = p != 0.0
+	$BorderProgressHexQuad.get_surface_override_material(0).set("shader_parameter/progress", p)
+
+func set_border_progress_color(color: Color):
+	$BorderProgressHexQuad.get_surface_override_material(0).set("shader_parameter/albedo", color)
+
+func set_border_progress_width(width: float = 0.07):
+	$BorderProgressHexQuad.get_surface_override_material(0).set("shader_parameter/width", width)
