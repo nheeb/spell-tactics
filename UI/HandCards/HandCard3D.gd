@@ -64,6 +64,14 @@ func set_castable_type(type: CastableType) -> void:
 	# Set Shader color
 	%CardModel.material_override.next_pass.set("shader_parameter/albedo", type.color)
 
+func set_miniature_variant_energy_type(et: EnergyStack.EnergyType):
+	# Set Texture
+	%CardTexture.set_miniature_variant_energy_type(et)
+	# Set Shader color
+	%CardModel.material_override.next_pass \
+		.set("shader_parameter/albedo", VFX.type_to_color(et))
+	set_distort(false)
+
 const ENERGY_SOCKET_DIST = .15
 func get_energy_socket_pos(i: int, socket_count: int) -> Vector3:
 	var middle : float = (socket_count-1) / 2.0

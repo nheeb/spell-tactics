@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cy6mvhm4iocs4"]
+[gd_scene load_steps=15 format=3 uid="uid://cy6mvhm4iocs4"]
 
 [ext_resource type="Script" path="res://Logic/AutoLoad/VFX.gd" id="1_82gqd"]
 [ext_resource type="Texture2D" uid="uid://dqqryr4jr7d4" path="res://Assets/Sprites/EnergyIconMasks/any.png" id="2_upnws"]
@@ -8,6 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://c4cqmwxrkmmrp" path="res://Assets/Sprites/EnergyIconMasks/flow.png" id="6_ipfab"]
 [ext_resource type="Texture2D" uid="uid://d1q47nuj8o2vd" path="res://Assets/Sprites/EnergyIconMasks/decay.png" id="7_vu5wx"]
 [ext_resource type="Texture2D" uid="uid://d4e57qo6gynjx" path="res://Assets/Sprites/EnergyIconMasks/spectral.png" id="8_31sc0"]
+[ext_resource type="Texture2D" uid="uid://bboltdu5d3oqf" path="res://Assets/Sprites/EnergyIconMasks/any_transparent.png" id="9_ftdci"]
+[ext_resource type="Texture2D" uid="uid://dqu3kpobbj2d" path="res://Assets/Sprites/EnergyIconMasks/matter_transparent.png" id="10_s73r3"]
+[ext_resource type="Texture2D" uid="uid://b1tvhejm54t4x" path="res://Assets/Sprites/EnergyIconMasks/harmony_transparent.png" id="11_cb3a2"]
+[ext_resource type="Texture2D" uid="uid://c355h53te3cix" path="res://Assets/Sprites/EnergyIconMasks/flow_transparent.png" id="12_dqmdo"]
+[ext_resource type="Texture2D" uid="uid://dwqd03xdkf4r4" path="res://Assets/Sprites/EnergyIconMasks/decay_transparent.png" id="13_0lu0l"]
+[ext_resource type="Texture2D" uid="uid://bnkv513aq4ogx" path="res://Assets/Sprites/EnergyIconMasks/spectral_transparent.png" id="14_4mqhc"]
 
 [node name="Vfx" type="Node"]
 script = ExtResource("1_82gqd")
@@ -18,4 +24,4 @@ harmony_color = Color(0.235905, 0.8, 0.710058, 1)
 flow_color = Color(0.968627, 0.596078, 0.117647, 1)
 decay_color = Color(0.423529, 0.231373, 0.541176, 1)
 spectral_color = Color(0.960784, 0, 0.788235, 1)
-energy_icons = Array[Texture]([ExtResource("2_upnws"), ExtResource("3_j62rn"), ExtResource("4_a8yco"), ExtResource("5_cychu"), ExtResource("6_ipfab"), ExtResource("7_vu5wx"), ExtResource("8_31sc0")])
+energy_icons = Array[Texture]([ExtResource("2_upnws"), ExtResource("3_j62rn"), ExtResource("4_a8yco"), ExtResource("5_cychu"), ExtResource("6_ipfab"), ExtResource("7_vu5wx"), ExtResource("8_31sc0"), ExtResource("9_ftdci"), ExtResource("10_s73r3"), ExtResource("11_cb3a2"), ExtResource("12_dqmdo"), ExtResource("13_0lu0l"), ExtResource("14_4mqhc")])

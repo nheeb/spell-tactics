@@ -91,3 +91,8 @@ func _on_load() -> void:
 	super._on_load()
 	if costs == null:
 		costs = EnergyStack.new([])
+
+func get_main_energy() -> EnergyStack.EnergyType:
+	if costs.size() > 0:
+		return costs.stack.front()
+	return EnergyStack.EnergyType.Empty
