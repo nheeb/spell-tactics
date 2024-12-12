@@ -1,8 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=9 format=3 uid="uid://72pgvo6r6k7c"]
-
-[ext_resource type="Texture2D" uid="uid://b4ta7t0uhldpx" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_color_2k_desat.png" id="1_cmel6"]
-[ext_resource type="Texture2D" uid="uid://d3lr1eyjbtpjq" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_normal_dx_2k.png" id="2_mnuk2"]
-[ext_resource type="Texture2D" uid="uid://c58sn1fmkxu5m" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_roughness_2k.png" id="3_ufr1b"]
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://72pgvo6r6k7c"]
 
 [sub_resource type="Shader" id="Shader_xxhw5"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's StandardMaterial3D.
@@ -160,10 +156,7 @@ render_priority = 1
 next_pass = SubResource("ShaderMaterial_ip25q")
 transparency = 1
 albedo_color = Color(0.7395, 0.8526, 0.87, 1)
-albedo_texture = ExtResource("1_cmel6")
-roughness_texture = ExtResource("3_ufr1b")
 normal_enabled = true
 normal_scale = 2.1
-normal_texture = ExtResource("2_mnuk2")
 uv1_scale = Vector3(2.76, 1.825, 1.825)
 uv1_offset = Vector3(0.74, 0.295, 0)

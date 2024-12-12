@@ -65,9 +65,8 @@ texture = SubResource("ViewportTexture_qgsc2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PopupHandler" parent="." node_paths=PackedStringArray("viewport", "drainable_root", "popup_root") instance=ExtResource("3_im24c")]
+[node name="PopupHandler" parent="." node_paths=PackedStringArray("viewport", "popup_root") instance=ExtResource("3_im24c")]
 viewport = NodePath("../Viewport3D")
-drainable_root = NodePath("../Viewport3D/Drainables")
 popup_root = NodePath("../Viewport3D/PopUps")
 
 [node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport", "debug_label")]
