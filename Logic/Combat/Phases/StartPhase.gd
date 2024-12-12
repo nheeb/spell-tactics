@@ -18,24 +18,26 @@ func process_phase() -> void:
 	await combat.action_stack.process_callable(auto_save)
 
 func auto_save():
-	if combat.current_round == 1:
-		return
-	var overworld: Overworld = null
-	
-	for activity in ActivityManager.activity_stack:
-		if activity is OverworldActivity:
-			overworld = activity.overworld
-	
-	if not overworld:
-		push_error("No Overworld found for auto-saving")
-		return
-	
-	var combat_state := combat.serialize()
-	var thread = Thread.new()
-	thread.start(func():
-		await VisualTime.new_timer(.5).timeout
-		combat_state.generate_meta("Auto Save - Round %s" % combat.current_round)
-		SaveFile.save_to_disk(combat_state, Game.SAVE_DIR + combat_state.meta.filename + ".tres")
-		)
-	thread.wait_to_finish()
+	## Feature deactivated fpr now
+	return
+	#if combat.current_round == 1:
+		#return
+	#var overworld: Overworld = null
+	#
+	#for activity in ActivityManager.activity_stack:
+		#if activity is OverworldActivity:
+			#overworld = activity.overworld
+	#
+	#if not overworld:
+		## push_error("No Overworld found for auto-saving")
+		#return
+	#
+	#var combat_state := combat.serialize()
+	#var thread = Thread.new()
+	#thread.start(func():
+		#await VisualTime.new_timer(.5).timeout
+		#combat_state.generate_meta("Auto Save - Round %s" % combat.current_round)
+		#SaveFile.save_to_disk(combat_state, Game.SAVE_DIR + combat_state.meta.filename + ".tres")
+		#)
+	#thread.wait_to_finish()
 	
