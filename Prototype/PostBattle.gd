@@ -29,7 +29,8 @@ func _on_rest_pressed():
 	ActivityManager.pop()
 
 func _on_purge_pressed():
-	ActivityManager.substitute(PurgeDeckActivity.new(1, true))
+	pass
+	#ActivityManager.substitute(PurgeDeckActivity.new(1, true))
 
 func _on_march_on_pressed():
 	ActivityManager.pop()
