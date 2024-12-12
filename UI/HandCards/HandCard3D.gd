@@ -8,6 +8,9 @@ var active: Active:
 	get:
 		return castable as Active
 
+func _ready() -> void:
+	pass
+
 func _enter_tree() -> void:
 	$Quad.get_surface_override_material(0).albedo_texture = $Quad/SubViewport.get_texture()
 	%CardModel.material_override.next_pass.set("shader_parameter/random_seed", randf())
@@ -30,6 +33,9 @@ func set_render_prio(p: int) -> void:
 	if %CardModel.material_overlay:
 		%CardModel.material_overlay.set("render_priority", p-1)
 	%CardModel.material_override.next_pass.set("render_priority", p+1)
+	for socket in %EnergySocketPivot.get_children():
+		if socket is HandCardEnergySocket:
+			socket.set_render_prio(p+1)
 
 func set_collision_scale(s: float) -> void:
 	$Area3D/CollisionShape3D.scale = Vector3.ONE * s
@@ -60,6 +66,7 @@ func set_castable_type(type: CastableType) -> void:
 		socket.position = get_energy_socket_pos(i, costs.size())
 		socket.set_type(energy)
 	# Set Texture
+	%CardTexture._ready()
 	%CardTexture.set_castable_type(type)
 	# Set Shader color
 	%CardModel.material_override.next_pass.set("shader_parameter/albedo", type.color)

@@ -21,7 +21,7 @@ const BASE_ROTATION = Vector3(0.0, - PI / 2, 0.0)
 const RADIAL_TURN = 1.0 # Rotate cards like in a real hand
 const RADIAL_ORIGIN_Y = -5.0 # 
 const PADDING = .9 # Distance between the cards
-const CLOSED_PADDING_EXTRA = -.39 # Distance change when hand closed
+const CLOSED_PADDING_EXTRA = -.25 # Distance change when hand closed
 static var HOVER_SCALE := 1.3 # Scale of hovered card
 static var HOVER_PUSH := .2 # Push Distance of adjacent cards
 static var HOVER_LIFT := 0.0 # Y lift of hovered card
@@ -29,7 +29,7 @@ static var DRAG_SCALE := 1.15
 const DRAG_PUSH = .3 # Gap size when rearranging cards
 const DRAG_ARRANGE_NORM_MOUSE_POS = .45
 const Z_BASE = -2.0
-const Z_UNIT = .05
+const Z_UNIT = .07
 const BOW_HEIGHT = .15 # Bow shape of card hand
 const PINNED_SCALE = 1.5
 const PINNED_ROTATION = BASE_ROTATION + Vector3(PI / 12, - PI / 8, 0.0)
@@ -105,6 +105,7 @@ func setup(_combat : Combat):
 const HAND_CARD = preload("res://UI/HandCards/HandCard3D.tscn")
 func add_card(spell: Spell):
 	var hand_card = HAND_CARD.instantiate()
+	hand_card._ready()
 	if spell:
 		hand_card.set_spell(spell)
 	cards.add_child(hand_card)

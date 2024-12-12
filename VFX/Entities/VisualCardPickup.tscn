@@ -96,10 +96,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.417105, 0)
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.0420237, 0)
 
 [node name="Pivot3" type="Node3D" parent="Pivot1/Pivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="HandCard3D" parent="Pivot1/Pivot2/Pivot3" instance=ExtResource("1_ka7yb")]
 unique_name_in_owner = true
-transform = Transform3D(0.3565, 0.0628606, 0, -0.0628606, 0.3565, 0, 0, 0, 0.362, -0.00475612, -0.0911214, -0.0157369)
+transform = Transform3D(0.344282, 0.111864, 0, -0.111864, 0.344282, 0, 0, 0, 0.362, -0.00475612, -0.0911214, -0.0157369)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

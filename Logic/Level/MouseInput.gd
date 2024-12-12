@@ -12,7 +12,6 @@ var disabled := false
 
 const BasicMovement = preload("res://Content/Actives/BasicMovement.tres")
 func get_highlight_type() -> Highlight.Type:
-
 	if combat.input.current_castable != null and combat.input.current_castable.get_type() == BasicMovement:
 		return Highlight.Type.HoverAction
 	elif targeting:

@@ -7,12 +7,6 @@ var combat: Combat:
 	get:
 		return level.combat
 @onready var highlight: Highlight = $Highlight
-	
-func _on_area_3d_mouse_entered() -> void:
-	set_highlight(Highlight.Type.Hover, true)
-	
-func _on_area_3d_mouse_exited() -> void:
-	set_highlight(Highlight.Type.Hover, false)
 
 func set_highlight(type: Highlight.Type, active: bool):
 	if active:

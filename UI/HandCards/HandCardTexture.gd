@@ -1,21 +1,34 @@
 class_name CardTexture extends Control
 
-@onready var icon_texture : CardIconTexture = $HandCardIconTexture
+@onready var icon_texture: CardIconTexture = $HandCardIconTexture
+@onready var title_label: Label = %TitleLabel
+@onready var spell_text_label: Label = %SpellTextLabel
+
+func _ready() -> void:
+	pass
+
+func set_spell_text(text: String):
+	spell_text_label.text = text
+	await VisualTime.visual_process
+	while spell_text_label.get_visible_line_count() > 2 \
+		and spell_text_label.label_settings.font_size > 26:
+		spell_text_label.label_settings.font_size -= 2
+		await VisualTime.visual_process
 
 func set_castable_type(type: CastableType):
-	$HandCardIconTexture.set_castable_type(type)
-	$Container/GridContainer/CenterContainer/TitleLabel.text=type.pretty_name
-	$Container/GridContainer/CenterContainer2/SpellTextLabel.text=type.effect_text
+	icon_texture.set_castable_type(type)
+	title_label.text=type.pretty_name
+	set_spell_text(type.effect_text)
 
 func set_castable(castable: Castable):
-	$HandCardIconTexture.set_castable_type(castable.type)
-	$Container/GridContainer/CenterContainer/TitleLabel.text=castable.type.pretty_name
-	$Container/GridContainer/CenterContainer2/SpellTextLabel.text=castable.get_effect_text()
+	icon_texture.set_castable_type(castable.type)
+	title_label.text=castable.type.pretty_name
+	set_spell_text(castable.get_effect_text())
 
 func set_error(text: String = ""):
 	%ErrorLabel.text = text
 
 func set_miniature_variant_energy_type(et: EnergyStack.EnergyType):
-	$HandCardIconTexture.set_main_icon_texture(VFX.type_to_icon(et, true))
-	$Container/GridContainer/CenterContainer/TitleLabel.text = ""
-	$Container/GridContainer/CenterContainer2/SpellTextLabel.text = ""
+	icon_texture.set_main_icon_texture(VFX.type_to_icon(et, true))
+	title_label.text = ""
+	spell_text_label.text = ""

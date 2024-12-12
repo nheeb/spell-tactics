@@ -95,4 +95,4 @@ func _on_load() -> void:
 func get_main_energy() -> EnergyStack.EnergyType:
 	if costs.size() > 0:
 		return costs.stack.front()
-	return EnergyStack.EnergyType.Empty
+	return EnergyStack.EnergyType.Any
