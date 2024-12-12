@@ -4,9 +4,6 @@ func execute() -> void:
 	combat.cards.draw()
 	combat.castables.get_active_from_name("Drain").add_to_bonus_uses(1)
 
-func is_selectable() -> bool:
-	return not has_enemy_in_range(data.get("no_enemies_range", 1))
-
 func is_castable() -> bool:
 	return not has_enemy_in_range(data.get("no_enemies_range", 1))
 

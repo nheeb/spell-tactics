@@ -41,22 +41,22 @@ func type_to_color(_type) -> Color:
 	return Color.RED
 
 @export var energy_icons: Array[Texture]
-func type_to_icon(_type) -> Texture:
+func type_to_icon(_type, transparent := false) -> Texture:
 	match _type:
 		EnergyStack.EnergyType.Any:
-			return energy_icons[0]
+			return energy_icons[7 if transparent else 0]
 		EnergyStack.EnergyType.Matter:
-			return energy_icons[1]
+			return energy_icons[8 if transparent else 1]
 		EnergyStack.EnergyType.Empty:
 			return energy_icons[2]
 		EnergyStack.EnergyType.Harmony:
-			return energy_icons[3]
+			return energy_icons[9 if transparent else 3]
 		EnergyStack.EnergyType.Flow:
-			return energy_icons[4]
+			return energy_icons[10 if transparent else 4]
 		EnergyStack.EnergyType.Decay:
-			return energy_icons[5]
+			return energy_icons[11 if transparent else 5]
 		EnergyStack.EnergyType.Spectral:
-			return energy_icons[6]
+			return energy_icons[12 if transparent else 6]
 	push_error("unknown type")
 	return energy_icons[0]
 

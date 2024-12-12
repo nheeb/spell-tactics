@@ -18,6 +18,7 @@ func is_valid(combat: Combat) -> bool:
 
 static var currently_hovering_drainable: Tile
 func execute(combat: Combat) -> void:
+	# This is for the movement arrow so it's more flexible with choosing exact paths
 	combat.level.append_to_hover_memory(tile)
 	var castable: Castable = combat.input.current_castable
 	if castable:

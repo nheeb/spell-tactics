@@ -30,3 +30,6 @@ func is_castable() -> bool:
 
 func on_select_deselect(select: bool) -> void:
 	pass
+
+func get_costs() -> EnergyStack:
+	return get_castable().type.costs

@@ -21,7 +21,7 @@ const BASE_ROTATION = Vector3(0.0, - PI / 2, 0.0)
 const RADIAL_TURN = 1.0 # Rotate cards like in a real hand
 const RADIAL_ORIGIN_Y = -5.0 # 
 const PADDING = .9 # Distance between the cards
-const CLOSED_PADDING_EXTRA = -.39 # Distance change when hand closed
+const CLOSED_PADDING_EXTRA = -.25 # Distance change when hand closed
 static var HOVER_SCALE := 1.3 # Scale of hovered card
 static var HOVER_PUSH := .2 # Push Distance of adjacent cards
 static var HOVER_LIFT := 0.0 # Y lift of hovered card
@@ -29,7 +29,7 @@ static var DRAG_SCALE := 1.15
 const DRAG_PUSH = .3 # Gap size when rearranging cards
 const DRAG_ARRANGE_NORM_MOUSE_POS = .45
 const Z_BASE = -2.0
-const Z_UNIT = .05
+const Z_UNIT = .07
 const BOW_HEIGHT = .15 # Bow shape of card hand
 const PINNED_SCALE = 1.5
 const PINNED_ROTATION = BASE_ROTATION + Vector3(PI / 12, - PI / 8, 0.0)
@@ -37,6 +37,10 @@ const HOVER_BALANCE_RAD = PI / 12
 const HOVER_BALANCE_RANGE = .5
 const HOVER_BALANCE_Y_BONUS = 1.5
 const CHOSEN_LIFT = .5
+const SIZING_START_AT = 5
+const SIZING_Z_PER_EXTRA_CARD = 1.3
+const SIZING_Y_PER_EXTRA_CARD = .13
+
 
 static var open_hand_block = Block.new("OpenHandBlock", false)
 
@@ -99,9 +103,9 @@ func setup(_combat : Combat):
 	combat = _combat
 
 const HAND_CARD = preload("res://UI/HandCards/HandCard3D.tscn")
-const ACTIVE_CARD = preload("res://UI/HandCards/ActiveCard.tscn")
 func add_card(spell: Spell):
 	var hand_card = HAND_CARD.instantiate()
+	hand_card._ready()
 	if spell:
 		hand_card.set_spell(spell)
 	cards.add_child(hand_card)
@@ -112,7 +116,7 @@ func add_card(spell: Spell):
 
 func add_active_to_pin(active: Active):
 	if not pinned_card:
-		var active_card = ACTIVE_CARD.instantiate()
+		var active_card = HAND_CARD.instantiate()
 		active_card.set_active(active)
 		cards.add_child(active_card)
 		all_cards.append(active_card)
@@ -120,6 +124,7 @@ func add_active_to_pin(active: Active):
 		active_card.global_position = %ActiveCardSpawn.global_position
 		active_card.global_position.z = Z_BASE
 		active_card._ready()
+		active_card.set_distort(false)
 	else:
 		push_error("Tried to add pinned active while another card is pinned")
 
@@ -376,8 +381,13 @@ func calc_positions():
 		scales[pinned_card] = PINNED_SCALE
 		rotations[pinned_card] = PINNED_ROTATION
 
-	var z_move: float = max(0.0, 1.3 * (all_cards.size() - 5))
-	var y_move: float = - max(0.0, .13 * (all_cards.size() - 5))
+	var card_count_for_sizing := all_cards.size()
+	if pinned_card:
+		card_count_for_sizing -= 1
+	var sizing_extra_cards: int = max(0, card_count_for_sizing - SIZING_START_AT)
+
+	var z_move: float = SIZING_Z_PER_EXTRA_CARD * sizing_extra_cards
+	var y_move: float = - SIZING_Y_PER_EXTRA_CARD * sizing_extra_cards
 
 	# Submit all transformations to the
 	for card in all_cards:
@@ -471,8 +481,10 @@ func pin_card(card: Card3D):
 func unpin_card():
 	if pinned_card:
 		pinned_card.set_pinned(false)
-		if pinned_card is HandCard3D:
+		if pinned_card.get_castable() is Spell:
 			hand_cards.append(pinned_card)
 			pinned_card = null
-		elif pinned_card is ActiveCard:
+		elif pinned_card.get_castable() is Active:
 			remove_card(pinned_card)
+		else:
+			push_error("The card's castable is neither Spell nor Active!!?!?")

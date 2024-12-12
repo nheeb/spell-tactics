@@ -17,7 +17,7 @@ func is_valid(combat: Combat) -> bool:
 
 func execute(combat: Combat) -> void:
 	combat.input.current_castable.add_target_to_details(tile)
-	combat.input.current_castable.update_current_state()
+	combat.input.current_castable.animate_current_state()
 	await combat.action_stack.wait()
 	combat.action_stack.active_ticket.finish()
 	await VisualTime.new_timer(.25).timeout

@@ -29,10 +29,13 @@ func set_type(_type: EnergyStack.EnergyType):
 	
 	mi.material_override = %MaterialPrototype.material_override
 	energy_color = VFX.type_to_color(type)
-	mi.material_override.albedo_color = energy_color.lerp(Color.DARK_GRAY, .1)
-	mi.material_override.emission = energy_color
+	mi.material_override.albedo_color = energy_color.lerp(Color.WHITE_SMOKE, .7)
+	mi.material_override.emission = energy_color.lerp(Color.WHITE_SMOKE, .7)
 	mi.material_override.emission_energy_multiplier = 1
-	socket.get_surface_override_material(2).albedo_color = energy_color.lerp(Color.DARK_GRAY, .4)
+	socket.get_surface_override_material(0).albedo_color = energy_color.lerp(Color.BLACK, .25)
+	socket.get_surface_override_material(1).albedo_color = Color.WHITE.lerp(Color.BLACK, .8)
+	socket.get_surface_override_material(1).emission_energy_multiplier = 0
+	socket.get_surface_override_material(2).albedo_color = energy_color.lerp(Color.WHITE_SMOKE, .05)
 
 var is_loaded := false
 var loaded_energy: EnergyStack.EnergyType
@@ -41,16 +44,19 @@ func load_energy(_type: EnergyStack.EnergyType):
 	is_loaded = true
 	loaded_energy = _type
 	loaded_color = VFX.type_to_color(_type)
-	card.get_spell().on_energy_load()
+	card.get_castable().on_energy_load()
 
 ## ANIM
 func load_animation(_type: EnergyStack.EnergyType):
 	loaded_color = VFX.type_to_color(_type)
-	%Light.light_color = loaded_color
+	%Light.light_color = loaded_color.lerp(Color.WHITE, .4)
 	%Light.show()
-	mi.material_override.albedo_color = loaded_color.lerp(Color.DARK_GRAY, .1)
+	mi.material_override.albedo_color = loaded_color.lerp(Color.DARK_GRAY, .2)
 	mi.material_override.emission = loaded_color
 	mi.material_override.emission_energy_multiplier = 2
+	socket.get_surface_override_material(1).albedo_color = loaded_color.lerp(Color.DARK_GRAY, .2)
+	socket.get_surface_override_material(1).emission = loaded_color
+	socket.get_surface_override_material(1).emission_energy_multiplier = 2.2
 	%AnimationPlayer.play("load")
 
 func pre_load_particles(_type: EnergyStack.EnergyType, seconds_to_load: float):
@@ -64,12 +70,31 @@ func unload_energy() -> EnergyStack.EnergyType:
 	card.get_spell().on_energy_load()
 	return e
 
+var last_prio := 0
+var all_mesh_instances: Array[MeshInstance3D]
+func set_render_prio(p: int) -> void:
+	if p == last_prio:
+		return
+	last_prio = p
+	if all_mesh_instances.is_empty():
+		all_mesh_instances = Utility.get_recursive_mesh_instances(self)
+	for mesh_instance in all_mesh_instances:
+		if mesh_instance.material_override:
+			mesh_instance.material_override.render_priority = p
+		for i in mesh_instance.get_surface_override_material_count():
+			var mat := mesh_instance.get_surface_override_material(i)
+			if mat:
+				mat.render_priority = p
+	
+
 ## ANIM 
 func unload_animation():
 	%Light.hide()
-	mi.material_override.albedo_color = energy_color.lerp(Color.DARK_GRAY, .1)
-	mi.material_override.emission = energy_color
+	mi.material_override.albedo_color = energy_color.lerp(Color.WHITE_SMOKE, .7)
+	mi.material_override.emission = energy_color.lerp(Color.WHITE_SMOKE, .7)
 	mi.material_override.emission_energy_multiplier = 1
+	socket.get_surface_override_material(1).albedo_color = Color.WHITE.lerp(Color.BLACK, .8)
+	socket.get_surface_override_material(1).emission_energy_multiplier = 0
 
 var hoverable := false
 func set_hoverarble(h: bool):

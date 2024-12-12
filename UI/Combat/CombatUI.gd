@@ -95,7 +95,7 @@ func set_current_energy(energy: EnergyStack):
 
 func update_payable_cards():
 	for hand_card in cards3d.hand_cards:
-		hand_card.set_distort(not hand_card.get_castable().is_selectable())
+		hand_card.set_distort(not hand_card.get_castable().player_has_enough_energy())
 
 func _ready() -> void:
 	deselect_card()

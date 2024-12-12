@@ -41,7 +41,7 @@ func deselect():
 	else:
 		push_error("Tried to deselect active which wasnt pinned")
 
-var card: ActiveCard
+var card: HandCard3D
 func get_card() -> Card3D:
 	return card
 
