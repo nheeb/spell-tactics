@@ -19,8 +19,8 @@ const LEVEL_PATH_DEFAULT = "res://Content/Levels/fight.tres"
 const LEVEL_PATH_SPELLTEST = "res://Content/Levels/SpellTesting/spell_test.tres"
 
 # todo: add these to Settings.gd
-const DEBUG_SKIP_OVERWORLD = true
-const DEBUG_SKIP_POST_COMBAT = true
+#const DEBUG_SKIP_OVERWORLD = true
+#const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false
 const DEBUG_DECK_PURGE = false
 var DEBUG_INFO: bool:
