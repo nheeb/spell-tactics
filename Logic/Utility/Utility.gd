@@ -158,11 +158,16 @@ func random_direction() -> Vector3:
 ############
 
 ## Returns a copy of the array with only unique and non null values
+## (empty arrays are considered null)
 func array_unique(array: Array, no_null_values := true) -> Array:
 	var unique: Array = []
 	for item in array:
-		if no_null_values and item == null:
-			continue
+		if no_null_values:
+			if item == null:
+				continue
+			if item is Array:
+				if item.is_empty():
+					continue
 		if not unique.has(item):
 			unique.append(item)
 	return unique
@@ -204,6 +209,11 @@ func array_shuffled(array: Array) -> Array:
 	_array.shuffle()
 	return _array
 
+func array_reversed(array: Array) -> Array:
+	var _array := array.duplicate()
+	_array.reverse()
+	return _array
+
 func array_sum(array: Array) -> Variant:
 	return array.reduce(func(a,b): return a+b)
 
@@ -228,6 +238,21 @@ func array_flat(array: Array) -> Array:
 		else:
 			result.append(item)
 	return result
+
+## Returns the first filtered element of the array
+func array_get_first_filtered_value(array: Array, filter_callable: Callable, default = null) -> Variant:
+	for element in array:
+		if filter_callable.call(element):
+			return element
+	return default
+
+## Returns the first mapped element of the array which does not count as null
+func array_get_first_mapped_value(array: Array, map_callable: Callable, default = null) -> Variant:
+	for element in array:
+		var map_value = map_callable.call(element)
+		if map_value:
+			return map_value
+	return default
 
 ###########
 ## Dicts ##
@@ -352,29 +377,3 @@ func get_exported_properties(object: Object) -> Array[String]:
 			if "usage" in property and property["usage"] & PROPERTY_USAGE_STORAGE:
 				exported_properties.append(property["name"])
 	return exported_properties
-
-#static func get_exported_properties(node: Node) -> Array:
-	#var exported_properties = []
-	#var script = node.get_script()
-	#
-	#if script:
-		#var properties = script.get_script_property_list()
-		#for property in properties:
-			#if "usage" in property and property["usage"] & PROPERTY_USAGE_STORAGE:
-				#var prop_info = {
-					#"name": property["name"],
-					#"type": type_string(property["type"]),
-					#"value": node.get(property["name"])
-				#}
-				#
-				## Check if it's a numeric range
-				#if property["hint"] == PROPERTY_HINT_RANGE:
-					#var range_info = property["hint_string"].split(",")
-					#if range_info.size() >= 3:
-						#prop_info["min"] = float(range_info[0])
-						#prop_info["max"] = float(range_info[1])
-						#prop_info["step"] = float(range_info[2])
-				#
-				#exported_properties.append(prop_info)
-	#
-	#return exported_properties

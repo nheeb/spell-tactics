@@ -16,7 +16,7 @@ func after_cast():
 		
 func on_select_deselect(select: bool) -> void:
 	var text_button: TextureButton = active.button.button  # TODO active/not button visuals
-	text_button.button_pressed = select
+	combat.animation.property(text_button, "button_pressed", select)
 
 
 #####################################

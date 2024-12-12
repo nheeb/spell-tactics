@@ -98,10 +98,19 @@ func process_active_hotkeys():
 	if Input.is_action_just_pressed("movement_active"): # can only right-click move if no castable is selected
 		if current_castable == null:
 			combat.action_stack.process_player_action(PASelectCastable.new(combat.actives[0]))
+		elif combat.input.current_castable == combat.actives[0]:
+			combat.action_stack.process_player_action(PADeselectCastable.new())
+
 	if Input.is_action_just_pressed("drain_active"):
-		combat.action_stack.process_player_action(PASelectCastable.new(combat.actives[1]))
+		if not combat.input.current_castable == combat.actives[1]:
+			combat.action_stack.process_player_action(PASelectCastable.new(combat.actives[1]))
+		else:
+			combat.action_stack.process_player_action(PADeselectCastable.new())
 	if Input.is_action_just_pressed("melee_active"):
-		combat.action_stack.process_player_action(PASelectCastable.new(combat.actives[2]))
+		if not combat.input.current_castable == combat.actives[2]:
+			combat.action_stack.process_player_action(PASelectCastable.new(combat.actives[2]))
+		else:
+			combat.action_stack.process_player_action(PADeselectCastable.new())
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("focus_on_player") and combat.player != null:

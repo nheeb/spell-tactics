@@ -31,7 +31,7 @@ var DEBUG_INFO: bool:
 var DEBUG_SPELL_TESTING := false
 var LEVEL_EDITOR := false
 
-var DEBUG_OVERLAY : bool = true  # toggled in Combat UI
+var DEBUG_OVERLAY : bool = false  # toggled in Combat UI
 signal energy_overlay_changed(c: bool)
 var ENERGY_OVERLAY: bool = false:
 	set(e):
@@ -45,8 +45,12 @@ var tree: SceneTree:
 	get:
 		return get_tree()
 
-var combats: Array[Combat] # For debuging
+var combats: Array[Combat] # For debugging
 
+
+func _ready() -> void:
+	# so the _input callback is active on pause to unpause 
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
 
 # --- PAUSE STUFF ---	
 @onready var pause_activity: PauseActivity = PauseActivity.new()
@@ -90,30 +94,32 @@ class DeckUtils:
 			spell_states.append(i.serialize())
 		return spell_states
 	
+	const DUPLICATE_COUNT = 3
 	static func create_test_deck(combat: Combat) -> Array[Spell]:
 		var spells: Array[Spell] = []
-		spells.append_array(load_spell_n_times("MudArmor", 1, combat))
-		spells.append_array(load_spell_n_times("AirMissile", 1, combat))
-		spells.append_array(load_spell_n_times("Berserker", 1, combat))
-		spells.append_array(load_spell_n_times("ObjectGrab", 1, combat))
-		spells.append_array(load_spell_n_times("SummonBush", 1, combat))
+		spells.append_array(load_spell_n_times("MudArmor", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("AirMissile", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("Berserker", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("ObjectGrab", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("SummonPlant", DUPLICATE_COUNT, combat))
 		
-		spells.append_array(load_spell_n_times("SporeFlight", 1, combat))
-		spells.append_array(load_spell_n_times("Cyclone", 1, combat))
-		spells.append_array(load_spell_n_times("SelfHeal", 1, combat))
-		spells.append_array(load_spell_n_times("GrowingMycel", 1, combat))
-		spells.append_array(load_spell_n_times("DeadlyDart", 1, combat))
+		spells.append_array(load_spell_n_times("SporeFlight", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("Cyclone", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("SelfHeal", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("GrowingMycel", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("DeadlyDart", DUPLICATE_COUNT, combat))
 		
-		spells.append_array(load_spell_n_times("RockBlast", 1, combat))
-		spells.append_array(load_spell_n_times("SummonWitchTotem", 1, combat))
-		spells.append_array(load_spell_n_times("Teleport", 1, combat))
-		spells.append_array(load_spell_n_times("Breath", 1, combat))
-		spells.append_array(load_spell_n_times("SpellMemory", 1, combat))
+		spells.append_array(load_spell_n_times("RockBlast", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("SummonWitchTotem", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("Teleport", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("Breath", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("SpellMemory", DUPLICATE_COUNT, combat))
 		
-		spells.append_array(load_spell_n_times("WaterBlast", 1, combat))
-		spells.append_array(load_spell_n_times("LightningStrike", 1, combat))
-		spells.append_array(load_spell_n_times("PoisonPunch", 1, combat))
-		spells.append_array(load_spell_n_times("Lifesteal", 1, combat))
+		spells.append_array(load_spell_n_times("WaterBlast", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("LightningStrike", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("PoisonPunch", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("Lifesteal", DUPLICATE_COUNT, combat))
+		spells.append_array(load_spell_n_times("SummonEarthTotem", DUPLICATE_COUNT, combat))
 		
 		spells.shuffle()
 		

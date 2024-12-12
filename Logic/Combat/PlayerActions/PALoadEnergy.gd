@@ -25,7 +25,7 @@ func execute(combat: Combat) -> void:
 		orb = orb.create_single_orb()
 	orb.set_hoverable(false)
 	combat.animation.callable(execute_animation.bind(combat, socket, orb)) \
-		.add_ticket_to_parameter().set_max_duration(.35)
+		.add_wait_ticket_to_args().set_max_duration(.35)
 
 func execute_animation(combat: Combat, socket: HandCardEnergySocket, \
 		_orb: EnergyOrb, ticket: WaitTicket) -> void:

@@ -42,7 +42,7 @@ func load_combat_from_state(combat_state: CombatState, combat_active: bool = tru
 	level = combat.level
 	add_child(combat.level)
 	
-	# Apparently that's only for notifying the PopUpHandler
+	# Apparently that's only for notifying the PopupHandler
 	combat_changed.emit(combat)
 	
 	# construct references to ui_root which lives outside this 3d viewport
@@ -58,7 +58,6 @@ func load_combat_from_state(combat_state: CombatState, combat_active: bool = tru
 	# Connect combat to UI & Cam
 	await get_tree().process_frame
 
-	
 	# Do initial phase process (if any)
 	if combat_active:
 		combat.connect_with_ui_and_camera(combat_ui, $GameCamera)

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=9 format=3 uid="uid://kq07x16lyno7"]
+[gd_resource type="Resource" script_class="EnemyEntityType" load_steps=11 format=3 uid="uid://kq07x16lyno7"]
 
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyEntityType.gd" id="1_uc3fh"]
 [ext_resource type="Resource" uid="uid://naanj6ysv6v5" path="res://Content/Enemies/Moves/Ranged/ArrowShot.tres" id="1_xa1ni"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="2_ebnix"]
 [ext_resource type="Resource" uid="uid://dpi03y33eyfyl" path="res://Content/Enemies/Moves/Ranged/ChargedShot.tres" id="3_iyp0c"]
+[ext_resource type="Resource" uid="uid://csqalxq6tc64q" path="res://Content/Enemies/Moves/Movement/MoveStayRanged.tres" id="4_2n3ve"]
 [ext_resource type="Resource" uid="uid://6xh03fswv7ip" path="res://Content/Enemies/Types/GoblinCorpseState.tres" id="4_05jnh"]
 [ext_resource type="PackedScene" uid="uid://8jt836ivwsy6" path="res://VFX/Entities/Enemies/VisualGoblinArcher.tscn" id="6_tkxns"]
 
@@ -27,28 +28,46 @@ args = []
 kwargs = {}
 fixed_targets = []
 
+[sub_resource type="Resource" id="Resource_dfwi4"]
+script = ExtResource("2_ebnix")
+action = ExtResource("4_2n3ve")
+score_factor = 1.0
+try_to_avoid = true
+avoid_score_factor = 0.01
+args = []
+kwargs = {}
+fixed_targets = []
+
 [resource]
 script = ExtResource("1_uc3fh")
-actions = Array[ExtResource("2_ebnix")]([SubResource("Resource_p4f2w"), SubResource("Resource_u3r4g")])
+actions = Array[ExtResource("2_ebnix")]([SubResource("Resource_p4f2w"), SubResource("Resource_u3r4g"), SubResource("Resource_dfwi4")])
 gain_drain_on_kill = true
 agility = 0
 strength = 1
 accuracy = 9
 resistance = 0
-movement_range = 2
-max_hp = 4
-team = 0
-can_be_hovered = true
+movement_range = 3
 visual_scene = ExtResource("6_tkxns")
 tags = Array[String]([])
 is_terrain = false
+can_be_hovered = true
+can_interact = false
+destroy_on_interact = false
+team = 2
 prototype_scale = Vector2(1, 1)
+prototype_modulate = Color(1, 1, 1, 1)
+only_show_in_editor = false
 is_drainable = false
+destroy_on_drain = false
 obstacle_layer = 2
 obstacle_mask = 3
 is_blocker = true
-cover_value = 0
+has_hp = true
 corpse_state = ExtResource("4_05jnh")
+max_hp = 4
+always_show_hp = true
+hp_bar_height = 1.5
+cover_value = 2
 pretty_name = "Goblin Archer"
 fluff_text = ""
 color = Color(0, 0, 0, 1)

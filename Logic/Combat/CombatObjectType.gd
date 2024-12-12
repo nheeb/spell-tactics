@@ -44,7 +44,7 @@ func create(combat: Combat, props := {}) -> CombatObject:
 		logic.setup(obj)
 		obj.set("logic", logic)
 	# Put on_birth on the stack for special creation effects
-	if (not obj.born or combat.current_phase == Combat.RoundPhase.CombatBegin) \
+	if ( (not obj.born) or combat.current_phase == Combat.RoundPhase.CombatBegin) \
 		and (not Game.LEVEL_EDITOR):
 		combat.action_stack.push_before_active(obj.on_birth)
 	# Put on_load on the stack for animation related stuff
@@ -65,3 +65,10 @@ func on_load() -> void:
 ## This method can be overwritten by other Types to do special stuff
 func _on_load() -> void:
 	pass
+
+static func load_from_file(path: String) -> CombatObjectType:
+	var res = load(path) as CombatObjectType
+	if res == null:
+		push_error("Castable could not be loaded. Path is %s" % path)
+	res.on_load()
+	return res

@@ -5,20 +5,22 @@ func execute() -> void:
 		ActionFlavor.new().set_owner(combat.player)
 			.add_tag(ActionFlavor.Tag.Drain)
 			.add_target(target_tile)
-			.add_target_array(target_entities)
+			.add_target_array(target_tile.entities)
 			.finalize(combat)
 	)
-	for entity in target_entities:
+	for entity in target_tile.entities:
 		entity = entity as Entity
-		var energy_stack : EnergyStack = null
 		if entity.is_drainable():
-			entity.drain() # removes the energy and queues the visual drain animation
-			energy_stack = entity.get_drained_energy()
-			combat.energy.gain(energy_stack, entity)
-		elif entity.type.is_terrain:
+			combat.energy.gain(entity.energy, entity)
+			await combat.action_stack.process_callable(entity.drain)
+		elif entity.type.is_terrain: # not drainable terrain only gets drained visually
 			combat.animation.callable(entity.visual_entity.visual_drain)
-			#for tag in entity.get_tags():
-				#combat.log.register_incident("drained_tag_%s" % tag)
 
 func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 	return target.is_drainable()
+
+
+func on_select_deselect(select: bool):
+	super(select)
+	for tile: Tile in active.current_possible_targets:
+		tile.energy_popup.active = select or Game.ENERGY_OVERLAY

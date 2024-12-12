@@ -1,6 +1,6 @@
 extends EnemyActionLogic
 
-const SKELETON = preload("res://Entities/Enemies/SkeletonTrooper.tres")
+const SKELETON = preload("res://Content/Enemies/Types/SkeletonTrooper.tres")
 
 func get_free_adjacent_tile(enemy_tile: Tile) -> Tile:
 	var surrounding_tiles := enemy_tile.get_surrounding_tiles().filter(

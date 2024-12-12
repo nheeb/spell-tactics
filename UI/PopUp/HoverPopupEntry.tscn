@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0331kddmygfg"]
+
+[ext_resource type="Script" path="res://UI/PopUp/HoverPopupEntry.gd" id="1_1uero"]
+[ext_resource type="FontFile" uid="uid://bgmbqeubb34cp" path="res://Assets/Fonts/rogue.ttf" id="1_20xsn"]
+[ext_resource type="PackedScene" uid="uid://ciug3sucml2b5" path="res://UI/PopUp/EnergyIcon.tscn" id="2_iymbt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0dv8f"]
+line_spacing = 0.0
+font = ExtResource("1_20xsn")
+font_size = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iprbr"]
+bg_color = Color(0.94902, 0.698039, 0.776471, 1)
+border_width_top = 2
+border_color = Color(1, 1, 1, 1)
+
+[node name="EntityEntry" type="MarginContainer"]
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_1uero")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="EntityName" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Rock"
+label_settings = SubResource("LabelSettings_0dv8f")
+horizontal_alignment = 1
+
+[node name="Seperator" type="HSeparator" parent="VBoxContainer/EntityName"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.135
+offset_bottom = 10.165
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 7
+theme_override_styles/separator = SubResource("StyleBoxFlat_iprbr")
+
+[node name="EnergyList" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="EnergyIcon1" parent="VBoxContainer/EnergyList" instance=ExtResource("2_iymbt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnergyIcon2" parent="VBoxContainer/EnergyList" instance=ExtResource("2_iymbt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnergyIcon3" parent="VBoxContainer/EnergyList" instance=ExtResource("2_iymbt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnergyIcon4" parent="VBoxContainer/EnergyList" instance=ExtResource("2_iymbt")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2

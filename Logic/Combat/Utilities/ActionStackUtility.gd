@@ -281,13 +281,17 @@ func _process(delta: float) -> void:
 ## Flavor Announcement ##
 #########################
 
+## TE for flavor listen to this signal
 signal flavor_announced(flavor: ActionFlavor)
 
+## Sets the flavor of the active ticket and announces it.
+## Returns wait(). This should be awaited.
 func set_active_flavor(flavor: ActionFlavor) -> Signal:
 	assert(active_ticket, "An active ticket is needed to set the flavor.")
 	#if active_ticket.flavor:
 		#push_warning("Setting flavor for active ticket which already has one.\
 		#Is this intended?")
+	# TBD is this now intended?
 	active_ticket.flavor = flavor
 	_announce_active_flavor()
 	return wait()

@@ -10,16 +10,26 @@ stack = Array[int]([1, 1])
 
 [resource]
 script = ExtResource("1_5loff")
-can_be_hovered = true
 visual_scene = ExtResource("3_djvx3")
 tags = Array[String]([])
 is_terrain = false
+can_be_hovered = true
+can_interact = false
+destroy_on_interact = false
+team = 0
 prototype_scale = Vector2(1, 1)
+prototype_modulate = Color(1, 1, 1, 1)
+only_show_in_editor = false
 is_drainable = true
 energy = SubResource("Resource_36c7q")
+destroy_on_drain = false
 obstacle_layer = 1
 obstacle_mask = 0
 is_blocker = false
+has_hp = true
+max_hp = 2
+always_show_hp = false
+hp_bar_height = 1.5
 cover_value = 1
 pretty_name = "Tree Stump"
 fluff_text = "Once it was a tree"

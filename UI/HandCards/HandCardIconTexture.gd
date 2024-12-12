@@ -39,3 +39,9 @@ func set_castable_type(type: CastableType):
 				icon.show()
 			else:
 				push_error("SideIcon not found")
+
+func set_main_icon_texture(texture: Texture):
+	for c in get_children(): c.hide()
+	$MainIcon.texture = texture
+	$MainIcon.scale *= (MAIN_ICON_SIZE / float($MainIcon.texture.get_width()))
+	$MainIcon.show()

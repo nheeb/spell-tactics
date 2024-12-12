@@ -86,9 +86,18 @@ func _find_tres_files_recursive(path: String, result: Array):
 				result.append(path.path_join(file_name))
 			file_name = dir.get_next()
 		dir.list_dir_end()
-	
+
+
+## FIXME this is the dirty fix to level editor killing all events
+var global_event_schedules: Array[CombatEventSchedule]
+var global_enemy_events: Array[EnemyEventPlan]
+
 func load_level(level_path: String):
 	var combat_state = ResourceLoader.load(level_path) as CombatState
+	if global_event_schedules.is_empty():
+		global_event_schedules = combat_state.event_schedules
+	if global_enemy_events.is_empty():
+		global_enemy_events = combat_state.enemy_event_queue
 	world._reset_combat()
 	await world.load_combat_from_state(combat_state, false)
 	current_level_path = level_path
@@ -96,13 +105,10 @@ func load_level(level_path: String):
 	
 func save_current_level():
 	var combat_state := world.combat.serialize()
-	# FIXME
-	# We copy the events from the old state because serialization is broken rn
-	var old_state := ResourceLoader.load(current_level_path) as CombatState
-	if old_state:
-		combat_state.event_schedules = old_state.event_schedules
-		combat_state.enemy_event_queue = old_state.enemy_event_queue
-	ResourceSaver.save(world.combat.serialize(), current_level_path)
+	# FIXME We copy the events from the old state because serialization is broken rn
+	combat_state.event_schedules = global_event_schedules
+	combat_state.enemy_event_queue = global_enemy_events
+	ResourceSaver.save(combat_state, current_level_path)
 
 func _on_terrain_place_pressed() -> void:
 	tool_active = tool_terrain_placer

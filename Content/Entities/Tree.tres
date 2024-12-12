@@ -6,22 +6,30 @@
 
 [sub_resource type="Resource" id="Resource_vir08"]
 script = ExtResource("1_40caj")
-stack = Array[int]([3, 3, 3])
+stack = Array[int]([3, 2])
 
 [resource]
 script = ExtResource("1_lkvqb")
-can_be_hovered = true
 visual_scene = ExtResource("3_qd3lb")
 tags = Array[String]([])
 is_terrain = false
+can_be_hovered = true
+can_interact = false
+destroy_on_interact = false
+team = 0
 prototype_scale = Vector2(1.5, 1.5)
 prototype_modulate = Color(1, 1, 1, 1)
 only_show_in_editor = false
 is_drainable = true
 energy = SubResource("Resource_vir08")
+destroy_on_drain = false
 obstacle_layer = 1
 obstacle_mask = 0
 is_blocker = false
+has_hp = true
+max_hp = 2
+always_show_hp = false
+hp_bar_height = 1.5
 cover_value = 3
 pretty_name = "Tree"
 fluff_text = "A beautiful source of wood"

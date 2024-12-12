@@ -6,5 +6,14 @@ var entity: Entity:
 	set(x):
 		push_error("Do not set this.")
 
-func get_reference() -> PropertyReference:
-	return PropertyReference.new(entity.get_reference(), "logic")
+#########################
+## Methods to override ##
+#########################
+
+## ACTION
+func on_drain() -> void:
+	pass
+
+## ACTION
+func on_interact() -> void:
+	pass

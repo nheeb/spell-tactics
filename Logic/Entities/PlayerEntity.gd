@@ -1,4 +1,4 @@
-class_name PlayerEntity extends HPEntity
+class_name PlayerEntity extends Entity
 
 var traits := PlayerTraits.new()
 

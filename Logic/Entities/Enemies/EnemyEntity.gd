@@ -1,4 +1,4 @@
-class_name EnemyEntity extends HPEntity
+class_name EnemyEntity extends Entity
 
 var agility: int = 0
 var strength: int = 1
@@ -102,8 +102,9 @@ func get_random_action_plan() -> EnemyActionPlan:
 
 func on_birth():
 	await super()
-	TimedEffect.new_combat_change(plan_next_action) \
-		.set_id("_cc_plan_action").set_solo().register(combat)
+	# TBD Removed this for now.
+	#TimedEffect.new_combat_change(plan_next_action) \
+		#.set_id("_cc_plan_action").set_solo().register(combat)
 
 func on_death():
 	super()
@@ -122,5 +123,6 @@ func get_bahviour() -> EnemyBehaviour:
 
 ## ACTION
 func on_hover_long(h: bool) -> void:
-	if action_plan:
+	await super(h)
+	if action_plan and Game.DEBUG_OVERLAY:
 		await action_plan.show_preview(combat, h)
