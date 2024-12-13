@@ -1,5 +1,11 @@
 class_name CastableType extends CombatActionType
 
+## Energy costs of the card
+@export var costs: EnergyStack
+
+## Effect text shown on the card
+@export_multiline var effect_text: String
+
 enum SpellTopic {
 	None,
 	Damage,
@@ -42,19 +48,11 @@ const TopicIconName = {
 	SpellTopic.Knockback: "plain-arrow-right"
 }
 
-## Effect text shown on the card
-@export_multiline var effect_text: String
+@export_group("Side / Topic Icons")
 @export var topic: SpellTopic = SpellTopic.None
 @export var topic_secondary: SpellTopic = SpellTopic.None
 @export var topic_icons: Array[SpellTopic] = []
 @export var topic_caption := ""
-
-static func load_from_file(path: String) -> CastableType:
-	var res = load(path) as CastableType
-	if res == null:
-		push_error("Castable could not be loaded. Path is %s" % path)
-	res.on_load()
-	return res
 
 func get_side_icon_infos() -> Array[HandCardSideIcon.SideIconInfo]:
 	# Left Topic Icons
@@ -87,5 +85,14 @@ func get_side_icon_infos() -> Array[HandCardSideIcon.SideIconInfo]:
 	#icon_infos.append(HandCardSideIcon.SideIconInfo.new(
 		#TargetIconName[target], target_text, false
 	#))
-	
 	return icon_infos
+
+func _on_load() -> void:
+	super._on_load()
+	if costs == null:
+		costs = EnergyStack.new([])
+
+func get_main_energy() -> EnergyStack.EnergyType:
+	if costs.size() > 0:
+		return costs.stack.front()
+	return EnergyStack.EnergyType.Any

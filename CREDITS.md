@@ -13,6 +13,8 @@ https://fontesk.com/rogue-font/
   - https://pixabay.com/illustrations/watercolor-texture-background-paint-5062356/
 - Wood Cursor, CC **Non-Commercial** by SYNTHCRO
   - http://www.rw-designer.com/user/33565
+- Card Rock Texture
+  - https://freestylized.com/material/rock_01/
 
 ### Models
 - High quality grass - nevayashka

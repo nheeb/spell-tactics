@@ -1,6 +1,15 @@
 class_name HandCard3D extends Card3D
 
-var spell: Spell
+var castable: Castable
+var spell: Spell:
+	get:
+		return castable as Spell
+var active: Active:
+	get:
+		return castable as Active
+
+func _ready() -> void:
+	pass
 
 func _enter_tree() -> void:
 	$Quad.get_surface_override_material(0).albedo_texture = $Quad/SubViewport.get_texture()
@@ -10,28 +19,42 @@ func _enter_tree() -> void:
 	$Model/EnergySocketPivot/HandCardEnergySocket.queue_free()
 
 func get_castable() -> Castable:
-	return get_spell()
+	return castable
 
 func get_spell() -> Spell:
 	return spell
-	
+
+func get_active() -> Active:
+	return active
+
 func set_render_prio(p: int) -> void:
 	$Quad.get_surface_override_material(0).set("render_priority", p)
 	%CardModel.material_override.set("render_priority", p)
 	if %CardModel.material_overlay:
 		%CardModel.material_overlay.set("render_priority", p-1)
 	%CardModel.material_override.next_pass.set("render_priority", p+1)
+	for socket in %EnergySocketPivot.get_children():
+		if socket is HandCardEnergySocket:
+			socket.set_render_prio(p+1)
 
 func set_collision_scale(s: float) -> void:
 	$Area3D/CollisionShape3D.scale = Vector3.ONE * s
 
 func set_spell(s: Spell) -> void:
-	spell = s
+	castable = s
 	s.card = self
 	set_spell_type(s.type)
 
+func set_active(a: Active) -> void:
+	castable = a
+	a.card = self
+	set_castable_type(a.type)
+
+func set_spell_type(type: SpellType):
+	set_castable_type(type)
+
 const ENERGY_SOCKET = preload("res://UI/HandCards/HandCardEnergySocket.tscn")
-func set_spell_type(type: SpellType) -> void:
+func set_castable_type(type: CastableType) -> void:
 	# Spawn Energy Sockets
 	var costs : EnergyStack = type.costs
 	costs.sort()
@@ -43,9 +66,18 @@ func set_spell_type(type: SpellType) -> void:
 		socket.position = get_energy_socket_pos(i, costs.size())
 		socket.set_type(energy)
 	# Set Texture
-	%CardTexture.set_spell_type(type)
+	%CardTexture._ready()
+	%CardTexture.set_castable_type(type)
 	# Set Shader color
 	%CardModel.material_override.next_pass.set("shader_parameter/albedo", type.color)
+
+func set_miniature_variant_energy_type(et: EnergyStack.EnergyType):
+	# Set Texture
+	%CardTexture.set_miniature_variant_energy_type(et)
+	# Set Shader color
+	%CardModel.material_override.next_pass \
+		.set("shader_parameter/albedo", VFX.type_to_color(et))
+	set_distort(false)
 
 const ENERGY_SOCKET_DIST = .15
 func get_energy_socket_pos(i: int, socket_count: int) -> Vector3:

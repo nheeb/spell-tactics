@@ -32,15 +32,3 @@ func after_cast():
 	pay_for_spell(payment)
 	super.after_cast()
 	combat.cards.discard(spell)
-
-## The current costs with all the modifiers if there are any
-func get_costs() -> EnergyStack:
-	var costs := _get_costs()
-	return costs
-
-#####################################
-## For overriding in each Castable ##
-#####################################
-
-func _get_costs() -> EnergyStack:
-	return spell.type.costs
