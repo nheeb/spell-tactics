@@ -2,6 +2,7 @@ class_name VFXUtils extends Node
 
 const HEX_RINGS = preload("res://VFX/Effects/HexRings.tscn")
 const HEX_COLOR = preload("res://VFX/Effects/HexColor.tscn")
+const HEX_COLOR_STAYING = preload("res://VFX/Effects/StayingHexColor.tscn")
 const ICON_VISUALS = preload("res://VFX/Effects/IconVisuals.tscn")
 const ICON_BURST = preload("res://VFX/Effects/IconBurst.tscn")
 const ICON_CYCLE = preload("res://VFX/Effects/CirclingIcons.tscn")
