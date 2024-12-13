@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActiveType" load_steps=5 format=3 uid="uid://pt0aoagtmp78"]
 
-[ext_resource type="Texture2D" uid="uid://bklbix8qk6xl0" path="res://Assets/Sprites/Icons/racoon-walk.png" id="1_8u1wa"]
+[ext_resource type="Texture2D" uid="uid://bxy64tmh881lq" path="res://Assets/Sprites/Icons/movement2.png" id="1_eni8p"]
 [ext_resource type="Script" path="res://Logic/Castables/ActiveType.gd" id="1_rfhoe"]
 [ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="3_qghvx"]
 
@@ -31,6 +31,6 @@ topic_caption = ""
 target_requirements = Array[ExtResource("3_qghvx")]([SubResource("Resource_wjtt8")])
 pretty_name = "Movement"
 fluff_text = ""
-icon = ExtResource("1_8u1wa")
+icon = ExtResource("1_eni8p")
 color = Color(1, 1, 1, 1)
 default_data = {}

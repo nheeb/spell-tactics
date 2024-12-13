@@ -41,26 +41,26 @@ color = Color(1, 1, 1, 0.145098)
 [node name="MainIcon" type="Sprite2D" parent="."]
 texture_filter = 4
 material = SubResource("ShaderMaterial_xckbr")
-position = Vector2(512, 512)
+position = Vector2(512, 441)
 texture = ExtResource("1_gny5x")
 
 [node name="HandCardSideIconLeft3" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(137, 403)
+position = Vector2(137, 332)
 
 [node name="HandCardSideIconLeft2" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(137, 587)
+position = Vector2(137, 516)
 
 [node name="HandCardSideIconLeft1" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(189, 755)
+position = Vector2(189, 684)
 
 [node name="HandCardSideIconRight3" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(856, 414)
+position = Vector2(856, 343)
 
 [node name="HandCardSideIconRight2" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(856, 598)
+position = Vector2(856, 527)
 
 [node name="HandCardSideIconRight1" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(812, 755)
+position = Vector2(812, 684)
 
 [node name="PrototypeIconCircle" type="CollisionShape2D" parent="."]
 visible = false
