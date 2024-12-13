@@ -1,8 +1,8 @@
 extends StayingVisualEffect
 
 var color: Color = Color.RED
-var duration := .25
-var alpha := .2
+var duration := .1
+var alpha := .12
 
 func toggle_active(active: bool) -> void:
 	var alpha_start := 0.0 if active else alpha

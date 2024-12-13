@@ -133,6 +133,21 @@ func on_birth():
 func on_load() -> void:
 	if type.has_hp:
 		combat.animation.update_hp(self).set_flag_with()
+	# FIXME This is shitty. Better make a "global" ACTION / PA for Overlay toggle
+	if type.can_interact:
+		Game.energy_overlay_changed.connect(
+			func (overlay: bool):
+				if overlay:
+					combat.animation.add_staying_effect(
+						VFX.HEX_COLOR_STAYING, current_tile.tile3d,
+						"interact_hex_color", {"color": Color.YELLOW}
+					).set_flag_with()
+				else:
+					combat.animation.remove_staying_effect(
+						current_tile.tile3d, "interact_hex_color"
+					).set_flag_with()
+				combat.animation.play_animation_queue()
+		)
 	await super()
 
 ##############################

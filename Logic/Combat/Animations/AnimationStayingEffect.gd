@@ -1,11 +1,11 @@
 class_name AnimationStayingEffect extends AnimationObject
 
 var effect_scene: PackedScene
-var target: VisualEntity
+var target: Node3D
 var setup_properties: Dictionary
 var id: String
 
-func _init(_effect_scene: PackedScene, _target: VisualEntity, _id: String, _setup_properties := {}) -> void:
+func _init(_effect_scene: PackedScene, _target: Node3D, _id: String, _setup_properties := {}) -> void:
 	effect_scene = _effect_scene
 	target = _target
 	setup_properties = _setup_properties
@@ -17,6 +17,10 @@ func set_property(prop_name: String, value) -> AnimationStayingEffect:
 	return self
 
 func play(level: Level):
+	if not target.has_method("add_visual_effect"):
+		push_error("Target %s cannot take visual effects" % target)
+		animation_done_internally.emit()
+		return
 	var effect = effect_scene.instantiate() as StayingVisualEffect
 	target.add_visual_effect(id, effect)
 	if is_instance_valid(target):

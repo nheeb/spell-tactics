@@ -50,12 +50,18 @@ func effect(_effect_scene: PackedScene, target: Object, _setup_properties := {})
 	add_animation_object(a)
 	return a
 
-func add_staying_effect(_effect_scene: PackedScene, target: VisualEntity, id: String,_setup_properties := {}) -> AnimationStayingEffect:
+func add_staying_effect(_effect_scene: PackedScene, target: Object, id: String,_setup_properties := {}) -> AnimationStayingEffect:
+	if target is CombatObject:
+		target = target.node3d
+	assert(target is VisualEntity or target is Tile3D, "target has a weird type")
 	var a = AnimationStayingEffect.new(_effect_scene, target, id, _setup_properties)
 	add_animation_object(a)
 	return a
 
-func remove_staying_effect(target: VisualEntity, id: String) -> AnimationCallable:
+func remove_staying_effect(target: Object, id: String) -> AnimationCallable:
+	if target is CombatObject:
+		target = target.node3d
+	assert(target is VisualEntity or target is Tile3D, "target has a weird type")
 	return call_method(target, "remove_visual_effect", [id])
 
 func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSignal:
