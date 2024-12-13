@@ -88,6 +88,17 @@ func get_parent_of_type(n: Node, type) -> Node:
 ##############
 ## Hex Grid ##
 ##############
+const Q_BASIS: Vector2 = Vector2(sqrt(3), 0)
+const R_BASIS: Vector2 = Vector2(sqrt(3)/2, 3./2)
+
+const HEX_DIRECTIONS: Array = [
+	Vector3(1, -1, 0),  # Right
+	Vector3(1, 0, -1),  # Top-right
+	Vector3(0, 1, -1),  # Top-left
+	Vector3(-1, 1, 0),  # Left
+	Vector3(-1, 0, 1),  # Bottom-left
+	Vector3(0, -1, 1)   # Bottom-right
+]
 
 func cube_add(r1: int, q1: int, s1: int, r2: int, q2: int, s2: int) -> Vector3i:
 	return Vector3i(r1 + r2, q1 + q2, s1 + s2)
@@ -97,6 +108,34 @@ func rq_distance(r1: int, q1: int, r2: int, q2: int) -> int:
 	return (abs(q1 - q2) 
 			+ abs(q1 + r1 - q2 - r2)
 			+ abs(r1 - r2)) / 2
+			
+func cube_to_axial(cube_dir: Vector3) -> Vector2:
+	return Vector2(cube_dir.x, cube_dir.y)
+
+func axial_to_cube(r: int, q: int) -> Vector3:
+	return Vector3(r, q, -r - q)
+
+# Converts an axial direction to a 2D world-space vector using the basis
+func axial_to_world_space(axial_dir: Vector2) -> Vector2:
+	return Q_BASIS * axial_dir.x + R_BASIS * axial_dir.y
+	
+func closest_hex_direction(start_r: int, start_q: int, target_r: int, target_q: int) -> Vector3:
+	# Calculate the cube difference between start and target
+	var start_cube = axial_to_cube(start_r, start_q)
+	var target_cube = axial_to_cube(target_r, target_q)
+	var diff_cube = target_cube - start_cube
+
+	# Normalize the direction by finding the closest HEX_DIRECTIONS
+	var closest_dir = HEX_DIRECTIONS[0]
+	var min_distance = diff_cube.distance_to(HEX_DIRECTIONS[0])
+	
+	for dir in HEX_DIRECTIONS:
+		var distance = diff_cube.distance_to(dir)
+		if distance < min_distance:
+			min_distance = distance
+			closest_dir = dir
+	
+	return closest_dir
 
 ################
 ## Randomness ##

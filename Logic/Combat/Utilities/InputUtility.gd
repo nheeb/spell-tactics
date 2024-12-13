@@ -116,4 +116,5 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("focus_on_player") and combat.player != null:
 		combat.animation.camera_reach(combat.player.visual_entity)
 		combat.animation.play_animation_queue(true)
-	process_active_hotkeys()
+	if not Game.LEVEL_EDITOR:
+		process_active_hotkeys()
