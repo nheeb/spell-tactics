@@ -60,6 +60,26 @@ func type_to_icon(_type, transparent := false) -> Texture:
 	push_error("unknown type")
 	return energy_icons[0]
 
+@export var icon_inner_colors: Array[Color]
+func type_to_inner_color(_type) -> Color:
+	match _type:
+		EnergyStack.EnergyType.Any:
+			return icon_inner_colors[0]
+		EnergyStack.EnergyType.Matter:
+			return icon_inner_colors[1]
+		EnergyStack.EnergyType.Empty:
+			return icon_inner_colors[2]
+		EnergyStack.EnergyType.Harmony:
+			return icon_inner_colors[3]
+		EnergyStack.EnergyType.Flow:
+			return icon_inner_colors[4]
+		EnergyStack.EnergyType.Decay:
+			return icon_inner_colors[5]
+		EnergyStack.EnergyType.Spectral:
+			return icon_inner_colors[6]
+	push_error("unknown type")
+	return icon_inner_colors[0]
+
 func get_icon_from_name(icon_name) -> Texture:
 	if icon_name is Texture:
 		return icon_name

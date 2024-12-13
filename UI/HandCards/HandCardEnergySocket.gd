@@ -5,6 +5,7 @@ class_name HandCardEnergySocket extends Node3D
 var card: HandCard3D
 
 var energy_color : Color
+var inner_color : Color
 var mi : MeshInstance3D
 var type : EnergyStack.EnergyType
 
@@ -29,8 +30,9 @@ func set_type(_type: EnergyStack.EnergyType):
 	
 	mi.material_override = %MaterialPrototype.material_override
 	energy_color = VFX.type_to_color(type)
-	mi.material_override.albedo_color = energy_color.lerp(Color.WHITE_SMOKE, .7)
-	mi.material_override.emission = energy_color.lerp(Color.WHITE_SMOKE, .7)
+	inner_color = VFX.type_to_inner_color(type)
+	mi.material_override.albedo_color = inner_color
+	mi.material_override.emission = inner_color
 	mi.material_override.emission_energy_multiplier = 1
 	socket.get_surface_override_material(0).albedo_color = energy_color.lerp(Color.BLACK, .25)
 	socket.get_surface_override_material(1).albedo_color = Color.WHITE.lerp(Color.BLACK, .8)
@@ -90,8 +92,8 @@ func set_render_prio(p: int) -> void:
 ## ANIM 
 func unload_animation():
 	%Light.hide()
-	mi.material_override.albedo_color = energy_color.lerp(Color.WHITE_SMOKE, .7)
-	mi.material_override.emission = energy_color.lerp(Color.WHITE_SMOKE, .7)
+	mi.material_override.albedo_color = inner_color
+	mi.material_override.emission = inner_color
 	mi.material_override.emission_energy_multiplier = 1
 	socket.get_surface_override_material(1).albedo_color = Color.WHITE.lerp(Color.BLACK, .8)
 	socket.get_surface_override_material(1).emission_energy_multiplier = 0

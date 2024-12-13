@@ -101,9 +101,9 @@ func on_hover_long(h: bool) -> void:
 		else:
 			combat.animation.hide(visual_entity.health_bar)
 
-####################################
+############################
 ## CombatObject Overrides ##
-####################################
+############################
 
 var pre_death_tile: Tile
 
@@ -131,6 +131,8 @@ func on_birth():
 
 ## This will be executed after an entity has been created from a type.
 func on_load() -> void:
+	if type.has_hp:
+		combat.animation.update_hp(self).set_flag_with()
 	await super()
 
 ##############################
