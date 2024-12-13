@@ -87,7 +87,8 @@ func _reset_combat():
 	if ui_root != null:
 		ui_root.remove_child(combat_ui)
 	if popup_handler != null:
-		popup_handler.reset()
+		#popup_handler.reset()
+		pass
 #
 #func _exit_tree():
 	#call_deferred("_reset_combat")

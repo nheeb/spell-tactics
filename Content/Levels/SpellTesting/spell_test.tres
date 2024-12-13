@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatState" load_steps=542 format=3 uid="uid://dee2npbifxxpy"]
+[gd_resource type="Resource" script_class="CombatState" load_steps=650 format=3]
 
 [ext_resource type="Script" path="res://Logic/Castables/ActiveState.gd" id="1_ytopo"]
 [ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventState.gd" id="2_yiqr2"]
@@ -6,17 +6,22 @@
 [ext_resource type="Script" path="res://Logic/Combat/ActionStack/ActionFlavor.gd" id="4_37hg5"]
 [ext_resource type="Script" path="res://Logic/Castables/SpellState.gd" id="4_qtw05"]
 [ext_resource type="Script" path="res://Logic/Combat/References/UniversalReference.gd" id="5_1dvju"]
-[ext_resource type="Resource" uid="uid://cqlrgabiv3qts" path="res://Content/Entities/DirtTile.tres" id="13_lcsyu"]
+[ext_resource type="Resource" path="res://Content/Levels/enemy_event_plan_spawn_new_bard.tres" id="8_dbjw3"]
+[ext_resource type="Resource" path="res://Content/Levels/enemy_event_plan_spawn_new_fighter.tres" id="9_gjrc2"]
+[ext_resource type="Resource" path="res://Content/Levels/enemy_event_plan_spawn_new_archer.tres" id="10_ibygq"]
+[ext_resource type="Resource" path="res://Content/Levels/combat_event_schedule_weather.tres" id="12_dgtm5"]
+[ext_resource type="Resource" path="res://Content/Entities/DirtTile.tres" id="13_lcsyu"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="14_vguef"]
 [ext_resource type="Script" path="res://Logic/Combat/CombatObjectState.gd" id="15_vwqs8"]
-[ext_resource type="Resource" uid="uid://b1uiotlalbmul" path="res://Content/Entities/GrassTile.tres" id="16_a75ux"]
-[ext_resource type="Resource" uid="uid://ddr1tv8hf3bj3" path="res://Content/Entities/Stump.tres" id="17_fy5m0"]
-[ext_resource type="Resource" uid="uid://d1wcrekyije7v" path="res://Content/Player/PlayerResource.tres" id="18_mx2mv"]
-[ext_resource type="Resource" uid="uid://brvjvj8i7f7kw" path="res://Content/Entities/Tree.tres" id="19_lyn8q"]
-[ext_resource type="Resource" uid="uid://dxf83ay5rsin2" path="res://Content/Enemies/Types/GoblinWarrior.tres" id="20_ooqup"]
-[ext_resource type="Resource" uid="uid://b7xqo2ltiqbwk" path="res://Content/Entities/Bush.tres" id="21_6w863"]
+[ext_resource type="Resource" path="res://Content/Entities/GrassTile.tres" id="16_a75ux"]
+[ext_resource type="Resource" path="res://Content/Entities/Stump.tres" id="17_fy5m0"]
+[ext_resource type="Resource" path="res://Content/Player/PlayerResource.tres" id="18_mx2mv"]
+[ext_resource type="Resource" path="res://Content/Entities/Tree.tres" id="19_lyn8q"]
+[ext_resource type="Resource" path="res://Content/Enemies/Types/GoblinWarrior.tres" id="20_ooqup"]
+[ext_resource type="Resource" path="res://Content/Entities/Bush.tres" id="21_6w863"]
 [ext_resource type="Script" path="res://Logic/Combat/References/CombatObjectReference.gd" id="22_mapb5"]
 [ext_resource type="Script" path="res://Logic/Combat/Events/EnemyEventPlan.gd" id="25_j4dhl"]
+[ext_resource type="Resource" path="res://Content/Entities/MediumShrooms.tres" id="26_8v8rr"]
 [ext_resource type="Script" path="res://Logic/Combat/Events/CombatEventSchedule.gd" id="27_edten"]
 [ext_resource type="Script" path="res://Logic/Entities/Enemies/EnemyActionArgs.gd" id="30_ewdvm"]
 [ext_resource type="Script" path="res://Logic/Level/State/EntityState.gd" id="31_t60qf"]
@@ -991,7 +996,707 @@ round_number = 1
 round_phase = 0
 text = "A: CombatState._deserialize_into"
 
-[sub_resource type="Resource" id="Resource_0otbg"]
+[sub_resource type="Resource" id="Resource_qcma4"]
+script = ExtResource("3_3p2ts")
+type = 0
+round_number = 1
+round_phase = 0
+text = "Combat was deserialized."
+
+[sub_resource type="Resource" id="Resource_m18bu"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_uq8c8"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_2wks2"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_h5xku"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_xek8v"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_u2w4e"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_ixtmi"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_qb1pu"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_s64t7"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_26cy0"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_alonp"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_wwf8w"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_17she"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_xmsxv"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_pskca"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_l53un"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_wubdw"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_med5o"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_416st"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_8cmen"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_frce8"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_byrle"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_4atex"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: PlayerEntity.on_load"
+
+[sub_resource type="Resource" id="Resource_n2g01"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_10qnr"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_yph60"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_2l1ie"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_kahes"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_le8ih"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_3lhm1"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_d7dpp"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_s0vnr"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_bq8hm"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_uleom"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_2mcc6"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_5jqqo"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_h2lxk"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_v7ydu"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_8k2u7"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_np8lu"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_35uqi"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_tmwt0"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: EnemyEntity.on_load"
+
+[sub_resource type="Resource" id="Resource_uqi5i"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_qtafg"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_e71xw"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_82lc0"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_6wgml"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_2s76v"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_vt1eo"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_5ofw5"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_8csqr"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_crstd"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_4yjft"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_64l56"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_xqa1r"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_asn2p"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_50iwa"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_r6rmx"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_7t66c"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_8cfw4"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_8vl7f"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_1u88m"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_lko5d"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_vb236"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_n8vkj"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_1fl66"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: CombatState._deserialize_into"
+
+[sub_resource type="Resource" id="Resource_dgok2"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_821kd"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(05/06):77>"
+flavor = SubResource("Resource_dgok2")
+
+[sub_resource type="Resource" id="Resource_nfmsp"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_6xott"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(05/06):77>"
+flavor = SubResource("Resource_nfmsp")
+
+[sub_resource type="Resource" id="Resource_7qe4p"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_s3ywt"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(04/07):57>"
+flavor = SubResource("Resource_7qe4p")
+
+[sub_resource type="Resource" id="Resource_t80wi"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_ema5e"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(04/07):57>"
+flavor = SubResource("Resource_t80wi")
+
+[sub_resource type="Resource" id="Resource_oja8f"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_x2gxd"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(08/04):132>"
+flavor = SubResource("Resource_oja8f")
+
+[sub_resource type="Resource" id="Resource_8c8fx"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_i7ix1"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(08/04):132>"
+flavor = SubResource("Resource_8c8fx")
+
+[sub_resource type="Resource" id="Resource_764pb"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_fddtf"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(07/04):115>"
+flavor = SubResource("Resource_764pb")
+
+[sub_resource type="Resource" id="Resource_fv6f4"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_0qqk8"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(07/04):115>"
+flavor = SubResource("Resource_fv6f4")
+
+[sub_resource type="Resource" id="Resource_40ym6"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "A: Entity.on_load"
+
+[sub_resource type="Resource" id="Resource_bclbx"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_je8o8"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(07/05):117>"
+flavor = SubResource("Resource_bclbx")
+
+[sub_resource type="Resource" id="Resource_bqexg"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_ml04v"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(07/05):117>"
+flavor = SubResource("Resource_bqexg")
+
+[sub_resource type="Resource" id="Resource_8pavl"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_bupqw"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(07/07):121>"
+flavor = SubResource("Resource_8pavl")
+
+[sub_resource type="Resource" id="Resource_m363o"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_jktvi"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(07/07):121>"
+flavor = SubResource("Resource_m363o")
+
+[sub_resource type="Resource" id="Resource_r1alf"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_17qjk"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(08/06):136>"
+flavor = SubResource("Resource_r1alf")
+
+[sub_resource type="Resource" id="Resource_mhg3a"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_fxd44"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(08/06):136>"
+flavor = SubResource("Resource_mhg3a")
+
+[sub_resource type="Resource" id="Resource_catle"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_10f3i"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(05/08):81>"
+flavor = SubResource("Resource_catle")
+
+[sub_resource type="Resource" id="Resource_rvkmw"]
+script = ExtResource("4_37hg5")
+tags = Array[int]([3])
+targets = Array[ExtResource("5_1dvju")]([])
+data = {}
+
+[sub_resource type="Resource" id="Resource_t1ox1"]
+script = ExtResource("3_3p2ts")
+type = 2
+round_number = 1
+round_phase = 0
+text = "PA:Hover Tile Long <Tile(05/08):81>"
+flavor = SubResource("Resource_rvkmw")
+
+[sub_resource type="Resource" id="Resource_73upb"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1005,7 +1710,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_7euh3"]
+[sub_resource type="Resource" id="Resource_et71q"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1019,7 +1724,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_lhlu5"]
+[sub_resource type="Resource" id="Resource_kg2w3"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1033,7 +1738,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_lxmgg"]
+[sub_resource type="Resource" id="Resource_7cvxl"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1047,7 +1752,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_3g75e"]
+[sub_resource type="Resource" id="Resource_pxtei"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1061,7 +1766,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_fkwyo"]
+[sub_resource type="Resource" id="Resource_amysb"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1075,7 +1780,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_5a7vl"]
+[sub_resource type="Resource" id="Resource_47km7"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1093,23 +1798,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_dktwp"]
+[sub_resource type="Resource" id="Resource_i4icf"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_iyqgc"),
+"hp": 0,
 "id": 8,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_1nrsn"]
+[sub_resource type="Resource" id="Resource_7e4vw"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_dktwp")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_i4icf")])
 data = {}
 props = {
 "born": false,
@@ -1121,7 +1832,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_iqlb8"]
+[sub_resource type="Resource" id="Resource_xixuk"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1135,7 +1846,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_lki78"]
+[sub_resource type="Resource" id="Resource_ldshq"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1149,7 +1860,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_rabq2"]
+[sub_resource type="Resource" id="Resource_3lxjd"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1163,7 +1874,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_6gxu4"]
+[sub_resource type="Resource" id="Resource_7g5j7"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1177,7 +1888,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_h52o5"]
+[sub_resource type="Resource" id="Resource_hry6b"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1195,23 +1906,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_1jmn2"]
+[sub_resource type="Resource" id="Resource_8lw3r"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_rlxnh"),
+"hp": 0,
 "id": 15,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_mrn75"]
+[sub_resource type="Resource" id="Resource_10hs2"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_1jmn2")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_8lw3r")])
 data = {}
 props = {
 "born": false,
@@ -1227,23 +1944,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_w1a8y"]
+[sub_resource type="Resource" id="Resource_2f5y1"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_bilgy"),
+"hp": 0,
 "id": 17,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_3khkj"]
+[sub_resource type="Resource" id="Resource_w2fy7"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_w1a8y")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_2f5y1")])
 data = {}
 props = {
 "born": false,
@@ -1259,23 +1982,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_cyb2s"]
+[sub_resource type="Resource" id="Resource_8qg01"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_wtoxs"),
+"hp": 0,
 "id": 19,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_e0jb2"]
+[sub_resource type="Resource" id="Resource_4xgmw"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_cyb2s")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_8qg01")])
 data = {}
 props = {
 "born": false,
@@ -1291,23 +2020,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_inepp"]
+[sub_resource type="Resource" id="Resource_1flfp"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_lary3"),
+"hp": 0,
 "id": 21,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_mmy3j"]
+[sub_resource type="Resource" id="Resource_rqvf2"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_inepp")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_1flfp")])
 data = {}
 props = {
 "born": false,
@@ -1323,23 +2058,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_j6toq"]
+[sub_resource type="Resource" id="Resource_pr016"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_nop1d"),
+"hp": 0,
 "id": 23,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_cgspa"]
+[sub_resource type="Resource" id="Resource_roj77"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_j6toq")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_pr016")])
 data = {}
 props = {
 "born": false,
@@ -1355,23 +2096,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_x76qo"]
+[sub_resource type="Resource" id="Resource_rc6la"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_jxowy"),
+"hp": 0,
 "id": 25,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_aid8w"]
+[sub_resource type="Resource" id="Resource_dp5g4"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_x76qo")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_rc6la")])
 data = {}
 props = {
 "born": false,
@@ -1387,23 +2134,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_qfh1l"]
+[sub_resource type="Resource" id="Resource_stc5r"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_7ss2s"),
+"hp": 0,
 "id": 27,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_i7wjw"]
+[sub_resource type="Resource" id="Resource_vh232"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_qfh1l")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_stc5r")])
 data = {}
 props = {
 "born": false,
@@ -1415,7 +2168,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_lhw4l"]
+[sub_resource type="Resource" id="Resource_xgckl"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1429,7 +2182,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_p54al"]
+[sub_resource type="Resource" id="Resource_qeuwf"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1447,23 +2200,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_7y28l"]
+[sub_resource type="Resource" id="Resource_p5m3e"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_4xx75"),
+"hp": 0,
 "id": 31,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_4vsr4"]
+[sub_resource type="Resource" id="Resource_24iri"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_7y28l")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_p5m3e")])
 data = {}
 props = {
 "born": false,
@@ -1479,23 +2238,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_gp7ls"]
+[sub_resource type="Resource" id="Resource_o1a4n"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_8vh2j"),
+"hp": 0,
 "id": 33,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_vtvcp"]
+[sub_resource type="Resource" id="Resource_a51wo"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_gp7ls")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_o1a4n")])
 data = {}
 props = {
 "born": false,
@@ -1511,23 +2276,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_6dajn"]
+[sub_resource type="Resource" id="Resource_qo86w"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_uw3mt"),
+"hp": 0,
 "id": 35,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_vvt4i"]
+[sub_resource type="Resource" id="Resource_at77r"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_6dajn")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_qo86w")])
 data = {}
 props = {
 "born": false,
@@ -1543,15 +2314,21 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_povso"]
+[sub_resource type="Resource" id="Resource_71hha"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_1r52v"),
+"hp": 0,
 "id": 37,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
@@ -1561,23 +2338,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([1, 1])
 
-[sub_resource type="Resource" id="Resource_kemwg"]
+[sub_resource type="Resource" id="Resource_2h653"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 1,
 "dead": false,
 "energy": SubResource("Resource_36c7q"),
+"hp": 2,
 "id": 38,
+"max_hp": 2,
+"team": 0,
 "type": ExtResource("17_fy5m0")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_wttou"]
+[sub_resource type="Resource" id="Resource_eoycy"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_povso"), SubResource("Resource_kemwg")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_71hha"), SubResource("Resource_2h653")])
 data = {}
 props = {
 "born": false,
@@ -1593,23 +2376,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_mwk3u"]
+[sub_resource type="Resource" id="Resource_k4nt7"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_qk80d"),
+"hp": 0,
 "id": 40,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_1nbyl"]
+[sub_resource type="Resource" id="Resource_osrnq"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_mwk3u")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_k4nt7")])
 data = {}
 props = {
 "born": false,
@@ -1625,23 +2414,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_ml82i"]
+[sub_resource type="Resource" id="Resource_7yqq5"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_j4p01"),
+"hp": 0,
 "id": 42,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_6m10e"]
+[sub_resource type="Resource" id="Resource_q8n71"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_ml82i")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_7yqq5")])
 data = {}
 props = {
 "born": false,
@@ -1657,23 +2452,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_h7qim"]
+[sub_resource type="Resource" id="Resource_gjwh1"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_42yum"),
+"hp": 0,
 "id": 44,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_dm77r"]
+[sub_resource type="Resource" id="Resource_7elp2"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_h7qim")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_gjwh1")])
 data = {}
 props = {
 "born": false,
@@ -1685,7 +2486,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_low4c"]
+[sub_resource type="Resource" id="Resource_26f1n"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1699,7 +2500,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_dqj2q"]
+[sub_resource type="Resource" id="Resource_yqg3o"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -1717,23 +2518,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_uqypg"]
+[sub_resource type="Resource" id="Resource_frjp4"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_odosn"),
+"hp": 0,
 "id": 48,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_rqdgk"]
+[sub_resource type="Resource" id="Resource_c2ydi"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_uqypg")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_frjp4")])
 data = {}
 props = {
 "born": false,
@@ -1749,23 +2556,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_ba85i"]
+[sub_resource type="Resource" id="Resource_04nj2"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_gkqsb"),
+"hp": 0,
 "id": 50,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_8myko"]
+[sub_resource type="Resource" id="Resource_xwx6t"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_ba85i")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_04nj2")])
 data = {}
 props = {
 "born": false,
@@ -1781,23 +2594,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_a33y4"]
+[sub_resource type="Resource" id="Resource_05qcr"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_x8vkp"),
+"hp": 0,
 "id": 52,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_g5ug5"]
+[sub_resource type="Resource" id="Resource_yemdi"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_a33y4")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_05qcr")])
 data = {}
 props = {
 "born": false,
@@ -1813,23 +2632,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_mjksy"]
+[sub_resource type="Resource" id="Resource_vtb4x"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_vj5fp"),
+"hp": 0,
 "id": 54,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_wrjdk"]
+[sub_resource type="Resource" id="Resource_jwwbt"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_mjksy")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_vtb4x")])
 data = {}
 props = {
 "born": false,
@@ -1845,23 +2670,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_ouy2c"]
+[sub_resource type="Resource" id="Resource_8ow6p"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_oeost"),
+"hp": 0,
 "id": 56,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_dplok"]
+[sub_resource type="Resource" id="Resource_5b1vw"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_ouy2c")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_8ow6p")])
 data = {}
 props = {
 "born": false,
@@ -1877,15 +2708,21 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_chbit"]
+[sub_resource type="Resource" id="Resource_njfj0"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_ajkjc"),
+"hp": 0,
 "id": 58,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
@@ -1895,24 +2732,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_naw6f"]
+[sub_resource type="Resource" id="Resource_if1sx"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 2,
 "dead": false,
 "energy": SubResource("Resource_50v8v"),
 "hp": 7,
 "id": 59,
+"max_hp": 7,
+"team": 2,
 "type": ExtResource("18_mx2mv")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_6li8s"]
+[sub_resource type="Resource" id="Resource_xt05b"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_chbit"), SubResource("Resource_naw6f")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_njfj0"), SubResource("Resource_if1sx")])
 data = {}
 props = {
 "born": false,
@@ -1928,23 +2770,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_g4chc"]
+[sub_resource type="Resource" id="Resource_thtu0"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_5ddf5"),
+"hp": 0,
 "id": 61,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_odnqs"]
+[sub_resource type="Resource" id="Resource_sxqle"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_g4chc")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_thtu0")])
 data = {}
 props = {
 "born": false,
@@ -1960,23 +2808,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_k88bq"]
+[sub_resource type="Resource" id="Resource_6wqq7"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_beovj"),
+"hp": 0,
 "id": 63,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_wbkps"]
+[sub_resource type="Resource" id="Resource_xjveq"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_k88bq")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_6wqq7")])
 data = {}
 props = {
 "born": false,
@@ -1988,7 +2842,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_fqlih"]
+[sub_resource type="Resource" id="Resource_1l7xp"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -2002,7 +2856,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_0xcdr"]
+[sub_resource type="Resource" id="Resource_e4em0"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -2020,23 +2874,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_fvjge"]
+[sub_resource type="Resource" id="Resource_wqhep"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_puj3u"),
+"hp": 0,
 "id": 67,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_4k0yo"]
+[sub_resource type="Resource" id="Resource_1d7gb"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_fvjge")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_wqhep")])
 data = {}
 props = {
 "born": false,
@@ -2052,23 +2912,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_3astt"]
+[sub_resource type="Resource" id="Resource_7q03v"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_70gdv"),
+"hp": 0,
 "id": 69,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_4uma1"]
+[sub_resource type="Resource" id="Resource_crily"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_3astt")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_7q03v")])
 data = {}
 props = {
 "born": false,
@@ -2084,23 +2950,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_wmy0r"]
+[sub_resource type="Resource" id="Resource_3quf8"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_4r24v"),
+"hp": 0,
 "id": 71,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_7jqtr"]
+[sub_resource type="Resource" id="Resource_s25cy"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_wmy0r")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_3quf8")])
 data = {}
 props = {
 "born": false,
@@ -2116,15 +2988,21 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_suyuw"]
+[sub_resource type="Resource" id="Resource_v0cvw"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_qmxyq"),
+"hp": 0,
 "id": 73,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
@@ -2134,23 +3012,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([3, 3, 3])
 
-[sub_resource type="Resource" id="Resource_ladj8"]
+[sub_resource type="Resource" id="Resource_0wsb8"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 3,
 "dead": false,
 "energy": SubResource("Resource_vir08"),
+"hp": 2,
 "id": 74,
+"max_hp": 2,
+"team": 0,
 "type": ExtResource("19_lyn8q")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_jfm3o"]
+[sub_resource type="Resource" id="Resource_ynv7w"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_suyuw"), SubResource("Resource_ladj8")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_v0cvw"), SubResource("Resource_0wsb8")])
 data = {}
 props = {
 "born": false,
@@ -2166,23 +3050,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_0y7gv"]
+[sub_resource type="Resource" id="Resource_7ea3q"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_6jvre"),
+"hp": 0,
 "id": 76,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_pfgyg"]
+[sub_resource type="Resource" id="Resource_xlcv3"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_0y7gv")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_7ea3q")])
 data = {}
 props = {
 "born": false,
@@ -2198,23 +3088,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_7h2qk"]
+[sub_resource type="Resource" id="Resource_yhs6c"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_8qb8x"),
+"hp": 0,
 "id": 78,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_1x4mk"]
+[sub_resource type="Resource" id="Resource_pb8t0"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_7h2qk")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_yhs6c")])
 data = {}
 props = {
 "born": false,
@@ -2230,23 +3126,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_276ns"]
+[sub_resource type="Resource" id="Resource_j87l4"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_kwyui"),
+"hp": 0,
 "id": 80,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_m45y4"]
+[sub_resource type="Resource" id="Resource_1u3m6"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_276ns")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_j87l4")])
 data = {}
 props = {
 "born": false,
@@ -2262,23 +3164,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_2ily2"]
+[sub_resource type="Resource" id="Resource_ri60g"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_j27gd"),
+"hp": 0,
 "id": 82,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_13j7t"]
+[sub_resource type="Resource" id="Resource_d1d1r"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_2ily2")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_ri60g")])
 data = {}
 props = {
 "born": false,
@@ -2294,23 +3202,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_kqhyu"]
+[sub_resource type="Resource" id="Resource_dtm7v"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_501ln"),
+"hp": 0,
 "id": 84,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_aq2qy"]
+[sub_resource type="Resource" id="Resource_nj43e"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_kqhyu")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_dtm7v")])
 data = {}
 props = {
 "born": false,
@@ -2322,7 +3236,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_ect06"]
+[sub_resource type="Resource" id="Resource_8hdlk"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -2340,23 +3254,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_5irey"]
+[sub_resource type="Resource" id="Resource_mgug0"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_4uy1i"),
+"hp": 0,
 "id": 87,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_jssoe"]
+[sub_resource type="Resource" id="Resource_0s7h1"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_5irey")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_mgug0")])
 data = {}
 props = {
 "born": false,
@@ -2372,23 +3292,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_3278c"]
+[sub_resource type="Resource" id="Resource_gr7nq"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_ayv22"),
+"hp": 0,
 "id": 89,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_2a7pg"]
+[sub_resource type="Resource" id="Resource_aef3t"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_3278c")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_gr7nq")])
 data = {}
 props = {
 "born": false,
@@ -2404,23 +3330,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_afmmh"]
+[sub_resource type="Resource" id="Resource_xt8op"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_8j8dq"),
+"hp": 0,
 "id": 91,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_qje21"]
+[sub_resource type="Resource" id="Resource_j1oba"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_afmmh")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_xt8op")])
 data = {}
 props = {
 "born": false,
@@ -2436,23 +3368,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_7tv5r"]
+[sub_resource type="Resource" id="Resource_7s2mk"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_f12j0"),
+"hp": 0,
 "id": 93,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_042a1"]
+[sub_resource type="Resource" id="Resource_u1kqu"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_7tv5r")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_7s2mk")])
 data = {}
 props = {
 "born": false,
@@ -2468,23 +3406,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_yg25d"]
+[sub_resource type="Resource" id="Resource_xjjr8"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_v1jd4"),
+"hp": 0,
 "id": 95,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_evtuu"]
+[sub_resource type="Resource" id="Resource_6q4v3"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_yg25d")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_xjjr8")])
 data = {}
 props = {
 "born": false,
@@ -2500,15 +3444,21 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_emqo7"]
+[sub_resource type="Resource" id="Resource_uufc6"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_yroip"),
+"hp": 0,
 "id": 97,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
@@ -2518,24 +3468,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_ao5ie"]
+[sub_resource type="Resource" id="Resource_oh552"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 2,
 "dead": false,
 "energy": SubResource("Resource_26eon"),
 "hp": 5,
 "id": 98,
+"max_hp": 5,
+"team": 2,
 "type": ExtResource("20_ooqup")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_21sxa"]
+[sub_resource type="Resource" id="Resource_aa1lq"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_emqo7"), SubResource("Resource_ao5ie")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_uufc6"), SubResource("Resource_oh552")])
 data = {}
 props = {
 "born": false,
@@ -2551,23 +3506,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_j0pk3"]
+[sub_resource type="Resource" id="Resource_tispt"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_ybbo2"),
+"hp": 0,
 "id": 100,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_8y33b"]
+[sub_resource type="Resource" id="Resource_y7uhr"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_j0pk3")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_tispt")])
 data = {}
 props = {
 "born": false,
@@ -2583,15 +3544,21 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_3awtx"]
+[sub_resource type="Resource" id="Resource_53f0r"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_43hvn"),
+"hp": 0,
 "id": 102,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
@@ -2601,23 +3568,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([3, 3])
 
-[sub_resource type="Resource" id="Resource_tmqcd"]
+[sub_resource type="Resource" id="Resource_6r2f1"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 1,
 "dead": false,
 "energy": SubResource("Resource_tsnpt"),
+"hp": 1,
 "id": 103,
+"max_hp": 1,
+"team": 0,
 "type": ExtResource("21_6w863")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_eccmd"]
+[sub_resource type="Resource" id="Resource_2lnyb"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_3awtx"), SubResource("Resource_tmqcd")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_53f0r"), SubResource("Resource_6r2f1")])
 data = {}
 props = {
 "born": false,
@@ -2633,23 +3606,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_26lgq"]
+[sub_resource type="Resource" id="Resource_i7nhf"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_we3ci"),
+"hp": 0,
 "id": 105,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_c1ud1"]
+[sub_resource type="Resource" id="Resource_tnvlj"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_26lgq")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_i7nhf")])
 data = {}
 props = {
 "born": false,
@@ -2661,7 +3640,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_gsslv"]
+[sub_resource type="Resource" id="Resource_x6wj8"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -2679,23 +3658,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_c3tup"]
+[sub_resource type="Resource" id="Resource_ktiay"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_t1087"),
+"hp": 0,
 "id": 108,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_sjtts"]
+[sub_resource type="Resource" id="Resource_1yxkk"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_c3tup")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_ktiay")])
 data = {}
 props = {
 "born": false,
@@ -2711,23 +3696,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_rqpgi"]
+[sub_resource type="Resource" id="Resource_c3koq"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_o6sss"),
+"hp": 0,
 "id": 110,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_73bf8"]
+[sub_resource type="Resource" id="Resource_gmx8a"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_rqpgi")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_c3koq")])
 data = {}
 props = {
 "born": false,
@@ -2743,23 +3734,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_bi78p"]
+[sub_resource type="Resource" id="Resource_11x7q"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_cnonx"),
+"hp": 0,
 "id": 112,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_i4t7a"]
+[sub_resource type="Resource" id="Resource_fmxex"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_bi78p")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_11x7q")])
 data = {}
 props = {
 "born": false,
@@ -2775,23 +3772,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_w5oe1"]
+[sub_resource type="Resource" id="Resource_qaose"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_uq1ja"),
+"hp": 0,
 "id": 114,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_2htvx"]
+[sub_resource type="Resource" id="Resource_hdjyr"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_w5oe1")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_qaose")])
 data = {}
 props = {
 "born": false,
@@ -2807,23 +3810,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_iprua"]
+[sub_resource type="Resource" id="Resource_7bvtg"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_kv87f"),
+"hp": 0,
 "id": 116,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_wu0ak"]
+[sub_resource type="Resource" id="Resource_c70eb"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_iprua")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_7bvtg")])
 data = {}
 props = {
 "born": false,
@@ -2839,23 +3848,53 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_nl0va"]
+[sub_resource type="Resource" id="Resource_cdynr"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_53v5f"),
+"hp": 0,
 "id": 118,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("16_a75ux")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_netwr"]
+[sub_resource type="Resource" id="Resource_o0xi8"]
+script = ExtResource("14_vguef")
+stack = Array[int]([1, 1])
+
+[sub_resource type="Resource" id="Resource_cragm"]
+script = ExtResource("31_t60qf")
+status_states = Array[ExtResource("15_vwqs8")]([])
+data = {}
+props = {
+"armor": 0,
+"born": false,
+"can_interact": false,
+"cover": 0,
+"dead": false,
+"energy": SubResource("Resource_o0xi8"),
+"hp": 0,
+"id": 156,
+"max_hp": 0,
+"team": 0,
+"type": ExtResource("26_8v8rr")
+}
+was_deserialized = false
+_deserialize_count = 0
+
+[sub_resource type="Resource" id="Resource_e8rbw"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_nl0va")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_cdynr"), SubResource("Resource_cragm")])
 data = {}
 props = {
 "born": false,
@@ -2871,23 +3910,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_hvelo"]
+[sub_resource type="Resource" id="Resource_y21dt"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_wru0s"),
+"hp": 0,
 "id": 120,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_c4vup"]
+[sub_resource type="Resource" id="Resource_b26ls"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_hvelo")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_y21dt")])
 data = {}
 props = {
 "born": false,
@@ -2903,23 +3948,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_2awfa"]
+[sub_resource type="Resource" id="Resource_ac6qa"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_lxtc2"),
+"hp": 0,
 "id": 122,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_qey2p"]
+[sub_resource type="Resource" id="Resource_b3bs6"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_2awfa")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_ac6qa")])
 data = {}
 props = {
 "born": false,
@@ -2931,7 +3982,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_2c7ef"]
+[sub_resource type="Resource" id="Resource_4qb2e"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -2949,23 +4000,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_csfsl"]
+[sub_resource type="Resource" id="Resource_laik1"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_nmd5d"),
+"hp": 0,
 "id": 125,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_r2haq"]
+[sub_resource type="Resource" id="Resource_ivnfx"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_csfsl")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_laik1")])
 data = {}
 props = {
 "born": false,
@@ -2981,23 +4038,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_mnjtm"]
+[sub_resource type="Resource" id="Resource_r234u"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_31wuq"),
+"hp": 0,
 "id": 127,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_ohpwd"]
+[sub_resource type="Resource" id="Resource_rr1x0"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_mnjtm")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_r234u")])
 data = {}
 props = {
 "born": false,
@@ -3013,23 +4076,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_kg6k3"]
+[sub_resource type="Resource" id="Resource_hq3yx"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_7og0j"),
+"hp": 0,
 "id": 129,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_cbker"]
+[sub_resource type="Resource" id="Resource_m1ncv"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_kg6k3")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_hq3yx")])
 data = {}
 props = {
 "born": false,
@@ -3045,23 +4114,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_8xn6p"]
+[sub_resource type="Resource" id="Resource_ouati"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_7d6ay"),
+"hp": 0,
 "id": 131,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_l4wsf"]
+[sub_resource type="Resource" id="Resource_eohal"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_8xn6p")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_ouati")])
 data = {}
 props = {
 "born": false,
@@ -3077,23 +4152,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_33x3q"]
+[sub_resource type="Resource" id="Resource_qqf66"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_jlx5w"),
+"hp": 0,
 "id": 133,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_ohkps"]
+[sub_resource type="Resource" id="Resource_bss2o"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_33x3q")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_qqf66")])
 data = {}
 props = {
 "born": false,
@@ -3109,23 +4190,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_cutoq"]
+[sub_resource type="Resource" id="Resource_1v3c1"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_hbp66"),
+"hp": 0,
 "id": 135,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_xxlyp"]
+[sub_resource type="Resource" id="Resource_cy7fw"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_cutoq")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_1v3c1")])
 data = {}
 props = {
 "born": false,
@@ -3141,23 +4228,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_gqacs"]
+[sub_resource type="Resource" id="Resource_neije"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_f655r"),
+"hp": 0,
 "id": 137,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_h8qs2"]
+[sub_resource type="Resource" id="Resource_w70ri"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_gqacs")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_neije")])
 data = {}
 props = {
 "born": false,
@@ -3169,7 +4262,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_cah4b"]
+[sub_resource type="Resource" id="Resource_nh6s8"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3183,7 +4276,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_bul2d"]
+[sub_resource type="Resource" id="Resource_hy608"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3201,23 +4294,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_es0xl"]
+[sub_resource type="Resource" id="Resource_8fckp"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_7hm83"),
+"hp": 0,
 "id": 141,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_fe2rh"]
+[sub_resource type="Resource" id="Resource_kytn5"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_es0xl")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_8fckp")])
 data = {}
 props = {
 "born": false,
@@ -3233,23 +4332,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_lrdd1"]
+[sub_resource type="Resource" id="Resource_lnchl"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_4qr32"),
+"hp": 0,
 "id": 143,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_k87xs"]
+[sub_resource type="Resource" id="Resource_h7h1l"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_lrdd1")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_lnchl")])
 data = {}
 props = {
 "born": false,
@@ -3265,23 +4370,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_ongqo"]
+[sub_resource type="Resource" id="Resource_q030u"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_n3ctb"),
+"hp": 0,
 "id": 145,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_vw0et"]
+[sub_resource type="Resource" id="Resource_px74p"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_ongqo")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_q030u")])
 data = {}
 props = {
 "born": false,
@@ -3293,7 +4404,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_k1vwb"]
+[sub_resource type="Resource" id="Resource_1fuwn"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3307,7 +4418,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_kp7oe"]
+[sub_resource type="Resource" id="Resource_xjr3a"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3321,7 +4432,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_55osq"]
+[sub_resource type="Resource" id="Resource_w4v5s"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3335,7 +4446,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_r7lp3"]
+[sub_resource type="Resource" id="Resource_qfheo"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3353,23 +4464,29 @@ _deserialize_count = 0
 script = ExtResource("14_vguef")
 stack = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_oi0uc"]
+[sub_resource type="Resource" id="Resource_64urj"]
 script = ExtResource("31_t60qf")
 status_states = Array[ExtResource("15_vwqs8")]([])
 data = {}
 props = {
+"armor": 0,
 "born": false,
+"can_interact": false,
+"cover": 0,
 "dead": false,
 "energy": SubResource("Resource_kihnj"),
+"hp": 0,
 "id": 151,
+"max_hp": 0,
+"team": 0,
 "type": ExtResource("13_lcsyu")
 }
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_6ehca"]
+[sub_resource type="Resource" id="Resource_aktkd"]
 script = ExtResource("33_dmgvk")
-entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_oi0uc")])
+entity_states = Array[ExtResource("31_t60qf")]([SubResource("Resource_64urj")])
 data = {}
 props = {
 "born": false,
@@ -3381,7 +4498,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_74sen"]
+[sub_resource type="Resource" id="Resource_7lhtj"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3395,7 +4512,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_b2a3v"]
+[sub_resource type="Resource" id="Resource_3st2p"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3409,7 +4526,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_ia5ml"]
+[sub_resource type="Resource" id="Resource_teet2"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3423,7 +4540,7 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_vvck7"]
+[sub_resource type="Resource" id="Resource_fd1v3"]
 script = ExtResource("33_dmgvk")
 entity_states = Array[ExtResource("31_t60qf")]([])
 data = {}
@@ -3437,9 +4554,9 @@ props = {
 was_deserialized = false
 _deserialize_count = 0
 
-[sub_resource type="Resource" id="Resource_hdh0f"]
+[sub_resource type="Resource" id="Resource_xarvx"]
 script = ExtResource("32_2w3q7")
-tiles = Array[ExtResource("33_dmgvk")]([SubResource("Resource_0otbg"), SubResource("Resource_7euh3"), SubResource("Resource_lhlu5"), SubResource("Resource_lxmgg"), SubResource("Resource_3g75e"), SubResource("Resource_fkwyo"), SubResource("Resource_5a7vl"), SubResource("Resource_1nrsn"), SubResource("Resource_iqlb8"), SubResource("Resource_lki78"), SubResource("Resource_rabq2"), SubResource("Resource_6gxu4"), SubResource("Resource_h52o5"), SubResource("Resource_mrn75"), SubResource("Resource_3khkj"), SubResource("Resource_e0jb2"), SubResource("Resource_mmy3j"), SubResource("Resource_cgspa"), SubResource("Resource_aid8w"), SubResource("Resource_i7wjw"), SubResource("Resource_lhw4l"), SubResource("Resource_p54al"), SubResource("Resource_4vsr4"), SubResource("Resource_vtvcp"), SubResource("Resource_vvt4i"), SubResource("Resource_wttou"), SubResource("Resource_1nbyl"), SubResource("Resource_6m10e"), SubResource("Resource_dm77r"), SubResource("Resource_low4c"), SubResource("Resource_dqj2q"), SubResource("Resource_rqdgk"), SubResource("Resource_8myko"), SubResource("Resource_g5ug5"), SubResource("Resource_wrjdk"), SubResource("Resource_dplok"), SubResource("Resource_6li8s"), SubResource("Resource_odnqs"), SubResource("Resource_wbkps"), SubResource("Resource_fqlih"), SubResource("Resource_0xcdr"), SubResource("Resource_4k0yo"), SubResource("Resource_4uma1"), SubResource("Resource_7jqtr"), SubResource("Resource_jfm3o"), SubResource("Resource_pfgyg"), SubResource("Resource_1x4mk"), SubResource("Resource_m45y4"), SubResource("Resource_13j7t"), SubResource("Resource_aq2qy"), SubResource("Resource_ect06"), SubResource("Resource_jssoe"), SubResource("Resource_2a7pg"), SubResource("Resource_qje21"), SubResource("Resource_042a1"), SubResource("Resource_evtuu"), SubResource("Resource_21sxa"), SubResource("Resource_8y33b"), SubResource("Resource_eccmd"), SubResource("Resource_c1ud1"), SubResource("Resource_gsslv"), SubResource("Resource_sjtts"), SubResource("Resource_73bf8"), SubResource("Resource_i4t7a"), SubResource("Resource_2htvx"), SubResource("Resource_wu0ak"), SubResource("Resource_netwr"), SubResource("Resource_c4vup"), SubResource("Resource_qey2p"), SubResource("Resource_2c7ef"), SubResource("Resource_r2haq"), SubResource("Resource_ohpwd"), SubResource("Resource_cbker"), SubResource("Resource_l4wsf"), SubResource("Resource_ohkps"), SubResource("Resource_xxlyp"), SubResource("Resource_h8qs2"), SubResource("Resource_cah4b"), SubResource("Resource_bul2d"), SubResource("Resource_fe2rh"), SubResource("Resource_k87xs"), SubResource("Resource_vw0et"), SubResource("Resource_k1vwb"), SubResource("Resource_kp7oe"), SubResource("Resource_55osq"), SubResource("Resource_r7lp3"), SubResource("Resource_6ehca"), SubResource("Resource_74sen"), SubResource("Resource_b2a3v"), SubResource("Resource_ia5ml"), SubResource("Resource_vvck7")])
+tiles = Array[ExtResource("33_dmgvk")]([SubResource("Resource_73upb"), SubResource("Resource_et71q"), SubResource("Resource_kg2w3"), SubResource("Resource_7cvxl"), SubResource("Resource_pxtei"), SubResource("Resource_amysb"), SubResource("Resource_47km7"), SubResource("Resource_7e4vw"), SubResource("Resource_xixuk"), SubResource("Resource_ldshq"), SubResource("Resource_3lxjd"), SubResource("Resource_7g5j7"), SubResource("Resource_hry6b"), SubResource("Resource_10hs2"), SubResource("Resource_w2fy7"), SubResource("Resource_4xgmw"), SubResource("Resource_rqvf2"), SubResource("Resource_roj77"), SubResource("Resource_dp5g4"), SubResource("Resource_vh232"), SubResource("Resource_xgckl"), SubResource("Resource_qeuwf"), SubResource("Resource_24iri"), SubResource("Resource_a51wo"), SubResource("Resource_at77r"), SubResource("Resource_eoycy"), SubResource("Resource_osrnq"), SubResource("Resource_q8n71"), SubResource("Resource_7elp2"), SubResource("Resource_26f1n"), SubResource("Resource_yqg3o"), SubResource("Resource_c2ydi"), SubResource("Resource_xwx6t"), SubResource("Resource_yemdi"), SubResource("Resource_jwwbt"), SubResource("Resource_5b1vw"), SubResource("Resource_xt05b"), SubResource("Resource_sxqle"), SubResource("Resource_xjveq"), SubResource("Resource_1l7xp"), SubResource("Resource_e4em0"), SubResource("Resource_1d7gb"), SubResource("Resource_crily"), SubResource("Resource_s25cy"), SubResource("Resource_ynv7w"), SubResource("Resource_xlcv3"), SubResource("Resource_pb8t0"), SubResource("Resource_1u3m6"), SubResource("Resource_d1d1r"), SubResource("Resource_nj43e"), SubResource("Resource_8hdlk"), SubResource("Resource_0s7h1"), SubResource("Resource_aef3t"), SubResource("Resource_j1oba"), SubResource("Resource_u1kqu"), SubResource("Resource_6q4v3"), SubResource("Resource_aa1lq"), SubResource("Resource_y7uhr"), SubResource("Resource_2lnyb"), SubResource("Resource_tnvlj"), SubResource("Resource_x6wj8"), SubResource("Resource_1yxkk"), SubResource("Resource_gmx8a"), SubResource("Resource_fmxex"), SubResource("Resource_hdjyr"), SubResource("Resource_c70eb"), SubResource("Resource_e8rbw"), SubResource("Resource_b26ls"), SubResource("Resource_b3bs6"), SubResource("Resource_4qb2e"), SubResource("Resource_ivnfx"), SubResource("Resource_rr1x0"), SubResource("Resource_m1ncv"), SubResource("Resource_eohal"), SubResource("Resource_bss2o"), SubResource("Resource_cy7fw"), SubResource("Resource_w70ri"), SubResource("Resource_nh6s8"), SubResource("Resource_hy608"), SubResource("Resource_kytn5"), SubResource("Resource_h7h1l"), SubResource("Resource_px74p"), SubResource("Resource_1fuwn"), SubResource("Resource_xjr3a"), SubResource("Resource_w4v5s"), SubResource("Resource_qfheo"), SubResource("Resource_aktkd"), SubResource("Resource_7lhtj"), SubResource("Resource_3st2p"), SubResource("Resource_teet2"), SubResource("Resource_fd1v3")])
 graveyard = Array[ExtResource("31_t60qf")]([])
 rows = 11
 columns = 11
@@ -4384,9 +5501,15 @@ id = 155
 removed = false
 cache_result = true
 
+[sub_resource type="Resource" id="Resource_nb2es"]
+script = ExtResource("22_mapb5")
+id = 156
+removed = false
+cache_result = true
+
 [resource]
 script = ExtResource("56_g2bnh")
-level_state = SubResource("Resource_hdh0f")
+level_state = SubResource("Resource_xarvx")
 current_round = 1
 current_phase = 0
 player_energy = SubResource("Resource_7c63w")
@@ -4394,11 +5517,11 @@ deck_states = Array[ExtResource("4_qtw05")]([])
 hand_states = Array[ExtResource("4_qtw05")]([])
 discard_pile_states = Array[ExtResource("4_qtw05")]([])
 timed_effects = Array[ExtResource("57_edfq2")]([])
-combat_log = Array[ExtResource("3_3p2ts")]([SubResource("Resource_ngbuq"), SubResource("Resource_ymlbh"), SubResource("Resource_i1y3j"), SubResource("Resource_qhoc4"), SubResource("Resource_fonsw"), SubResource("Resource_1srf8"), SubResource("Resource_08moj"), SubResource("Resource_4tb0h"), SubResource("Resource_bfnip"), SubResource("Resource_18vso"), SubResource("Resource_oe3s3"), SubResource("Resource_ijxc7"), SubResource("Resource_6jkwc"), SubResource("Resource_1snf8"), SubResource("Resource_1c5t7"), SubResource("Resource_61ya4"), SubResource("Resource_q0avh"), SubResource("Resource_t7ljl"), SubResource("Resource_b7252"), SubResource("Resource_5pao2"), SubResource("Resource_osgoe"), SubResource("Resource_18jat"), SubResource("Resource_foshi"), SubResource("Resource_yd8cc"), SubResource("Resource_bnuee"), SubResource("Resource_5o2iv"), SubResource("Resource_ic0s0"), SubResource("Resource_7g6rb"), SubResource("Resource_dsi37"), SubResource("Resource_uyafl"), SubResource("Resource_p2hco"), SubResource("Resource_xe0yq"), SubResource("Resource_6rps6"), SubResource("Resource_r7nxr"), SubResource("Resource_11ymj"), SubResource("Resource_mp3l0"), SubResource("Resource_qolsm"), SubResource("Resource_6qbik"), SubResource("Resource_2ff8u"), SubResource("Resource_2pyrg"), SubResource("Resource_ty66s"), SubResource("Resource_lsa2b"), SubResource("Resource_8y0sh"), SubResource("Resource_o678l"), SubResource("Resource_ygw4k"), SubResource("Resource_uuhlr"), SubResource("Resource_k2ljj"), SubResource("Resource_mbfie"), SubResource("Resource_8xp5u"), SubResource("Resource_o6r6g"), SubResource("Resource_0xhci"), SubResource("Resource_m7e6i"), SubResource("Resource_aqdqr"), SubResource("Resource_njyss"), SubResource("Resource_xrrlu"), SubResource("Resource_afo83"), SubResource("Resource_7l7v7"), SubResource("Resource_mpcj8"), SubResource("Resource_e5xhp"), SubResource("Resource_l0e38"), SubResource("Resource_h883o"), SubResource("Resource_dij4q"), SubResource("Resource_pc30e"), SubResource("Resource_1bfrr"), SubResource("Resource_s8ern"), SubResource("Resource_e3pq1"), SubResource("Resource_pfe6r"), SubResource("Resource_uf4ha"), SubResource("Resource_b87ob"), SubResource("Resource_5f0yn"), SubResource("Resource_7thin"), SubResource("Resource_22rkt"), SubResource("Resource_6h2aa"), SubResource("Resource_xyv4k"), SubResource("Resource_pfq13"), SubResource("Resource_y87o7"), SubResource("Resource_u802w"), SubResource("Resource_0fat5"), SubResource("Resource_63tih"), SubResource("Resource_oudc1"), SubResource("Resource_2bisn"), SubResource("Resource_m3lcc"), SubResource("Resource_8l1oq"), SubResource("Resource_7kmpe"), SubResource("Resource_bnv1n"), SubResource("Resource_htpvx"), SubResource("Resource_sscnc"), SubResource("Resource_6sd3g"), SubResource("Resource_ce01p"), SubResource("Resource_dmfon"), SubResource("Resource_q8dmb"), SubResource("Resource_sje0k"), SubResource("Resource_v6yi5"), SubResource("Resource_6pj5s"), SubResource("Resource_261yt"), SubResource("Resource_qpanm"), SubResource("Resource_b78po"), SubResource("Resource_j78iq"), SubResource("Resource_fwpif"), SubResource("Resource_3vak6"), SubResource("Resource_kbhkb"), SubResource("Resource_pd8wf"), SubResource("Resource_tivx7"), SubResource("Resource_0cgdx"), SubResource("Resource_7rrvi"), SubResource("Resource_ket1m"), SubResource("Resource_6w7n5"), SubResource("Resource_lirjd"), SubResource("Resource_g6a4w"), SubResource("Resource_0fxoi"), SubResource("Resource_5qhr7"), SubResource("Resource_u8i0m"), SubResource("Resource_2cwja"), SubResource("Resource_pjf8m"), SubResource("Resource_di7rh"), SubResource("Resource_jp1p6"), SubResource("Resource_vqtjp"), SubResource("Resource_64qiq"), SubResource("Resource_6210v"), SubResource("Resource_6m3l3"), SubResource("Resource_nu45q"), SubResource("Resource_jjjk5"), SubResource("Resource_4hafw"), SubResource("Resource_3as0c"), SubResource("Resource_boaef"), SubResource("Resource_h2ss1"), SubResource("Resource_w2yro"), SubResource("Resource_u7eon"), SubResource("Resource_241wv"), SubResource("Resource_6n386"), SubResource("Resource_vlwog"), SubResource("Resource_xpotg"), SubResource("Resource_bc4b1"), SubResource("Resource_n21da"), SubResource("Resource_4paa6"), SubResource("Resource_ord0r")])
+combat_log = Array[ExtResource("3_3p2ts")]([SubResource("Resource_ngbuq"), SubResource("Resource_ymlbh"), SubResource("Resource_i1y3j"), SubResource("Resource_qhoc4"), SubResource("Resource_fonsw"), SubResource("Resource_1srf8"), SubResource("Resource_08moj"), SubResource("Resource_4tb0h"), SubResource("Resource_bfnip"), SubResource("Resource_18vso"), SubResource("Resource_oe3s3"), SubResource("Resource_ijxc7"), SubResource("Resource_6jkwc"), SubResource("Resource_1snf8"), SubResource("Resource_1c5t7"), SubResource("Resource_61ya4"), SubResource("Resource_q0avh"), SubResource("Resource_t7ljl"), SubResource("Resource_b7252"), SubResource("Resource_5pao2"), SubResource("Resource_osgoe"), SubResource("Resource_18jat"), SubResource("Resource_foshi"), SubResource("Resource_yd8cc"), SubResource("Resource_bnuee"), SubResource("Resource_5o2iv"), SubResource("Resource_ic0s0"), SubResource("Resource_7g6rb"), SubResource("Resource_dsi37"), SubResource("Resource_uyafl"), SubResource("Resource_p2hco"), SubResource("Resource_xe0yq"), SubResource("Resource_6rps6"), SubResource("Resource_r7nxr"), SubResource("Resource_11ymj"), SubResource("Resource_mp3l0"), SubResource("Resource_qolsm"), SubResource("Resource_6qbik"), SubResource("Resource_2ff8u"), SubResource("Resource_2pyrg"), SubResource("Resource_ty66s"), SubResource("Resource_lsa2b"), SubResource("Resource_8y0sh"), SubResource("Resource_o678l"), SubResource("Resource_ygw4k"), SubResource("Resource_uuhlr"), SubResource("Resource_k2ljj"), SubResource("Resource_mbfie"), SubResource("Resource_8xp5u"), SubResource("Resource_o6r6g"), SubResource("Resource_0xhci"), SubResource("Resource_m7e6i"), SubResource("Resource_aqdqr"), SubResource("Resource_njyss"), SubResource("Resource_xrrlu"), SubResource("Resource_afo83"), SubResource("Resource_7l7v7"), SubResource("Resource_mpcj8"), SubResource("Resource_e5xhp"), SubResource("Resource_l0e38"), SubResource("Resource_h883o"), SubResource("Resource_dij4q"), SubResource("Resource_pc30e"), SubResource("Resource_1bfrr"), SubResource("Resource_s8ern"), SubResource("Resource_e3pq1"), SubResource("Resource_pfe6r"), SubResource("Resource_uf4ha"), SubResource("Resource_b87ob"), SubResource("Resource_5f0yn"), SubResource("Resource_7thin"), SubResource("Resource_22rkt"), SubResource("Resource_6h2aa"), SubResource("Resource_xyv4k"), SubResource("Resource_pfq13"), SubResource("Resource_y87o7"), SubResource("Resource_u802w"), SubResource("Resource_0fat5"), SubResource("Resource_63tih"), SubResource("Resource_oudc1"), SubResource("Resource_2bisn"), SubResource("Resource_m3lcc"), SubResource("Resource_8l1oq"), SubResource("Resource_7kmpe"), SubResource("Resource_bnv1n"), SubResource("Resource_htpvx"), SubResource("Resource_sscnc"), SubResource("Resource_6sd3g"), SubResource("Resource_ce01p"), SubResource("Resource_dmfon"), SubResource("Resource_q8dmb"), SubResource("Resource_sje0k"), SubResource("Resource_v6yi5"), SubResource("Resource_6pj5s"), SubResource("Resource_261yt"), SubResource("Resource_qpanm"), SubResource("Resource_b78po"), SubResource("Resource_j78iq"), SubResource("Resource_fwpif"), SubResource("Resource_3vak6"), SubResource("Resource_kbhkb"), SubResource("Resource_pd8wf"), SubResource("Resource_tivx7"), SubResource("Resource_0cgdx"), SubResource("Resource_7rrvi"), SubResource("Resource_ket1m"), SubResource("Resource_6w7n5"), SubResource("Resource_lirjd"), SubResource("Resource_g6a4w"), SubResource("Resource_0fxoi"), SubResource("Resource_5qhr7"), SubResource("Resource_u8i0m"), SubResource("Resource_2cwja"), SubResource("Resource_pjf8m"), SubResource("Resource_di7rh"), SubResource("Resource_jp1p6"), SubResource("Resource_vqtjp"), SubResource("Resource_64qiq"), SubResource("Resource_6210v"), SubResource("Resource_6m3l3"), SubResource("Resource_nu45q"), SubResource("Resource_jjjk5"), SubResource("Resource_4hafw"), SubResource("Resource_3as0c"), SubResource("Resource_boaef"), SubResource("Resource_h2ss1"), SubResource("Resource_w2yro"), SubResource("Resource_u7eon"), SubResource("Resource_241wv"), SubResource("Resource_6n386"), SubResource("Resource_vlwog"), SubResource("Resource_xpotg"), SubResource("Resource_bc4b1"), SubResource("Resource_n21da"), SubResource("Resource_4paa6"), SubResource("Resource_ord0r"), SubResource("Resource_qcma4"), SubResource("Resource_m18bu"), SubResource("Resource_uq8c8"), SubResource("Resource_2wks2"), SubResource("Resource_h5xku"), SubResource("Resource_xek8v"), SubResource("Resource_u2w4e"), SubResource("Resource_ixtmi"), SubResource("Resource_qb1pu"), SubResource("Resource_s64t7"), SubResource("Resource_26cy0"), SubResource("Resource_alonp"), SubResource("Resource_wwf8w"), SubResource("Resource_17she"), SubResource("Resource_xmsxv"), SubResource("Resource_pskca"), SubResource("Resource_l53un"), SubResource("Resource_wubdw"), SubResource("Resource_med5o"), SubResource("Resource_416st"), SubResource("Resource_8cmen"), SubResource("Resource_frce8"), SubResource("Resource_byrle"), SubResource("Resource_4atex"), SubResource("Resource_n2g01"), SubResource("Resource_10qnr"), SubResource("Resource_yph60"), SubResource("Resource_2l1ie"), SubResource("Resource_kahes"), SubResource("Resource_le8ih"), SubResource("Resource_3lhm1"), SubResource("Resource_d7dpp"), SubResource("Resource_s0vnr"), SubResource("Resource_bq8hm"), SubResource("Resource_uleom"), SubResource("Resource_2mcc6"), SubResource("Resource_5jqqo"), SubResource("Resource_h2lxk"), SubResource("Resource_v7ydu"), SubResource("Resource_8k2u7"), SubResource("Resource_np8lu"), SubResource("Resource_35uqi"), SubResource("Resource_tmwt0"), SubResource("Resource_uqi5i"), SubResource("Resource_qtafg"), SubResource("Resource_e71xw"), SubResource("Resource_82lc0"), SubResource("Resource_6wgml"), SubResource("Resource_2s76v"), SubResource("Resource_vt1eo"), SubResource("Resource_5ofw5"), SubResource("Resource_8csqr"), SubResource("Resource_crstd"), SubResource("Resource_4yjft"), SubResource("Resource_64l56"), SubResource("Resource_xqa1r"), SubResource("Resource_asn2p"), SubResource("Resource_50iwa"), SubResource("Resource_r6rmx"), SubResource("Resource_7t66c"), SubResource("Resource_8cfw4"), SubResource("Resource_8vl7f"), SubResource("Resource_1u88m"), SubResource("Resource_lko5d"), SubResource("Resource_vb236"), SubResource("Resource_n8vkj"), SubResource("Resource_1fl66"), SubResource("Resource_821kd"), SubResource("Resource_6xott"), SubResource("Resource_s3ywt"), SubResource("Resource_ema5e"), SubResource("Resource_x2gxd"), SubResource("Resource_i7ix1"), SubResource("Resource_fddtf"), SubResource("Resource_0qqk8"), SubResource("Resource_40ym6"), SubResource("Resource_je8o8"), SubResource("Resource_ml04v"), SubResource("Resource_bupqw"), SubResource("Resource_jktvi"), SubResource("Resource_17qjk"), SubResource("Resource_fxd44"), SubResource("Resource_10f3i"), SubResource("Resource_t1ox1")])
 active_states = Array[ExtResource("1_ytopo")]([])
 all_events = Array[ExtResource("2_yiqr2")]([])
-event_schedules = Array[ExtResource("27_edten")]([])
-enemy_event_queue = Array[ExtResource("25_j4dhl")]([])
+event_schedules = Array[ExtResource("27_edten")]([ExtResource("12_dgtm5")])
+enemy_event_queue = Array[ExtResource("25_j4dhl")]([ExtResource("8_dbjw3"), ExtResource("9_gjrc2"), ExtResource("10_ibygq")])
 enemy_meter = 0
 global_enemy_actions = Array[ExtResource("30_ewdvm")]([])
 references = {
@@ -4557,7 +5680,8 @@ references = {
 152: SubResource("Resource_johk6"),
 153: SubResource("Resource_0ag4r"),
 154: SubResource("Resource_iuwdx"),
-155: SubResource("Resource_66kxd")
+155: SubResource("Resource_66kxd"),
+156: SubResource("Resource_nb2es")
 }
 object_names = {
 0: "Tile(00/05):0",
@@ -4658,7 +5782,7 @@ object_names = {
 95: "GrassTile:95",
 96: "Tile(06/05):96",
 97: "GrassTile:97",
-98: "Goblin:98",
+98: "GoblinWarrior:98",
 99: "Tile(06/06):99",
 100: "GrassTile:100",
 101: "Tile(06/07):101",
@@ -4715,5 +5839,6 @@ object_names = {
 152: "Tile(10/02):152",
 153: "Tile(10/03):153",
 154: "Tile(10/04):154",
-155: "Tile(10/05):155"
+155: "Tile(10/05):155",
+156: "MediumShrooms:156"
 }

@@ -161,3 +161,34 @@ func look_at_tile(tile: Tile, ticket: WaitTicket):
 	#tween.tween_property(self, "rotation_degrees:y", new_rotation_y, 0.35)
 	#await tween.finished
 	ticket.resolve()
+	
+func look_at_entity_exact(target: Entity):
+	var tile = target.current_tile
+	var r_target = tile.r; var q_target = tile.q
+	var world_space_target = tile.global_position
+	var world_space_origin = entity.current_tile.global_position
+	var tween := VisualTime.create_tween() 
+	pass
+
+## look at in x-z plane while "rounding" it to closest hex tile border
+func look_at_entity_tile_border(target: Node3D, ticket: WaitTicket = null):
+	var direction = (target.global_position - self.global_position).normalized()
+
+	var xz_degrees = rad_to_deg(atan2(direction.y, direction.x)) - 30
+	if xz_degrees < 0:
+		xz_degrees = abs(xz_degrees) + 180  # idk why but this seems to work
+	#print("--- %s ---" % entity.to_string())
+	#print("initial = " + str(self.rotation_degrees.y))
+	#print("xz_degrees = " + str(xz_degrees))
+	
+	# Round to nearest border 150 -> 150, 140 -> 150, 160 -> 150, 0 -> 30, 40 -> 30
+	# Possible results: 30, 90, 150, 210, 270, 330
+	var hex_snap = 30 + round((xz_degrees - 30) / 60.0) * 60.0
+
+	# TODO take the shorter path between clockwise / counter-clockwise rotation
+	var tween := VisualTime.create_tween()
+	tween.tween_property(self, "rotation_degrees:y", hex_snap, 0.4)  
+	
+	if ticket != null:
+		await tween.finished
+		ticket.resolve()

@@ -1,8 +1,8 @@
-class_name TileHoverPopupEntry extends MarginContainer
+class_name DrainablePopupEntry extends MarginContainer
 
 @onready var icons = [%EnergyIcon1, %EnergyIcon2, %EnergyIcon3, %EnergyIcon4]
 
-func show_entity(ent: Entity):
+func show_drainable_entity(ent: Entity):
 	%EntityName.text = ent.type.pretty_name
 	var n_energies := 0
 	if ent.energy != null:
@@ -15,3 +15,9 @@ func show_entity(ent: Entity):
 		icon.show()
 		icon.type = ent.energy.stack[i]
 		
+func show_player_entity(ent: PlayerEntity):
+	pass
+	
+	
+func show_enemy_entity(ent: EnemyEntity):
+	pass
