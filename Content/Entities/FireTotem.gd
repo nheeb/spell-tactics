@@ -1,6 +1,6 @@
 extends EntityLogic
 
-var damage := 1
+var damage := 2
 
 func on_birth():
 	TimedEffect.new_end_phase_trigger_from_callable(

@@ -1,4 +1,8 @@
-[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://72pgvo6r6k7c"]
+[gd_resource type="StandardMaterial3D" load_steps=9 format=3 uid="uid://72pgvo6r6k7c"]
+
+[ext_resource type="Texture2D" uid="uid://b4ta7t0uhldpx" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_color_2k_desat.png" id="1_cmel6"]
+[ext_resource type="Texture2D" uid="uid://d3lr1eyjbtpjq" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_normal_dx_2k.png" id="2_mnuk2"]
+[ext_resource type="Texture2D" uid="uid://c58sn1fmkxu5m" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_roughness_2k.png" id="3_ufr1b"]
 
 [sub_resource type="Shader" id="Shader_xxhw5"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's StandardMaterial3D.
@@ -137,8 +141,8 @@ shader_parameter/glow_process = 4.75e-08
 shader_parameter/brightness = 0.25
 shader_parameter/title_uv_aa = Vector2(0.032, 0.08)
 shader_parameter/title_uv_bb = Vector2(0.4, 0.205)
-shader_parameter/icon_uv_aa = Vector2(0.05, 0.12)
-shader_parameter/icon_uv_bb = Vector2(0.385, 0.44)
+shader_parameter/icon_uv_aa = Vector2(0.04, 0.13)
+shader_parameter/icon_uv_bb = Vector2(0.395, 0.47)
 shader_parameter/text_uv_aa = Vector2(0.07, 0.374)
 shader_parameter/text_uv_bb = Vector2(0.36, 0.636)
 shader_parameter/error_uv_aa = Vector2(0, 0.15)
@@ -156,7 +160,10 @@ render_priority = 1
 next_pass = SubResource("ShaderMaterial_ip25q")
 transparency = 1
 albedo_color = Color(0.7395, 0.8526, 0.87, 1)
+albedo_texture = ExtResource("1_cmel6")
+roughness_texture = ExtResource("3_ufr1b")
 normal_enabled = true
 normal_scale = 2.1
+normal_texture = ExtResource("2_mnuk2")
 uv1_scale = Vector3(2.76, 1.825, 1.825)
 uv1_offset = Vector3(0.74, 0.295, 0)
