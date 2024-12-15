@@ -24,6 +24,8 @@ const LEVEL_PATH_SPELLTEST = "res://Content/Levels/SpellTesting/spell_test.tres"
 #const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false
 const DEBUG_DECK_PURGE = false
+const DEBUG_SKIP_DECKSELECTION = true
+
 var DEBUG_INFO: bool:
 	get:
 		return DebugInfo.ACTIVE
