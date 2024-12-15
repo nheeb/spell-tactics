@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmkp2kdylfihb"]
+
+[ext_resource type="Script" path="res://VFX/Effects/StayingText.gd" id="1_qef1x"]
+[ext_resource type="FontFile" uid="uid://d2paqurb1iqxc" path="res://Assets/Fonts/Teachers/Teachers-Regular.ttf" id="2_yre6a"]
+
+[node name="StayingText" type="Node3D"]
+script = ExtResource("1_qef1x")
+
+[node name="Label3D" type="Label3D" parent="."]
+billboard = 1
+text = "Making this and that"
+font = ExtResource("2_yre6a")
+font_size = 64
+outline_size = 0

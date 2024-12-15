@@ -12,6 +12,7 @@ const LINE = preload("res://VFX/Effects/LineEffect.tscn")
 const IMMEDIATE_ARROWS = preload("res://VFX/Effects/ImmediateArrows.tscn")
 const ENERGY_ORB = preload("res://VFX/Effects/EnergyOrbs/EnergyOrb.tscn") 
 const ENERGY_ORB_ATTRACTOR = preload("res://VFX/Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
+const TEXT = preload("res://VFX/Effects/StayingText.tscn")
 
 const DRAIN_DURATION: float = 0.8
 

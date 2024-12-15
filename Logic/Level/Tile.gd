@@ -200,7 +200,9 @@ func _hover_long(h: bool) -> void:
 func distance_to(other_tile: Tile) -> int:
 	return Utility.rq_distance(self.r, self.q, other_tile.r, other_tile.q)
 
-func is_next_to(other_tile: Tile) -> bool:
+func is_next_to(other_tile: Tile, or_equal := false) -> bool:
+	if or_equal:
+		return distance_to(other_tile) <= 1
 	return distance_to(other_tile) == 1
 
 func direction_to(other_tile: Tile) -> Vector2i:
