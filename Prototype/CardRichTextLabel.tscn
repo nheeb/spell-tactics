@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://xcur8fdjvyvl"]
+
+[ext_resource type="FontFile" uid="uid://dlt3ifex0yuhb" path="res://Assets/Fonts/Teachers/Teachers-SemBd.ttf" id="1_0baaq"]
+[ext_resource type="Script" path="res://Prototype/CardEffectLabel.gd" id="2_oeag5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_maiw2"]
+font = ExtResource("1_0baaq")
+
+[node name="CardRichTextLabel" type="Node2D"]
+
+[node name="CardEffectLabel" type="RichTextLabel" parent="."]
+offset_right = 528.0
+offset_bottom = 209.0
+tooltip_text = "Test"
+theme_override_fonts/normal_font = ExtResource("1_0baaq")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "Gain 1 [hint={tooltip}][img=60, tooltip=Hello]res://Assets/Sprites/Icons/drain.png[/img][/hint].
+
+[hint={tooltip}]{text}[/hint]"
+custom_effects = [null]
+script = ExtResource("2_oeag5")
+
+[node name="Label" type="Label" parent="."]
+offset_top = 57.0
+offset_right = 40.0
+offset_bottom = 80.0
+text = "Gain 1"
+label_settings = SubResource("LabelSettings_maiw2")

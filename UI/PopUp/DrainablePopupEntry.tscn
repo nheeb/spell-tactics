@@ -10,7 +10,6 @@ font = ExtResource("2_5kevt")
 font_size = 26
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iprbr"]
-bg_color = Color(0.94902, 0.698039, 0.776471, 1)
 border_width_top = 1
 
 [node name="EntityEntry" type="MarginContainer"]
@@ -35,13 +34,10 @@ text = "Rock"
 label_settings = SubResource("LabelSettings_0dv8f")
 horizontal_alignment = 1
 
-[node name="Seperator" type="HSeparator" parent="VBoxContainer/EntityName"]
+[node name="Seperator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
-offset_top = 26.0
-offset_right = 128.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_vertical = 0
 theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxFlat_iprbr")
 

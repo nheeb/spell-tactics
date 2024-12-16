@@ -15,8 +15,24 @@ class_name EnergyIcon extends Control
 			color_rect.material.set_shader_parameter("icon_mask", VFX.type_to_icon(type))
 			color_rect.material.set_shader_parameter("icon_color", VFX.type_to_inner_color(type))
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# when running this scene itself, turn this into a little photo studio
+	# for renders of each energy icon type
+	if get_tree().current_scene == self:
+		get_window().size = Vector2(128, 128)
+		get_window().transparent = true
+		get_window().transparent_bg = true
+		for type in EnergyStack.EnergyType.values():
+			var type_name: String = EnergyStack.EnergyType.keys()[type]
+			print(type_name)
+			self.type = type
+			await get_tree().process_frame
+			await get_tree().process_frame
+			var image = get_viewport().get_texture().get_image()
+			image.save_png("res://Assets/Sprites/EnergyIconMasks/rendered/%s.png" % type_name.to_lower())
+			await get_tree().process_frame
+			await get_tree().process_frame
+
 	color_rect.color = VFX.type_to_color(type)
 	color_rect.material.set_shader_parameter("icon_mask", VFX.type_to_icon(type))
 	color_rect.material.set_shader_parameter("icon_color", VFX.type_to_inner_color(type))

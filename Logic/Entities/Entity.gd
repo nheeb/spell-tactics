@@ -147,6 +147,8 @@ func on_load() -> void:
 	if type.can_interact:
 		Game.energy_overlay_changed.connect(
 			func (overlay: bool):
+				if current_tile != null:
+					return
 				if overlay:
 					combat.animation.add_staying_effect(
 						VFX.HEX_COLOR_STAYING, current_tile.tile3d,
