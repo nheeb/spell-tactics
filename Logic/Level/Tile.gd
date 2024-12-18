@@ -181,11 +181,12 @@ func inflict_damage_with_visuals(dmg: int) -> AnimationObject:
 ## Hover & Highlight ##
 #######################
 
-func set_highlight(type: Highlight.Type, active: bool):
-	tile3d.set_highlight(type, active)
+## ANIMATOR
+func set_highlight(type: Highlight.Type, active: bool) -> AnimationCallable:
+	return combat.animation.callable(tile3d.set_highlight.bind(type, active)).set_flag_with()
 
 ## ACTION
-func _hover_long(h: bool) -> void:
+func hover_long(h: bool) -> void:
 	if h:
 		Events.tile_hovered_long.emit(self)
 	else:

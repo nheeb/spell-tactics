@@ -22,8 +22,8 @@ var is_already_setup := false  # set to true after setup
 func _ready() -> void:
 	Events.tile_hovered_long.connect(show_tile_popup)
 	Events.tile_unhovered_long.connect(hide_tile_popup)
-	PAHoverTile.on_drainable_tile_hovered.connect(on_drainable_tile_hovered)
-	PAHoverTile.on_drainable_tile_unhovered.connect(on_drainable_tile_unhovered)
+	PATileHoverUpdate.on_drainable_tile_hovered.connect(on_drainable_tile_hovered)
+	PATileHoverUpdate.on_drainable_tile_unhovered.connect(on_drainable_tile_unhovered)
 	Game.energy_overlay_changed.connect(energy_overlay_changed)
 	hover_popup = HOVER_POPUP.instantiate()
 

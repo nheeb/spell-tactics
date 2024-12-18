@@ -36,7 +36,7 @@ func execute(combat: Combat) -> void:
 	signal_disposer = SxCompositeDisposable.new()
 	Sx.merge([
 		Sx.from(Events.tile_click_released),
-		Sx.from(PAHoverTile.on_tile_hovered).filter(
+		Sx.from(PATileHoverUpdate.on_tile_hovered).filter(
 			func (tile: Tile): return tile != target_tile
 		)
 	]).subscribe(abort).dispose_with(signal_disposer)

@@ -16,7 +16,9 @@ func set_highlight(type: Highlight.Type, active: bool):
 
 func _on_hover_timer_timeout() -> void:
 	tile.hovering = true
-	tile.combat.action_stack.process_player_action(PAHoverTileLong.new(tile, true))
+	tile.combat.action_stack.process_player_action(
+		PATileHoverUpdate.new(tile, true, true)
+	)
 
 func _to_string() -> String:
 	return name

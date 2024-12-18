@@ -10,38 +10,17 @@ var combat: Combat
 
 var disabled := false
 
-const BasicMovement = preload("res://Content/Actives/BasicMovement.tres")
-func get_highlight_type() -> Highlight.Type:
-	if combat.input.current_castable != null and combat.input.current_castable.get_type() == BasicMovement:
-		return Highlight.Type.HoverAction
-	elif targeting:
-		return Highlight.Type.HoverTarget
-	else:
-		return Highlight.Type.Hover
-
-var targeting: bool = false
 func hover_tile(tile: Tile):
 	if mouse_block.is_blocked():
 		return
-	if combat != null:  # check if targeting with a spell
-		targeting = combat.current_phase == Combat.RoundPhase.Spell \
-					and combat.input.current_castable
-
-	tile.set_highlight(get_highlight_type(), true)
-	PAHoverTile.on_tile_hovered.emit(tile)  # alternativ: PaHoverTile.new(), combat.trigger_action(PaHoverTile.new(args))
+	PATileHoverUpdate.on_tile_hovered.emit(tile)  # alternativ: PATileHoverUpdate.new(), combat.trigger_action(PATileHoverUpdate.new(args))
 	tile.get_node("HoverTimer").start()
 	
 func unhover_tile(tile: Tile):
-	tile.set_highlight(Highlight.Type.Hover, false)
-	tile.set_highlight(Highlight.Type.HoverTarget, false)
-	tile.set_highlight(Highlight.Type.HoverAction, false)
 	if tile.hovering:
 		tile.hovering = false
-		if combat != null:
-			combat.action_stack.process_player_action(PAHoverTileLong.new(tile, false))
 	tile.get_node("HoverTimer").stop()
 	Events.tile_unhovered.emit(tile)
-
 
 var currently_hovering: Tile = null
 func _process(delta: float) -> void:

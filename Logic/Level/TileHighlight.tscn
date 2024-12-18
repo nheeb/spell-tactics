@@ -1,0 +1,263 @@
+[gd_scene load_steps=19 format=3 uid="uid://wbk066sary8u"]
+
+[ext_resource type="Script" path="res://Logic/Level/TileHighlight.gd" id="1_oy41c"]
+[ext_resource type="Material" uid="uid://k1prmlwbo6lp" path="res://VFX/Materials/HoverHighlight.tres" id="2_a6vul"]
+[ext_resource type="Shader" path="res://VFX/Materials/HoverHighlight.gdshader" id="3_nnklq"]
+[ext_resource type="Material" uid="uid://1gqrknigw3j8" path="res://VFX/Materials/MovementTarget.tres" id="4_sbsci"]
+[ext_resource type="Material" uid="uid://cknjllbe38xwo" path="res://VFX/Materials/SpellTargetHighlightStatic.tres" id="5_oriky"]
+[ext_resource type="Material" uid="uid://b8dlfxl2dvdof" path="res://VFX/Materials/SpellTargetHighlight.tres" id="6_fpsqi"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_m1xtl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_agwot"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_nnklq")
+shader_parameter/albedo = Color(0.3024, 0.84, 0.84, 1)
+shader_parameter/time_scale = 4.0
+shader_parameter/range = 0.04
+shader_parameter/smooth_edge = 0.04
+shader_parameter/width = 0.08
+shader_parameter/alpha = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8byt"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_nnklq")
+shader_parameter/albedo = Color(0.98, 0.80752, 0.1176, 1)
+shader_parameter/time_scale = 4.0
+shader_parameter/range = 0.04
+shader_parameter/smooth_edge = 0.04
+shader_parameter/width = 0.08
+shader_parameter/alpha = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_g7058"]
+
+[sub_resource type="Shader" id="Shader_d4hav"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode unshaded, blend_mix,depth_draw_opaque,cull_back, shadows_disabled;
+uniform vec4 albedo : source_color;
+uniform float time_scale = 1.0;
+uniform float range = 0.04;
+uniform float smooth_edge = 0.1;
+uniform float width = 0.1;
+
+uniform float alpha = 1.0;
+
+float sdHexagon( in vec2 p, in float r )
+{
+    const vec3 k = vec3(-0.866025404,0.5,0.577350269);
+    p = abs(p);
+    p -= 2.0*min(dot(k.xy,p),0.0)*k.xy;
+    p -= vec2(clamp(p.x, -k.z*r, k.z*r), r);
+    return length(p)*sign(p.y);
+}
+
+void fragment() {
+	float d = sdHexagon(2.59 * (vec2(UV.x - 0.5, UV.y - 0.5)), 1.0);
+	ALBEDO = albedo.rgb;
+	//float time_offset = range * sin(TIME * time_scale);
+	float outer_edge = 1.0 - smoothstep(smooth_edge, smooth_edge, d);
+	float inner_edge = smoothstep(width - smooth_edge, width + smooth_edge, d);
+	ALPHA = outer_edge * inner_edge * alpha;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yh362"]
+render_priority = 0
+shader = SubResource("Shader_d4hav")
+shader_parameter/albedo = Color(1, 0.925537, 0.523438, 1)
+shader_parameter/time_scale = 4.0
+shader_parameter/range = 0.04
+shader_parameter/smooth_edge = 0.13
+shader_parameter/width = 0.09
+shader_parameter/alpha = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_opmr3"]
+
+[sub_resource type="Shader" id="Shader_8f2ry"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode unshaded, blend_mix,depth_draw_opaque,cull_back, shadows_disabled;
+uniform vec4 albedo : source_color;
+uniform float time_scale = 1.0;
+uniform float range = 0.04;
+uniform float smooth_edge = 0.1;
+uniform float width = 0.1;
+
+uniform float scale = 1.0;
+uniform float alpha = 1.0;
+
+float sdHexagon( in vec2 p, in float r )
+{
+    const vec3 k = vec3(-0.866025404,0.5,0.577350269);
+    p = abs(p);
+    p -= 2.0*min(dot(k.xy,p),0.0)*k.xy;
+    p -= vec2(clamp(p.x, -k.z*r, k.z*r), r);
+    return length(p)*sign(p.y);
+}
+
+void fragment() {
+	float d = sdHexagon(2.50 * (vec2(UV.x - 0.5, UV.y - 0.5)), 1.0 * scale);
+	ALBEDO = albedo.rgb;
+	float time_offset = range * sin(TIME * time_scale);
+	float outer_edge = 1.0 - smoothstep(time_offset-smooth_edge, time_offset+smooth_edge, d);
+	float inner_edge = smoothstep(time_offset - width - smooth_edge, time_offset - width + smooth_edge, d);
+	ALPHA = alpha * outer_edge * inner_edge;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w71nl"]
+render_priority = 0
+shader = SubResource("Shader_8f2ry")
+shader_parameter/albedo = Color(1, 1, 0.188235, 1)
+shader_parameter/time_scale = 4.0
+shader_parameter/range = 0.04
+shader_parameter/smooth_edge = 0.05
+shader_parameter/width = 0.08
+shader_parameter/scale = 0.87
+shader_parameter/alpha = 0.415
+
+[sub_resource type="QuadMesh" id="QuadMesh_4yaub"]
+
+[sub_resource type="Shader" id="Shader_umg0b"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode unshaded, blend_mix,depth_draw_opaque,cull_back, shadows_disabled;
+uniform vec4 albedo : source_color;
+uniform float time_scale = 1.0;
+uniform float range = 0.04;
+uniform float smooth_edge = 0.1;
+uniform float width = 0.1;
+
+uniform float alpha = 1.0;
+
+float sdHexagon( in vec2 p, in float r )
+{
+    const vec3 k = vec3(-0.866025404,0.5,0.577350269);
+    p = abs(p);
+    p -= 2.0*min(dot(k.xy,p),0.0)*k.xy;
+    p -= vec2(clamp(p.x, -k.z*r, k.z*r), r);
+    return length(p)*sign(p.y);
+}
+
+void fragment() {
+	float d = sdHexagon(2.59 * (vec2(UV.x - 0.5, UV.y - 0.5)), 1.0);
+	ALBEDO = albedo.rgb;
+	//float time_offset = range * sin(TIME * time_scale);
+	float outer_edge = 1.0 - smoothstep(smooth_edge, smooth_edge, d);
+	float inner_edge = smoothstep(width - smooth_edge, width + smooth_edge, d);
+	ALPHA = outer_edge * inner_edge * alpha;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifodc"]
+render_priority = 0
+shader = SubResource("Shader_umg0b")
+shader_parameter/albedo = Color(0, 0.376471, 0, 1)
+shader_parameter/time_scale = 4.0
+shader_parameter/range = -0.15
+shader_parameter/smooth_edge = 0.13
+shader_parameter/width = -0.075
+shader_parameter/alpha = 0.465
+
+[node name="Highlight" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.117866, 0)
+script = ExtResource("1_oy41c")
+
+[node name="HoverHexQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_m1xtl")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_a6vul")
+
+[node name="HoverAction" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_m1xtl")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_agwot")
+
+[node name="HoverInteract" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_m1xtl")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_x8byt")
+
+[node name="MovementTarget" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_g7058")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_sbsci")
+
+[node name="PlayerFocus" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.71534, 0.990354, 4.32898e-08, 0, -8.65796e-08, 1.98071, 0.990354, -1.71534, -7.49801e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_g7058")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_sbsci")
+
+[node name="CombatHexQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_g7058")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("5_oriky")
+
+[node name="PossibleTargetQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_g7058")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_yh362")
+
+[node name="SelectedTargetQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_opmr3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_w71nl")
+
+[node name="LowSpellEnergyHexQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_4yaub")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_ifodc")
+
+[node name="HighSpellEnergyHexQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70253, 0.982956, 4.29664e-08, 0, -8.59328e-08, 1.96591, 0.982956, -1.70253, -7.442e-08, 0, 0.146032, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_opmr3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_w71nl")
+
+[node name="HoverTargetHexQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.70261, 0.983, 4.29683e-08, 0, -8.59366e-08, 1.966, 0.983, -1.70261, -7.44233e-08, 0, 0.146, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_m1xtl")
+surface_material_override/0 = ExtResource("6_fpsqi")
+
+[node name="BorderProgressHexQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.78401, 1.03, 4.50226e-08, 0, -9.00455e-08, 2.06, 1.03, -1.78401, -7.79817e-08, 0, 0.146, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_m1xtl")
+surface_material_override/0 = ExtResource("6_fpsqi")
