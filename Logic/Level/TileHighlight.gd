@@ -30,8 +30,9 @@ enum Type {  # TODO cleanup, which of these do we still use?
 
 ## Highlights being preferred over others
 const superseding_types: Dictionary = {
-	Type.HoverAction: [Type.Hover]
+	Type.HoverAction: [Type.Hover],
 	# this means when both of these are active, only show HoverAction
+	Type.HoverInteract: [Type.HoverAction, Type.Hover],
 }
 
 var current_highlights: Array[Type] = []
@@ -48,8 +49,7 @@ func enable_highlight(type: Type):
 		if type in superseding_types:
 			for superseded in superseding_types[type]:
 				typeToMesh[superseded].visible = false
-				
-	
+
 func disable_highlight(type: Type):
 	if type in current_highlights:
 		current_highlights.erase(type)

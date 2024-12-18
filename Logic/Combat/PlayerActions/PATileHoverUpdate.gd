@@ -78,6 +78,6 @@ func execute(combat: Combat) -> void:
 		else:
 			currently_hovering_long = null
 		await tile.hover_long(hovering)
-	elif currently_hovering_long != tile:
+	elif currently_hovering_long != tile and currently_hovering_long != null:
 		await currently_hovering_long.hover_long(false)
 		currently_hovering_long = null
