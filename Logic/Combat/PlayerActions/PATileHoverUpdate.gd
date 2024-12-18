@@ -30,35 +30,54 @@ func tile_can_be_drained(combat: Combat) -> bool:
 	return tile.distance_to(combat.player.current_tile) <= 1 \
 		and tile.is_drainable() and drain.unlocked
 
+func tile_can_interact(combat: Combat) -> bool:
+	return tile.distance_to(combat.player.current_tile) <= 1 \
+		and tile.entities.any(func (ent: Entity): return ent.can_interact)
+
+const BasicMovement = preload("res://Content/Actives/BasicMovement.tres")
+func get_highlight_type(combat: Combat) -> Highlight.Type:
+	if combat.input.current_castable != null and combat.input.current_castable.get_type() == BasicMovement:
+		return Highlight.Type.HoverAction
+	elif combat.input.current_castable != null:
+		return Highlight.Type.HoverTarget
+	else:
+		return Highlight.Type.Hover
+
 func execute(combat: Combat) -> void:
 	# Hover Tile
 	if hovering:
 		combat.level.append_to_hover_memory(tile) # This is for the movement arrow pathing
-		var castable: Castable = combat.input.current_castable
-		if castable:
-			await castable.get_logic().set_preview_visuals(true, tile)
-		if tile.distance_to(combat.player.current_tile) <= 1 and tile.is_drainable() and combat.actives[1].unlocked:
+		tile.set_highlight(get_highlight_type(combat), true)
+		if tile_can_interact(combat):
+			tile.set_highlight(Highlight.Type.HoverInteract, true)
+		if tile_can_be_drained(combat):
 			if tile != currently_hovering_drainable:
+				currently_hovering_drainable = tile
 				tile.set_highlight(Highlight.Type.HoverAction, true)
 				on_drainable_tile_hovered.emit(tile)
 				open_cards_shelf_blocker.block()
-				if currently_hovering_drainable != null:
-					currently_hovering_drainable.set_highlight(Highlight.Type.HoverAction, false)
-					on_drainable_tile_unhovered.emit(currently_hovering_drainable)
-				currently_hovering_drainable = tile
-		else:
-			if currently_hovering_drainable != null:
-				open_cards_shelf_blocker.unblock()
-				on_drainable_tile_unhovered.emit(currently_hovering_drainable)
-				currently_hovering_drainable.set_highlight(Highlight.Type.HoverAction, false)
-				currently_hovering_drainable = null
-	
 	# Unhover Tile
 	else:
-		if combat.input.current_castable != null:
-			await combat.input.current_castable.get_logic().set_preview_visuals(false, tile)
-		if currently_hovering_drainable != null and currently_hovering_drainable == tile:
+		tile.set_highlight(Highlight.Type.Hover, false)
+		tile.set_highlight(Highlight.Type.HoverTarget, false)
+		tile.set_highlight(Highlight.Type.HoverAction, false)
+		tile.set_highlight(Highlight.Type.HoverInteract, false)
+		if currently_hovering_drainable == tile:
 			open_cards_shelf_blocker.unblock()
-			currently_hovering_drainable.set_highlight(Highlight.Type.HoverAction, false)
 			on_drainable_tile_unhovered.emit(currently_hovering_drainable)
 			currently_hovering_drainable = null
+	
+	# Castable Visual Preview
+	if combat.input.current_castable != null:
+		await combat.input.current_castable.get_logic().set_preview_visuals(hovering, tile)
+	
+	# Hover Long
+	if long:
+		if hovering:
+			currently_hovering_long = tile
+		else:
+			currently_hovering_long = null
+		await tile.hover_long(hovering)
+	elif currently_hovering_long != tile:
+		await currently_hovering_long.hover_long(false)
+		currently_hovering_long = null

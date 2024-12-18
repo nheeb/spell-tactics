@@ -67,8 +67,9 @@ func _on_load() -> void:
 	pass
 
 static func load_from_file(path: String) -> CombatObjectType:
-	var res = load(path) as CombatObjectType
-	if res == null:
-		push_error("Castable could not be loaded. Path is %s" % path)
-	res.on_load()
-	return res
+	var res = load(path)
+	assert(res != null, "Resource could not be loaded. Path is %s" % path)
+	var converted_res := res as CombatObjectType
+	assert(converted_res, "Could not convert to CombatObjectType. Path is %s" % path)
+	converted_res.on_load()
+	return converted_res

@@ -12,12 +12,14 @@ enum Type {  # TODO cleanup, which of these do we still use?
 	SelectedTarget,
 	PlayerFocus,
 	HoverAction,
+	HoverInteract,
 }
 
 @onready var typeToMesh: Dictionary = {
 	Type.Hover: $HoverHexQuad,
 	Type.HoverTarget: $HoverTargetHexQuad,
 	Type.HoverAction: $HoverAction,
+	Type.HoverInteract: $HoverInteract,
 	Type.MovementTarget: $MovementTarget,
 	Type.Combat: $CombatHexQuad,
 	Type.LowSpellEnergy: $LowSpellEnergyHexQuad,
@@ -26,8 +28,10 @@ enum Type {  # TODO cleanup, which of these do we still use?
 	Type.SelectedTarget: $SelectedTargetQuad
 }
 
+## Highlights being preferred over others
 const superseding_types: Dictionary = {
-	Type.HoverAction: [Type.Hover]  # this means when both of these are active, only show HoverAction
+	Type.HoverAction: [Type.Hover]
+	# this means when both of these are active, only show HoverAction
 }
 
 var current_highlights: Array[Type] = []

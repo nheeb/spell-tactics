@@ -217,7 +217,6 @@ func is_location_obstructed(coord: Vector2i, mask: int) -> bool:
 	if tile == null:
 		return true
 	return tile.is_obstacle(mask)
-	
 
 func get_tile_by_location(location: Vector2i) -> Tile:
 	if location.x >= 0 and location.y >= 0:
@@ -240,7 +239,6 @@ func get_line(tile1: Tile, tile2: Tile, include_edge_tiles := true) -> Array[Til
 	for i in range(1,dist+1):
 		var lerp_pos = lerp(pos1, pos2, float(i)/dist)
 		line.append_array(get_tiles_from_float_vec(lerp_pos, not include_edge_tiles))
-	
 	return line
 
 func get_tiles_from_float_vec(vec: Vector2, just_one := false) -> Array[Tile]:
@@ -302,7 +300,6 @@ func get_all_tiles_in_distance(r_center: int, q_center: int, dist: int) -> Array
 					var tile: Tile = tiles[tile_indices.x][tile_indices.y]
 					if tile != null:
 						tiles_in_distance.append(tile)
-
 	return tiles_in_distance
 
 func get_center_tile() -> Tile:
@@ -310,7 +307,6 @@ func get_center_tile() -> Tile:
 	var r_center: int = n_rows / 2
 	@warning_ignore("integer_division")
 	var q_center: int = n_cols / 2
-	
 	return tiles[r_center][q_center]
 
 func get_cone_tiles(origin: Tile, destination: Tile, range_start : int, range_end : int, \
@@ -344,16 +340,15 @@ func get_drainable_entities() -> Dictionary: # Tile -> Array[Entity]
 			tile_to_ents[tile] = tile.get_drainable_entities()
 	return tile_to_ents
 
+#func _highlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
+	#for tile in highlight_tiles:
+		#if tile:
+			#tile.set_highlight(type, true)
+#
+#func _unhighlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
+	#for tile in highlight_tiles:
+		#tile.set_highlight(type, false)
 
-func _highlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
-	for tile in highlight_tiles:
-		if tile:
-			tile.set_highlight(type, true)
-		
-func _unhighlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
-	for tile in highlight_tiles:
-		tile.set_highlight(type, false)
-		
 #func highlight_movement_range(entity: Entity, movement_range: int) -> Array[Tile]:
 	#var highlight_tiles = get_all_tiles_in_distance(entity.current_tile.r,
 													#entity.current_tile.q, movement_range)
@@ -369,8 +364,7 @@ func _unhighlight_tile_set(highlight_tiles: Array[Tile], type: Highlight.Type):
 	#
 	#_highlight_tile_set(distance_filtered, Highlight.Type.MovementTarget)
 	#return distance_filtered
-		
-		
+
 func move_entity(entity: Entity, target: Tile):
 	entity.move(target)
 
@@ -388,13 +382,11 @@ func get_all_tiles() -> Array[Tile]:
 	var num_rows = len(tiles)
 	assert(num_rows > 0, "empty tiles.")
 	var num_cols = len(tiles[0])
-	
 	for r in range(num_rows):
 		for q in range(num_cols):
 			var tile = tiles[r][q]
 			if tile != null:
 				all_tiles.append(tile)
-	
 	return all_tiles
 
 func get_all_entities() -> Array[Entity]:
@@ -408,7 +400,6 @@ func find_all_tiles_with(type: EntityType) -> Array[Tile]:
 	var num_rows = len(tiles)
 	assert(num_rows > 0, "empty tiles.")
 	var num_cols = len(tiles[0])
-	
 	for r in range(num_rows):
 		for q in range(num_cols):
 			var tile = tiles[r][q]
@@ -419,7 +410,6 @@ func find_all_tiles_with(type: EntityType) -> Array[Tile]:
 					if ent.type == type:
 						tiles_with.append(tile)
 						break
-
 	return tiles_with
 
 ## Returns the first Entity found matching the given type
@@ -432,26 +422,9 @@ func find_entity_type(type: EntityType) -> Entity:
 					if ent.type == type:
 						return ent
 	return null
-	
-func highlight_entity_type(type: EntityType):
-	_highlight_tile_set(find_all_tiles_with(type), Highlight.Type.Energy)
-	
-func unhighlight_entity_type(type: EntityType):
-	_unhighlight_tile_set(find_all_tiles_with(type), Highlight.Type.Energy)
-
-
 
 func search(from: Vector2i, to: Vector2i, mask: int = Constants.INT64_MAX) -> LevelSearch:
 	return LevelSearch.new(self, from, to, mask)
-
-# ----- tool part -----
-@export var create_catan_grid: bool = false:
-	set(value):
-		if value == true:
-			init_basic_grid(3)
-
-func save_without_combat(path: String):
-	Combat.serialize_level_as_combat_state(self).save_to_disk(path)
 
 var _im_arr: ImmediateArrows
 func immediate_arrows() -> ImmediateArrows:
@@ -466,6 +439,8 @@ var _hover_memory: Array[Tile] = []
 const HOVER_MEMORY_SIZE = 4
 ## This is used in PATileHoverUpdate to keep track of the last hovers.
 func append_to_hover_memory(t: Tile) -> void:
+	if t in _hover_memory:
+		_hover_memory.erase(t)
 	_hover_memory.push_back(t)
 	if _hover_memory.size() > HOVER_MEMORY_SIZE:
 		_hover_memory.pop_front()
