@@ -67,11 +67,9 @@ func _on_load() -> void:
 	pass
 
 static func load_from_file(path: String) -> CombatObjectType:
-	var res = load(path)
+	var res := load(path) as Resource
 	assert(res != null, "Resource could not be loaded. Path is %s" % path)
 	var converted_res := res as CombatObjectType
-	var mist := res as ActiveType
-	var kacke := res as CombatObjectType
 	assert(converted_res, "Could not convert to CombatObjectType. Path is %s" % path)
 	converted_res.on_load()
 	return converted_res

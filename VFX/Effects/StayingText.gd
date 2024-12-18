@@ -1,7 +1,5 @@
 extends StayingVisualEffect
 
-## Quick Paste: combat.animation.say(target, "", {"color": Color., "font_size": 64})
-
 const FONTS = {
 	"regular" : preload("res://Assets/Fonts/Teachers/Teachers-Regular.ttf"),
 	"bold" : preload("res://Assets/Fonts/Teachers/Teachers-ExtraBold.ttf"),
@@ -10,7 +8,7 @@ const FONTS = {
 
 var text := ""
 var duration := 1.2
-var height := 1.8
+var height := 1.65
 var color := Color.WHITE
 var outline_size := 0
 var font_size := 48
