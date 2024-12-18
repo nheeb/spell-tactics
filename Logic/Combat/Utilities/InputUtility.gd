@@ -81,7 +81,7 @@ func connect_with_event_signals() -> void:
 	Events.tile_clicked.connect(tile_clicked)
 	Events.tile_rightclicked.connect(tile_rightclicked)
 	#Events.tile_hovered.connect(tile_hovered)
-	PAHoverTile.on_tile_hovered.connect(func(tile): combat.action_stack.process_player_action(PAHoverTile.new(tile)))
+	PATileHoverUpdate.on_tile_hovered.connect(func(tile): combat.action_stack.process_player_action(PATileHoverUpdate.new(tile)))
 	Events.tile_unhovered.connect(tile_unhovered)
 	Events.card_hovered.connect(card_hovered)
 	Events.card_selected.connect(card_selected)

@@ -464,7 +464,7 @@ func immediate_arrows() -> ImmediateArrows:
 ## We use it to make inputing the movement clean.
 var _hover_memory: Array[Tile] = []
 const HOVER_MEMORY_SIZE = 4
-## This is used in PAHoverTile to keep track of the last hovers.
+## This is used in PATileHoverUpdate to keep track of the last hovers.
 func append_to_hover_memory(t: Tile) -> void:
 	_hover_memory.push_back(t)
 	if _hover_memory.size() > HOVER_MEMORY_SIZE:

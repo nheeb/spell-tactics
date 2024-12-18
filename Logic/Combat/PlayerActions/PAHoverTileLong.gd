@@ -1,4 +1,4 @@
-class_name PAHoverTileLong extends PlayerAction
+class_name PATileHoverUpdateLong extends PlayerAction
 
 var tile: Tile
 var hover: bool

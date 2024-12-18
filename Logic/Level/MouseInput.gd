@@ -28,7 +28,7 @@ func hover_tile(tile: Tile):
 					and combat.input.current_castable
 
 	tile.set_highlight(get_highlight_type(), true)
-	PAHoverTile.on_tile_hovered.emit(tile)  # alternativ: PaHoverTile.new(), combat.trigger_action(PaHoverTile.new(args))
+	PATileHoverUpdate.on_tile_hovered.emit(tile)  # alternativ: PATileHoverUpdate.new(), combat.trigger_action(PATileHoverUpdate.new(args))
 	tile.get_node("HoverTimer").start()
 	
 func unhover_tile(tile: Tile):
@@ -38,7 +38,7 @@ func unhover_tile(tile: Tile):
 	if tile.hovering:
 		tile.hovering = false
 		if combat != null:
-			combat.action_stack.process_player_action(PAHoverTileLong.new(tile, false))
+			combat.action_stack.process_player_action(PATileHoverUpdateLong.new(tile, false))
 	tile.get_node("HoverTimer").stop()
 	Events.tile_unhovered.emit(tile)
 
