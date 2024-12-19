@@ -34,9 +34,11 @@ func tile_can_interact(combat: Combat) -> bool:
 	return tile.distance_to(combat.player.current_tile) <= 1 \
 		and tile.entities.any(func (ent: Entity): return ent.can_interact)
 
-const BasicMovement = preload("res://Content/Actives/BasicMovement.tres")
 func get_highlight_type(combat: Combat) -> Highlight.Type:
-	if combat.input.current_castable != null and combat.input.current_castable.get_type() == BasicMovement:
+	if combat.input.current_castable != null \
+		and combat.input.current_castable.get_type() == Preloaded.ACTIVE_MOVEMENT:
+	#if combat.input.current_castable != null \
+		#and "Movement" in combat.input.current_castable.get_type().pretty_name:
 		return Highlight.Type.HoverAction
 	elif combat.input.current_castable != null:
 		return Highlight.Type.HoverTarget

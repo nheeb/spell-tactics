@@ -1,10 +1,5 @@
 class_name CombatBeginPhase extends CombatPhase
 
-const MOVE  = "res://Content/Actives/BasicMovement.tres"
-const DRAIN = "res://Content/Actives/Drain.tres"
-const MELEE = "res://Content/Actives/SimpleMelee.tres"
-const INTERACT = "res://Content/Actives/Interact.tres"
-
 func process_phase() -> void:
 	# Create Deck
 	if Game.DEBUG_SPELL_TESTING:
@@ -17,11 +12,12 @@ func process_phase() -> void:
 	# Create actives
 	if combat.actives.is_empty():
 		combat.log.add("Level has no actives -> Regular actives will be loaded")
+		var movement := Preloaded.ACTIVE_MOVEMENT.create(combat) as Active
+		var drain := Preloaded.ACTIVE_DRAIN.create(combat) as Active
+		var melee := Preloaded.ACTIVE_MELEE.create(combat) as Active
+		var interact := Preloaded.ACTIVE_INTERACT.create(combat) as Active
 		combat.actives = [
-			ActiveType.load_from_file(MOVE).create(combat),
-			ActiveType.load_from_file(DRAIN).create(combat),
-			ActiveType.load_from_file(MELEE).create(combat),
-			ActiveType.load_from_file(INTERACT).create(combat)
+			movement, drain, melee, interact
 		]
 	combat.ui.initialize_active_buttons(combat.actives)
 	
