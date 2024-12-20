@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ActiveType" load_steps=5 format=3 uid="uid://pt0aoagtmp78"]
 
-[ext_resource type="Texture2D" uid="uid://bxy64tmh881lq" path="res://Assets/Sprites/Icons/movement2.png" id="1_eni8p"]
-[ext_resource type="Script" path="res://Logic/Castables/ActiveType.gd" id="1_rfhoe"]
-[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="3_qghvx"]
+[ext_resource type="Texture2D" uid="uid://cgko32i1tugdm" path="res://Assets/Sprites/Icons/movement3.png" id="1_2em2l"]
+[ext_resource type="Script" path="res://Logic/Castables/ActiveType.gd" id="1_jyuxq"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="2_7g1cy"]
 
 [sub_resource type="Resource" id="Resource_wjtt8"]
-script = ExtResource("3_qghvx")
+script = ExtResource("2_7g1cy")
 type = 0
 limitation = 1
 range_size = 3
@@ -18,7 +18,7 @@ possible_highlight = 2
 selected_highlight = 8
 
 [resource]
-script = ExtResource("1_rfhoe")
+script = ExtResource("1_jyuxq")
 limitation = 0
 max_uses_per_round = 1
 show_button_in_ui = true
@@ -28,9 +28,9 @@ topic = 0
 topic_secondary = 0
 topic_icons = Array[int]([])
 topic_caption = ""
-target_requirements = Array[ExtResource("3_qghvx")]([SubResource("Resource_wjtt8")])
+target_requirements = Array[ExtResource("2_7g1cy")]([SubResource("Resource_wjtt8")])
 pretty_name = "Movement"
 fluff_text = ""
-icon = ExtResource("1_eni8p")
+icon = ExtResource("1_2em2l")
 color = Color(1, 1, 1, 1)
 default_data = {}
