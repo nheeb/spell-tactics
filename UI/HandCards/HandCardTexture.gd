@@ -12,6 +12,9 @@ func set_castable_type(type: CastableType):
 	set_color(type.color)
 	icon_texture.set_castable_type(type)
 	title_label.text="[center]" + type.pretty_name + "[/center]"
+	while title_label.get_line_count() > 1:
+		title_label.set("theme_override_font_sizes/normal_font_size", 
+						title_label.get("theme_override_font_sizes/normal_font_size") - 2)
 	spell_text_label.set_spell_text(type.effect_text)
 
 func set_castable(castable: Castable):

@@ -37,7 +37,7 @@ func set_font_size(_size: int):
 func setup_font_size():
 	await VisualTime.visual_process
 	var first_with_4_lines := 0 
-	while get_visible_line_count() > 3 and get_font_size() > 26:
+	while get_visible_line_count() > 4 and get_font_size() > 26:
 		#if first_with_3_lines == 0 and get_visible_line_count() <= 5:
 			#first_with_3_lines = get_font_size()
 		set_font_size(get_font_size() - 2)
