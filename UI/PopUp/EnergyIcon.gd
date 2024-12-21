@@ -22,10 +22,9 @@ func _ready() -> void:
 		get_window().size = Vector2(128, 128)
 		get_window().transparent = true
 		get_window().transparent_bg = true
-		for type in EnergyStack.EnergyType.values():
-			var type_name: String = EnergyStack.EnergyType.keys()[type]
-			print(type_name)
-			self.type = type
+		for energy_type in EnergyStack.EnergyType.values():
+			var type_name: String = EnergyStack.EnergyType.keys()[energy_type]
+			self.type = energy_type
 			await get_tree().process_frame
 			await get_tree().process_frame
 			var image = get_viewport().get_texture().get_image()

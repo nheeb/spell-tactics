@@ -1,8 +1,6 @@
-[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://72pgvo6r6k7c"]
+[gd_scene load_steps=6 format=3 uid="uid://cufqrdhv2yyhd"]
 
-[ext_resource type="Texture2D" uid="uid://b4ta7t0uhldpx" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_color_2k_desat.png" id="1_cmel6"]
-[ext_resource type="Texture2D" uid="uid://d3lr1eyjbtpjq" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_normal_dx_2k.png" id="2_mnuk2"]
-[ext_resource type="Texture2D" uid="uid://c58sn1fmkxu5m" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_roughness_2k.png" id="3_ufr1b"]
+[ext_resource type="PackedScene" uid="uid://bu5g84clr48vs" path="res://UI/HandCards/HandCardTexture.tscn" id="1_r8d4o"]
 
 [sub_resource type="Shader" id="Shader_lrlyf"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
@@ -35,23 +33,29 @@ void fragment() {
 [sub_resource type="ViewportTexture" id="ViewportTexture_j1fei"]
 viewport_path = NodePath("TextureViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6ulv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq71t"]
 resource_local_to_scene = true
 render_priority = 0
 shader = SubResource("Shader_lrlyf")
-shader_parameter/card_uv_aa = Vector2(0.06, 0.06)
-shader_parameter/card_uv_bb = Vector2(0.37, 0.48)
+shader_parameter/card_uv_aa = Vector2(0.06, 0.08)
+shader_parameter/card_uv_bb = Vector2(0.37, 0.5)
 shader_parameter/card_texture = SubResource("ViewportTexture_j1fei")
 
-[resource]
+[sub_resource type="QuadMesh" id="QuadMesh_yby1i"]
 resource_local_to_scene = true
-render_priority = 1
-next_pass = SubResource("ShaderMaterial_g6ulv")
-albedo_color = Color(0.7395, 0.8526, 0.87, 1)
-albedo_texture = ExtResource("1_cmel6")
-roughness_texture = ExtResource("3_ufr1b")
-normal_enabled = true
-normal_scale = 2.1
-normal_texture = ExtResource("2_mnuk2")
-uv1_scale = Vector3(2.76, 1.825, 1.825)
-uv1_offset = Vector3(0.74, 0.295, 0)
+material = SubResource("ShaderMaterial_aq71t")
+size = Vector2(0.708, 1)
+
+[node name="HandCardTextureTest" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_yby1i")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.47594)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(725, 1024)
+
+[node name="HandCardTexture" parent="SubViewport" instance=ExtResource("1_r8d4o")]

@@ -8,8 +8,13 @@
 font = ExtResource("3_382cu")
 font_size = 78
 
-[node name="HandCardSideIcon" type="Node2D"]
-position = Vector2(184, 367)
+[node name="HandCardSideIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 184.0
+offset_top = 367.0
+offset_right = 184.0
+offset_bottom = 367.0
 script = ExtResource("1_mdphw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

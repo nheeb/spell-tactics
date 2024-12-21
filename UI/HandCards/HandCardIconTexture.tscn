@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1382bw2xmw6b"]
+[gd_scene load_steps=7 format=3 uid="uid://d1382bw2xmw6b"]
 
 [ext_resource type="Shader" path="res://UI/HandCards/HandCardMainIconCircle.gdshader" id="1_6xsoc"]
 [ext_resource type="Script" path="res://UI/HandCards/HandCardIconTexture.gd" id="1_8fqpw"]
 [ext_resource type="Texture2D" uid="uid://dtsjgpeqf2s2j" path="res://Assets/Sprites/Icons/swirl-ring.png" id="1_gny5x"]
-[ext_resource type="PackedScene" uid="uid://ddgi1ht0f4leb" path="res://UI/HandCards/HandCardSideIcon.tscn" id="2_1yjm5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1lb16"]
 frequency = 0.0621
@@ -20,56 +19,29 @@ noise = SubResource("FastNoiseLite_1lb16")
 resource_local_to_scene = true
 shader = ExtResource("1_6xsoc")
 shader_parameter/distort_progress = 1.0
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(1, 0.990028, 0.938982, 1)
 shader_parameter/distort_noise = SubResource("NoiseTexture3D_wer57")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wkypa"]
-radius = 256.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_020a4"]
-radius = 282.177
-
-[node name="HandCardIconTexture" type="Node2D"]
+[node name="HandCardIconTexture" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_8fqpw")
 
-[node name="PrototypeBackground" type="ColorRect" parent="."]
-visible = false
-offset_right = 1024.0
-offset_bottom = 1024.0
-color = Color(1, 1, 1, 0.145098)
-
-[node name="MainIcon" type="Sprite2D" parent="."]
-texture_filter = 4
+[node name="MainIcon" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_xckbr")
-position = Vector2(512, 441)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("1_gny5x")
-
-[node name="HandCardSideIconLeft3" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(137, 332)
-
-[node name="HandCardSideIconLeft2" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(137, 516)
-
-[node name="HandCardSideIconLeft1" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(189, 684)
-
-[node name="HandCardSideIconRight3" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(856, 343)
-
-[node name="HandCardSideIconRight2" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(856, 527)
-
-[node name="HandCardSideIconRight1" parent="." instance=ExtResource("2_1yjm5")]
-position = Vector2(812, 684)
-
-[node name="PrototypeIconCircle" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(512, 512)
-shape = SubResource("CircleShape2D_wkypa")
-debug_color = Color(0.65625, 0.950893, 1, 0.42)
-
-[node name="PrototypeIconCircle2" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(512, 512)
-shape = SubResource("CircleShape2D_020a4")
-debug_color = Color(0.470588, 0.701961, 1, 0.168627)
+expand_mode = 2
+stretch_mode = 5

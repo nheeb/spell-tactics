@@ -1,0 +1,64 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b7i7gpkllx7f4"]
+
+[sub_resource type="Shader" id="Shader_u617a"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, unshaded;
+
+#include \"res://VFX/Materials/lib.gdshaderinc\"
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo;
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+uniform vec2 card_uv_aa;
+uniform vec2 card_uv_bb;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+vec4 texture_project(sampler2D tex, vec2 uv, vec2 aa, vec2 bb, vec2 target_aa, vec2 target_bb) {
+	vec4 card_color = texture(tex, uv_project(uv, aa, bb, target_aa, target_bb));
+	return card_color * vec2_between(uv, aa, bb);
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	vec4 card_color = texture_project(texture_albedo, UV, card_uv_aa, card_uv_bb, vec2(0., 0.), vec2(1., 1.));
+
+	ALBEDO = card_color.rgb;
+
+	//float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	//METALLIC = metallic_tex * metallic;
+	//SPECULAR = specular;
+//
+	//vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	//float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	//ROUGHNESS = roughness_tex * roughness;
+	ALPHA = card_color.a;
+}
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5y3c5"]
+viewport_path = NodePath("SubViewport")
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_u617a")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/card_uv_aa = Vector2(0.065, 0.08)
+shader_parameter/card_uv_bb = Vector2(0.51, 0.585)
+shader_parameter/texture_albedo = SubResource("ViewportTexture_5y3c5")

@@ -1,9 +1,10 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://bdasc8xyqak4i"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://b0ynhho7hatbs"]
 
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_0b7hu"]
 resource_name = "PitchShift"
 
 [resource]
+bus/0/volume_db = -12.9785
 bus/1/name = &"TimeCorrection"
 bus/1/solo = false
 bus/1/mute = false

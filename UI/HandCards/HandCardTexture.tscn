@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bu5g84clr48vs"]
+[gd_scene load_steps=7 format=3 uid="uid://bu5g84clr48vs"]
 
 [ext_resource type="Script" path="res://UI/HandCards/HandCardTexture.gd" id="1_7ojg0"]
-[ext_resource type="LabelSettings" uid="uid://8t400en6463g" path="res://UI/HandCards/SpellCardTitle.tres" id="2_pa4o0"]
-[ext_resource type="LabelSettings" uid="uid://chkhqxibm0gua" path="res://UI/HandCards/SpellCardText.tres" id="3_j5qev"]
 [ext_resource type="PackedScene" uid="uid://d1382bw2xmw6b" path="res://UI/HandCards/HandCardIconTexture.tscn" id="3_qxxye"]
-[ext_resource type="LabelSettings" uid="uid://x5iftw67vnst" path="res://UI/HandCards/SpellCardErrorText.tres" id="5_v07jk"]
+[ext_resource type="FontFile" uid="uid://cb4uhvpr8gbry" path="res://Assets/Fonts/Teachers/Teachers-Bold.ttf" id="4_ldpju"]
+[ext_resource type="Script" path="res://Prototype/SpellTextLabel.gd" id="4_tlp2q"]
+[ext_resource type="FontFile" uid="uid://clfhm2203i71y" path="res://Assets/Fonts/Teachers/Teachers-BoldItalic.ttf" id="5_es0ah"]
+[ext_resource type="FontFile" uid="uid://bb5j13fub6i66" path="res://Assets/Fonts/Teachers/Teachers-ExtraBold.ttf" id="6_xdg7j"]
 
 [node name="HandCardTexture" type="Control"]
 layout_mode = 3
@@ -13,92 +14,65 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 script = ExtResource("1_7ojg0")
 
-[node name="HandCardIconTexture" parent="." instance=ExtResource("3_qxxye")]
-position = Vector2(512, 0)
-scale = Vector2(0.5, 0.5)
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 0
+offset_right = 725.0
+offset_bottom = 1024.0
+ratio = 0.708
 
-[node name="Container" type="Control" parent="."]
-custom_minimum_size = Vector2(512, 512)
-layout_mode = 1
-anchor_right = 0.267
-anchor_bottom = 0.474
-offset_right = -0.640015
-offset_bottom = 0.0799561
-
-[node name="GridContainer" type="VBoxContainer" parent="Container"]
-custom_minimum_size = Vector2(512, 512)
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Container/GridContainer"]
-custom_minimum_size = Vector2(0, 8)
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer"]
 layout_mode = 2
 
-[node name="CenterContainer" type="VBoxContainer" parent="Container/GridContainer"]
-custom_minimum_size = Vector2(0, 71.38)
+[node name="Gap3" type="Control" parent="AspectRatioContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="TitleLabel" type="Label" parent="Container/GridContainer/CenterContainer"]
+[node name="TitleLabel" type="RichTextLabel" parent="AspectRatioContainer/VBoxContainer"]
 unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 100.045)
 layout_mode = 2
-text = "Long Spell Name"
-label_settings = ExtResource("2_pa4o0")
-horizontal_alignment = 1
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("4_ldpju")
+theme_override_font_sizes/normal_font_size = 86
+bbcode_enabled = true
+text = "[center]Long Spell Name[/center]"
 
-[node name="CenterContainer2" type="VBoxContainer" parent="Container/GridContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.5
-
-[node name="SpellTextLabel" type="Label" parent="Container/GridContainer/CenterContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(512, 370)
-layout_mode = 2
-text = "Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text Spell Text"
-label_settings = ExtResource("3_j5qev")
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="Container2" type="Control" parent="."]
-custom_minimum_size = Vector2(512, 512)
-layout_mode = 1
-anchor_right = 0.267
-anchor_bottom = 0.474
-offset_left = 512.0
-offset_right = 511.36
-offset_bottom = 0.0799866
-
-[node name="GridContainer" type="VBoxContainer" parent="Container2"]
-custom_minimum_size = Vector2(512, 512)
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="CenterContainer" type="VBoxContainer" parent="Container2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ErrorLabel" type="Label" parent="Container2/GridContainer/CenterContainer"]
-unique_name_in_owner = true
-visible = false
+[node name="Gap" type="Control" parent="AspectRatioContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
-text = "Not enough energy"
-label_settings = ExtResource("5_v07jk")
-horizontal_alignment = 1
-vertical_alignment = 2
-clip_text = true
+
+[node name="HandCardIconTexture" parent="AspectRatioContainer/VBoxContainer" instance=ExtResource("3_qxxye")]
+unique_name_in_owner = true
+modulate = Color(0.367188, 0.158789, 0.0838727, 1)
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Gap2" type="Control" parent="AspectRatioContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="SpellTextLabel" type="RichTextLabel" parent="AspectRatioContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(512, 275.41)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("4_ldpju")
+theme_override_fonts/italics_font = ExtResource("5_es0ah")
+theme_override_fonts/bold_font = ExtResource("6_xdg7j")
+theme_override_font_sizes/italics_font_size = 66
+theme_override_font_sizes/normal_font_size = 66
+theme_override_font_sizes/bold_font_size = 66
+bbcode_enabled = true
+text = "[center]Spell [img=45]res://Assets/Sprites/EnergyIconMasks/rendered/decay.png[/img] Text Spell Text Spell Text Spell Text Spell Text Spell Text [/center]
+"
+scroll_active = false
+script = ExtResource("4_tlp2q")
+
+[node name="Panel" type="Panel" parent="AspectRatioContainer"]
+visible = false
+layout_mode = 2

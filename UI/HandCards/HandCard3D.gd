@@ -12,7 +12,6 @@ func _ready() -> void:
 	pass
 
 func _enter_tree() -> void:
-	$Quad.get_surface_override_material(0).albedo_texture = $Quad/SubViewport.get_texture()
 	%CardModel.material_override.next_pass.set("shader_parameter/random_seed", randf())
 	%CardModel.material_override.next_pass.set("shader_parameter/card_texture", $TextureViewport.get_texture())
 	%CardModel.material_override.uv1_offset = Vector3(randf(), randf(), 0) * 10.0
@@ -28,11 +27,11 @@ func get_active() -> Active:
 	return active
 
 func set_render_prio(p: int) -> void:
-	$Quad.get_surface_override_material(0).set("render_priority", p)
 	%CardModel.material_override.set("render_priority", p)
 	if %CardModel.material_overlay:
 		%CardModel.material_overlay.set("render_priority", p-1)
 	%CardModel.material_override.next_pass.set("render_priority", p+1)
+
 	for socket in %EnergySocketPivot.get_children():
 		if socket is HandCardEnergySocket:
 			socket.set_render_prio(p+1)
@@ -69,14 +68,16 @@ func set_castable_type(type: CastableType) -> void:
 	%CardTexture._ready()
 	%CardTexture.set_castable_type(type)
 	# Set Shader color
-	%CardModel.material_override.next_pass.set("shader_parameter/albedo", type.color)
+	# TODO Nils fix this
+	#%CardModel.material_override.next_pass.set("shader_parameter/albedo", type.color)
 
 func set_miniature_variant_energy_type(et: EnergyStack.EnergyType):
 	# Set Texture
 	%CardTexture.set_miniature_variant_energy_type(et)
 	# Set Shader color
-	%CardModel.material_override.next_pass \
-		.set("shader_parameter/albedo", VFX.type_to_color(et))
+	# TODO Nils fix this
+	#%CardModel.material_override.next_pass \
+		#.set("shader_parameter/albedo", VFX.type_to_color(et))
 	set_distort(false)
 
 const ENERGY_SOCKET_DIST = .15

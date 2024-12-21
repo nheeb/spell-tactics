@@ -138,6 +138,9 @@ vec2 uv_project(vec2 uv, vec2 aa, vec2 bb, vec2 target_aa, vec2 target_bb) {
 	return vec2(x,y);
 }
 
+// 	vec4 card_color = texture(card_texture, uv_project(UV, card_uv_aa, card_uv_bb, vec2(0., 0.), vec2(1., 1.)))
+
+
 float random_float(vec2 seed) {
     return fract(sin(dot(seed.xy,
         vec2(12.9898,78.233))) * 43758.5453123);

@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://j0l5hc388gmj"]
+[gd_scene load_steps=10 format=3 uid="uid://j0l5hc388gmj"]
 
 [ext_resource type="Script" path="res://UI/HandCards/HandCard3D.gd" id="1_iur57"]
 [ext_resource type="PackedScene" uid="uid://bjuv8jfc5pykg" path="res://UI/HandCards/HandCardEnergySocket.tscn" id="2_87ldq"]
 [ext_resource type="Material" uid="uid://72pgvo6r6k7c" path="res://UI/HandCards/HandCardMaterial.tres" id="3_cro0o"]
 [ext_resource type="ArrayMesh" uid="uid://dr7tkk70dda4c" path="res://Assets/Models/HUD_Card/SimpleCardMesh.tres" id="4_jyopt"]
 [ext_resource type="PackedScene" uid="uid://cr5uo2crw6yep" path="res://Logic/Utility/SmoothMovement.tscn" id="4_v18nh"]
-[ext_resource type="PackedScene" uid="uid://yttsolijsbto" path="res://Assets/Models/HUD_Card/GLB/SimpleCard.glb" id="5_pkbxk"]
 [ext_resource type="PackedScene" uid="uid://bu5g84clr48vs" path="res://UI/HandCards/HandCardTexture.tscn" id="6_ywg8h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dakll"]
@@ -14,13 +13,6 @@ albedo_color = Color(1, 0.694118, 0.509804, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_x50fm"]
 material = SubResource("StandardMaterial3D_dakll")
 size = Vector2(1, 1.4)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6j1g"]
-resource_local_to_scene = true
-render_priority = -128
-transparency = 1
-no_depth_test = true
-shading_mode = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ne87j"]
 size = Vector3(0.046, 1.40829, 1)
@@ -34,7 +26,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 
 
 [node name="EnergySocketPivot" type="Marker3D" parent="Model"]
 unique_name_in_owner = true
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0.38, 0.099)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0.420218, 0.099)
 
 [node name="HandCardEnergySocket" parent="Model/EnergySocketPivot" instance=ExtResource("2_87ldq")]
 visible = false
@@ -50,24 +42,12 @@ skeleton = NodePath("")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0132882, -0.0531537, -0.113039)
 
-[node name="Quad" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-visible = false
-mesh = SubResource("QuadMesh_x50fm")
-surface_material_override/0 = SubResource("StandardMaterial3D_y6j1g")
-
-[node name="SubViewport" type="SubViewport" parent="Quad"]
-disable_3d = true
-transparent_bg = true
-size = Vector2i(563, 789)
-
 [node name="QuadBackside" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.00970364, 0, 4.2416e-10)
 visible = false
 mesh = SubResource("QuadMesh_x50fm")
 
 [node name="Area3D" type="Area3D" parent="." groups=["hand_area"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0412399, 0, 1.80265e-09)
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
@@ -80,18 +60,14 @@ rotation_custom_node = NodePath("../Model")
 [node name="ScaleOrigin" parent="SmoothMovement" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.700331, 0)
 
-[node name="SimpleCard" parent="." instance=ExtResource("5_pkbxk")]
-transform = Transform3D(-3.20737e-08, 0, -0.733761, 0, 0.733761, 0, 0.733761, 0, -3.20737e-08, 0, 0, 0)
-visible = false
-
 [node name="TextureViewport" type="SubViewport" parent="."]
 disable_3d = true
 transparent_bg = true
 msaa_2d = 1
-size = Vector2i(1024, 512)
+canvas_item_default_texture_filter = 2
+size = Vector2i(725, 1024)
 
 [node name="CardTexture" parent="TextureViewport" instance=ExtResource("6_ywg8h")]
 unique_name_in_owner = true
 
 [editable path="SmoothMovement"]
-[editable path="SimpleCard"]
