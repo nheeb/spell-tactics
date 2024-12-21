@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bjuv8jfc5pykg" path="res://UI/HandCards/HandCardEnergySocket.tscn" id="2_87ldq"]
 [ext_resource type="Material" uid="uid://72pgvo6r6k7c" path="res://UI/HandCards/HandCardMaterial.tres" id="3_cro0o"]
 [ext_resource type="PackedScene" uid="uid://cr5uo2crw6yep" path="res://Logic/Utility/SmoothMovement.tscn" id="4_v18nh"]
-[ext_resource type="ArrayMesh" uid="uid://cri3py6nmkr5j" path="res://Assets/Models/HUD_Card/SimpleCardMeshBeveledFlat.tres" id="5_our1s"]
+[ext_resource type="ArrayMesh" uid="uid://ce8f8edm1sbvb" path="res://Assets/Models/HUD_Card/CardWithUV2.res" id="4_wd21n"]
 [ext_resource type="PackedScene" uid="uid://bu5g84clr48vs" path="res://UI/HandCards/HandCardTexture.tscn" id="6_ywg8h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dakll"]
@@ -35,7 +35,7 @@ visible = false
 unique_name_in_owner = true
 transform = Transform3D(-0.733761, 0, 2.33237e-08, 0, 0.733761, 0, -2.33237e-08, 0, -0.733761, 0, 0, 0)
 material_override = ExtResource("3_cro0o")
-mesh = ExtResource("5_our1s")
+mesh = ExtResource("4_wd21n")
 skeleton = NodePath("")
 
 [node name="IconOrigin" type="Marker3D" parent="."]

@@ -5,11 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c58sn1fmkxu5m" path="res://Assets/BaseMaterials/Textures/cardstone/rock_01_2k/rock_01_roughness_2k.png" id="3_ufr1b"]
 
 [sub_resource type="Shader" id="Shader_lrlyf"]
-code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
-
-
-
-shader_type spatial;
+code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, unshaded;
 
 uniform sampler2D card_texture : source_color, filter_linear_mipmap, repeat_enable;
@@ -24,9 +20,7 @@ vec4 texture_project(sampler2D tex, vec2 uv, vec2 aa, vec2 bb, vec2 target_aa, v
 }
 
 void fragment() {
-	vec4 card_albedo = texture(card_texture, UV);
-	vec4 card_color = texture_project(card_texture, UV, card_uv_aa, card_uv_bb, vec2(0., 0.), vec2(1., 1.));
-
+	vec4 card_color = texture_project(card_texture, UV2, card_uv_aa, card_uv_bb, vec2(0., 0.), vec2(1., 1.));
 	ALBEDO = card_color.rgb;
 	ALPHA = card_color.a;
 }
@@ -37,15 +31,15 @@ viewport_path = NodePath("TextureViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6ulv"]
 resource_local_to_scene = true
-render_priority = 0
+render_priority = 121
 shader = SubResource("Shader_lrlyf")
-shader_parameter/card_uv_aa = Vector2(0.06, 0.075)
-shader_parameter/card_uv_bb = Vector2(0.37, 0.495)
+shader_parameter/card_uv_aa = Vector2(0, 0)
+shader_parameter/card_uv_bb = Vector2(1, 1)
 shader_parameter/card_texture = SubResource("ViewportTexture_j1fei")
 
 [resource]
 resource_local_to_scene = true
-render_priority = 1
+render_priority = 120
 next_pass = SubResource("ShaderMaterial_g6ulv")
 albedo_color = Color(0.7395, 0.8526, 0.87, 1)
 albedo_texture = ExtResource("1_cmel6")
@@ -53,6 +47,5 @@ roughness_texture = ExtResource("3_ufr1b")
 normal_enabled = true
 normal_scale = 2.1
 normal_texture = ExtResource("2_mnuk2")
-uv1_scale = Vector3(2.76, 1.825, 1.825)
-uv1_offset = Vector3(0.74, 0.295, 0)
+uv1_offset = Vector3(0.715, 0.295, 0)
 grow_amount = 0.16
