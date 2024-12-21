@@ -6,10 +6,6 @@ uniform sampler3D distort_noise: repeat_enable;
 
 uniform vec4 color: source_color;
 
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
-
 void fragment() {
 	float t = TIME * .09;
 	float middle_dist = distance(UV, vec2(.5));
@@ -28,6 +24,6 @@ void fragment() {
 	COLOR.rgb = color.rgb;
 	COLOR.a *= smoothstep(edge - .4, edge, distort_value);
 	COLOR.a = max(COLOR.a, base_tex.a * .4 * distort_progress * uv_noise);
-	COLOR.a = max(COLOR.a, smoothstep(.46, .5, middle_dist));
-	COLOR.a = float(middle_dist < .5) * COLOR.a;
+	COLOR.a = max(COLOR.a, smoothstep(.42, .5, middle_dist));
+	COLOR.a = (1.0 - smoothstep(.49, .5, middle_dist)) * COLOR.a;
 }

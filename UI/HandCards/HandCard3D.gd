@@ -67,9 +67,6 @@ func set_castable_type(type: CastableType) -> void:
 	# Set Texture
 	%CardTexture._ready()
 	%CardTexture.set_castable_type(type)
-	# Set Shader color
-	# TODO Nils fix this
-	#%CardModel.material_override.next_pass.set("shader_parameter/albedo", type.color)
 
 func set_miniature_variant_energy_type(et: EnergyStack.EnergyType):
 	# Set Texture
