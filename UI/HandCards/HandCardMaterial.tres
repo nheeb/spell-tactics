@@ -39,8 +39,8 @@ viewport_path = NodePath("TextureViewport")
 resource_local_to_scene = true
 render_priority = 0
 shader = SubResource("Shader_lrlyf")
-shader_parameter/card_uv_aa = Vector2(0.06, 0.06)
-shader_parameter/card_uv_bb = Vector2(0.37, 0.48)
+shader_parameter/card_uv_aa = Vector2(0.06, 0.075)
+shader_parameter/card_uv_bb = Vector2(0.37, 0.495)
 shader_parameter/card_texture = SubResource("ViewportTexture_j1fei")
 
 [resource]
