@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://ul7grn17okla"]
+
+[ext_resource type="Script" path="res://Logic/Activities/SelectDeckActivity.gd" id="1_rrmjt"]
+
+[node name="DeckChoice" type="Node2D"]
+script = ExtResource("1_rrmjt")
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button1" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 306.0
+offset_right = 1355.0
+offset_bottom = 451.0
+theme_override_font_sizes/font_size = 100
+text = "Eager Elementalist"
+
+[node name="Button2" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 536.0
+offset_top = 628.0
+offset_right = 1287.0
+offset_bottom = 773.0
+theme_override_font_sizes/font_size = 100
+text = "Totem Tinkerer"
+
+[connection signal="pressed" from="Buttons/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Buttons/Button2" to="." method="_on_button_2_pressed"]

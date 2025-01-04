@@ -1,6 +1,6 @@
 extends SpellLogic
 
-var damage = 2
+var damage = 3
 
 ## Here should be the effect
 func execute() -> void:

@@ -1,6 +1,6 @@
 class_name CardUtility extends CombatUtility
 
-const START_HAND_SIZE = 3
+const START_HAND_SIZE = 2
 
 func shuffle_deck():
 	combat.deck.shuffle()

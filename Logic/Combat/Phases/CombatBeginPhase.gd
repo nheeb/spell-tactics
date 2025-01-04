@@ -8,7 +8,7 @@ func process_phase() -> void:
 		combat.deck.append_array(Game.DeckUtils.deck_for_spell_testing(combat))
 	if combat.deck.size() + combat.hand.size() + combat.discard_pile.size() < 1:
 		combat.log.add("Level has no deck -> PrototypeDeck will be loaded")
-		combat.deck.append_array(Game.DeckUtils.create_test_deck(combat))
+		combat.deck.append_array(Game.DeckUtils.create_test_deck(combat, Game.deck_choice))
 	# Create actives
 	if combat.actives.is_empty():
 		combat.log.add("Level has no actives -> Regular actives will be loaded")

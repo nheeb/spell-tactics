@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" path="res://Content/Levels/SpellTesting/SpellTest.gd" id="1_58ka4"]
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="2_rjkex"]
+[ext_resource type="Resource" uid="uid://f7tf26i2rvfl" path="res://Content/Spells/TotemicInspiration.tres" id="3_aaaa6"]
+[ext_resource type="Resource" uid="uid://bgso5e8ri5vit" path="res://Content/Spells/TotemThud.tres" id="4_rfocu"]
+[ext_resource type="Resource" uid="uid://bsq8y8x2onm0t" path="res://Content/Spells/SummonFireTotem.tres" id="5_ankct"]
+[ext_resource type="Resource" uid="uid://e11g6t1krvn2" path="res://Content/Spells/TotemPort.tres" id="4_abga2"]
 [ext_resource type="Resource" uid="uid://bhbal4070u1qk" path="res://Content/Spells/SummonWitchTotem.tres" id="3_i0bmn"]
 [ext_resource type="Resource" uid="uid://cjit0u77ak3lu" path="res://Content/Spells/GrowingMycel.tres" id="4_bmc66"]
 [ext_resource type="Resource" uid="uid://bcpsexkc1asv1" path="res://Content/Spells/SummonPlant.tres" id="5_5vyfc"]
@@ -16,8 +20,8 @@ stack = Array[int]([1, 1, 2, 2, 3, 3, 4, 4, 5])
 transform = Transform3D(0.519788, 0, 0, 0, 0.519788, 0, 0, 0, 0.519788, 0, 0, 0)
 script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
-test_spell_1 = ExtResource("3_i0bmn")
-test_spell_2 = ExtResource("4_bmc66")
-test_spell_3 = ExtResource("5_5vyfc")
+test_spell_1 = ExtResource("3_aaaa6")
+test_spell_2 = ExtResource("4_rfocu")
+test_spell_3 = ExtResource("5_ankct")
 test_spell_4 = ExtResource("6_ckump")
 test_spell_5 = ExtResource("7_jm2qq")
