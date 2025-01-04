@@ -229,6 +229,7 @@ func check_hand_state():
 					Events.pinned_card_clicked.emit(pinned_card)
 				if Input.is_action_just_pressed("deselect"):
 					Events.pinned_card_rightclicked.emit(pinned_card)
+				card_on_cursor = null
 		elif collider is Area3D and collider.is_in_group("energy_ui"):
 			collider.get_parent().ray_cast = %MouseRayCast
 			

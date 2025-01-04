@@ -1,6 +1,6 @@
 extends Node
 
-const ROCK = preload("res://Entities/Environment/Rock.tres")
+const ROCK = preload("res://Content/Entities/Rock.tres")
 # Called when the node enters the scene tree for the first time.
 
 
@@ -22,7 +22,7 @@ func load_file():
 	print(obj)
 	
 
-const LEVEL = preload("res://Logic/CombatUtility/Tiles/Level.tscn")
+const LEVEL = preload("res://Logic/Level/Level.tscn")
 func save_Level_scene():
 	var level = LEVEL.instantiate()
 	add_child(level)

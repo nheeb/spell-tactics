@@ -1,0 +1,34 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ngexpunhyoji"]
+
+[sub_resource type="Shader" id="Shader_73yxx"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
+
+
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, unshaded;
+
+uniform sampler2D card_texture : source_color, filter_linear_mipmap, repeat_enable;
+uniform vec2 card_uv_aa;
+uniform vec2 card_uv_bb;
+
+#include \"res://VFX/Materials/lib.gdshaderinc\"
+
+vec4 texture_project(sampler2D tex, vec2 uv, vec2 aa, vec2 bb, vec2 target_aa, vec2 target_bb) {
+	vec4 card_color = texture(tex, uv_project(uv, aa, bb, target_aa, target_bb));
+	return card_color * vec2_between(uv, aa, bb);
+}
+
+void fragment() {
+	vec4 card_albedo = texture(card_texture, UV);
+	ALBEDO = card_albedo.rgb;
+	ALPHA *= card_albedo.a;
+}
+"
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_73yxx")
+shader_parameter/card_uv_aa = null
+shader_parameter/card_uv_bb = null

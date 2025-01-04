@@ -130,7 +130,7 @@ class DeckUtils:
 				spells.append_array(load_spell_n_times("Breath", DUPLICATE_COUNT, combat))
 				spells.append_array(load_spell_n_times("SpellMemory", DUPLICATE_COUNT, combat))
 		
-				spells.shuffle()
+		spells.shuffle()
 		return spells
 	
 	static func deck_for_spell_testing(combat: Combat) -> Array[Spell]:

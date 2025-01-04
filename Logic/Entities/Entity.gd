@@ -100,10 +100,20 @@ func on_hover_long(h: bool) -> void:
 			combat.animation.show(visual_entity.health_bar)
 		else:
 			combat.animation.hide(visual_entity.health_bar)
+	if can_interact:
+		if h:
+			if combat.player.current_tile.is_next_to(current_tile, true):
+				combat.animation.add_staying_effect(VFX.TEXT, self, "interact_hint",
+					{"text": "Hold LMB to %s" % type.interact_hint, "color": Color.YELLOW})
+			else:
+				combat.animation.add_staying_effect(VFX.TEXT, self, "interact_hint",
+					{"text": "Get close to %s" % type.interact_hint, "color": Color.YELLOW})
+		else:
+			combat.animation.remove_staying_effect(self, "interact_hint")
 
-####################################
+############################
 ## CombatObject Overrides ##
-####################################
+############################
 
 var pre_death_tile: Tile
 
@@ -131,6 +141,25 @@ func on_birth():
 
 ## This will be executed after an entity has been created from a type.
 func on_load() -> void:
+	if type.has_hp:
+		combat.animation.update_hp(self).set_flag_with()
+	# FIXME This is shitty. Better make a "global" ACTION / PA for Overlay toggle
+	if type.can_interact:
+		Game.energy_overlay_changed.connect(
+			func (overlay: bool):
+				if current_tile != null:
+					return
+				if overlay:
+					combat.animation.add_staying_effect(
+						VFX.HEX_COLOR_STAYING, current_tile.tile3d,
+						"interact_hex_color", {"color": Color.YELLOW}
+					).set_flag_with()
+				else:
+					combat.animation.remove_staying_effect(
+						current_tile.tile3d, "interact_hex_color"
+					).set_flag_with()
+				combat.animation.play_animation_queue()
+		)
 	await super()
 
 ##############################

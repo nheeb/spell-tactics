@@ -28,14 +28,18 @@ func set_pinned(s: bool):
 
 func warp(pos: Vector3 = %IconOrigin.global_position):
 	RenderingServer.global_shader_parameter_set("card_warp_origin", pos)
-	VisualTime.new_tween().tween_property(card_model.material_override.next_pass, \
-				"shader_parameter/warp_progress", 2.0, 1.4).from(0.0)
+	# TODO reimplement card warp
+	#VisualTime.new_tween().tween_property(card_model.material_override.next_pass, \
+				#"shader_parameter/warp_progress", 2.0, 1.4).from(0.0)
 
 func set_glow(g : bool):
-	VisualTime.new_tween().tween_property(card_model.material_override.next_pass, \
-						"shader_parameter/glow_process", 1.0 if g else 0.0, .3)
+	# TODO reimplement card glow
+	#VisualTime.new_tween().tween_property(card_model.material_override.next_pass, \
+						#"shader_parameter/glow_process", 1.0 if g else 0.0, .3)
+	pass
 
+const MAX_DISTORT := 0.81
 func set_distort(d : bool):
 	VisualTime.new_tween().tween_property( \
 						card_texture.icon_texture.main_icon.material, \
-						"shader_parameter/distort_progress", 1.0 if d else 0.0, .45)
+						"shader_parameter/distort_progress", MAX_DISTORT if d else 0.0, .45)

@@ -2,6 +2,7 @@ class_name VFXUtils extends Node
 
 const HEX_RINGS = preload("res://VFX/Effects/HexRings.tscn")
 const HEX_COLOR = preload("res://VFX/Effects/HexColor.tscn")
+const HEX_COLOR_STAYING = preload("res://VFX/Effects/StayingHexColor.tscn")
 const ICON_VISUALS = preload("res://VFX/Effects/IconVisuals.tscn")
 const ICON_BURST = preload("res://VFX/Effects/IconBurst.tscn")
 const ICON_CYCLE = preload("res://VFX/Effects/CirclingIcons.tscn")
@@ -11,6 +12,7 @@ const LINE = preload("res://VFX/Effects/LineEffect.tscn")
 const IMMEDIATE_ARROWS = preload("res://VFX/Effects/ImmediateArrows.tscn")
 const ENERGY_ORB = preload("res://VFX/Effects/EnergyOrbs/EnergyOrb.tscn") 
 const ENERGY_ORB_ATTRACTOR = preload("res://VFX/Effects/EnergyOrbs/EnergyOrbAttractor.tscn")
+const TEXT = preload("res://VFX/Effects/StayingText.tscn")
 
 const DRAIN_DURATION: float = 0.8
 
@@ -59,6 +61,26 @@ func type_to_icon(_type, transparent := false) -> Texture:
 			return energy_icons[12 if transparent else 6]
 	push_error("unknown type")
 	return energy_icons[0]
+
+@export var icon_inner_colors: Array[Color]
+func type_to_inner_color(_type) -> Color:
+	match _type:
+		EnergyStack.EnergyType.Any:
+			return icon_inner_colors[0]
+		EnergyStack.EnergyType.Matter:
+			return icon_inner_colors[1]
+		EnergyStack.EnergyType.Empty:
+			return icon_inner_colors[2]
+		EnergyStack.EnergyType.Harmony:
+			return icon_inner_colors[3]
+		EnergyStack.EnergyType.Flow:
+			return icon_inner_colors[4]
+		EnergyStack.EnergyType.Decay:
+			return icon_inner_colors[5]
+		EnergyStack.EnergyType.Spectral:
+			return icon_inner_colors[6]
+	push_error("unknown type")
+	return icon_inner_colors[0]
 
 func get_icon_from_name(icon_name) -> Texture:
 	if icon_name is Texture:

@@ -1,6 +1,4 @@
-extends Node3D
-
-signal effect_done
+extends OneshotVisualEffect
 
 var color: Color = Color.RED
 var duration := 1.6

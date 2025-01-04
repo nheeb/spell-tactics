@@ -1,4 +1,4 @@
-class_name HandCardSideIcon extends Node2D
+class_name HandCardSideIcon extends Control
 
 const ICON_SIZE = 512.0
 

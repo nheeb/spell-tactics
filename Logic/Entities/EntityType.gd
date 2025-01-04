@@ -11,6 +11,7 @@ class_name EntityType extends CombatObjectType
 @export var can_be_hovered: bool = true
 @export var can_interact: bool = false
 @export var destroy_on_interact: bool = false
+@export var interact_hint := ""
 enum Teams {Neutral = 0, Good = 1, Evil = 2}
 @export var team := Teams.Neutral
 

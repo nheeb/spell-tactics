@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://blp34387omsbv"]
+
+[ext_resource type="Script" path="res://VFX/Effects/StayingHexColor.gd" id="1_ul6gf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkui0"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.196078)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_axkmu"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.05
+radial_segments = 6
+rings = 1
+
+[node name="HexColor" type="Node3D"]
+script = ExtResource("1_ul6gf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_vkui0")
+mesh = SubResource("CylinderMesh_axkmu")
