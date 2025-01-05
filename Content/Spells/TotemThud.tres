@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="SpellType" load_steps=8 format=3 uid="uid://bgso5e8ri5vit"]
+
+[ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="1_2v8up"]
+[ext_resource type="Script" path="res://Logic/Castables/SpellType.gd" id="1_vmedl"]
+[ext_resource type="Texture2D" uid="uid://bphhr8u3lcxnd" path="res://Assets/Sprites/Icons/fragmented-meteor.png" id="2_b77v8"]
+[ext_resource type="Script" path="res://Logic/Combat/TargetRequirement.gd" id="2_f4136"]
+
+[sub_resource type="Resource" id="Resource_wenk5"]
+script = ExtResource("1_2v8up")
+stack = Array[int]([2, 6, 6])
+
+[sub_resource type="Resource" id="Resource_64ukp"]
+script = ExtResource("2_f4136")
+type = 0
+limitation = 4
+range_size = 2
+mandatory = true
+target_tag = "summoned"
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
+[sub_resource type="Resource" id="Resource_35y75"]
+script = ExtResource("2_f4136")
+type = 0
+limitation = 2
+range_size = 2
+mandatory = true
+target_tag = ""
+shape_select = 0
+shape_size = 1
+help_text = "Target"
+possible_highlight = 7
+selected_highlight = 8
+
+[resource]
+script = ExtResource("1_vmedl")
+costs = SubResource("Resource_wenk5")
+effect_text = "Take a nearby Totem and smash it into a nearby enemy dealing 3 points of damage."
+topic = 0
+topic_secondary = 0
+topic_icons = Array[int]([])
+topic_caption = ""
+target_requirements = Array[ExtResource("2_f4136")]([SubResource("Resource_64ukp"), SubResource("Resource_35y75")])
+pretty_name = "Totem Thud"
+fluff_text = ""
+icon = ExtResource("2_b77v8")
+color = Color(0.543933, 0.343367, 0.109701, 1)
+default_data = {}

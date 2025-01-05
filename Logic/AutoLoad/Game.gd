@@ -6,6 +6,7 @@ const _SAVE_DIR_USER_REVIEWS = "user://reviews/"
 const GOOGLE_DRIVE_REVIEWS_LINK = "https://drive.google.com/drive/folders/1o0zJrVl51mmWTfiNKrZq-RvV7wg2pnY2?usp=sharing"
 var combat_to_review: Combat
 
+
 const _SAVE_DIR_RES = "res://Prototype/Savefiles/"
 const _SAVE_DIR_USER = "user://"
 var SAVE_DIR = _SAVE_DIR_USER if OS.has_feature("template") else _SAVE_DIR_RES
@@ -23,6 +24,8 @@ const LEVEL_PATH_SPELLTEST = "res://Content/Levels/SpellTesting/spell_test.tres"
 #const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false
 const DEBUG_DECK_PURGE = false
+const DEBUG_SKIP_DECKSELECTION = true
+
 var DEBUG_INFO: bool:
 	get:
 		return DebugInfo.ACTIVE
@@ -37,6 +40,8 @@ var ENERGY_OVERLAY: bool = false:
 	set(e):
 		ENERGY_OVERLAY = e
 		energy_overlay_changed.emit(e)
+		
+var deck_choice: int
 
 var testing_deck: Array[SpellType]
 var testing_energy: EnergyStack
@@ -88,41 +93,44 @@ class DeckUtils:
 			spells.append(load_spell(name, combat))
 		return spells
 	
-	static func create_test_deck_serialized() -> Array[SpellState]:
-		var spell_states: Array[SpellState] = []
-		for i in create_test_deck(null):
-			spell_states.append(i.serialize())
-		return spell_states
 	
-	const DUPLICATE_COUNT = 3
-	static func create_test_deck(combat: Combat) -> Array[Spell]:
+	const DUPLICATE_COUNT = 2
+	
+	static func create_test_deck(combat: Combat, deck_choice) -> Array[Spell]:
 		var spells: Array[Spell] = []
-		spells.append_array(load_spell_n_times("MudArmor", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("AirMissile", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("Berserker", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("ObjectGrab", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("SummonPlant", DUPLICATE_COUNT, combat))
+		match deck_choice:
+			1:
 		
-		spells.append_array(load_spell_n_times("SporeFlight", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("Cyclone", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("SelfHeal", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("GrowingMycel", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("DeadlyDart", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("MudArmor", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("AirMissile", DUPLICATE_COUNT, combat))
+			
+				spells.append_array(load_spell_n_times("SporeFlight", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("GrowingMycel", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("DeadlyDart", DUPLICATE_COUNT, combat))
+			
+				spells.append_array(load_spell_n_times("RockBlast", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("Teleport", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("Breath", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("SpellMemory", DUPLICATE_COUNT, combat))
+			
+				spells.append_array(load_spell_n_times("WaterBlast", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("LightningStrike", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("Lifesteal", DUPLICATE_COUNT, combat))
 		
-		spells.append_array(load_spell_n_times("RockBlast", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("SummonWitchTotem", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("Teleport", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("Breath", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("SpellMemory", DUPLICATE_COUNT, combat))
-		
-		spells.append_array(load_spell_n_times("WaterBlast", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("LightningStrike", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("PoisonPunch", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("Lifesteal", DUPLICATE_COUNT, combat))
-		spells.append_array(load_spell_n_times("SummonEarthTotem", DUPLICATE_COUNT, combat))
+			2:
+				spells.append_array(load_spell_n_times("SummonEarthTotem", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("SummonFireTotem", DUPLICATE_COUNT, combat))
+			
+				spells.append_array(load_spell_n_times("SummonWitchTotem", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("TotemPort", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("TotemThud", DUPLICATE_COUNT, combat))
+			
+				spells.append_array(load_spell_n_times("ExplodeTotem", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("TotemicInspiration", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("Breath", DUPLICATE_COUNT, combat))
+				spells.append_array(load_spell_n_times("SpellMemory", DUPLICATE_COUNT, combat))
 		
 		spells.shuffle()
-		
 		return spells
 	
 	static func deck_for_spell_testing(combat: Combat) -> Array[Spell]:
