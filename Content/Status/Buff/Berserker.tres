@@ -6,14 +6,16 @@
 
 [resource]
 script = ExtResource("2_1enxd")
-pretty_name = "Berserker"
-icon = ExtResource("2_8mq37")
-color = Color(1, 0.632813, 0, 1)
 text = "The next melee attack of this entity deals +2 damage."
-default_data = {}
 has_lifetime = false
 lifetime_default = 1
 lifetime_extend_method = 0
 make_floating_icon = true
+merge_this_type = false
 kill_te_on_remove = true
 enemy_actions = Array[ExtResource("1_w031f")]([])
+pretty_name = "Berserker"
+fluff_text = ""
+icon = ExtResource("2_8mq37")
+color = Color(1, 0.632813, 0, 1)
+default_data = {}

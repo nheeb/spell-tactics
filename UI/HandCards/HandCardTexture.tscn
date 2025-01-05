@@ -55,7 +55,7 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="Gap2" type="Control" parent="AspectRatioContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="SpellTextLabel" type="RichTextLabel" parent="AspectRatioContainer/VBoxContainer"]
@@ -64,6 +64,7 @@ clip_contents = false
 custom_minimum_size = Vector2(512, 275.41)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/outline_size = 9
 theme_override_fonts/normal_font = ExtResource("4_ldpju")
 theme_override_fonts/italics_font = ExtResource("5_es0ah")
 theme_override_fonts/bold_font = ExtResource("6_xdg7j")

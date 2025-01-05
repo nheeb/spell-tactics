@@ -460,10 +460,9 @@ anchor_right = 0.366
 anchor_bottom = 0.344
 metadata/_edit_use_anchors_ = true
 
-[node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport", "debug_label")]
+[node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport")]
 script = ExtResource("16_ahd0b")
 target_viewport = NodePath("../CardsAspectContainer/CardViewportContainer/CardViewport")
-debug_label = NodePath("")
 
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]
