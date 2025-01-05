@@ -17,10 +17,10 @@ uniform vec2 card_uv_bb;
 vec4 texture_project(sampler2D tex, vec2 uv, vec2 aa, vec2 bb, vec2 target_aa, vec2 target_bb) {
 	vec4 card_color = texture(tex, uv_project(uv, aa, bb, target_aa, target_bb));
 	return card_color * vec2_between(uv, aa, bb);
-}
+} 	//vec4 card_color = texture_project(card_texture, UV2, card_uv_aa, card_uv_bb, vec2(0., 0.), vec2(1., 1.));
 
 void fragment() {
-	vec4 card_color = texture_project(card_texture, UV2, card_uv_aa, card_uv_bb, vec2(0., 0.), vec2(1., 1.));
+	vec4 card_color = texture(card_texture, UV2); 
 	ALBEDO = card_color.rgb;
 	ALPHA = card_color.a;
 }

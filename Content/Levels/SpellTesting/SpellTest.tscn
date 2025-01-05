@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://Logic/Combat/Utilities/EnergyStack.gd" id="2_rjkex"]
 [ext_resource type="Resource" uid="uid://bhbal4070u1qk" path="res://Content/Spells/SummonWitchTotem.tres" id="3_i0bmn"]
 [ext_resource type="Resource" uid="uid://cjit0u77ak3lu" path="res://Content/Spells/GrowingMycel.tres" id="4_bmc66"]
-[ext_resource type="Resource" uid="uid://bcpsexkc1asv1" path="res://Content/Spells/SummonPlant.tres" id="5_5vyfc"]
+[ext_resource type="Resource" uid="uid://bjrjvk0evvvyt" path="res://Content/Spells/PoisonPunch.tres" id="5_nsysi"]
 [ext_resource type="Resource" uid="uid://crulutmxosaai" path="res://Content/Spells/SummonEarthTotem.tres" id="6_ckump"]
-[ext_resource type="Resource" uid="uid://cd42nwwenro" path="res://Content/Spells/Cyclone.tres" id="7_jm2qq"]
+[ext_resource type="Resource" uid="uid://cca31estceejt" path="res://Content/Spells/SporeFlight.tres" id="7_tlq8y"]
 
 [sub_resource type="Resource" id="Resource_vfkqf"]
 script = ExtResource("2_rjkex")
@@ -18,6 +18,6 @@ script = ExtResource("1_58ka4")
 start_every_round_with = SubResource("Resource_vfkqf")
 test_spell_1 = ExtResource("3_i0bmn")
 test_spell_2 = ExtResource("4_bmc66")
-test_spell_3 = ExtResource("5_5vyfc")
+test_spell_3 = ExtResource("5_nsysi")
 test_spell_4 = ExtResource("6_ckump")
-test_spell_5 = ExtResource("7_jm2qq")
+test_spell_5 = ExtResource("7_tlq8y")

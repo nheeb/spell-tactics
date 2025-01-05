@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bysejqqiloy1u"]
+[gd_scene load_steps=21 format=3 uid="uid://bysejqqiloy1u"]
 
 [ext_resource type="Script" path="res://UI/Combat/CombatUI.gd" id="1_uhqdp"]
 [ext_resource type="LabelSettings" uid="uid://cpn6v2w5vr1au" path="res://UI/Theme/LabelSettings/DefaultLabelSettings.tres" id="3_wybdv"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://rsv86yvvojk4" path="res://UI/Combat/CombatEventInfo.tscn" id="13_37g1a"]
 [ext_resource type="PackedScene" uid="uid://drxy2f6dh4jq0" path="res://UI/Menu/LogSettingsPanel.tscn" id="13_jiaoo"]
 [ext_resource type="Texture2D" uid="uid://dwtt6sjlmrana" path="res://Assets/Sprites/Icons/sound-symbol.png" id="14_q28kc"]
+[ext_resource type="Script" path="res://Logic/Utility/ViewportSizer.gd" id="16_ahd0b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqwoa"]
 bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.682353)
@@ -130,7 +131,7 @@ own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 msaa_3d = 1
-size = Vector2i(2, 2)
+size = Vector2i(1920, 1079)
 render_target_update_mode = 4
 
 [node name="Cards3D" parent="CardsAspectContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
@@ -458,6 +459,11 @@ anchor_top = 0.038
 anchor_right = 0.366
 anchor_bottom = 0.344
 metadata/_edit_use_anchors_ = true
+
+[node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport", "debug_label")]
+script = ExtResource("16_ahd0b")
+target_viewport = NodePath("../CardsAspectContainer/CardViewportContainer/CardViewport")
+debug_label = NodePath("")
 
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]
