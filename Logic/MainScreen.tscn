@@ -15,6 +15,7 @@ script = ExtResource("1_mxjyu")
 [node name="Viewport3D" type="SubViewport" parent="."]
 unique_name_in_owner = true
 own_world_3d = true
+snap_2d_transforms_to_pixel = true
 msaa_3d = 1
 use_debanding = true
 physics_object_picking = true
@@ -69,10 +70,9 @@ stretch_mode = 5
 viewport = NodePath("../Viewport3D")
 popup_root = NodePath("../Viewport3D/PopUps")
 
-[node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport", "debug_label")]
+[node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport")]
 script = ExtResource("4_dkfaa")
 target_viewport = NodePath("../Viewport3D")
-debug_label = NodePath("../DebugLabel")
 
 [node name="DebugLabel" type="Label" parent="."]
 visible = false

@@ -7,7 +7,6 @@ var actives: Array[Active]
 @onready var mouse_blocker = MouseInput.mouse_block.register_blocker()
 
 @onready var cards3d: Cards3D = %Cards3D
-@onready var timeline: TimelineUI = %Timeline
 @onready var cast_lines: StatusLines = %CastLines
 @onready var event_icons: CombatEventIcons = %CombatEventIcons
 @onready var event_info: CombatEventInfo = %CombatEventInfo

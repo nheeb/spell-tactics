@@ -62,7 +62,7 @@ var test_mode := false # This is true when the scene runs solo
 @onready var energy_ui : EnergyUI = %EnergyUI
 @onready var energy_bezier_point := %EnergyBezierPoint
 
-var combat: Combat
+var combat: Combat = null
 
 func _ready() -> void:
 	RenderingServer.global_shader_parameter_set("pinned_card_global_pos", %PinnedCard.global_position)
@@ -80,9 +80,9 @@ func _ready() -> void:
 	DebugInfo.global_settings_add("CLOSE_AT_NORM_MOUSE_POS", 0.0, 1.0)
 	
 	if get_tree().current_scene == self:
-		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
-		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
-		add_card(SpellType.load_from_file("res://Spells/AllSpells/PoisonPunch.tres").create(combat))
+		add_card(SpellType.load_from_file("res://Content/Spells/PoisonPunch.tres").create(combat))
+		add_card(SpellType.load_from_file("res://Content/Spells/PoisonPunch.tres").create(combat))
+		add_card(SpellType.load_from_file("res://Content/Spells/PoisonPunch.tres").create(combat))
 		%EnergyUI.spawn_energy_orbs(EnergyStack.new([EnergyStack.EnergyType.Harmony, EnergyStack.EnergyType.Matter]))
 	
 	# Set cam mode
@@ -193,17 +193,20 @@ func _process(delta: float) -> void:
 
 var raycast_hit := false
 func check_hand_state():
+	var viewport = get_viewport()
 	var mouse_pos_2d := Utility.get_mouse_pos_absolute()
 	var mouse_pos_2d_normalized := Utility.get_mouse_pos_normalized()
+	print(mouse_pos_2d)
+	print(mouse_pos_2d_normalized)
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_pos_2d)
 	var ray_direction: Vector3
 	if CAM_MODE_ORTHOGONAL:
 		ray_direction = Vector3.FORWARD
 	else:
-		ray_direction = camera.project_ray_normal(mouse_pos_2d)
+		ray_direction = camera.project_ray_normal(Utility.scale_screen_pos(mouse_pos_2d))
 	var ray_end: Vector3 = ray_origin + ray_direction * 50.0
 	
-	%MouseRayCast.global_position = ray_origin
+	#%MouseRayCast.global_position = ray_origin
 	%MouseRayCast.target_position = %MouseRayCast.to_local(ray_end)
 	%MouseRayCast.force_raycast_update()
 	

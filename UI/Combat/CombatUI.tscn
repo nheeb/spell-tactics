@@ -6,7 +6,6 @@
 [ext_resource type="LabelSettings" uid="uid://bwqe2p4xk88b2" path="res://Assets/Fonts/LabelSettings/EffectText.tres" id="5_jttea"]
 [ext_resource type="Texture2D" uid="uid://ditt5pum2lahc" path="res://Assets/Sprites/Icons/plain-arrow.png" id="5_myaa6"]
 [ext_resource type="PackedScene" uid="uid://cp5c8if6axsd6" path="res://UI/Combat/EnemyEventIcon.tscn" id="8_isphm"]
-[ext_resource type="PackedScene" uid="uid://cn2mfqtdouxdu" path="res://UI/Combat/Timeline.tscn" id="9_denmg"]
 [ext_resource type="PackedScene" uid="uid://k4w38jjb4tmp" path="res://UI/Combat/StatusLines.tscn" id="10_gtdym"]
 [ext_resource type="PackedScene" uid="uid://cm4ux8unrhhbi" path="res://UI/Combat/AnimationSpeedUI.tscn" id="11_ups4t"]
 [ext_resource type="PackedScene" uid="uid://b7cdtyuptrypr" path="res://UI/Combat/CombatEventIcons.tscn" id="12_8b75y"]
@@ -16,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://drxy2f6dh4jq0" path="res://UI/Menu/LogSettingsPanel.tscn" id="13_jiaoo"]
 [ext_resource type="Texture2D" uid="uid://dwtt6sjlmrana" path="res://Assets/Sprites/Icons/sound-symbol.png" id="14_q28kc"]
 [ext_resource type="Script" path="res://Logic/Utility/ViewportSizer.gd" id="16_ahd0b"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nc51s"]
+viewport_path = NodePath("CardViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqwoa"]
 bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.682353)
@@ -47,23 +49,40 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_uhqdp")
 
-[node name="CardContainer" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.025
-anchor_top = 0.666667
-anchor_right = 0.819917
-anchor_bottom = 0.984
-offset_right = -0.544067
-offset_bottom = -0.16803
-theme_override_constants/separation = 10
-alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="CardViewport" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 1
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Cards3D" parent="CardViewport" instance=ExtResource("4_a38j0")]
+unique_name_in_owner = true
+
+[node name="CardContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportTexture" type="TextureRect" parent="CardContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+texture = SubResource("ViewportTexture_nc51s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport")]
+script = ExtResource("16_ahd0b")
+target_viewport = NodePath("../CardViewport")
 
 [node name="Next" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = 0.892708
 anchor_top = 0.52037
 anchor_right = 0.989062
@@ -76,8 +95,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Cast" type="Button" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = 0.764583
 anchor_top = 0.572222
 anchor_right = 0.831424
@@ -91,8 +109,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Status" type="Label" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = 0.686632
 anchor_right = 1.0
 anchor_bottom = 0.129
@@ -106,39 +123,9 @@ label_settings = ExtResource("5_jttea")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="CardsAspectContainer" type="AspectRatioContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-ratio = 1.7778
-alignment_vertical = 2
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="CardViewportContainer" type="SubViewportContainer" parent="CardsAspectContainer"]
-layout_mode = 2
-size_flags_horizontal = 7
-mouse_filter = 2
-stretch = true
-
-[node name="CardViewport" type="SubViewport" parent="CardsAspectContainer/CardViewportContainer"]
-own_world_3d = true
-transparent_bg = true
-handle_input_locally = false
-msaa_3d = 1
-size = Vector2i(1920, 1079)
-render_target_update_mode = 4
-
-[node name="Cards3D" parent="CardsAspectContainer/CardViewportContainer/CardViewport" instance=ExtResource("4_a38j0")]
-unique_name_in_owner = true
-
 [node name="TileHoverBlocker" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 2
+anchors_preset = 0
 anchor_top = 0.735185
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -147,8 +134,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="EnergyArea" type="Panel" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = 0.849479
 anchor_top = 0.685185
 anchor_right = 0.949479
@@ -160,8 +146,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Drains" type="Label" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = 0.00104167
 anchor_top = 0.462037
 anchor_right = 0.122563
@@ -174,8 +159,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="GameOverText" type="Label" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = 0.244792
 anchor_top = 0.338889
 anchor_right = 0.751729
@@ -188,8 +172,7 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Actives" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = -0.00625
 anchor_top = 0.67037
 anchor_right = 0.129687
@@ -246,8 +229,7 @@ offset_bottom = 205.0
 [node name="Position" type="Marker2D" parent="Actives/ActivePos4"]
 
 [node name="EnemyArea" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_left = 0.755208
 anchor_top = 0.00555556
 anchor_right = 0.989875
@@ -299,57 +281,28 @@ mouse_filter = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationSpeedUI" parent="." instance=ExtResource("11_ups4t")]
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
+anchors_preset = 0
 anchor_left = 0.015
 anchor_top = 0.015
 anchor_right = 0.113
 anchor_bottom = 0.109
 metadata/_edit_use_anchors_ = true
 
-[node name="TimelineArea" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.443229
-anchor_top = -0.00462963
-anchor_right = 0.591958
-anchor_bottom = 0.0792963
-offset_right = 0.439972
-offset_bottom = 0.359985
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxEmpty_so122")
-metadata/_edit_use_anchors_ = true
-
-[node name="Timeline" parent="TimelineArea" instance=ExtResource("9_denmg")]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.093
-anchor_right = 0.855
-anchor_bottom = 1.135
-offset_left = 163.598
-offset_top = 89.0
-offset_right = -76.53
-offset_bottom = 29.715
-scale = Vector2(0.607886, 0.607886)
-
 [node name="CastLines" parent="." instance=ExtResource("10_gtdym")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.449
-anchor_top = 0.154
-anchor_right = 0.783
-anchor_bottom = 0.417
+layout_mode = 2
+anchors_preset = 0
+anchor_top = 0.107407
+anchor_bottom = 0.251
+grow_vertical = 1
 mouse_filter = 2
 default_color = Color(1, 1, 1, 1)
-metadata/_edit_lock_ = true
 
 [node name="CombatEventIcons" parent="." instance=ExtResource("12_8b75y")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
+anchors_preset = 0
 anchor_left = 0.159896
 anchor_top = 0.00555556
 anchor_right = 0.415104
@@ -359,8 +312,8 @@ metadata/_edit_use_anchors_ = true
 [node name="CombatEventInfo" parent="." instance=ExtResource("13_37g1a")]
 unique_name_in_owner = true
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
+anchors_preset = 0
 anchor_left = 0.19375
 anchor_top = 0.0833333
 anchor_right = 0.46875
@@ -370,8 +323,8 @@ metadata/_edit_use_anchors_ = true
 [node name="EnemyEventInfo" parent="." instance=ExtResource("13_37g1a")]
 unique_name_in_owner = true
 visible = false
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
+anchors_preset = 0
 anchor_left = 0.550521
 anchor_top = 0.107407
 anchor_right = 0.844271
@@ -379,7 +332,7 @@ anchor_bottom = 0.389815
 metadata/_edit_use_anchors_ = true
 
 [node name="OverlayBar" type="Panel" parent="."]
-layout_mode = 0
+layout_mode = 2
 offset_left = 13.0
 offset_top = 995.0
 offset_right = 614.0
@@ -452,24 +405,19 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="LogSettingsPanel" parent="." instance=ExtResource("13_jiaoo")]
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
+anchors_preset = 0
 anchor_left = 0.013
 anchor_top = 0.038
 anchor_right = 0.366
 anchor_bottom = 0.344
 metadata/_edit_use_anchors_ = true
 
-[node name="ViewportSizer" type="Node" parent="." node_paths=PackedStringArray("target_viewport")]
-script = ExtResource("16_ahd0b")
-target_viewport = NodePath("../CardsAspectContainer/CardViewportContainer/CardViewport")
-
 [connection signal="mouse_entered" from="Next" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Next" to="." method="_on_button_exited"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
 [connection signal="mouse_entered" from="Cast" to="." method="_on_button_entered"]
 [connection signal="mouse_exited" from="Cast" to="." method="_on_button_exited"]
-[connection signal="pressed" from="Cast" to="." method="_on_cast_pressed"]
 [connection signal="mouse_entered" from="TileHoverBlocker" to="." method="_on_tile_hover_blocker_mouse_entered"]
 [connection signal="mouse_exited" from="TileHoverBlocker" to="." method="_on_tile_hover_blocker_mouse_exited"]
 [connection signal="toggled" from="OverlayBar/DebugOverlay" to="." method="_on_debug_overlay_toggled"]
