@@ -204,7 +204,8 @@ func check_hand_state():
 		ray_direction = camera.project_ray_normal(Utility.scale_screen_pos(mouse_pos_2d))
 	var ray_end: Vector3 = ray_origin + ray_direction * 50.0
 	
-	#%MouseRayCast.global_position = ray_origin
+	if CAM_MODE_ORTHOGONAL:
+		%MouseRayCast.global_position = ray_origin
 	%MouseRayCast.target_position = %MouseRayCast.to_local(ray_end)
 	%MouseRayCast.force_raycast_update()
 	

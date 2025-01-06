@@ -105,4 +105,4 @@ var print_stack_trace_lines: bool:
 func _build_stack_trace() -> void:
 	if not DebugInfo.ACTIVE:
 		return
-	stack_trace = get_stack()
+	#stack_trace = get_stack()
