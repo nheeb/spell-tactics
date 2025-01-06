@@ -196,8 +196,6 @@ func check_hand_state():
 	var viewport = get_viewport()
 	var mouse_pos_2d := Utility.get_mouse_pos_absolute()
 	var mouse_pos_2d_normalized := Utility.get_mouse_pos_normalized()
-	print(mouse_pos_2d)
-	print(mouse_pos_2d_normalized)
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_pos_2d)
 	var ray_direction: Vector3
 	if CAM_MODE_ORTHOGONAL:
