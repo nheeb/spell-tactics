@@ -41,8 +41,9 @@ var ENERGY_OVERLAY: bool = false:
 		ENERGY_OVERLAY = e
 		energy_overlay_changed.emit(e)
 		
-var deck_choice: int
+enum DeckChoice {EagerElementalist = 1, TotemTinkerer = 2, Tournament = 3}
 
+var deck_choice: DeckChoice
 var testing_deck: Array[SpellType]
 var testing_energy: EnergyStack
 
