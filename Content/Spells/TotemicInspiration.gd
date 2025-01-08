@@ -9,6 +9,7 @@ func execute() -> void:
 				counter += 1
 	for i in counter:
 		combat.cards.draw()
+	combat.cards.draw()
 
 func is_castable() -> bool:
 	var tiles = combat.player.current_tile.get_surrounding_tiles()
