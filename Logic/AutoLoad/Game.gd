@@ -24,7 +24,7 @@ const LEVEL_PATH_SPELLTEST = "res://Content/Levels/SpellTesting/spell_test.tres"
 #const DEBUG_SKIP_POST_COMBAT = true
 const DEBUG_DECK_VIEW = false
 const DEBUG_DECK_PURGE = false
-const DEBUG_SKIP_DECKSELECTION = true
+const DEBUG_SKIP_DECKSELECTION = false
 
 var DEBUG_INFO: bool:
 	get:
@@ -129,7 +129,9 @@ class DeckUtils:
 				spells.append_array(load_spell_n_times("TotemicInspiration", DUPLICATE_COUNT, combat))
 				spells.append_array(load_spell_n_times("Breath", DUPLICATE_COUNT, combat))
 				spells.append_array(load_spell_n_times("SpellMemory", DUPLICATE_COUNT, combat))
-		
+			3:
+				spells.append_array(load_spell_n_times("SummonWitchTotem", DUPLICATE_COUNT, combat))
+				
 		spells.shuffle()
 		return spells
 	

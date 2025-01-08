@@ -17,3 +17,9 @@ func _on_button_2_pressed() -> void:
 	Game.deck_choice = 2
 	ActivityManager.pop()
 	ActivityManager.push(CombatActivity.new(Game.LEVEL_PATH_DEFAULT))
+
+
+func _on_button_3_pressed() -> void:
+	Game.deck_choice = 3
+	ActivityManager.pop()
+	ActivityManager.push(CombatActivity.new(Game.LEVEL_PATH_DEFAULT))

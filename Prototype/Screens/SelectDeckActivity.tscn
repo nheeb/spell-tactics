@@ -10,6 +10,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Button1" type="Button" parent="Buttons"]
 layout_mode = 0
@@ -29,5 +30,21 @@ offset_bottom = 773.0
 theme_override_font_sizes/font_size = 100
 text = "Totem Tinkerer"
 
+[node name="Button3" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 12.875
+anchor_top = 19.65
+anchor_right = 25.5
+anchor_bottom = 22.5
+offset_left = 92.0
+offset_top = 91.0
+offset_right = 197.0
+offset_bottom = 122.0
+theme_override_font_sizes/font_size = 100
+text = "Tournament"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="Buttons/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="Buttons/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Buttons/Button3" to="." method="_on_button_3_pressed"]
