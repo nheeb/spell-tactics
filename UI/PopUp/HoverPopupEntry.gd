@@ -1,4 +1,4 @@
-class_name DrainablePopupEntry extends MarginContainer
+class_name HoverPopupEntry extends MarginContainer
 
 @onready var icons = [%EnergyIcon1, %EnergyIcon2, %EnergyIcon3, %EnergyIcon4]
 
@@ -20,4 +20,4 @@ func show_player_entity(ent: PlayerEntity):
 	
 	
 func show_enemy_entity(ent: EnemyEntity):
-	pass
+	$%EntityName.text = ent.get_name()

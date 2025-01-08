@@ -51,7 +51,7 @@ func execute(combat: Combat) -> void:
 	# Hover Tile
 	if hovering:
 		combat.level.append_to_hover_memory(tile) # This is for the movement arrow pathing
-		print("hover " + str(tile) + " " + Highlight.Type.find_key(get_highlight_type(combat)))
+		#print("hover " + str(tile) + " " + Highlight.Type.find_key(get_highlight_type(combat)))
 		tile.set_highlight(get_highlight_type(combat), true)
 		if tile_can_interact(combat):
 			tile.set_highlight(Highlight.Type.HoverInteract, true)
