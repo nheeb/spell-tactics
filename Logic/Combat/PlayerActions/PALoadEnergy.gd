@@ -16,6 +16,9 @@ func is_valid(combat: Combat) -> bool:
 	return false
 
 func execute(combat: Combat) -> void:
+	await combat.action_stack.force_process_player_action(
+		PABlockInput.new(InputUtility.InputBlockType.OrbTransition, true)
+	)
 	var socket := combat.input.current_castable.get_card() \
 		.get_empty_energy_socket(energy_type)
 	assert(socket)
@@ -24,8 +27,13 @@ func execute(combat: Combat) -> void:
 		orb.energy_count -= 1
 		orb = orb.create_single_orb()
 	orb.set_hoverable(false)
-	combat.animation.callable(execute_animation.bind(combat, socket, orb)) \
+	var anim := combat.animation.callable(execute_animation.bind(combat, socket, orb)) \
 		.add_wait_ticket_to_args().set_max_duration(.35)
+	combat.action_stack.active_ticket.finish()
+	await anim.animation_done
+	combat.action_stack.force_process_player_action(
+		PABlockInput.new(InputUtility.InputBlockType.OrbTransition, false)
+	)
 
 ## ANIM
 func execute_animation(combat: Combat, socket: HandCardEnergySocket, \

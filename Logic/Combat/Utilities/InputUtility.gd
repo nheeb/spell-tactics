@@ -1,7 +1,8 @@
 class_name InputUtility extends CombatUtility
 
-signal action_executed(action: PlayerAction)
-signal action_failed(action: PlayerAction)
+###############################
+## Processing Player Actions ##
+###############################
 
 ## Creates the action ticket for a player action. It does not add it to the stack.
 func player_action_ticket(action: PlayerAction, force_action := false) -> ActionTicket:
@@ -11,8 +12,11 @@ func player_action_ticket(action: PlayerAction, force_action := false) -> Action
 		ActionFlavor.new().add_tag(ActionFlavor.Tag.PlayerAction).finalize(combat)
 	)
 
-## ACTION
-## Checks whether an action is valid and executes it.
+signal action_executed(action: PlayerAction)
+signal action_failed(action: PlayerAction)
+
+## ACTION Checks whether an action is valid and executes it.
+## CAUTION Don't call this directly. Call combat.action_stack.process_player_action(...) instead.
 func process_action(action: PlayerAction, force_action := false) -> void:
 	if not (is_taking_actions() or force_action):
 		return
@@ -28,6 +32,17 @@ func process_action(action: PlayerAction, force_action := false) -> void:
 		action.failed.emit()
 		action_failed.emit(action)
 
+func is_taking_actions() -> bool:
+	return not input_blocked()
+
+## TODO Move this somewhere else?
+func update_ui():
+	combat.ui.update_payable_cards()
+
+######################
+## Current Castable ##
+######################
+
 var current_castable: Castable
 
 func select_castable(castable: Castable):
@@ -39,13 +54,6 @@ func deselect_castable(castable: Castable = null):
 	if current_castable == castable or castable == null:
 		current_castable.deselect()
 		current_castable = null
-
-func is_taking_actions() -> bool:
-	var t := not input_blocked and combat.current_phase == Combat.RoundPhase.Spell
-	return t
-
-func update_ui():
-	combat.ui.update_payable_cards()
 
 #########################################
 ## Converting signals to PlayerActions ##
@@ -66,7 +74,6 @@ func connect_with_event_signals() -> void:
 	Events.energy_socket_clicked.connect(energy_socket_clicked)
 	Events.pinned_card_clicked.connect(pinned_card_clicked)
 	Events.pinned_card_rightclicked.connect(pinned_card_rightclicked)
-
 
 func tile_unhovered(tile: Tile):
 	combat.action_stack.process_player_action(PATileHoverUpdate.new(tile, false))
@@ -95,7 +102,6 @@ func pinned_card_clicked(card: Card3D):
 
 func pinned_card_rightclicked(card: Card3D):
 	combat.action_stack.process_player_action(PADeselectCastable.new())
-
 
 #############
 ## Process ##
@@ -131,6 +137,7 @@ func _process(delta: float) -> void:
 ####################
 
 enum InputBlockType {
+	Any, ## This BlockType doesn't really exist. It blocks Generic and tests for all of them.
 	Generic,
 	OrbTransition, ## Certain Action should be blocked if an orb is flying towards a socket.
 	EnemyPhase,
@@ -139,10 +146,16 @@ enum InputBlockType {
 ## {InputBlockType -> Number of Blocks (int)}
 var input_blocks : Dictionary = {}
 
-## Returns whether a InputBlockType is blocked.
-func input_blocked(type: InputBlockType) -> bool:
+## Returns whether a InputBlockType is blocked. By default it returns whether any Type is blocked.
+func input_blocked(type: InputBlockType = InputBlockType.Any) -> bool:
+	if type == InputBlockType.Any:
+		return Utility.array_sum(input_blocks.values(), 0) > 0
+		return Utility.array_sum(input_blocks.values(), 0) > 0
 	return input_blocks.get_or_add(type, 0) > 0
 
-## Don't call this directly. Create a PABlockInput instead.
+## Blocks or unblocks the input for a certain type.
+## CAUTION Don't call this directly. Create & proess a PABlockInput instead:
+## combat.action_stack.process_player_action(PABlockInput.new(...))
 func block_input(type: InputBlockType, block := true) -> void:
+	type = type if type != InputBlockType.Any else InputBlockType.Generic
 	input_blocks[type] = input_blocks.get(type, 0) + sign(float(block) - .5)

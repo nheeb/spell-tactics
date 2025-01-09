@@ -67,6 +67,9 @@ func process_callable(callable: Callable) -> Signal:
 func process_player_action(pa: PlayerAction, forced := false) -> Signal:
 	return process_ticket(combat.input.player_action_ticket(pa, forced), false)
 
+func force_process_player_action(pa: PlayerAction) -> Signal:
+	return process_player_action(pa, true)
+
 ## Returns the result of a callable as action stack coroutine.
 ## Use it with await:
 ## var x = await combat.action_stack.get_result(uwu) 
