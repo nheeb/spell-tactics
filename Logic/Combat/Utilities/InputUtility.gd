@@ -3,8 +3,6 @@ class_name InputUtility extends CombatUtility
 signal action_executed(action: PlayerAction)
 signal action_failed(action: PlayerAction)
 
-var input_blocked := false
-
 ## Creates the action ticket for a player action. It does not add it to the stack.
 func player_action_ticket(action: PlayerAction, force_action := false) -> ActionTicket:
 	return ActionTicket.new(
@@ -49,6 +47,27 @@ func is_taking_actions() -> bool:
 func update_ui():
 	combat.ui.update_payable_cards()
 
+#########################################
+## Converting signals to PlayerActions ##
+#########################################
+
+func connect_with_event_signals() -> void:
+	Events.tile_clicked.connect(tile_clicked)
+	Events.tile_rightclicked.connect(tile_rightclicked)
+	#Events.tile_hovered.connect(tile_hovered)
+	PATileHoverUpdate.on_tile_hovered.connect(
+		func(tile: Tile):
+			combat.action_stack.process_player_action(PATileHoverUpdate.new(tile, true))
+	)
+	Events.tile_unhovered.connect(tile_unhovered)
+	Events.card_hovered.connect(card_hovered)
+	Events.card_selected.connect(card_selected)
+	Events.energy_orb_clicked.connect(energy_orb_clicked)
+	Events.energy_socket_clicked.connect(energy_socket_clicked)
+	Events.pinned_card_clicked.connect(pinned_card_clicked)
+	Events.pinned_card_rightclicked.connect(pinned_card_rightclicked)
+
+
 func tile_unhovered(tile: Tile):
 	combat.action_stack.process_player_action(PATileHoverUpdate.new(tile, false))
 
@@ -77,25 +96,10 @@ func pinned_card_clicked(card: Card3D):
 func pinned_card_rightclicked(card: Card3D):
 	combat.action_stack.process_player_action(PADeselectCastable.new())
 
-func connect_with_event_signals() -> void:
-	Events.tile_clicked.connect(tile_clicked)
-	Events.tile_rightclicked.connect(tile_rightclicked)
-	#Events.tile_hovered.connect(tile_hovered)
-	PATileHoverUpdate.on_tile_hovered.connect(
-		func(tile: Tile):
-			combat.action_stack.process_player_action(PATileHoverUpdate.new(tile, true))
-	)
-	Events.tile_unhovered.connect(tile_unhovered)
-	Events.card_hovered.connect(card_hovered)
-	Events.card_selected.connect(card_selected)
-	Events.energy_orb_clicked.connect(energy_orb_clicked)
-	Events.energy_socket_clicked.connect(energy_socket_clicked)
-	Events.pinned_card_clicked.connect(pinned_card_clicked)
-	Events.pinned_card_rightclicked.connect(pinned_card_rightclicked)
 
-func deselect_current_and_select_castable(castable: Castable):
-	pass
-
+#############
+## Process ##
+#############
 
 func process_active_hotkeys():
 	if Input.is_action_just_pressed("movement_active"): # can only right-click move if no castable is selected
@@ -121,3 +125,24 @@ func _process(delta: float) -> void:
 		combat.animation.play_animation_queue(true)
 	if not Game.LEVEL_EDITOR:
 		process_active_hotkeys()
+
+####################
+## Blocking Input ##
+####################
+
+enum InputBlockType {
+	Generic,
+	OrbTransition, ## Certain Action should be blocked if an orb is flying towards a socket.
+	EnemyPhase,
+}
+
+## {InputBlockType -> Number of Blocks (int)}
+var input_blocks : Dictionary = {}
+
+## Returns whether a InputBlockType is blocked.
+func input_blocked(type: InputBlockType) -> bool:
+	return input_blocks.get_or_add(type, 0) > 0
+
+## Don't call this directly. Create a PABlockInput instead.
+func block_input(type: InputBlockType, block := true) -> void:
+	input_blocks[type] = input_blocks.get(type, 0) + sign(float(block) - .5)

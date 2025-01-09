@@ -13,13 +13,13 @@ func execute(combat: Combat) -> void:
 	var payment := combat.energy.player_energy.get_forced_payment(spell.get_costs())
 	var actions : Array[PlayerAction] = []
 	
-	actions.append(PABlockInput.new(true))
+	actions.append(PABlockInput.new(InputUtility.InputBlockType.OrbTransition, true))
 	for energy in payment.stack:
 		for orb in available_orbs:
 			if orb.type == energy:
 				actions.append(PALoadEnergy.new(orb))
 				break
-	actions.append(PABlockInput.new(false))
+	actions.append(PABlockInput.new(InputUtility.InputBlockType.OrbTransition, false))
 	
 	await combat.action_stack.wait()
 	

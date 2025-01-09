@@ -10,9 +10,9 @@ func is_valid(combat: Combat) -> bool:
 func execute(combat: Combat) -> void:
 	var sockets := combat.input.current_castable.get_card().get_loaded_energy_sockets()
 	var actions : Array[PlayerAction] = []
-	actions.append(PABlockInput.new(true))
+	actions.append(PABlockInput.new(InputUtility.InputBlockType.OrbTransition, true))
 	actions.append_array(sockets.map(func(s): return PAUnloadSocket.new(s)))
-	actions.append(PABlockInput.new(false))
+	actions.append(PABlockInput.new(InputUtility.InputBlockType.OrbTransition, false))
 	
 	for action in actions:
 		await combat.action_stack.process_player_action(action, true)

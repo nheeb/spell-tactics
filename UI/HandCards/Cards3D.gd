@@ -114,6 +114,7 @@ func add_card(spell: Spell):
 	hand_card.global_position = %CardSpawn.global_position
 	hand_card.global_position.z = Z_BASE
 
+## ANIM
 func add_active_to_pin(active: Active):
 	if not pinned_card:
 		var active_card = HAND_CARD.instantiate()
