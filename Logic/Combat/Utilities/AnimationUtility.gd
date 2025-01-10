@@ -1,12 +1,5 @@
 class_name AnimationUtility extends CombatUtility
 
-const SAY_EFFECT = preload("res://VFX/Effects/SayEffect.tscn")
-
-signal animation_queues_empty
-
-var animation_queue: Array[AnimationObject]
-var currently_playing_queues: Array[AnimationQueue]
-var currently_queued_queues: Array[AnimationQueue]
 
 #########################################
 ## Shortcut Functions (only use those) ##
@@ -71,7 +64,7 @@ func wait_for_signal(_obj: Object, _signal_name: String) -> AnimationWaitForSign
 
 func say(target: Object, text: String, params := {}) -> AnimationEffect:
 	params["text"] = text
-	return effect(SAY_EFFECT, target, params)
+	return effect(VFX.SAY_EFFECT, target, params)
 	## Quick Paste: combat.animation.say(target, "", {"color": Color., "font_size": 64})
 
 func camera_set_player_input(enabled: bool) -> AnimationProperty:
@@ -133,7 +126,7 @@ func combat_choice(activity: CombatChoiceActivity) -> AnimationCombatChoice:
 func reappend_as_subqueue(_anims: Array) -> AnimationSubQueue:
 	var anims: Array[AnimationObject] = get_flat_animation_array(_anims)
 	for anim in anims:
-		animation_queue.erase(anim)
+		raw_animation_queue.erase(anim)
 	var a = AnimationSubQueue.new(anims)
 	add_animation_object(a)
 	return a
@@ -141,7 +134,7 @@ func reappend_as_subqueue(_anims: Array) -> AnimationSubQueue:
 func reappend_as_array(_anims: Array) -> Array[AnimationObject]:
 	var anims: Array[AnimationObject] = get_flat_animation_array(_anims)
 	for anim in anims:
-		animation_queue.erase(anim)
+		raw_animation_queue.erase(anim)
 	for anim in anims:
 		add_animation_object(anim)
 	return anims
@@ -167,7 +160,7 @@ func record_start(record_id := "") -> AnimationWait:
 ## Returns all AnimationObjects that were added since the record with given id was started
 func record_finish(record_id := "") -> Array[AnimationObject]:
 	var record_object := Utility.array_get_first_filtered_value(
-		Utility.array_reversed(animation_queue),
+		Utility.array_reversed(raw_animation_queue),
 		func (a: AnimationObject):
 			if a is AnimationWait:
 				return a.record_id == record_id
@@ -176,37 +169,44 @@ func record_finish(record_id := "") -> Array[AnimationObject]:
 	if not record_object:
 		push_warning("No animation record found for id %s" % record_id)
 		return []
-	var index := animation_queue.find(record_object)
-	var recorded_animations := animation_queue.slice(index + 1)
-	animation_queue.erase(record_object)
+	var index := raw_animation_queue.find(record_object)
+	var recorded_animations := raw_animation_queue.slice(index + 1)
+	raw_animation_queue.erase(record_object)
 	return recorded_animations
 
 func record_finish_as_subqueue(record_id := "") -> AnimationSubQueue:
 	return reappend_as_subqueue(record_finish(record_id))
 
-#######################################
-## Logic Functions (don't use those) ##
-#######################################
+##########################################
+## Internal Functions (don't use those) ##
+##########################################
+
+const PROCESS_PER_FRAME = 10
+
+signal animation_queues_empty
+signal animation_process
+
+var raw_animation_queue: Array[AnimationObject]
+var currently_playing_queues: Array[AnimationQueue]
+var currently_queued_queues: Array[AnimationQueue]
 
 func add_animation_object(a: AnimationObject) -> void:
-	animation_queue.append(a)
+	a.setup(combat)
+	raw_animation_queue.append(a)
 
-func play_animation_queue(start_immediately := false) -> void:
-	if animation_queue:
-		var aq := AnimationQueue.new(animation_queue.duplicate())
-		animation_queue.clear()
-		if start_immediately:
-			process_single_queue(aq)
-		else:
-			currently_queued_queues.append(aq)
-			_animation_queue_process()
+func play_animation_queue() -> void:
+	if raw_animation_queue:
+		var aqs := AnimationQueue.from_raw_array(combat, raw_animation_queue.duplicate())
+		raw_animation_queue.clear()
+		currently_queued_queues.append_array(aqs)
+		_animation_queue_process()
 
-func process_single_queue(aq: AnimationQueue):
+func play_single_queue(aq: AnimationQueue):
 	currently_playing_queues.append(aq)
-	aq.play(combat)
+	aq.play()
 	await aq.queue_finished
 	currently_playing_queues.erase(aq)
-	if not is_playing() and currently_queued_queues.is_empty() and animation_queue.is_empty():
+	if not is_playing() and currently_queued_queues.is_empty() and raw_animation_queue.is_empty():
 			animation_queues_empty.emit()
 			VisualTime.visual_time_scale = 1.0
 			VisualTime.current_speed_idx = 0
@@ -214,10 +214,24 @@ func process_single_queue(aq: AnimationQueue):
 func is_playing() -> bool:
 	return not currently_playing_queues.is_empty()
 
+func get_playing_ids() -> Array[String]:
+	return Utility.array_unique(currently_playing_queues.map(
+		func (aq: AnimationQueue): return aq.id
+	))
+
 func _process(delta: float) -> void:
-	_animation_queue_process()
+	for i in range(PROCESS_PER_FRAME):
+		_animation_queue_process()
 
 func _animation_queue_process():
-	if not is_playing():
-		if currently_queued_queues:
-			process_single_queue(currently_queued_queues.pop_front())
+	animation_process.emit()
+	if currently_queued_queues:
+		var playing_ids := get_playing_ids()
+		var queues_to_start := []
+		for queue in currently_queued_queues:
+			if queue.id not in playing_ids:
+				queues_to_start.append(queue)
+				playing_ids.append(queue.id)
+		for queue in queues_to_start:
+			currently_queued_queues.erase(queue)
+			play_single_queue(queue)

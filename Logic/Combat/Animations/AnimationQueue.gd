@@ -1,29 +1,35 @@
-class_name AnimationQueue extends Object
-
-var animation_objects: Array[AnimationObject]
-var animation_steps: Array[AnimationStep]
-
-var current_step: AnimationStep
-
-var currently_playing := false
-var step_ready := true
+class_name AnimationQueue extends RefCounted
 
 signal queue_finished
 
-func _init(queue) -> void:
+var combat: Combat
+var id: String
+var animation_objects: Array[AnimationObject]
+var animation_steps: Array[AnimationStep]
+var current_step: AnimationStep
+var currently_playing := false
+var step_ready := true
+
+static func from_raw_array(combat: Combat, raw_queue: Array[AnimationObject]) -> Array[AnimationQueue]:
+	var raw_queues: Dictionary = {} # {id (str) -> Array[AnimationObject]}
+	for anim in raw_queue:
+		raw_queues.get_or_add(anim.seperate_queue_id, [])
+	var queue_objects: Array[AnimationQueue]
+	for id in raw_queues.keys():
+		queue_objects.append(AnimationQueue.new(combat, id, raw_queues.get(id, [])))
+	return queue_objects
+
+func _init(_combat: Combat, _id: String, queue: Array[AnimationObject]) -> void:
+	combat = _combat
+	id = _id
 	animation_objects = queue
 
-func play(combat: Combat) -> void:
-	if not combat:
-		push_error("Animation Queue played without combat?")
+func play() -> void:
 	currently_playing = true
-	
-	await VisualTime.visual_process
-	
+	await combat.animation.animation_process
 	if animation_objects.is_empty():
 		queue_finished.emit()
 		return
-	
 	animation_steps = [AnimationStep.new()]
 	for animation in animation_objects:
 		if animation.has_flag(AnimationObject.Flags.PlayAfterStep):
@@ -32,20 +38,19 @@ func play(combat: Combat) -> void:
 	for step in animation_steps:
 		step.compile()
 		step.step_done.connect(func(): step_ready = true, CONNECT_ONE_SHOT)
-	
 	while true:
 		if step_ready:
 			step_ready = false
-			play_next_step(combat)
+			play_next_step()
 			if not currently_playing:
 				break
 		else:
-			await VisualTime.visual_process
+			await combat.animation.animation_process
 
-func play_next_step(combat: Combat) -> void:
+func play_next_step() -> void:
 	if animation_steps.is_empty():
 		currently_playing = false
 		queue_finished.emit()
 	else:
 		current_step = animation_steps.pop_front()
-		current_step.play(combat.level)
+		current_step.play()

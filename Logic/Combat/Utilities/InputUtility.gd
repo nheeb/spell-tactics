@@ -128,7 +128,7 @@ func process_active_hotkeys():
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("focus_on_player") and combat.player != null:
 		combat.animation.camera_reach(combat.player.visual_entity)
-		combat.animation.play_animation_queue(true)
+		combat.animation.play_animation_queue() # DIRTY TODO Make Focus on player into a PA
 	if not Game.LEVEL_EDITOR:
 		process_active_hotkeys()
 
