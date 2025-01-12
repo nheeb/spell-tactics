@@ -158,9 +158,8 @@ func unhover():
 
 func warp(pos: Vector3 = %IconOrigin.global_position):
 	RenderingServer.global_shader_parameter_set("card_warp_origin", pos)
-	# TODO reimplement card warp
-	#VisualTime.new_tween().tween_property(card_model.material_override.next_pass, \
-				#"shader_parameter/warp_progress", 2.0, 1.4).from(0.0)
+	VisualTime.new_tween().tween_property(card_model.material_override.next_pass, \
+				"shader_parameter/warp_progress", 1.0, .5).from(0.0)
 
 func set_glow(g : bool):
 	# TODO reimplement card glow
