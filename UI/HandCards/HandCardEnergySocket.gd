@@ -1,5 +1,7 @@
 class_name HandCardEnergySocket extends Node3D
 
+signal loaded
+
 @onready var socket : MeshInstance3D = $EnergySocket/Socket
 
 var card: HandCard3D
@@ -67,7 +69,7 @@ func pre_load_particles(_type: EnergyStack.EnergyType, seconds_to_load: float):
 
 func unload_energy() -> EnergyStack.EnergyType:
 	is_loaded = false
-	var e = loaded_energy
+	var e := loaded_energy
 	loaded_energy = EnergyStack.EnergyType.Empty
 	card.get_spell().on_energy_load()
 	return e
@@ -87,7 +89,6 @@ func set_render_prio(p: int) -> void:
 			var mat := mesh_instance.get_surface_override_material(i)
 			if mat:
 				mat.render_priority = p
-	
 
 ## ANIM 
 func unload_animation():

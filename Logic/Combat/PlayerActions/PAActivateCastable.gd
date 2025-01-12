@@ -5,6 +5,8 @@ var clicked_on_card := false
 func _init(_clicked_on_card: bool = true) -> void:
 	clicked_on_card = _clicked_on_card
 	action_string = "Activate Castable"
+	blocking_types = [InputUtility.InputBlockType.Any]
+	changes_combat = true
 
 func is_valid(combat: Combat) -> bool:
 	if combat.input.current_castable:

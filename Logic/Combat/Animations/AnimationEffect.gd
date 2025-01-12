@@ -8,13 +8,12 @@ func _init(_effect_scene: PackedScene, _target: Node3D, _setup_properties := {})
 	effect_scene = _effect_scene
 	target = _target
 	setup_properties = _setup_properties
-	_build_stack_trace()
 
 func set_property(prop_name: String, value) -> AnimationEffect:
 	setup_properties[prop_name] = value
 	return self
 
-func play(level: Level):
+func play():
 	var effect = effect_scene.instantiate() as Node3D
 	level.visual_effects.add_child(effect)
 	if is_instance_valid(target):

@@ -15,6 +15,7 @@ var level: Level:
 
 func setup(_combat: Combat):
 	combat = _combat
+	_build_stack_trace()
 
 ## Override this to set what the animation does.
 ## Always emit animation_done_internally at the end
@@ -56,7 +57,7 @@ var delay := 0.0
 var min_duration := 0.0
 var max_duration := 0.0
 var global_start_time : float
-var seperate_queue_id := ""
+var _seperate_queue_id := ""
 
 func set_flag(f: Flags) -> AnimationObject:
 	flag = f
@@ -105,8 +106,8 @@ func add_wait_ticket_to_args() -> AnimationCallable:
 	_add_wait_ticket_to_args = true
 	return self
 
-func set_seperate_queue(queue_id := "x") -> AnimationObject:
-	seperate_queue_id = queue_id
+func seperate_queue(queue_id := "x") -> AnimationObject:
+	_seperate_queue_id = queue_id
 	return self
 
 ################

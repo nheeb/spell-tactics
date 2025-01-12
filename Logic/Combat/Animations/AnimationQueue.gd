@@ -10,13 +10,18 @@ var current_step: AnimationStep
 var currently_playing := false
 var step_ready := true
 
-static func from_raw_array(combat: Combat, raw_queue: Array[AnimationObject]) -> Array[AnimationQueue]:
+static func from_raw_array(_combat: Combat, raw_queue: Array[AnimationObject]) -> Array[AnimationQueue]:
 	var raw_queues: Dictionary = {} # {id (str) -> Array[AnimationObject]}
+	var typed_array: Array[AnimationObject] = [] # Fuck you Godot, this is so cringe omg...
+	# Let me at least type cast Arrays with '... as Array[AnimationObject]'.
+	# But no you just ignore that and force me to write shitty code like that. Fuck you.
 	for anim in raw_queue:
-		raw_queues.get_or_add(anim.seperate_queue_id, [])
+		raw_queues.get_or_add(anim._seperate_queue_id, typed_array.duplicate()).append(anim)
 	var queue_objects: Array[AnimationQueue]
-	for id in raw_queues.keys():
-		queue_objects.append(AnimationQueue.new(combat, id, raw_queues.get(id, [])))
+	for _id in raw_queues.keys():
+		queue_objects.append(
+			AnimationQueue.new(_combat, _id, raw_queues.get(_id, typed_array.duplicate()))
+		)
 	return queue_objects
 
 func _init(_combat: Combat, _id: String, queue: Array[AnimationObject]) -> void:

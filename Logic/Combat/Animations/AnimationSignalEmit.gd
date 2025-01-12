@@ -7,9 +7,8 @@ var signal_name: String
 func _init(ref: Object, s: String) -> void:
 	object = ref
 	signal_name = s
-	_build_stack_trace()
 
-func play(level: Level):
+func play():
 	if is_instance_valid(object):
 		if object.has_signal(signal_name):
 			object.emit_signal(signal_name)

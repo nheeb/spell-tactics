@@ -2,15 +2,15 @@ class_name PAAutoLoadEnergy extends PlayerAction
 
 func _init() -> void:
 	action_string = "Auto Load Energy"
+	blocking_types = [InputUtility.InputBlockType.OrbTransition]
 
 func is_valid(combat: Combat) -> bool:
-	return combat.input.current_castable != null \
-			and combat.input.current_castable.get_type() is SpellType
+	return combat.input.current_castable != null
 
 func execute(combat: Combat) -> void:
 	var available_orbs := combat.ui.cards3d.energy_ui.get_orbs()
-	var spell := combat.input.current_castable as Spell
-	var payment := combat.energy.player_energy.get_forced_payment(spell.get_costs())
+	var castable := combat.input.current_castable
+	var payment := combat.energy.player_energy.get_forced_payment(castable.get_costs())
 	var actions : Array[PlayerAction] = []
 	
 	for energy in payment.stack:
@@ -19,7 +19,5 @@ func execute(combat: Combat) -> void:
 				actions.append(PALoadEnergy.new(orb))
 				break
 
-	await combat.action_stack.wait()
-	
 	for action in actions:
-		await combat.action_stack.process_player_action(action, true)
+		await combat.action_stack.process_player_action(action.force_execution())

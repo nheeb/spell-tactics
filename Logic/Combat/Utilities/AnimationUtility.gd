@@ -214,7 +214,7 @@ func play_single_queue(aq: AnimationQueue):
 func is_playing() -> bool:
 	return not currently_playing_queues.is_empty()
 
-func get_playing_ids() -> Array[String]:
+func get_playing_ids() -> Array:
 	return Utility.array_unique(currently_playing_queues.map(
 		func (aq: AnimationQueue): return aq.id
 	))

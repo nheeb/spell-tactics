@@ -8,7 +8,7 @@ func _init(time) -> void:
 	wait_time = time
 	_build_stack_trace()
 
-func play(level: Level):
+func play():
 	await VisualTime.new_timer(wait_time).timeout
 	animation_done_internally.emit()
 

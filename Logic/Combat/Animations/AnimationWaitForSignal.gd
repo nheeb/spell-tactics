@@ -9,7 +9,7 @@ func _init(_obj: Object, _signal_name: String) -> void:
 	signal_name = _signal_name
 	_build_stack_trace()
 
-func play(level: Level):
+func play():
 	if obj:
 		if obj.has_signal(signal_name):
 			await obj.get(signal_name)
