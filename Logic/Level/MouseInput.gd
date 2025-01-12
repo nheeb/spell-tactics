@@ -24,6 +24,7 @@ func unhover_tile(tile: Tile):
 
 var currently_hovering: Tile = null
 func _process(delta: float) -> void:
+	%MouseRaycast.force_raycast_update()
 	var mouse_position := Utility.get_mouse_pos_absolute()
 	var camera: Camera3D = %Camera3D
 	var ray_origin := camera.project_ray_origin(mouse_position)

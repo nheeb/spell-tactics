@@ -33,14 +33,16 @@ func tile_can_be_drained(combat: Combat) -> bool:
 func tile_can_interact(combat: Combat) -> bool:
 	return tile.distance_to(combat.player.current_tile) <= 1 \
 		and tile.entities.any(func (ent: Entity): return ent.can_interact)
+		
+func tile_can_move_to(combat: Combat) -> bool:
+	return combat.castables.get_active_from_name("movement").is_target_valid(tile)
 
 func get_highlight_type(combat: Combat) -> Highlight.Type:
 	if combat.input.current_castable != null \
-		and combat.input.current_castable.get_type() == Preloaded.ACTIVE_MOVEMENT:
-	#if combat.input.current_castable != null \
-		#and "Movement" in combat.input.current_castable.get_type().pretty_name:
+		and combat.input.current_castable.get_type() == Preloaded.ACTIVE_MOVEMENT \
+		and tile_can_move_to(combat):
 		return Highlight.Type.HoverAction
-	elif combat.input.current_castable != null:
+	elif combat.input.current_castable != null and combat.input.current_castable.is_target_valid(tile):
 		return Highlight.Type.HoverTarget
 	else:
 		return Highlight.Type.Hover
@@ -51,6 +53,7 @@ func execute(combat: Combat) -> void:
 	# Hover Tile
 	if hovering:
 		combat.level.append_to_hover_memory(tile) # This is for the movement arrow pathing
+		print("hover " + str(tile) + " " + Highlight.Type.find_key(get_highlight_type(combat)))
 		tile.set_highlight(get_highlight_type(combat), true)
 		if tile_can_interact(combat):
 			tile.set_highlight(Highlight.Type.HoverInteract, true)

@@ -169,8 +169,8 @@ func show_surrounding_drainable_entries():  # broken?!?
 
 func update_popup_position(popup: EnergyPopup):
 	var cam = viewport.get_camera_3d()
-	popup.visible = not cam.is_position_behind(popup.tile.global_position)
-	var _screen_pos = viewport.get_camera_3d().unproject_position(popup.tile.global_position)
+	popup.visible = not cam.is_position_behind(popup.tile.tile3d.global_position)
+	var _screen_pos = viewport.get_camera_3d().unproject_position(popup.tile.tile3d.global_position)
 	#_screen_pos = Utility.inv_scale_screen_pos(_screen_pos).round()
 	popup.position = _screen_pos - popup.size / 2 # unfortunately necessary..
 

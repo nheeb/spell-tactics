@@ -36,7 +36,10 @@ func create(combat: Combat, props := {}) -> CombatObject:
 	# Update props if any are given
 	obj.update_properties(props)
 	# Connect with combat
-	obj.connect_with_combat(combat)
+	if combat != null:
+		obj.connect_with_combat(combat)
+	else:
+		return obj
 	# Create CombatLogic
 	if logic_script:
 		var logic: CombatLogic = logic_script.new() as CombatLogic

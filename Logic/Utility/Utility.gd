@@ -326,6 +326,7 @@ func take_screenshot(shrink_count := 0) -> ImageTexture:
 	return texture
 	
 ## for when the viewport resolution doesn't match the content_scale	
+## screen_pos absolute mouse pos in px (like from get_mouse_pos_absolute)
 func scale_screen_pos(screen_pos: Vector2) -> Vector2:
 	var current_viewport_size: Vector2 = get_tree().root.size
 	var reference_viewport_size: Vector2 = get_tree().root.content_scale_size
@@ -335,15 +336,15 @@ func scale_screen_pos(screen_pos: Vector2) -> Vector2:
 	var scaled: Vector2 = screen_pos * size_scale
 	return scaled
 
-func get_mouse_pos_absolute() -> Vector2:
-	return get_viewport().get_mouse_position()
+func get_mouse_pos_absolute(viewport: Viewport = get_viewport()) -> Vector2:
+	return viewport.get_mouse_position()
 
-func get_mouse_pos_normalized(invert_y_axis := true) -> Vector2:
-	var absolute := get_mouse_pos_absolute()
+func get_mouse_pos_normalized(viewport: Viewport = get_viewport(), invert_y_axis := true) -> Vector2:
+	var absolute := get_mouse_pos_absolute(viewport)
 	if invert_y_axis:
-		return Vector2(absolute.x / get_viewport().get_visible_rect().size.x, 1.0 - (absolute.y / get_viewport().get_visible_rect().size.y))
+		return Vector2(absolute.x / viewport.get_visible_rect().size.x, 1.0 - (absolute.y / viewport.get_visible_rect().size.y))
 	else:
-		return Vector2(absolute.x / get_viewport().get_visible_rect().size.x, absolute.y / get_viewport().get_visible_rect().size.y)
+		return Vector2(absolute.x / viewport.get_visible_rect().size.x, absolute.y / viewport.get_visible_rect().size.y)
 
 #############
 ## Signals ##
