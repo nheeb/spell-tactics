@@ -284,7 +284,7 @@ func check_hand_state():
 			if not Input.is_action_pressed("select"):
 				hand_state = HandState.Open
 				# Card got rearranged or not selectable
-				if dragged_card is HandCard3D:
+				if dragged_card is Card3D:
 					dragged_card.unhover()
 				if dragged_before:
 					hand_cards.insert(hand_cards.find(dragged_before), dragged_card)
@@ -444,13 +444,13 @@ func start_choice(_min: int, _max: int) -> void:
 func end_choice_and_get_result() -> Array:
 	var _chosen_spells = []
 	for c in chosen_cards:
-		c = c as HandCard3D
+		c = c as Card3D
 		_chosen_spells.append(c.get_spell())
 	chosen_cards = []
 	choice_running = false
 	return _chosen_spells
 
-func unchoose_card(card: HandCard3D) -> void:
+func unchoose_card(card: Card3D) -> void:
 	if card in chosen_cards:
 		chosen_cards.erase(card)
 		card_chosen.emit(chosen_cards.size())

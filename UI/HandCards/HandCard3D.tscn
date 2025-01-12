@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://j0l5hc388gmj"]
 
-[ext_resource type="Script" path="res://UI/HandCards/HandCard3D.gd" id="1_iur57"]
+[ext_resource type="Script" path="res://UI/HandCards/Card3D.gd" id="1_l3tql"]
 [ext_resource type="PackedScene" uid="uid://bjuv8jfc5pykg" path="res://UI/HandCards/HandCardEnergySocket.tscn" id="2_87ldq"]
 [ext_resource type="Material" uid="uid://72pgvo6r6k7c" path="res://UI/HandCards/HandCardMaterial.tres" id="3_cro0o"]
 [ext_resource type="PackedScene" uid="uid://cr5uo2crw6yep" path="res://Logic/Utility/SmoothMovement.tscn" id="4_v18nh"]
@@ -19,7 +19,7 @@ size = Vector3(0.046, 1.40829, 1)
 
 [node name="HandCard3D" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-script = ExtResource("1_iur57")
+script = ExtResource("1_l3tql")
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)

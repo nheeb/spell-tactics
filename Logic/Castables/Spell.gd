@@ -2,7 +2,6 @@ class_name Spell extends Castable
 
 @export var type: SpellType
 var logic: SpellLogic
-var card: HandCard3D
 
 func serialize() -> SpellState:
 	var state := SpellState.new(self)
@@ -18,9 +17,6 @@ func deselect():
 		combat.animation.callable(combat.ui.cards3d.unpin_card)
 	else:
 		push_error("Tried to deselect spell which wasnt pinned")
-
-func get_card() -> Card3D:
-	return card
 
 func get_logic() -> CastableLogic:
 	return logic

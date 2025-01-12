@@ -4,7 +4,7 @@ signal loaded
 
 @onready var socket : MeshInstance3D = $EnergySocket/Socket
 
-var card: HandCard3D
+var card: Card3D
 
 var energy_color : Color
 var inner_color : Color

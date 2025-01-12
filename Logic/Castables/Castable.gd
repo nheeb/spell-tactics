@@ -1,6 +1,7 @@
 class_name Castable extends CombatAction
 
 var selected := false
+var card: Card3D
 var current_requirement: TargetRequirement
 var current_possible_targets: Array
 
@@ -37,7 +38,7 @@ func deselect():
 ################################
 
 func get_card() -> Card3D:
-	return null
+	return card
 
 func get_logic() -> CastableLogic:
 	return null

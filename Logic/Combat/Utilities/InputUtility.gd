@@ -85,10 +85,10 @@ func tile_clicked(tile: Tile) -> void:
 func tile_rightclicked(tile: Tile) -> void:
 	combat.action_stack.process_player_action(PADeselectTile.new(tile))
 
-func card_hovered(card: HandCard3D) -> void:
+func card_hovered(card: Card3D) -> void:
 	pass # TODO Nitai Connect this to some PA
 
-func card_selected(card: HandCard3D) -> void:
+func card_selected(card: Card3D) -> void:
 	combat.action_stack.process_player_action(PASelectCastable.new(card.get_castable()))
 
 func energy_orb_clicked(orb : EnergyOrb):
