@@ -1,9 +1,8 @@
-class_name EnemyActionArgs extends Resource
-
+class_name EnemyActionTemplate extends Resource
 ## Wraps an enemy action together with optional custom arguments defining
 ## how the action should be used by the enemy.
 
-@export var action: EnemyAction:
+@export var action: EnemyActionType:
 	set(a):
 		action = a
 		if a:
@@ -21,7 +20,7 @@ class_name EnemyActionArgs extends Resource
 ## References to targets this action should have
 @export var fixed_targets := []
 
-func _init(_action: EnemyAction = null, _args := [], _kwargs := {}) -> void:
+func _init(_action: EnemyActionType = null, _args := [], _kwargs := {}) -> void:
 	action = _action
 	args = _args
 	kwargs = _kwargs
@@ -122,7 +121,7 @@ func get_possible_plans(enemy: EnemyEntity) -> Array[EnemyActionPlan]:
 	await combat.action_stack.wait()
 	
 	# Reduce the targets and only consider the important ones
-	if action.target_consider_method == EnemyAction.TargetConsiderMethod.Best:
+	if action.target_consider_method == EnemyActionType.TargetConsiderMethod.Best:
 		plans.sort_custom(
 			func (a, b):
 				return score_dict[a].value > score_dict[b].value

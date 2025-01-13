@@ -59,7 +59,7 @@ var actives: Array[Active]
 var player: PlayerEntity
 var enemies: Array[EnemyEntity]
 
-var global_enemy_actions: Array[EnemyActionArgs]
+var global_enemy_actions: Array[EnemyActionTemplate]
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():

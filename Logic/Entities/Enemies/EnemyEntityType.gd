@@ -1,7 +1,7 @@
 class_name EnemyEntityType extends EntityType
 
 @export var behaviour: EnemyBehaviour
-@export var actions: Array[EnemyActionArgs]
+@export var actions: Array[EnemyActionTemplate]
 
 @export var gain_drain_on_kill := true
 

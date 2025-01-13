@@ -78,8 +78,8 @@ func on_death() -> void:
 		combat.animation.remove_staying_effect(entity.visual_entity, icon_name)
 
 ## Special actions an enemy with the status could do
-func get_enemy_actions() -> Array[EnemyActionArgs]:
-	var actions : Array[EnemyActionArgs] = type.enemy_actions.duplicate()
+func get_enemy_actions() -> Array[EnemyActionTemplate]:
+	var actions : Array[EnemyActionTemplate] = type.enemy_actions.duplicate()
 	actions.append_array(logic.get_enemy_actions())
 	if targets:
 		for action in actions:

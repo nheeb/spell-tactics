@@ -6,7 +6,7 @@ var accuracy: int = 0
 var resistance: int = 0
 var movement_range: int = 2
 
-var action_logic := {} # EnemyActionArgs -> EnemyActionLogic
+var action_logic := {} # EnemyActionTemplate -> EnemyActionLogic
 var action_plan: EnemyActionPlan
 
 ##################################
@@ -64,8 +64,8 @@ func do_action():
 ## Internal Methods ##
 ######################
 
-func get_action_pool() -> Array[EnemyActionArgs]:
-	var actions : Array[EnemyActionArgs] = []
+func get_action_pool() -> Array[EnemyActionTemplate]:
+	var actions : Array[EnemyActionTemplate] = []
 	actions.append_array(type.actions)
 	for se in status_array:
 		actions.append_array(se.get_enemy_actions())

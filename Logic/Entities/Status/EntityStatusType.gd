@@ -25,7 +25,7 @@ class_name EntityStatusType extends CombatObjectType
 @export var merge_this_type := false
 ## Kills all TimedEffects (from status & logic) automatically when being removed.
 @export var kill_te_on_remove := true
-@export var enemy_actions: Array[EnemyActionArgs]
+@export var enemy_actions: Array[EnemyActionTemplate]
 
 func create_base_object() -> CombatObject:
 	return EntityStatus.new()

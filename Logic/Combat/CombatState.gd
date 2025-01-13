@@ -29,7 +29,7 @@ class_name CombatState extends Resource
 ## Progress of the enemy meter
 @export var enemy_meter: int
 ## Enemy Actions
-@export var global_enemy_actions: Array[EnemyActionArgs]
+@export var global_enemy_actions: Array[EnemyActionTemplate]
 ## References
 @export var references: Dictionary
 @export var object_names: Dictionary

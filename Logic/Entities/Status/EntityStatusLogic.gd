@@ -35,7 +35,7 @@ func on_death() -> void:
 	pass
 
 ## Special actions an enemy with the status could do
-func get_enemy_actions() -> Array[EnemyActionArgs]:
+func get_enemy_actions() -> Array[EnemyActionTemplate]:
 	return []
 
 ####################

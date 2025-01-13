@@ -4,8 +4,8 @@ class_name EnemyActionLogic extends RefCounted
 ## creates a new Logic.
 
 var combat: Combat
-var args: EnemyActionArgs
-var action: EnemyAction
+var args: EnemyActionTemplate
+var action: EnemyActionType
 var enemy: EnemyEntity
 var plan: EnemyActionPlan
 var target:
@@ -108,25 +108,25 @@ func _get_alternative_plan() -> EnemyActionPlan:
 func _get_target_pool() -> Array:
 	var all_targets := []
 	match action.target_type:
-		EnemyAction.TargetType.None:
+		EnemyActionType.TargetType.None:
 			return [null]
-		EnemyAction.TargetType.Foes:
+		EnemyActionType.TargetType.Foes:
 			all_targets = combat.get_all_hp_entities()
 			all_targets = all_targets.filter(
 				func (t):
 					## FIXME This is shitty
 					return t is PlayerEntity
 			)
-		EnemyAction.TargetType.Allies:
+		EnemyActionType.TargetType.Allies:
 			all_targets = combat.get_all_hp_entities()
 			all_targets = all_targets.filter(
 				func (t):
 					## FIXME This is shitty
 					return t.team == enemy.team and t is EnemyEntity
 			)
-		EnemyAction.TargetType.Tiles:
+		EnemyActionType.TargetType.Tiles:
 			all_targets = combat.level.get_all_tiles()
-		EnemyAction.TargetType.Entities:
+		EnemyActionType.TargetType.Entities:
 			all_targets = combat.level.get_all_entities()
 	return all_targets
 

@@ -1,11 +1,11 @@
 class_name EnemyActionPlan extends Resource
 
 @export var enemy_ref: CombatObjectReference
-@export var action_args: EnemyActionArgs
+@export var action_args: EnemyActionTemplate
 @export var target_ref: UniversalReference
 @export var plan_details := {}
 
-var action: EnemyAction:
+var action: EnemyActionType:
 	get:
 		if action_args:
 			return action_args.action
@@ -25,7 +25,7 @@ func _init(_enemy = null, _action_args = null, _target = null, combat: Combat = 
 		enemy_ref = _enemy
 	elif _enemy is EnemyEntity:
 		enemy_ref = _enemy.get_reference()
-	action_args = _action_args as EnemyActionArgs
+	action_args = _action_args as EnemyActionTemplate
 	if _target is UniversalReference:
 		target_ref = _target
 	elif _target:

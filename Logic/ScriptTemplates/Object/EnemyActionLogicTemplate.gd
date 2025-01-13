@@ -1,6 +1,6 @@
 extends EnemyActionLogic
 
-# args: EnemyActionArgs
+# args: EnemyActionTemplate
 # action: EnemyAction
 # combat: Combat
 # enemy: EnemyEntity
