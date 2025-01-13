@@ -9,9 +9,8 @@ var method: StringName:
 func _init(_callable: Callable):
 	callable = _callable
 	object = callable.get_object()
-	_build_stack_trace()
 
-func play(level: Level) -> void:
+func play() -> void:
 	if is_instance_valid(object):
 		if _add_wait_ticket_to_args:
 			var ticket := WaitTicket.new()

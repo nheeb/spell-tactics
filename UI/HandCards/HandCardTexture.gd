@@ -23,11 +23,9 @@ func set_castable(castable: Castable):
 	title_label.text="[center]" + castable.type.pretty_name + "[/center]"
 	spell_text_label.set_spell_text(castable.get_effect_text())
 
-	
 func set_color(color: Color):
 	%TitleLabel.set("theme_override_colors/default_color", color)
 	%HandCardIconTexture.modulate = color
-	
 
 func set_miniature_variant_energy_type(et: EnergyStack.EnergyType):
 	icon_texture.set_main_icon_texture(VFX.type_to_icon(et, true))

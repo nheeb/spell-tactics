@@ -48,6 +48,8 @@ func get_highlight_type(combat: Combat) -> Highlight.Type:
 		return Highlight.Type.Hover
 
 func execute(combat: Combat) -> void:
+	combat.animation.record_start("hover")
+	
 	# Hover Tile
 	if hovering:
 		combat.level.append_to_hover_memory(tile) # This is for the movement arrow pathing
@@ -86,3 +88,5 @@ func execute(combat: Combat) -> void:
 	elif currently_hovering_long != tile and currently_hovering_long != null:
 		await currently_hovering_long.hover_long(false)
 		currently_hovering_long = null
+
+	combat.animation.record_finish_as_subqueue("hover").seperate_queue("hover")

@@ -253,8 +253,8 @@ func array_reversed(array: Array) -> Array:
 	_array.reverse()
 	return _array
 
-func array_sum(array: Array) -> Variant:
-	return array.reduce(func(a,b): return a+b)
+func array_sum(array: Array, accum = null) -> Variant:
+	return array.reduce(func(a,b): return a + b, accum)
 
 func array_average(array: Array) -> float:
 	return array_sum(array) * (1.0 / array.size())

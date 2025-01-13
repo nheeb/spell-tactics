@@ -39,6 +39,7 @@ signal energy_overlay_changed(c: bool)
 var ENERGY_OVERLAY: bool = false:
 	set(e):
 		ENERGY_OVERLAY = e
+		# TODO Create a PlayerAction for this as well
 		energy_overlay_changed.emit(e)
 		
 var deck_choice: int

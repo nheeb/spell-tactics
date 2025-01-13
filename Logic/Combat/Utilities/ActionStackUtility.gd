@@ -64,8 +64,8 @@ func process_callable(callable: Callable) -> Signal:
 ## Turns the PlayerAction into a ActionTicket and adds the ticket to the stack.
 ## Returns a signal which is emitted when the ticket is being removed
 ## (either finished or aborted).
-func process_player_action(pa: PlayerAction, forced := false) -> Signal:
-	return process_ticket(combat.input.player_action_ticket(pa, forced), false)
+func process_player_action(pa: PlayerAction) -> Signal:
+	return process_ticket(combat.input.player_action_ticket(pa), false)
 
 ## Returns the result of a callable as action stack coroutine.
 ## Use it with await:

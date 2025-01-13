@@ -1,4 +1,5 @@
 class_name PreloaderNode extends Node
+## Here are only preloaded Content Resources. For VFX Scenes look at VFX Singleton.
 
 const STATUS_BERSERKER = preload("res://Content/Status/Buff/Berserker.tres")
 const STATUS_POISON_MELEE = preload("res://Content/Status/Buff/PoisonMelee.tres")

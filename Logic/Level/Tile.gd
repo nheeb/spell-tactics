@@ -183,7 +183,7 @@ func inflict_damage_with_visuals(dmg: int) -> AnimationObject:
 
 ## ANIMATOR
 func set_highlight(type: Highlight.Type, active: bool) -> AnimationCallable:
-	return combat.animation.callable(tile3d.set_highlight.bind(type, active)).set_flag_with()
+	return combat.animation.callable(tile3d.set_highlight.bind(type, active))
 
 ## ACTION
 func hover_long(h: bool) -> void:

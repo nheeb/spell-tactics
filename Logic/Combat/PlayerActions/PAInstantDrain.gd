@@ -9,6 +9,7 @@ var possible_interact := false
 func _init(_target_tile: Tile) -> void:
 	target_tile = _target_tile
 	action_string = "Instant Drain on tile <%s>" % target_tile
+	blocking_types = [InputUtility.InputBlockType.Any]
 
 func is_valid(combat: Combat) -> bool:
 	if combat.input.current_castable:
@@ -53,6 +54,8 @@ func execute(combat: Combat) -> void:
 	Sx.from(progress_tween.finished)\
 		.subscribe(quick_drain.bind(combat))\
 		.dispose_with(signal_disposer)
+
+# TODO rename this better to sound like interact is also wanted
 
 func quick_drain(combat: Combat):
 	signal_disposer.dispose()

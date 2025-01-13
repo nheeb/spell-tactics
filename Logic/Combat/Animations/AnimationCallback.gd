@@ -10,9 +10,8 @@ func _init(_reference: Object, _command: String, _parameters := []):
 	reference = _reference
 	command = _command
 	parameters = _parameters
-	_build_stack_trace()
 
-func play(level: Level) -> void:
+func play() -> void:
 	if is_instance_valid(reference):
 		if reference.has_method("get_wait_ticket_handler"):
 			var handler := reference.get_wait_ticket_handler() as WaitTicketHandler

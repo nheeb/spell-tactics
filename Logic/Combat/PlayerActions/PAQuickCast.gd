@@ -7,6 +7,8 @@ func _init(_castable: Castable, _targets: Array[Tile] = []) -> void:
 	castable = _castable
 	targets = _targets
 	action_string = "Quick Cast <%s> on [%s]" % [castable, targets]
+	blocking_types = [InputUtility.InputBlockType.Any]
+	changes_combat = true
 
 func is_valid(combat: Combat) -> bool:
 	if not castable is Active:
