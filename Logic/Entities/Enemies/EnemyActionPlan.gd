@@ -1,17 +1,5 @@
-class_name EnemyActionPlan extends Resource
+class_name EnemyActionPlan extends CombatActionDetails
 
-@export var enemy_ref: CombatObjectReference
-@export var action_args: EnemyActionTemplate
-@export var target_ref: UniversalReference
-@export var plan_details := {}
-
-var action: EnemyActionType:
-	get:
-		if action_args:
-			return action_args.action
-		else:
-			return null
-var _logic: EnemyActionLogic
 var score_cache := -1.0
 var executed := false
 var fizzled := false
@@ -49,29 +37,29 @@ func get_logic() -> EnemyActionLogic:
 		return _logic
 	return null
 
-########################
-## Methods for details #
-########################
-
-func get_detail(key: Variant, default: Variant = null) -> Variant:
-	return Utility.dict_safe_get(plan_details, key, default)
-
-func get_detail_and_resolve(combat: Combat, key: Variant, default: Variant = null) -> Variant:
-	var value = get_detail(key, default)
-	if value is UniversalReference:
-		value = value.resolve(combat)
-	return value
-
-func set_detail(key: Variant, value: Variant) -> void:
-	assert(not (value is Object and (not value is Resource)), "Can this be serialized?")
-	plan_details[key] = value
-
-func create_detail(key: Variant, value: Variant) -> void:
-	if not key in plan_details.keys():
-		if value is Object:
-			if value.has_method("get_reference"):
-				value = value.get_reference()
-		set_detail(key, value)
+#########################
+### Methods for details #
+#########################
+#
+#func get_detail(key: Variant, default: Variant = null) -> Variant:
+	#return Utility.dict_safe_get(plan_details, key, default)
+#
+#func get_detail_and_resolve(combat: Combat, key: Variant, default: Variant = null) -> Variant:
+	#var value = get_detail(key, default)
+	#if value is UniversalReference:
+		#value = value.resolve(combat)
+	#return value
+#
+#func set_detail(key: Variant, value: Variant) -> void:
+	#assert(not (value is Object and (not value is Resource)), "Can this be serialized?")
+	#plan_details[key] = value
+#
+#func create_detail(key: Variant, value: Variant) -> void:
+	#if not key in plan_details.keys():
+		#if value is Object:
+			#if value.has_method("get_reference"):
+				#value = value.get_reference()
+		#set_detail(key, value)
 
 #######################
 ## Methods for usage ##

@@ -1,12 +1,10 @@
 class_name EnemyEntity extends Entity
 
-var agility: int = 0
-var strength: int = 1
-var accuracy: int = 0
-var resistance: int = 0
-var movement_range: int = 2
+var agility: int
+var strength: int
+var movement_range: int
 
-var action_logic := {} # EnemyActionTemplate -> EnemyActionLogic
+#var action_logic := {} # EnemyActionTemplate -> EnemyActionLogic
 var action_plan: EnemyActionPlan
 
 ##################################

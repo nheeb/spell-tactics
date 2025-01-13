@@ -3,6 +3,7 @@ class_name CombatAction extends CombatObject
 
 ## Those details should contain everything the Action needs to be executed.
 ## (Mainly the actor entity & targets)
+## In case of EnemyAction Calculation those details will be changed a lot.
 var details: CombatActionDetails
 
 ####################
