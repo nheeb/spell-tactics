@@ -16,17 +16,25 @@ func show_tile(tile: Tile):
 	var i = 0
 	# tile has an array of entities, show one entry for each of these
 	for ent in tile.entities:
+		if ent.type.is_terrain:
+			continue
 		var drainable_entry: HoverPopupEntry = DRAINABLE_ENTRY.instantiate()
-		drainable_entry.name = "%2d_Drainable" % i
 		%EntryContainer.add_child(drainable_entry)
+
+		drainable_entry.name = "%2d_Drainable" % i
 		if ent.type.is_drainable:
 			drainable_entry.show_drainable_entity(ent)
 		elif ent.type is EnemyEntityType:
 			# we won't have drainable enemies, will we?
 			drainable_entry.show_enemy_entity(ent)
+		elif ent.type is PlayerEntityType:
+			drainable_entry.show_player_entity(ent)
 		else:
-			push_warning("unexpected ent in HoverPopup, implement better filter")
+			push_warning("unexpected ent %s in HoverPopup, implement better filter" % str(ent))
+			drainable_entry.queue_free()
 			continue
+			
+
 		drainable_entry.show()
 
 		i += 1

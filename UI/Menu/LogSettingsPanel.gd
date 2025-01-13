@@ -1,7 +1,7 @@
 class_name LogSettingsPanel extends PanelContainer
 
 @onready var zoom_blocker = GameCamera.zoom_block.register_blocker()
-@onready var mouse_blocker = MouseInput.mouse_block.register_blocker()
+@onready var mouse_blocker = Preloaded.mouse_block.register_blocker()
 
 var combat: Combat
 

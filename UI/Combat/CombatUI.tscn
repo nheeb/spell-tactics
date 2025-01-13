@@ -174,9 +174,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Actives" type="Panel" parent="."]
 layout_mode = 2
 anchor_left = -0.00625
-anchor_top = 0.67037
+anchor_top = 0.701852
 anchor_right = 0.129687
-anchor_bottom = 0.955556
+anchor_bottom = 0.987038
 theme_override_styles/panel = SubResource("StyleBoxFlat_fc21w")
 metadata/_edit_use_anchors_ = true
 
@@ -420,6 +420,8 @@ metadata/_edit_use_anchors_ = true
 [connection signal="mouse_exited" from="Cast" to="." method="_on_button_exited"]
 [connection signal="mouse_entered" from="TileHoverBlocker" to="." method="_on_tile_hover_blocker_mouse_entered"]
 [connection signal="mouse_exited" from="TileHoverBlocker" to="." method="_on_tile_hover_blocker_mouse_exited"]
+[connection signal="mouse_entered" from="Actives" to="." method="_on_tile_hover_blocker_mouse_entered"]
+[connection signal="mouse_exited" from="Actives" to="." method="_on_tile_hover_blocker_mouse_exited"]
 [connection signal="toggled" from="OverlayBar/DebugOverlay" to="." method="_on_debug_overlay_toggled"]
 [connection signal="toggled" from="OverlayBar/EnergyOverlay" to="." method="_on_energy_overlay_toggled"]
 [connection signal="toggled" from="OverlayBar/SoundToggle" to="." method="_on_sound_toggle_toggled"]

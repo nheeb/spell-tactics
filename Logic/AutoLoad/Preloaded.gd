@@ -15,3 +15,5 @@ const ACTIVE_MOVEMENT = preload("res://Content/Actives/Movement.tres")
 const ACTIVE_DRAIN = preload("res://Content/Actives/Drain.tres")
 const ACTIVE_MELEE = preload("res://Content/Actives/SimpleMelee.tres")
 const ACTIVE_INTERACT = preload("res://Content/Actives/Interact.tres")
+
+var mouse_block: Block = Block.new()

@@ -12,6 +12,7 @@ static var on_drainable_tile_unhovered: Signal = \
 static var open_cards_shelf_blocker = Cards3D.open_hand_block.register_blocker()
 static var currently_hovering_drainable: Tile
 static var currently_hovering_long: Tile
+static var currently_hovering: Tile
 
 var tile: Tile
 var hovering: bool
@@ -24,6 +25,8 @@ func _init(_tile: Tile, _hovering: bool, _long := false) -> void:
 	action_string = "%sover Tile %s<%s>" % [
 		"H" if hovering else "Unh", "Long " if long else "", tile
 	]
+	if hovering and not long:
+		currently_hovering = tile
 
 func tile_can_be_drained(combat: Combat) -> bool:
 	var drain := combat.castables.get_active_from_name("drain")

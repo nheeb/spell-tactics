@@ -42,8 +42,7 @@ func show_tile_popup(tile: Tile):
 	# AND we are already showing the drainable overlay for this tile
 	if (not tile.has_enemy()) and tile.energy_popup.active:
 		return
-		
-	print("hover long " + str(tile))
+
 	current_tile = tile
 	# can use Camera3D.is_position_behind() to check, but should not be relevant here for now
 	screen_pos = viewport.get_camera_3d().unproject_position(tile.global_position)
