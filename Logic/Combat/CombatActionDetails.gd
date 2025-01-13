@@ -1,10 +1,14 @@
 class_name CombatActionDetails extends RefCounted
+## This is the situational HOW of the Action's execution. Most important here are the
+## actor entity and the targets.
 
+## Entity that will execute the Action. If the Action is a castable, this will be the Player.
 var actor: Entity
+## Reference to the action
 var combat_action: CombatAction
-var target_requirements: Array[TargetRequirement]:
-	get:
-		return combat_action.get_action_type().target_requirements
+## This is a duplicate of the ActionType's target reqs
+var target_requirements: Array[TargetRequirement]
+## Selected targets for the Action based on TargetRequirements
 ## {TargetRequirement -> Array[Value]}
 var target_details: Dictionary
 
@@ -17,6 +21,7 @@ func _init(_actor: Entity, action: CombatAction) -> void:
 	if not (actor is PlayerEntity or actor is EnemyEntity):
 		push_warning("Created CombatActionDetails for invalid actor.")
 	combat_action = action
+	target_requirements = combat_action.get_action_type().target_requirements
 	for req in target_requirements:
 		target_details[req] = []
 

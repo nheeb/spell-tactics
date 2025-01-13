@@ -7,11 +7,18 @@ var combat: Combat
 
 ## Unique ID for that object
 @export var id: int = -1
+
+## This is a place to save anything serializable
 @export var data: Dictionary
 
+## This tells whether the saved object is a savestate (= was born before)
+## or whether it is a template (with some preset data for easy creation)
 @export var born := false
+
+## Dead CombatObjects get this flag rather than getting removed.
 @export var dead := false
 
+## Related Node3D if the CombatObject has any
 var node3d: Node3D
 var position: Vector3:
 	set(x):

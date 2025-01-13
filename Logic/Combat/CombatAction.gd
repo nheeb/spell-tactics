@@ -1,5 +1,8 @@
 class_name CombatAction extends CombatObject
+## CombatActions are CombatObjects which can be executed to change the combat.
 
+## Those details should contain everything the Action needs to be executed.
+## (Mainly the actor entity & targets)
 var details: CombatActionDetails
 
 ####################

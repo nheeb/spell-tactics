@@ -1,5 +1,4 @@
 class_name EnemyActionLogic extends RefCounted
-
 ## This should NOT extend CombatLogic. Having a reference for this logic makes no
 ## sense due to it's short lifetime. Every ActionPlan (action intent) of an enemy
 ## creates a new Logic.

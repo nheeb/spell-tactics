@@ -1,4 +1,8 @@
 class_name CombatObjectState extends Resource
+## CombatObjectState is a generic Resource to serialize a CombatObject.
+## When created it saves all the CombatObject's exportet properties.
+## This is NOT just used for saving the game. A CombatObjectState can be used as template as well.
+## If it is a template use create(), otherwise use deserialize()
 
 ## Data is seperated from the other properties to make it easier to edit
 @export var data: Dictionary
@@ -16,12 +20,14 @@ func _init(object: CombatObject = null) -> void:
 				continue
 			props[export_prop] = object.get(export_prop)
 
-func get_creation_props() -> Dictionary:
-	var creation_props := {}
+## Returns the properties that should be added when the COS is a template. (Mainly the type)
+## By overriding this you can add new export vars for easy template editing. (see EnemyEventPlan)
+func get_template_props() -> Dictionary:
+	var template_props := {}
 	var type := get("type") as CombatObjectType
 	if type:
-		creation_props["type"] = type
-	return creation_props
+		template_props["type"] = type
+	return template_props
 
 func deserialize(combat: Combat) -> CombatObject:
 	# Integrate data into props
@@ -29,8 +35,8 @@ func deserialize(combat: Combat) -> CombatObject:
 		push_warning("CombatObjectState: Data should always kept seperate.")
 	props["data"] = data
 	# Get creation props
-	if not object_was_born_before():
-		props.merge(get_creation_props(), true)
+	if is_template():
+		props.merge(get_template_props(), true)
 	# Set deserialized flag
 	# TBD do we want this warning?
 	#if was_deserialized:
@@ -48,10 +54,11 @@ func deserialize(combat: Combat) -> CombatObject:
 ## Wrapper for deserialize that warns if the Object was once serialized.
 ## This is intended to be used for States created in the inspector.
 func create(combat: Combat) -> CombatObject:
-	if object_was_born_before():
+	if not is_template():
 		push_warning("Creating CombatObject that was serialized before.")
 		push_warning("If this is intended use 'deserialize' instead.")
 	return deserialize(combat)
 
-func object_was_born_before() -> bool:
-	return props.get("born", false) as bool
+## Returns if the CombatObjectState is a tamplate. Otherwise it's a save state.
+func is_template() -> bool:
+	return not (props.get("born", false) as bool)
