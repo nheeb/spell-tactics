@@ -1,6 +1,5 @@
 class_name MouseInput extends RayCast3D
 
-
 # A reference to cards3d is needed here to see if the hover/click input is meant for this RayCast
 # or the one in Cards3D (cards3d has priority, since it is "on top" visually)
 var cards3d: Cards3D = null
@@ -22,13 +21,16 @@ func unhover_tile(tile: Tile):
 	Events.tile_unhovered.emit(tile)
 
 static var currently_hovering: Tile = null
+static var mouse_pos_3d: Vector3
 func _process(delta: float) -> void:
 	%MouseRaycast.force_raycast_update()
 	var mouse_position := Utility.get_mouse_pos_absolute()
 	var camera: Camera3D = %Camera3D
 	var ray_origin := camera.project_ray_origin(mouse_position)
-
 	var ray_direction := camera.project_ray_normal(Utility.scale_screen_pos(mouse_position))
+	var intersect = Plane(Vector3.UP).intersects_ray(ray_origin, ray_direction)
+	if intersect:
+		mouse_pos_3d = intersect
 	var end := ray_origin + ray_direction * camera.far
 	self.target_position = to_local(end)
 	

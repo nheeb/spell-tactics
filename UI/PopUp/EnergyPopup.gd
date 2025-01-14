@@ -77,3 +77,12 @@ func update():
 func drain():
 	# TODO for this we could play a slight animation and then slowly fade it out
 	pass
+
+func update_size_with_mouse_pos():
+	var alpha := 1.0 - smoothstep(
+			20, 26, tile.tile3d.global_position.distance_squared_to(MouseInput.mouse_pos_3d)
+		)
+	modulate.a = alpha
+	for icon in $List.get_children():
+		if icon is EnergyIcon:
+			icon.min_size = int(alpha * 34.0)

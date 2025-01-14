@@ -188,6 +188,7 @@ func _process(delta: float) -> void:
 	# PERFORMANCE check how this performs for large levels
 	for popup in EnergyPopup.ACTIVE_POPUPS:
 		update_popup_position(popup)
+		popup.update_size_with_mouse_pos()
 
 
 func _on_world_combat_changed(_combat: Combat):
