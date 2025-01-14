@@ -16,7 +16,7 @@ var target_details: Dictionary
 ## Constructor ##
 #################
 
-func _init(_actor: Entity, action: CombatAction) -> void:
+func _init(_actor: Entity, action: CombatAction, targets: Array = []) -> void:
 	actor = _actor
 	if not (actor is PlayerEntity or actor is EnemyEntity):
 		push_warning("Created CombatActionDetails for invalid actor.")
@@ -24,6 +24,8 @@ func _init(_actor: Entity, action: CombatAction) -> void:
 	target_requirements = combat_action.get_action_type().target_requirements
 	for req in target_requirements:
 		target_details[req] = []
+	for t in targets:
+		add_targets(t)
 
 #############
 ## Targets ##

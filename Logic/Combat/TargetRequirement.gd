@@ -67,7 +67,7 @@ enum Shape {
 ##########################
 
 func get_possible_targets(action: CombatAction) -> Array:
-	assert(action.details)
+	assert(action.details, "This is needed for knowing the actor.")
 	return convert_target(get_base_pool(action.combat), action)
 
 func get_base_pool(combat: Combat) -> Array:
@@ -143,7 +143,6 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						return not t.is_blocked()
 					return true
 			)
-	
 	# Filter tiles with no enemies
 	if Utility.has_int_flag(limitation, Limitation.Enemy):
 		if type == Type.Tile:
@@ -163,7 +162,6 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						return t is EnemyEntity
 					return true
 			)
-	
 	# Filter tiles with no target_tag
 	if Utility.has_int_flag(limitation, Limitation.EntityWithTag):
 		if type == Type.Tile:
@@ -183,7 +181,6 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						return target_tag in t.type.tags
 					return true
 			)
-	
 	# If not include terrain, exclude it
 	if not Utility.has_int_flag(limitation, Limitation.IncludeTerrain):
 		if type == Type.EntityXX:
@@ -193,7 +190,6 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						return not t.type.is_terrain
 					return true
 			)
-	
 	# Filter empty tiles
 	if Utility.has_int_flag(limitation, Limitation.NoEmpty):
 		if type == Type.Tile:
@@ -206,7 +202,6 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						)
 					return true
 			)
-	
 	return targets
 
 func filter_based_on_range(targets: Array, actor: Entity) -> Array:

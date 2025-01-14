@@ -45,12 +45,20 @@ var target_enemy: EnemyEntity:
 ##########################
 
 ## ACTION
+## The effect of the CombatAction
 func execute():
 	pass
 
+## Override this if you want a certain requirement to have a different target pool.
+## If you return [], it will be replaced by the default pool. (e.g. all Tiles)
+func get_target_pool(requirement: TargetRequirement) -> Array:
+	return []
+
+## For special conditions you can decide if a target fits to a certain requirement
 func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 	return true
 
 ## ACTION
+## Override this when you want to preview the CombatAction
 func set_preview_visuals(show: bool, tile: Tile = null) -> void:
 	pass

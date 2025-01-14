@@ -5,6 +5,13 @@ class_name EntityState extends CombatObjectState
 ## States of the Entity's Status
 @export var status_states: Array[CombatObjectState] = []
 
+func _init(object: CombatObject = null) -> void:
+	var entity := object as Entity
+	assert(entity)
+	super(entity)
+	for status in entity.status_array:
+		status_states.append(status.serialize())
+
 func deserialize(combat: Combat) -> Entity:
 	var entity: Entity = super(combat) as Entity
 	assert(entity)
@@ -14,7 +21,7 @@ func deserialize(combat: Combat) -> Entity:
 		entity.status_array.append(status)
 	return entity
 
-func deserialize_on_tile(tile: Tile) -> Entity:
+func create_on_tile(tile: Tile) -> Entity:
 	var entity := deserialize(tile.combat)
 	assert(entity)
 	tile.add_entity(entity)

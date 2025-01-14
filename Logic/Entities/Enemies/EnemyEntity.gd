@@ -1,82 +1,45 @@
 class_name EnemyEntity extends Entity
+## An EnemyEntity is an Entity that will do EnemyActions during the EnemyPhase
 
 var agility: int
 var strength: int
 var movement_range: int
 
-#var action_logic := {} # EnemyActionTemplate -> EnemyActionLogic
+## This are the details for the Action the Enemy wants to do next.
+## Since this should be made directly before the execution there is no real reason
+## to have it be a member var. But we'll keep it that way for tradition reasons.
 var action_plan: EnemyActionPlan
 
-##################################
-## Methods for the action stack ##
-##################################
+## EnemyActions are created at birth based on all the types + global templates
+var action_pool: Array[EnemyAction] # TODO Serialize this
+
+###################
+## Enemy Actions ##
+###################
+
+func build_action_pool():
+	var templates: Array[EnemyActionTemplate] = []
+	templates.append_array(get_enemy_type().actions)
+	templates.append_array(combat.global_enemy_action_templates)
+	assert(action_pool.is_empty())
+	for template in templates:
+		var action := template.create_enemy_action(combat)
+		assert(action)
+		action_pool.append(action)
 
 ## ACTION
 func plan_next_action():
-	if not action_plan:
-		action_plan = await get_random_action_plan()
-	else:
-		var possible: bool = await combat.action_stack.get_result(
-			action_plan.is_possible.bind(combat)
-		)
-		if (not possible) or action_plan.action_args.try_to_avoid:
-			var new_action_plan: EnemyActionPlan = await get_random_action_plan()
-			if not new_action_plan.action_args.try_to_avoid:
-				action_plan = new_action_plan
-
-## ACTION
-func do_action():
-	while true:
-		# If no plan, make one
-		if not action_plan:
-			await combat.action_stack.process_callable(plan_next_action)
-			continue
-		
-		# Check if possible
-		var possible = combat.action_stack.process_result(
-			action_plan.is_possible.bind(combat)
-		)
-		await combat.action_stack.wait()
-		
-		# Get alternative if not possible
-		if not possible.value:
-			action_plan = action_plan.get_alternative(combat)
-			continue
-		
-		# Execute
-		combat.action_stack.preset_flavor(
-			ActionFlavor.new().set_owner(self)
-				.add_tag(ActionFlavor.Tag.EnemyActionSpecific)
-				.add_target(action_plan.target_ref)
-				.add_data("action", action_plan.action)
-				.add_data("action_name", action_plan.action.internal_name)
-				.finalize(combat)
-		)
-		await combat.action_stack.process_callable(
-			action_plan.execute.bind(combat)
-		)
-		action_plan = null
-		break
-
-######################
-## Internal Methods ##
-######################
-
-func get_action_pool() -> Array[EnemyActionTemplate]:
-	var actions : Array[EnemyActionTemplate] = []
-	actions.append_array(type.actions)
-	for se in status_array:
-		actions.append_array(se.get_enemy_actions())
-	actions.append_array(combat.global_enemy_actions)
-	return actions
+	if action_plan:
+		push_warning("There already is an EnemyActionPlan. A new one will be planned.")
+	action_plan = await get_random_action_plan()
 
 ## RESULT
 func get_random_action_plan() -> EnemyActionPlan:
 	var d_power : float = get_bahviour().decision_power
 	var plans: Array[EnemyActionPlan] = []
-	for action_args in get_action_pool():
+	for action in action_pool:
 		var plans_result := combat.action_stack.process_result(
-			action_args.get_possible_plans.bind(self)
+			action.get_possible_plans.bind(self)
 		)
 		await combat.action_stack.wait()
 		plans.append_array(plans_result.value)
@@ -94,15 +57,39 @@ func get_random_action_plan() -> EnemyActionPlan:
 	assert(index != -1, "No enemy action was chosen. There should always be a backup action")
 	return plans[index]
 
+## ACTION
+func do_action():
+	# If no plan, make one
+	if not action_plan:
+		await combat.action_stack.process_callable(plan_next_action)
+	# Execute
+	combat.action_stack.preset_flavor(
+		ActionFlavor.new().set_owner(self)
+			.add_tag(ActionFlavor.Tag.EnemyActionSpecific)
+			.add_target(action_plan.target_ref)
+			.add_data("action", action_plan.action)
+			.add_data("action_name", action_plan.action.internal_name)
+			.finalize(combat)
+	)
+	await combat.action_stack.process_callable(
+		action_plan.execute.bind(combat)
+	)
+	action_plan = null
+
 ######################
 ## Entity Overrides ##
 ######################
 
+## Write the entity into an EntityState (Resource)
+## We don't use regular CombatObjectState for this because Entity owns Status which
+## get saved inside the EntityState
+func serialize() -> EntityState:
+	var state: EntityState = EntityState.new(self)
+	return state
+
 func on_birth():
 	await super()
-	# TBD Removed this for now.
-	#TimedEffect.new_combat_change(plan_next_action) \
-		#.set_id("_cc_plan_action").set_solo().register(combat)
+	build_action_pool()
 
 func on_death():
 	super()
@@ -118,9 +105,3 @@ func get_bahviour() -> EnemyBehaviour:
 	if get_enemy_type().behaviour:
 		return get_enemy_type().behaviour
 	return DEFAULT_BEHAVIOUR
-
-## ACTION
-func on_hover_long(h: bool) -> void:
-	await super(h)
-	if action_plan and Game.DEBUG_OVERLAY:
-		await action_plan.show_preview(combat, h)

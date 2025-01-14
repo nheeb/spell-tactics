@@ -29,7 +29,7 @@ class_name CombatState extends Resource
 ## Progress of the enemy meter
 @export var enemy_meter: int
 ## Enemy Actions
-@export var global_enemy_actions: Array[EnemyActionTemplate]
+@export var global_enemy_action_templates: Array[EnemyActionTemplate]
 ## References
 @export var references: Dictionary
 @export var object_names: Dictionary
@@ -79,7 +79,7 @@ func _deserialize_into(combat: Combat):
 	combat.events.enemy_event_queue = enemy_event_queue
 	combat.events.current_enemy_event = current_enemy_event
 	combat.events.enemy_meter = enemy_meter
-	combat.global_enemy_actions = global_enemy_actions
+	combat.global_enemy_action_templates = global_enemy_action_templates
 	combat.t_effects.effects = timed_effects
 	combat.log.log_entries = combat_log
 	

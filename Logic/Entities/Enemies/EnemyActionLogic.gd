@@ -1,32 +1,5 @@
 class_name EnemyActionLogic extends CombatActionLogic
 
-var combat: Combat
-var args: EnemyActionTemplate
-var action: EnemyActionType
-var enemy: EnemyEntity
-var plan: EnemyActionPlan
-var target:
-	get:
-		if target:
-			return target
-		if combat and plan:
-			return plan.get_target(combat)
-		return null
-var target_tile: Tile:
-	get:
-		if target is Tile:
-			return target
-		elif target is Entity:
-			return target.current_tile
-		else:
-			return null
-var target_entity: Entity:
-	get:
-		if target is Entity:
-			return target
-		else:
-			return null
-
 #########################
 ## Methods for calling ##
 #########################
@@ -35,11 +8,11 @@ var target_entity: Entity:
 func execute():
 	await _execute()
 
-## SUBRESULT
+## RESULT
 func is_possible(enemy_tile: Tile = enemy.current_tile) -> bool:
 	return await _is_possible(enemy_tile)
 
-## SUBRESULT
+## RESULT
 func evaluate(enemy_tile: Tile = enemy.current_tile) -> EnemyActionEval:
 	if await is_possible(enemy_tile):
 		var evaluation := EnemyActionEval.from_cv_array(action.default_scores)
@@ -47,7 +20,7 @@ func evaluate(enemy_tile: Tile = enemy.current_tile) -> EnemyActionEval:
 	else:
 		return EnemyActionEval.new()
 
-## SUBRESULT
+## RESULT
 func estimated_destination(enemy_tile: Tile = enemy.current_tile) -> Tile:
 	var destinaion := await _estimated_destination(enemy_tile)
 	if destinaion != null:
@@ -82,15 +55,15 @@ func setup() -> void:
 func _execute():
 	pass
 
-## SUBRESULT
+## RESULT
 func _is_possible(enemy_tile: Tile) -> bool:
 	return true
 
-## SUBRESULT
+## RESULT
 func _evaluate(enemy_tile: Tile, eval: EnemyActionEval) -> EnemyActionEval:
 	return eval
 
-## SUBRESULT
+## RESULT
 func _estimated_destination(enemy_tile: Tile) -> Tile:
 	return enemy_tile
 
@@ -134,36 +107,36 @@ func _setup() -> void:
 ####################
 ## Helper Methods ##
 ####################
-
-## ACTION ANIMATOR
-func show_movement_arrow(show: bool):
-	var from: Tile = enemy.current_tile
-	var to: Tile
-	if plan:
-		to = await combat.action_stack.get_result(
-			plan.get_estimated_destination.bind(combat, from)
-		)
-	else:
-		to = await estimated_destination(from)
-		
-	if from != to:
-		if show:
-			var path: Array[Vector3] = [enemy.visual_entity.global_position]
-			path.append_array(combat.level.get_shortest_path(from, to).map(
-				func (t):
-					return t.global_position
-			))
-			combat.animation.callable(
-				combat.level.immediate_arrows().render_path.bind(path)
-			)
-		else:
-			combat.animation.callable(combat.level.immediate_arrows().clear)
-
-## ANIMATOR
-func show_action_icon_over_enemy(show: bool):
-	if action.icon:
-		if show:
-			combat.animation.add_staying_effect(VFX.ICON_VISUALS, enemy.visual_entity, "action_icon", \
-				{"icon": action.icon, "color": action.color, "quad": true}).set_flag_with()
-		else:
-			combat.animation.remove_staying_effect(enemy.visual_entity, "action_icon")
+#
+### ACTION ANIMATOR
+#func show_movement_arrow(show: bool):
+	#var from: Tile = enemy.current_tile
+	#var to: Tile
+	#if plan:
+		#to = await combat.action_stack.get_result(
+			#plan.get_estimated_destination.bind(combat, from)
+		#)
+	#else:
+		#to = await estimated_destination(from)
+		#
+	#if from != to:
+		#if show:
+			#var path: Array[Vector3] = [enemy.visual_entity.global_position]
+			#path.append_array(combat.level.get_shortest_path(from, to).map(
+				#func (t):
+					#return t.global_position
+			#))
+			#combat.animation.callable(
+				#combat.level.immediate_arrows().render_path.bind(path)
+			#)
+		#else:
+			#combat.animation.callable(combat.level.immediate_arrows().clear)
+#
+### ANIMATOR
+#func show_action_icon_over_enemy(show: bool):
+	#if action.icon:
+		#if show:
+			#combat.animation.add_staying_effect(VFX.ICON_VISUALS, enemy.visual_entity, "action_icon", \
+				#{"icon": action.icon, "color": action.color, "quad": true}).set_flag_with()
+		#else:
+			#combat.animation.remove_staying_effect(enemy.visual_entity, "action_icon")

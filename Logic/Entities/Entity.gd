@@ -41,15 +41,6 @@ var status_array: Array[EntityStatus] = []
 signal entering_graveyard # Before the graveyard
 signal entered_graveyard # After the graveyard
 
-#####################################
-## Creation & CombatObject Methods ##
-#####################################
-
-## Write the entity into an EntityState (Resource)
-func serialize() -> EntityState:
-	var state: EntityState = EntityState.new(self)
-	return state
-
 ####################
 ## Entity Methods ##
 ####################
@@ -130,7 +121,7 @@ func on_death():
 	await super()
 	assert(pre_death_tile, "If this is null the method 'die' was never executed.")
 	if type.corpse_state:
-		var corpse := type.corpse_state.deserialize_on_tile(pre_death_tile)
+		var corpse := type.corpse_state.create_on_tile(pre_death_tile)
 		combat.animation.effect(VFX.HEX_RINGS, pre_death_tile, {"color": corpse.type.color})
 
 func on_birth():
@@ -161,6 +152,13 @@ func on_load() -> void:
 				combat.animation.play_animation_queue() # DIRTY TODO change this when energy overlay is PA
 		)
 	await super()
+
+## Write the entity into an EntityState (Resource)
+## We don't use regular CombatObjectState for this because Entity owns Status which
+## get saved inside the EntityState
+func serialize() -> EntityState:
+	var state: EntityState = EntityState.new(self)
+	return state
 
 ##############################
 ## Methods for EntityStatus ##
