@@ -15,6 +15,8 @@ func set_highlight(type: Highlight.Type, active: bool):
 		$Highlight.disable_highlight(type)
 
 func _on_hover_timer_timeout() -> void:
+	if Preloaded.mouse_block.is_blocked():
+		return
 	tile.hovering = true
 	tile.combat.action_stack.process_player_action(
 		PATileHoverUpdate.new(tile, true, true)

@@ -10,13 +10,12 @@ func _init(_effect_scene: PackedScene, _target: Node3D, _id: String, _setup_prop
 	target = _target
 	setup_properties = _setup_properties
 	id = _id
-	_build_stack_trace()
 
 func set_property(prop_name: String, value) -> AnimationStayingEffect:
 	setup_properties[prop_name] = value
 	return self
 
-func play(level: Level):
+func play():
 	if not target.has_method("add_visual_effect"):
 		push_error("Target %s cannot take visual effects" % target)
 		animation_done_internally.emit()

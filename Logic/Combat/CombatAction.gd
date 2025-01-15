@@ -28,7 +28,8 @@ func reset_details():
 
 func is_target_valid(target: Variant, requirement_or_index = null) -> bool:
 	assert(details)
-	assert(get_target_requirements())
+	# Nils: hab hier einen assertion failed beim auswählen von spell memory bekommen (hatte nicht die passende energie)
+	assert(get_target_requirements())  
 	if requirement_or_index == null:
 		requirement_or_index = 0
 	if requirement_or_index is int:

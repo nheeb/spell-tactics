@@ -1,4 +1,4 @@
-class_name AnimationStep extends Object
+class_name AnimationStep extends RefCounted
 
 signal step_done
 
@@ -17,9 +17,8 @@ func compile() -> void:
 			relevant_animations_to_do += 1
 			a.animation_done.connect(self.relevant_animation_done, CONNECT_ONE_SHOT)
 
-func play(level: Level) -> void:
+func play() -> void:
 	for a in animations:
-		#print(a)
-		a._play(level)
+		a._play()
 	if relevant_animations_to_do == 0:
 		step_done.emit()

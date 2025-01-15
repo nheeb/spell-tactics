@@ -42,6 +42,7 @@ func show_tile_popup(tile: Tile):
 	# AND we are already showing the drainable overlay for this tile
 	if (not tile.has_enemy()) and tile.energy_popup.active:
 		return
+
 	current_tile = tile
 	# can use Camera3D.is_position_behind() to check, but should not be relevant here for now
 	screen_pos = viewport.get_camera_3d().unproject_position(tile.global_position)
@@ -169,8 +170,8 @@ func show_surrounding_drainable_entries():  # broken?!?
 
 func update_popup_position(popup: EnergyPopup):
 	var cam = viewport.get_camera_3d()
-	popup.visible = not cam.is_position_behind(popup.tile.global_position)
-	var _screen_pos = viewport.get_camera_3d().unproject_position(popup.tile.global_position)
+	popup.visible = not cam.is_position_behind(popup.tile.tile3d.global_position)
+	var _screen_pos = viewport.get_camera_3d().unproject_position(popup.tile.tile3d.global_position)
 	#_screen_pos = Utility.inv_scale_screen_pos(_screen_pos).round()
 	popup.position = _screen_pos - popup.size / 2 # unfortunately necessary..
 
@@ -187,6 +188,7 @@ func _process(delta: float) -> void:
 	# PERFORMANCE check how this performs for large levels
 	for popup in EnergyPopup.ACTIVE_POPUPS:
 		update_popup_position(popup)
+		popup.update_size_with_mouse_pos()
 
 
 func _on_world_combat_changed(_combat: Combat):

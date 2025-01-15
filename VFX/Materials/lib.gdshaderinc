@@ -64,7 +64,6 @@ float positive_direction_of_vec2(vec2 v) {
 	return PI/2.0 + atan(v.y / v.x) + PI * float(v.x < 0.0);
 }
 
-
 float is_in_range_as_float(float value, float a, float b) {
 	return float( (value >= a && value <= b) || (value <= a && value >= b) );
 }
@@ -138,10 +137,16 @@ vec2 uv_project(vec2 uv, vec2 aa, vec2 bb, vec2 target_aa, vec2 target_bb) {
 	return vec2(x,y);
 }
 
-// 	vec4 card_color = texture(card_texture, uv_project(UV, card_uv_aa, card_uv_bb, vec2(0., 0.), vec2(1., 1.)))
-
+vec4 texture_project(sampler2D tex, vec2 uv, vec2 aa, vec2 bb, vec2 target_aa, vec2 target_bb) {
+	vec4 color = texture(tex, uv_project(uv, aa, bb, target_aa, target_bb));
+	return color * vec2_between(uv, aa, bb);
+}
 
 float random_float(vec2 seed) {
     return fract(sin(dot(seed.xy,
         vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+vec3 global_pos_from_vertex(vec3 vert, mat4 model_mat) {
+	return (model_mat * vec4(vert, 1.0)).xyz;
 }

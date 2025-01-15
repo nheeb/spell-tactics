@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://c82ccv5b11qa"]
+
+[ext_resource type="Texture2D" uid="uid://dqqryr4jr7d4" path="res://Assets/Sprites/EnergyIconMasks/any.png" id="2_eskaf"]
+
+[sub_resource type="Shader" id="Shader_tf0fs"]
+code = "shader_type canvas_item;
+
+uniform vec4 border_color : source_color; // Color of the border of the square
+uniform float border_thickness : hint_range(0.0, 1.0); // Thickness of the border
+uniform float alpha_feathering : hint_range(0.0, 1.0);
+uniform sampler2D icon_mask;
+uniform vec4 icon_color : source_color;
+
+float box_dist(vec2 p) {
+    vec2 d = abs(p) - vec2(0.5);
+    return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
+}
+
+void fragment() {
+    vec2 uv = UV - vec2(0.5);
+    float d = box_dist(uv); // Distance from the center using box distance
+    float radius = -border_thickness;
+    float t1 = 1.0 - smoothstep(0.0, border_thickness, -d); // Interpolation for border
+    float t2 = 1.0 - smoothstep(radius, radius + border_thickness, d); // Interpolation for alpha channel
+
+    float mask_val = texture(icon_mask, UV).r;
+    vec4 final_color = mix(mix(COLOR, border_color, t1), icon_color, mask_val);
+    final_color.a = clamp(float(d < -border_thickness) + smoothstep(t2, -alpha_feathering, +alpha_feathering), 0.0, 1.0);
+
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ljyjs"]
+resource_local_to_scene = true
+shader = SubResource("Shader_tf0fs")
+shader_parameter/border_color = null
+shader_parameter/border_thickness = 0.111
+shader_parameter/alpha_feathering = 0.0
+shader_parameter/icon_color = Color(0.940427, 0.898915, 0.953125, 1)
+shader_parameter/icon_mask = ExtResource("2_eskaf")
+
+[node name="StatusIcon" type="AspectRatioContainer"]
+size_flags_horizontal = 4
+alignment_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ljyjs")
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.41788, 0.796875, 0.706772, 1)

@@ -1,4 +1,5 @@
 class_name PreloaderNode extends Node
+## Here are only preloaded Content Resources. For VFX Scenes look at VFX Singleton.
 
 const STATUS_BERSERKER = preload("res://Content/Status/Buff/Berserker.tres")
 const STATUS_POISON_MELEE = preload("res://Content/Status/Buff/PoisonMelee.tres")
@@ -14,3 +15,5 @@ const ACTIVE_MOVEMENT = preload("res://Content/Actives/Movement.tres")
 const ACTIVE_DRAIN = preload("res://Content/Actives/Drain.tres")
 const ACTIVE_MELEE = preload("res://Content/Actives/SimpleMelee.tres")
 const ACTIVE_INTERACT = preload("res://Content/Actives/Interact.tres")
+
+var mouse_block: Block = Block.new()

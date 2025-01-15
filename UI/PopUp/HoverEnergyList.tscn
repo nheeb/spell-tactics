@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://doptlsowlb2ye"]
+
+[ext_resource type="PackedScene" uid="uid://ciug3sucml2b5" path="res://UI/PopUp/EnergyIcon.tscn" id="1_0r6o5"]
+
+[node name="EnergyList" type="HBoxContainer"]
+size_flags_vertical = 3
+alignment = 1
+
+[node name="EnergyIcon1" parent="." instance=ExtResource("1_0r6o5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnergyIcon2" parent="." instance=ExtResource("1_0r6o5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnergyIcon3" parent="." instance=ExtResource("1_0r6o5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnergyIcon4" parent="." instance=ExtResource("1_0r6o5")]
+unique_name_in_owner = true
+layout_mode = 2

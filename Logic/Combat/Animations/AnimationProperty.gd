@@ -8,9 +8,8 @@ func _init(_object: Object, _property: String, _value):
 	object = _object
 	property = _property
 	value = _value
-	_build_stack_trace()
 
-func play(level: Level) -> void:
+func play() -> void:
 	if is_instance_valid(object):
 		object.set(property, value)
 	animation_done_internally.emit()

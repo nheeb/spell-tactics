@@ -4,10 +4,9 @@ var combat : Combat
 var selected_spell: Spell
 var actives: Array[Active]
 
-@onready var mouse_blocker = MouseInput.mouse_block.register_blocker()
+@onready var mouse_blocker = Preloaded.mouse_block.register_blocker()
 
 @onready var cards3d: Cards3D = %Cards3D
-@onready var timeline: TimelineUI = %Timeline
 @onready var cast_lines: StatusLines = %CastLines
 @onready var event_icons: CombatEventIcons = %CombatEventIcons
 @onready var event_info: CombatEventInfo = %CombatEventInfo
@@ -149,12 +148,15 @@ func set_enemy_meter_event(event: EnemyEvent) -> void:
 
 
 func _on_tile_hover_blocker_mouse_entered() -> void:
+	Events.tile_unhovered.emit(PATileHoverUpdate.currently_hovering)
 	mouse_blocker.block()
 
 
 func _on_tile_hover_blocker_mouse_exited() -> void:
-	mouse_blocker.unblock()
-
+	if not Rect2($TileHoverBlocker.position, $TileHoverBlocker.size).has_point(get_local_mouse_position()):
+		mouse_blocker.unblock()
+		# force hover refresh
+		MouseInput.currently_hovering = null
 
 func _on_debug_overlay_toggled(toggled_on: bool) -> void:
 	$LogSettingsPanel.advance()

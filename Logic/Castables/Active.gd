@@ -33,17 +33,11 @@ func select():
 
 func deselect():
 	super.deselect()
-	if combat.ui.cards3d.pinned_card: 
-		if combat.ui.cards3d.pinned_card.get_castable() == self:
-			combat.animation.callable(combat.ui.cards3d.unpin_card)
-		else:
-			push_error("Tried to deselect active which wasnt pinned")
+	var pin := combat.ui.cards3d.pinned_card
+	if pin and pin.get_castable() == self:
+		combat.animation.callable(combat.ui.cards3d.unpin_card)
 	else:
 		push_error("Tried to deselect active which wasnt pinned")
-
-var card: HandCard3D
-func get_card() -> Card3D:
-	return card
 
 func get_logic() -> CastableLogic:
 	return logic

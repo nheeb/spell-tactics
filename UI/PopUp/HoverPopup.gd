@@ -3,7 +3,7 @@ class_name HoverPopup extends Control
 
 # no instancing for now, just max it out at 3 entries
 
-const DRAINABLE_ENTRY = preload("res://UI/PopUp/DrainablePopupEntry.tscn")
+const DRAINABLE_ENTRY = preload("res://UI/PopUp/HoverPopupEntry.tscn")
 
 #@onready var ent_entries: Array[DrainablePopupEntry] = [%EntityEntry1, %EntityEntry2, %EntityEntry3]
 func show_tile(tile: Tile):
@@ -12,33 +12,33 @@ func show_tile(tile: Tile):
 	
 	# reset
 	hide_popup()
-	
-	#if len(tile.entities) > 3:
-		#push_warning("PopUp show_tile() only supports up to 3 Entities.")
-		#return
 
-	
 	var i = 0
 	# tile has an array of entities, show one entry for each of these
 	for ent in tile.entities:
-		if not ent.type.is_drainable:
-			# skip
+		if ent.type.is_terrain:
 			continue
+		var drainable_entry: HoverPopupEntry = DRAINABLE_ENTRY.instantiate()
+		%EntryContainer.add_child(drainable_entry)
 
+		drainable_entry.name = "%2d_Drainable" % i
 		if ent.type.is_drainable:
-			var drainable_entry: DrainablePopupEntry = DRAINABLE_ENTRY.instantiate()
-			drainable_entry.name = "%2d_Drainable" % i
-			%EntryContainer.add_child(drainable_entry)
 			drainable_entry.show_drainable_entity(ent)
-			drainable_entry.show()
+		elif ent.type is EnemyEntityType:
+			# we won't have drainable enemies, will we?
+			drainable_entry.show_enemy_entity(ent)
+		elif ent.type is PlayerEntityType:
+			drainable_entry.show_player_entity(ent)
+		else:
+			push_warning("unexpected ent %s in HoverPopup, implement better filter" % str(ent))
+			drainable_entry.queue_free()
+			continue
+			
+
+		drainable_entry.show()
 
 		i += 1
-		
-	# hide entries without entities
-	# if there are no entities on this tile, i will be 0, so all entries will be hidden
-	#for j in range(i, len(ent_entries)):
-		#ent_entries[j].hide()
-		
+
 	# don't show if it's empty (except for tile label)
 	if %EntryContainer.get_child_count() == 1:
 		return

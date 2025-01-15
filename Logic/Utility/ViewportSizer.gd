@@ -36,4 +36,5 @@ func update_size():
 	target_viewport.size = scaled_size
 	
 	if debug_label != null:
+		print("3D size: " + str(target_viewport.size) + ", Root size: " + str(get_tree().root.size))
 		debug_label.text = "3D size: " + str(target_viewport.size) + ", Root size: " + str(get_tree().root.size)

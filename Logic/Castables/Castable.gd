@@ -1,6 +1,7 @@
 class_name Castable extends CombatAction
 
 var selected := false
+var card: Card3D
 var current_requirement: TargetRequirement
 var current_possible_targets: Array
 
@@ -37,7 +38,7 @@ func deselect():
 ################################
 
 func get_card() -> Card3D:
-	return null
+	return card
 
 func get_logic() -> CastableLogic:
 	return null
@@ -130,7 +131,7 @@ func update_tile_highlights():
 	)))
 	for hl in castable_highlights:
 		for tile in combat.level.get_all_tiles():
-			tile.set_highlight(hl, false)
+			tile.tile3d.set_highlight(hl, false)
 	# Build new highlights
 	if selected:
 		for req in get_target_requirements():
@@ -140,12 +141,12 @@ func update_tile_highlights():
 				if selected_targets:
 					for target in selected_targets:
 						if target is Tile:
-							target.set_highlight(req.selected_highlight, true)
+							target.tile3d.set_highlight(req.selected_highlight, true)
 				# Highlight all possible tiles
 				elif req == current_requirement:
 					for target in current_possible_targets:
 						if target is Tile:
-							target.set_highlight(req.possible_highlight, true)
+							target.tile3d.set_highlight(req.possible_highlight, true)
 
 ## ANIM
 func update_card():

@@ -35,9 +35,6 @@ func setup(ent: Entity):
 		health_bar.position.y = type.hp_bar_height
 		health_bar.visible = type.always_show_hp
 		health_bar.update_hp(ent.hp, ent.max_hp, ent.armor)
-	else:
-		if has_node("HealthBar3D"):
-			get_node("HealthBar3D").queue_free()
 
 ## Ticket Handler and getter for all kinds of animation
 var ticket_handler := WaitTicketHandler.new()

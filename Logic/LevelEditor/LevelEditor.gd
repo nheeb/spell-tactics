@@ -21,7 +21,7 @@ var tool_active = null:
 		tool_active = t
 var ent_active: EntityType = null
 
-@onready var tile_hover_blocker: Block.Blocker = MouseInput.mouse_block.register_blocker()
+@onready var tile_hover_blocker: Block.Blocker = Preloaded.mouse_block.register_blocker()
 @onready var zoom_blocker: Block.Blocker = GameCamera.zoom_block.register_blocker()
 @onready var translate_blocker: Block.Blocker = GameCamera.translate_block.register_blocker()
 

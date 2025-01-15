@@ -80,7 +80,7 @@ func show_info(visible := true) -> AnimationObject:
 func hover(hovering := true) -> void:
 	show_info(hovering)
 	logic.on_hover(hovering)
-	combat.animation.play_animation_queue()
+	combat.animation.play_animation_queue() # DIRTY TODO Make Event Hover into a PA
 
 ## Is called when the player clicks on the event icon.
 func click() -> void:

@@ -12,6 +12,7 @@ static var on_drainable_tile_unhovered: Signal = \
 static var open_cards_shelf_blocker = Cards3D.open_hand_block.register_blocker()
 static var currently_hovering_drainable: Tile
 static var currently_hovering_long: Tile
+static var currently_hovering: Tile
 
 var tile: Tile
 var hovering: bool
@@ -24,6 +25,8 @@ func _init(_tile: Tile, _hovering: bool, _long := false) -> void:
 	action_string = "%sover Tile %s<%s>" % [
 		"H" if hovering else "Unh", "Long " if long else "", tile
 	]
+	if hovering and not long:
+		currently_hovering = tile
 
 func tile_can_be_drained(combat: Combat) -> bool:
 	var drain := combat.castables.get_active_from_name("drain")
@@ -33,22 +36,27 @@ func tile_can_be_drained(combat: Combat) -> bool:
 func tile_can_interact(combat: Combat) -> bool:
 	return tile.distance_to(combat.player.current_tile) <= 1 \
 		and tile.entities.any(func (ent: Entity): return ent.can_interact)
+		
+func tile_can_move_to(combat: Combat) -> bool:
+	return combat.castables.get_active_from_name("movement").is_target_valid(tile)
 
 func get_highlight_type(combat: Combat) -> Highlight.Type:
 	if combat.input.current_castable != null \
-		and combat.input.current_castable.get_type() == Preloaded.ACTIVE_MOVEMENT:
-	#if combat.input.current_castable != null \
-		#and "Movement" in combat.input.current_castable.get_type().pretty_name:
+		and combat.input.current_castable.get_type() == Preloaded.ACTIVE_MOVEMENT \
+		and tile_can_move_to(combat):
 		return Highlight.Type.HoverAction
-	elif combat.input.current_castable != null:
+	elif combat.input.current_castable != null and combat.input.current_castable.is_target_valid(tile):
 		return Highlight.Type.HoverTarget
 	else:
 		return Highlight.Type.Hover
 
 func execute(combat: Combat) -> void:
+	combat.animation.record_start("hover")
+	
 	# Hover Tile
 	if hovering:
 		combat.level.append_to_hover_memory(tile) # This is for the movement arrow pathing
+		#print("hover " + str(tile) + " " + Highlight.Type.find_key(get_highlight_type(combat)))
 		tile.set_highlight(get_highlight_type(combat), true)
 		if tile_can_interact(combat):
 			tile.set_highlight(Highlight.Type.HoverInteract, true)
@@ -83,3 +91,5 @@ func execute(combat: Combat) -> void:
 	elif currently_hovering_long != tile and currently_hovering_long != null:
 		await currently_hovering_long.hover_long(false)
 		currently_hovering_long = null
+
+	combat.animation.record_finish_as_subqueue("hover").seperate_queue("hover")
