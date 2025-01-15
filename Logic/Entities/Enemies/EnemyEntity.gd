@@ -17,14 +17,20 @@ var action_pool: Array[EnemyAction] # TODO Serialize this
 ## Enemy Actions ##
 ###################
 
+## ACTION
 func build_action_pool():
+	assert(action_pool.is_empty())
 	var templates: Array[EnemyActionTemplate] = []
 	templates.append_array(get_enemy_type().actions)
 	templates.append_array(combat.global_enemy_action_templates)
-	assert(action_pool.is_empty())
 	for template in templates:
-		var action := template.create_enemy_action(combat)
-		assert(action)
+		add_actions_from_template(template)
+		await combat.action_stack.wait()
+
+func add_actions_from_template(template: EnemyActionTemplate):
+	var actions := template.create_enemy_actions(combat)
+	for action in actions:
+		action.enemy = self
 		action_pool.append(action)
 
 ## ACTION
@@ -38,6 +44,8 @@ func get_random_action_plan() -> EnemyActionPlan:
 	var d_power : float = get_bahviour().decision_power
 	var plans: Array[EnemyActionPlan] = []
 	for action in action_pool:
+		if not action.selectable:
+			continue
 		var plans_result := combat.action_stack.process_result(
 			action.get_possible_plans.bind(self)
 		)
@@ -45,17 +53,17 @@ func get_random_action_plan() -> EnemyActionPlan:
 		plans.append_array(plans_result.value)
 	var scores := plans.map(
 		func(plan: EnemyActionPlan):
-			return pow(plan.get_evaluation_score_cached(), d_power)
+			return pow(plan.get_score(), d_power)
 	)
 	var names_for_log := plans.map(
 		func (plan: EnemyActionPlan):
-			return plan.get_string_action_target(combat)
+			return plan.get_string_action_target_score()
 	)
 	var title_for_log := str(self) + " chooses an action:"
 	var index := Utility.random_index_of_scores(scores, true, names_for_log, title_for_log)
 	combat.log.add(Utility.random_index_of_scores_report)
 	assert(index != -1, "No enemy action was chosen. There should always be a backup action")
-	return plans[index]
+	return Utility.array_safe_get(plans, index)
 
 ## ACTION
 func do_action():
@@ -89,7 +97,7 @@ func serialize() -> EntityState:
 
 func on_birth():
 	await super()
-	build_action_pool()
+	await build_action_pool()
 
 func on_death():
 	super()

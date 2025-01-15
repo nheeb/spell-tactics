@@ -1,4 +1,9 @@
 class_name EntityType extends CombatObjectType
+## Base-Class for every EntityType
+
+#######################
+## Export Properties ##
+#######################
 
 ## OPTIONAL, PackedScene inheriting from VisualEntity.tscn with mesh/particles/animations
 @export var visual_scene: PackedScene
@@ -12,7 +17,6 @@ class_name EntityType extends CombatObjectType
 @export var can_interact: bool = false
 @export var destroy_on_interact: bool = false
 @export var interact_hint := ""
-enum Teams {Neutral = 0, Good = 1, Evil = 2}
 @export var team := Teams.Neutral
 
 @export_group("Prototype Graphics")
@@ -54,6 +58,9 @@ const ENEMY_LAYER = 2
 ## Value for size or height when it comes to taking damage being applied to a tile
 @export var cover_value: int = 0
 
+#############################
+## Entity Creation & Setup ##
+#############################
 
 func create_base_object() -> CombatObject:
 	return Entity.new()
@@ -101,3 +108,15 @@ func setup_visuals(ent: Entity) -> void:
 		ent.visual_entity._ready()
 	ent.visual_entity.setup(ent)
 	ent.combat.animation.show(ent.visual_entity).set_flag_with()
+
+###########
+## Teams ##
+###########
+
+enum Teams {Neutral = 0, Good = 1, Evil = 2}
+
+static func are_teams_foes(team_a: Teams, team_b: Teams) -> bool:
+	return int(team_a) + int(team_b) == 3 # :)
+
+static func are_teams_allies(team_a: Teams, team_b: Teams) -> bool:
+	return team_a == team_b

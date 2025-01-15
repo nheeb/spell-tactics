@@ -12,6 +12,11 @@ class_name CombatObjectState extends Resource
 @export var was_deserialized := false
 @export var _deserialize_count := 0
 
+## Here the CombatObjectState saves all the values of exported properties in the
+## props Dictionary.
+## NOTE Although it would be cool to automatically take references from exported
+## CombatObject typed vars, the reversed direction is more difficult because we would
+## need to know if it originally was CO or reference. Maybe we'll do that later.
 func _init(object: CombatObject = null) -> void:
 	if object:
 		data = object.data

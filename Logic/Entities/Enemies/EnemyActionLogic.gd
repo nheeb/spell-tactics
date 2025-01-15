@@ -32,14 +32,6 @@ func estimated_destination(enemy_tile: Tile = enemy.current_tile) -> Tile:
 func show_preview(show: bool) -> void:
 	await _show_preview(show)
 
-func get_alternative_plan() -> EnemyActionPlan:
-	var _plan := _get_alternative_plan()
-	if _plan:
-		return _plan
-	elif action.alternative_action_args:
-		return EnemyActionPlan.new(enemy, action.alternative_action_args, target)
-	return null
-
 func get_target_pool() -> Array:
 	return _get_target_pool()
 

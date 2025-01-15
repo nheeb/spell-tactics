@@ -34,7 +34,8 @@ func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 	return length > 0 and length <= movement_range
 
 ## Set special preview visuals when a target is hovered / selected
-func set_preview_visuals(show: bool, tile: Tile = null) -> void:
+func set_preview_visuals(show: bool, target = null) -> void:
+	var tile = target as Tile
 	if show:
 		if not actor:
 			return

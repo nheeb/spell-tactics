@@ -9,5 +9,4 @@ enum TargetConsiderMethod {Best, Random}
 @export var default_scores : Array[EnemyActionCriteriaValue]
 
 @export_group("Extras")
-@export var cooldown: int = 0 # TODO implement this
-@export var movement_action: EnemyActionTemplate = null
+@export var cooldown: int = 0

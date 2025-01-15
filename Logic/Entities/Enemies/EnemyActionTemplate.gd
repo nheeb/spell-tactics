@@ -3,11 +3,9 @@ class_name EnemyActionTemplate extends CombatObjectState
 ## how the action can be used by the enemy in general.
 
 @export var action: EnemyActionType
-@export var try_to_avoid := false
-
-@export_group("Score Factors")
+@export var avoid := false
 @export var score_factor := 1.0
-@export var avoid_score_factor := 0.01
+@export var pre_action_template: EnemyActionTemplate = null
 
 #@export_group("Extras")
 ### References to targets this action should have
@@ -15,11 +13,18 @@ class_name EnemyActionTemplate extends CombatObjectState
 
 func get_template_props() -> Dictionary:
 	var p := super()
-	p["try_to_avoid"] = try_to_avoid
+	p["avoid"] = avoid
 	p["score_factor"] = score_factor
-	p["avoid_score_factor"] = avoid_score_factor
 	p["type"] = action
 	return p
 
-func create_enemy_action(combat: Combat) -> EnemyAction:
-	return create(combat) as EnemyAction
+func create_enemy_actions(combat: Combat) -> Array[EnemyAction]:
+	var actions: Array[EnemyAction]
+	var own_action := create(combat) as EnemyAction
+	assert(own_action)
+	if pre_action_template:
+		actions = pre_action_template.create_enemy_actions(combat)
+		own_action.pre_action = actions.back()
+		own_action.pre_action.selectable = false
+	actions.push_back(own_action)
+	return actions

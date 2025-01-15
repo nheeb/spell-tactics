@@ -11,6 +11,19 @@ var executed := false
 func calculate_score() -> void:
 	pass
 
+func get_score() -> float:
+	if score_cache == -1.0:
+		push_warning("Seems like the score for this EnemyActionPlan wasn't calculated.")
+	return score_cache
+
+func get_string_action_target_score() -> String:
+	var action_name := combat_action.get_action_type().pretty_name
+	var target_name := ""
+	var first_target = Utility.array_safe_get(get_target_array(0), 0)
+	if first_target:
+		target_name = " -> %10s" % str(first_target)
+	return action_name + target_name + " <%.1f>" % score_cache
+
 ### ACTION
 #func create_action_logic(combat: Combat) -> void:
 	#if get_enemy(combat) and action:
@@ -74,7 +87,7 @@ func calculate_score() -> void:
 		#var eval := await get_logic().evaluate(start_from)
 		#score_cache += eval.get_total_score(get_enemy(combat).get_bahviour())
 		#score_cache *= action_args.score_factor
-		#if action_args.try_to_avoid:
+		#if action_args.avoid:
 			#score_cache *= action_args.avoid_score_factor
 	#return score_cache
 #
@@ -119,6 +132,3 @@ func calculate_score() -> void:
 #func get_alternative(combat: Combat) -> EnemyActionPlan:
 	#return get_logic().get_alternative_plan()
 #
-#func get_string_action_target(combat: Combat) -> String:
-	#return action.pretty_name + ("-> %10s " % str(get_target(combat)) if target_ref else "") \
-			#+ "<%.1f> " % score_cache
