@@ -2,7 +2,7 @@ class_name TargetRequirement extends Resource
 
 enum Type {
 	Tile,
-	EntityXX,
+	Entity,
 	SpellXX,
 	EnergyStackXX
 }
@@ -14,22 +14,27 @@ enum Limitation {
 	## Only Tiles without obstacle can be selected
 	NoBlocker = 1,
 	## Only Tiles with an enemy can be selected
-	Enemy = 2,
+	Foe = 2,
+	## Only Tiles with an enemy can be selected
+	Ally = 4,
 	## Only Tiles with entity with target_tag can be selected
-	EntityWithTag = 4,
+	EntityWithTag = 8,
 	## Terrain will not be removed from the targets
-	IncludeTerrain = 8,
+	IncludeTerrain = 16,
 	## Only Tiles that have more than terrain
-	NoEmpty = 16,
+	NoEmpty = 32,
 }
 
 ## Common limitations for the selectable targets
+## NOTE You maybe wonder why we have to write the flag-int-values a second time
+## here in the export tag. Godot is CRINGE, that's why.
 @export_flags(
 	"No Blocker / Obstacle:1",
-	"Enemy:2",
-	"Entity with special Tag:4",
-	"Include Terrain:8",
-	"No empty Tile:16"
+	"Foe:2",
+	"Ally:4",
+	"Entity with special Tag:8",
+	"Include Terrain:16",
+	"No empty Tile:32"
 ) var limitation: int
 
 enum RangeSize {
@@ -66,14 +71,16 @@ enum Shape {
 ## Possible Target Pool ##
 ##########################
 
-func get_possible_targets(action: CombatAction) -> Array:
-	assert(action.details, "This is needed for knowing the actor.")
-	return convert_target(get_base_pool(action.combat), action)
+## Details are needed for knowing the actor / origin tile.
+func get_possible_targets(details: CombatActionDetails) -> Array:
+	return convert_target(get_base_pool(details.combat_action.combat), details)
 
 func get_base_pool(combat: Combat) -> Array:
 	match type:
 		Type.Tile:
 			return combat.level.get_all_tiles()
+		Type.Entity:
+			return combat.level.get_all_entities()
 	return []
 
 ####################################
@@ -82,11 +89,7 @@ func get_base_pool(combat: Combat) -> Array:
 
 ## Takes a single / array of targets and converts them to whatever might suit the requirement.
 ## If the target is invalid it returns an empty array.
-func convert_target(target: Variant, action: CombatAction = null) -> Array:
-	var actor: Entity
-	if action:
-		if action.details:
-			actor = action.details.actor
+func convert_target(target: Variant, details: CombatActionDetails = null) -> Array:
 	if target == null:
 		return []
 	if target is Array:
@@ -95,11 +98,10 @@ func convert_target(target: Variant, action: CombatAction = null) -> Array:
 	var targets := Utility.array_from(target)
 	targets = convert_targets_based_on_type(targets)
 	targets = filter_null_and_duplicates(targets)
-	targets = filter_based_on_limitation(targets)
-	if actor:
-		targets = filter_based_on_range(targets, actor)
-		if action:
-			targets = filter_based_on_action_logic(targets, action)
+	targets = filter_based_on_limitation(targets, details)
+	if details:
+		targets = filter_based_on_range(targets, details)
+		targets = filter_based_on_action_logic(targets, details)
 	return targets
 
 func convert_targets_based_on_type(targets: Array) -> Array:
@@ -111,7 +113,7 @@ func convert_targets_based_on_type(targets: Array) -> Array:
 					converted_targets.append(target.current_tile)
 				else:
 					converted_targets.append(target as Tile)
-			Type.EntityXX:
+			Type.Entity:
 				if target is Tile:
 					converted_targets.append_array(target.entities)
 				converted_targets.append(target as Entity)
@@ -133,7 +135,7 @@ func filter_null_and_duplicates(array: Array) -> Array:
 			result.append(t)
 	return result
 
-func filter_based_on_limitation(targets: Array) -> Array:
+func filter_based_on_limitation(targets: Array, details: CombatActionDetails = null) -> Array:
 	# Filter tiles with blocker
 	if Utility.has_int_flag(limitation, Limitation.NoBlocker):
 		if type == Type.Tile:
@@ -143,23 +145,50 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						return not t.is_blocked()
 					return true
 			)
-	# Filter tiles with no enemies
-	if Utility.has_int_flag(limitation, Limitation.Enemy):
+	# Filter tiles with no foes
+	if Utility.has_int_flag(limitation, Limitation.Foe) and details:
 		if type == Type.Tile:
 			targets = targets.filter(
 				func (t):
 					if t is Tile:
 						return t.entities.any(
 							func (e: Entity):
-								return e is EnemyEntity
+								return EntityType.are_teams_foes(
+									e.team, details.actor.team
+								)
 						)
 					return true
 			)
-		elif type == Type.EntityXX:
+		elif type == Type.Entity:
 			targets = targets.filter(
 				func (t):
 					if t is Entity:
-						return t is EnemyEntity
+						return EntityType.are_teams_foes(
+									t.team, details.actor.team
+								)
+					return true
+			)
+	# Filter tiles with no allies
+	if Utility.has_int_flag(limitation, Limitation.Ally) and details:
+		if type == Type.Tile:
+			targets = targets.filter(
+				func (t):
+					if t is Tile:
+						return t.entities.any(
+							func (e: Entity):
+								return EntityType.are_teams_allies(
+									e.team, details.actor.team
+								)
+						)
+					return true
+			)
+		elif type == Type.Entity:
+			targets = targets.filter(
+				func (t):
+					if t is Entity:
+						return EntityType.are_teams_allies(
+									t.team, details.actor.team
+								)
 					return true
 			)
 	# Filter tiles with no target_tag
@@ -174,7 +203,7 @@ func filter_based_on_limitation(targets: Array) -> Array:
 						)
 					return true
 			)
-		elif type == Type.EntityXX:
+		elif type == Type.Entity:
 			targets = targets.filter(
 				func (t):
 					if t is Entity:
@@ -183,7 +212,7 @@ func filter_based_on_limitation(targets: Array) -> Array:
 			)
 	# If not include terrain, exclude it
 	if not Utility.has_int_flag(limitation, Limitation.IncludeTerrain):
-		if type == Type.EntityXX:
+		if type == Type.Entity:
 			targets = targets.filter(
 				func (t):
 					if t is Entity:
@@ -204,7 +233,7 @@ func filter_based_on_limitation(targets: Array) -> Array:
 			)
 	return targets
 
-func filter_based_on_range(targets: Array, actor: Entity) -> Array:
+func filter_based_on_range(targets: Array, details: CombatActionDetails) -> Array:
 	if range_size == RangeSize.UNLIMITED:
 		return targets
 	return targets.filter(
@@ -214,11 +243,11 @@ func filter_based_on_range(targets: Array, actor: Entity) -> Array:
 				tile = t.current_tile
 			if tile == null:
 				return true
-			return tile.distance_to(actor.current_tile) <= int(range_size)
+			return tile.distance_to(details.origin_tile) <= int(range_size)
 	)
 
-func filter_based_on_action_logic(targets: Array, action: CombatAction) -> Array:
+func filter_based_on_action_logic(targets: Array, details: CombatActionDetails) -> Array:
 	return targets.filter(
 		func (t: Variant):
-			return action.get_action_logic().is_target_valid(t, self)
+			return details.combat_action.get_action_logic().is_target_valid(t, self)
 	)

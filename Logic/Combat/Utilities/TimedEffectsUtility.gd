@@ -46,12 +46,12 @@ func add_effect(te: TimedEffect) -> void:
 	effects.append(te)
 	connect_effect(te)
 
-## Since cringe Godot doen't allow vararg we do it that way ...
+## Since CRINGE Godot doen't allow vararg we do it that way ...
 func signal_triggered(sig_param0 = null, sig_param1 = null, sig_param2 = null, \
 					 sig_param3 = null, sig_param4 = null, sig_param5 = null):
 	var sig: Signal
 	var sig_params := []
-	# Since Godot is omega cringe we need to search for the signal manually
+	# Since Godot is omega CRINGE we need to search for the signal manually
 	# because binded args come after the signal args.
 	for param in [sig_param0, sig_param1, sig_param2, sig_param3, sig_param4, sig_param5]:
 		if param != null:

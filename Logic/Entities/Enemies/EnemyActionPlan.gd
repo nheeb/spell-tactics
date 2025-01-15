@@ -14,6 +14,7 @@ func calculate_score() -> void:
 func get_score() -> float:
 	if score_cache == -1.0:
 		push_warning("Seems like the score for this EnemyActionPlan wasn't calculated.")
+		return 0.0
 	return score_cache
 
 func get_string_action_target_score() -> String:
@@ -23,20 +24,6 @@ func get_string_action_target_score() -> String:
 	if first_target:
 		target_name = " -> %10s" % str(first_target)
 	return action_name + target_name + " <%.1f>" % score_cache
-
-### ACTION
-#func create_action_logic(combat: Combat) -> void:
-	#if get_enemy(combat) and action:
-		#var new_action_logic = action.logic_script.new() as EnemyActionLogic
-		#assert(new_action_logic, "Enemy Action Logic wasn't created.")
-		#new_action_logic.args = action_args
-		#new_action_logic.action = action
-		#new_action_logic.combat = combat
-		#new_action_logic.enemy = get_enemy(combat)
-		#new_action_logic.target = get_target(combat)
-		#new_action_logic.plan = self
-		#await new_action_logic.setup()
-		#_logic = new_action_logic
 
 ### ACTION
 #func execute(combat: Combat):
@@ -51,7 +38,7 @@ func get_string_action_target_score() -> String:
 	#else:
 		#fizzled = true
 	#executed = true
-#
+
 ### RESULT
 #func is_possible(combat: Combat, include_movement := true) -> bool:
 	#if not get_logic():
@@ -90,11 +77,7 @@ func get_string_action_target_score() -> String:
 		#if action_args.avoid:
 			#score_cache *= action_args.avoid_score_factor
 	#return score_cache
-#
-#func get_evaluation_score_cached() -> float:
-	#assert(score_cache >= 0.0)
-	#return score_cache
-#
+
 ### RESULT
 #func get_estimated_destination(combat: Combat, start_from: Tile = null) -> Tile:
 	#if not get_logic():
@@ -109,26 +92,3 @@ func get_string_action_target_score() -> String:
 		#await combat.action_stack.active_ticket.wait()
 		#start_from = after_movement.value
 	#return await get_logic().estimated_destination(start_from)
-#
-### ACTION
-#func show_preview(combat: Combat, show: bool) -> void:
-	#await get_logic().show_preview(show)
-#
-#func has_movement() -> bool:
-	#return action.movement_action_args != null
-#
-#var cached_movement_plan: EnemyActionPlan = null
-#func get_movement() -> EnemyActionPlan:
-	#if cached_movement_plan:
-		#return cached_movement_plan
-	#if has_movement():
-		#cached_movement_plan = EnemyActionPlan.new(
-			#enemy_ref, action.movement_action_args, target_ref
-		#)
-		#return cached_movement_plan
-	#else:
-		#return null
-#
-#func get_alternative(combat: Combat) -> EnemyActionPlan:
-	#return get_logic().get_alternative_plan()
-#

@@ -15,7 +15,7 @@ func is_selectable() -> bool:
 func is_castable() -> bool:
 	return are_requirements_fullfilled() \
 		and is_energy_loaded_fully() \
-		and get_logic().is_castable()
+		and get_logic().is_executable()
 
 ## ACTION
 func cast() -> void:

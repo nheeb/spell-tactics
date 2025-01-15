@@ -60,6 +60,8 @@ func get_random_action_plan() -> EnemyActionPlan:
 			return plan.get_string_action_target_score()
 	)
 	var title_for_log := str(self) + " chooses an action:"
+	# We use Utility.random_index_of_scores so that we can get the "report" in the
+	# combat log stating which options with which propabilities did the Enemy have.
 	var index := Utility.random_index_of_scores(scores, true, names_for_log, title_for_log)
 	combat.log.add(Utility.random_index_of_scores_report)
 	assert(index != -1, "No enemy action was chosen. There should always be a backup action")

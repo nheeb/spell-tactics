@@ -66,3 +66,8 @@ func is_target_valid(target: Variant, requirement: TargetRequirement) -> bool:
 ## Override this when you want to preview the CombatAction.
 func set_preview_visuals(show: bool, target = null) -> void:
 	pass
+
+## You can return the Tile where the actor will end up being after the action.
+## This is only really relevant for Enemy Movement / Pre-Actions.
+func get_estimated_destination() -> Tile:
+	return null

@@ -12,7 +12,7 @@ var step_ready := true
 
 static func from_raw_array(_combat: Combat, raw_queue: Array[AnimationObject]) -> Array[AnimationQueue]:
 	var raw_queues: Dictionary = {} # {id (str) -> Array[AnimationObject]}
-	var typed_array: Array[AnimationObject] = [] # Fuck you Godot, this is so cringe omg...
+	var typed_array: Array[AnimationObject] = [] # Fuck you Godot, this is so CRINGE omg...
 	# Let me at least type cast Arrays with '... as Array[AnimationObject]'.
 	# But no you just ignore that and force me to write shitty code like that. Fuck you.
 	for anim in raw_queue:

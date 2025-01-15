@@ -25,9 +25,6 @@ func after_cast() -> void:
 func is_selectable() -> bool:
 	return true
 
-func is_castable() -> bool:
-	return true
-
 func on_select_deselect(select: bool) -> void:
 	pass
 
